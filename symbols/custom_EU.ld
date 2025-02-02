@@ -23,7 +23,7 @@ MaxNumMultiworldItemsAtOnceKec1 = 7;
 MaxNumMultiworldItemsAtOnceKec2 = 3;
 
 /* Undocumented Functions 
-   Note: You may to remove some of these definitions if they become defined*/
+   Note: You may to remove some of these definitions if they become defined
    in pmdsky-debug.*/
 AddItemToKecleon1 = 0x2010B70;
 AddItemToKecleon2 = 0x2010E74;
