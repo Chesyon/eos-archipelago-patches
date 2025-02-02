@@ -4,7 +4,7 @@
 #define MAX_MULTIWORLD_ITEMS_AT_ONCE_KEC1 #7;
 #define MAX_MULTIWORLD_ITEMS_AT_ONCE_KEC2 #3;
 
-ov36_kec_shop_1_tweak:
+GenerateShop1Tweak:
     sub  sp,sp,#0x8
     mov  r0,NULL
     mov  r1,VAR_SCENARIO_SUB1
@@ -70,7 +70,7 @@ ov36_kec_shop_1_tweak:
     ldmia sp!,{r4,r5,r6,r7,r8,pc}
     
     .align
-    ov36_kec_shop_2_tweak:
+GenerateShop2Tweak:
     push {r8}
     sub  sp,sp,#0x8
     mov  r0,NULL
