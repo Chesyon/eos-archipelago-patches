@@ -19,8 +19,10 @@
 .close
 
 .open "overlay11.bin", overlay11_start
+  .ifdef CUSTOM_SPECIAL_PROCESSES
   .org ScriptSpecialProcessCall
     b cotInternalTrampolineScriptSpecialProcessCall
+  .endif
 
   .ifdef HookScriptMenuRequestCheck
   .org ScriptMenuRequestDefaultCase
@@ -40,8 +42,12 @@
 .close 
 
 .open "overlay29.bin", overlay29_start
+  .ifdef CUSTOM_ITEM_EFFECTS
   .org ApplyItemEffectHookAddr
     b cotInternalTrampolineApplyItemEffect
+  .endif
+  .ifdef CUSTOM_MOVE_EFFECTS
   .org ApplyMoveEffectHookAddr
     b cotInternalTrampolineApplyMoveEffect
+  .endif
 .close

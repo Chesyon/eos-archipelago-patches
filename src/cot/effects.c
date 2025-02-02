@@ -4,6 +4,7 @@
 // Internal dispatch code for item and move effects and special processes to C and Rust.
 // These functions are called in trampolines.s.
 
+#if CUSTOM_ITEM_EFFECTS
 bool cotInternalDispatchApplyItemEffect(
         struct entity* user, struct entity* target, struct item* item, bool is_thrown
 ) {
@@ -11,7 +12,9 @@ bool cotInternalDispatchApplyItemEffect(
 
     return CustomApplyItemEffect(user, target, item, is_thrown);
 }
+#endif
 
+#if CUSTOM_MOVE_EFFECTS
 bool cotInternalDispatchApplyMoveEffect(
         move_effect_input* data, struct entity* user, struct entity* target, struct move* move
 ) {
@@ -19,7 +22,9 @@ bool cotInternalDispatchApplyMoveEffect(
 
     return CustomApplyMoveEffect(data, user, target, move);
 }
+#endif
 
+#if CUSTOM_SPECIAL_PROCESSES
 int cotInternalDispatchScriptSpecialProcessCall(
         undefined4* unknown, uint32_t special_process_id, short arg1, short arg2
 ) {
@@ -35,3 +40,4 @@ int cotInternalDispatchScriptSpecialProcessCall(
     }
     return return_val;
 }
+#endif

@@ -1,6 +1,8 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+#if CUSTOM_SPECIAL_PROCESSES
+
 // Special process 100: Change border color
 // Based on https://github.com/SkyTemple/eos-move-effects/blob/master/example/process/set_frame_color.asm
 /*static int SpChangeBorderColor(short arg1) {
@@ -24,3 +26,5 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
       return false;
   }
 }
+
+#endif
