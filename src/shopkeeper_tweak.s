@@ -186,17 +186,17 @@ ov36_kec_shop_1_tweak:
     .pool
     .align
         kec2_multiworld_item_table:
-            .halfword 113
-            .halfword 138
-            .halfword 177
-            .halfword 400 // Just a way to see errors // padding.
+            .hword 113
+            .hword 138
+            .hword 177
+            .hword 400 // Just a way to see errors // padding.
     .align
         kec1_multiworld_item_table:
-            .halfword 11
-            .halfword 12
-            .halfword 98
-            .halfword 114
-            .halfword 166
-            .halfword 175
-            .halfword 184 // This is #9 now!
-            .halfword 400 // Just a way to see errors // padding.
+            .hword 11
+            .hword 12
+            .hword 98
+            .hword 114
+            .hword 166
+            .hword 175
+            .hword 184 // This is #9 now!
+            .hword 400 // Just a way to see errors // padding.
