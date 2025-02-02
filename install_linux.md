@@ -12,7 +12,7 @@ You can install c-of-time on Linux using the following methods. Instructions var
 You can install c-of-time on Ubuntu or Debian using the following methods. The steps detailed in this guide were tested on Ubuntu 22.04.
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta bsdiff4`, followed by `pip install bsdiff4`. You will need to enter your password during the installation.
 3. Install Python dependencies: `pip3 install pyyaml ndspy`
 4. Compile `armips`:
     1. Run `git clone --recursive https://github.com/Kingcom/armips.git` to download the source code.

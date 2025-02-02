@@ -1,3 +1,18 @@
+# eos-archipelago-patches
+This repository contains all ROMside custom code used in the Pokémon Mystery Dungeon: Explorers of Sky [Archipelago APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky).
+## Shell files
+There are four files of interest, designed to simplify patching. But first, there are three NDS files we should discuss:
+* vanilla.nds: This needs to be provided by you. This should be an unmodified EU ROM for Pokémon Mystery Dungeon: Explorers of Sky. You will not modify this file.
+* rom.nds: The input file for c-of-time. Any changes that need to be made in SkyTemple or with external programs that aren't c-of-time should be done on this ROM.
+* out.nds: The output file from c-of-time. This is the final ROM, that Archipelago players will be using. This has all the C/ASM code from the repository applied. **You should not edit this file in SkyTemple!**
+
+With that being said, here are our helper shell files:
+* apply-unpatched-xdelta: Use this to get the latest rom.nds, which applies the xdelta on this repo. This should be run before making changes to rom.nds after fetching, and before running `make patch`.
+* make-unpatched-xdelta: Make a new xdelta, to share your changes to rom.nds. This should be used before you push your changes to rom.nds.
+* patch-rom: Make an out.nds from rom.nds. Use this to apply the C code. This should be run before testing, and before running `make-patched-bsdiff`.
+* make-patched-bsdiff: Make a bsdiff for out.nds. This is what will be applied in the APWorld, so you should run this to make a new patch for CrypticMonkey's repository. 
+
+Below is the readme for c-of-time, which this repository is a fork of.
 # c-of-time
 
 ![c-of-time logo by Irdkwia](./cot-logo.png)
@@ -180,3 +195,4 @@ You can also change the compiler flags to optimize for size instead of speed. To
 ## Licensing
 - Build scripts (everything under the `tools`) are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
 - All other code is licensed under MIT. Review the file `LICENSE_MIT` for more information.
+

@@ -1,0 +1,198 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+            §label_0;
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetAnimation(2);
+            }
+            message_Mail({
+                english="[CN]There\'s a notice posted here.[K]\n[CN]Something\'s written on it...",
+                french="[CN]Il y a une affiche ici.[K]\n[CN]Quelque chose y est écrit...",
+                german="[CN]Hier hängt ein Notizzettel.[K]\n[CN]Etwas steht darauf geschrieben.",
+                italian="[CN]C\'è un biglietto.[K]\n[CN]E c\'è scritto qualcosa...",
+                spanish="[CN]Aquí hay una nota.[K]\n[CN]A ver qué pone...",
+            });
+            message_Mail({
+                english="\"[CS:K]Marowak[CR] Dojo has collapsed.[K] But it will rise\nfrom the rubble again!\"",
+                french="\"Le [CS:K]Dojo Ossatueur[CR] s\'est effondré.[K]\nMais il renaîtra de ses cendres!",
+                german="Das [CS:K]Knogga-Dojo[CR] ist eingestürzt.[K] Aber es wird\nsich wieder aus seinen Trümmern erheben!",
+                italian="\"Il Dojo [CS:K]Marowak[CR] è crollato.[K] Ma risorgerà\ndalle macerie!\"",
+                spanish="\"El [CS:K]Dojo Marowak[CR] se ha hundido...[K] ¡pero\nresurgirá de sus cenizas!\"",
+            });
+            message_Mail({
+                english="\"Yes! The Dojo will be resurrected to its\nformer glory![K]\n          - [CS:K]Marowak[CR] Dojo\'s Sensei -\"",
+                french="Oui! Le Dojo retrouvera sa grandeur passée![K]\n          - [CS:K]Ossatueur[CR], sensei du dojo -\"",
+                german="Jawohl! Das Dojo wird seine frühere Pracht\nzurückerlangen![K]\n          - Meister des [CS:K]Knogga-Dojos[CR] -",
+                italian="\"Sì! Il Dojo tornerà alla\nsua antica gloria!\"[K]\n          - [CS:K]Marowak[CR], maestro del Dojo -",
+                spanish="\"¡Sí! ¡El dojo recuperará la gloria de antaño!\"[K]\n          - Maestro [CS:K]Marowak[CR]",
+            });
+            message_Close();
+            JumpCommon(CORO_END_TALK);
+        default:
+            with (actor ACTOR_PLAYER) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            switch ( main_EnterTraining(32767, 30) ) {
+                case 1:
+                    call @dojo_check;
+                    §label_1;
+                    supervision_Suspend(-2);
+                    end;
+                default:
+                    message_Mail({
+                        english="\n[CN]Caution!",
+                        french="\n[CN]Attention!",
+                        german="\n[CN]Achtung!",
+                        italian="\n[CN]Attenzione!",
+                        spanish="\n[CN]¡Atención!",
+                    });
+                    message_Mail({
+                        english="[CN]If you enter here, all the items in\n[CN]your Treasure Bag will be lost.",
+                        french="[CN]Si vous entrez ici, tous les objets\n[CN]de votre Sac à Trésor seront perdus.",
+                        german="[CN]Wenn ihr eintretet, gehen alle Items in eurem\n[CN]Schatzbeutel verloren.",
+                        italian="[CN]Entrando qui, tutti gli strumenti nella Sacca\n[CN]dei tesori andranno persi.",
+                        spanish="[CN]Si continúas, perderás todos los\n[CN]objetos que llevas en la Bolsa.",
+                    });
+                    message_Mail({
+                        english="[CN]Will you enter, even though\n[CN]all your items will be lost?",
+                        french="[CN]Voulez-vous entrer quand même, au risque\n[CN]de perdre tous vos objets?",
+                        german="[CN]Tretet ihr ein, auch wenn dadurch alle Items\n[CN]in eurem Schatzbeutel verloren gehen?",
+                        italian="[CN]Vuoi entrare anche se tutti gli strumenti\n[CN]andranno persi?",
+                        spanish="[CN]¿Quieres entrar aunque vayas a\n[CN]perder todos tus objetos?",
+                    });
+                    switch ( message_SwitchMenu(0, 2) ) {
+                        case menu({
+                            english="Yes",
+                            french="Oui",
+                            german="Ja",
+                            italian="Sì",
+                            spanish="Sí",
+                        }):
+                            message_Close();
+                            switch ( main_EnterTraining(251, 30) ) { }
+                            hold;
+                        case menu({
+                            english="No",
+                            french="Non",
+                            german="Nein",
+                            italian="No",
+                            spanish="No",
+                        }):
+                            message_Close();
+                            message_Mail({
+                                english="[CN]You should leave important items with\n[CN][CS:K]Kangaskhan[CR] Storage before coming here.",
+                                french="[CN]Vous devriez stocker vos objets précieux\n[CN]dans la [CS:K]Réserve Kangourex[CR] avant d\'entrer.",
+                                german="[CN]Wichtige Items solltet ihr im [CS:K]Kangama-Lager[CR]\n[CN]aufbewahren lassen, bevor ihr hierherkommt.",
+                                italian="[CN]Prima di venire qui bisognerebbe lasciare\n[CN]gli strumenti più importanti al Deposito\n[CN][CS:K]Kangaskhan[CR].",
+                                spanish="[CN]Deberías dejar los objetos importantes en la\n[CN][CS:K]Consigna Kangaskhan[CR] antes de venir aquí.",
+                            });
+                            message_Close();
+                            jump @label_1;
+                        default:
+                            message_Mail("Hi");
+                            message_Close();
+                            jump @label_1;
+                    }
+                    break;
+            }
+            break;
+    }
+    hold;
+    §dojo_check;
+    switch(dungeon_mode(180)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(181)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(182)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(183)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(184)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(185)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(186)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(187)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(188)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(189)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(190)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            return;
+        default:
+            break;
+    }
+    message_Mail({
+        english="[CN]There\'s a notice posted here.[K]\n[CN]Something\'s written on it...",
+        french="[CN]Il y a une affiche ici.[K]\n[CN]Quelque chose y est écrit...",
+        german="[CN]Hier hängt ein Notizzettel.[K]\n[CN]Etwas steht darauf geschrieben.",
+        italian="[CN]C\'è un biglietto.[K]\n[CN]E c\'è scritto qualcosa...",
+        spanish="[CN]Aquí hay una nota.[K]\n[CN]A ver qué pone...",
+    });
+    message_Mail("[CN]You haven\'t unlocked any dojo dungeons yet![K]\n[CN]You cannot use this area until you do!");
+    message_Close();
+    return;
+    hold;
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

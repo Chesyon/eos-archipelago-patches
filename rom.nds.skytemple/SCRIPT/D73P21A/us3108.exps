@@ -1,0 +1,190 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] ) {
+        with (actor ACTOR_PLAYER_APPOINT) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_PLAYER_APPOINT) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYUURA);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" .........",
+            french=" .........",
+            german=" .........",
+            italian=" .........",
+            spanish=" ...",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] ) {
+        with (actor ACTOR_PLAYER_APPOINT) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_PLAYER_APPOINT) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYUURA);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Ugh... Oof...",
+            french=" Argh... Ouf...",
+            german=" Uff... Uuuff...",
+            italian=" Urgh... Oooh...",
+            spanish=" Ay... Uf...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Huh? [CS:I]Sky Gift[CR]?",
+            french=" Hein? Les [CS:I]Dons du Ciel[CR]?",
+            german=" Wie? [CS:I]Himmelspräsent[CR]?",
+            italian=" Eh? Un [CS:I]Dono Cielo[CR]?",
+            spanish=" ¿Eh? ¿Un [CS:I]Regalo Cielo[CR]?",
+        });
+        message_Talk({
+            english=" It isn\'t really treasure...",
+            french=" Ce sont pas vraiment\ndes trésors...",
+            german=" Das ist kein richtiger Schatz...",
+            italian=" Ma non è affatto un tesoro...",
+            spanish=" Es un tesoro de mentirijilla...",
+        });
+        message_Talk({
+            english=" There\'s no point in treasure if \nyou don\'t get to keep it yourself.",
+            french=" Ça n\'a rien d\'un trésor,\nsi tu ne peux pas le garder pour toi.",
+            german=" Schätze sind doch sinnlos,\nwenn man sie nicht behalten darf!",
+            italian=" Come si fa a definire tesoro\nqualcosa che non puoi tenere tutto per te?",
+            spanish=" ¿Qué clase de tesoro va a ser si\nno te lo puedes quedar? ¡Menuda tontería!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Huh? That legendary treasure\nwill need to be found by someone of legend...\nI\'d say that\'s me!",
+            french=" Hein? Pour trouver un trésor\nlégendaire, il faut quelqu\'un de légendaire,\net ce quelqu\'un, c\'est moi!",
+            german=" Der legendäre Schatz wird von\njemand Legendärem gefunden werden...\nIch würde mal sagen, das bin ich!",
+            italian=" Uh? Quel tesoro leggendario può\nessere trovato solo da un esploratore\neccezionale... Cioè io!",
+            spanish=" ¿Eh? Ese tesoro legendario debería\nencontrarlo alguien que cree leyenda...\n¡Quién mejor que yo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYUURA);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Heh-heh-heh...\nThe legendary treasure will be claimed by\n[CS:N]Sneasel[CR]!",
+            french=" Hé hé hé...\nC\'est [CS:N]Farfuret[CR] qui pourra s\'enorgueillir\nd\'avoir trouvé le trésor légendaire!",
+            german=" Hehehe...\n[CS:N]Sniebel[CR] wird den legendären Schatz für sich\nbeanspruchen!",
+            italian=" Eh eh eh...\nSarò io, [CS:N]Sneasel[CR], a mettere le mani\nsu quel tesoro leggendario!",
+            spanish=" Je, je, je... ¡[CS:N]Sneasel[CR] encontrará\nel tesoro legendario!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] || scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYUURA);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Heh-heh-heh. I found a so-called\n\"Secret Room\" earlier.",
+            french=" Hé hé hé. J\'ai trouvé une\nsoi-disant \"Salle Secrète\", un peu plus tôt.",
+            german=" Hehehe. Ich habe vorhin einen\nsogenannten [F:S2]Geheimraum[F:E2] gefunden.",
+            italian=" Eh eh eh! Prima ho trovato una\ncosiddetta \"Sala Segreta\".",
+            spanish=" Je, je, je. Antes encontré\nuna de esas \"Cámaras Secretas\".",
+        });
+        message_Close();
+        se_Play(8962);
+        with (actor ACTOR_NPC_NYUURA) {
+            SetEffect(EFFECT_QUESTION_MARK, 3);
+        }
+        with (actor ACTOR_NPC_NYUURA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_NYUURA);
+        message_Talk({
+            english=" Huh? Where was it?",
+            french=" Hein? Où ça?",
+            german=" Äh? Wo das war?",
+            italian=" Eh? Vuoi sapere dove\nsi trovava?",
+            spanish=" ¿Cómo? ¿Que dónde estaba?",
+        });
+        message_Talk({
+            english=" Ha ha ha! Like I\'m going to tell\nyou that!",
+            french=" Ha ha ha! Comme si j\'allais\nte le dire!",
+            german=" Ha ha ha! Als ob ich dir das\nsagen würde!",
+            italian=" Ah ah ah! E tu credi che venga\na dirlo a te?!",
+            spanish=" ¡Como que te lo iba a decir a ti!\n¡Ja, ja, ja!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYUURA);
+        }
+        message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I\'m [CS:N]Sneasel[CR].\nI\'m a one-Pokémon exploration team.",
+            french=" Je suis [CS:N]Farfuret[CR].\nJe suis une équipe d\'exploration\nà moi tout seul.",
+            german=" Mein Name ist [CS:N]Sniebel[CR].\nIch bin ein Einzel-Pokémon-Erkundungsteam.",
+            italian=" Mi chiamo [CS:N]Sneasel[CR].\nSono un esploratore solitario.",
+            spanish=" Soy [CS:N]Sneasel[CR] y soy el único\nmiembro de mi equipo explorador.",
+        });
+        message_Talk({
+            english=" I won\'t let anyone get in my\nway, ever.",
+            french=" Je laisserai jamais personne\ntraîner dans mes pattes.",
+            german=" Ich werde niemals zulassen,\ndass sich mir jemand in den Weg stellt.",
+            italian=" Non permetterò a nessuno di\nintralciarmi! Capito?",
+            spanish=" Nunca dejo que nadie\nse interponga en mi camino, jamás.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

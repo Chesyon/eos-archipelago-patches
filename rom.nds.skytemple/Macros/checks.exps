@@ -1,0 +1,87 @@
+
+macro RunSP($variable_id,$value) {
+    ProcessSpecial(65,$variable_id,$value);
+}
+
+
+macro AssignCheck($bit) {
+    $LOCAL0 = $bit;
+    if ($LOCAL0 > 127) {
+        message_Mail("Check Bit too high!");
+        message_Close();
+        return;
+    }
+    $LOCAL0 /= 8;
+    if ($LOCAL0 &<< 0) {
+        $VERSION = 1;
+    } else {
+        $VERSION = 0;
+    }
+    
+    // Next we circumvent ExplorerScript not having modulo with integer division!!!
+    $LOCAL1 = value($LOCAL0);
+    $LOCAL1 *= 8;
+    $DUNGEON_EVENT_LOCAL = $bit;
+    $DUNGEON_EVENT_LOCAL -= value($LOCAL1); 
+    
+    switch($DUNGEON_EVENT_LOCAL) {
+        case 0:
+            ~InternalCheckMacro(1);
+            break;
+        case 1:
+            ~InternalCheckMacro(2);
+            break;
+        case 2:
+            ~InternalCheckMacro(4);
+            break;
+        case 3:
+            ~InternalCheckMacro(8);
+            break;
+        case 4:
+            ~InternalCheckMacro(16);
+            break;
+        case 5:
+            ~InternalCheckMacro(32);
+            break;
+        case 6:
+            ~InternalCheckMacro(64);
+            break;
+        case 7:
+            ~InternalCheckMacro(128);
+            break;
+        default:
+            break;
+    }
+    $VERSION = 1; // Revert to 1, otherwise 
+}
+
+
+macro InternalCheckMacro($value) {
+    switch($LOCAL0) { // 
+        case < 2:
+            ~RunSP(5,$value);
+            break;
+        case < 4:
+            ~RunSP(6,$value);
+            break;
+        case < 6:
+            ~RunSP(7,$value);
+            break;
+        case < 8:
+            ~RunSP(8,$value);
+            break;
+        case < 2:
+            ~RunSP(9,$value);
+            break;
+        case < 4:
+            ~RunSP(10,$value);
+            break;
+        case < 6:
+            ~RunSP(11,$value);
+            break;
+        default:
+            ~RunSP(12,$value);
+            break;
+    }
+    
+}

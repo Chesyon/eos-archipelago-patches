@@ -1,0 +1,1406 @@
+
+def 0 {
+    sound_Stop();
+    back_SetDungeonBanner(43, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    screen_WhiteIn(26, 6);
+    back_SetGround(LEVEL_D30P41A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    bgm_PlayFadeIn(BGM_HEAVY_FEELING, 90, 256);
+    screen_FadeIn(1, 30);
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m0', 32.5, 45.5>);
+    }
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m1', 36.5, 45.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        ExecuteCommon(CORO_LOOK_AROUND_RIGHT_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    WaitExecuteLives(ACTOR_PLAYER);
+    Wait(10);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 2, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Is this...[K] Is this the top of\n[CS:P]Temporal Tower[CR]?",
+                french=" C\'est...[K] c\'est le sommet\nde la [CS:P]Tour du Temps[CR]?",
+                german=" Ist dies...[K] Ist dies die Spitze des\n[CS:P]Zeitturms[CR]?",
+                italian=" Questa è...[K] Questa è la cima \ndella [CS:P]Torre del Tempo[CR]?",
+                spanish=" ¿Hemos llegado?[K] ¿Estamos en\nlo alto de la [CS:P]Torre del Tiempo[CR]?",
+            }
+        case 2:
+            {
+                english=" Is this...[K] Is this the top of\n[CS:P]Temporal Tower[CR]?",
+                french=" C\'est...[K] c\'est le sommet\nde la [CS:P]Tour du Temps[CR]?",
+                german=" Ist dies...[K] Ist dies die Spitze des\n[CS:P]Zeitturms[CR]?",
+                italian=" Questa è...[K] Questa è la cima \ndella [CS:P]Torre del Tempo[CR]?",
+                spanish=" ¿Hemos llegado?[K] ¿Estamos en\nlo alto de la [CS:P]Torre del Tiempo[CR]?",
+            }
+        default:
+            {
+                english=" Is this...[K] Is this the top of\n[CS:P]Temporal Tower[CR]?",
+                french=" C\'est...[K] c\'est le sommet\nde la [CS:P]Tour du Temps[CR]?",
+                german=" Ist dies...[K] Ist dies die Spitze des\n[CS:P]Zeitturms[CR]?",
+                italian=" Questa è...[K] Questa è la cima \ndella [CS:P]Torre del Tempo[CR]?",
+                spanish=" ¿Hemos llegado?[K] ¿Estamos en\nlo alto de la [CS:P]Torre del Tiempo[CR]?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(7690);
+    screen_WhiteOut(1, 3);
+    Wait(2);
+    screen_FadeIn(1, 3);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Whoa! Lightning!",
+                french=" Ouah! Un éclair!",
+                german=" Aaah! Blitze!",
+                italian=" Aaah! I fulmini!",
+                spanish=" ¡Vaya! ¡Una tormenta!",
+            }
+        case 2:
+            {
+                english=" Waah! Lightning!",
+                french=" Ouah! Un éclair!",
+                german=" Waah! Blitze!",
+                italian=" Aaah! I fulmini!",
+                spanish=" ¡Vaya! ¡Una tormenta!",
+            }
+        default:
+            {
+                english=" Waah! Lightning!",
+                french=" Ouah! Un éclair!",
+                german=" Waah! Blitze!",
+                italian=" Aaah! I fulmini!",
+                spanish=" ¡Vaya! ¡Una tormenta!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    WaitSe(7690);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    se_Play(8967);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Look at the sky, [hero]!",
+                french=" Regarde le ciel, [hero]!",
+                german=" Sieh dir den Himmel an,\n[hero]!",
+                italian=" Guarda il cielo, [hero]!",
+                spanish=" ¡Mira el cielo, [hero]!",
+            }
+        case 2:
+            {
+                english=" Look at the sky, [hero]!",
+                french=" Regarde le ciel, [hero]!",
+                german=" Sieh dir den Himmel an,\n[hero]!",
+                italian=" Guarda il cielo, [hero]!",
+                spanish=" ¡Mira el cielo, [hero]!",
+            }
+        default:
+            {
+                english=" Look at the sky, [hero]!",
+                french=" Regarde le ciel, [hero]!",
+                german=" Sieh dir den Himmel an,\n[hero]!",
+                italian=" Guarda il cielo, [hero]!",
+                spanish=" ¡Mira el cielo, [hero]!",
+            }
+    }
+    message_Close();
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    Wait(15);
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V25P03A);
+    camera2_SetPositionMark(Position<'m2', 19.5, 16.5>);
+    se_Play(7691);
+    supervision_Acting(2);
+    screen2_FadeIn(1, 15);
+    Wait(60);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It\'s incredible![K] Red clouds are\nswirling!",
+                french=" Incroyable![K] Il y a un tourbillon\nde nuages rouges!",
+                german=" Das ist unglaublich![K] Da wirbeln\nrote Wolken durcheinander!",
+                italian=" È incredibile![K] Ci sono delle\nnuvole rosse che si muovono vorticosamente!",
+                spanish=" ¡Es increíble![K] ¡Se están\narremolinando nubes rojas!",
+            }
+        case 2:
+            {
+                english=" It\'s incredible![K] Red clouds are\nswirling!",
+                french=" Incroyable![K] Il y a un tourbillon\nde nuages rouges!",
+                german=" Das ist unglaublich![K] Da wirbeln\nrote Wolken durcheinander!",
+                italian=" È incredibile![K] Ci sono delle\nnuvole rosse che si muovono vorticosamente!",
+                spanish=" ¡Es increíble![K] ¡Se están\narremolinando nubes rojas!",
+            }
+        default:
+            {
+                english=" It\'s incredible![K] Red clouds are\nswirling!",
+                french=" Incroyable![K] Il y a un tourbillon\nde nuages rouges!",
+                german=" Das ist unglaublich![K] Da wirbeln\nrote Wolken durcheinander!",
+                italian=" È incredibile![K] Ci sono delle\nnuvole rosse che si muovono vorticosamente!",
+                spanish=" ¡Es increíble![K] ¡Se están\narremolinando nubes rojas!",
+            }
+    }
+    message_Close();
+    se_FadeOut(7691, 45);
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    supervision_RemoveActing(2);
+    Wait(30);
+    se_Play(7692);
+    camera_SetEffect(2, 1, 33024);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(20);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        ExecuteCommon(CORO_LOOK_AROUND_DOWN_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Whoa! It happened again!",
+                french=" Ouah! Ça recommence!",
+                german=" Es ist schon wieder passiert!",
+                italian=" Wow! È successo di nuovo!",
+                spanish=" ¡Aaah! ¡Ha vuelto a ocurrir!",
+            }
+        case 2:
+            {
+                english=" Waah! It happened again!",
+                french=" Ouah! Ça recommence!",
+                german=" Es ist schon wieder passiert!",
+                italian=" Aaah! È successo di nuovo!",
+                spanish=" ¡Aaah! ¡Ha vuelto a ocurrir!",
+            }
+        default:
+            {
+                english=" Waah! It happened again!",
+                french=" Ouah! Ça recommence!",
+                german=" Es ist schon wieder passiert!",
+                italian=" Aaah! È successo di nuovo!",
+                spanish=" ¡Aaah! ¡Ha vuelto a ocurrir!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Stop(7692);
+    camera_SetEffect(0, 0, 0);
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_PAIN, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" This tower feels like it\'s going\nto fall apart any second!",
+                french=" La tour menace de s\'écrouler\nd\'une seconde à l\'autre!",
+                german=" Es fühlt sich an, als würde der\nTurm jeden Moment zusammenbrechen!",
+                italian=" Ho come l\'impressione che questa\ntorre crollerà da un momento all\'altro!",
+                spanish=" Parece que la torre se va a\ncaer de un momento a otro.",
+            }
+        case 2:
+            {
+                english=" This tower feels like it\'s going\nto shake apart any moment!",
+                french=" La tour menace de s\'écrouler\nd\'une seconde à l\'autre!",
+                german=" Es fühlt sich an, als würde\njeden Moment der Turm auseinanderfallen!",
+                italian=" Ho come l\'impressione che questa\ntorre crollerà da un momento all\'altro!",
+                spanish=" Parece que la torre se va a\ncaer de un momento a otro.",
+            }
+        default:
+            {
+                english=" This tower feels like it\'s going\nto break apart any moment!",
+                french=" La tour menace de s\'écrouler\nd\'une seconde à l\'autre!",
+                german=" Es fühlt sich an, als würde\nder Turm jeden Moment kollabieren!",
+                italian=" Ho come l\'impressione che questa\ntorre crollerà da un momento all\'altro!",
+                spanish=" Parece que la torre se va a\ncaer de un momento a otro.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_DETERMINED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s move it, [hero]!",
+                french=" Vite, [hero]!",
+                german=" Setzen wir uns in\nBewegung, [hero]!",
+                italian=" Facciamo presto, [hero]!",
+                spanish=" ¡Démonos prisa, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s hustle, [hero]!",
+                french=" Vite, [hero]!",
+                german=" Es ist Zeit,\n[hero]!",
+                italian=" Facciamo in fretta,\n[hero]!",
+                spanish=" ¡Démonos prisa, [hero]!",
+            }
+        default:
+            {
+                english=" Let\'s hurry, [hero]!",
+                french=" Vite, [hero]!",
+                german=" Beeilen wir uns,\n[hero]!",
+                italian=" Facciamo presto, [hero]!",
+                spanish=" ¡Démonos prisa, [hero]!",
+            }
+    }
+    message_Close();
+    with (performer 0) {
+        MovePositionMark(1, Position<'m3', 34.5, 34.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m4', 32.5, 35.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m5', 36.5, 35.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    se_Play(8967);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Hey! Over there!",
+                french=" Regarde là-bas!",
+                german=" Hey! Dort drüben!",
+                italian=" Ehi! Laggiù!",
+                spanish=" ¡Mira eso!",
+            }
+        case 2:
+            {
+                english=" Look! Over there!",
+                french=" Regarde là-bas!",
+                german=" Sieh mal! Dort drüben!",
+                italian=" Guarda! Laggiù!",
+                spanish=" ¡Mira eso!",
+            }
+        default:
+            {
+                english=" Oh! Over there!",
+                french=" Regarde là-bas!",
+                german=" Oh! Da drüben!",
+                italian=" Oh! Laggiù!",
+                spanish=" ¡Mira eso!",
+            }
+    }
+    message_Close();
+    with (performer 0) {
+        MovePositionMark(1, Position<'m6', 34.5, 26.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m7', 32.5, 27.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m8', 36.5, 27.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V25P04A);
+    camera2_SetPositionMark(Position<'m9', 19.5, 16.5>);
+    screen2_FadeIn(1, 15);
+    Wait(30);
+    bgm2_PlayFadeIn(BGM_TEMPORAL_PINNACLE, 0, 256);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" ...[K]What is this?",
+                french=" ...[K] Qu\'est-ce que c\'est que ça?",
+                german=" ...[K]Was ist das?",
+                italian=" ...[K] Che cos\'è?",
+                spanish=" ¿Qué...?[K] ¿Qué crees que será?",
+            }
+        case 2:
+            {
+                english=" ...[K]What could this be?",
+                french=" ...[K] Qu\'est-ce que c\'est que ça?",
+                german=" ...[K]Was könnte das sein?",
+                italian=" ...[K] Cosa potrebbe essere?",
+                spanish=" ¿Qué...?[K] ¿Qué crees que será?",
+            }
+        default:
+            {
+                english=" ...[K]What could this be?",
+                french=" ...[K] Qu\'est-ce que c\'est que ça?",
+                german=" ...[K]Was könnte das sein?",
+                italian=" ...[K] Cosa potrebbe essere?",
+                spanish=" ¿Qué...?[K] ¿Qué crees que será?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It has a mystical air to it...",
+                french=" Il y a comme une aura mystique\nqui s\'en dégage...",
+                german=" Es hat etwas Mystisches an\nsich...",
+                italian=" Ha un\'aria mistica...",
+                spanish=" Tiene un aire misterioso.",
+            }
+        case 2:
+            {
+                english=" It has a strange, mystical feel...",
+                french=" Il y a comme une aura mystique\nqui s\'en dégage...",
+                german=" Es hat etwas Seltsames,\nMystisches an sich...",
+                italian=" Ha un\'aria strana, mistica...",
+                spanish=" Tiene un aire misterioso.",
+            }
+        default:
+            {
+                english=" It has a mystical feel to it...",
+                french=" Il y a comme une aura mystique\nqui s\'en dégage...",
+                german=" Irgendetwas daran macht es\ngeheimnisvoll...",
+                italian=" Ha un\'aria mistica...",
+                spanish=" Tiene un aire misterioso.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(...............)",
+                french="(...............)",
+                german="(...............)",
+                italian="(...............)",
+                spanish="(...)",
+            }
+        default:
+            {
+                english="(...............)",
+                french="(...............)",
+                german="(...............)",
+                italian="(...............)",
+                spanish="(...)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(There\'s a big circular pattern...)",
+                french="(Il y a un grand symbole circulaire...)",
+                german="(Dort ist ein großes kreisförmiges Muster.)",
+                italian="(Un grosso disegno circolare...)",
+                spanish="(Hay un círculo enorme dibujado.)",
+            }
+        default:
+            {
+                english="(There\'s a big circular pattern...)",
+                french="(Il y a un grand symbole circulaire...)",
+                german="(Dort ist ein großes kreisförmiges Muster.)",
+                italian="(Un grosso disegno circolare...)",
+                spanish="(Hay un círculo enorme dibujado.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Inside are indentations that look like they\'ve\nbeen gouged out...)",
+                french="(On dirait que quelqu\'un a creusé des trous\ndedans...)",
+                german="(Und innen sind Vertiefungen, die aussehen, als\nwären sie herausgemeißelt worden.)",
+                italian="(Ci sono delle incavature...)",
+                spanish="(Dentro, tiene unas marcas; como si se hubiera\nsacado algo a la fuerza.)",
+            }
+        default:
+            {
+                english="(Inside are indentations that look like they\'ve\nbeen gouged out...)",
+                french="(On dirait que quelqu\'un a creusé des trous\ndedans...)",
+                german="(Und innen sind Vertiefungen, die aussehen, als\nwären sie herausgemeißelt worden.)",
+                italian="(Ci sono delle incavature...)",
+                spanish="(Dentro, tiene unas marcas; como si se hubiera\nsacado algo a la fuerza.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(What is this...?)",
+                french="(Mais à quoi ça peut bien servir...?)",
+                german="(Was ist das?)",
+                italian="(Che cosa...?)",
+                spanish="(¿Qué es esto?)",
+            }
+        default:
+            {
+                english="(What is this...?)",
+                french="(Mais à quoi ça peut bien servir...?)",
+                german="(Was ist das?)",
+                italian="(Che cosa...?)",
+                spanish="(¿Qué es esto?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8965);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_PLAYER, FACE_SURPRISED, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(...![K] Wait a second!)",
+                french="(...![K] Une seconde!)",
+                german="(...[K]Einen Moment mal!)",
+                italian="(...![K] Aspetta un secondo!)",
+                spanish="(¡Eh![K] ¡Espera un segundo!)",
+            }
+        default:
+            {
+                english="(...![K] Wait a second!)",
+                french="(...![K] Une seconde!)",
+                german="(...[K]Einen Moment mal!)",
+                italian="(...![K] Aspetta un secondo!)",
+                spanish="(¡Eh![K] ¡Espera un segundo!)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(The gouged-out indentations...[K] There are\nfive in all.)",
+                french="(Ces creux dans le symbole...[K] Il y en a cinq\nen tout.)",
+                german="(Die herausgemeißelten Vertiefungen...[K] Es sind\ninsgesamt fünf.)",
+                italian="(Le incavature...[K] in tutto sono\ncinque.)",
+                spanish="(Son...[K] ¡Son cinco marcas en total!)",
+            }
+        default:
+            {
+                english="(The gouged-out indentations...[K] There are\nfive in all.)",
+                french="(Ces creux dans le symbole...[K] Il y en a cinq\nen tout.)",
+                german="(Die herausgemeißelten Vertiefungen...[K] Es sind\ninsgesamt fünf.)",
+                italian="(Le incavature...[K] in tutto sono\ncinque.)",
+                spanish="(Son...[K] ¡Son cinco marcas en total!)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Five slots...[K] That means...!)",
+                french="(Cinq cavités...[K] Bon sang mais c\'est bien sûr!)",
+                german="(Fünf Vertiefungen...[K] Das bedeutet...)",
+                italian="(Cinque alloggiamenti...[K] Questo significa...!)",
+                spanish="(Cinco huecos...[K] Eso significa que...)",
+            }
+        default:
+            {
+                english="(Five slots...[K] That means...!)",
+                french="(Cinq cavités...[K] Bon sang mais c\'est bien sûr!)",
+                german="(Fünf Vertiefungen...[K] Das bedeutet...)",
+                italian="(Cinque alloggiamenti...[K] Questo significa...!)",
+                spanish="(Cinco huecos...[K] Eso significa que...)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        ExecuteCommon(CORO_EXPLANATION_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Huh? Five slots?",
+                french=" Hein, quoi? Cinq trous?",
+                german=" Fünf Vertiefungen?",
+                italian=" Eh? Cinque alloggiamenti?",
+                spanish=" ¿Qué? ¿Cinco huecos?",
+            }
+        case 2:
+            {
+                english=" What? Five slots?",
+                french=" Hein, quoi? Cinq trous?",
+                german=" Was? Fünf Vertiefungen?",
+                italian=" Cosa? Cinque alloggiamenti?",
+                spanish=" ¿Qué? ¿Cinco huecos?",
+            }
+        default:
+            {
+                english=" What? Five slots?",
+                french=" Hein, quoi? Cinq trous?",
+                german=" Was? Fünf Vertiefungen?",
+                italian=" Cosa? Cinque alloggiamenti?",
+                spanish=" ¿Qué? ¿Cinco huecos?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8978);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Th-that\'s it![K] If I put the Time\nGears into these slots...",
+                french=" Mais oui, c\'est ça![K] Si je place\nles Rouages du Temps dans les trous...",
+                german=" D-das ist es![K] Wenn ich die\nZahnräder der Zeit in diese Vertiefungen\neinsetze...",
+                italian=" D-Dev\'essere così![K] Se metto\ngli Ingranaggi del Tempo nelle incavature...",
+                spanish=" ¡Eso es![K] Si introduzco los\nEngranajes del Tiempo en esos cinco huecos...",
+            }
+        case 2:
+            {
+                english=" Th-that\'s it![K] If I set the five\nTime Gears into these five slots...",
+                french=" Mais oui, c\'est ça![K] Si je place\nles Rouages du Temps dans les trous...",
+                german=" D-das ist es![K] Wenn ich die\nZahnräder der Zeit in diese Vertiefungen\neinsetze...",
+                italian=" D-Dev\'essere così![K] Se metto\ngli Ingranaggi del Tempo nelle incavature...",
+                spanish=" ¡Eso es![K] Si introduzco los\nEngranajes del Tiempo en esos cinco huecos...",
+            }
+        default:
+            {
+                english=" Th-that\'s it![K] If I put the Time\nGears into these slots...",
+                french=" Mais oui, c\'est ça![K] Si je place\nles Rouages du Temps dans les trous...",
+                german=" D-das ist es![K] Wenn ich die\nZahnräder der Zeit in diese Vertiefungen\neinsetze...",
+                italian=" D-Dev\'essere così![K] Se metto\ngli Ingranaggi del Tempo nelle incavature...",
+                spanish=" ¡Eso es![K] Si introduzco los\nEngranajes del Tiempo en esos cinco huecos...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" We might be able to prevent\ntime from stopping!",
+                french=" ... alors on pourra empêcher\nque le temps ne se fige!",
+                german=" Dann könnten wir vielleicht\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Riusciremo a impedire che il \ntempo si fermi!",
+                spanish=" ¡Tal vez podamos evitar que\nse detenga el tiempo!",
+            }
+        case 2:
+            {
+                english=" We might prevent time from\nstopping!",
+                french=" ... alors on pourra empêcher\nque le temps ne se fige!",
+                german=" Dann könnten wir vielleicht\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Potremo impedire che il tempo\nsi fermi!",
+                spanish=" ¡Tal vez podamos evitar que\nse detenga el tiempo!",
+            }
+        default:
+            {
+                english=" We might prevent time from\nstopping!",
+                french=" ... alors on pourra empêcher\nque le temps ne se fige!",
+                german=" Dann könnten wir vielleicht\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Potremo impedire che il tempo\nsi fermi!",
+                spanish=" ¡Tal vez podamos evitar que\nse detenga el tiempo!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Gotcha! I\'ll do it!",
+                french=" Compris, je vais le faire!",
+                german=" Kapiert! Ich mache es!",
+                italian=" Afferrato! Ci penso io!",
+                spanish=" ¡Voy a hacerlo!",
+            }
+        case 2:
+            {
+                english=" OK! I\'ll do it!",
+                french=" Compris, je vais le faire!",
+                german=" Okay! Ich mache es!",
+                italian=" Ok! Ci penso io!",
+                spanish=" ¡De acuerdo! ¡Voy a hacerlo!",
+            }
+        default:
+            {
+                english=" All right! I\'ll do it!",
+                french=" Compris, je vais le faire!",
+                german=" Alles klar! Ich mache es!",
+                italian=" Va bene! Ci penso io!",
+                spanish=" ¡Voy a hacerlo!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_FadeOut(10);
+    bgm2_FadeOut(10);
+    se_Play(7693);
+    screen_WhiteChange(1, 2, 256, 64);
+    supervision_Acting(3);
+    with (object OBJECT_D30P33A4_78) {
+        SetAnimation(17);
+    }
+    with (object OBJECT_D30P33A4_78) {
+        WaitAnimation();
+    }
+    Wait(15);
+    with (actor ACTOR_PLAYER) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(3);
+    }
+    with (performer 0) {
+        MovePositionMark(4, Position<'m10', 34.5, 34.5>);
+    }
+    with (actor ACTOR_PLAYER) {
+        SlidePositionMark(4, Position<'m11', 36.5, 35.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionMark(4, Position<'m12', 32.5, 35.5>);
+    }
+    WaitExecuteObject(OBJECT_D30P33A4_78);
+    with (object OBJECT_D30P33A4_78) {
+        Destroy();
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SHOUTING, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Waaaah!",
+                french=" Ouaaaah!",
+                german=" Waaaah!",
+                italian=" Aaaaah!",
+                spanish=" ¡Aaaah!",
+            }
+        case 2:
+            {
+                english=" Waaaah!",
+                french=" Ouaaaah!",
+                german=" Waaaah!",
+                italian=" Aaaaah!",
+                spanish=" ¡Aaaah!",
+            }
+        default:
+            {
+                english=" Waaaah!",
+                french=" Ouaaaah!",
+                german=" Waaaah!",
+                italian=" Aaaaah!",
+                spanish=" ¡Aaaah!",
+            }
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(68);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(68);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    screen_WhiteChange(1, 15, 64, 256);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(6925);
+    screen_FadeChange(1, 30, 256, 128);
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    Wait(10);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Whoa![K] It turned dark suddenly!",
+                french=" Ouah![K] Il fait noir tout à coup!",
+                german=" Aaah![K] Es ist plötzlich dunkel\ngeworden!",
+                italian=" Wow![K] È diventato buio\nall\'improvviso!",
+                spanish=" ¡Pero bueno![K] ¡De pronto todo\nse ha oscurecido!",
+            }
+        case 2:
+            {
+                english=" Waaah![K] It turned dark all of a\nsudden!",
+                french=" Ouah![K] Il fait noir tout à coup!",
+                german=" Waaah![K] Es ist plötzlich finster\ngeworden!",
+                italian=" Aaaah![K] È diventato tutto buio\nall\'improvviso!",
+                spanish=" ¡Vaya![K] ¿Qué ha pasado con\nla luz?",
+            }
+        default:
+            {
+                english=" Waaah![K] It turned suddenly dark!",
+                french=" Ouah![K] Il fait noir tout à coup!",
+                german=" Waaah![K] Es ist plötzlich ganz\ndunkel geworden!",
+                italian=" Aaaah![K] È diventato buio\nall\'improvviso!",
+                spanish=" ¡Vaya![K] ¡De pronto todo se\nha vuelto negro!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_PlayFadeIn(BGM_DOWN_A_DARK_PATH, 0, 256);
+    message_EmptyActor();
+    message_Talk({
+        english="GRRRRRRRRR...",
+        french="GRRRRRRRRR...",
+        german="GRRRRRRRRR...",
+        italian="GRRRRRRRRR...",
+        spanish="GRRRRRRRRR...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_ResetActor();
+    message_Talk({
+        english=" SO! IT\'S YOU!",
+        french=" ALORS, C\'EST VOUS!",
+        german=" AH! IHR SEID ES!",
+        italian=" ALLORA SIETE VOI!",
+        spanish=" ¡ASÍ QUE HA SIDO CULPA VUESTRA!",
+    });
+    message_Talk({
+        english=" YOU SEEK THE DESTRUCTION OF\n[CS:P]TEMPORAL TOWER[CR]!",
+        french=" VOUS CHERCHEZ A DETRUIRE LA [CS:P]TOUR\nDU TEMPS[CR]!",
+        german=" IHR STREBT DIE ZERSTÖRUNG DES\n[CS:P]ZEITTURMS[CR] AN!",
+        italian=" STATE CERCANDO DI DISTRUGGERE LA\n[CS:P]TORRE DEL TEMPO[CR]!",
+        spanish=" ¡SOIS LOS QUE QUERÉIS ACABAR CON\nLA [CS:P]TORRE DEL TIEMPO[CR]!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" What?![K] That\'s not true!",
+                french=" Pardon?![K] Non,\nvous vous trompez!",
+                german=" Was?[K] Das stimmt nicht!",
+                italian=" Cosa?![K] Non è vero!",
+                spanish=" ¡¿Qué?![K] ¡Eso no es verdad!",
+            }
+        case 2:
+            {
+                english=" What?![K] You\'re wrong!",
+                french=" Pardon?![K] Non,\nvous vous trompez!",
+                german=" Was?[K] Mitnichten!",
+                italian=" Cosa?![K] Ti sbagli!",
+                spanish=" ¡¿Qué?![K] ¡Te equivocas!",
+            }
+        default:
+            {
+                english=" What?![K] That\'s not true!",
+                french=" Pardon?![K] Non,\nvous vous trompez!",
+                german=" Was?[K] Das stimmt nicht!",
+                italian=" Cosa?![K] Non è vero!",
+                spanish=" ¡¿Qué?![K] ¡Eso no es verdad!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" We came to prevent time from\nstopping!",
+                french=" On est venus pour éviter\nque le temps ne s\'arrête!",
+                german=" Wir sind gekommen, um zu\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Siamo qui per evitare che\nil tempo si fermi!",
+                spanish=" ¡Hemos venido a evitar que\nel tiempo se detenga!",
+            }
+        case 2:
+            {
+                english=" We\'re here to prevent time\nfrom stopping!",
+                french=" On est venus pour éviter\nque le temps ne s\'arrête!",
+                german=" Wir sind gekommen, um zu\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Siamo qui per evitare che il\ntempo si fermi!",
+                spanish=" ¡Hemos venido a evitar que\nel tiempo se detenga!",
+            }
+        default:
+            {
+                english=" We came to prevent time from\nstopping!",
+                french=" On est là pour éviter\nque le temps ne s\'arrête!",
+                german=" Wir sind gekommen, um zu\nverhindern, dass die Zeit stehenbleibt!",
+                italian=" Siamo qui per evitare che il\ntempo si fermi!",
+                spanish=" ¡Hemos venido a evitar que\nel tiempo se detenga!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_ResetActor();
+    message_Talk({
+        english=" TIME...[K]STOPPING...",
+        french=" LE TEMPS...[K] S\'ARRETE...",
+        german=" ZEIT...[K] STEHENBLEIBT...",
+        italian=" IL TEMPO...[K] SI FERMI...",
+        spanish=" QUE EL TIEMPO...[K] SE DETENGA...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(5126);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(30);
+    message_Talk({
+        english=" TIME...[K] GRRR-OOOOOO!",
+        french=" LE TEMPS...[K] GRRR-OOOOOO!",
+        german=" ZEIT...[K] GRRR-OOOOOO!",
+        italian=" IL TEMPO...[K] GRRR-OOOOOO!",
+        spanish=" EL TIEMPO...[K] ¡GRRRRRRR!",
+    });
+    message_Close();
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(30);
+    se_Play(6930);
+    screen_WhiteOut(1, 30);
+    supervision_Acting(1);
+    Wait(45);
+    screen_FadeIn(1, 30);
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (performer 0) {
+        SlidePositionOffset(33152, 0, 16);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(33152, 0, 16);
+    }
+    Wait(5);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(33152, 0, 16);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]D-Dialga[CR]!",
+                french=" [CS:N]D-Dialga[CR]!",
+                german=" [CS:N]D-Dialga[CR]!",
+                italian=" [CS:N]D-Dialga[CR]!",
+                spanish=" ¡[CS:N]Dialga[CR]!",
+            }
+        case 2:
+            {
+                english=" [CS:N]D-Dialga[CR]!",
+                french=" [CS:N]D-Dialga[CR]!",
+                german=" [CS:N]D-Dialga[CR]!",
+                italian=" [CS:N]D-Dialga[CR]!",
+                spanish=" ¡[CS:N]Dialga[CR]!",
+            }
+        default:
+            {
+                english=" [CS:N]D-Dialga[CR]!",
+                french=" [CS:N]D-Dialga[CR]!",
+                german=" [CS:N]D-Dialga[CR]!",
+                italian=" [CS:N]D-Dialga[CR]!",
+                spanish=" ¡[CS:N]Dialga[CR]!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        SetAnimation(19);
+    }
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        WaitAnimation();
+    }
+    camera_SetEffect(2, 1, 33024);
+    se_Play(6930);
+    message_SetFace(ACTOR_NPC_DARK_DIARUGA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" GRRR-OOOOOO!",
+        french=" GRRR-OOOOOO!",
+        german=" GRRR-OOOOOO!",
+        italian=" GRRR-OOOOOO!",
+        spanish=" ¡GRRRRRRR! ¡GRRRRRRR!",
+    });
+    WaitSe(6930);
+    camera_SetEffect(0, 0, 0);
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        SetAnimation(2);
+    }
+    message_CloseEnforce();
+    Wait(10);
+    message_Talk({
+        english=" YOU![K] YOU DARE BRING RUIN TO\nTHE TOWER!",
+        french=" MISERABLES![K] VOUS OSEZ\nVOUS EN PRENDRE A LA TOUR!",
+        german=" IHR![K] IHR WAGT ES, NACH DER\nZERSTÖRUNG DES TURMS ZU TRACHTEN!",
+        italian=" VOI![K] VOI OSATE CONDURRE\nLA TORRE ALLA ROVINA!",
+        spanish=" ¡CÓMO OS ATREVÉIS![K] ¡CÓMO\nOSÁIS DESTRUIR LA TORRE!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" No! You\'ve got it wrong!",
+                french=" Non, c\'est un malentendu!",
+                german=" Nein! Das siehst du falsch!",
+                italian=" No! Ti stai sbagliando!",
+                spanish=" ¡No! ¡Te equivocas!",
+            }
+        case 2:
+            {
+                english=" No! That\'s wrong!",
+                french=" Non, c\'est un malentendu!",
+                german=" Nein! Das stimmt nicht!",
+                italian=" No! Non è vero!",
+                spanish=" ¡No! ¡Te equivocas!",
+            }
+        default:
+            {
+                english=" No! That\'s not it!",
+                french=" Non, c\'est un malentendu!",
+                german=" Nein! Das tun wir nicht!",
+                italian=" No! Non è così!",
+                spanish=" ¡No! ¡Te equivocas!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" We want to prevent the Tower\nfrom falling apart...",
+                french=" C\'est le contraire, on veut\nempêcher qu\'elle ne s\'écroule...",
+                german=" Wir wollen verhindern, dass der\nTurm auseinanderbricht...",
+                italian=" Noi vogliamo evitare che la\ntorre crolli...",
+                spanish=" Queremos evitar que la Torre\nse derrumbe.",
+            }
+        case 2:
+            {
+                english=" We want to prevent the Tower\nfrom collapsing...",
+                french=" C\'est le contraire, on veut\nempêcher qu\'elle ne s\'écroule...",
+                german=" Wir wollen verhindern, dass der\nTurm kollabiert...",
+                italian=" Noi vogliamo evitare che la \ntorre venga distrutta...",
+                spanish=" Queremos evitar que la Torre\nse derrumbe.",
+            }
+        default:
+            {
+                english=" We came to prevent the Tower\nfrom breaking apart...",
+                french=" C\'est le contraire, on veut\nempêcher qu\'elle ne s\'écroule...",
+                german=" Wir wollen verhindern, dass der\nTurm zusammenbricht...",
+                italian=" Noi vogliamo evitare che la \ntorre crolli...",
+                spanish=" Queremos evitar que la Torre\nse derrumbe.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_DARK_DIARUGA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" SILENCE! GRRR-OOOOOO!",
+        french=" SILENCE! GRRR-OOOOOO!",
+        german=" SCHWEIGT! GRRR-OOOOOO!",
+        italian=" SILENZIO! GRRR-OOOOOO!",
+        spanish=" ¡SILENCIO! ¡GRRRRRRR!",
+    });
+    message_Talk({
+        english=" FOR ALL THOSE WHO THREATEN\n[CS:P]TEMPORAL TOWER[CR]...",
+        french=" QUICONQUE MENACE LA [CS:P]TOUR\nDU TEMPS[CR]...",
+        german=" AN ALLE, DIE IHR DEN\n[CS:P]ZEITTURM[CR] BEDROHT...",
+        italian=" VERSO CHI MINACCIA LA \n[CS:P]TORRE DEL TEMPO[CR]...",
+        spanish=" AQUELLOS QUE AMENACEN\nLA [CS:P]TORRE DEL TIEMPO[CR]...",
+    });
+    message_Talk({
+        english=" I WILL SHOW NO MERCY!",
+        french=" ... S\'EXPOSE A MON\nIMPITOYABLE COURROUX!",
+        german=" ICH WERDE EUCH KEINE GNADE\nGEWÄHREN!",
+        italian=" NON MOSTRERÒ ALCUNA PIETÀ!",
+        spanish=" ¡NO TENDRÁN MI CLEMENCIA!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        SetAnimation(19);
+    }
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        WaitAnimation();
+    }
+    camera_SetEffect(2, 1, 33024);
+    se_Play(6930);
+    message_Talk({
+        english=" GRRR-OOOOOO...OOOOOH!",
+        french=" GRRR-OOOOOO... OOOOOH!",
+        german=" GRRR-OOOOOO...OOOOOH!",
+        italian=" GRRR-OOOOOO... OOOOOH!",
+        spanish=" ¡GRRRRRRR!",
+    });
+    WaitExecuteLives(ACTOR_NPC_DARK_DIARUGA);
+    WaitSe(6930);
+    message_CloseEnforce();
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        SetAnimation(2);
+    }
+    camera_SetEffect(0, 0, 0);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It\'s no use, [hero]!",
+                french=" Rien à faire, [hero]!",
+                german=" Es hat keinen Zweck,\n[hero]!",
+                italian=" È inutile, [hero]!",
+                spanish=" Es inútil, [hero].",
+            }
+        case 2:
+            {
+                english=" It\'s no use, [hero]!",
+                french=" Rien à faire, [hero]!",
+                german=" Es hat keinen Zweck,\n[hero]!",
+                italian=" È inutile, [hero]!",
+                spanish=" No sirve de nada, [hero].",
+            }
+        default:
+            {
+                english=" It\'s no use, [hero]!",
+                french=" Rien à faire, [hero]!",
+                german=" Es hat keinen Zweck,\n[hero]!",
+                italian=" È inutile, [hero]!",
+                spanish=" No sirve de nada, [hero].",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" He won\'t listen to us!",
+                french=" Il refuse de nous écouter!",
+                german=" Es will uns nicht zuhören!",
+                italian=" Non ci darà ascolto!",
+                spanish=" No quiere escucharnos.",
+            }
+        case 2:
+            {
+                english=" He\'s not listening to us at all!",
+                french=" Il refuse de nous écouter!",
+                german=" Es hört uns absolut nicht zu!",
+                italian=" Non ci sta neanche ascoltando!",
+                spanish=" No quiere escucharnos.",
+            }
+        default:
+            {
+                english=" He\'s not listening to us at all!",
+                french=" Il refuse de nous écouter!",
+                german=" Es hört uns absolut nicht zu!",
+                italian=" Non ci sta neanche ascoltando!",
+                spanish=" No quiere escucharnos.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_DETERMINED, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="([CS:N]Dialga[CR] is losing control because time is\nbreaking down!)",
+                french="([CS:N]Dialga[CR] devient fou à cause du temps\nqui se détraque!)",
+                german="([CS:N]Dialga[CR] verliert die Kontrolle, weil die Zeit\nzusammenbricht!)",
+                italian="([CS:N]Dialga[CR] sta perdendo il controllo perché\nl\'equilibrio del tempo sta andando in frantumi!)",
+                spanish="(¡[CS:N]Dialga[CR] ha perdido el control de sí mismo\nporque el tiempo se está desmoronando!)",
+            }
+        default:
+            {
+                english="([CS:N]Dialga[CR] is losing control because time is\nbreaking down!)",
+                french="([CS:N]Dialga[CR] devient fou à cause du temps\nqui se détraque!)",
+                german="([CS:N]Dialga[CR] verliert die Kontrolle, weil die Zeit\nzusammenbricht!)",
+                italian="([CS:N]Dialga[CR] sta perdendo il controllo perché il\ntempo sta andando in frantumi!)",
+                spanish="(¡[CS:N]Dialga[CR] ha perdido el control de sí mismo\nporque el tiempo se está desmoronando!)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(But...)",
+                french="(Pourtant...)",
+                german="(Aber...)",
+                italian="(Ma...)",
+                spanish="(Pero...)",
+            }
+        default:
+            {
+                english="(But...)",
+                french="(Pourtant...)",
+                german="(Aber...)",
+                italian="(Ma...)",
+                spanish="(Pero...)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(This isn\'t like Primal [CS:N]Dialga[CR] in the future...)",
+                french="(... il n\'est pas comme [CS:N]Dialga[CR] Primal\ndans le futur...)",
+                german="(Dieses Pokémon ist nicht das [CS:N]Schatten-Dialga[CR],\ndem wir in der Zukunft begegnet sind...)",
+                italian="(Questo non è come [CS:N]Dialga[CR] Oscuro del\nfuturo...)",
+                spanish="(Este no es como el [CS:N]Dialga Primario[CR] del\nfuturo.)",
+            }
+        default:
+            {
+                english="(This isn\'t like Primal [CS:N]Dialga[CR] in the future...)",
+                french="(... il n\'est pas comme [CS:N]Dialga[CR] Primal\ndans le futur...)",
+                german="(Dieses Pokémon ist nicht das [CS:N]Schatten-Dialga[CR],\ndem wir in der Zukunft begegnet sind...)",
+                italian="(Questo non è come [CS:N]Dialga[CR] Oscuro del\nfuturo...)",
+                spanish="(Este no es como el [CS:N]Dialga Primario[CR] del\nfuturo.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(He\'s not yet fully consumed by the power of\ndarkness!)",
+                french="(La puissance de l\'ombre ne l\'a pas encore\nentièrement consumé!)",
+                german="(Die Macht der Dunkelheit hat es noch nicht\nvöllig überwältigt!)",
+                italian="(Non è ancora completamente consumato dal \npotere dell\'oscurità!)",
+                spanish="(La oscuridad aún no lo tiene totalmente en\nsu poder...)",
+            }
+        default:
+            {
+                english="(He\'s not yet fully consumed by the power of\ndarkness!)",
+                french="(La puissance de l\'ombre ne l\'a pas encore\nentièrement consumé!)",
+                german="(Die Macht der Dunkelheit hat es noch nicht\nvöllig überwältigt!)",
+                italian="(Non è ancora completamente consumato dal \npotere dell\'oscurità!)",
+                spanish="(La oscuridad aún no lo tiene totalmente en\nsu poder...)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(There\'s still a chance that [CS:N]Dialga[CR] can be\nbrought back to reason!)",
+                french="(Il nous reste une chance de ramener [CS:N]Dialga[CR]\nà la raison!)",
+                german="(Es gibt immer noch eine Chance, [CS:N]Dialga[CR] zur\nVernunft zu bringen!)",
+                italian="(C\'è ancora una possibilità di riportare\n[CS:N]Dialga[CR] alla ragione!)",
+                spanish="(Todavía queda una oportunidad de que [CS:N]Dialga[CR]\nrecupere la razón.)",
+            }
+        default:
+            {
+                english="(There\'s still a chance that [CS:N]Dialga[CR] can be\nbrought back to reason!)",
+                french="(Il nous reste une chance de ramener [CS:N]Dialga[CR]\nà la raison!)",
+                german="(Es gibt immer noch eine Chance, [CS:N]Dialga[CR] zur\nVernunft zu bringen!)",
+                italian="(C\'è ancora una possibilità di riportare\n[CS:N]Dialga[CR] alla ragione!)",
+                spanish="(Todavía queda una oportunidad de que [CS:N]Dialga[CR]\nrecupere la razón.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(There\'s still hope!)",
+                french="(L\'espoir est encore permis!)",
+                german="(Es gibt noch Hoffnung!)",
+                italian="(C\'è ancora una speranza!)",
+                spanish="(¡Aún hay esperanza!)",
+            }
+        default:
+            {
+                english="(There\'s still hope!)",
+                french="(L\'espoir est encore permis!)",
+                german="(Es gibt noch Hoffnung!)",
+                italian="(C\'è ancora una speranza!)",
+                spanish="(¡Aún hay esperanza!)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" H-here he comes, [hero]!",
+                french=" Il... il commence à se fâcher,\n[hero]!",
+                german=" E-es greift gleich an,\n[hero]!",
+                italian=" S-Si sta avvicinando,\n[hero]!",
+                spanish=" ¡Aquí viene, [hero]!",
+            }
+        case 2:
+            {
+                english=" H-here he comes, [hero]!",
+                french=" Il... il commence à se fâcher,\n[hero]!",
+                german=" E-es greift gleich an,\n[hero]!",
+                italian=" S-Si sta avvicinando,\n[hero]!",
+                spanish=" ¡Aquí viene, [hero]!",
+            }
+        default:
+            {
+                english=" H-here he comes, [hero]!",
+                french=" Il... il commence à se fâcher,\n[hero]!",
+                german=" E-es greift gleich an,\n[hero]!",
+                italian=" S-Si sta avvicinando,\n[hero]!",
+                spanish=" ¡Aquí viene, [hero]!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        SetAnimation(18);
+    }
+    with (actor ACTOR_NPC_DARK_DIARUGA) {
+        WaitAnimation();
+    }
+    camera_SetEffect(2, 1, 33024);
+    se_Play(6930);
+    message_SetFace(ACTOR_NPC_DARK_DIARUGA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" GRRR-OOOOOO!",
+        french=" GRRR-OOOOOO!",
+        german=" GRRR-OOOOOO!",
+        italian=" GRRR-OOOOOO!",
+        spanish=" ¡GRRRRRRR!",
+    });
+    WaitSe(6930);
+    message_CloseEnforce();
+    camera_SetEffect(0, 0, 0);
+    bgm_Stop();
+    se_Play(5140);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    WaitSe(5140);
+    CallCommon(CORO_BOSS_WIPE_FUNC);
+    main_EnterDungeon(43, 30);
+    main_EnterDungeon(-1, 30);
+    hold;
+    end;
+}

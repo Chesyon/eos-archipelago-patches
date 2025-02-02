@@ -1,11 +1,13 @@
 /build
 /venv
+/rom.nds.skytemple/debugger
+
 
 out.bin
 out.elf
 out.asm
 
 *.nds
-*.nds.skytemple
+*.ssb.sha256
 
 symbols/generated_*.ld
