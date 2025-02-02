@@ -1,6 +1,8 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+#if CUSTOM_MOVE_EFFECTS
+
 // Implements the "Body Press" move
 // Based on https://github.com/Adex-8x/EoS-ASM-Effects/blob/main/moves/gen8/body_press.asm
 // Deals damage based on the user's defense instead of attack stat
@@ -37,3 +39,5 @@ bool CustomApplyMoveEffect(
     return false;
   }
 }
+
+#endif

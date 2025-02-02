@@ -1,6 +1,8 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+#if CUSTOM_ITEM_EFFECTS
+
 // Elixir: Refills 10 PP of each move
 /*static void ItemElixir(struct entity* target) {
   if (target->type == ENTITY_MONSTER) {
@@ -31,3 +33,5 @@ bool CustomApplyItemEffect(
       return false;
   }
 }
+
+#endif
