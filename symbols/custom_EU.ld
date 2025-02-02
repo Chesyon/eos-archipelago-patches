@@ -22,11 +22,6 @@ NameAutofillStringAddr = 0x23DE000;
 MaxNumMultiworldItemsAtOnceKec1 = 7;
 MaxNumMultiworldItemsAtOnceKec2 = 3;
 
-/* Constants */
-VAR_SCENARIO_SUB1 = 5
-VAR_SCENARIO_SUB2 = 6
-NULL = 0x0
-
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined*/
    in pmdsky-debug.*/
