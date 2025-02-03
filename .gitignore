@@ -8,6 +8,7 @@ out.elf
 out.asm
 
 *.nds
+*.exps.sm
 *.ssb.sha256
 
 symbols/generated_*.ld
