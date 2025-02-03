@@ -59,7 +59,7 @@ def 0 {
             } elseif ($SCENARIO_SUB2 &<< 7) { // Manaphy Check obtained!
                 jump @label_0;
             } elseif ($PERFORMANCE_PROGRESS_LIST[17]) { // Cleared Dialga!
-                if ($SCENARIO_SUB2 &<< 6) {
+                if ($SCENARIO_SUB2 &<< 6) { // Phione Dew
                     jump @label_4;
                 } else {
                     jump @label_0;

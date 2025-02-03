@@ -1,4 +1,5 @@
-
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
     back_SetGround(LEVEL_D17P45A);
     if ( $PERFORMANCE_PROGRESS_LIST[7] ) {
@@ -30,13 +31,15 @@ def 0 {
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
         Wait(60);
         message_Mail({
-            english="[CN][CS:N]Azelf[CR] wants to join the team.",
+            english="[CN][CS:N]Azelf[CR] gave you something!",
             french="[CN][CS:N]Créfadet[CR] veut se joindre à votre équipe.",
             german="[CN][CS:N]Tobutz[CR] möchte dem Team beitreten.",
             italian="[CN][CS:N]Azelf[CR] vuole unirsi alla squadra.",
             spanish="[CN][CS:N]Azelf[CR] quiere unirse al equipo.",
         });
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        ~AssignCheck(27);
+        jump @label_4;
         §label_7;
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
         switch ( ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER, 6, 0) ) { }

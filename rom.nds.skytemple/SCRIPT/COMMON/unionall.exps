@@ -10496,15 +10496,22 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 15:
             debug_Print('LABEL_D015_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 4, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D10P41A, 'M99A0106', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D10P41A, 'M99A0104', 0);
-                    main_EnterDungeon(16, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Uxie Check claimed?
+                    case &<< 1:
+                        §no_uxie;
+                        supervision_ExecuteActingSub(LEVEL_D10P41A, 'M99A0106', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D10P41A, 'M99A0104', 0);
+                        main_EnterDungeon(16, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("Recruiting [CS:G]Uxie[CR] is a Post-Dialga check!");
+                message_Close();
+                jump @no_uxie;
             }
             break;
         case 16:
@@ -10611,15 +10618,22 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 22:
             debug_Print('LABEL_D022_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 5, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D15P41A, 'M99A0110', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D15P41A, 'M99A0108', 0);
-                    main_EnterDungeon(23, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Mesprit Check Claimed?
+                    case &<< 2:
+                        §no_mesprit;
+                        supervision_ExecuteActingSub(LEVEL_D15P41A, 'M99A0110', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D15P41A, 'M99A0108', 0);
+                        main_EnterDungeon(23, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("Recruiting [CS:G]Mesprit[CR] is a Post-Dialga check!");
+                message_Close();
+                jump @no_mesprit;
             }
             break;
         case 23:
@@ -10670,15 +10684,22 @@ coro GETOUT_REQUEST_CONQUEST {
             break;
         case 25:
             debug_Print('LABEL_D025_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 6, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D17P45A, 'M99A0113', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D17P45A, 'M99A0111', 0);
-                    main_EnterDungeon(26, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Azelf Check Claimed?
+                    case &<< 3:
+                        §no_azelf;
+                        supervision_ExecuteActingSub(LEVEL_D17P45A, 'M99A0113', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D17P45A, 'M99A0111', 0);
+                        main_EnterDungeon(26, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("Recruiting [CS:G]Azelf[CR] is a Post-Dialga check!");
+                message_Close();
+                jump @no_azelf;
             }
             break;
         case 26:
@@ -10850,15 +10871,23 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 42:
             debug_Print('LABEL_D042_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 7, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D30P41A, 'M99A0118', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D30P41A, 'M99A0116', 0);
-                    main_EnterDungeon(43, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Dialga Check Claimed?
+                    case &<< 4:
+                        §no_dialga;
+                        supervision_ExecuteActingSub(LEVEL_D30P41A, 'M99A0118', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D30P41A, 'M99A0116', 0);
+                        main_EnterDungeon(43, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("Recruiting [CS:G]Dialga[CR] is a Post-Dialga check!");
+                message_Mail("Someone tell happylappy if you see this!");
+                message_Close();
+                jump @no_dialga;
             }
             break;
         case 43:
@@ -10927,15 +10956,22 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 52:
             debug_Print('LABEL_D052_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 17, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D35P41A, 'S03P1901', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D35P41A, 'S03P1801', 0);
-                    jump @label_1167;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Phione Check Claimed?
+                    case &<< 5:
+                        §no_phione;
+                        supervision_ExecuteActingSub(LEVEL_D35P41A, 'S03P1901', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D35P41A, 'S03P1801', 0);
+                        jump @label_1167;
+                }
+                break;
+            } else {
+                message_Mail("Recruiting [CS:G]Phione[CR] is a Post-Dialga check!");
+                message_Close();
+                jump @no_phione;
             }
-            break;
         case 53:
             debug_Print('LABEL_D053_CLEAR');
             jump @label_1167;
@@ -10961,7 +10997,7 @@ coro GETOUT_REQUEST_CONQUEST {
             debug_Print('LABEL_D059_CLEAR');
             JumpCommon(CORO_EVENT_S04_15);
         case 60:
-            debug_Print('LABEL_D060_CLEAR');
+            debug_Print('LABEL_D060_CLEAR'); // Nope! So much nope!
             switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 9, 0) ) {
                 case 1:
                     JumpCommon(CORO_EVENT_S04_21);
@@ -10981,15 +11017,22 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 65:
             debug_Print('LABEL_D065_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 8, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D39P41A, 'M99A0123', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D39P41A, 'M99A0121', 0);
-                    main_EnterDungeon(66, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Palkia Check Claimed?
+                    case &<< 6:
+                        §no_palkia;
+                        supervision_ExecuteActingSub(LEVEL_D39P41A, 'M99A0123', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D39P41A, 'M99A0121', 0);
+                        main_EnterDungeon(66, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("Recruiting [CS:G]Palkia[CR] is a Post-Dialga check!");
+                message_Close();
+                jump @no_palkia;
             }
             break;
         case 66:
@@ -11018,15 +11061,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 73:
             debug_Print('LABEL_D073_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 20, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1201', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1001', 0);
-                    main_EnterDungeon(74, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
+                    case &<< 7:
+                        §no_kyogre;
+                        supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1201', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1001', 0);
+                        main_EnterDungeon(74, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_kyogre;
             }
             break;
         case 74:
@@ -11035,15 +11085,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 75:
             debug_Print('LABEL_D075_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 3, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0901', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0701', 0);
-                    main_EnterDungeon(76, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
+                    case &<< 1:
+                        §no_groudon;
+                        supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0901', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0701', 0);
+                        main_EnterDungeon(76, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Groudon[CR] and the [CS:I]Terra Cymbal[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_groudon;
             }
             break;
         case 76:
@@ -11052,15 +11109,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 77:
             debug_Print('LABEL_D077_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 12, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0301', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0101', 0);
-                    main_EnterDungeon(78, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
+                    case &<< 3:
+                        §no_articuno;
+                        supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0301', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0101', 0);
+                        main_EnterDungeon(78, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Articuno[CR] and the [CS:I]Icy-Flute[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_articuno;
             }
             break;
         case 78:
@@ -11069,22 +11133,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 79:
             debug_Print('LABEL_D079_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 14, 0) ) {
-                case 1:
-                    §label_1209;
-                    supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0601', 0);
-                    jump @label_1167;
-                default:
-                    switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 13, 0) ) {
-                        case 1:
-                            jump @label_1209;
-                        default:
-                            supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0401', 0);
-                            main_EnterDungeon(80, 30);
-                            main_EnterDungeon(-1, 30);
-                            hold;
-                    }
-                    break;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
+                    case &<< 5:
+                        §no_heatran;
+                        supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0601', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0401', 0);
+                        main_EnterDungeon(80, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Heatran[CR] and the [CS:I]Fiery Drum[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_heatran;
             }
             break;
         case 80:
@@ -11093,15 +11157,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 81:
             debug_Print('LABEL_D081_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 10, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1501', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1301', 0);
-                    main_EnterDungeon(82, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
+                    case &<< 7:
+                        §no_giratina;
+                        supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1501', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1301', 0);
+                        main_EnterDungeon(82, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Giratina[CR] and the [CS:I]Rock Horn[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_giratina;
             }
             break;
         case 82:
@@ -11110,15 +11181,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 83:
             debug_Print('LABEL_D083_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 19, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A2101', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A1901', 0);
-                    main_EnterDungeon(84, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
+                    case &<< 1:
+                        §no_rayquaza;
+                        supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A2101', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A1901', 0);
+                        main_EnterDungeon(84, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Rayquaza[CR] and the [CS:I]Sky Melodica[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_giratina;
             }
             break;
         case 84:
@@ -11127,15 +11205,22 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 85:
             debug_Print('LABEL_D085_CLEAR');
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 15, 0) ) {
-                case 1:
-                    supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1801', 0);
-                    jump @label_1167;
-                default:
-                    supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1601', 0);
-                    main_EnterDungeon(86, 30);
-                    main_EnterDungeon(-1, 30);
-                    hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
+                    case &<< 3:
+                        §no_mew;
+                        supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1801', 0);
+                        jump @label_1167;
+                    default:
+                        supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1601', 0);
+                        main_EnterDungeon(86, 30);
+                        main_EnterDungeon(-1, 30);
+                        hold;
+                }
+            } else {
+                message_Mail("[CS:G]Mew[CR] and the [CS:I]Grass Cornet[CR]\nare Post-Dialga checks!");
+                message_Close();
+                jump @no_mew;
             }
             break;
         case 86:

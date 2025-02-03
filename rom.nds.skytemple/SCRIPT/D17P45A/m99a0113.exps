@@ -1,0 +1,117 @@
+
+def 0 {
+    sound_Stop();
+    back_SetDungeonBanner(26, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    back_SetGround(LEVEL_D17P45A);
+    if ( $PERFORMANCE_PROGRESS_LIST[7] ) {
+        §label_0;
+        supervision_Acting(1);
+        with (performer 0) {
+            camera_SetMyself();
+        }
+        screen_FadeIn(1, 30);
+        bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+        with (actor ACTOR_PLAYER_APPOINT) {
+            MovePositionMark(1, Position<'m4', 43.5, 26.5>);
+        }
+        with (actor ACTOR_ADVENTURE_NPC1) {
+            MovePositionMark(1, Position<'m5', 46.5, 28.5>);
+        }
+        with (actor ACTOR_ADVENTURE_NPC2) {
+            MovePositionMark(1, Position<'m6', 40.5, 28.5>);
+        }
+        with (actor ACTOR_ADVENTURE_NPC3) {
+            MovePositionMark(1, Position<'m7', 43.5, 30.5>);
+        }
+        WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+        Wait(15);
+        with (actor ACTOR_PLAYER_APPOINT) {
+            ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+        }
+        Wait(12);
+        with (actor ACTOR_ADVENTURE_NPC1) {
+            ExecuteCommon(CORO_LOOK_AROUND_LEFT_FUNC_SERIES, 0);
+        }
+        Wait(4);
+        with (actor ACTOR_ADVENTURE_NPC2) {
+            ExecuteCommon(CORO_LOOK_AROUND_DOWN_FUNC_SERIES, 0);
+        }
+        Wait(7);
+        with (actor ACTOR_ADVENTURE_NPC3) {
+            ExecuteCommon(CORO_LOOK_AROUND_RIGHT_FUNC_SERIES, 0);
+        }
+        WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+        Wait(15);
+        §label_1;
+        message_Mail({
+            english="[CN]There appears to be no one here.",
+            french="[CN]Il n\'y a personne ici.",
+            german="[CN]Hier scheint niemand zu sein.",
+            italian="[CN]Sembra che qui non ci sia nessuno.",
+            spanish="[CN]Parece que aquí no hay nadie.",
+        });
+        message_Mail({
+            english="[CN]It\'s impossible to go any farther.[K]\n[CN]Let\'s go back to Treasure Town.",
+            french="[CN]Impossible d\'aller plus loin.[K]\n[CN]Retournons à Bourg-Trésor.",
+            german="[CN]Es ist unmöglich weiterzugehen.[K]\n[CN]Gehen wir zurück nach Schatzstadt.",
+            italian="[CN]È impossibile proseguire.[K]\n[CN]Torniamo a Borgo Tesoro.",
+            spanish="[CN]Es imposible ir más lejos.[K]\n[CN]Volvamos a Aldea Tesoro.",
+        });
+        message_Close();
+        bgm_FadeOut(120);
+        screen_FadeOut(1, 60);
+        WaitBgm(BGM_IN_THE_DEPTHS_OF_THE_PIT);
+        message_Explanation({
+            english="[CN][player] cleared [CS:P]Crystal Crossing[CR]\n[CN]in admirable fashion!",
+            french="[CN][player] a brillamment terminé\n[CN]le [CS:P]Croisement Cristal[CR]!\n",
+            german="[CN][player] meisterte die [CS:P]Kristallstraße[CR]\n[CN]auf beeindruckende Weise!",
+            italian="[CN][player] ha completato il\n[CN][CS:P]Bivio di Cristallo[CR] in modo eccellente!",
+            spanish="[CN]¡[player] logró atravesar\n[CN]la [CS:P]Vía Cristalina[CR]!",
+        });
+        message_Close();
+        end;
+    } else {
+        supervision_Acting(0);
+        with (performer 0) {
+            camera_SetMyself();
+        }
+        screen_FadeIn(1, 30);
+        bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+        with (actor ACTOR_ATTENDANT1) {
+            MovePositionMark(1, Position<'m0', 41.5, 26.5>);
+        }
+        with (actor ACTOR_PLAYER) {
+            MovePositionMark(1, Position<'m1', 45.5, 26.5>);
+        }
+        with (actor ACTOR_UNIT_NPC1) {
+            MovePositionMark(1, Position<'m2', 43.5, 30.5>);
+        }
+        with (actor ACTOR_UNIT_NPC2) {
+            MovePositionMark(1, Position<'m3', 46.5, 29.5>);
+        }
+        WaitExecuteLives(ACTOR_PLAYER);
+        Wait(15);
+        with (actor ACTOR_ATTENDANT1) {
+            ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+        }
+        Wait(12);
+        with (actor ACTOR_PLAYER) {
+            ExecuteCommon(CORO_LOOK_AROUND_LEFT_FUNC_SERIES, 0);
+        }
+        Wait(4);
+        with (actor ACTOR_UNIT_NPC1) {
+            ExecuteCommon(CORO_LOOK_AROUND_DOWN_FUNC_SERIES, 0);
+        }
+        Wait(7);
+        with (actor ACTOR_UNIT_NPC2) {
+            ExecuteCommon(CORO_LOOK_AROUND_RIGHT_FUNC_SERIES, 0);
+        }
+        WaitExecuteLives(ACTOR_PLAYER);
+        Wait(15);
+        jump @label_1;
+    }
+}
