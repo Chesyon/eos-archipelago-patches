@@ -1601,6 +1601,7 @@ coro EVENT_DIVIDE_AFTER {
 coro EVENT_DIVIDE_RESUME {
     if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
         debug_Print('HANYOU_RESUME');
+        ProcessSpecial(23,0,0); // Randomize Demo Actors
         switch ( $GROUND_ENTER ) {
             case 211:
             default:

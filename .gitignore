@@ -11,3 +11,4 @@ out.asm
 *.ssb.sha256
 
 symbols/generated_*.ld
+*.Identifier
