@@ -1,4 +1,4 @@
-#ifdef CUSTOM_SPECIAL_PROCESSES
+#if CUSTOM_SPECIAL_PROCESSES
 .align 4
 cotInternalTrampolineScriptSpecialProcessCall:
     // If the special process ID is >= 100, handle it as a custom special process
@@ -11,7 +11,7 @@ cotInternalTrampolineScriptSpecialProcessCall:
     b ScriptSpecialProcessCall+4
 #endif
 
-#ifdef CUSTOM_ITEM_EFFECTS
+#if CUSTOM_ITEM_EFFECTS
 .align 4
 cotInternalTrampolineApplyItemEffect:
     // Backup registers
@@ -39,7 +39,7 @@ cotInternalTrampolineApplyItemEffect:
     b ApplyItemEffectHookAddr+4
 #endif
 
-#ifdef CUSTOM_MOVE_EFFECTS
+#if CUSTOM_MOVE_EFFECTS
 .align 4
 cotInternalTrampolineApplyMoveEffect:
     // Backup registers
