@@ -25,63 +25,118 @@ def 0 {
                                 break;
                             case 8:
                             case 9:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });                            
-                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]14[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
-                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(9)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });                            
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]14[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 10:
                             case 11:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });  
-                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]16[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
-                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(11)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });  
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]16[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 32:
                             case 34:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
-                                message_Mail("[CN]Upon clearing this dungeon group, [CS:G]Grovyle[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that group only. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(34)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon group, [CS:G]Grovyle[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that group only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 33:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
-                                message_Mail("[CN][CS:G]Celebi[CR] will also join you at level [CS:C]45[CR], but\n[CN]This has no net effect on level scaling. They\n[CN]can only join if there is room!");
-                                message_Mail("[CN]Upon clearing [CS:P]Deep Dark Forest[CR], both allies\n[CN]will leave your team, returning scaling to\n[CN]normal in [CS:P]Deep Dark Forest[CR]. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(33)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN][CS:G]Celebi[CR] will also join you at level [CS:C]45[CR], but\n[CN]This has no net effect on level scaling. They\n[CN]can only join if there is room!");
+                                                message_Mail("[CN]Upon clearing [CS:P]Deep Dusk Forest[CR], both allies\n[CN]will leave your team, returning scaling to\n[CN]normal in [CS:P]Deep Dusk Forest[CR]. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 35:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN]In this dungeon, [CS:G]Chatot[CR] will join you at\n[CN]level [CS:C]36[CR]. Enemies will scale to [CS:G]Chatot[CR] if\n[CN]he is higher level than you!");
-                                message_Mail("[CN]Additionally, upon entering [CS:P]Lower Brine Cave[CR],\n[CN][CS:G]Chatot[CR] will leave your team, returning scaling\n[CN]to normal for [CS:C]ALL[CR] of [CS:P]Brine Cave[CR]. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(35)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Chatot[CR] will join you at\n[CN]level [CS:C]36[CR]. Enemies will scale to [CS:G]Chatot[CR] if\n[CN]he is higher level than you!");
+                                                message_Mail("[CN]Additionally, upon entering [CS:P]Lower Brine Cave[CR],\n[CN][CS:G]Chatot[CR] will leave your team, returning scaling\n[CN]to normal for [CS:C]ALL[CR] of [CS:P]Brine Cave[CR]. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 51:
                                 message_Mail({
                                     english="\n[CN]Caution!",
@@ -93,27 +148,49 @@ def 0 {
                                 message_Mail("[CN][CS:P]Miracle Sea[CR] cannot be cleared until [CS:G]Manaphy[CR]\n[CN]falls ill. You can still enter, but you will not\n[CN]receive a check for completion. Is that OK?");
                                 jump @label_32;
                             case 67:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN]In this dungeon, [CS:G]Cresselia[CR] will join you at\n[CN]level [CS:C]47[CR]. Enemies will scale to [CS:G]Cresselia[CR] if\n[CN]she is higher level than you!");
-                                message_Mail("[CN]Upon clearing [CS:P]Dark Crater[CR],\n[CN][CS:G]Cresselia[CR] will leave your team, returning\n[CN]scaling to normal in [CS:P]Dark Crater[CR]. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(67)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Cresselia[CR] will join you at\n[CN]level [CS:C]47[CR]. Enemies will scale to [CS:G]Cresselia[CR] if\n[CN]she is higher level than you!");
+                                                message_Mail("[CN]Upon clearing [CS:P]Dark Crater[CR],\n[CN][CS:G]Cresselia[CR] will leave your team, returning\n[CN]scaling to normal in [CS:P]Dark Crater[CR]. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 110:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN]In this dungeon, [CS:G]Shaymin[CR] will join you at\n[CN]level [CS:C]55[CR]. Enemies will scale to [CS:G]Shaymin[CR] if\n[CN]they are higher level than you!");
-                                message_Mail("[CN]Upon clearing [CS:P]Sky Peak[CR], [CS:G]Shaymin[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal for [CS:C]ALL[CR] of [CS:P]Sky Peak[CR]. Is that OK?");
-                                jump @label_32;
+                                switch (dungeon_mode(110)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Shaymin[CR] will join you at\n[CN]level [CS:C]55[CR]. Enemies will scale to [CS:G]Shaymin[CR] if\n[CN]they are higher level than you!");
+                                                message_Mail("[CN]Upon clearing [CS:P]Sky Peak[CR], [CS:G]Shaymin[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal for [CS:C]ALL[CR] of [CS:P]Sky Peak[CR]. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             default:
                                 break;
                         }
