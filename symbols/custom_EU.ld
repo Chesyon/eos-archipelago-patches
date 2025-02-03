@@ -15,6 +15,7 @@ AddShopItemToInventoryHook4 = 0x238B784;
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 
 /* ! Archipelago Values For Overlay36 */
+AP_SETTINGS = 0x23DE0AC;
 LevelScalingCheckAddr = 0x23DE0B8;
 NameAutofillStringAddr = 0x23DE000;
 

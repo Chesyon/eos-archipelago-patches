@@ -19,7 +19,7 @@
 .close
 
 .open "overlay11.bin", overlay11_start
-  .ifdef CUSTOM_SPECIAL_PROCESSES
+  .ifdef cotInternalTrampolineScriptSpecialProcessCall
   .org ScriptSpecialProcessCall
     b cotInternalTrampolineScriptSpecialProcessCall
   .endif
