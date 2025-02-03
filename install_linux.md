@@ -12,7 +12,7 @@ You can install c-of-time on Linux using the following methods. Instructions var
 You can install c-of-time on Ubuntu or Debian using the following methods. The steps detailed in this guide were tested on Ubuntu 22.04.
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta bsdiff4`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta`. You will need to enter your password during the installation.
 3. Install Python dependencies: `pip3 install pyyaml ndspy bsdiff4`
 4. Compile `armips`:
     1. Run `git clone --recursive https://github.com/Kingcom/armips.git` to download the source code.
@@ -21,13 +21,10 @@ You can install c-of-time on Ubuntu or Debian using the following methods. The s
     4. Run `sudo cp armips /usr/local/bin` to install `armips`.
     5. Run `cd ../..` to return to the previous directory.
 5. Navigate to the directory where you want to install c-of-time. You can use `cd` to change the directory and `ls` to list the contents of the current directory. For example, if you want to install c-of-time to `/home/YourName/Documents/c-of-time`, run `cd /home/YourName/Documents`.
-    - **Note:** You can also use the file manager to navigate to the directory where you want to install c-of-time. Right-click the name of the directory and select "Open in Terminal".
-6. Download this repository by running `git clone --recursive https://github.com/SkyTemple/c-of-time.git` in the terminal. c-of-time will be downloaded in a folder called `c-of-time` inside the current directory.
-7. Enter the `c-of-time` directory with `cd c-of-time`.
-8. Copy the ROM you have prepared into the `c-of-time` directory and rename it to `rom.nds`. You can open the file manager in the current directory by running `xdg-open .` in the terminal.
-    - **US ROM offsets are used by default.** If you're using a EU or JP ROM, change the `REGION` variable in `Makefile` to `EU` or `JP` accordingly.
-9. Run `make headers` to add aliases and documentation comments to headers for increased compatibility.
-10. Run `make patch` to build the project. The output ROM will be saved as `out.nds` by default.
+    - **Note:** You can also use the file manager to navigate to the directory where you want to install eos-archipelago-patches. Right-click the name of the directory and select "Open in Terminal".
+6. Download this repository by running `git clone --recursive https://github.com/Chesyon/eos-archipelago-patches.git` in the terminal. c-of-time will be downloaded in a folder called `eos-archipelago-patches` inside the current directory.
+7. Enter the `c-of-time` directory with `cd eos-archipelago-patches`.
+8. Copy your vanilla ROM you have prepared into the `eos-archipelago-patches` directory and rename it to `rom.nds`. You can open the file manager in the current directory by running `xdg-open .` in the terminal.
 
 ## Fedora
 
