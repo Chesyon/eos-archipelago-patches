@@ -1,4 +1,3 @@
-#if CUSTOM_SPECIAL_PROCESSES
 .align 4
 cotInternalTrampolineScriptSpecialProcessCall:
     // If the special process ID is >= 100, handle it as a custom special process
@@ -9,7 +8,6 @@ cotInternalTrampolineScriptSpecialProcessCall:
     // and run the original function
     push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
     b ScriptSpecialProcessCall+4
-#endif
 
 #if CUSTOM_ITEM_EFFECTS
 .align 4

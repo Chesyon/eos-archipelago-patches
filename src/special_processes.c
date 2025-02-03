@@ -1,6 +1,6 @@
 #include <pmdsky.h>
 #include <cot.h>
-#include <extern.h>
+#include "extern.h"
 
 #if CUSTOM_SPECIAL_PROCESSES
 
