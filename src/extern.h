@@ -1,6 +1,8 @@
-char[16] slot_name;
+extern uint32_t AP_SETTINGS[4];
 
-int seed : 64; // 64 bits = 8
+char slot_name[16];
+
+int seed; // 64 bits = 8 bytes
 
 struct archipelago_flags {
     bool recruitment : 1;        // 0 (0x0)
@@ -21,4 +23,4 @@ struct archipelago_flags {
     bool unused_10 : 1;      // 15 (0xF)
 };
 
-int starter_option : 2; // 4 options - 2 bits are needed to store 0-3
+int starter_option; // 4 options - 2 bits are needed to store 0-3

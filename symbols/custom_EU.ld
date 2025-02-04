@@ -33,10 +33,10 @@ SlotNameAddr = 0x23DE000; /* 16 bytes long. */
 ArchipelagoSeedAddr = 0x23DE0A0; /* 8 bytes long */
 
 /* ! New Archipelago Values For Overlay36 */
-slot_name = 0x23DE000
-seed = 0x23DE010
-archipelago_flags = 0x23DE018
-starter_option = 0x23DE01A
+slot_name = 0x23DE000;
+seed = 0x23DE010;
+archipelago_flags = 0x23DE018;
+starter_option = 0x23DE01A;
 
 
 /* Undocumented Functions 
