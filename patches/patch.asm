@@ -3,29 +3,38 @@
 
 .open "arm9.bin", arm9_start
     .org GenerateKecleonItems1Hook
-            b  GenerateShop1Tweak
+        b  GenerateShop1Tweak
     
     .org GenerateKecleonItems2Hook
-            b  GenerateShop2Tweak
+        b  GenerateShop2Tweak
 .close
 
 .open "overlay11.bin", overlay11_start
     .org NameAutofillHook
-            bl AutofillName
+        bl AutofillName
+.close
+
+.open "overlay13.bin", overlay13_start
+    .org SameTypeHook
+        blne SameTypeCheck
+    ;.org QuizInterceptStateHook
+            ;b QuizCustomStateTrampoline
+    ;.org QuizForcedPlayerHook
+        ;b ForcedPlayerCheck
 .close
 
 .open "overlay22.bin", overlay22_start
     .org AddShopItemToInventoryHook1
-            bl AddItemToBagWithMultiworldCheck
+        bl AddItemToBagWithMultiworldCheck
 
     .org AddShopItemToInventoryHook2
-            bl AddItemToBagWithMultiworldCheck
+        bl AddItemToBagWithMultiworldCheck
 
     .org AddShopItemToInventoryHook3
-            bl AddItemToBagWithMultiworldCheck
+        bl AddItemToBagWithMultiworldCheck
 
     .org AddShopItemToInventoryHook4
-            bl AddItemToBagWithMultiworldCheck
+        bl AddItemToBagWithMultiworldCheck
 .close
 
 .open "overlay29.bin", overlay29_start

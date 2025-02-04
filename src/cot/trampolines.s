@@ -1,4 +1,10 @@
 .align 4
+    QuizCustomStateTrampoline:
+        ldr lr,=QuizInterceptStateUnhook
+        b   QuizCustomStateHandler
+    .pool
+
+.align 4
 cotInternalTrampolineScriptSpecialProcessCall:
     // If the special process ID is >= 100, handle it as a custom special process
     cmp r1, #100

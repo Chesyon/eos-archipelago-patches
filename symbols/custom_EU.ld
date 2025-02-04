@@ -5,6 +5,15 @@ GenerateKecleonItems2Hook = 0x2010E30;
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
 
+/* ! For Overlay13 */
+SameTypeHook = 0x238C48C;
+SameTypeUnhook = 0x238C4B0;
+QuizInterceptStateHook = 0x238B0E8;
+QuizInterceptStateUnhook = 0x238C8B4;
+QuizForcedPlayerHook = 0x238B250;
+QuizForcedPlayerUnhook = 0x238B258;
+OVERLAY13_PTR_NA_238CEA0 = 0x238D9E0;
+
 /* ! For Overlay22 */
 AddShopItemToInventoryHook1 = 0x238B0D8;
 AddShopItemToInventoryHook2 = 0x238B138;
@@ -18,10 +27,10 @@ LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 AP_SETTINGS = 0x23DE0AC;
 LevelScalingCheckAddr = 0x23DE0B8;
 NameAutofillStringAddr = 0x23DE000;
-
-/* Patch Constants */
-MaxNumMultiworldItemsAtOnceKec1 = 7;
-MaxNumMultiworldItemsAtOnceKec2 = 3;
+SameTypeCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
+ForcedPlayerPartnerCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
+SlotNameAddr = 0x23DE000; /* 16 bytes long. */
+ArchipelagoSeedAddr = 0x23DE0A0; /* 8 bytes long */
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined
