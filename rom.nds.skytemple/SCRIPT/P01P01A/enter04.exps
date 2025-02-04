@@ -138,15 +138,19 @@ def 0 {
                                 }
                                 jump @label_12;
                             case 51:
-                                message_Mail({
-                                    english="\n[CN]Caution!",
-                                    french="\n[CN]Attention!",
-                                    german="\n[CN]Achtung!",
-                                    italian="\n[CN]Attenzione!",
-                                    spanish="\n[CN]¡Atención!",
-                                });
-                                message_Mail("[CN][CS:P]Miracle Sea[CR] cannot be cleared until [CS:G]Manaphy[CR]\n[CN]falls ill. You can still enter, but you will not\n[CN]receive a check for completion. Is that OK?");
-                                jump @label_32;
+                                if ($SCENARIO_SUB2 &<< 5) {
+                                } else {
+                                    message_Mail({
+                                        english="\n[CN]Caution!",
+                                        french="\n[CN]Attention!",
+                                        german="\n[CN]Achtung!",
+                                        italian="\n[CN]Attenzione!",
+                                        spanish="\n[CN]¡Atención!",
+                                    });
+                                    message_Mail("[CN][CS:P]Miracle Sea[CR] cannot be cleared until [CS:G]Manaphy[CR]\n[CN]falls ill. You can still enter, but you will not\n[CN]receive a check for completion. Is that OK?");
+                                    jump @label_32;
+                                }
+                                break;
                             case 67:
                                 switch (dungeon_mode(67)) {
                                     case DMODE_OPEN:
@@ -191,6 +195,40 @@ def 0 {
                                         break;
                                 }
                                 jump @label_12;
+                            case 73:
+                            case 75:
+                            case 77:
+                            case 79:
+                            case 81:
+                            case 83:
+                            case 85:
+                                if ($PERFORMANCE_PROGRESS_LIST[17]) {
+                                } else {
+                                    message_Mail({
+                                        english="\n[CN]Caution!",
+                                        french="\n[CN]Attention!",
+                                        german="\n[CN]Achtung!",
+                                        italian="\n[CN]Attenzione!",
+                                        spanish="\n[CN]¡Atención!",
+                                    });
+                                    message_Mail("[CN]The seven treasures dungeons are intended\n[CN]to be Post-Dialga checks! You CAN get the\n[CN]check for missions or clearing it anyway.");
+                                    message_Mail("[CN]However, you will be unable to fight the boss,\n[CN]nor get the check for the seven treasures,\n[CN]nor get the boss recruit check. Is that OK?");
+                                    jump @label_32;
+                                }
+                                break;
+                            // TODO: Make these warn the player legends are unrecruitable if pre-dialga!
+                            case 14: // Uxie Boss Fight
+
+                            case 21: // Mesprit Boss Fight
+                            
+                            case 25: // Azelf Boss Fight
+                            
+                            // 51 is Phione! 
+                            
+                            case 65: // Palkia
+                            
+                            case -1: // Aegis Cave, probably. Idk it make my head hurt
+                            
                             default:
                                 break;
                         }
