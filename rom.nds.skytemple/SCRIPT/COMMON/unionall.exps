@@ -8990,6 +8990,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         message_Mail("[CS:P]Side Path[CR] returned you to where you\ncame from!");
                         dungeon_mode(9) = DMODE_OPEN_AND_REQUEST; 
                         message_Close();
+                        message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
                         JumpCommon(CORO_EVENT_DIVIDE);
                         break;
                     case 10:
@@ -9004,6 +9005,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         message_Mail("[CS:P]Rock Path[CR] returned you to where you came from!");
                         dungeon_mode(11) = DMODE_OPEN_AND_REQUEST; 
                         message_Close();
+                        message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
                         JumpCommon(CORO_EVENT_DIVIDE);
                         break;
                     case 12:
@@ -9014,7 +9016,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Break Glass if Softlock!");
                         message_Mail("[CS:P]Forest Path[CR] returned you to where you came from!");
                         message_Close();
-                        dungeon_mode(13) = DMODE_OPEN_AND_REQUEST; 
+                        dungeon_mode(13) = DMODE_OPEN_AND_REQUEST;
+                        message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
                         JumpCommon(CORO_EVENT_DIVIDE);
                         hold;
                         debug_Print("Forest Patch: No changes needed (?), see above!");
@@ -10106,12 +10109,15 @@ coro GETOUT_REQUEST_DUNGEON {
                             supervision_ExecuteActingSub(LEVEL_D05P31A, 'M99A0103', 0);
                             jump @label_957;
                         case 8:
+                        case 9:
                             debug_Print('LABEL_D008_CLEAR');
                             jump @label_957;
                         case 10:
+                        case 11:
                             debug_Print('LABEL_D010_CLEAR');
                             jump @label_957;
                         case 12:
+                        case 13:
                             debug_Print('LABEL_D012_CLEAR');
                             jump @label_957;
                         case 14:
