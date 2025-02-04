@@ -39,7 +39,7 @@ def 0 {
                 spanish=" ¿Me aceptáis?",
             });
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            @label_cresselia_check;
+            §label_cresselia_check;
             message_Mail("[CN]Accept [CS:N]Cresselia[CR]'s gift?");
             switch ( message_SwitchMenu(1, 2) ) {
                 case menu({
