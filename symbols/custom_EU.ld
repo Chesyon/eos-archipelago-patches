@@ -23,7 +23,7 @@ AddShopItemToInventoryHook4 = 0x238B784;
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 
-/* ! Archipelago Values For Overlay36 */
+/* ! Archipelago Values For Overlay36. TODO: remove */
 AP_SETTINGS = 0x23DE0AC;
 LevelScalingCheckAddr = 0x23DE0B8;
 NameAutofillStringAddr = 0x23DE000;
@@ -31,6 +31,13 @@ SameTypeCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
 ForcedPlayerPartnerCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
 SlotNameAddr = 0x23DE000; /* 16 bytes long. */
 ArchipelagoSeedAddr = 0x23DE0A0; /* 8 bytes long */
+
+/* ! New Archipelago Values For Overlay36 */
+slot_name = 0x23DE000
+seed = 0x23DE010
+archipelago_flags = 0x23DE018
+starter_option = 0x23DE01A
+
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined
