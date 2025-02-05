@@ -2,10 +2,10 @@
 def 0 {
     supervision_Station(0);
     if ( scn($SCENARIO_MAIN) >= [29, 31] ) {
+        supervision_Station(3);
         §label_0;
         end;
     } elseif ( scn($SCENARIO_MAIN) >= [29, 30] ) {
-        supervision_Station(3);
         end;
     } elseif ( scn($SCENARIO_MAIN) >= [29, 29] ) {
         supervision_Station(3);

@@ -1,0 +1,262 @@
+
+def 0 {
+    sound_Stop();
+    screen_WhiteIn(29, 14);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Oh! I can see the\n2nd Station Clearing! [K]We can do it!",
+        french=" Oh! J\'aperçois la trouée\ndu 2[F:E] Relais![K]\nOn peut y arriver!",
+        german=" Oh! Ich kann da drüben die\n2. Zwischenlagerlichtung sehen![K]\nWir schaffen das!",
+        italian=" Oh! Riesco a vedere\nil Bivacco 2![K] Possiamo farcela!",
+        spanish=" ¡Anda! ¡Si ya veo la Base del\nSegundo Puerto![K] ¡Ánimo, que podemos hacerlo!",
+    });
+    message_Close();
+    back_SetGround(LEVEL_D73P22A);
+    supervision_LoadStation(LEVEL_D73P22A, 'US31');
+    supervision_Station(6);
+    supervision_Station(40);
+    supervision_Station(41);
+    supervision_Station(42);
+    supervision_StationCommon(0);
+    supervision_StationCommon(9);
+    supervision_StationCommon(10);
+    supervision_Acting(0);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_GOORIKII) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_GOORIKII) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    Wait(1);
+    with (actor ACTOR_NPC_SHEIMI) {
+        MovePositionMark(1, Position<'m0', 28.5, 43.5>);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m1', 28.5, 47.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m2', 31.5, 46.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m3', 25.5, 46.5>);
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_SKY_PEAK_CAVE, 0, 256);
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    se_Play(8964);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Wow... Incredible!",
+        french=" Ouah... Incroyable!",
+        german=" Wow... Unglaublich!",
+        italian=" Wow... Incredibile!",
+        spanish=" Guau... ¡Es increíble!",
+    });
+    message_Talk({
+        english=" This is...",
+        french=" C\'est...",
+        german=" Das ist...",
+        italian=" Questo è...",
+        spanish=" Es...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (performer 0) {
+        MovePositionMark(1, Position<'m4', 28.5, 35.5>);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(4);
+    }
+    WaitExecutePerformer(0);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    Wait(60);
+    with (actor ACTOR_NPC_SHEIMI) {
+        MovePositionMark(1, Position<'m5', 28.5, 33.5>);
+    }
+    Wait(7);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m6', 28.5, 37.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m7', 31.5, 38.5>);
+    }
+    Wait(3);
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m8', 25.5, 38.5>);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(4);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(2);
+    }
+    se_Play(8978);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_LEFT, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_LEFT, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_GOORIKII);
+    with (actor ACTOR_NPC_KUCHIITO) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_KUCHIITO);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        MovePositionMark(1, Position<'m9', 28.5, 30.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    message_SetFace(ACTOR_NPC_KINOGASSA, FACE_HAPPY, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Hey!\nWe\'re the Survey Team from Project P,\nTeam [CS:X]Frontier[CR]!",
+        french=" Hé!\nNous sommes l\'équipe de reconnaissance\ndu Projet P, l\'Equipe [CS:X]Eclaireurs[CR]!",
+        german=" Hey!\nWir sind das Vermessungsteam von Projekt P,\nTeam [CS:X]Grenzland[CR]!",
+        italian=" Ehi!\nSiamo la squadra di indagine del Progetto P,\nil Team [CS:X]Pioniere[CR]!",
+        spanish=" ¡Hola! Somos el [CS:X]Equipo Frontera[CR],\nel equipo de reconocimiento del Proyecto P.",
+    });
+    message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" This is a huge, tall mountain, you\nknow? So rescue missions can\'t be done...",
+        french=" C\'est une montagne vraiment\ntrès haute, vous savez? C\'est pour ça que les\nmissions de sauvetage sont impossibles ici...",
+        german=" Dies ist ein riesengroßer Berg,\nwisst ihr? Daher können hier keine\nRettungsmissionen durchgeführt werden...",
+        italian=" Questa montagna è immensa,\nlo sapete? Quindi non è possibile effettuare\nmissioni di Pronto Intervento...",
+        spanish=" Esta montaña es altísima y\ngigantesca, así que no se pueden llevar a\ncabo misiones de rescate...",
+    });
+    message_Talk({
+        english=" So we\'ve built a base at the\n2nd Station Clearing.",
+        french=" Alors on a établi un campement\nà la trouée du 2[F:E] Relais.",
+        german=" Aus diesem Grund haben wir\neine Basis auf der 2. Zwischenlagerlichtung\ngebaut.",
+        italian=" Ecco perché abbiamo costruito\nun campo base al Bivacco 2.",
+        spanish=" Por eso hemos levantado el\ncampamento en la Base del Segundo Puerto.",
+    });
+    message_Talk({
+        english=" We\'ve set up a Kangaskhan Rock\nand [CS:K]Drifblim[CR]\'s Gondola,\nso be sure to use them!",
+        french=" N\'hésitez pas à utiliser la\nStatue Kangourex et la [CS:K]Navette Grodrive[CR]\nque nous y avons mis en place, d\'accord?",
+        german=" Geht auf Nummer sicher und\nverwendet den Kangama-Speicher ebenso\nwie die [CS:K]Drifzepeli-Seilbahn[CR]!",
+        italian=" Qui troverete una Statua\nKangaskhan e l\'Agenzia Viaggi [CS:K]Drifblim[CR]...\nUsatele pure a vostro piacimento!",
+        spanish=" Hemos colocado una Roca de\nKangaskhan y una [CS:K]Góndola Drifblim[CR],\n¡espero que os resulten útiles!",
+    });
+    message_Talk({
+        english=" Project P\'s Recycle Shop is\ncovering it all too.",
+        french=" C\'est la Bourse d\'Echange du\nProjet P qui finance tous ces services.",
+        german=" Der Wiederverwertungsladen\nvon Projekt P trägt die Kosten.",
+        italian=" Non vi preoccupate per le spese,\nrientra tutto nel Progetto P del Centro Riciclo.",
+        spanish=" El Reciclaje Explorador del\nProyecto P cubre todos los gastos.",
+    });
+    message_Talk({
+        english=" Everything\'s free!",
+        french=" Tout est gratuit!",
+        german=" Es ist alles kostenlos!",
+        italian=" È tutto gratis!",
+        spanish=" ¡Es todo gratis!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        MovePositionMark(1, Position<'m10', 36.5, 30.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER_APPOINT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_INSPIRED, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" That\'s wonderful!\nThat\'s the spirit of cooperation.",
+        french=" C\'est merveilleux!\nC\'est ça, l\'esprit d\'équipe!",
+        german=" Wie wunderbar!\nDas nenne ich Teamgeist.",
+        italian=" Ma è meraviglioso!\nQuesto sì che è spirito di collaborazione.",
+        spanish=" ¡Qué maravilla!\nA eso se le llama solidaridad.",
+    });
+    message_Talk({
+        english=" Ah. The mountain is so\nbeautiful...",
+        french=" Ah... La montagne est si belle...",
+        german=" Ach. Der Berg ist so schön...",
+        italian=" Ah... La montagna è così bella...",
+        spanish=" Ah, qué bonita es la montaña...",
+    });
+    message_Close();
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m11', 35.5, 40.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m12', 21.5, 40.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC1);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC2);
+    end;
+}

@@ -12079,6 +12079,10 @@ coro BUBBLE_TEST {
         }
         $PERFORMANCE_PROGRESS_LIST[35] = 0;
     }
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
+        $PERFORMANCE_PROGRESS_LIST[36] = 0;
+    }
     return;
 }
 
