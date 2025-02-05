@@ -16,11 +16,13 @@
 
 .open "overlay13.bin", overlay13_start
     .org SameTypeHook
-        blne SameTypeCheck
-    ;.org QuizInterceptStateHook
-            ;b QuizCustomStateTrampoline
-    ;.org QuizForcedPlayerHook
-        ;b ForcedPlayerCheck
+        blne TypesanityCheck
+    .org QuizInterceptStateHook
+        b QuizCustomStateTrampoline
+    .org QuizForcedPlayerHook
+        b ForcedPlayerCheck
+    .org QuizForcedPartnerHook
+        bl ForcedPartnerCheck
 .close
 
 .open "overlay22.bin", overlay22_start
@@ -38,6 +40,6 @@
 .close
 
 .open "overlay29.bin", overlay29_start
-    .org LevelScalingCheckAddr
+    .org LevelScalingHook
         bl BranchLevel
 .close

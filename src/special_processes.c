@@ -6,7 +6,7 @@
 
 // Special process 100: Get level scaling status
 static int SpGetLevelScalingStatus() {
-  return AP_SETTINGS[3];
+  return apSettings->levelScaling;
 }
 
 // Called for special process IDs 100 and greater.

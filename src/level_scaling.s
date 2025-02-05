@@ -3,12 +3,11 @@
         // First things first, check archipelago setting. Skip all the code if level scaling is disabled
         stmdb sp!,{r0-r8, lr}
         stmdb sp!,{r0}
-        ldr r0,=LevelScalingCheckAddr
-        ldrb r0,[r0]
-        cmp r0,#1
+        ldr r0,=apSettings
+        ldrb r0,[r0,#0x0]
+        tst  r0,#0b0000000000001000 // Test ArchipelagoSettings->levelScaling
         ldmia sp!,{r0}
-        blgt CardPullOut // failsafe, the value should NEVER be greater than 1 since it's a bool. if this gets called we're reading or writing smth wrong.
-        bne return // if the value is 0, don't do level scaling
+        beq return // if the value is 0, don't do level scaling
         // more checks for if level scaling should be used.
         cmp r0, #0 // i have literally no clue what this does lmaoooo- maybe this is what stops bossfights from scaling? regardless i'm leaving it in for now
         beq return

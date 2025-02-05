@@ -12,7 +12,10 @@ QuizInterceptStateHook = 0x238B0E8;
 QuizInterceptStateUnhook = 0x238C8B4;
 QuizForcedPlayerHook = 0x238B250;
 QuizForcedPlayerUnhook = 0x238B258;
+QuizForcedPartnerHook = 0x238C44C;
+QuizForcedPartnerUnhook = 0x238C4B0;
 OVERLAY13_PTR_NA_238CEA0 = 0x238D9E0;
+STARTERS_PARTNERS_IDS = 0x238CBCC;
 
 /* ! For Overlay22 */
 AddShopItemToInventoryHook1 = 0x238B0D8;
@@ -23,21 +26,11 @@ AddShopItemToInventoryHook4 = 0x238B784;
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 
-/* ! Archipelago Values For Overlay36. TODO: remove */
-AP_SETTINGS = 0x23DE0AC;
-LevelScalingCheckAddr = 0x23DE0B8;
-NameAutofillStringAddr = 0x23DE000;
-SameTypeCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
-ForcedPlayerPartnerCheckAddr = 0x238CC3C; /* ! TODO: CHANGE */
-SlotNameAddr = 0x23DE000; /* 16 bytes long. */
-ArchipelagoSeedAddr = 0x23DE0A0; /* 8 bytes long */
-
 /* ! New Archipelago Values For Overlay36 */
-slot_name = 0x23DE000;
-seed = 0x23DE010;
-archipelago_flags = 0x23DE018;
-starter_option = 0x23DE01A;
-
+archipelagoAreaStart = 0x23DE000;
+apSlotName = 0x23DE000;
+apSeed = 0x23DE010;
+apSettings = 0x23DE018;
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined
