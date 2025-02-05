@@ -3545,7 +3545,7 @@ coro EVENT_M07_07_12 {
                     spanish="[CN]¡Ahora puedes llevar\n[CN]más objetos que antes!",
                 });
                 message_Close();
-                ~AssignCheck(3);
+                ~AssignCheck(2);
                 JumpCommon(CORO_EVENT_HA_SAMEX);
                 supervision_ExecuteActingSub(LEVEL_G01P06B, 'M07A0901', 0);
                 supervision_ExecuteActingSub(LEVEL_G01P05C, 'M07A1001', 0);
@@ -3863,7 +3863,7 @@ coro EVENT_M10_11_12 {
         supervision_ExecuteActingSub(LEVEL_V03P09A, 'M10A1212', 0);
         adventure_log = 1;
         supervision_ExecuteActingSub(LEVEL_P04P01C, 'M10A1213', 0);
-        ~AssignCheck(2);
+        ~AssignCheck(3);
         JumpCommon(CORO_EVENT_HA_SAME);
     } else {
         $PERFORMANCE_PROGRESS_LIST[13] = 1;
