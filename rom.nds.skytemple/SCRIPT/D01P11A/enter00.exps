@@ -1,6 +1,6 @@
 import "checks.exps";
 def 0 {
-    ~AssignCheck(3);
+    ~AssignCheck(3); // I only edited this comment. 
     switch ( sector() ) {
         case 1:
             §label_0;
