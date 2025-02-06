@@ -164,7 +164,7 @@ void __attribute__((naked)) ForcedPartnerCheck() {
 
 void QuizCustomStateHandler(void* quizData, int state) {
     switch (state) {
-        case 0x42: // Override Check
+        case 0x42:; // Override Check
             struct preprocessor_args preArgs;
             InitPreprocessorArgs(&preArgs);
             
