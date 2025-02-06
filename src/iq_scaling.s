@@ -14,12 +14,12 @@ IqScalingGround:
     bx   lr // return
 .align
 IqScalingDungeon:
-    push r0
+    push {r0}
     ldr  r0,=apSettings
     ldrh r0,[r0]
     lsr  r0,r0,#7
     and  r0,r0,#0b1111
     mul  r1,r1,r0 // multiply IQ increase by the multiplier
-    pop  r0
+    pop  {r0}
     add  r1,r4,r1 // original instruction
     bx   lr // return
