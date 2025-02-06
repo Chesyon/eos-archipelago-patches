@@ -12092,32 +12092,55 @@ coro BUBBLE_TEST {
         }
         JumpCommon(CORO_HA_MIHARIBAN);
     }
-    if ($PERFORMANCE_PROGRESS_LIST[35]) {
-        §box_iteration;
-        if ($ITEM_BACKUP > 0) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) { // If true, run ITEM LOOP
+        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I\'ve got a special delivery for team\n[team]!");
+        
+        if ($ITEM_BACKUP > 0) { // ITEM_BACKUP is non-zero! 
+            §box_iteration;
             item_SetVariable(0,$ITEM_BACKUP);
             message_EmptyActor();
             me_Play(4);
-            message_Monologue("[CN]You got a [s_item:0]!");
+            message_Monologue("[CN][CS:G]Pelipper[CR] handed you a [s_item:0]!");
             WaitMe(4);
             Wait(30);
             message_Close();
-            switch(ProcessSpecial(56,0,0)) {
+            switch(ProcessSpecial(56,0,0)) { // Give the player the item
                 case 0: // Bag NOT full
-                    switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+                    switch ( message_Menu(MENU_GIVE_ITEM) ) { } // Put it in their bag
                     break;
-                case 1:
-                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                case 1: 
+                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
                     break;
             }
             message_Close();
-            $SCENARIO_MAIN_BIT_FLAG[250] = 1;
+            $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item
+            message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]!");
+            message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");
             §box_halt;
-            if ($SCENARIO_MAIN_BIT_FLAG[250]) {
-                Wait(1);
+            se_Play(7450);
+            WaitSe(7450);
+            if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
+                se_Play(7443);
+                WaitSe(7443);
                 jump @box_halt;
             }
-            jump @box_iteration;
+            message_CloseEnforce();
+            if ($ITEM_BACKUP > 0) {
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" I do have another delivery for you!\nHere you are, team [team]!");
+                message_Close();
+                jump @box_iteration; // Next Item given by Cryptic!
+            } else {
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                message_Mail(" That appears to be everything!\nHave a great day, team [team]!");
+                message_Close();
+            }
+            
+        } else { // Next Item was null, we're out of items!
+            message_Talk(" How strange...[K] I can\'t seem to find\nyour package right now![K] This is really weird,\n[CS:C]you should tell[CR] [CS:G]happylappy[CR] [CS:C]if you see this[CR]![K][K][K]");
+            message_Close();
         }
         debug_Print("Transaction Complete!");
         $PERFORMANCE_PROGRESS_LIST[35] = 0;
