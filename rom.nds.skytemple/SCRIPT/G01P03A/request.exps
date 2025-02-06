@@ -1,6 +1,6 @@
 
 def 0 {
-    debug_Print('acting_REQUEST');
+    debug_Print('Codeglitchmurphy requested to be inside the code');
     switch ( message_Menu(MENU_JOB_REWARD_TYPE) ) {
         case 32767:
             §label_0;

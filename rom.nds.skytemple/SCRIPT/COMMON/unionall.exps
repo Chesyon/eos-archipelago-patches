@@ -12117,8 +12117,9 @@ coro BUBBLE_TEST {
                 Wait(1);
                 jump @box_halt;
             }
-            debug_Print("Transaction Complete!");
+            jump @box_iteration;
         }
+        debug_Print("Transaction Complete!");
         $PERFORMANCE_PROGRESS_LIST[35] = 0;
     }
     if ($PERFORMANCE_PROGRESS_LIST[36]) {
@@ -12126,8 +12127,13 @@ coro BUBBLE_TEST {
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
     }
     return;
+    
+    
+    
 }
 
 coro MAP_TEST {
     return;
 }
+
+
