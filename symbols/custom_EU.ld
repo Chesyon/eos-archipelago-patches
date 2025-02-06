@@ -1,6 +1,7 @@
 /* ! For Arm9 */
 GenerateKecleonItems1Hook = 0x2010B20;
 GenerateKecleonItems2Hook = 0x2010E30;
+IqScalingGroundHook = 0x20119FC;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -23,6 +24,7 @@ AddShopItemToInventoryHook4 = 0x238B784;
 
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
+IqScalingDungeonHook = 0x22FAB68;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;

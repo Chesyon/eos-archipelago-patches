@@ -7,6 +7,9 @@
     
     .org GenerateKecleonItems2Hook
         b  GenerateShop2Tweak
+
+    .org IqScalingGroundHook
+        bl IqScalingGround
 .close
 
 .open "overlay11.bin", overlay11_start
@@ -42,4 +45,7 @@
 .open "overlay29.bin", overlay29_start
     .org LevelScalingHook
         bl BranchLevel
+
+    .org IqScalingDungeonHook
+        bl IqScalingDungeon
 .close
