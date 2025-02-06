@@ -5316,7 +5316,7 @@ coro EVENT_S02_06 {
 
 coro EVENT_S02_07 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[22] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[22] = 1;
     supervision_ExecuteActingSub(LEVEL_D79P41A, 'S02P0701', 0);
     supervision_ExecuteActingSub(LEVEL_P01P01A, 'S02P0702', 0);
     JumpCommon(CORO_EVENT_HA_SAME);
@@ -11068,17 +11068,23 @@ coro GETOUT_REQUEST_CONQUEST {
             jump @label_1167;
         case 73:
             debug_Print('LABEL_D073_CLEAR');
-            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
-                    case &<< 7:
-                        §no_kyogre;
-                        supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1201', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1001', 0);
-                        main_EnterDungeon(74, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+            if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
+                        case &<< 7:
+                            §no_kyogre;
+                            supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1201', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1001', 0);
+                            main_EnterDungeon(74, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Kyogre[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_kyogre;
                 }
             } else {
                 message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!");
@@ -11093,16 +11099,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 75:
             debug_Print('LABEL_D075_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
-                    case &<< 1:
-                        §no_groudon;
-                        supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0901', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0701', 0);
-                        main_EnterDungeon(76, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
+                        case &<< 1:
+                            §no_groudon;
+                            supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0901', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0701', 0);
+                            main_EnterDungeon(76, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Groudon[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_groudon;
                 }
             } else {
                 message_Mail("[CS:G]Groudon[CR] and the [CS:I]Terra Cymbal[CR]\nare Post-Dialga checks!");
@@ -11117,16 +11129,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 77:
             debug_Print('LABEL_D077_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
-                    case &<< 3:
-                        §no_articuno;
-                        supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0301', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0101', 0);
-                        main_EnterDungeon(78, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
+                        case &<< 3:
+                            §no_articuno;
+                            supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0301', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0101', 0);
+                            main_EnterDungeon(78, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Articuno[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_articuno;
                 }
             } else {
                 message_Mail("[CS:G]Articuno[CR] and the [CS:I]Icy-Flute[CR]\nare Post-Dialga checks!");
@@ -11141,16 +11159,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 79:
             debug_Print('LABEL_D079_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
-                    case &<< 5:
-                        §no_heatran;
-                        supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0601', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0401', 0);
-                        main_EnterDungeon(80, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
+                        case &<< 5:
+                            §no_heatran;
+                            supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0601', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0401', 0);
+                            main_EnterDungeon(80, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Heatran[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_heatran;
                 }
             } else {
                 message_Mail("[CS:G]Heatran[CR] and the [CS:I]Fiery Drum[CR]\nare Post-Dialga checks!");
@@ -11165,16 +11189,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 81:
             debug_Print('LABEL_D081_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
-                    case &<< 7:
-                        §no_giratina;
-                        supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1501', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1301', 0);
-                        main_EnterDungeon(82, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
+                        case &<< 7:
+                            §no_giratina;
+                            supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1501', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1301', 0);
+                            main_EnterDungeon(82, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Giratina[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_giratina;
                 }
             } else {
                 message_Mail("[CS:G]Giratina[CR] and the [CS:I]Rock Horn[CR]\nare Post-Dialga checks!");
@@ -11189,16 +11219,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 83:
             debug_Print('LABEL_D083_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
-                    case &<< 1:
-                        §no_rayquaza;
-                        supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A2101', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A1901', 0);
-                        main_EnterDungeon(84, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
+                        case &<< 1:
+                            §no_rayquaza;
+                            supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A2101', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A1901', 0);
+                            main_EnterDungeon(84, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Rayquaza[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_rayquaza;
                 }
             } else {
                 message_Mail("[CS:G]Rayquaza[CR] and the [CS:I]Sky Melodica[CR]\nare Post-Dialga checks!");
@@ -11213,16 +11249,22 @@ coro GETOUT_REQUEST_CONQUEST {
         case 85:
             debug_Print('LABEL_D085_CLEAR');
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
-                switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
-                    case &<< 3:
-                        §no_mew;
-                        supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1801', 0);
-                        jump @label_1167;
-                    default:
-                        supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1601', 0);
-                        main_EnterDungeon(86, 30);
-                        main_EnterDungeon(-1, 30);
-                        hold;
+                if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                    switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
+                        case &<< 3:
+                            §no_mew;
+                            supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1801', 0);
+                            jump @label_1167;
+                        default:
+                            supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1601', 0);
+                            main_EnterDungeon(86, 30);
+                            main_EnterDungeon(-1, 30);
+                            hold;
+                    }
+                } else {
+                    message_Mail("[CS:G]Mew[CR] requires the [CS:C]Secret Rank[CR]\nto fight!");
+                    message_Close();
+                    jump @no_mew;
                 }
             } else {
                 message_Mail("[CS:G]Mew[CR] and the [CS:I]Grass Cornet[CR]\nare Post-Dialga checks!");

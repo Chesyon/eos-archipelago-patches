@@ -203,7 +203,12 @@ def 0 {
                             case 83:
                             case 85:
                                 if ($PERFORMANCE_PROGRESS_LIST[17]) {
+                                    if ($PERFORMANCE_PROGRESS_LIST[22]) {
+                                    } else {
+                                        jump @no_secret_rank;
+                                    }
                                 } else {
+                                    §no_secret_rank;
                                     message_Mail({
                                         english="\n[CN]Caution!",
                                         french="\n[CN]Attention!",
@@ -211,7 +216,7 @@ def 0 {
                                         italian="\n[CN]Attenzione!",
                                         spanish="\n[CN]¡Atención!",
                                     });
-                                    message_Mail("[CN]The seven treasures dungeons are intended\n[CN]to be Post-Dialga checks! You CAN get the\n[CN]check for missions or clearing it anyway.");
+                                    message_Mail("[CN]The seven treasures dungeons are intended to\n[CN]be Post-Dialga checks locked behind the [CS:C]Secret\n[CN]Rank[CR]! You can get the normal dungeon checks.");
                                     message_Mail("[CN]However, you will be unable to fight the boss,\n[CN]nor get the check for the seven treasures,\n[CN]nor get the boss recruit check. Is that OK?");
                                     jump @label_32;
                                 }
