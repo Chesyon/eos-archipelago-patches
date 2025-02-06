@@ -20,12 +20,12 @@ typedef struct ArchipelagoSettings {
 
 extern ArchipelagoSettings* apSettings;
 
-char slot_name[16];
+extern char slot_name[16];
 
-int seed; // 64 bits = 8 bytes
+extern int seed; // 64 bits = 8 bytes
 
 typedef struct ArchipelagoData {
     char slotName[16];
-    int seed[2];
+    unsigned int seed[2];
     ArchipelagoSettings settings;
 } ArchipelagoData;

@@ -14,8 +14,6 @@ QuizForcedPlayerHook = 0x238B250;
 QuizForcedPlayerUnhook = 0x238B258;
 QuizForcedPartnerHook = 0x238C44C;
 QuizForcedPartnerUnhook = 0x238C4B0;
-OVERLAY13_PTR_NA_238CEA0 = 0x238D9E0;
-STARTERS_PARTNERS_IDS = 0x238CBCC;
 
 /* ! For Overlay22 */
 AddShopItemToInventoryHook1 = 0x238B0D8;
