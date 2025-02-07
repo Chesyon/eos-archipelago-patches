@@ -1,3 +1,4 @@
+#define CONFIRMATION_STR_ID 1732 // 0x6C4
 /* Starter Typesanity
 Disabled (default): Hero and partner cannot share a type (vanilla behavior).
 Enabled: Hero and partner can share types. Note that the game is not balanced around this!
@@ -13,20 +14,20 @@ Random: Be randomly assigned a hero and partner from the starter pool.*/
 
 typedef struct QuizData {
     // 0x0: something related to waiting for boxes state
-    uint8_t unk_0x0;
-    uint8_t unk_0x1;
+    int8_t unk_0x0;
+    int8_t unk_0x1;
     // 0x2: during the quiz questions?
-    uint8_t dialougeBox1Id;
+    int8_t dialougeBox1Id;
     // 0x3: simple or advanced
-    uint8_t menuId;
+    int8_t menuId;
     // 0x4
-    uint8_t dialougeBox2Id;
+    int8_t dialougeBox2Id;
     // 0x5
-    uint8_t portraitBoxId;
+    int8_t portraitBoxId;
     // 0x6: Specifically for Debug Quiz Window?
-    uint8_t textBoxId;
+    int8_t textBoxId;
     // 0x7
-    uint8_t unk_0x7;
+    int8_t unk_0x7;
     // 0x8: pointer to questionBuffer?
     char *questionStrPtr;
     // 0xC: pointer to answerBuffers? uncertain if so because of the way the
@@ -170,11 +171,21 @@ void __attribute__((naked)) ForcedPartnerCheck() {
     asm("b QuizForcedPartnerUnhook");
 }
 
-int QuizCustomStateHandler(QuizData* quizData, int state) {
+void QuizCustomStateHandler(QuizData* quizData, int state) {
     switch (state) {
-        case 0x42:; // Override Check, this semicolon is required by the compiler
+        case 0x42:; // Override Check Message
             struct preprocessor_args preArgs;
             InitPreprocessorArgs(&preArgs);
+            //preArgs.flag_vals[0] = *((uint16_t*)&STARTERS_HERO_IDS[(GetPersonality()*2) + quizData->genderResult]);
+            ShowDialogueBox(quizData->dialougeBox1Id);
+            //ShowStringIdInDialogueBox(quizData->dialougeBox1Id, 0b100, CONFIRMATION_STR_ID, &preArgs);
+            quizData->state = quizData->state + 1;
+            break;
+        case 0x43: // Override Check Yes/No
+            if(IsDialogueBoxActive(quizData->dialougeBox1Id) == false) {
+                
+            }
     }
+    
     return;
 }
