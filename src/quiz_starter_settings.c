@@ -11,29 +11,27 @@ Random: Be randomly assigned a hero and partner from the starter pool.*/
 #include <cot.h>
 #include "extern.h"
 
-/*
 typedef struct QuizData {
-    // 0x0: something related to waiting for boxes and state?
+    // 0x0: something related to waiting for boxes state
     uint8_t unk_0x0;
-    
+    uint8_t unk_0x1;
     // 0x2: during the quiz questions?
     uint8_t dialougeBox1Id;
-    // 0x3
-    uint8_t simpleMenuId;
+    // 0x3: simple or advanced
+    uint8_t menuId;
     // 0x4
     uint8_t dialougeBox2Id;
-    
+    // 0x5
+    uint8_t portraitBoxId;
     // 0x6: Specifically for Debug Quiz Window?
     uint8_t textBoxId;
-    
-    // 0x8: pointer to 0x6C?
-    int unk_0x8;
-    
-    // 0x14: moves to 0x18?
-    int unk_0x14;
-    // 0x18: moves to 0x1C? points to 0xC sometimes???
-    int unk_0x18;
-    // 0x1C:
+    // 0x7
+    uint8_t unk_0x7;
+    // 0x8: pointer to questionBuffer?
+    char *questionStrPtr;
+    // 0xC: pointer to answerBuffers? uncertain if so because of the way the
+    // uses some elements? maybe multipurpose?
+    char *answerStrPtr[4];
     int unk_0x1C;
     // 0x20
     int state;
@@ -41,42 +39,52 @@ typedef struct QuizData {
     int currentQuestion;
     // 0x28: Countdown related to holding the stylus on the screen (Lifted state 0x3D)
     int countdownHold;
-    
-    // 0x30: Seems like a countdown for a delay after the quiz?
-    // Set to 4? Then countdown?
-    int countdown;
+    // 0x2c
+    int unk_0x2c;
+    // 0x30: Next step after waiting? Not sure if also used for a countdown
+    // from 4->0?
+    int nextState;
     // 0x34: personality values
     uint8_t personalityValues[16];
     // 0x44: random number [0, 0x14) for highest values
     uint8_t personalityValuesTieBreaker[16];
-    
     // 0x54: First always 0x41 and last is always 0x40
-    uint8_t questionNums[10]
+    uint8_t questionNums[10];
     // 0x5E: Why is this NOT???? The Scripting Variable inverses this value? WHY?
     // Is it NOT here?
     uint8_t notPlayedOldGame;
     // 0x5F
     uint8_t genderResult;
-    // 0x60: this is some weird value that uses like 0x24, 0x54, and quiz
-    // question strings I have no idea what it's for
-    uint16_t questionString; 
-    
+    // 0x60: probably?
+    uint16_t currentQuestionString; 
+    uint16_t unk_0x62;
+    int unk_0x64;
+    int unk_0x68;
     // 0x6C: exact size is a guess for now
-    char questionBuffer[30];
-    
+    char questionBuffer[512];
     // 0x26C: uncertain of num buffers, but certain of buffer length
     // no question has more than 4 answers so logically you would think there
     // would only be 4 buffers for answers
     char answerBuffers[4][64];
-    
-    // 0x3B4
+    int unk_0x36C;
+    // 0x370
+    int numselectablePartners;
+    // 0x374: The base game only has 21 starters.
+    // I suspect the list has space for 32 and just goes unused.
+    struct monster_id_16 partners[32];
+    // 0x3B4: 0x10 in size
     struct portrait_params portraitParams;
-    
-    // 0x426
-    uint16_t unk_0x426;
+    // 0x3C4: Partner Name Final
+    char partner_name_final[32];
+    // 0x3E4: Partner Name Keyboard Input
+    char partner_name_init[32];
+    // 0x404: Partner Name Also Keyboard Input
+    char partner_name_init_copy[32];
+    // 0x424
+    struct monster_id_16 partner;
+    // 0x426: pulled from ds firmware color 75%, mac 25%
+    uint16_t auraColor;
 } QuizData;
-
-*/
 
 void __attribute__((naked)) TypesanityCheck() {
     asm("ldr r0,=apSettings");
@@ -162,13 +170,11 @@ void __attribute__((naked)) ForcedPartnerCheck() {
     asm("b QuizForcedPartnerUnhook");
 }
 
-void QuizCustomStateHandler(void* quizData, int state) {
+int QuizCustomStateHandler(QuizData* quizData, int state) {
     switch (state) {
-        case 0x42:; // Override Check
+        case 0x42:; // Override Check, this semicolon is required by the compiler
             struct preprocessor_args preArgs;
             InitPreprocessorArgs(&preArgs);
-            
-            break;
     }
     return;
 }

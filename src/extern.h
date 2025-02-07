@@ -18,7 +18,7 @@ typedef struct ArchipelagoSettings {
     bool unused_7 : 1;          // 15 (0xF)
 } ArchipelagoSettings;
 
-extern ArchipelagoSettings* apSettings;
+extern ArchipelagoSettings apSettings;
 
 extern char slot_name[16];
 
