@@ -3340,7 +3340,7 @@ coro EVENT_M05_01_02 {
 
 coro EVENT_M05_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[27] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[27] = 1;
     supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05A0301', 0);
     supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
     supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05D0314', 1);
@@ -6572,7 +6572,7 @@ coro EVENT_S31_36 {
 coro EVENT_S31_37 {
     CallCommon(CORO_SUBSCREEN_INIT);
     adventure_log = 8;
-    $PERFORMANCE_PROGRESS_LIST[26] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[26] = 1;
     supervision_ExecuteActingSub(LEVEL_D73P41A, 'S31A3701', 0);
     supervision_ExecuteActingSub(LEVEL_V37P02A, 'S31A3702', 0);
     supervision_ExecuteActingSub(LEVEL_D73P31A, 'S31A3703', 0);
@@ -8506,7 +8506,6 @@ coro GETOUT_NORMAL {
     } else {
         switch ( $DUNGEON_ENTER ) {
             case 44:
-                $PERFORMANCE_PROGRESS_LIST[5] = 0;
                 switch ( ProcessSpecial(PROCESS_SPECIAL_IS_TEAM_SETUP_HERO_AND_PARTNER_ONLY, 0, 0) ) {
                     case 1:
                         jump @label_667;
@@ -8525,7 +8524,6 @@ coro GETOUT_NORMAL {
                 }
                 break;
             case 62:
-                $PERFORMANCE_PROGRESS_LIST[5] = 0;
                 switch ( ProcessSpecial(PROCESS_SPECIAL_IS_TEAM_SETUP_HERO_AND_PARTNER_ONLY, 0, 0) ) {
                     case 1:
                         jump @label_667;
@@ -8585,6 +8583,17 @@ coro GETOUT_NORMAL {
                     jump @label_689;
                 }
                 break;
+            case 178:
+                dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
+                main_EnterGround(LEVEL_P02P01A, 30);
+                hold;
+                end;
+            case 179:
+                $SCENARIO_MAIN_BIT_FLAG[3] = 0;
+                dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
+                main_EnterGround(LEVEL_P02P01A, 30);
+                hold;
+                end;
             default:
                 jump @label_667;
         }
@@ -12178,6 +12187,9 @@ coro BUBBLE_TEST {
 }
 
 coro MAP_TEST {
+    if ($PERFORMANCE_PROGRESS_LIST[37]) {
+        
+    }
     return;
 }
 

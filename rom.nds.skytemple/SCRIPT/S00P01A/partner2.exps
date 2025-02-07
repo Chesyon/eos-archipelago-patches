@@ -1,8 +1,11 @@
 
 def 0 {
     if (debug) {
-
-        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
+        dungeon_mode(123) = DMODE_OPEN;
+        dungeon_mode(158) = DMODE_OPEN;
+        dungeon_mode(178) = DMODE_OPEN_AND_REQUEST; // Works OPEN
+        dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
+        dungeon_mode(179) = DMODE_OPEN_AND_REQUEST;
         $PERFORMANCE_PROGRESS_LIST[17] = 1;
     }
     

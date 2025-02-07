@@ -404,6 +404,7 @@ def 0 {
             });
             message_KeyWait();
             me_Play(1);
+/*
             message_Explanation({
                 english="[CN]There\'s now a machine available for you to\n[CN]listen to the game music anytime!\n[CN]The Sky Jukebox is now available![W:100]",
                 french="[CN]Vous pouvez désormais utiliser un appareil\n[CN]pour écouter les musiques du jeu à loisir!\n[CN]Le Juke-box Céleste est disponible![W:100]",
@@ -425,6 +426,24 @@ def 0 {
                 italian="[CN]Per utilizzare il Jukebox Cielo, salva\n[CN]la tua avventura e torna al menu principale.",
                 spanish="[CN]Para usarla, guarda la aventura y\n[CN]vuelve al menú principal.",
             });
+*/
+            if ($PERFORMANCE_PROGRESS_LIST[26]) {
+                message_Explanation({
+                    english="[CN]There\'s now a machine available for you to\n[CN]listen to the game music anytime![K] ...But you\n[CN]already have it! How convenient![W:100]",
+                    french="[CN]Vous pouvez désormais utiliser un appareil\n[CN]pour écouter les musiques du jeu à loisir!\n[CN]Le Juke-box Céleste est disponible![W:100]",
+                    german="[CN]Es gibt nun eine Einrichtung, um die Musik\n[CN]des Spiels jederzeit anhören zu können!\n[CN]Die Himmels-Jukebox wurde freigeschaltet![W:100]",
+                    italian="[CN]... da adesso è possibile! Con il nuovo\n[CN]Jukebox Cielo a disposizione, puoi ascoltare\n[CN]la colonna sonora del gioco quando vuoi![W:100]",
+                    spanish="[CN]¡Ahora puedes escuchar todas las canciones\n[CN]del juego siempre que quieras!\n[CN]¡Ya puedes usar la Gramola celeste![W:100]",
+                });
+            } else {
+                message_Explanation({
+                    english="[CN]There\'s now a machine available for you to\n[CN]listen to the game music anytime![K] ...But you\n[CN]don\'t have it yet! Get bent, or something idk...[W:100]",
+                    french="[CN]Vous pouvez désormais utiliser un appareil\n[CN]pour écouter les musiques du jeu à loisir!\n[CN]Le Juke-box Céleste est disponible![W:100]",
+                    german="[CN]Es gibt nun eine Einrichtung, um die Musik\n[CN]des Spiels jederzeit anhören zu können!\n[CN]Die Himmels-Jukebox wurde freigeschaltet![W:100]",
+                    italian="[CN]... da adesso è possibile! Con il nuovo\n[CN]Jukebox Cielo a disposizione, puoi ascoltare\n[CN]la colonna sonora del gioco quando vuoi![W:100]",
+                    spanish="[CN]¡Ahora puedes escuchar todas las canciones\n[CN]del juego siempre que quieras!\n[CN]¡Ya puedes usar la Gramola celeste![W:100]",
+                });
+            }
             message_Close();
             Wait(30);
             camera_SetDefault();
