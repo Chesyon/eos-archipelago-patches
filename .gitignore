@@ -3,11 +3,10 @@
 /rom.nds.skytemple/debugger
 
 
-out.bin
-out.elf
-out.asm
+out*
 
 *.nds
+*.sav
 *.exps.sm
 *.ssb.sha256
 
