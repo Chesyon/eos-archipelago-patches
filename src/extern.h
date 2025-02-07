@@ -29,3 +29,11 @@ typedef struct ArchipelagoData {
     unsigned int seed[2];
     ArchipelagoSettings settings;
 } ArchipelagoData;
+
+typedef struct CustomSaveArea {
+    uint32_t checksum;
+    undefined fields[0x10FC];
+} CustomSaveArea;
+ASSERT_SIZE(CustomSaveArea, 0x1100);
+
+extern CustomSaveArea CUSTOM_SAVE_AREA;

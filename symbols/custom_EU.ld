@@ -2,6 +2,13 @@
 GenerateKecleonItems1Hook = 0x2010B20;
 GenerateKecleonItems2Hook = 0x2010E30;
 IqScalingGroundHook = 0x20119FC;
+WriteSaveFileCallsite1 = 0x02049470;
+WriteSaveFileCallsite2 = 0x02049498;
+WriteSaveFileCallsite3 = 0x020494B0;
+WriteSaveFileCallsite4 = 0x020494D8;
+LoadSaveFileCallsite1 = 0x020496F4;
+LoadSaveFileCallsite2 = 0x02049714;
+ClearAdventureLogStructCallsite = 0x02048774;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -31,6 +38,7 @@ archipelagoAreaStart = 0x23DE000;
 apSlotName = 0x23DE000;
 apSeed = 0x23DE010;
 apSettings = 0x23DE018;
+CUSTOM_SAVE_AREA = 0x23B0000;
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined
