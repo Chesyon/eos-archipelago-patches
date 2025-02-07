@@ -26,20 +26,39 @@ def 0 {
             screen_FadeIn(1, 30);
             bgm_PlayFadeIn(BGM_JOB_CLEAR, 0, 256);
             switch ( message_Menu(MENU_JOB_REWARD_TEXT) ) { }
-            §rewind_9;
-            if ($SCENARIO_TALK_BIT_FLAG[252]) {
-                Wait(1);
-                message_Mail("Checking Mission Count...[W:60]");
-                message_CloseEnforce();
-                jump @rewind_9;
+            if ($LOTTERY_RESULT != -1) {
+                $EVENT_LOCAL = 0;
+                §rewind_9;
+                if ($SCENARIO_TALK_BIT_FLAG[252]) {
+                    if ($EVENT_LOCAL < 100) {
+                        message_Mail("Checking Mission Count...[W:60]");
+                        message_CloseEnforce();
+                        $EVENT_LOCAL += 1;
+                        jump @rewind_9;
+                    } else {
+                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you will not\n[CN]be given a mission check today\'s missions!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Keep Waiting"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                jump @rewind_9;
+                            case menu("Give Up"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                $LOTTERY_RESULT = -1;
+                                $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                                break;
+                        }
+                    }
+                }
+                if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                    $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                    message_Mail("\n[CN]You got a check for this mission!");
+                } else {
+                    message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                }
+                message_Close();
             }
-            if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                $SCENARIO_TALK_BIT_FLAG[251] = 0;
-                message_Mail("\n[CN]You got a check for this mission!");
-            } else {
-                message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
-            }
-            message_Close();
             §label_10;
             bgm_FadeOut(30);
             screen_FadeOut(1, 30);
@@ -105,19 +124,39 @@ def 0 {
                 SetEffect(EFFECT_NONE, 3);
             }
             Wait(20);
-            §rewind_10;
-            if ($SCENARIO_TALK_BIT_FLAG[252]) {
-                message_Mail("Checking Mission Count...[W:60]");
-                message_CloseEnforce();
-                jump @rewind_10;
+            if ($LOTTERY_RESULT != -1) {
+                $EVENT_LOCAL = 0;
+                §rewind_10;
+                if ($SCENARIO_TALK_BIT_FLAG[252]) {
+                    if ($EVENT_LOCAL < 100) {
+                        $EVENT_LOCAL += 1;
+                        message_Mail("Checking Mission Count...[W:60]");
+                        message_CloseEnforce();
+                        jump @rewind_10;
+                    } else {
+                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you will not\n[CN]be given a mission check today\'s missions!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Keep Waiting"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                jump @rewind_10;
+                            case menu("Give Up"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                $LOTTERY_RESULT = -1;
+                                $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                                break;
+                        }
+                    }
+                }
+                if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                    $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                    message_Mail("\n[CN]You got a check for this mission!");
+                } else {
+                    message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                }
+                message_Close();
             }
-            if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                $SCENARIO_TALK_BIT_FLAG[251] = 0;
-                message_Mail("\n[CN]You got a check for this mission!");
-            } else {
-                message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
-            }
-            message_Close();
             jump @label_10;
         case 12: // Job Special
             $SCENARIO_TALK_BIT_FLAG[253] = 1;
@@ -183,19 +222,39 @@ def 0 {
             message_Close();
             Wait(20);
             switch ( message_Menu(MENU_JOB_REWARD_TEXT) ) { }
-            §rewind_11;
-            if ($SCENARIO_TALK_BIT_FLAG[253]) {
-                message_Mail("Checking Mission Count...[W:60]");
-                message_CloseEnforce();
-                jump @rewind_11;
+            if ($LOTTERY_RESULT != -1) {
+                $EVENT_LOCAL = 0;
+                §rewind_12;
+                if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                    if ($EVENT_LOCAL < 100) {
+                        $EVENT_LOCAL += 1;
+                        message_Mail("Checking Mission Count...[W:60]");
+                        message_CloseEnforce();
+                        jump @rewind_12;
+                    } else {
+                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you will not\n[CN]be given a mission check today\'s missions!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Keep Waiting"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                jump @rewind_12;
+                            case menu("Give Up"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                $LOTTERY_RESULT = -1;
+                                $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                                break;
+                        }
+                    }
+                }
+                if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                    $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                    message_Mail("\n[CN]You got a check for this mission!");
+                } else {
+                    message_Mail("[CN]There are no more checks for regular\n[CN]jobs for this dungeon!");
+                }
+                message_Close();
             }
-            if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                $SCENARIO_TALK_BIT_FLAG[251] = 0;
-                message_Mail("\n[CN]You got a check for this mission!");
-            } else {
-                message_Mail("[CN]There are no more checks for regular\n[CN]jobs for this dungeon!");
-            }
-            message_Close();
             jump @label_10;
         case 11: // Job
             back_SetGround(LEVEL_G01P03A);
@@ -218,6 +277,39 @@ def 0 {
             bgm_PlayFadeIn(BGM_JOB_CLEAR, 0, 256);
             message_SetFace(ACTOR_RANDOM_REQUEST_NPC01, FACE_NORMAL, FACE_POS_STANDARD);
             switch ( message_Menu(MENU_JOB_REWARD_TEXT) ) { }
+            if ($LOTTERY_RESULT != -1) {
+                $EVENT_LOCAL = 0;
+                §rewind_11;
+                if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                    if ($EVENT_LOCAL < 100) {
+                        $EVENT_LOCAL += 1;
+                        message_Mail("Checking Mission Count...[W:60]");
+                        message_CloseEnforce();
+                        jump @rewind_11;
+                    } else {
+                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you will not\n[CN]be given a mission check today\'s missions!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Keep Waiting"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                jump @rewind_11;
+                            case menu("Give Up"):
+                                message_Close();
+                                $EVENT_LOCAL = 0;
+                                $LOTTERY_RESULT = -1;
+                                $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                                break;
+                        }
+                    }
+                }
+                if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                    $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                    message_Mail("\n[CN]You got a check for this mission!");
+                } else {
+                    message_Mail("[CN]There are no more checks for regular\n[CN]jobs for this dungeon!");
+                }
+                message_Close();
+            }
             jump @label_10;
         default: // Job
             $SCENARIO_TALK_BIT_FLAG[253] = 1;
@@ -244,20 +336,40 @@ def 0 {
                     screen_FadeIn(1, 30);
                     bgm_PlayFadeIn(BGM_JOB_CLEAR, 0, 256);
                     switch ( message_Menu(MENU_JOB_REWARD_TEXT) ) { }
-                    §rewind_11;
-                    if ($SCENARIO_TALK_BIT_FLAG[253]) {
-                        Wait(1);
-                        message_Mail("Checking Mission Count...[W:60]");
-                        message_CloseEnforce();
-                        jump @rewind_11;
+                    if ($LOTTERY_RESULT != -1) {
+                        $EVENT_LOCAL = 0;
+                        §rewind_13;
+                        if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                            if ($EVENT_LOCAL < 100) {
+                                $EVENT_LOCAL += 1;
+                                Wait(1);
+                                message_Mail("Checking Mission Count...[W:60]");
+                                message_CloseEnforce();
+                                jump @rewind_13;
+                            } else {
+                                message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you will not\n[CN]be given a mission check today\'s missions!");
+                                switch(message_SwitchMenu(0,1)) {
+                                    case menu("Keep Waiting"):
+                                        message_Close();
+                                        $EVENT_LOCAL = 0;
+                                        jump @rewind_11;
+                                    case menu("Give Up"):
+                                        message_Close();
+                                        $EVENT_LOCAL = 0;
+                                        $LOTTERY_RESULT = -1;
+                                        $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                                        break;
+                                }
+                            }
+                        }
+                        if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                            $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                            message_Mail("\n[CN]You got a check for this mission!");
+                        } else {
+                            message_Mail("[CN]There are no more checks for regular\n[CN]jobs for this dungeon!");
+                        }
+                        message_Close();
                     }
-                    if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                        $SCENARIO_TALK_BIT_FLAG[251] = 0;
-                        message_Mail("\n[CN]You got a check for this mission!");
-                    } else {
-                        message_Mail("[CN]There are no more checks for regular\n[CN]jobs for this dungeon!");
-                    }
-                    message_Close();
                     jump @label_10;
                 case 2:
                     supervision_Acting(2);

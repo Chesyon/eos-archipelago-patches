@@ -12116,29 +12116,51 @@ coro BUBBLE_TEST {
             message_Close();
             $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item
             message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk(" One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]!");
-            message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");
-            §box_halt;
-            se_Play(7450);
-            WaitSe(7450);
-            if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
-                se_Play(7443);
-                WaitSe(7443);
-                jump @box_halt;
-            }
-            message_CloseEnforce();
-            if ($ITEM_BACKUP > 0) {
-                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" I do have another delivery for you!\nHere you are, team [team]!");
+            if ($LOTTERY_RESULT == -1) {
+                message_Talk(" My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)");
                 message_Close();
-                jump @box_iteration; // Next Item given by Cryptic!
             } else {
-                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                message_Mail(" That appears to be everything!\nHave a great day, team [team]!");
-                message_Close();
+                message_Talk(" One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]!");
+                message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");        
+                §box_halt;
+                if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
+                    if ($LOTTERY_RESULT < 65535) {
+                        se_Play(7450);
+                        WaitSe(7450);
+                        se_Play(7443);
+                        WaitSe(7443);
+                        $LOTTERY_RESULT += 1;
+                        jump @box_halt;
+                    } else {
+                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you may lose\n[CN]any unreceived boxes!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Keep Waiting"):
+                                message_Close();
+                                $LOTTERY_RESULT = 0;
+                                jump @box_halt;
+                            case menu("Give Up"):
+                                message_Close();
+                                $LOTTERY_RESULT = -1;
+                                $SCENARIO_TALK_BIT_FLAG[250] = 0;
+                                jump @box_lost;
+                                break;
+                        }
+                    }
+                }
+                message_CloseEnforce();
+                if ($ITEM_BACKUP > 0) {
+                    message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk(" I do have another delivery for you!\nHere you are, team [team]!");
+                    message_Close();
+                    jump @box_iteration; // Next Item given by Cryptic!
+                } else {
+                    message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Mail(" That appears to be everything!\nHave a great day, team [team]!");
+                    message_Close();
+                }
             }
-            
         } else { // Next Item was null, we're out of items!
+            §box_lost;
             message_Talk(" How strange...[K] I can\'t seem to find\nyour package right now![K] This is really weird,\n[CS:C]you should tell[CR] [CS:G]happylappy[CR] [CS:C]if you see this[CR]![K][K][K]");
             message_Close();
         }
