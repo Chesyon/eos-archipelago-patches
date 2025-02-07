@@ -3,19 +3,19 @@
 #include "extern.h"
 
 int SaveMoreData(int* file_offset, void* buf, int size, int new_file_offset, bool force_save_flag) {
-  int save_status = WriteSaveFile(file_offset, buf, size);
+  int save_status = WriteSaveFile((undefined*)file_offset, buf, size);
   if(save_status == 0 || force_save_flag) {
     *file_offset = new_file_offset;
-    save_status = WriteSaveFile(file_offset, &CUSTOM_SAVE_AREA, sizeof(CustomSaveArea));
+    save_status = WriteSaveFile((undefined*)file_offset, (undefined*)&CUSTOM_SAVE_AREA, sizeof(CustomSaveArea));
   }
   return save_status;
 }
 
 int LoadMoreData(int* file_offset, void* buf, int size, int new_file_offset) {
-  int load_status = ReadSaveFile(file_offset, buf, size);
+  int load_status = ReadSaveFile((undefined*)file_offset, buf, size);
   if(load_status == 0) {
     *file_offset = new_file_offset;
-    load_status = ReadSaveFile(file_offset, &CUSTOM_SAVE_AREA, sizeof(CustomSaveArea));
+    load_status = ReadSaveFile((undefined*)file_offset, (undefined*)&CUSTOM_SAVE_AREA, sizeof(CustomSaveArea));
   }
   return load_status;
 }

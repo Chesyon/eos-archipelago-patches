@@ -3,7 +3,7 @@
 /rom.nds.skytemple/debugger
 
 
-out.*
+out*
 
 *.nds
 *.sav
