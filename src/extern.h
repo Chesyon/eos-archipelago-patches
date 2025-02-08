@@ -30,9 +30,18 @@ typedef struct ArchipelagoData {
     ArchipelagoSettings settings;
 } ArchipelagoData;
 
+typedef struct MissionStatus {
+    uint8_t completedJobs : 8;    // 0x0
+    uint8_t totalJobs : 8;        // 0x1
+    uint8_t completedOutlaws : 8; // 0x2
+    uint8_t totalOutlaws : 8;     // 0x3
+} MissionStatus;
+ASSERT_SIZE(MissionStatus, 0x4);
+
 typedef struct CustomSaveArea {
-    uint32_t checksum;
-    undefined fields[0x10FC];
+    uint32_t checksum;               // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192]; // 0x4: Status of missions for each dungeon in the game.
+    undefined fields[0xDFC];         // 0x304: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
