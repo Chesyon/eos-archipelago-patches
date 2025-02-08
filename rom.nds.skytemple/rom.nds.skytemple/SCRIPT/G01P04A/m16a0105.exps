@@ -1,0 +1,387 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_G01P04A);
+    supervision_LoadStation(LEVEL_G01P04A, 'UM16');
+    supervision_Station(1);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    supervision_Acting(2);
+    with (actor ACTOR_NPC_PERAPPU) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_PERAPPU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
+    message_Talk({
+        english=" ...That\'s the current situation!",
+        french=" ... Voilà donc où nous\nen sommes!",
+        german=" ...Das ist unsere Situation!",
+        italian=" E questa è la situazione attuale!",
+        spanish=" Esta es la situación actual.",
+    });
+    message_Talk({
+        english=" Until everything is resolved, we\nask that you go about your regular duties.",
+        french=" Jusqu\'à ce que tout soit résolu,\nveuillez poursuivre vos tâches habituelles.",
+        german=" Bis alles geklärt ist, sollten wir\neinfach unseren gewohnten Pflichten nachgehen.",
+        italian=" Finché la questione non viene\nrisolta, vi preghiamo di tornare alle vostre\nnormali attività.",
+        spanish=" Hasta que todo se resuelva,\ntenemos que pediros que os encarguéis\nde vuestras responsabilidades habituales.",
+    });
+    message_Talk({
+        english=" Yes, we would like you to spread\nthe rumor as much as possible...",
+        french=" Oui, nous aimerions que vous\npropagiez la rumeur autant que possible...",
+        german=" Ja, wir wollen, dass ihr das\nGerücht so weit wie möglich verbreitet.",
+        italian=" Inoltre, per favore, cercate di\nspargere la voce...",
+        spanish=" Por supuesto que nos gustaría\nque os pasarais todo el tiempo posible\nextendiendo el rumor...",
+    });
+    message_Talk({
+        english=" But not so much that it would\nmake [CS:N]Grovyle[CR] suspicious.",
+        french=" ... mais en vous appliquant à ne\npas éveiller les soupçons de [CS:N]Massko[CR].",
+        german=" Aber übertreibt es nicht, damit\n[CS:N]Reptain[CR] keinen Verdacht schöpft.",
+        italian=" Ma tenete a mente che\n[CS:N]Grovyle[CR] non deve insospettirsi.",
+        spanish=" Pero no tanto como para que\n[CS:N]Grovyle[CR] sospeche algo.",
+    });
+    message_Talk({
+        english=" Try to be natural! ♪",
+        french=" Essayez d\'avoir l\'air naturel! ♪",
+        german=" Verhaltet euch natürlich! ♪",
+        italian=" Cercate di essere naturali!",
+        spanish=" ¡Comportaos con naturalidad! ♪",
+    });
+    message_Talk({
+        english=" Go about your jobs in the usual\nmanner.[K] And, when possible, spread the rumor.",
+        french=" Accomplissez vos missions\ncomme vous le faites d\'habitude.[K] Et propagez\nla rumeur quand l\'occasion se présente.",
+        german=" Erledigt euren Job wie immer.[K]\nUnd wenn sich die Gelegenheit ergibt,\nverbreitet das Gerücht.",
+        italian=" Svolgete i vostri compiti come\nal solito.[K] E quando possibile, spargete la voce.",
+        spanish=" Cumplid vuestras misiones\ncomo de costumbre.[K] Y, si tenéis\nocasión, extended el rumor.",
+    });
+    message_Talk({
+        english=" That is what we would like you\nto do for at least the next few days.",
+        french=" Voilà pour le programme\ndes prochains jours.",
+        german=" Das ist für mindestens ein paar\nTage eure Aufgabe.",
+        italian=" Questo sarà il vostro compito\nnei prossimi giorni.",
+        spanish=" Eso es lo que nos gustaría\nque hicierais durante los próximos días.",
+    });
+    message_Talk({
+        english=" That is all!",
+        french=" C\'est tout!",
+        german=" Das ist alles!",
+        italian=" È tutto!",
+        spanish=" ¡Eso es todo!",
+    });
+    message_Talk({
+        english=" All right, everyone! Let\'s have\nanother good day of work! ♪",
+        french=" Très bien, tout le monde! C\'est\nparti pour une bonne journée de travail! ♪",
+        german=" In Ordnung, Pokémon! Auf einen\nweiteren erfolgreichen Arbeitstag! ♪",
+        italian=" Facciamo del nostro meglio!",
+        spanish=" ¡Muy bien! ¡A trabajar un día\nmás! ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_JOYOUS, 3);
+    }
+    with (actor ACTOR_NPC_GUREGGURU) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_NPC_GUREGGURU) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        SetAnimation(24);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        SetAnimation(25);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(66);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetDirection(DIR_UP);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(66);
+    }
+    message_EmptyActor();
+    message_Talk({
+        english="[CS:N]Everyone[CR]: HOORAY!",
+        french="[CS:N]Tous[CR]: HOURRA!",
+        german="[CS:N]Alle[CR]: HURRA!",
+        italian="[CS:N]Tutti[CR]: SÌÌÌÌÌÌÌ!",
+        spanish="[CS:N]Todos[CR]: ¡HURRA!",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_GUREGGURU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (performer 0) {
+        MovePositionLives(1, 0);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetDirection(DIR_DOWN);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        SetAnimation(25);
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_NPC_DAGUTORIO) {
+        Destroy();
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        SetDirection(DIR_DOWN);
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        SetAnimation(24);
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_NPC_DIGUDA) {
+        Destroy();
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(8, 10, DIR_LEFT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(8, 10, DIR_LEFT);
+    }
+    with (actor ACTOR_NPC_PUKURIN) {
+        MovePositionMark(1, Position<'m0', 52.5, 22.5>);
+    }
+    with (actor ACTOR_NPC_GUREGGURU) {
+        MovePositionMark(33075, Position<'m1', 28, 31.5>);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        MovePositionMark(33075, Position<'m2', 40.5, 23.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_HEIGANI) {
+        MovePositionMark(33075, Position<'m3', 40.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        MovePositionMark(33075, Position<'m4', 30, 34>);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        Move2PositionMark(33075, Position<'m5', 40.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        Move2PositionOffset(33075, -32, 0);
+    }
+    with (actor ACTOR_NPC_PUKURIN) {
+        Destroy();
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        Move2PositionMark(33075, Position<'m6', 40.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        MovePositionMark(33075, Position<'m7', 40.5, 16.5>);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        MovePositionMark(33075, Position<'m8', 40.5, 16.5>);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        MovePositionMark(33075, Position<'m9', 40.5, 16.5>);
+    }
+    supervision_RemoveActing(1);
+    Wait(30);
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_NPC_PERAPPU);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_FacePositionOffset(0, -1);
+    message_Talk({
+        english=" Oh, you two!",
+        french=" Oh, vous autres!",
+        german=" Oh, ihr zwei!",
+        italian=" Oh, voi due!",
+        spanish=" ¡Ah, aquí estáis!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_PERAPPU);
+    }
+    message_Talk({
+        english=" Today, take jobs on the Job\nBulletin Board and the Outlaw Notice Board.",
+        french=" Aujourd\'hui, occupez-vous\ndes missions du Tableau des Missions et\ndes Avis de Recherche.",
+        german=" Erledigt heute die Jobs an\nden Job- und Ganoven-Infobrettern.",
+        italian=" Oggi dovreste tornare a dare\nun\'occhiata alla Bacheca delle missioni e a\nquella dei ricercati.",
+        spanish=" Hoy tenéis que aceptar misiones\ndel Tablón de Anuncios y el Tablón \"Se Busca\".",
+    });
+    message_Talk({
+        english=" That will do! ♪",
+        french=" Ce sera tout! ♪",
+        german=" Das dürfte reichen! ♪",
+        italian=" Buona fortuna!",
+        spanish=" ¡Con eso será suficiente! ♪",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_PERAPPU);
+    Wait(30);
+    bgm_FadeOut(60);
+    screen_FadeOut(1, 30);
+    supervision_RemoveActing(0);
+    supervision_RemoveActing(2);
+    Wait(60);
+    me_Play(7);
+    message_Explanation({
+        english="[CN]The Exploration Team Federation\n[CN]has sent a message...[W:30]",
+        french="[CN]La Fédération des Equipes d\'Exploration\n[CN]a envoyé un message...[W:30]",
+        german="[CN]Der Erkundungsteamverband\n[CN]hat eine Nachricht geschickt...[W:30]",
+        italian="[CN]Arriva un messaggio della Federazione\n[CN]Squadre d\'Esplorazione![W:30]",
+        spanish="[CN]La Federación de Exploradores\n[CN]ha enviado un mensaje...[W:30]",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    back_SetGround(LEVEL_G01P09A);
+    supervision_Acting(10);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetAnimation(24);
+    }
+    with (actor ACTOR_NPC_KIMAWARI) {
+        SetAnimation(256);
+    }
+    screen_FadeIn(1, 15);
+    Wait(30);
+    me_Play(5);
+    message_Mail({
+        english="[CN]The Special Episode\n[CN]\"Today\'s \'Oh My Gosh\'\"\n[CN]is no longer here![W:90]",
+        french="[CN]L\'Episode Spécial\n[CN]\"Ben mince alors!\"\n[CN]est maintenant disponible![W:90]",
+        german="[CN]Die Bonusepisode\n[CN][F:S2]Das [F:S2]Auweia[F:E2] des Tages[F:E2]\n[CN]wurde freigeschaltet![W:90]",
+        italian="[CN]L\'episodio speciale\n[CN]\"Una giornata da shock\"\n[CN]è ora disponibile![W:90]",
+        spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"¡O sea, pero qué fuerte!\".[W:90]",
+    });
+    message_Mail({
+        english="[CN]The check can be found by\n[CN]simply reading [CS:G]Sunflora[CR]\'s diary\n[CN]in her room in the guild.",
+        french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+        german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+        italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+        spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+    });
+    message_Mail({
+        english="[CN]There are no pre-requisites,\n[CN]for this check, so be sure to grab it!",
+        french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
+        german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
+        italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
+        spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
+    });
+    message_Close();
+    screen_FadeOut(1, 30);
+    Wait(30);
+    back_SetGround(LEVEL_G01P04A);
+    supervision_LoadStation(LEVEL_G01P04A, 'UM16');
+    supervision_Station(1);
+    supervision_Acting(0);
+    supervision_Acting(2);
+    with (actor ACTOR_NPC_PERAPPU) {
+        SetDirection(DIR_DOWN);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetDirection(DIR_UPLEFT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetDirection(DIR_UPLEFT);
+    }
+    camera_SetDefault();
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    end;
+}

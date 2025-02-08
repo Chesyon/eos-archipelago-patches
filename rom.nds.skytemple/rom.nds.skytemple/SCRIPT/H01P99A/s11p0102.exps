@@ -1,0 +1,359 @@
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    back_SetGround(LEVEL_H01P99A);
+    switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 18, 0) ) {
+        case 1:
+            §label_0;
+            supervision_Acting(0);
+            with (performer 0) {
+                camera_SetMyself();
+            }
+            bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
+            screen_FadeIn(1, 30);
+            Wait(30);
+            supervision_Acting(1);
+            Wait(10);
+            with (actor ACTOR_NPC_MANAFI) {
+                Turn2Direction(4, 10, DIR_UPLEFT);
+            }
+            WaitExecuteLives(ACTOR_NPC_MANAFI);
+            se_Play(8978);
+            with (actor ACTOR_NPC_MANAFI) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_PLAYER) {
+                MovePositionOffset(1, 24, 0);
+            }
+            Wait(15);
+            supervision_Acting(2);
+            Wait(10);
+            with (actor ACTOR_ATTENDANT1) {
+                MovePositionOffset(1, 24, 0);
+            }
+            with (actor ACTOR_PLAYER) {
+                MovePositionMark(1, Position<'m0', 39.5, 25.5>);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                MovePositionMark(1, Position<'m1', 39.5, 22.5>);
+            }
+            Wait(15);
+            with (actor ACTOR_NPC_MANAFI) {
+                Turn2Direction(4, 10, DIR_LEFT);
+            }
+            with (actor ACTOR_PLAYER) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: Hi, [hero] and\n[partner]!",
+                french="[c_name:NPC_MANAFI]: Bonjour, [hero] et\n[partner]!",
+                german="[c_name:NPC_MANAFI]: Hallo, [hero] und\n[partner]!",
+                italian="[c_name:NPC_MANAFI]: Ciao, [hero] e\n[partner]!",
+                spanish="[c_name:NPC_MANAFI]: ¡Hola, [hero] y\n[partner]!",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: Good morning!",
+                french="[c_name:NPC_MANAFI]: Belle journée!",
+                german="[c_name:NPC_MANAFI]: Guten Morgen!",
+                italian="[c_name:NPC_MANAFI]: Buongiorno!",
+                spanish="[c_name:NPC_MANAFI]: ¡Buenos días!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(8964);
+            with (actor ACTOR_ATTENDANT1) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" Hey, it\'s [c_name:NPC_MANAFI]!\nGood morning to you!",
+                        french=" Hé, c\'est [c_name:NPC_MANAFI]! Bonjour!",
+                        german=" Hey, es ist [c_name:NPC_MANAFI]!\nGuten Morgen!",
+                        italian=" Ehi, è [c_name:NPC_MANAFI]! Buongiorno\na te!",
+                        spanish=" ¡Hombre, pero si es\n[c_name:NPC_MANAFI]! ¡Buenos días!",
+                    }
+                case 2:
+                    {
+                        english=" Hey, it\'s [c_name:NPC_MANAFI]!\nGood morning!",
+                        french=" Hé, c\'est [c_name:NPC_MANAFI]! Bonjour!",
+                        german=" Hey, es ist [c_name:NPC_MANAFI]!\nGuten Morgen!",
+                        italian=" Ehi, è [c_name:NPC_MANAFI]! Buongiorno\na te!",
+                        spanish=" ¡Hombre, pero si es\n[c_name:NPC_MANAFI]! ¡Buenos días!",
+                    }
+                default:
+                    {
+                        english=" Hey, it\'s [c_name:NPC_MANAFI]!\nGood morning!",
+                        french=" Hé, c\'est [c_name:NPC_MANAFI]! Bonjour!",
+                        german=" Hey, es ist [c_name:NPC_MANAFI]!\nGuten Morgen!",
+                        italian=" Ehi, è [c_name:NPC_MANAFI]! Buongiorno\na te!",
+                        spanish=" ¡Hombre, pero si es\n[c_name:NPC_MANAFI]! ¡Buenos días!",
+                    }
+            }
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" What brings you back here so\nearly in the morning?",
+                        french=" Qu\'est-ce que tu fais là de si\nbon matin?",
+                        german=" Was bringt dich denn so früh\nam Morgen zu uns?",
+                        italian=" Cosa ci fai qui a quest\'ora\ndella mattina?",
+                        spanish=" ¿Qué te trae por aquí tan\ntemprano?",
+                    }
+                case 2:
+                    {
+                        english=" What brings you back here so\nearly in the morning!",
+                        french=" Qu\'est-ce que tu fais là de si\nbon matin?",
+                        german=" Was bringt dich denn so früh\nam Morgen zu uns?",
+                        italian=" Cosa ci fai qui a quest\'ora\ndella mattina?",
+                        spanish=" ¿Qué te trae por aquí tan\ntemprano?",
+                    }
+                default:
+                    {
+                        english=" What brings you back here so\nearly in the morning!",
+                        french=" Qu\'est-ce que tu fais là de si\nbon matin?",
+                        german=" Was bringt dich denn so früh\nam Morgen zu uns?",
+                        italian=" Cosa ci fai qui a quest\'ora\ndella mattina?",
+                        spanish=" ¿Qué te trae por aquí tan\ntemprano?",
+                    }
+            }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(8975);
+            with (actor ACTOR_NPC_MANAFI) {
+                ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+            }
+            WaitExecuteLives(ACTOR_NPC_MANAFI);
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: Well, um, I was on my daily\nmorning travels...",
+                french="[c_name:NPC_MANAFI]: Eh bien, en faisant mon\nexploration matinale, comme tous les jours...",
+                german="[c_name:NPC_MANAFI]: Nun ja, ähem, ich bin gerade auf\nmeinem täglichen Morgenausflug unterwegs...",
+                italian="[c_name:NPC_MANAFI]: Beh, ehm, stavo facendo il mio\nsolito viaggio mattutino...",
+                spanish="[c_name:NPC_MANAFI]: Bueno, estaba dando mi paseo\nmatutino...",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: And I found a really great place!",
+                french="[c_name:NPC_MANAFI]: ... j\'ai trouvé un endroit\ndu tonnerre!",
+                german="[c_name:NPC_MANAFI]: Und ich habe einen echt tollen\nOrt gefunden!",
+                italian="[c_name:NPC_MANAFI]: E ho trovato un posto\ndavvero fantastico!",
+                spanish="[c_name:NPC_MANAFI]: ¡Y he descubierto un sitio genial!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" A really great place?",
+                        french=" Vraiment?",
+                        german=" Einen echt tollen Ort?",
+                        italian=" Un posto davvero fantastico?",
+                        spanish=" ¿Un sitio genial?",
+                    }
+                case 2:
+                    {
+                        english=" A really great place?",
+                        french=" Vraiment?",
+                        german=" Einen echt tollen Ort?",
+                        italian=" Un posto davvero fantastico?",
+                        spanish=" ¿Un sitio genial?",
+                    }
+                default:
+                    {
+                        english=" A really great place?",
+                        french=" Vraiment?",
+                        german=" Einen echt tollen Ort?",
+                        italian=" Un posto davvero fantastico?",
+                        spanish=" ¿Un sitio genial?",
+                    }
+            }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_NPC_MANAFI) {
+                ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+            }
+            WaitExecuteLives(ACTOR_NPC_MANAFI);
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: Yep, yep! It has crystal clear\nwater and a white-sand beach...",
+                french="[c_name:NPC_MANAFI]: Oui, oui! Avec de l\'eau limpide\net des plages de sable blanc...",
+                german="[c_name:NPC_MANAFI]: Jep, jep! Dort gibt es\nkristallklares Wasser und einen weißen \nSandstrand...",
+                italian="[c_name:NPC_MANAFI]: Proprio così! L\'acqua è \ncristallina e la spiaggia è fatta di \nsabbia bianca...",
+                spanish="[c_name:NPC_MANAFI]: ¡Sí! Tiene agua cristalina y una\nplaya de arena blanca...",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: And it\'s got plenty of totally\nyummi Gummis!",
+                french="[c_name:NPC_MANAFI]: ... et des tas de délicieuses\ngelées!",
+                german="[c_name:NPC_MANAFI]: Und auch noch viele leckere\nGummibonbons!",
+                italian="[c_name:NPC_MANAFI]: Ed è pieno di Caramelle\nGommose assolutamente deliziose!",
+                spanish="[c_name:NPC_MANAFI]: ¡Y hay gomis por todas partes!",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: And the place is named the\n[CS:P]Marine Resort[CR]! It\'s a Pokémon paradise!",
+                french="[c_name:NPC_MANAFI]: Ça s\'appelle la [CS:P]Station Marine[CR]!\nC\'est un paradis pour les Pokémon!",
+                german="[c_name:NPC_MANAFI]: Der Ort heißt [CS:P]Meereszuflucht[CR]!\nEs ist ein Paradies für Pokémon!",
+                italian="[c_name:NPC_MANAFI]: Si chiama\n[CS:P]Riserva Marina[CR]! È un paradiso per Pokémon!",
+                spanish="[c_name:NPC_MANAFI]: ¡El lugar en cuestión se llama\n[CS:P]Refugio Marino[CR]! ¡Es un paraíso!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(8967);
+            with (actor ACTOR_PLAYER) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" The [CS:P]Marine Resort[CR]![K]\nA Pokémon paradise?!",
+                        french=" La [CS:P]Station Marine[CR]![K] Un\nparadis pour les Pokémon?!",
+                        german=" Die [CS:P]Meereszuflucht[CR]![K] Ein Paradies\nfür Pokémon?!?",
+                        italian=" La [CS:P]Riserva Marina[CR]![K] Un paradiso\nper Pokémon?!",
+                        spanish=" ¡El [CS:P]Refugio Marino[CR]![K]\n¿Un paraíso?",
+                    }
+                case 2:
+                    {
+                        english=" The [CS:P]Marine Resort[CR]![K]\nA Pokémon paradise?!",
+                        french=" La [CS:P]Station Marine[CR]![K] Un\nparadis pour les Pokémon?!",
+                        german=" Die [CS:P]Meereszuflucht[CR]![K] Ein Paradies\nfür Pokémon?!?",
+                        italian=" La [CS:P]Riserva Marina[CR]![K] Un paradiso\nper Pokémon?!",
+                        spanish=" ¡El [CS:P]Refugio Marino[CR]![K]\n¿Un paraíso?",
+                    }
+                default:
+                    {
+                        english=" The [CS:P]Marine Resort[CR]![K]\nA Pokémon paradise?!",
+                        french=" La [CS:P]Station Marine[CR]![K] Un\nparadis pour les Pokémon?!",
+                        german=" Die [CS:P]Meereszuflucht[CR]![K] Ein Paradies\nfür Pokémon?!?",
+                        italian=" La [CS:P]Riserva Marina[CR]![K] Un paradiso\nper Pokémon?!",
+                        spanish=" ¡El [CS:P]Refugio Marino[CR]![K]\n¿Un paraíso?",
+                    }
+            }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: I couldn\'t wait to come tell you\nand [hero] right away. ",
+                french="[c_name:NPC_MANAFI]: Je voulais absolument vous\nen parler tout de suite.",
+                german="[c_name:NPC_MANAFI]: Ich konnte es nicht erwarten,\ndir und [hero] sofort davon\nzu berichten.",
+                italian="[c_name:NPC_MANAFI]: Non ho resistito, quindi sono\ncorso a dirlo a te e a [hero]. ",
+                spanish="[c_name:NPC_MANAFI]: Me moría de ganas de venir\na contároslo a ti y a [hero]. ",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: So I cut my daily trip short\nand came straight here to tell you!",
+                french="[c_name:NPC_MANAFI]: Alors j\'ai écourté mon voyage\net je suis venu directement!",
+                german="[c_name:NPC_MANAFI]: Also habe ich meinen täglichen \nAusflug etwas verkürzt und bin sofort zu euch\ngekommen, um es euch mitzuteilen!",
+                italian="[c_name:NPC_MANAFI]: Così ho accorciato il mio viaggio\nquotidiano e sono venuto a dirvelo!",
+                spanish="[c_name:NPC_MANAFI]: ¡Así que he acortado mi paseo\ndiario para venir a contároslo!",
+            });
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: I\'ll show you where it is.\nCan you open your map for me?",
+                french="[c_name:NPC_MANAFI]: Je vais vous montrer où c\'est.\nVous pouvez déplier votre carte?",
+                german="[c_name:NPC_MANAFI]: Ich zeige euch, wo es ist.\nKönnt ihr eure Karte für mich aufschlagen?",
+                italian="[c_name:NPC_MANAFI]: Vi mostro dove si trova.\nPotete aprire la Mappa un attimo?",
+                spanish="[c_name:NPC_MANAFI]: Os enseñaré dónde es.\n¿Podéis abrir vuestro mapa?",
+            });
+            message_Close();
+            se_Play(6667);
+            screen_FadeOut(1, 30);
+            worldmap_SetMode(4);
+            back2_SetMode(3);
+            WaitSubScreen();
+            worldmap_SetCamera(73);
+            worldmap_SetArrow(73);
+            worldmap_BlinkMark(73);
+            Wait(30);
+            me_Play(6);
+            message_Mail({
+                english="[CN]Your ability to go to\n[CN]the [CS:P]Marine Resort[CR] has not changed![K]\n[CN]...but you did get a check!",
+                french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Station Marine[CR]!",
+                german="[CN]Du kannst jetzt zur\n[CN][CS:P]Meereszuflucht[CR] gehen!",
+                italian="[CN]Adesso potete andare \n[CN]alla [CS:P]Riserva Marina[CR]!",
+                spanish="[CN]¡Ahora puedes ir\n[CN]al [CS:P]Refugio Marino[CR]!",
+            });
+            WaitMe(6);
+            ~AssignCheck(24);
+            message_Close();
+            screen2_FadeOut(0, 30);
+            screen_FadeIn(1, 30);
+            Wait(30);
+            back2_SetMode(0);
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: Let\'s go play there\ntogether sometime!",
+                french="[c_name:NPC_MANAFI]: Allons nous y amuser ensemble\nde temps en temps!",
+                german="[c_name:NPC_MANAFI]: Lasst uns dort mal zusammen\nspielen!",
+                italian="[c_name:NPC_MANAFI]: Possiamo andarci a giocare\ninsieme qualche volta!",
+                spanish="[c_name:NPC_MANAFI]: ¡Vayamos juntos algún día\na disfrutar de la vista!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_ATTENDANT1) {
+                ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+            }
+            message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" Yup, yup!",
+                        french=" Oh oui!",
+                        german=" Ja, ja!",
+                        italian=" Certo!",
+                        spanish=" ¡Sí!",
+                    }
+                case 2:
+                    {
+                        english=" Of course!",
+                        french=" Oh oui!",
+                        german=" Natürlich!",
+                        italian=" Certo!",
+                        spanish=" ¡Claro!",
+                    }
+                default:
+                    {
+                        english=" Yep, yep!",
+                        french=" Oh oui!",
+                        german=" Ja, ja!",
+                        italian=" Certo!",
+                        spanish=" ¡Sí!",
+                    }
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFaceEmpty(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english="[c_name:NPC_MANAFI]: OK, bye!",
+                french="[c_name:NPC_MANAFI]: D\'accord, à plus tard!",
+                german="[c_name:NPC_MANAFI]: Okay, tschüss!",
+                italian="[c_name:NPC_MANAFI]: Ok, ciao!",
+                spanish="[c_name:NPC_MANAFI]: ¡Vale, adiós!",
+            });
+            message_Close();
+            with (actor ACTOR_NPC_MANAFI) {
+                MovePositionOffset(33075, 160, 0);
+            }
+            WaitExecuteLives(ACTOR_NPC_MANAFI);
+            with (actor ACTOR_NPC_MANAFI) {
+                Destroy();
+            }
+            bgm_FadeOut(120);
+            screen_FadeOut(1, 30);
+            Wait(90);
+            bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
+            screen_FadeIn(1, 30);
+            Wait(30);
+            end;
+        default:
+            supervision_LoadStation(LEVEL_H01P99A, 'US23');
+            supervision_Station(2);
+            jump @label_0;
+    }
+}

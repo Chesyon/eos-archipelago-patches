@@ -1,0 +1,12 @@
+
+def 0 {
+    if ($PERFORMANCE_PROGRESS_LIST[24]) {
+        Wait(0);
+    } elseif ($SCENARIO_SUB2 &<< 4) {
+        Wait(0);
+    } elseif($PERFORMANCE_PROGRESS_LIST[23]) {
+        supervision_ExecuteCommon(CORO_EVENT_S03_05);
+    }
+    supervision_Suspend(-2);
+    end;
+}

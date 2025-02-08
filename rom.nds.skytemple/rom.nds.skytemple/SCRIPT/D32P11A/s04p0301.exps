@@ -1,0 +1,201 @@
+
+def 0 {
+    sound_Stop();
+    screen_WhiteIn(29, 58);
+    back_SetGround(LEVEL_D32P11A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m0', 28.5, 38.5>);
+    }
+    Wait(15);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m1', 31.5, 40.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m2', 25.5, 40.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m3', 28.5, 41.5>);
+    }
+    Wait(15);
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    se_Play(8978);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh, Team [team:].[K]\nYou\'ve ended up back here like us.",
+        french=" Oh, Equipe [team:].[K]\nVous en êtes au même point que nous.",
+        german=" Oh, Team [team:].[K]\nIhr seid auch hier hinten gelandet, wie wir.",
+        italian=" Oh, Team [team:].[K] \nAnche voi qui!",
+        spanish=" Vaya, [CS:X]Equipo[CR] [team:].[K]\nHabéis acabado aquí, igual que nosotras.",
+    });
+    message_Talk({
+        english=" You have to solve a mystery to\nmove ahead, it seems. This is vexing.",
+        french=" Apparemment, il faut résoudre\nune énigme pour avancer. Que c\'est\ncontrariant.",
+        german=" Man muss ein Rätsel lösen, um\nweiterzukommen, wie es scheint. Das ist\närgerlich.",
+        italian=" Sembra che per proseguire sia\nnecessario risolvere un mistero. È irritante.",
+        spanish=" Hay que resolver un misterio\npara poder avanzar. Qué fastidio.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SAANAITO) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" I would assume this stone\nmarker holds the key.",
+        french=" Je suppose que cette stèle\nest la clé.",
+        german=" Ich nehme mal an, dieser\nSteinwegweiser enthält den Schlüssel\nzur Lösung.",
+        italian=" Questa Stele deve essere\nla chiave.",
+        spanish=" Pienso que en esta losa\nestá la clave.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 2, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    Wait(15);
+    message_Talk({
+        english=" The surface of the stone marker\nis scored by deep grooves shaped like [CS:K]Unown[CR].",
+        french=" La surface de la stèle est\ncreusée de profonds sillons en forme\nde [CS:K]Zarbi[CR].",
+        german=" In die Oberfläche dieses\nSteinwegweisers sind tiefe Rillen eingeritzt, \ndie die Form eines [CS:K]Icognito[CR] haben.",
+        italian=" La superficie della Stele è \npiena di profondi solchi a forma di [CS:K]Unown[CR].",
+        spanish=" La superficie está llena de\ninscripciones con forma de [CS:K]Unown[CR].",
+    });
+    message_Talk({
+        english=" The cave is filled by hordes of\n[CS:K]Unown[CR]...",
+        french=" La grotte grouille de hordes de\n[CS:K]Zarbi[CR]...",
+        german=" Die Höhle ist voll mit Horden\nvon [CS:K]Icognito[CR]...",
+        italian=" La caverna è strapiena \ndi [CS:K]Unown[CR]...",
+        spanish=" Y esta cueva está plagada\nde [CS:K]Unown[CR]...",
+    });
+    message_Talk({
+        english=" There most certainly is a\nconnection between those facts.",
+        french=" Il y a très certainement un\nrapport entre ces deux éléments.",
+        german=" Ich bin mir fast sicher, dass es\neinen Zusammenhang zwischen diesen Tatsachen\ngibt.",
+        italian=" Ci deve sicuramente essere un \nlegame tra le due cose.",
+        spanish=" Seguro que hay algún tipo\nde conexión entre ambas cosas.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" \"If you seek passage, close your\neyes, then submit your proof.\" Well, that\'s not\nmuch to go on.",
+        french=" \"Si vous cherchez un passage,\nfermez les yeux et présentez vos preuves.\"\nC\'est un peu mince.",
+        german=" [F:S2]Ersuchst du Durchlass,\nschließe deine Augen und reiche deine\nBerechtigung ein.[F:E2] Hilft uns nicht sehr weiter.",
+        italian=" \"Se desiderate passare, chiudete\ngli occhi e mostrate la prova.\" Beh, non è un\ngranché come indizio.",
+        spanish=" \"Si buscas un pasadizo, cierra\nlos ojos y sométete a la prueba.\" Bueno,\nmuchas pistas no da, la verdad.",
+    });
+    message_Talk({
+        english=" Well, I closed my eyes, but that\ndid nothing. We must be overlooking something.",
+        french=" J\'ai fermé les yeux, mais il ne\ns\'est rien passé. Nous devons sûrement oublier\nun détail.",
+        german=" Nun, ich habe meine Augen\ngeschlossen, aber es ist nichts passiert. Wir\nmüssen etwas übersehen haben.",
+        italian=" Beh, io ho chiuso gli occhi, ma\nnon è successo niente. Ci dev\'essere qualcosa\nche ci sfugge.",
+        spanish=" He cerrado los ojos pero no\nha servido de nada. Debemos haber pasado\npor alto algún detalle.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    message_Talk({
+        english=" We\'ll go into the cave and\nsearch again.",
+        french=" Nous retournons dans la grotte\npour poursuivre les recherches.",
+        german=" Wir gehen noch mal in die Höhle\nund suchen weiter.",
+        italian=" Torniamo nella caverna\ne cerchiamo di nuovo.",
+        spanish=" Entremos en la cueva y sigamos\nbuscando.",
+    });
+    message_Talk({
+        english=" See you again.",
+        french=" Au plaisir.",
+        german=" Man sieht sich.",
+        italian=" Ci vediamo.",
+        spanish=" Hasta luego.",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m4', 23.5, 28.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m5', 33.5, 28.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m6', 33.5, 28.5>);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m7', 28.5, 22.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m8', 28.5, 22.5>);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m9', 28.5, 22.5>);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m10', 28.5, 15.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m11', 28.5, 15.5>);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m12', 28.5, 15.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    supervision_RemoveActing(1);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m13', 33.5, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m14', 23, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m15', 26, 40.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC1);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC2);
+    end;
+}

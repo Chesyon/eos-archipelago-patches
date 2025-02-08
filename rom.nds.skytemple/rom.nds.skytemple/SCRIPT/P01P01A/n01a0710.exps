@@ -1,0 +1,311 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_P01P01A);
+    supervision_Acting(0);
+    camera_SetMyself<performer 0>();
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_YUKIKABURI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english="""
+             We should make sure we
+            prepare before going out exploring...
+        """,
+        french="""
+             On devrait s'assurer d'avoir
+            tout ce qu'il nous faut avant de partir
+            à l'aventure...
+        """,
+        german="""
+             Wir sollten uns gut vorbereiten,
+            bevor wir auf Erkundung gehen.
+        """,
+        italian="""
+             Dobbiamo prepararci bene prima
+            di partire per la nostra esplorazione...
+        """,
+        spanish="""
+             Deberíamos asegurarnos de que
+            estamos listos antes de irnos a explorar...
+        """,
+    });
+    message_Talk({
+        english="""
+             But I don't really want to do
+            anything that would draw attention to me...
+        """,
+        french="""
+             Mais je n'ai pas vraiment envie
+            de me faire remarquer...
+        """,
+        german="""
+             Aber ich möchte lieber nichts
+            tun, was Aufmerksamkeit auf mich zieht.
+        """,
+        italian="""
+             Ma non voglio fare niente che
+            possa attirare l'attenzione su di me...
+        """,
+        spanish="""
+             Pero no quiero hacer nada que
+            llame la atención...
+        """,
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8963);
+    ExecuteCommon<actor ACTOR_NPC_YUKIKABURI>(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    WaitExecuteLives(ACTOR_NPC_YUKIKABURI);
+    message_SetFace(ACTOR_NPC_YUKIKABURI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english="""
+             [CS:N]Bagon[CR] and [CS:N]Gligar[CR] are still looking
+            for that map...
+        """,
+        french="""
+             [CS:N]Draby[CR] et [CS:N]Scorplane[CR] sont encore
+            à la recherche de cette carte...
+        """,
+        german="""
+             [CS:N]Kindwurm[CR] und [CS:N]Skorgla[CR]
+            sind immer noch hinter der Karte her...
+        """,
+        italian="""
+             [CS:N]Bagon[CR] e [CS:N]Gligar[CR] sono ancora
+            alla ricerca della mappa...
+        """,
+        spanish="""
+             [CS:N]Bagon[CR] y [CS:N]Gligar[CR] siguen buscando
+            ese mapa...
+        """,
+    });
+    message_Talk({
+        english="""
+             They might be hanging around
+            here. It's kind of scaring me...[K] (Yikes...)
+        """,
+        french="""
+             Ils traînent peut-être encore
+            dans le coin, je ne suis pas rassuré...[K]
+            (Mince...)
+        """,
+        german="""
+             Und sie könnten hier noch immer
+            auf mich lauern...[K] Bibber...
+        """,
+        italian="""
+             Potrebbero aggirarsi da queste
+            parti e al solo pensiero... mi viene una fifa![K]
+            (Aaah...)
+        """,
+        spanish="""
+             Puede que sigan merodeando
+            por aquí, tiemblo solo de pensarlo...[K] (Horror...)
+        """,
+    });
+    SetAnimation<actor ACTOR_NPC_YUKIKABURI>(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, -1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, 1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, -1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, 1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, -1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, 1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, -1, 0);
+    Wait(3);
+    SlidePositionOffset<actor ACTOR_NPC_YUKIKABURI>(1, 1, 0);
+    Wait(1);
+    SetAnimation<actor ACTOR_NPC_YUKIKABURI>(2);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" I've got it!",
+        french=" Pas d'problème!",
+        german=" Ich hab's!",
+        italian=" Ci sono!",
+        spanish=" ¡Ya sé!",
+    });
+    message_Talk({
+        english="""
+             You just leave the exploration
+            preparations to me. I can do it...
+        """,
+        french="""
+             J'm'occupe des préparatifs pour
+            l'exploration, t'en fais pas...
+        """,
+        german="""
+             Überlass mir einfach die
+            Vorbereitungen. Das kann ich gut...
+        """,
+        italian="""
+             Lascia a me i preparativi,
+            ci penso io...
+        """,
+        spanish="""
+             Déjame a mí los preparativos
+            de la exploración, puedo hacerlo yo...
+        """,
+    });
+    message_Talk({
+        english="""
+             And you should hide somewhere,
+            [CS:N]Snover[CR]. Stay out of sight.
+        """,
+        french="""
+             Et toi tu d'vrais t'cacher
+            en attendant, [CS:N]Blizzi[CR]. Te montre pas.
+        """,
+        german="""
+             Und du versteckst dich besser,
+            [CS:N]Shnebedeck[CR]. Lass dich nicht blicken.
+        """,
+        italian="""
+             Tu pensa a nasconderti da
+            qualche parte, [CS:N]Snover[CR]. Non dare
+            nell'occhio.
+        """,
+        spanish="""
+             Y tú deberías esconderte, [CS:N]Snover[CR].
+            Que no te vea nadie.
+        """,
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_YUKIKABURI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english="""
+             I'm sorry.[K] I'll find a hiding place
+            right around here.
+        """,
+        french="""
+             Désolé.[K] Je vais chercher
+            une cachette dans le coin.
+        """,
+        german="""
+             Danke dir.[K] Ich werde mir in
+            der Nähe ein Versteck suchen.
+        """,
+        italian="""
+             Mi dispiace.[K] Troverò un posto
+            dove nascondermi qui intorno.
+        """,
+        spanish="""
+             Siento no ser de ayuda,[K] pero
+            tienes razón, voy a buscar un escondite.
+        """,
+    });
+    message_Talk({
+        english="""
+             When you're ready to head to the
+            dungeon, [CS:Y]Bidoof[CR]...[K] I'll slip away and join you.
+        """,
+        french="""
+             Dès que tu seras prêt à partir
+            pour le donjon, [CS:Y]Keunotor[CR]...[K]
+            je sortirai de ma cachette et je te rejoindrai.
+        """,
+        german="""
+             Sobald du bereit für den
+            Dungeon bist, [CS:Y]Bidiza[CR],[K] komme ich heraus, um
+            dich zu begleiten.
+        """,
+        italian="""
+             E non appena sei pronto a partire
+            per il dungeon, [CS:Y]Bidoof[CR]...[K] io scivolerò fuori
+            dal mio nascondiglio e ti raggiungerò.
+        """,
+        spanish="""
+             Cuando estés listo para ir al
+            territorio, [CS:Y]Bidoof[CR]...[K] Saldré y me uniré a ti.
+        """,
+    });
+    message_Talk({
+        english="""
+             So once you've finished
+            preparing, please head for the dungeon.
+        """,
+        french="""
+             Alors, une fois tes préparatifs
+            terminés, dirige-toi vers le donjon,
+            s'il te plaît.
+        """,
+        german="""
+             Also mach dich einfach auf zum
+            Dungeon, sobald du mit den Vorbereitungen
+            fertig bist.
+        """,
+        italian="""
+             Tutto chiaro? Quando hai finito
+            di prepararti, dirigiti al dungeon.
+        """,
+        spanish="""
+             Así que, cuando estés listo,
+            dirígete al territorio.
+        """,
+    });
+    message_Talk({
+        english=" See you later.",
+        french=" A tout à l'heure.",
+        german=" Wir sehen uns dann.",
+        italian=" A dopo.",
+        spanish=" Nos vemos luego.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    MovePositionMark<actor ACTOR_NPC_YUKIKABURI>(2, Position<'m0', 27.5, 25>);
+    WaitExecuteLives(ACTOR_NPC_YUKIKABURI);
+    ExecuteCommon<actor ACTOR_NPC_YUKIKABURI>(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    WaitExecuteLives(ACTOR_NPC_YUKIKABURI);
+    MovePositionMark<actor ACTOR_NPC_YUKIKABURI>(2, Position<'m1', 27.5, 41>);
+    Wait(20);
+    Turn2Direction<actor ACTOR_PLAYER_BIPPA>(4, 10, DIR_DOWNLEFT);
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    WaitExecuteLives(ACTOR_NPC_YUKIKABURI);
+    Wait(50);
+    Turn2Direction<actor ACTOR_PLAYER_BIPPA>(4, 10, DIR_LEFT);
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    Wait(10);
+    se_Play(8975);
+    ExecuteCommon<actor ACTOR_PLAYER_BIPPA>(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    Wait(10);
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_DETERMINED, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english="""
+             Got it![K] All right, I need to head
+            into Treasure Town and get ready to explore.
+        """,
+        french="""
+             Pigé![K] Très bien, faut qu'j'aille à
+            Bourg-Trésor pour préparer l'exploration.
+        """,
+        german="""
+             Verstanden![K] Gut, dann werde ich
+            mich mal nach Schatzstadt aufmachen, um
+            alles vorzubereiten.
+        """,
+        italian="""
+             Ok![K] Ora devo andare a Borgo
+            Tesoro e prepararmi per l'esplorazione.
+        """,
+        spanish="""
+             ¡Hasta luego![K] Bueno, tengo que
+            ir a Aldea Tesoro y prepararme para explorar.
+        """,
+    });
+    message_Talk({
+        english=" I'll do my best!",
+        french=" J'ferai d'mon mieux!",
+        german=" Verlass dich drauf!",
+        italian=" Ce la metterò tutta!",
+        spanish=" ¡Lo haré lo mejor que pueda!",
+    });
+    message_Close();
+    dungeon_mode(123) = DMODE_OPEN;
+    end;
+}

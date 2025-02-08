@@ -1,0 +1,31 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+        case 2:
+            §label_0;
+            switch ( $GROUND_ENTER ) {
+                case 224:
+                    debug_Print('BGM_FADEOUT');
+                    bgm_FadeOut(60);
+                    §label_3;
+                    main_EnterGround(LEVEL_G01P01A, 30);
+                    hold;
+                default:
+                    jump @label_3;
+            }
+            break;
+        default:
+            if ( scn($SCENARIO_MAIN) == [29, 48] ) {
+                supervision_ExecuteCommon(CORO_EVENT_S03_11);
+                end;
+            } else {
+                jump @label_0;
+            }
+            break;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}
