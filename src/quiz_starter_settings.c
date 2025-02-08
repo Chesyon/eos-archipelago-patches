@@ -250,7 +250,7 @@ struct window_flags windowHeroSelectFlags = {.a_accept = true, .se_on = true,
 
 void QuizCustomStateHandler(QuizData* quizData, int state) {
     switch (state) {
-        case 0x42: // Compute Starter List.
+        case 0x42:; // Compute Starter List.
             // Build a list of all starters and include starters not normally
             // pickable in vanilla because of gender exclusivity or partner
             // exclusivity.
@@ -320,14 +320,14 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, CONFIRMATION_STR_ID, &preArgs);
             quizData->state = quizData->state + 1;
             break;
-        case 0x44: // Override Check Yes/No Menu
+        case 0x44:; // Override Check Yes/No Menu
             if(IsDialogueBoxActive(quizData->dialougeBox1Id) == false) {
                 quizData->menuId = CreateSimpleMenuFromStringIds(&QUIZ_WINDOW_PARAMS_5, windowYesNoFlags, NULL,
                     QUIZ_MENU_ITEMS_1, 2);
                 quizData->state = quizData->state + 1;
             }
             break;
-        case 0x45: // Override Check Response
+        case 0x45:; // Override Check Response
             undefined menuResult = GetSimpleMenuResult(quizData->menuId);
             if(menuResult == 1) {
                 CloseSimpleMenu(quizData->menuId);
@@ -340,7 +340,7 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                 quizData->state = quizData->state + 1;
             }
             break;
-        case 0x46: // Make Hero Selection Menu
+        case 0x46:; // Make Hero Selection Menu
             ShowDialogueBox(quizData->dialougeBox1Id);
             ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, WHO_LIKE_TO_BE_STR_ID, &preArgs);
             quizData->menuId = CreateAdvancedMenu(&QUIZ_WINDOW_PARAMS_6, windowHeroSelectFlags,
@@ -355,7 +355,7 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
             quizData->state += 1;
             break;
-        case 0x47: // Player Is Picking Hero
+        case 0x47:; // Player Is Picking Hero
             int selected = (int)GetAdvancedMenuCurrentOption(quizData->menuId);
             if (PARTNER_SELECT_MENU_OPTION_TRACKER == selected) {
                 int currentCounter = PARTNER_SELECT_MENU_OPTION_TIMER;

@@ -15,23 +15,23 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
     // load either jobs or outlaws:
     if (arg2 == 1) { // outlaws
         if (arg1 == 1) { // Write mode
-            if (missionStats->completedOutlaws < missionStats->totalOutlaws) {
+            if (missionStats->completedOutlaws < missionMaxes->totalOutlaws) {
                 missionStats->completedOutlaws++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return missionStats->totalOutlaws - missionStats->completedOutlaws; // Read mode
+        else return missionMaxes->totalOutlaws - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
         if (arg1 == 1) { // Write mode
-            if (missionStats->completedJobs < missionStats->totalJobs) {
+            if (missionStats->completedJobs < missionMaxes->totalJobs) {
                 missionStats->completedJobs++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return missionStats->totalJobs - missionStats->completedJobs; // Read mode
+        else return missionMaxes->totalJobs - missionStats->completedJobs; // Read mode
     }
 }
 
@@ -39,24 +39,46 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
 static int SpAccessMacguffinStatus(short arg1, short arg2) {
     if(arg2 == 1) { // instruments
         if (arg1 == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredInstruments < CUSTOM_SAVE_AREA.totalInstruments) {
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.totalInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return CUSTOM_SAVE_AREA.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+        else return macguffinMaxes.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
         if (arg1 == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < CUSTOM_SAVE_AREA.totalRelicFragmentShards) {
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.totalRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return CUSTOM_SAVE_AREA.totalRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+        else return macguffinMaxes.totalRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
     }
+}
+
+void GetLowercaseName(const char* src, char* dst) // Used in NameCheck
+{
+    MemZero(dst, 10);
+    for(int i = 0; i < 10 && src[i] != NULL; i++) dst[i] = src[i] >= 'A' && src[i] <= 'Z' ? src[i]+0x20 : src[i];
+}
+
+// Special process 103: Checks if HERO_FIRST_NAME matches any name in a list of dev names. Returns the index of the name plus one if there's a match, otherwise returns zero. Saves the return value to nameCheckResult in the save.
+static int SpDoNameCheck() {
+    #define num_of_names 3
+    char name_check_names[num_of_names][10] = {"chesyon", "happylappy", "cryptic"};
+    char name[10];
+    char lower_name[10];
+    LoadScriptVariableValueBytes(VAR_HERO_FIRST_NAME, name, 10);
+    GetLowercaseName(name, lower_name);
+    for (int i = 0; i < num_of_names; i++) if (strncmp(lower_name, name_check_names[i], 10) == 0) {
+        CUSTOM_SAVE_AREA.nameCheckResult = i + 1;
+        return i + 1;
+    }
+    CUSTOM_SAVE_AREA.nameCheckResult = 0;
+    return 0;
 }
 
 // Called for special process IDs 100 and greater.
@@ -73,6 +95,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 102:
         *return_val = SpAccessMacguffinStatus(arg1, arg2);
+        return true;
+    case 103:
+        *return_val = SpDoNameCheck();
         return true;
     default:
         return false;

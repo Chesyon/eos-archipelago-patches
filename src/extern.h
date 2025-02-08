@@ -3,20 +3,21 @@
 #define STARTER_OPTION_OVERRIDE 0b10
 #define STARTER_OPTION_CHOOSE 0b11
 
-typedef struct ArchipelagoSettings {
-    bool recruitment : 1;       // 0 (0x0)
-    bool evolution : 1;         // 1 (0x1).
-    bool teamFormation : 1;     // 2 (0x2)
-    bool levelScaling : 1;      // 3 (0x3)
-    bool typesanity : 1;        // 4 (0x4)
-    uint8_t starterOptions : 2; // 5 (0x5)
-    uint8_t iqMultiplier : 4;   // 7 (0x7)
-    bool unused_3 : 1;          // 11 (0xB)
-    bool unused_4 : 1;          // 12 (0xC)
-    bool unused_5 : 1;          // 13 (0xD)
-    bool unused_6 : 1;          // 14 (0xE)
-    bool unused_7 : 1;          // 15 (0xF)
+typedef struct ArchipelagoSettings { // size: 2 bytes
+    uint8_t iqMultiplier : 4;   // 0 (0x7)
+    bool recruitment : 1;       // 4 (0x0)
+    bool evolution : 1;         // 5 (0x1).
+    bool teamFormation : 1;     // 6 (0x2)
+    bool levelScaling : 1;      // 7 (0x3)
+    bool typesanity : 1;        // 8 (0x4)
+    uint8_t starterOptions : 2; // 10 (0x5)
+    bool unused_1 : 1;          // 11 (0xB)
+    bool unused_2 : 1;          // 12 (0xC)
+    bool unused_3 : 1;          // 13 (0xD)
+    bool unused_4 : 1;          // 14 (0xE)
+    bool unused_5 : 1;          // 15 (0xF)
 } ArchipelagoSettings;
+ASSERT_SIZE(ArchipelagoSettings, 0x2);
 
 extern ArchipelagoSettings apSettings;
 
@@ -24,28 +25,33 @@ extern char slot_name[16];
 
 extern int seed; // 64 bits = 8 bytes
 
-typedef struct ArchipelagoData {
-    char slotName[16];
-    unsigned int seed[2];
-    ArchipelagoSettings settings;
-} ArchipelagoData;
+typedef struct MissionMax {
+    uint8_t totalJobs;    // 0x0
+    uint8_t totalOutlaws; // 0x1
+} MissionMax;
+ASSERT_SIZE(MissionMax, 0x2);
+extern MissionMax missionMaxes[192];
+
+typedef struct MacguffinMax {
+    uint8_t totalRelicFragmentShards; // 0x0
+    uint8_t totalInstruments;         // 0x1
+} MacguffinMax;
+ASSERT_SIZE(MacguffinMax, 0x2);
+extern MacguffinMax macguffinMaxes;
 
 typedef struct MissionStatus {
     uint8_t completedJobs : 8;    // 0x0
-    uint8_t totalJobs : 8;        // 0x1
-    uint8_t completedOutlaws : 8; // 0x2
-    uint8_t totalOutlaws : 8;     // 0x3
+    uint8_t completedOutlaws : 8; // 0x1
 } MissionStatus;
-ASSERT_SIZE(MissionStatus, 0x4);
+ASSERT_SIZE(MissionStatus, 0x2);
 
 typedef struct CustomSaveArea {
     uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
     MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards; // 0x304
-    uint8_t totalRelicFragmentShards;    // 0x305
-    uint8_t acquiredInstruments;         // 0x306
-    uint8_t totalInstruments;            // 0x307
-    undefined fields[0xDF8];             // 0x308: Unused.
+    uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
+    uint8_t nameCheckResult;             // 0x186: Saves the outcome from SpDoNameCheck.
+    undefined fields[0xF79];             // 0x187: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
