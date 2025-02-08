@@ -5,7 +5,7 @@
         stmdb sp!,{r0}
         ldr r0,=apSettings
         ldrb r0,[r0,#0x0]
-        tst  r0,#0b0000000000001000 // Test ArchipelagoSettings->levelScaling
+        tst  r0,#0b0000000010000000 // Test ArchipelagoSettings->levelScaling
         ldmia sp!,{r0}
         beq return // if the value is 0, don't do level scaling
         // more checks for if level scaling should be used.

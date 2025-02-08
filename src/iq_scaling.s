@@ -7,7 +7,6 @@
 IqScalingGround:
     ldr  r0,=apSettings
     ldrh r0,[r0]
-    lsr  r0,r0,#7
     and  r0,r0,#0b1111
     mul  r4,r4,r0 // multiply IQ increase by the multiplier
     add  r0,r1,r4 // original instruction
@@ -17,7 +16,6 @@ IqScalingDungeon:
     push {r0}
     ldr  r0,=apSettings
     ldrh r0,[r0]
-    lsr  r0,r0,#7
     and  r0,r0,#0b1111
     mul  r1,r1,r0 // multiply IQ increase by the multiplier
     pop  {r0}
