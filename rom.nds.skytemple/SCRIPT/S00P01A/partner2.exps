@@ -27,6 +27,46 @@ def 0 {
             message_Close();
             call @variable_checkup;
             jump @anything_else;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk(" Sure! I\'d be happy to give you\na recap on what our goals are, [hero]!\nLet\'s see, according to my notes...");
+            call @current_goals;
+            jump @anything_else;
+        case menu("Any ideas"): 
+            switch(random(10)) {
+                case 0: 
+                    message_Talk(" You should check X Placeholder 0");
+                    break;
+                case 1: 
+                    message_Talk(" You should check X Placeholder 1");
+                    break;
+                case 2: 
+                    message_Talk(" You should check X Placeholder 2");
+                    break;
+                case 3: 
+                    message_Talk(" You should check X Placeholder 3");
+                    break;
+                case 4: 
+                    message_Talk(" You should check X Placeholder 4");
+                    break;
+                case 5: 
+                    message_Talk(" You should check X Placeholder 5");
+                    break;
+                case 6: 
+                    message_Talk(" You should check X Placeholder 6");
+                    break;
+                case 7: 
+                    message_Talk(" You should check X Placeholder 7");
+                    break;
+                case 8: 
+                    message_Talk(" You should check X Placeholder 8");
+                    break;
+                case 9: 
+                    message_Talk(" You should check X Placeholder 9");
+                    break;
+            }
+            jump @anything_else;
         case menu("Just Chatting"):
             message_Close();
             jump @just_chatting;
@@ -49,6 +89,89 @@ def 0 {
         default:
             jump @shut_up;
     }
+
+    §current_goals;
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Our current goal is to defeat\nthat wicked [CS:G]Darkrai[CR] in [CS:P]Dark Crater[CR].[K] To open\nthe way, we need the [CS:C]Legendary Treasures[CR]!");
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" If my records are correct, we\nhave all of the treasures we need![K] Let\'s go to\n[CS:P]Dark Crater[CR] and beat [CS:G]Darkrai[CR], [hero]!");
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records, we\'re\njust missing one treasure![K] We need to find\nthat last one before we can go to [CS:P]Dark Crater[CR]!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records, we\'re\nstill missing several treasures![K] We need to\nfind them all before we can go to [CS:P]Dark Crater[CR]!");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Our current goal is to defeat\n[CS:G]Dialga[CR] at the pinnacle of [CS:P]Temporal Tower[CR]! To\nget there, we need access to [CS:P]Hidden Land[CR]!");
+        message_Talk(" [CS:P]Hidden Land[CR] is only accessible\nfrom [CS:G]Lapras[CR] on the beach. In order to summon\nhim, we need enough [CS:I]Relic Fragment[CR] shards!");
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records,\nwe\'ve already cleared [CS:P]Hidden Land[CR], and\nexplored it top-to-bottom, [hero]!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" According to my records,\n[CS:G]Lapras[CR] is waiting for us on the beach\nto take us to [CS:P]Hidden Land[CR], [hero]!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we have\nall the [CS:I]Relic Fragment Shards[CR] we need![K] But\n[CS:P]Hidden Land[CR] is closed?[K] Probably [CS:G]Cryptic[CR]\'s fault!");
+                        message_Talk(" Okay, so I can open [CS:P]Hidden Land[CR]\nfor us, but [CS:B]definitely report this as a bug[CR] if\nyou see this message, okay [hero]?");
+                        screen_FadeOut(1,30);
+                        message_Mail("[CN][partner] held their [CS:I]Relic Fragment[CR] high in\n[CN]the air![K] Suddenly, it began to glow, and a beam\n[CN]of light burst out of it, heading for the beach![W:90]");
+                        dungeon_mode(38) = DMODE_OPEN;
+                        screen_FadeIn(1,30);
+                        message_Talk(" There we go, [CS:G]Lapras[CR] should be\nwaiting for us on the beach right now![K] Don\'t\nforget, [CS:B]this wasn\'t supposed to happen![CR]");
+                        break;
+                    
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we are\nmissing just one [CS:I]Relic Fragment Shard[CR].[K] I hope\nit isn\'t too hard to find for you, [hero]!");
+                        break;
+
+                    default: // Missing several!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we are\nmissing a few [CS:I]Relic Fragment Shards[CR].[K] We need\nthem all in order to reach [CS:P]Hidden Land[CR], okay?");
+                        break;      
+                }
+                break;
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Oh right, I almost forgot![K]\nwe also need to have [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" According to my notes, we\'ve\nmanaged to clear [CS:P]Temporal Tower[CR] without\nbeating [CS:G]Dialga[CR]... [CS:B]this is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" According to my notes, we\'ve\nmanaged to unlock [CS:P]Temporal Tower[CR], so if we\nmade it to [CS:P]Hidden Land[CR], we could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_Talk(" According to my notes, we still\nneed to find [CS:P]Temporal Tower[CR] before we can\ndefeat [CS:G]Dialga[CR], even if we clear [CS:P]Hidden Land[CR]!");
+                message_Talk(" Keep in mind, it\'s very possible\nthat [CS:P]Temporal Tower[CR] is found in [CS:P]Hidden Land[CR].\n[K]If we can clear [CS:P]Hidden Land[CR], we may want to.");
+                message_Talk(" Even if we don\'t find [CS:P]Temporal\nTower[CR] there, [CS:G]Lapras[CR] can take us directly to the\ntower if we have it, and [CS:P]Hidden Land[CR] is clear!");
+                break;
+        }
+        
+    }
+    return;
+
 
     §just_chatting;
     debug_Print('PARTNER_MESSAGE_TYPE2');

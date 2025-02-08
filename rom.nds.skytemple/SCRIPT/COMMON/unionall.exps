@@ -2349,6 +2349,8 @@ coro EVENT_M00A_01 {
     ProcessSpecial(64, 6, 1); // Recruits Can Evolve (NOT Hero/Partner)
     ProcessSpecial(64, 7, 2); // Full Team Formation control 
     $VERSION = 1;
+    //TODO: uncomment this SP call!
+    // ProcessSpecial(103,0,0);
     JumpCommon(CORO_EVENT_DIVIDE);
 }
 
@@ -12187,7 +12189,8 @@ coro BUBBLE_TEST {
 }
 
 coro MAP_TEST {
-
+    message_Mail("Do not use! Reserved for [CS:G]Adex[CR]!");
+    message_Close();
     return;
 }
 
