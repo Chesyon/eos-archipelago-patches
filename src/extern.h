@@ -39,9 +39,13 @@ typedef struct MissionStatus {
 ASSERT_SIZE(MissionStatus, 0x4);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;               // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192]; // 0x4: Status of missions for each dungeon in the game.
-    undefined fields[0xDFC];         // 0x304: Unused.
+    uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards; // 0x304
+    uint8_t totalRelicFragmentShards;    // 0x305
+    uint8_t acquiredInstruments;         // 0x306
+    uint8_t totalInstruments;            // 0x307
+    undefined fields[0xDF8];             // 0x308: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 

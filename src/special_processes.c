@@ -35,6 +35,30 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
     }
 }
 
+// Special process 102: Read/write Instrument/Relic Fragment
+static int SpAccessMacguffinStatus(short arg1, short arg2) {
+    if(arg2 == 1) { // instruments
+        if (arg1 == 1) { // Write mode
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < CUSTOM_SAVE_AREA.totalInstruments) {
+                CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
+                return 1;
+            }
+            else return 0;
+        }
+        else return CUSTOM_SAVE_AREA.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+    }
+    else { // relic fragment
+        if (arg1 == 1) { // Write mode
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < CUSTOM_SAVE_AREA.totalRelicFragmentShards) {
+                CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
+                return 1;
+            }
+            else return 0;
+        }
+        else return CUSTOM_SAVE_AREA.totalRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+    }
+}
+
 // Called for special process IDs 100 and greater.
 //
 // Set return_val to the return value that should be passed back to the game's script engine. Return true,
@@ -42,13 +66,16 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
 bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_process_id, short arg1, short arg2, int* return_val) {
   switch (special_process_id) {
     case 100:
-      *return_val = SpGetLevelScalingStatus();
-      return true;
+        *return_val = SpGetLevelScalingStatus();
+        return true;
     case 101:
-      *return_val = SpAccessMissionStatuses(arg1, arg2);
-      return true;
+        *return_val = SpAccessMissionStatuses(arg1, arg2);
+        return true;
+    case 102:
+        *return_val = SpAccessMacguffinStatus(arg1, arg2);
+        return true;
     default:
-      return false;
+        return false;
   }
 }
 
