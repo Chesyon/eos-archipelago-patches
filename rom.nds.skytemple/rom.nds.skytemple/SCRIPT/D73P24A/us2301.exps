@@ -1,0 +1,164 @@
+import "checks.exps";
+def 0 {
+switch(dungeon_mode(111)) {
+    case DMODE_OPEN_AND_REQUEST:    
+        if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Downed
+            switch ( scn($SCENARIO_SUB3)[1] ) {
+                case &<< 6: 
+                   jump @hows_the_weather;
+                default: 
+                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" I was deeply moved while\nclimbing the mountain with you,\nTeam [team:]. I won\'t forget it...",
+                    french=" J\'ai vraiment été émue de\ngravir cette montagne avec vous,\nEquipe [team:]. Je ne l\'oublierai pas...",
+                    german=" Mit euch den Berg zu besteigen,\nTeam [team:], war ein unvergessliches\nErlebnis. Es hat mich wirklich tief bewegt.",
+                    italian=" È stato davvero emozionante\nscalare questa montagna con voi,\nTeam [team:]. Non lo dimenticherò mai...",
+                    spanish=" [CS:X]Equipo[CR] [team:], me\nconmovió mucho escalar la montaña a vuestro\nlado. Es algo que no olvidaré...",
+                });
+                message_Talk({
+                    english=" I\'m so grateful, that... well...\nI got a few gifts for you.[K] I may have gotten\na little carried away, and...[W:60] well...",
+                    french=" Que diriez-vous si...\nenfin... si je vous demandais de me laisser\nrejoindre l\'Equipe [team:]?",
+                    german=" Was glaubt ihr... Könnte ich bei\nTeam [team:] mitmachen?",
+                    italian=" Che ne dite...\nNon è che magari... mi fareste entrare\nnel Team [team:]?",
+                    spanish=" ¿Qué os parecería si...\nbueno...si me uniera al [CS:X]Equipo[CR] [team:]?",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                message_Mail("[CN]Accept [CS:N]Shymin[CR]'s gift(s)?");
+                switch ( message_SwitchMenu(1, 2) ) {
+                    case menu({
+                        english="Yes",
+                        french="Oui",
+                        german="Ja",
+                        italian="Sì",
+                        spanish="Sí",
+                    }):
+                        $EVENT_LOCAL = 10;
+                        message_Talk(" Yay!");
+                        message_Mail("[CS:G]Shaymin[CR] showered you with gifts!");
+                        item_Set(0, 180, 0);
+                        message_EmptyActor();
+                        me_Play(4);                            
+                        message_Mail("[CN][CS:G]Shaymin[CR] gave you a [s_item:0]!");
+                        WaitMe(4);
+                        Wait(30);
+                        message_Close();
+                        switch(ProcessSpecial(56,0,0)) {
+                            case 0: // Bag NOT full
+                                switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+                                break;
+                            case 1:
+                                switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                                break;
+                        }
+                        message_EmptyActor();
+                        if ($EVENT_LOCAL > 0) {
+                            switch(random(12)) {
+                                case 0:
+                                    item_SetTableData(0, 4);
+                                    break;
+                                case 1:
+                                    item_SetTableData(0, 5);
+                                    break;
+                                case 2:
+                                    item_SetTableData(0, 6);
+                                    break;
+                                case 3:
+                                    item_SetTableData(0, 7);
+                                    break;
+                                case 4:
+                                    item_SetTableData(0, 8);
+                                    break;
+                                case 5:
+                                    item_SetTableData(0, 9);
+                                    break;
+                                case 6:
+                                    item_SetTableData(0, 10);
+                                    break;
+                                case 7:
+                                    item_SetTableData(0, 11);
+                                    break;
+                                case 8:
+                                    item_SetTableData(0, 12);
+                                    break;
+                                case 9:
+                                    item_SetTableData(0, 13);
+                                    break;
+                                case 10:
+                                    item_SetTableData(0, 14);
+                                    break;
+                                case 11:
+                                default:
+                                    item_SetTableData(0, 15);
+                                    break;
+                            }
+                            me_Play(4);                            
+                            message_Mail("[CN][CS:G]Shaymin[CR] gave you a [s_item:0]!");
+                            WaitMe(4);
+                            Wait(30);
+                            message_Close();
+                            switch(ProcessSpecial(56,0,0)) {
+                                case 0: // Bag NOT full
+                                    switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+                                    break;
+                                case 1:
+                                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                                    break;
+                            }
+                            message_Close();
+                            $EVENT_LOCAL -= 1;
+                        }
+                        ~AssignCheck(46);
+                        break;
+                    case menu({
+                        english="No",
+                        french="Oui",
+                        german="Ja",
+                        italian="Sì",
+                        spanish="Sí",
+                    }):
+                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk({
+                            english=" Oh... I see...\nThat\'s too bad.",
+                            french=" Oh... Je vois...\nC\'est bien dommage.",
+                            german=" Oh... Ich verstehe...\nDas ist zu schade.",
+                            italian=" Oh... capisco...\nChe peccato.",
+                            spanish=" Ah... Entiendo...\nEs una lástima.",
+                        });
+                        message_Talk({
+                            english=" Well, I\'ll always be here\nwaiting.",
+                            french=" Hé bien, je ne bouge pas d\'ici...",
+                            german=" Nun ja, ich werde immer hier\nsein und auf euch warten.",
+                            italian=" Beh, se mai doveste cambiare\nidea...",
+                            spanish=" Bueno, siempre estaré aquí\nesperándoos.",
+                        });
+                        message_Close();
+                        jump @label_64;
+                    }
+                }
+            } else {
+                message_Talk(" I\'m so grateful for your help on our\nfirst climb on the mountain![K] I\'m not quite sure\nhow to thank you yet, but I\'ll do so [CS:C]later[CR]...");
+                message_Mail("Recruiting [CS:G]Shaymin[CR] is a Post-Dialga check!\n[K]...and might yield other boons");
+                message_Close();
+            }
+        default:
+            §hows_the_weather;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" You meet all different kinds of\nfolks when climbing a mountain. It\'s so\nmuch fun!",
+                french=" Tu rencontres des tas de\nPokémon différents quand tu gravis\nune montagne. C\'est si amusant!",
+                german=" Beim Bergsteigen triffst du so\nviele unterschiedliche Pokémon. Das macht\neinen Riesenspaß!",
+                italian=" Si incontrano così tanti Pokémon\ndiversi quando si scala una montagna. È così\ndivertente!",
+                spanish=" Se conoce a tanta gente\nvariopinta durante el ascenso a una montaña...\n¡Es la mar de entretenido!",
+            });
+            message_Close();
+            break;
+    }
+    §label_64;
+    JumpCommon(CORO_END_TALK);
+}

@@ -62,6 +62,14 @@
         b ForcedPlayerCheck
     .org QuizForcedPartnerHook
         bl ForcedPartnerCheck
+    .org QuizOverrideHook
+        bl OverrideHeroCheck
+    .org QuizHeroTweakHook
+        bl HeroTweakCheck
+    .org QuizChooseTweakHook
+        bl ChooseTweakCheck
+    .org QuizTypeHeroTweakHook
+        bl TypeHeroTweak
 .close
 
 .open "overlay22.bin", overlay22_start

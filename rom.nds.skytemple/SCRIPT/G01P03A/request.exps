@@ -1,4 +1,4 @@
-
+// 101 is mission stuff. Written by Chesyon, untested, but assumed working!
 def 0 {
     debug_Print('Codeglitchmurphy requested to be inside the code');
     switch ( message_Menu(MENU_JOB_REWARD_TYPE) ) {
@@ -59,6 +59,34 @@ def 0 {
                 }
                 message_Close();
             }
+/*
+            §rewind_9;
+            if ($SCENARIO_TALK_BIT_FLAG[252]) {
+                message_Mail("[CN]Client has not yet distributed the previous\n[CN]check for this mission type yet![K] Please wait\n[CN]for the check to go through first!");
+                message_Mail("[CN]Check if the client has sent the check yet?\n[CN]Note: If you select Give Up, this mission\n[CN]check will not be counted by the client!");
+                switch(message_SwitchMenu(0,1)) {
+                    case menu("Retry"):
+                        message_Close();
+                        jump @rewind_9;
+                    case menu("Give Up"):
+                        message_Close();
+                        break;
+                }
+            } else {
+                switch(ProcessSpecial(101, 1, 0)) {
+                    case > 0:
+                        message_Mail("\n[CN]You got a check for this outlaw mission!");
+                        message_Close();
+                        $SCENARIO_TALK_BIT_FLAG[252] = 1;
+                        ProcessSpecial(101, 1, 1);
+                        break;
+                    case 0:
+                        message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                        message_Close();
+                        break;
+                }
+            }
+*/
             §label_10;
             bgm_FadeOut(30);
             screen_FadeOut(1, 30);
@@ -153,10 +181,38 @@ def 0 {
                     $SCENARIO_TALK_BIT_FLAG[251] = 0;
                     message_Mail("\n[CN]You got a check for this mission!");
                 } else {
-                    message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                    message_Mail("[CN]There are no more checks for outlaw\n[CN]missions for this dungeon!");
                 }
                 message_Close();
             }
+/*
+            §rewind_10;
+            if ($SCENARIO_TALK_BIT_FLAG[252]) {
+                message_Mail("[CN]Client has not yet distributed the previous\n[CN]check for this mission type yet![K] Please wait\n[CN]for the check to go through first!");
+                message_Mail("[CN]Check if the client has sent the check yet?\n[CN]Note: If you select Give Up, this mission\n[CN]check will not be counted by the client!");
+                switch(message_SwitchMenu(0,1)) {
+                    case menu("Retry"):
+                        message_Close();
+                        jump @rewind_10;
+                    case menu("Give Up"):
+                        message_Close();
+                        break;
+                }
+            } else {
+                switch(ProcessSpecial(101, 1, 0)) {
+                    case > 0:
+                        message_Mail("\n[CN]You got a check for this outlaw mission!");
+                        message_Close();
+                        $SCENARIO_TALK_BIT_FLAG[252] = 1;
+                        ProcessSpecial(101, 1, 1);
+                        break;
+                    case 0:
+                        message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                        message_Close();
+                        break;
+                }
+            }
+*/
             jump @label_10;
         case 12: // Job Special
             $SCENARIO_TALK_BIT_FLAG[253] = 1;
@@ -255,6 +311,34 @@ def 0 {
                 }
                 message_Close();
             }
+/*
+            §rewind_12;
+            if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                message_Mail("[CN]Client has not yet distributed the previous\n[CN]check for this mission type yet![K] Please wait\n[CN]for the check to go through first!");
+                message_Mail("[CN]Check if the client has sent the check yet?\n[CN]Note: If you select Give Up, this mission\n[CN]check will not be counted by the client!");
+                switch(message_SwitchMenu(0,1)) {
+                    case menu("Retry"):
+                        message_Close();
+                        jump @rewind_12;
+                    case menu("Give Up"):
+                        message_Close();
+                        break;
+                }
+            } else {
+                switch(ProcessSpecial(101, 0, 0)) {
+                    case > 0:
+                        message_Mail("\n[CN]You got a check for this regular mission!");
+                        message_Close();
+                        $SCENARIO_TALK_BIT_FLAG[253] = 1;
+                        ProcessSpecial(101, 0, 1);
+                        break;
+                    case 0:
+                        message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                        message_Close();
+                        break;
+                }
+            }
+*/
             jump @label_10;
         case 11: // Job
             back_SetGround(LEVEL_G01P03A);
@@ -310,6 +394,34 @@ def 0 {
                 }
                 message_Close();
             }
+/*       
+            §rewind_11;
+            if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                message_Mail("[CN]Client has not yet distributed the previous\n[CN]check for this mission type yet![K] Please wait\n[CN]for the check to go through first!");
+                message_Mail("[CN]Check if the client has sent the check yet?\n[CN]Note: If you select Give Up, this mission\n[CN]check will not be counted by the client!");
+                switch(message_SwitchMenu(0,1)) {
+                    case menu("Retry"):
+                        message_Close();
+                        jump @rewind_11;
+                    case menu("Give Up"):
+                        message_Close();
+                        break;
+                }
+            } else {
+                switch(ProcessSpecial(101, 0, 0)) {
+                    case > 0:
+                        message_Mail("\n[CN]You got a check for this regular mission!");
+                        message_Close();
+                        $SCENARIO_TALK_BIT_FLAG[253] = 1;
+                        ProcessSpecial(101, 0, 1);
+                        break;
+                    case 0:
+                        message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                        message_Close();
+                        break;
+                }
+            }
+            */
             jump @label_10;
         default: // Job
             $SCENARIO_TALK_BIT_FLAG[253] = 1;
@@ -352,7 +464,7 @@ def 0 {
                                     case menu("Keep Waiting"):
                                         message_Close();
                                         $EVENT_LOCAL = 0;
-                                        jump @rewind_11;
+                                        jump @rewind_13;
                                     case menu("Give Up"):
                                         message_Close();
                                         $EVENT_LOCAL = 0;
@@ -370,6 +482,34 @@ def 0 {
                         }
                         message_Close();
                     }
+/*
+                    §rewind_13;
+                    if ($SCENARIO_TALK_BIT_FLAG[253]) {
+                        message_Mail("[CN]Client has not yet distributed the previous\n[CN]check for this mission type yet![K] Please wait\n[CN]for the check to go through first!");
+                        message_Mail("[CN]Check if the client has sent the check yet?\n[CN]Note: If you select Give Up, this mission\n[CN]check will not be counted by the client!");
+                        switch(message_SwitchMenu(0,1)) {
+                            case menu("Retry"):
+                                message_Close();
+                                jump @rewind_13;
+                            case menu("Give Up"):
+                                message_Close();
+                                break;
+                        }
+                    } else {
+                        switch(ProcessSpecial(101, 0, 0)) {
+                            case > 0:
+                                message_Mail("\n[CN]You got a check for this regular mission!");
+                                message_Close();
+                                $SCENARIO_TALK_BIT_FLAG[253] = 1;
+                                ProcessSpecial(101, 0, 1);
+                                break;
+                            case 0:
+                                message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                                message_Close();
+                                break;
+                        }
+                    }
+*/
                     jump @label_10;
                 case 2:
                     supervision_Acting(2);

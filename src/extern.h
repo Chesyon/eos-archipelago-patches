@@ -50,3 +50,18 @@ typedef struct CustomSaveArea {
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
 extern CustomSaveArea CUSTOM_SAVE_AREA;
+
+extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
+extern int PARTNER_SELECT_MENU_OPTION_TIMER;
+extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
+
+/*typedef struct SomeTeamSetupThing {
+    struct monster_id_16 hero_id;
+    struct monster_id_16 partner_id;
+    uint8_t unk_0x4[0x14]; // maybe like hero name idk
+    char partnerName[0x14]; // maybe only 11 long idk
+    int auraColor;
+} SomeTeamSetupThing;
+
+undefined UNK_FUN_2039514_EU(void);
+undefined UNK_FUN_2038AB0_EU(SomeTeamSetupThing* thing);*/

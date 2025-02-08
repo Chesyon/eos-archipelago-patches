@@ -1,0 +1,63 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_TIME_GEAR_REMIX, 0, 256);
+    bgm2_PlayFadeIn(BGM_STORM, 0, 256);
+    back_SetGround(LEVEL_V03P12A);
+    supervision_Acting(0);
+    camera_SetPositionMark(Position<'m0', 60, 16.5>);
+    message_ResetActor();
+    message_Talk({
+        english=" Do my eyes deceive me?[K] Could it be...?[K]\nYes, it is!",
+        french=" Est-ce que mes yeux me jouent des\ntours?[K] Est-ce que c\'est bien...?[K] Oui, c\'est ça!",
+        german=" Sehe ich richtig?[K] Kann es sein?[K]\nJa, es ist wahr!",
+        italian=" I miei occhi mi ingannano?[K] Quello è...[K]\nSì, è così!",
+        spanish=" ¿Qué ven mis ojos?[K] ¿Se trata de...?[K]\n¡Sí! ¡Ahí está!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    screen_FadeIn(1, 10);
+    Wait(45);
+    se_Play(6401);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    camera_SetPositionMark(Position<'m1', 21, 16.5>);
+    Wait(15);
+    camera_SetPositionMark(Position<'m2', 60, 16.5>);
+    Wait(30);
+    message_Talk({
+        english=" I\'ve finally found it![K] A Time Gear!",
+        french=" Je l\'ai enfin trouvé![K] Un Rouage du Temps!",
+        german=" Endlich habe ich es gefunden![K] Ein Zahnrad\nder Zeit!",
+        italian=" Finalmente l\'ho trovato![K] Un Ingranaggio \ndel Tempo!",
+        spanish=" ¡Al fin lo he encontrado! [K]\n¡Un Engranaje del Tiempo!",
+    });
+    message_Talk({
+        english=" But...[K]this is only the first of many...",
+        french=" Mais...[K] ce n\'est que le premier...",
+        german=" Aber...[K] Es ist nur das erste von vielen...",
+        italian=" Ma...[K] è solo il primo...",
+        spanish=" Pero...[K] Este solo es el primero\nde una larga serie.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(6401);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    camera_SetPositionMark(Position<'m3', 21, 16.5>);
+    Wait(10);
+    camera_SetPositionMark(Position<'m4', 60, 16.5>);
+    Wait(15);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    se_Play(6401);
+    camera_SetPositionMark(Position<'m5', 21, 16.5>);
+    Wait(10);
+    camera_SetPositionMark(Position<'m6', 60, 16.5>);
+    Wait(90);
+    bgm_FadeOut(120);
+    bgm2_FadeOut(120);
+    screen_FadeOut(1, 120);
+    Wait(60);
+    end;
+}

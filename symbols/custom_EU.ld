@@ -22,6 +22,11 @@ QuizForcedPlayerHook = 0x238B250;
 QuizForcedPlayerUnhook = 0x238B258;
 QuizForcedPartnerHook = 0x238C44C;
 QuizForcedPartnerUnhook = 0x238C4B0;
+QuizOverrideHook = 0x238B908;
+QuizHeroTweakHook = 0x238BED4;
+QuizChooseTweakHook = 0x238B7BC;
+QuizTypeHeroTweakHook = 0x238C3C0;
+QuizTypeHeroTweakUnhook = 0x238C3E0;
 
 /* ! For Overlay22 */
 AddShopItemToInventoryHook1 = 0x238B0D8;
@@ -45,6 +50,10 @@ CUSTOM_SAVE_AREA = 0x23B0000;
    in pmdsky-debug.*/
 AddItemToKecleon1 = 0x2010B70;
 AddItemToKecleon2 = 0x2010E74;
+PARTNER_SELECT_MENU_OPTION_TRACKER = 0x238D9E4;
+PARTNER_SELECT_MENU_OPTION_TIMER = 0x238D9E8;
+PARTNER_SELECT_PORTRAIT_OFFSETS = 0x238CB54;
+UNK_FUN_2039514_EU = 0x2039514; /* Keyboard Related? or Keyboard Confirm Related? */
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;

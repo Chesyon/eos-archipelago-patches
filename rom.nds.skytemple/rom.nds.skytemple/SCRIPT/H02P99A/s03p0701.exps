@@ -1,0 +1,907 @@
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_MANAFI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MANAFI);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MANAFI);
+    }
+    with (actor ACTOR_NPC_MANAFI) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    with (actor ACTOR_NPC_MANAFI) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_MANAFI);
+    message_SetFace(ACTOR_NPC_MANAFI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Goomi! Goomi!",
+        french=" Jélé! Jélé!",
+        german=" Dummi! Dummi!",
+        italian=" Gooma! Gooma!",
+        spanish=" ¡Gumi! ¡Gumi!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Mail({
+        english="[CN]Would you like to give a\n[CN][CS:I]Blue Gummi[CR] to [CS:N]Manaphy[CR]?",
+        french="[CN]Voulez-vous donner une\n[CN][CS:I]Gelée Bleue[CR] à [CS:N]Manaphy[CR]?",
+        german="[CN]Möchtest du [CS:N]Manaphy[CR]\n[CN]ein [CS:I]Blaugummi[CR] geben?",
+        italian="[CN]Vuoi dare una\n[CN][CS:I]Gommablu[CR] a [CS:N]Manaphy[CR]?",
+        spanish="[CN]¿Quieres darle una [CS:I]Gomi Azul[CR]\n[CN]a [CS:N]Manaphy[CR]?",
+    });
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu({
+            english="Yes",
+            french="Oui",
+            german="Ja",
+            italian="Sì",
+            spanish="Sí",
+        }):
+            §label_0;
+            message_Close();
+            switch ( ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG, 121, 0) ) {
+                case >= 1:
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 121, 0) ) { }
+                    bgm_FadeOut(120);
+                    screen_FadeOut(1, 30);
+                    supervision_Acting(0);
+                    with (performer 0) {
+                        SetPositionMark(Position<'m0', 38.5, 25.5>);
+                    }
+                    with (performer 0) {
+                        camera_SetMyself();
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetPositionMark(Position<'m1', 40.5, 25.5>);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetPositionMark(Position<'m2', 36.5, 25.5>);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetPositionMark(Position<'m3', 38.5, 22.5>);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetDirection(DIR_UPLEFT);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetDirection(DIR_UPRIGHT);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetDirection(DIR_DOWN);
+                    }
+                    Wait(30);
+                    WaitBgm(BGM_DO_YOUR_BEST_AS_ALWAYS);
+                    bgm_PlayFadeIn(BGM_OCEAN1, 90, 190);
+                    bgm_ChangeVolume(0, 190);
+                    screen_FadeIn(1, 30);
+                    Wait(30);
+                    message_Mail({
+                        english="[CN][hero] gave a\n[CN][CS:I]Blue Gummi[CR] to [CS:N]Manaphy[CR].",
+                        french="[CN][hero] donne une [CS:I]Gelée Bleue[CR]\n[CN]à [CS:N]Manaphy[CR].",
+                        german="[CN][hero] gibt [CS:N]Manaphy[CR]\n[CN]ein [CS:I]Blaugummi[CR].",
+                        italian="[CN][hero] dà una\n[CN][CS:I]Gommablu[CR] a [CS:N]Manaphy[CR].",
+                        spanish="[CN][hero] le dio una [CS:I]Gomi Azul[CR]\n[CN]a [CS:N]Manaphy[CR].",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    
+                    se_Play(8978);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_JOYOUS, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" Goomi! ♪",
+                        french=" Jélé! ♪",
+                        german=" Dummi! ♪",
+                        italian=" Gooma! ♪",
+                        spanish=" ¡Gumi! ♪",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    Wait(15);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" Chew, chew...",
+                        french=" Miam, miam...",
+                        german=" Kau, kau...",
+                        italian=" Gnam, gnam...",
+                        spanish=" Ñam, ñam...",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    screen_FadeOut(1,30);
+                    se_Play(5128);
+                    Wait(90);
+                    message_Mail("[CS:G]Manaphy[CR] burped up a strange box![K]\nInside was...[W:90] another check!");
+                    message_Close();
+                    ~AssignCheck(21);
+                    screen_FadeIn(1,30);
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_STUNNED, FACE_POS_STANDARD);
+                    message_Talk(" ...[W:90]");
+                    message_SetFace(ACTOR_PLAYER_HERO, FACE_STUNNED, FACE_POS_BOTTOM_R_FACEINW);
+                    message_Talk(" ...[W:90]");
+                    message_Close();
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Is it tasty? Er...[K] Goomi tasty?",
+                                french=" Est-ce que c\'est bon? Euh...[K]\nGelée bonne?",
+                                german=" Na, schmeckt das? Öh...[K]\nLecker Dummi?",
+                                italian=" È buona? Ehm...[K] buona gooma?",
+                                spanish=" ¿Está buena? Esto...[K] ¿la gumi?",
+                            }
+                        case 2:
+                            {
+                                english=" Is it tasty? Er...[K] Goomi tasty?",
+                                french=" Est-ce que c\'est bon? Euh...[K]\nGelée bonne?",
+                                german=" Na, schmeckt das? Öh...[K]\nLecker Dummi?",
+                                italian=" È buona? Ehm...[K] buona gooma?",
+                                spanish=" ¿Está buena? Esto...[K] ¿la gumi?",
+                            }
+                        default:
+                            {
+                                english=" Is it tasty? Er...[K] Goomi tasty?",
+                                french=" Est-ce que c\'est bon? Euh...[K]\nGelée bonne?",
+                                german=" Na, schmeckt das? Öh...[K]\nLecker Dummi?",
+                                italian=" È buona? Ehm...[K] buona gooma?",
+                                spanish=" ¿Está buena? Esto...[K] ¿la gumi?",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        Turn2Direction(4, 10, DIR_DOWNLEFT);
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    se_Play(8962);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetEffect(EFFECT_QUESTION_MARK, 3);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" Tasty?",
+                        french=" Jélé bonne?",
+                        german=" Lecker?",
+                        italian=" Buona?",
+                        spanish=" ¿Buena?",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Yup. Tasty?",
+                                french=" Oui. Gelée bonne?",
+                                german=" Jep. Lecker?",
+                                italian=" Sì. Buona?",
+                                spanish=" Sí. ¿Está buena?",
+                            }
+                        case 2:
+                            {
+                                english=" That\'s right. Tasty?",
+                                french=" Oui. Gelée bonne?",
+                                german=" So ist es. Lecker?",
+                                italian=" Sì. Buona?",
+                                spanish=" Sí. ¿Está buena?",
+                            }
+                        default:
+                            {
+                                english=" Yes. Tasty?",
+                                french=" Oui. Gelée bonne?",
+                                german=" Ja. Lecker?",
+                                italian=" Sì. Buona?",
+                                spanish=" Sí. ¿Está buena?",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetEffect(EFFECT_LAUGHING, 3);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" Tasty! ♪ Goomi tasty! ♪",
+                        french=" Jélé! ♪ Jélé bonne! ♪",
+                        german=" Lecker! ♪ Dummi lecker! ♪",
+                        italian=" Buona! ♪ Gooma buona! ♪",
+                        spanish=" ¡Buena! ♪ ¡Gumi buena! ♪",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetEffect(EFFECT_NONE, 3);
+                    }
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Ha![K] The little guy\'s going to\ngrow up in no time at this pace!",
+                                french=" Ha![K] Ce petit va grandir\nen moins de deux à ce rythme!",
+                                german=" Ha![K] Das kleine Kerlchen wächst\nbei dem Tempo bestimmt in Windeseile auf!",
+                                italian=" Ah![K] Di questo passo, il piccolo\ncrescerà in un battibaleno!",
+                                spanish=" ¡Ja![K] ¡A este paso va a crecer\nen un periquete!",
+                            }
+                        case 2:
+                            {
+                                english=" Ha![K] The little guy\'s going to\ngrow up in no time at this pace!",
+                                french=" Ha![K] Ce petit va grandir\nen moins de deux à ce rythme!",
+                                german=" Ha![K] Das kleine Kerlchen wächst\nbei dem Tempo bestimmt in Windeseile auf!",
+                                italian=" Ah![K] Di questo passo, il piccolo\ncrescerà in un battibaleno!",
+                                spanish=" ¡Ja![K] ¡A este paso va a crecer\nen un periquete!",
+                            }
+                        default:
+                            {
+                                english=" Ha![K] The little cutie\'s going to\ngrow up in no time at this rate!",
+                                french=" Ha![K] Ce petit va grandir\nen moins de deux à ce rythme!",
+                                german=" Ha![K] Bei diesem Tempo wächst\ndas Kleine bestimmt superschnell heran!",
+                                italian=" Ah![K] Di questo passo, il piccolo\ncrescerà in un battibaleno!",
+                                spanish=" ¡Ja![K] ¡A este paso esta monada\nva a crecer en un periquete!",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    bgm_FadeOut(180);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_STUNNED, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" .....................",
+                        french=" .....................",
+                        german=" .....................",
+                        italian=" .....................",
+                        spanish=" ...",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    se_Play(8962);
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetEffect(EFFECT_QUESTION_MARK, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Huh? Is something the matter?",
+                                french=" Hein? Quel est le problème?",
+                                german=" Ist irgendetwas?",
+                                italian=" Eh? C\'è qualcosa che non va?",
+                                spanish=" ¿Qué? ¿Pasa algo?",
+                            }
+                        case 2:
+                            {
+                                english=" What? Is something wrong?",
+                                french=" Hein? Quel est le problème?",
+                                german=" Was? Stimmt etwas nicht?",
+                                italian=" Eh? C\'è qualcosa che non va?",
+                                spanish=" ¿Qué? ¿Pasa algo?",
+                            }
+                        default:
+                            {
+                                english=" Oh? Is something the matter?",
+                                french=" Hein? Quel est le problème?",
+                                german=" Oh? Stimmt etwas nicht?",
+                                italian=" Eh? C\'è qualcosa che non va?",
+                                spanish=" ¿Qué? ¿Pasa algo?",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_SIGH, FACE_POS_TOP_C_FACEL);
+                    message_Talk({
+                        english=" ...Yawn...[K] Snuffle...",
+                        french=" ... Waaaaaaaah...[K] Rrrzzz...",
+                        german=" ...Gähn...[K] Schnarch...",
+                        italian=" Yawn...[K] Snuffle...",
+                        spanish=" Uuaa...[K] Bzz...",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_NPC_MANAFI) {
+                        SetAnimation(25);
+                    }
+                    with (actor ACTOR_NPC_MANAFI) {
+                        WaitAnimation();
+                    }
+                    WaitExecuteLives(ACTOR_NPC_MANAFI);
+                    Wait(15);
+                    se_Play(8978);
+                    with (actor ACTOR_PLAYER) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    Wait(45);
+                    bgm_PlayFadeIn(BGM_GOODNIGHT, 0, 256);
+                    Wait(15);
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Ha! I guess the little guy got\nfull, and now he\'s sleepy.",
+                                french=" Ha! Il doit être repu, et\nmaintenant il s\'endort.",
+                                german=" Ha! Wahrscheinlich hat sich das\nKleine vollgefuttert und wird jetzt müde.",
+                                italian=" Ah! Il piccolo è sazio e adesso\nha bisogno di dormire.",
+                                spanish=" ¡Ja! Ahora que está lleno le\nha entrado sueño.",
+                            }
+                        case 2:
+                            {
+                                english=" Ha! The little guy ate his fill.\nNow he needs to sleep it off.",
+                                french=" Ha! Il doit être repu, et\nmaintenant il s\'endort.",
+                                german=" Ha! Das Kleine hat seine\nFütterung gehabt, jetzt will es schlafen.",
+                                italian=" Ah! Il piccolo è sazio e adesso\nha bisogno di dormire.",
+                                spanish=" ¡Ja! Ahora que está lleno le\nha entrado sueño.",
+                            }
+                        default:
+                            {
+                                english=" Ha! The little cutie must be\nfull. He\'s gone to sleep now.",
+                                french=" Ha! Il doit être repu, et\nmaintenant il s\'endort.",
+                                german=" Ha! Das süße Kerlchen muss\nsatt sein. Es ist eingeschlafen.",
+                                italian=" Ah! Il piccolo è sazio e adesso\nha bisogno di dormire.",
+                                spanish=" ¡Ja! Ahora que está lleno le\nha entrado sueño.",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+                    }
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Let\'s let him sleep.",
+                                french=" Laissons-le dormir.",
+                                german=" Lassen wir es schlafen.",
+                                italian=" Lasciamolo riposare.",
+                                spanish=" Dejémosle dormir.",
+                            }
+                        case 2:
+                            {
+                                english=" Let\'s be quiet and let him sleep.",
+                                french=" Laissons-le dormir.",
+                                german=" Seien wir ruhig und lassen es\nschlafen.",
+                                italian=" Lasciamolo riposare.",
+                                spanish=" No hagamos ruido. Dejémosle\nque descanse.",
+                            }
+                        default:
+                            {
+                                english=" We should let him sleep.",
+                                french=" Laissons-le dormir.",
+                                german=" Wir sollten es schlafen lassen.",
+                                italian=" Lasciamolo riposare.",
+                                spanish=" Dejémosle dormir.",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2DirectionLives(4, 10, ACTOR_NPC_MANAFI);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        Turn2DirectionLives(4, 10, ACTOR_NPC_MANAFI);
+                    }
+                    Wait(30);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Sleep tight, [CS:N]Manaphy[CR].",
+                                french=" Dors bien, [CS:N]Manaphy[CR].",
+                                german=" Schlaf gut, [CS:N]Manaphy[CR].",
+                                italian=" Sogni d\'oro, [CS:N]Manaphy[CR].",
+                                spanish=" Que duermas bien, [CS:N]Manaphy[CR].",
+                            }
+                        case 2:
+                            {
+                                english=" Sleep tight, [CS:N]Manaphy[CR].",
+                                french=" Dors bien, [CS:N]Manaphy[CR].",
+                                german=" Schlaf gut, [CS:N]Manaphy[CR].",
+                                italian=" Sogni d\'oro, [CS:N]Manaphy[CR].",
+                                spanish=" Que duermas bien, [CS:N]Manaphy[CR].",
+                            }
+                        default:
+                            {
+                                english=" Sleep tight, [CS:N]Manaphy[CR].",
+                                french=" Dors bien, [CS:N]Manaphy[CR].",
+                                german=" Schlaf gut, [CS:N]Manaphy[CR].",
+                                italian=" Sogni d\'oro, [CS:N]Manaphy[CR].",
+                                spanish=" Que duermas bien, [CS:N]Manaphy[CR].",
+                            }
+                    }
+                    message_Close();
+                    bgm_FadeOut(120);
+                    screen_FadeOut(1, 90);
+                    Wait(60);
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
+                    message_Narration(30, {
+                        english="[CN]The next morning...",
+                        french="[CN]Le lendemain matin...",
+                        german="[CN]Am nächsten Morgen...",
+                        italian="[CN]La mattina dopo...",
+                        spanish="[CN]Al día siguiente...",
+                    });
+                    message_Close();
+                    back2_SetMode(4);
+                    back2_SetGround(LEVEL_V24P08A);
+                    $ATTENDANT2_KIND = 10;
+                    with (actor ACTOR_NPC_MANAFI) {
+                        Destroy();
+                    }
+                    supervision_Acting(1);
+                    supervision_StationCommon(1);
+                    camera2_SetPositionMark(Position<'m4', 19, 15.5>);
+                    with (performer 0) {
+                        SetPositionMark(Position<'m5', 36, 27.5>);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetPositionMark(Position<'m6', 38.5, 27.5>);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetPositionMark(Position<'m7', 32.5, 27.5>);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetDirection(DIR_RIGHT);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetDirection(DIR_LEFT);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetAnimation(76);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetAnimation(76);
+                    }
+                    screen2_FadeIn(0, 30);
+                    screen_FadeIn(1, 30);
+                    bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+                    Wait(30);
+                    with (actor ACTOR_ATTENDANT2) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetAnimation(63);
+                    }
+                    Wait(5);
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetAnimation(63);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        WaitAnimation();
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        WaitAnimation();
+                    }
+                    WaitExecuteLives(ACTOR_PLAYER);
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        SetAnimation(2);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        Turn2Direction(4, 10, DIR_DOWN);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetAnimation(2);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2Direction(4, 10, DIR_DOWN);
+                    }
+                    Wait(30);
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+                    }
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Good morning, [hero]!",
+                                french=" Bonjour, [hero]!",
+                                german=" Guten Morgen, [hero]!",
+                                italian=" Buongiorno, [hero]!",
+                                spanish=" ¡Buenos días, [hero]!",
+                            }
+                        case 2:
+                            {
+                                english=" Good morning, [hero]!",
+                                french=" Bonjour, [hero]!",
+                                german=" Guten Morgen, [hero]!",
+                                italian=" Buongiorno, [hero]!",
+                                spanish=" ¡Buenos días, [hero]!",
+                            }
+                        default:
+                            {
+                                english=" Good morning, [hero]!",
+                                french=" Bonjour, [hero]!",
+                                german=" Guten Morgen, [hero]!",
+                                italian=" Buongiorno, [hero]!",
+                                spanish=" ¡Buenos días, [hero]!",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT2) {
+                        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT2);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_TOP_R_CENTER);
+                    message_FacePositionOffset(1, 0);
+                    message_Talk({
+                        english=" Hi!",
+                        french=" Bonjour!",
+                        german=" Hallo!",
+                        italian=" Ciao!",
+                        spanish=" ¡Hola!",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT2);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT2);
+                    }
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Good morning, [CS:N]Manaphy[CR].",
+                                french=" Bonjour, [CS:N]Manaphy[CR].",
+                                german=" Guten Morgen, [CS:N]Manaphy[CR].",
+                                italian=" Buongiorno, [CS:N]Manaphy[CR].",
+                                spanish=" Buenos días, [CS:N]Manaphy[CR].",
+                            }
+                        case 2:
+                            {
+                                english=" Good morning, [CS:N]Manaphy[CR].",
+                                french=" Bonjour, [CS:N]Manaphy[CR].",
+                                german=" Guten Morgen, [CS:N]Manaphy[CR].",
+                                italian=" Buongiorno, [CS:N]Manaphy[CR].",
+                                spanish=" Buenos días, [CS:N]Manaphy[CR].",
+                            }
+                        default:
+                            {
+                                english=" Good morning, [CS:N]Manaphy[CR].",
+                                french=" Bonjour, [CS:N]Manaphy[CR].",
+                                german=" Guten Morgen, [CS:N]Manaphy[CR].",
+                                italian=" Buongiorno, [CS:N]Manaphy[CR].",
+                                spanish=" Buenos días, [CS:N]Manaphy[CR].",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_TOP_R_CENTER);
+                    message_FacePositionOffset(1, 0);
+                    message_Talk({
+                        english=" Morning! [hero]!\n[partner]!",
+                        french=" Bonjour! [hero]!\n[partner]!",
+                        german=" Morgen! [hero]!\n[partner]!",
+                        italian=" Buongiorno! [hero]!\n[partner]!",
+                        spanish=" ¡Días! ¡[hero]!\n¡[partner]!",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    se_Play(8967);
+                    with (actor ACTOR_PLAYER) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetEffect(EFFECT_SHOCKED_MIRRORED, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Whoa! The little guy called us\nby name!",
+                                french=" Oooh! Il connaît nos noms!",
+                                german=" Nanu! Das kleine Kerlchen hat\nuns mit unseren Namen angeredet!",
+                                italian=" Wow! Il cucciolo ha detto i\nnostri nomi!",
+                                spanish=" ¡Oye! ¡Nos ha llamado por\nnuestro nombre!",
+                            }
+                        case 2:
+                            {
+                                english=" Wow! The little guy called us\nby name!",
+                                french=" Oooh! Il connaît nos noms!",
+                                german=" Nanu! Das kleine Kerlchen hat\nuns mit unseren Namen angeredet!",
+                                italian=" Wow! Il cucciolo ha detto i\nnostri nomi!",
+                                spanish=" ¡Oye! ¡Nos ha llamado por\nnuestro nombre!",
+                            }
+                        default:
+                            {
+                                english=" Wow! The little cutie greeted us\nby name!",
+                                french=" Oooh! Il connaît nos noms!",
+                                german=" Nanu! Das kleine Kerlchen hat\nuns mit unseren Namen angeredet!",
+                                italian=" Wow! Il cucciolo ha detto i\nnostri nomi!",
+                                spanish=" ¡Oye! ¡Nos ha llamado por\nnuestro nombre!",
+                            }
+                    }
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" That\'s awesome, [CS:N]Manaphy[CR]!",
+                                french=" C\'est incroyable, [CS:N]Manaphy[CR]!",
+                                german=" Das ist toll, [CS:N]Manaphy[CR]!",
+                                italian=" Bravissimo, [CS:N]Manaphy[CR]!",
+                                spanish=" ¡Bien hecho, [CS:N]Manaphy[CR]!",
+                            }
+                        case 2:
+                            {
+                                english=" That\'s awesome, [CS:N]Manaphy[CR]!",
+                                french=" C\'est incroyable, [CS:N]Manaphy[CR]!",
+                                german=" Das ist toll, [CS:N]Manaphy[CR]!",
+                                italian=" Bravissimo, [CS:N]Manaphy[CR]!",
+                                spanish=" ¡Bien hecho, [CS:N]Manaphy[CR]!",
+                            }
+                        default:
+                            {
+                                english=" That\'s awesome, [CS:N]Manaphy[CR]!",
+                                french=" C\'est incroyable, [CS:N]Manaphy[CR]!",
+                                german=" Das ist toll, [CS:N]Manaphy[CR]!",
+                                italian=" Bravissimo, [CS:N]Manaphy[CR]!",
+                                spanish=" ¡Bien hecho, [CS:N]Manaphy[CR]!",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    se_Play(8974);
+                    with (actor ACTOR_ATTENDANT2) {
+                        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT2);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_JOYOUS, FACE_POS_TOP_R_CENTER);
+                    message_FacePositionOffset(1, 0);
+                    message_Talk({
+                        english=" Awesome!",
+                        french=" Incroyaaable!",
+                        german=" Toll!",
+                        italian=" Bravissimo!",
+                        spanish=" ¡Bien!",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT1) {
+                        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    with (actor ACTOR_PLAYER) {
+                        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+                    }
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Well, [hero].[K] What should\nwe do with him today?",
+                                french=" Alors, [hero].[K]\nQu\'allons-nous faire de lui aujourd\'hui?",
+                                german=" Nun, [hero].[K] Was sollen\nwir heute mit ihm unternehmen?",
+                                italian=" Beh, [hero].[K] Cosa \nfacciamo fare a Manaphy oggi?",
+                                spanish=" Bueno, [hero].[K]\n¿Qué vamos a hacer hoy con él?",
+                            }
+                        case 2:
+                            {
+                                english=" Well, [hero].[K] What should\nwe do with him today?",
+                                french=" Alors, [hero].[K]\nQu\'allons-nous faire de lui aujourd\'hui?",
+                                german=" Nun, [hero].[K] Was sollen\nwir heute mit ihm unternehmen?",
+                                italian=" Beh, [hero].[K] Cosa \nfacciamo fare a Manaphy oggi?",
+                                spanish=" Bueno, [hero].[K]\n¿Qué vamos a hacer hoy con él?",
+                            }
+                        default:
+                            {
+                                english=" Well, [hero].[K] What should\nwe do with him today?",
+                                french=" Alors, [hero].[K]\nQu\'allons-nous faire de lui aujourd\'hui?",
+                                german=" Nun, [hero].[K] Was sollen\nwir heute mit ihm unternehmen?",
+                                italian=" Beh, [hero].[K] Cosa \nfacciamo fare a Manaphy oggi?",
+                                spanish=" Bueno, [hero].[K]\n¿Qué vamos a hacer hoy con él?",
+                            }
+                    }
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" Eating and sleeping all the time\ndoesn\'t seem healthy enough...",
+                                french=" Manger et dormir tout le temps,\nce n\'est pas très sain...",
+                                german=" Nur essen und schlafen kann\nauf Dauer nicht gesund sein...",
+                                italian=" Mangiare e dormire tutto il \ngiorno non dev\'essere troppo salutare...",
+                                spanish=" Tanto comer y dormir no puede\nser bueno...",
+                            }
+                        case 2:
+                            {
+                                english=" Eating and sleeping all the time\ndoesn\'t seem healthy enough...",
+                                french=" Manger et dormir tout le temps,\nce n\'est pas très sain...",
+                                german=" Nur essen und schlafen kann\nauf Dauer nicht gesund sein...",
+                                italian=" Mangiare e dormire tutto il \ngiorno non dev\'essere troppo salutare...",
+                                spanish=" Tanto comer y dormir no puede\nser bueno...",
+                            }
+                        default:
+                            {
+                                english=" Eating and sleeping all the time\ndoesn\'t seem healthy enough...",
+                                french=" Manger et dormir tout le temps,\nce n\'est pas très sain...",
+                                german=" Nur essen und schlafen kann\nauf Dauer nicht gesund sein...",
+                                italian=" Mangiare e dormire tutto il \ngiorno non dev\'essere troppo salutare...",
+                                spanish=" Tanto comer y dormir no puede\nser bueno...",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    se_Play(8965);
+                    with (actor ACTOR_ATTENDANT1) {
+                        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                    }
+                    with (actor ACTOR_ATTENDANT1) {
+                        WaitEffect();
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT1);
+                    message_SwitchTalk ($PARTNER_TALK_KIND) {
+                        case 1:
+                            {
+                                english=" I know![K] Let\'s take the little guy\nfor a walk at the beach!",
+                                french=" Je sais![K] Emmenons-le se\npromener à la plage!",
+                                german=" Ich weiß![K] Wir gehen mit dem\nKleinen am Strand spazieren!",
+                                italian=" Ci sono![K] Portiamo il cucciolo a\nfare una passeggiata sulla spiaggia!",
+                                spanish=" ¡Ya sé![K] ¡Llevemos al pequeño a\ndar un paseo por la playa!",
+                            }
+                        case 2:
+                            {
+                                english=" I know![K] Let\'s take the little guy\nfor a walk at the beach!",
+                                french=" Je sais![K] Emmenons-le se\npromener à la plage!",
+                                german=" Ich weiß![K] Wir gehen mit dem\nKleinen am Strand spazieren!",
+                                italian=" Ci sono![K] Portiamo il cucciolo a\nfare una passeggiata sulla spiaggia!",
+                                spanish=" ¡Ya sé![K] ¡Llevemos al pequeño a\ndar un paseo por la playa!",
+                            }
+                        default:
+                            {
+                                english=" I know![K] Let\'s take the little cutie\nfor a walk at the beach!",
+                                french=" Je sais![K] Emmenons-le se\npromener à la plage!",
+                                german=" Ich weiß![K] Wir gehen mit dem\nKleinen am Strand spazieren!",
+                                italian=" Ci sono![K] Portiamo il cucciolo a\nfare una passeggiata sulla spiaggia!",
+                                spanish=" ¡Ya sé![K] ¡Llevemos al pequeño a\ndar un paseo por la playa!",
+                            }
+                    }
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    with (actor ACTOR_ATTENDANT2) {
+                        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                    }
+                    WaitExecuteLives(ACTOR_ATTENDANT2);
+                    message_SetFace(ACTOR_NPC_MANAFI, FACE_HAPPY, FACE_POS_TOP_R_CENTER);
+                    message_FacePositionOffset(1, 0);
+                    message_Talk({
+                        english=" Walk! ♪",
+                        french=" Promener! ♪",
+                        german=" Spazieren! ♪",
+                        italian=" Passeggiata! ♪",
+                        spanish=" ¡Paseo! ♪",
+                    });
+                    message_Close();
+                    screen2_FadeOut(1, 30);
+                    back2_SetMode(0);
+                    screen_FadeOut(1,30);
+                    supervision_ExecuteCommon(CORO_EVENT_S03_09);
+                    hold;
+                default:
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_Mail({
+                        english="[CN][hero] doesn\'t have a [CS:I]Blue Gummi[CR]...",
+                        french="[CN][hero] n\'a pas de [CS:I]Gelée Bleue[CR]...",
+                        german="[CN][hero] hat kein [CS:I]Blaugummi[CR]...",
+                        italian="[CN][hero] non ha una [CS:I]Gommablu[CR]...",
+                        spanish="[CN][hero] no tiene ninguna [CS:I]Gomi Azul[CR]...",
+                    });
+                    message_Close();
+                    end;
+            }
+            break;
+        case menu({
+            english="No",
+            french="Non",
+            german="Nein",
+            italian="No",
+            spanish="No",
+        }):
+        default:
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_NPC_MANAFI) {
+                SetAnimation(42);
+            }
+            message_SetFace(ACTOR_NPC_MANAFI, FACE_CRYING, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Weh...[K] Weh...[K] Waaaah!",
+                french=" Ouin...[K] Ouin...[K] Ouiiiiiiin!",
+                german=" Uäh...[K] Uäh...[K] Buuuuhuhu!",
+                italian=" Weh...[K] Weh...[K] Waaaah!",
+                spanish=" Snif...[K] snif...[K] ¡Buaaaa!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(8972);
+            with (actor ACTOR_ATTENDANT1) {
+                SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" Whoa, whoa... Please don\'t cry!",
+                        french=" Oh non... Ne pleure pas!",
+                        german=" Oooh, uaah... Bitte nicht weinen!",
+                        italian=" Ehi, ehi... Per favore,\nnon piangere!\n",
+                        spanish=" Oye, oye... ¡no llores!",
+                    }
+                case 2:
+                    {
+                        english=" Oh no... Please don\'t cry!",
+                        french=" Oh non... Ne pleure pas!",
+                        german=" Oh nein! Bitte nicht weinen!",
+                        italian=" Oh, no... Per favore,\nnon piangere!",
+                        spanish=" Anda, anda... ¡no llores!",
+                    }
+                default:
+                    {
+                        english=" Oh, no no... Please don\'t cry!",
+                        french=" Oh non... Ne pleure pas!",
+                        german=" Oh nein! Nein! Bitte nicht\nweinen!",
+                        italian=" Oh, no... Per favore,\nnon piangere!",
+                        spanish=" No, por favor... ¡no llores!",
+                    }
+            }
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" Don\'t worry, little guy.[K] We\'ll be\nback soon with a tasty [CS:I]Blue Gummi[CR] for you.",
+                        french=" Ne t\'inquiète pas.[K] Nous serons de\nretour bientôt avec une bonne [CS:I]Gelée Bleue[CR].",
+                        german=" Keine Sorge, kleines Kerlchen.[K]\nWir sind bald zurück mit einem leckeren\n[CS:I]Blaugummi[CR] für dich.",
+                        italian=" Non preoccuparti, piccolo.[K] \nTorneremo presto con una gustosa [CS:I]Gommablu[CR]\ntutta per te.",
+                        spanish=" No te preocupes, pequeño.[K]\nPronto estaremos de vuelta con una sabrosa\n[CS:I]Gomi Azul[CR] para ti.",
+                    }
+                case 2:
+                    {
+                        english=" Don\'t you cry, little guy.[K] We\'ll be\nback soon with a tasty [CS:I]Blue Gummi[CR] for you.",
+                        french=" Ne t\'inquiète pas.[K] Nous serons de\nretour bientôt avec une bonne [CS:I]Gelée Bleue[CR].",
+                        german=" Nicht weinen, süßes Kerlchen.[K]\nWir sind bald zurück mit einem leckeren\n[CS:I]Blaugummi[CR] für dich.",
+                        italian=" Non preoccuparti, piccolo.[K] \nTorneremo presto con una gustosa [CS:I]Gommablu[CR]\ntutta per te.",
+                        spanish=" No te preocupes, pequeño.[K]\nPronto estaremos de vuelta con una sabrosa\n[CS:I]Gomi Azul[CR] para ti.",
+                    }
+                default:
+                    {
+                        english=" Don\'t you cry, cutie.[K] We\'ll be\nback soon with a tasty [CS:I]Blue Gummi[CR] for you.",
+                        french=" Ne t\'inquiète pas.[K] Nous serons de\nretour bientôt avec une bonne [CS:I]Gelée Bleue[CR].",
+                        german=" Nicht weinen, du süßer Fratz.[K]\nWir sind bald zurück mit einem leckeren\n[CS:I]Blaugummi[CR] für dich.",
+                        italian=" Non preoccuparti, piccolo.[K] \nTorneremo presto con una gustosa [CS:I]Gommablu[CR]\ntutta per te.",
+                        spanish=" No te preocupes, pequeño.[K]\nPronto estaremos de vuelta con una sabrosa\n[CS:I]Gomi Azul[CR] para ti.",
+                    }
+            }
+            message_Close();
+            with (actor ACTOR_NPC_MANAFI) {
+                SetAnimation(2);
+            }
+            end;
+    }
+}

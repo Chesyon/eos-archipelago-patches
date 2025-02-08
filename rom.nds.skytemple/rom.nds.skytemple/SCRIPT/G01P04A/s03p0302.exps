@@ -1,0 +1,761 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_G01P04A);
+    supervision_LoadStation(LEVEL_G01P04A, 'US03');
+    supervision_StationCommon(0);
+    supervision_Station(17);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_NPC_MANAFI) {
+        SetAnimation(4);
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" ...And that\'s why we\'re here.",
+                french=" ... Et c\'est pour ça que nous\nsommes là.",
+                german=" ...Und darum sind wir hier.",
+                italian=" ... Ed ecco perché siamo qui.",
+                spanish=" Y por eso estamos aquí.",
+            }
+        case 2:
+            {
+                english=" ...And so we came to see you.",
+                french=" ... Et c\'est pour ça que nous\nsommes là.",
+                german=" ...Und deshalb sind wir zu dir\ngekommen.",
+                italian=" ... Ed ecco perché siamo qui.",
+                spanish=" Y por eso estamos aquí.",
+            }
+        default:
+            {
+                english=" ...And that\'s why we\'re here.",
+                french=" ... Et c\'est pour ça que nous\nsommes là.",
+                german=" ...Und darum sind wir hier.",
+                italian=" ... Ed ecco perché siamo qui.",
+                spanish=" Y por eso estamos aquí.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Do you have any idea what kind\nof Pokémon this little guy is, [CS:N]Chatot[CR]?",
+                french=" As-tu une idée sur l\'espèce de\nce Pokémon, [CS:N]Pijako[CR]?",
+                german=" Hast du irgendeine Ahnung, was\nfür eine Art Pokémon dieses kleine Kerlchen\nist, [CS:N]Plaudagei[CR]?",
+                italian=" Sai dirci di che specie di\nPokémon si tratta, [CS:N]Chatot[CR]?",
+                spanish=" ¿Tienes idea de qué tipo de\nPokémon puede ser, [CS:N]Chatot[CR]?",
+            }
+        case 2:
+            {
+                english=" Do you have any idea what kind\nof Pokémon this little guy is, [CS:N]Chatot[CR]?",
+                french=" As-tu une idée sur l\'espèce de\nce Pokémon, [CS:N]Pijako[CR]?",
+                german=" Hast du irgendeine Ahnung, was\nfür eine Art Pokémon dieses kleine Kerlchen\nist, [CS:N]Plaudagei[CR]?",
+                italian=" Sai dirci di che specie di\nPokémon si tratta, [CS:N]Chatot[CR]?",
+                spanish=" ¿Tienes idea de qué tipo de\nPokémon puede ser, [CS:N]Chatot[CR]?",
+            }
+        default:
+            {
+                english=" Do you have any idea what kind\nof Pokémon this little guy is, [CS:N]Chatot[CR]?",
+                french=" As-tu une idée sur l\'espèce de\nce Pokémon, [CS:N]Pijako[CR]?",
+                german=" Hast du irgendeine Ahnung, was\nfür eine Art Pokémon dieses kleine Kerlchen\nist, [CS:N]Plaudagei[CR]?",
+                italian=" Sai dirci di che specie di\nPokémon si tratta, [CS:N]Chatot[CR]?",
+                spanish=" ¿Tienes idea de qué tipo de\nPokémon puede ser, [CS:N]Chatot[CR]?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Hmm...[K] Well, to be honest, this\nis the first time I\'ve actually seen a Pokémon\nof this sort.",
+        french=" Hum...[K] Eh bien, pour être\nhonnête, c\'est la première fois que je vois un\nPokémon de ce genre.",
+        german=" Hmm...[K] Um ehrlich zu sein,\ndas ist das erste Mal, dass ich ein Pokémon\ndieser Art zu sehen bekomme.",
+        italian=" Mmm...[K] Beh, a dire la verità, è\nla prima volta che vedo un Pokémon \ndel genere.",
+        spanish=" Hum...[K] Para serte sincero, es\nla primera vez que veo un Pokémon así.",
+    });
+    message_Talk({
+        english=" But judging from what you\'ve\ntold me...[K] This youngster appears to be a\nPokémon named [CS:N]Manaphy[CR].",
+        french=" Mais d\'après ce que vous m\'avez\ndit...[K] Ce petit pourrait être un Pokémon appelé\n[CS:N]Manaphy[CR].",
+        german=" Aber nach dem, was ihr mir\nerzählt habt...[K] Dieser Jungspund scheint ein\nPokémon namens [CS:N]Manaphy[CR] zu sein.",
+        italian=" Ma da quello che mi avete \ndetto,[K] questo piccolo potrebbe essere un\nPokémon chiamato [CS:N]Manaphy[CR].",
+        spanish=" Por lo que me habéis contado...[K]\nDiría que es un Pokémon llamado [CS:N]Manaphy[CR].",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]Manaphy[CR]?",
+                french=" [CS:N]Manaphy[CR]?",
+                german=" [CS:N]Manaphy[CR]?",
+                italian=" [CS:N]Manaphy[CR]?",
+                spanish=" ¿[CS:N]Manaphy[CR]?",
+            }
+        case 2:
+            {
+                english=" [CS:N]Manaphy[CR]?",
+                french=" [CS:N]Manaphy[CR]?",
+                german=" [CS:N]Manaphy[CR]?",
+                italian=" [CS:N]Manaphy[CR]?",
+                spanish=" ¿[CS:N]Manaphy[CR]?",
+            }
+        default:
+            {
+                english=" [CS:N]Manaphy[CR]?",
+                french=" [CS:N]Manaphy[CR]?",
+                german=" [CS:N]Manaphy[CR]?",
+                italian=" [CS:N]Manaphy[CR]?",
+                spanish=" ¿[CS:N]Manaphy[CR]?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Correct.[K] This youngster is an\nextremely rare Pokémon. There are only a\nfew in the whole world.",
+        french=" Exact.[K] C\'est un Pokémon\nextrêmement rare. Il n\'en existe qu\'une\npoignée sur toute la planète.",
+        german=" Korrekt.[K] Dieser Jungspund ist\nein extrem seltenes Pokémon. Es gibt nur ein\npaar davon auf der ganzen Welt.",
+        italian=" Esatto.[K] Si tratta di un\nPokémon rarissimo. Ne esistono pochissimi\nin tutto il mondo.",
+        spanish=" Exacto.[K] Este jovencito es un\nPokémon muy poco común. Hay muy pocos\nen el mundo.",
+    });
+    message_Talk({
+        english=" It\'s said to hatch at the bottom \nof a cold sea. It then travels the seas over\nthousands of miles.",
+        french=" On dit qu\'il éclot au fond\ndes eaux froides, et qu\'il parcourt ensuite\nles mers sur des milliers de kilomètres.",
+        german=" Es soll angeblich auf dem Grund\neines kalten Meeres schlüpfen. Danach wandert\nes Tausende von Kilometern.",
+        italian=" Si dice che nascano sui fondali\ndei mari freddi. Poi si spostano nel mare per\nmigliaia di chilometri.",
+        spanish=" Según parece, eclosionan en las\nprofundidades de un frío mar y, después,\nviajan durante leguas atravesando el océano.",
+    });
+    message_Talk({
+        english=" I should emphasize that a\n[CS:N]Manaphy[CR] is very rarely sighted.",
+        french=" J\'insiste sur le fait qu\'on\nn\'aperçoit [CS:N]Manaphy[CR] que dans des\ncirconstances très exceptionnelles.",
+        german=" Ich sollte betonen, dass [CS:N]Manaphy[CR]\nsehr selten gesehen werden.",
+        italian=" Voglio sottolineare che è molto\nraro avvistare un [CS:N]Manaphy[CR].",
+        spanish=" Querría subrayar que raramente\nse ve a un [CS:N]Manaphy[CR].",
+    });
+    message_Talk({
+        english=" As a result, little is actually\nknown about the Pokémon.",
+        french=" Il en résulte qu\'on en sait\ntrès peu sur ce Pokémon.",
+        german=" Aus diesem Grund ist sehr wenig\nüber diese Pokémon bekannt.",
+        italian=" Di conseguenza, si sa molto\npoco al loro riguardo.",
+        spanish=" Así que se sabe muy poco de\nellos.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Wow.[K] So this little guy\'s a\nreally rare Pokémon.",
+                french=" Oh.[K] Alors ce petit gars est\nun Pokémon très rare.",
+                german=" Wow.[K] Also ist dieses kleine\nKerlchen ein echt seltenes Pokémon.",
+                italian=" Wow.[K] Quindi questo piccolino\nè un Pokémon davvero raro.",
+                spanish=" Vaya.[K] Así que es un Pokémon\nmuy raro.",
+            }
+        case 2:
+            {
+                english=" Wow.[K] So this little guy\'s a\nreally rare Pokémon.",
+                french=" Oh.[K] Alors ce petit gars est\nun Pokémon très rare.",
+                german=" Wow.[K] Also ist dieses kleine\nKerlchen ein echt seltenes Pokémon.",
+                italian=" Wow.[K] Quindi questo piccolino\nè un Pokémon davvero raro.",
+                spanish=" Vaya.[K] Así que es un Pokémon\nmuy raro.",
+            }
+        default:
+            {
+                english=" Wow.[K] So this little cutie\'s a\nreally rare Pokémon.",
+                french=" Oh.[K] Alors ce petit gars est\nun Pokémon très rare.",
+                german=" Wow.[K] Also ist dieses kleine\nKerlchen ein echt seltenes Pokémon.",
+                italian=" Wow.[K] Quindi questo piccolino\nè un Pokémon davvero raro.",
+                spanish=" Vaya.[K] Así que es un Pokémon\nmuy raro.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MANAFI) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_MANAFI);
+    message_SetFace(ACTOR_NPC_MANAFI, FACE_JOYOUS, FACE_POS_TOP_R_FACEINW);
+    message_Talk({
+        english=" Rare-rare! ♪",
+        french=" Rar-rar! ♪",
+        german=" Selten-selten! ♪",
+        italian=" Raro-raro! ♪",
+        spanish=" ¡Raro, raro! ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_PERAPPU);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" So, you two.[K] What do you intend\nto do with this youngster?",
+        french=" Alors vous deux.[K] Qu\'est-ce que\nvous allez faire de lui?",
+        german=" So, ihr zwei.[K] Was gedenkt ihr\nmit diesem Kleinen zu tun?",
+        italian=" E voi?[K] Cosa avete intenzione\ndi fare con questo cucciolo?",
+        spanish=" A ver...[K] ¿Qué pretendéis hacer\ncon este jovencito?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Huh?[K] What should we do?",
+                french=" Hum![K] Que faire?",
+                german=" Ähem?[K] Was sollten wir tun?",
+                italian=" Eh?[K] Cosa dovremmo fare?",
+                spanish=" ¿Qué?[K] ¿Qué deberíamos hacer?",
+            }
+        case 2:
+            {
+                english=" What?[K] What should we do?",
+                french=" Hum![K] Que faire?",
+                german=" Was?[K] Was sollten wir tun?",
+                italian=" Eh?[K] Cosa dovremmo fare?",
+                spanish=" ¿Qué?[K] ¿Qué deberíamos hacer?",
+            }
+        default:
+            {
+                english=" What?[K] What should we do?",
+                french=" Hum![K] Que faire?",
+                german=" Was?[K] Was sollten wir tun?",
+                italian=" Eh?[K] Cosa dovremmo fare?",
+                spanish=" ¿Qué?[K] ¿Qué deberíamos hacer?",
+            }
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Well, come to think of it...[K]\nWhat to do?[K] We didn\'t consider that at all.",
+                french=" Oui, c\'est vrai, ça...[K] Qu\'est-ce\nqu\'on peut bien en faire?[K] On n\'y a pas encore\nréfléchi.",
+                german=" Hm, jetzt, wo du das sagst...[K]\nWas ist zu tun?[K] Darüber haben wir uns\ngar keine Gedanken gemacht.",
+                italian=" Beh, a pensarci...[K] Cosa\nfacciamo?[K] Non ci abbiamo ancora riflettuto.",
+                spanish=" Bueno, ahora que lo dices...[K]\n¿Qué hacemos?[K] No habíamos pensado en eso.",
+            }
+        case 2:
+            {
+                english=" Well, come to think of it...[K]\nWhat to do?[K] We haven\'t given it much thought.",
+                french=" Oui, c\'est vrai, ça...[K] Qu\'est-ce\nqu\'on peut bien en faire?[K] On n\'y a pas encore\nréfléchi.",
+                german=" Hm, jetzt, wo du das sagst...[K]\nWas ist zu tun?[K] Wir haben daran noch nicht\nviele Gedanken verschwendet.",
+                italian=" Beh, a pensarci...[K] Cosa\nfacciamo?[K] Non ci abbiamo ancora riflettuto.",
+                spanish=" Bueno, ahora que lo dices...[K]\n¿Qué hacemos?[K] No habíamos pensado en nada.",
+            }
+        default:
+            {
+                english=" Well, come to think of it...[K]\nWhat to do?[K] We hadn\'t thought about that yet.",
+                french=" Oui, c\'est vrai, ça...[K] Qu\'est-ce\nqu\'on peut bien en faire?[K] On n\'y a pas encore\nréfléchi.",
+                german=" Hm, jetzt, wo du das sagst...[K]\nWas ist zu tun?[K] Darüber haben wir uns noch\nnicht den Kopf zerbrochen.",
+                italian=" Beh, a pensarci...[K] Cosa\nfacciamo?[K] Non ci abbiamo ancora riflettuto.",
+                spanish=" Bueno, ahora que lo dices...[K]\n¿Qué hacemos?[K] No habíamos pensado nada.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MANAFI) {
+        SetAnimation(42);
+    }
+    message_SetFace(ACTOR_NPC_MANAFI, FACE_CRYING, FACE_POS_TOP_R_FACEINW);
+    message_Talk({
+        english=" Weh...[K] Weh...[K] Waaaah!",
+        french=" Ouin...[K] Ouin...[K] Ouiiiiiiiiiiiiiiin!",
+        german=" He...[K] He...[K] Huaaaaaah!",
+        italian=" Weh...[K] Weh...[K] Waaaah!",
+        spanish=" Snif...[K] snif...[K] ¡Buaaaa!",
+    });
+    bgm_Stop();
+    se_Play(8968);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_PERAPPU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    se_Play(8972);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Whoa![K] What...[K]what\'s wrong?[K]\nThe baby started crying all of a sudden!",
+                french=" Ouah![K] Que...[K] qu\'est-ce qui ne\nva pas?[K] Le bébé se met à pleurer d\'un coup!",
+                german=" Holla![K] Was...[K] Was ist denn\nlos?[K] Das Kleine hat plötzlich angefangen zu\nschreien!",
+                italian=" Ehi![K] Cosa...[K] Cosa succede?[K]\nIl cucciolo ha iniziato a piangere \ntutto d\'un tratto!",
+                spanish=" Pero...[K] ¿Qué...?[K] ¿Qué le pasa?[K]\n¡Ha empezado a llorar de repente!",
+            }
+        case 2:
+            {
+                english=" Whoa![K] What...[K]what\'s wrong?[K]\nThe baby started crying all of a sudden!",
+                french=" Ouah![K] Que...[K] qu\'est-ce qui ne\nva pas?[K] Le bébé se met à pleurer d\'un coup!",
+                german=" Holla![K] Was...[K] Was ist denn\nlos?[K] Das Kleine hat plötzlich angefangen zu\nschreien!",
+                italian=" Ehi![K] Cosa...[K] Cosa succede?[K]\nIl cucciolo ha iniziato a piangere \ntutto d\'un tratto!",
+                spanish=" Pero...[K] ¿Qué...?[K] ¿Qué le pasa?[K]\n¡Ha empezado a llorar de repente!",
+            }
+        default:
+            {
+                english=" Whoa![K] What...[K]what\'s wrong?[K]\nThe baby started crying all of a sudden!",
+                french=" Ouah![K] Que...[K] qu\'est-ce qui ne\nva pas?[K] Le bébé se met à pleurer d\'un coup!",
+                german=" Holla![K] Was...[K] Was ist denn\nlos?[K] Das Kleine hat plötzlich angefangen zu\nschreien!",
+                italian=" Ehi![K] Cosa...[K] Cosa succede?[K]\nIl cucciolo ha iniziato a piangere \ntutto d\'un tratto!",
+                spanish=" Pero...[K] ¿Qué...?[K] ¿Qué le pasa?[K]\n¡Ha empezado a llorar de repente!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" I would imagine he\'s hungry.",
+        french=" J\'imagine qu\'il a faim.",
+        german=" Ich schätze mal, es hat Hunger.",
+        italian=" Immagino che abbia fame.",
+        spanish=" Tendrá hambre.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Right. What should we give him?",
+                french=" Très bien. Qu\'est-ce qu\'on lui\ndonne?",
+                german=" Okay. Was sollen wir ihm\ngeben?",
+                italian=" Giusto. E cosa dobbiamo dargli?",
+                spanish=" Sí. ¿Y qué le damos?",
+            }
+        case 2:
+            {
+                english=" Right. What should we feed him?",
+                french=" Très bien. Qu\'est-ce qu\'on lui\ndonne?",
+                german=" Okay. Was geben wir ihm\nzum Essen?",
+                italian=" Giusto. E cosa dobbiamo dargli?",
+                spanish=" Sí. ¿Y qué le damos?",
+            }
+        default:
+            {
+                english=" Oh, of course. What do you think\nhe eats?",
+                french=" Très bien. Qu\'est-ce qu\'on lui\ndonne?",
+                german=" Oh, natürlich. Was, denkst du,\nisst es wohl?",
+                italian=" Giusto. E cosa dobbiamo dargli?",
+                spanish=" Claro. ¿Y qué comerá?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_WORRIED, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Hmm...[K] I\'m not sure, but because\nthis youngster is a Water-type Pokémon...",
+        french=" Hum...[K] Je n\'en suis pas sûr,\nmais puisque ce petit est un Pokémon de\ntype Eau...",
+        german=" Hmm...[K] Ich bin mir nicht\nsicher, aber da das Kleine ein\nWasser-Pokémon ist...",
+        italian=" Mmm...[K] Non ne sono sicuro, ma\nvisto che si tratta di un Pokémon\ndi tipo Acqua...",
+        spanish=" Hum...[K] No estoy seguro, pero\ndado que es un Pokémon de tipo Agua...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_PERAPPU);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" How about feeding him some\n[CS:I]Blue Gummis[CR]?",
+        french=" Pourquoi ne pas lui donner\ndes [CS:I]Gelées Bleues[CR]?",
+        german=" Sollen wir ihm mal ein paar\n[CS:I]Blaugummis[CR] geben?",
+        italian=" Che ne dite di dargli delle\n[CS:I]Gommeblu[CR]?",
+        spanish=" ¿Qué tal si le damos unas\n[CS:I]Gomis Azules[CR]?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Gotcha. [CS:I]Blue Gummis[CR].",
+                french=" D\'accord. Des [CS:I]Gelées Bleues[CR].",
+                german=" Verstanden. [CS:I]Blaugummis[CR].",
+                italian=" Afferrato. [CS:I]Gommeblu[CR].",
+                spanish=" Vale. [CS:I]Gomis Azules[CR].",
+            }
+        case 2:
+            {
+                english=" OK! Some [CS:I]Blue Gummis[CR].",
+                french=" D\'accord. Des [CS:I]Gelées Bleues[CR].",
+                german=" Okay! Ein paar [CS:I]Blaugummis[CR].",
+                italian=" Afferrato! Delle [CS:I]Gommeblu[CR].",
+                spanish=" Vale. [CS:I]Gomis Azules[CR].",
+            }
+        default:
+            {
+                english=" OK![K] Some [CS:I]Blue Gummis[CR].",
+                french=" D\'accord. Des [CS:I]Gelées Bleues[CR].",
+                german=" Okay![K] Ein paar [CS:I]Blaugummis[CR].",
+                italian=" Afferrato! Delle [CS:I]Gommeblu[CR].",
+                spanish=" Vale. [CS:I]Gomis Azules[CR].",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s see...[K] [CS:I]Blue Gummis[CR]...\nWhere can we go to find some?",
+                french=" Voyons...[K] Des [CS:I]Gelées Bleues[CR]...\nJe crois qu\'on peut en trouver sur la\n[CS:P]Côte Escarpée[CR].",
+                german=" Mal sehen...[K] [CS:I]Blaugummis[CR]. Ich\nglaube, wir haben mal welche an der\n[CS:P]Schroffküste[CR] gefunden.",
+                italian=" Vediamo un po\'...[K] [CS:I]Gommeblu[CR]...\nMi sembra di averle viste al [CS:P]Dirupo Costiero[CR].",
+                spanish=" A ver...[K] [CS:I]Gomis Azules[CR]...\nSi no recuerdo mal, encontramos algunas\nen la [CS:P]Costa Escarpada[CR].",
+            }
+        case 2:
+            {
+                english=" Let\'s see...[K] [CS:I]Blue Gummis[CR]...\nWhere can we go to find some?",
+                french=" Voyons...[K] Des [CS:I]Gelées Bleues[CR]...\nJe crois qu\'on peut en trouver sur la\n[CS:P]Côte Escarpée[CR].",
+                german=" Mal sehen...[K] [CS:I]Blaugummis[CR]. Wir\nhaben welche an der [CS:P]Schroffküste[CR] gefunden,\nmeine ich.",
+                italian=" Vediamo un po\'...[K] [CS:I]Gommeblu[CR]...\nMi sembra di averle viste al [CS:P]Dirupo Costiero[CR].",
+                spanish=" A ver...[K] [CS:I]Gomis Azules[CR]...\nSi no recuerdo mal, encontramos algunas\nen la [CS:P]Costa Escarpada[CR].",
+            }
+        default:
+            {
+                english=" Let\'s see...[K] [CS:I]Blue Gummis[CR]...\nWhere can we go to find some?",
+                french=" Voyons...[K] Des [CS:I]Gelées Bleues[CR]...\nJe crois qu\'on peut en trouver sur la\n[CS:P]Côte Escarpée[CR].",
+                german=" Mal sehen...[K] [CS:I]Blaugummis[CR]. Wir\nhaben welche an der [CS:P]Schroffküste[CR] gefunden,\nmeine ich.",
+                italian=" Vediamo un po\'...[K] [CS:I]Gommeblu[CR]...\nMi sembra di averle viste al [CS:P]Dirupo Costiero[CR].",
+                spanish=" A ver...[K] [CS:I]Gomis Azules[CR]...\nSi no recuerdo mal, encontramos algunas\nen la [CS:P]Costa Escarpada[CR].",
+            }
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" According to notes from the\n[CS:X]Survey Team[CR], cross-referenced against our\ndungeon list...[W:60] Here\'s some [CS:I]Blue Gummi[CR] odds:");
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    switch(dungeon_mode(91)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Labyrinth Cave[CR]: [CS:C]1.2717%[CR] to [CS:C]3.6813[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(4)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Bristle[CR]: [CS:C]1.725%[CR] to [CS:C]3.45[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(85)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mystery Jungle[CR]: [CS:C]1.25%[CR] to [CS:C]3.1[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(17)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Amp Plains[CR]: [CS:C]0.5132%[CR] to [CS:C]2.8853[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(99)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Zero Isle North[CR]: [CS:C]0.6833%[CR] to [CS:C]2.775[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(8)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Craggy Coast[CR]: [CS:C]2.6313%[CR] to [CS:C]2.6313[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(174)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Star Cave[CR]: [CS:C]1.26%[CR] to [CS:C]2.36[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(104)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Destiny Tower[CR]: [CS:C]0.33%[CR] to [CS:C]2.356[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(72)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Marine Resort[CR]: [CS:C]1.0667%[CR] to [CS:C]2.2364[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(101)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Zero Isle West[CR]: [CS:C]1.8406%[CR] to [CS:C]1.8406[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(7)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Apple Woods[CR]: [CS:C]1.5461%[CR] to [CS:C]1.5461[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(111)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Sky Peak[CR]: [CS:C]1.3875%[CR] to [CS:C]1.3875[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(6)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Waterfall Cave[CR]: [CS:C]1.1654%[CR] to [CS:C]1.1654[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(3)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Drenched Bluff[CR]: [CS:C]1.122%[CR] to [CS:C]1.122[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(191)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Dojo: Final Maze[CR]: [CS:C]0.6096%[CR] to [CS:C]0.6096[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(12)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Foggy Forest[CR]: [CS:C]0.5676%[CR] to [CS:C]0.5676[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(64)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Spacial Rift[CR]: [CS:C]0.5318%[CR] to [CS:C]0.5318[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(94)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Happy Outlook[CR]: [CS:C]0.5277%[CR] to [CS:C]0.5277[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(67)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Dark Crater[CR]: [CS:C]0.5208%[CR] to [CS:C]0.5208[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(14)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Steam Cave[CR]: [CS:C]0.5132%[CR] to [CS:C]0.5132[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(25)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crystal Crossing[CR]: [CS:C]0.5132%[CR] to [CS:C]0.5132[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(47)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crevice Cave[CR]: [CS:C]0.4929%[CR] to [CS:C]0.4929[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(35)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Brine Cave[CR]: [CS:C]0.4879%[CR] to [CS:C]0.4879[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(54)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Aegis Cave[CR]: [CS:C]0.4767%[CR] to [CS:C]0.4767[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(34)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Treeshroud Forest[CR]: [CS:C]0.4724%[CR] to [CS:C]0.4724[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(38)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Hidden Land[CR]: [CS:C]0.4415%[CR] to [CS:C]0.472[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(41)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Temporal Tower[CR]: [CS:C]0.4415%[CR] to [CS:C]0.472[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(95)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Mistral[CR]: [CS:C]0.4555%[CR] to [CS:C]0.4555[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(10)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Horn[CR]: [CS:C]0.1614%[CR] to [CS:C]0.4281[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(24)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crystal Cave[CR]: [CS:C]0.3544%[CR] to [CS:C]0.3544[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(108)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Treacherous Waters[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(109)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Southeastern Islands[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(110)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Inferno Cave[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(50)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Surrounded Sea[CR]: [CS:C]0.1513%[CR] to [CS:C]0.1513[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(51)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Miracle Sea[CR]: [CS:C]0.1369%[CR] to [CS:C]0.1369[CR]% per floor");
+        default:
+            break;
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Talk(" Feel free to ask me\nfor that data again at any time!");
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s go get some [CS:I]Blue Gummis[CR],\n[hero]!",
+                french=" Allons chercher des [CS:I]Gelées\nBleues[CR], [hero]!",
+                german=" Besorgen wir ein paar\n[CS:I]Blaugummis[CR], [hero]!",
+                italian=" Andiamo a prendere delle \n[CS:I]Gommeblu[CR], [hero]!",
+                spanish=" ¡Vamos a por [CS:I]Gomis Azules[CR],\n[hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s go get some [CS:I]Blue Gummis[CR],\n[hero]!",
+                french=" Allons chercher des [CS:I]Gelées\nBleues[CR], [hero]!",
+                german=" Besorgen wir ein paar\n[CS:I]Blaugummis[CR], [hero]!",
+                italian=" Andiamo a prendere delle \n[CS:I]Gommeblu[CR], [hero]!",
+                spanish=" ¡Vamos a por [CS:I]Gomis Azules[CR],\n[hero]!",
+            }
+        default:
+            {
+                english=" Let\'s go get some [CS:I]Blue Gummis[CR],\n[hero]!",
+                french=" Allons chercher des [CS:I]Gelées\nBleues[CR], [hero]!",
+                german=" Besorgen wir ein paar\n[CS:I]Blaugummis[CR], [hero]!",
+                italian=" Andiamo a prendere delle \n[CS:I]Gommeblu[CR], [hero]!",
+                spanish=" ¡Vamos a por [CS:I]Gomis Azules[CR],\n[hero]!",
+            }
+    }
+    message_Close();
+    with (performer 0) {
+        MovePositionLives(1, 0);
+    }
+    WaitExecutePerformer(0);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    end;
+}

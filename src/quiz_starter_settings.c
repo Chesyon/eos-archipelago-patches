@@ -1,4 +1,5 @@
 #define CONFIRMATION_STR_ID 1732 // 0x6C4
+#define WHO_LIKE_TO_BE_STR_ID 2613
 /* Starter Typesanity
 Disabled (default): Hero and partner cannot share a type (vanilla behavior).
 Enabled: Hero and partner can share types. Note that the game is not balanced around this!
@@ -69,9 +70,9 @@ typedef struct QuizData {
     char answerBuffers[4][64];
     int unk_0x36C;
     // 0x370
-    int numselectablePartners;
+    int numSelectablePartners;
     // 0x374: The base game only has 21 starters.
-    // I suspect the list has space for 32 and just goes unused.
+    // I suspect the list has space for 32 and extra entries go unused.
     struct monster_id_16 partners[32];
     // 0x3B4: 0x10 in size
     struct portrait_params portraitParams;
@@ -82,7 +83,7 @@ typedef struct QuizData {
     // 0x404: Partner Name Also Keyboard Input
     char partner_name_init_copy[32];
     // 0x424
-    struct monster_id_16 partner;
+    struct monster_id_16 partnerSpecies;
     // 0x426: pulled from ds firmware color 75%, mac 25%
     uint16_t auraColor;
 } QuizData;
@@ -102,6 +103,11 @@ void __attribute__((naked)) ForcedPlayerCheck() {
     asm("ldr r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000000001100000");
     asm("lsr r1,r1,#0x5");
+    asm("cmp r1,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("moveq r3,#9");        // If choose is picked, skip all questions
+    asm("ldreq r1,[r0,#0x0]"); // except male/female.
+    asm("streq r3,[r1,#0x24]");
+    asm("beq QuizForcedPlayerUnhook");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM 
     asm("ldr r1,[r0,#0x0]");
     asm("movne r3,#0"); // 0 if normal
@@ -171,21 +177,244 @@ void __attribute__((naked)) ForcedPartnerCheck() {
     asm("b QuizForcedPartnerUnhook");
 }
 
-void QuizCustomStateHandler(QuizData* quizData, int state) {
-    switch (state) {
-        case 0x42:; // Override Check Message
-            struct preprocessor_args preArgs;
-            InitPreprocessorArgs(&preArgs);
-            //preArgs.flag_vals[0] = *((uint16_t*)&STARTERS_HERO_IDS[(GetPersonality()*2) + quizData->genderResult]);
-            ShowDialogueBox(quizData->dialougeBox1Id);
-            //ShowStringIdInDialogueBox(quizData->dialougeBox1Id, 0b100, CONFIRMATION_STR_ID, &preArgs);
-            quizData->state = quizData->state + 1;
-            break;
-        case 0x43: // Override Check Yes/No
-            if(IsDialogueBoxActive(quizData->dialougeBox1Id) == false) {
-                
-            }
+// Check if override is active. If so, allow the quiz result to be overwritten.
+void __attribute__((naked)) OverrideHeroCheck() {
+    asm("mov r7,#0x0"); // Original Instruction
+    asm("ldr r1,=apSettings");
+    asm("ldr r1,[r1,#0x0]");
+    asm("and r1,r1,#0b0000000001100000");
+    asm("lsr r1,r1,#0x5");
+    asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
+    asm("moveq r0,#0x42");
+    asm("movne r0,#0x26");
+    asm("bx lr");
+}
+
+void __attribute__((naked)) HeroTweakCheck() {
+    asm("ldr r3,=apSettings");
+    asm("ldr r3,[r3,#0x0]");
+    asm("and r3,r3,#0b0000000001100000");
+    asm("lsr r3,r3,#0x5");
+    asm("cmp r3,#0b10"); // STARTER_OPTION_OVERRIDE
+    asm("cmpne r3,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("ldrne r3,[r1,r0]"); // originalish instruction
+    asm("bxne lr");
+    asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
+    asm("ldr r3,[r3,#0x0]");
+    asm("ldr r3,[r3,#0x24]");
+    asm("bx lr");
+}
+
+void __attribute__((naked)) ChooseTweakCheck() {
+    asm("stmdb sp!,{r0,r1}");
+    asm("ldr r3,=apSettings");
+    asm("ldr r3,[r3,#0x0]");
+    asm("and r3,r3,#0b0000000001100000");
+    asm("lsr r3,r3,#0x5");
+    asm("cmp r3,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("addne r2,r2,#1"); // originalish instruction
+    asm("moveq r2,#0x42");
+    asm("ldmia sp!,{r0,r1}");
+    asm("bx lr");
+}
+
+void __attribute__((naked)) TypeHeroTweak() {
+    asm("ldr r1,=apSettings");
+    asm("ldr r1,[r1,#0x0]");
+    asm("and r1,r1,#0b0000000001100000");
+    asm("lsr r1,r1,#0x5");
+    asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
+    asm("cmpne r1,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("bne GetPersonality");
+    asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
+    asm("ldr r3,[r3,#0x0]");
+    asm("ldr r4,[r3,#0x24]");
+    asm("b QuizTypeHeroTweakUnhook");
+}
+
+enum monster_id MaleToFemaleForm(enum monster_id monId) {
+    if (GetMonsterGender(monId) == GENDER_MALE && monId < 600) {
+        if (GetMonsterGender(monId + 600) == GENDER_FEMALE) {
+            return monId + 600;
+        }
     }
     
+    return monId;
+}
+
+struct preprocessor_flags preFlags = {.flags_1 = 0b10};
+struct window_flags windowYesNoFlags = {.a_accept = true, .b_cancel = true,
+    .se_on = true, .y_offset_end = true, .x_offset_end = true};
+struct window_flags windowHeroSelectFlags = {.a_accept = true, .se_on = true, 
+    .menu_lower_bar = true};
+
+void QuizCustomStateHandler(QuizData* quizData, int state) {
+    switch (state) {
+        case 0x42: // Compute Starter List.
+            // Build a list of all starters and include starters not normally
+            // pickable in vanilla because of gender exclusivity or partner
+            // exclusivity.
+            int selectable = 0;
+            struct monster_id_16 currMonId;
+            uint8_t genderPicked = quizData->genderResult;
+            int i;
+            int j;
+            for(i = 0; i < 32; i++) {
+                if (genderPicked == 0) {
+                    currMonId.val = FemaleToMaleForm(STARTERS_HERO_IDS[i].val);
+                } else if (genderPicked == 1) {
+                    currMonId.val = MaleToFemaleForm(STARTERS_HERO_IDS[i].val);
+                } else {
+                    currMonId.val = STARTERS_HERO_IDS[i].val;
+                }
+                bool notDuplicate = true;
+                for(j = i; j >= 0; j--) {
+                    if (currMonId.val == quizData->partners[j].val) {
+                        notDuplicate = false;
+                        break;
+                    }
+                }      
+                if(notDuplicate) {
+                    quizData->partners[selectable] = currMonId;
+                    selectable += 1;
+                }
+            }
+            for(i = 0 ; i < 21; i++) {
+                if (selectable == 32) {
+                    break; // The number of entries is full. Bail adding partners!
+                }
+                if (genderPicked == 0) {
+                    currMonId.val = FemaleToMaleForm(STARTERS_PARTNER_IDS[i].val);
+                } else if (genderPicked == 1) {
+                    currMonId.val = MaleToFemaleForm(STARTERS_PARTNER_IDS[i].val);
+                } else {
+                    currMonId.val = STARTERS_HERO_IDS[i].val;
+                }
+                bool notDuplicate = true;
+                for(j = i; j >= 0; j--) {
+                    if (currMonId.val == quizData->partners[j].val) {
+                        notDuplicate = false;
+                        break;
+                    }
+                }      
+                if(notDuplicate) {
+                    quizData->partners[selectable] = currMonId;
+                    selectable += 1;
+                }
+            }
+            quizData->numSelectablePartners = selectable;
+            // Reuse currentQuestion to store species.
+            if (apSettings.starterOptions == STARTER_OPTION_OVERRIDE) {
+                quizData->currentQuestion = (STARTERS_HERO_IDS[(GetPersonality()*2) + quizData->genderResult]).val;
+                quizData->state = quizData->state + 1;
+            } else if (apSettings.starterOptions == STARTER_OPTION_CHOOSE) {
+                quizData->portraitBoxId = CreatePortraitBox(0, 3, 1);
+                quizData->state = 0x46;
+            } // uhhhh breaks if we get to this state in vanilla or random by accident w/o else
+            break;
+        case 0x43:; // Override Check Message
+            struct preprocessor_args preArgs;
+            InitPreprocessorArgs(&preArgs);
+            preArgs.flag_vals[0] = quizData->currentQuestion;
+            ShowDialogueBox(quizData->dialougeBox1Id);
+            ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, CONFIRMATION_STR_ID, &preArgs);
+            quizData->state = quizData->state + 1;
+            break;
+        case 0x44: // Override Check Yes/No Menu
+            if(IsDialogueBoxActive(quizData->dialougeBox1Id) == false) {
+                quizData->menuId = CreateSimpleMenuFromStringIds(&QUIZ_WINDOW_PARAMS_5, windowYesNoFlags, NULL,
+                    QUIZ_MENU_ITEMS_1, 2);
+                quizData->state = quizData->state + 1;
+            }
+            break;
+        case 0x45: // Override Check Response
+            undefined menuResult = GetSimpleMenuResult(quizData->menuId);
+            if(menuResult == 1) {
+                CloseSimpleMenu(quizData->menuId);
+                quizData->menuId = 0xFE;
+                quizData->state = 0x26;
+            } else if (menuResult == 2) {
+                HidePortraitBox(quizData->portraitBoxId);
+                CloseSimpleMenu(quizData->menuId);
+                quizData->menuId = 0xFE;
+                quizData->state = quizData->state + 1;
+            }
+            break;
+        case 0x46: // Make Hero Selection Menu
+            ShowDialogueBox(quizData->dialougeBox1Id);
+            ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, WHO_LIKE_TO_BE_STR_ID, &preArgs);
+            quizData->menuId = CreateAdvancedMenu(&QUIZ_WINDOW_PARAMS_6, windowHeroSelectFlags,
+                NULL, GetOptionStringFromID, quizData->numSelectablePartners, 6);
+            PARTNER_SELECT_MENU_OPTION_TRACKER = 0;
+            PARTNER_SELECT_MENU_OPTION_TIMER = 0;
+            InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                (quizData->partners[0]).val);
+            SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_NORMAL);
+            SetPortraitLayout(&quizData->portraitParams, 4);
+            SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+            ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+            quizData->state += 1;
+            break;
+        case 0x47: // Player Is Picking Hero
+            int selected = (int)GetAdvancedMenuCurrentOption(quizData->menuId);
+            if (PARTNER_SELECT_MENU_OPTION_TRACKER == selected) {
+                int currentCounter = PARTNER_SELECT_MENU_OPTION_TIMER;
+                int emotionThing = currentCounter & 0xFF;
+                PARTNER_SELECT_MENU_OPTION_TIMER = currentCounter + 1;
+                if (emotionThing == 0xF0) { // TODO: Fix the fancy schmancy way this is supposed to look.
+                    InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                    (quizData->partners[selected]).val);
+                    SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_NORMAL);
+                    SetPortraitLayout(&quizData->portraitParams, 4);
+                    SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                    ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+                } else if (emotionThing == 0xC0) {
+                    InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                    (quizData->partners[selected]).val);
+                    SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_JOYOUS);
+                    SetPortraitLayout(&quizData->portraitParams, 4);
+                    SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                    ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+                } else if (emotionThing == 0x90) {
+                    InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                    (quizData->partners[selected]).val);
+                    SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_SURPRISED);
+                    SetPortraitLayout(&quizData->portraitParams, 4);
+                    SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                    ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+                } else if (emotionThing == 0x60) {
+                    InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                    (quizData->partners[selected]).val);
+                    SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_ANGRY);
+                    SetPortraitLayout(&quizData->portraitParams, 4);
+                    SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                    ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+                } else if (emotionThing == 0x30) {
+                    InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                    (quizData->partners[selected]).val);
+                    SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_HAPPY);
+                    SetPortraitLayout(&quizData->portraitParams, 4);
+                    SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                    ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+                }
+            } else {
+                PARTNER_SELECT_MENU_OPTION_TRACKER = selected;
+                PARTNER_SELECT_MENU_OPTION_TIMER = 0;
+                InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
+                (quizData->partners[selected]).val);
+                SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_NORMAL);
+                SetPortraitLayout(&quizData->portraitParams, 4);
+                SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
+                ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
+            }
+            if (IsAdvancedMenuActive(quizData->menuId) == false) {
+                quizData->currentQuestion = quizData->partners[selected].val;
+                CloseAdvancedMenu(quizData->menuId);
+                quizData->menuId = 0xFE;
+                HidePortraitBox(quizData->portraitBoxId);
+                quizData->state = 0x43;
+            }
+            break;
+    }
     return;
 }

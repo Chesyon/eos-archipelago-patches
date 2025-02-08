@@ -1,0 +1,113 @@
+
+def 0 {
+    debug_Print('START');
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            if ( scn($SCENARIO_MAIN) >= [29, 93] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US31', 0);
+                §label_9;
+                supervision_StationCommon(7);
+                debug_Print('LABEL_TEAM_SET');
+                supervision_StationCommon(9);
+                switch ( sector() ) {
+                    case 1:
+                        §label_11;
+                        debug_Print('LABEL_END');
+                        JumpCommon(CORO_COMMON_ENTER);
+                    default:
+                        debug_Print('LABEL_PLAYER_SET');
+                        if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                            debug_Print('LABEL_REBIRTH');
+                            supervision_StationCommon(6);
+                            §label_14;
+                            debug_Print('SET_BGM');
+                            bgm_PlayFadeIn(BGM_SKY_PEAK_SNOWFIELD, 0, 256);
+                            debug_Print('LABEL_ENTER_END');
+                            if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                                $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                jump @label_11;
+                            } elseif ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
+                                screen_FadeIn(1, 30);
+                                screen_FadeInAll(1, 30);
+                                $SCENARIO_MAIN_BIT_FLAG[46] = 0;
+                                message_SetFace(ACTOR_NPC_FUWARAIDO, FACE_NORMAL, FACE_POS_STANDARD);
+                                message_Talk({
+                                    english=" [CS:P]Sky Peak[CR] 6th Station Clearing.\n6th Station Clearing.",
+                                    french=" [CS:P]Pic Céleste[CR], trouée du 6[F:E] Relais,\ntrouée du 6[F:E] Relais!",
+                                    german=" Nächster Halt [CS:P]Himmelsgipfel[CR]\n6. Zwischenlagerlichtung.\n6. Zwischenlagerlichtung.",
+                                    italian=" Bivacco 6 [CS:P]Picco del Cielo[CR]!\nBivacco 6!",
+                                    spanish=" Base del Sexto Puerto de la\n[CS:P]Cumbre del Cielo[CR].\nHemos llegado a la Base del Sexto Puerto.",
+                                });
+                                message_Talk({
+                                    english=" Thank you for your patronage.",
+                                    french=" Merci d\'avoir utilisé\nnos services.",
+                                    german=" Es ist mir immer ein Vergnügen,\ndich als Kunden begrüßen zu dürfen.",
+                                    italian=" Grazie per averci scelto.",
+                                    spanish=" Esperamos verte pronto, gracias.",
+                                });
+                                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                jump @label_11;
+                            } else {
+                                JumpCommon(CORO_COMMON_ENTER);
+                            }
+                        } else {
+                            debug_Print('LABEL_PLAYER_SET_RESUME');
+                            if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                                debug_Print('LABEL_RESUME');
+                                $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                                supervision_StationCommon(4);
+                                jump @label_14;
+                            } elseif ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
+                                supervision_StationCommon(2);
+                                jump @label_14;
+                            } else {
+                                debug_Print('LABEL_PLAYER_SET_NORMAL');
+                                supervision_StationCommon(1);
+                                jump @label_14;
+                            }
+                        }
+                        break;
+                }
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 86] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US22', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 77] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US21', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 68] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US20', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 54] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US04', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US03', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 32] ) {
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US02', 0);
+                jump @label_9;
+            } elseif ( scn($SCENARIO_MAIN) >= [29, 7] ) {
+                §label_8;
+                supervision_ExecuteStationSub(LEVEL_D73P26A, 'US31', 0);
+                jump @label_9;
+            } else {
+                jump @label_8;
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            debug_Print('LABEL_BACK_SET');
+            back_SetGround(LEVEL_D73P26A);
+            supervision_StationCommon(10);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER_APPOINT) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

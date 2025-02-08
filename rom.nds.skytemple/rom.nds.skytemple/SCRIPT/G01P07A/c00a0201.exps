@@ -1,0 +1,207 @@
+
+def 0 {
+    sound_Stop();
+    if ( scn($SCENARIO_MAIN) == [4, 0] ) {
+        §label_0;
+        back_SetBanner2(319, 0, 128, 96, 3, {
+            english="The Scream",
+            french="Le cri",
+            german="Der Schrei",
+            italian="Lo squarcio",
+            spanish="Percepciones",
+        });
+        screen_FadeIn(1, 45);
+        Wait(160);
+        screen_FadeOut(1, 45);
+        Wait(15);
+        §label_4;
+        $SCENARIO_MAIN_BIT_FLAG[1] = 1;
+        message_Narration(30, {
+            english="[CN]The next morning...",
+            french="[CN]Le lendemain matin...",
+            german="[CN]Der nächste Morgen...",
+            italian="[CN]La mattina dopo...",
+            spanish="[CN]A la mañana siguiente...",
+        });
+        message_Close();
+        Wait(30);
+        message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk({
+            english=" UP AND AT \'EM![K] IT\'S MORNING!",
+            french=" DEBOUT! ET QUE ÇA SAUTE![K]\nC\'EST L\'HEURE! HOP HOP HOP!",
+            german=" AUFGESTANDEN UND AB DAFÜR![K]\nES IST MORGEN!",
+            italian=" SVEGLIA![K] È MATTINA!",
+            spanish=" ¡ARRIBA, GANDULES![K]\n¡YA ES DE DÍA!",
+        });
+        message_Close();
+        back_SetGround(LEVEL_G01P07A);
+        supervision_StationCommon(0);
+        supervision_Acting(0);
+        with (performer 0) {
+            camera_SetMyself();
+        }
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(76);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(76);
+        }
+        screen_FadeIn(1, 30);
+        se_Play(8971);
+        camera_SetEffect(2, 2, 33536);
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(18);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            WaitAnimation();
+        }
+        WaitExecuteLives(ACTOR_NPC_DOGOOMU);
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        camera_SetEffect(0, 0, 0);
+        Wait(10);
+        with (actor ACTOR_NPC_DOGOOMU) {
+            MovePositionOffset(33152, -96, 0);
+        }
+        WaitExecuteLives(ACTOR_NPC_DOGOOMU);
+        with (actor ACTOR_NPC_DOGOOMU) {
+            Destroy();
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SlidePositionOffset(1, 1, 0);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        Wait(2);
+        with (actor ACTOR_PLAYER) {
+            SlidePositionOffset(1, 1, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SlidePositionOffset(1, -1, 0);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        Wait(2);
+        with (actor ACTOR_PLAYER) {
+            SlidePositionOffset(1, -1, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SlidePositionOffset(1, 1, 0);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        Wait(2);
+        with (actor ACTOR_PLAYER) {
+            SlidePositionOffset(1, 1, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SlidePositionOffset(1, -1, 0);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        Wait(2);
+        with (actor ACTOR_PLAYER) {
+            SlidePositionOffset(1, -1, 0);
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_DIZZY, FACE_POS_STANDARD);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Ugh! Good morning,\n[hero]...",
+                    french=" Arf... Bonjour,\n[hero]...",
+                    german=" Umpf! Guten Morgen,\n[hero]...",
+                    italian=" Uh! Buongiorno, [hero]...",
+                    spanish=" ¡Aah! Buenos días, [hero].",
+                }
+            case 2:
+                {
+                    english=" Ugh! Good morning,\n[hero]...",
+                    french=" Arf... Bonjour,\n[hero]...",
+                    german=" Umpf! Guten Morgen,\n[hero]...",
+                    italian=" Uh! Buongiorno, [hero]...",
+                    spanish=" ¡Uf! Buenos días, [hero].",
+                }
+            default:
+                {
+                    english=" Ugh! Good morning,\n[hero]...",
+                    french=" Arf... Bonjour,\n[hero]...",
+                    german=" Umpf! Guten Morgen,\n[hero]...",
+                    italian=" Uh! Buongiorno, [hero]...",
+                    spanish=" ¡Huy! Buenos días, [hero].",
+                }
+        }
+        message_Close();
+        Wait(30);
+        bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(63);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(63);
+        }
+        with (actor ACTOR_PLAYER) {
+            WaitAnimation();
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            WaitAnimation();
+        }
+        Wait(10);
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_PLAYER) {
+            Turn2Direction(4, 10, DIR_DOWN);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2Direction(4, 10, DIR_DOWN);
+        }
+        Wait(30);
+        main_SetGround(LEVEL_G01P07A);
+        $SCENARIO_MAIN_BIT_FLAG[7] = 1;
+        CallCommon(CORO_HANYOU_SAVE_FUNC);
+        CallCommon(CORO_EVENT_END_MAPIN);
+        supervision_ExecuteStationCommon(LEVEL_G01P07A, 1);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) == [5, 0] ) {
+        back_SetBanner2(358, 0, 156, 136, 4, {
+            english="The Gatekeepers",
+            french="Les gardiens de l\'entrée",
+            german="Die Torwächter",
+            italian="Al posto\ndi guardia",
+            spanish="De guardia",
+        });
+        screen_FadeIn(1, 45);
+        Wait(160);
+        screen_FadeOut(1, 45);
+        Wait(15);
+        jump @label_4;
+    } elseif ( scn($SCENARIO_MAIN) == [6, 0] ) {
+        back_SetBanner2(18, 0, 252, 180, 5, {
+            english="The First\nOfficial\nExploration",
+            french="Première\nexploration\nofficielle",
+            german="Die erste\noffizielle\nErkundung",
+            italian="La prima\nesplorazione",
+            spanish="La primera\nexploración\noficial",
+        });
+        screen_FadeIn(1, 45);
+        Wait(160);
+        screen_FadeOut(1, 45);
+        Wait(15);
+        jump @label_4;
+    } elseif ( scn($SCENARIO_MAIN) == [7, 0] ) {
+        back_SetBanner2(22, 0, 276, 128, 6, {
+            english="Team Skull",
+            french="L\'Equipe\nCrâne",
+            german="Team Totenkopf",
+            italian="Il Team Teschio",
+            spanish="El Equipo\nCalavera",
+        });
+        screen_FadeIn(1, 45);
+        Wait(160);
+        screen_FadeOut(1, 45);
+        Wait(15);
+        jump @label_4;
+    } else {
+        jump @label_4;
+    }
+}

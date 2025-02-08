@@ -1,0 +1,1100 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_G01P05A);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Guildmaster![K] I present to you\ntwo Pokémon who wish to join our guild as\napprentices.",
+        french=" Maître![K] Je vous présente\ndeux Pokémon qui souhaiteraient rejoindre\nla Guilde et faire partie des apprentis.",
+        german=" Gildenmeister![K] Ich bringe zwei\nPokémon, die Lehrlinge in unserer Gilde\nwerden möchten.",
+        italian=" Capitano![K] Le presento\ndue Pokémon che desiderano unirsi alla nostra\nGilda come apprendisti.",
+        spanish=" ¡Gran Bluff![K] Te presento\na dos Pokémon que desean unirse\na nuestro [CS:N]Pokégremio[CR] como aprendices.",
+    });
+    message_Talk(" I hear they just cleared [CS:P]Beach Cave[CR],\none of the hardest dungeons there is![K] They\nshould make for excellent guild recruits!");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    Wait(60);
+    se_Play(8964);
+    with (actor ACTOR_NPC_PERAPPU) {
+        SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_LEFT, 3);
+    }
+    with (actor ACTOR_NPC_PERAPPU) {
+        WaitEffect();
+    }
+    Wait(30);
+    message_Talk({
+        english=" Guildmaster...[K]um...[K]Guildmaster?",
+        french=" Maître...[K] Hum hum...[K]\nMaître?",
+        german=" Gildenmeister...[K] Äh...[K]\nGildenmeister?",
+        italian=" Capitano...[K] ehm...[K] Capitano?",
+        spanish=" ¿Gran Bluff?[K] Esto...[K]\n¿Maestro?",
+    });
+    message_Close();
+    Wait(60);
+    with (actor ACTOR_NPC_PUKURIN) {
+        Turn2Direction(1, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_PUKURIN);
+    se_Play(8974);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    bgm_PlayFadeIn(BGM_GUILDMASTER_WIGGLYTUFF, 0, 256);
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Hiya!",
+        french=" Amis du jour, bonjour!",
+        german=" Hallöchen!",
+        italian=" Ullalà!",
+        spanish=" ¿Qué hay?",
+    });
+    message_Talk({
+        english=" I\'m [CS:N]Wigglytuff[CR]![K] I\'m the guild\'s\nGuildmaster!",
+        french=" Je m\'appelle [CS:N]Grodoudou[CR]![K]\nJe suis le Maître de la Guilde!",
+        german=" Ich bin [CS:N]Knuddeluff[CR]![K] Ich bin der\nMeister der Gilde!",
+        italian=" Mi chiamo [CS:N]Wigglytuff[CR]![K] Sono il\nCapitano della Gilda!",
+        spanish=" ¡Soy [CS:N]Wigglytuff[CR]![K]\n¡Soy el Gran Bluff de este [CS:N]Pokégremio[CR]!",
+    });
+    message_Talk({
+        english=" You want to form an exploration\nteam?[K] Then, let\'s go for it!",
+        french=" Vous voulez créer une équipe\nd\'exploration?[K] Alors allons-y!",
+        german=" Ihr wollt ein Erkundungsteam\ngründen?[K] Na dann, auf geht\'s!",
+        italian=" Volete formare una squadra \nd\'esplorazione?[K] Beh, allora cosa stiamo\naspettando?",
+        spanish=" ¿Queréis formar un equipo\nexplorador?[K] ¡Pues adelante!",
+    });
+    message_Talk({
+        english=" First we must register your\nexploration team\'s name!",
+        french=" Nous devons tout d\'abord\nenregistrer le nom de votre équipe\nd\'exploration!",
+        german=" Als Erstes müssen wir den\nNamen eures Erkundungsteams registrieren!",
+        italian=" Come prima cosa, bisogna \nregistrare il nome della vostra squadra!",
+        spanish=" ¡Lo primero es registrar\nel nombre de vuestro equipo!",
+    });
+    message_Talk({
+        english=" So tell me your team\'s name?",
+        french=" Quel est le nom de votre équipe?",
+        german=" Der Name des Teams lautet?",
+        italian=" Qual è il nome?",
+        spanish=" Así que... ¿cómo queréis que\nse llame vuestro equipo?",
+    });
+    message_Close();
+    se_Play(8972);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Huh? The team\'s name?",
+                french=" Hum? Le nom de l\'équipe?",
+                german=" Häh? Der Name des Teams?",
+                italian=" Eh? Il nome della squadra?",
+                spanish=" Ah... ¿El nombre del equipo?",
+            }
+        case 2:
+            {
+                english=" Oh? Our team\'s name?",
+                french=" Hum? Le nom de l\'équipe?",
+                german=" Oh! Der Name unseres Teams?",
+                italian=" Eh? Il nome della squadra?",
+                spanish=" Ah... ¿El nombre del equipo?",
+            }
+        default:
+            {
+                english=" Oh? Our team\'s name?",
+                french=" Hum? Le nom de l\'équipe?",
+                german=" Oh! Der Name unseres Teams?",
+                italian=" Eh? Il nome della squadra?",
+                spanish=" Oh... ¿El nombre del equipo?",
+            }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[1]) {
+        message_Talk(" [hero] already chose [team]!");
+        message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+        message_Talk({
+            english="  All settled, then![K] I\'ll register\nyour team as [team:].",
+            french=" C\'est décidé![K] J\'enregistre votre\néquipe sous le nom [team:].",
+            german=" Dann hätten wir das![K] Ich\nregistriere euer Team unter dem Namen\n[team:].",
+            italian=" Allora è tutto stabilito![K] Vi \nregistrerò come Team [team:].",
+            spanish=" ¡Pues ya está decidido![K] Voy a\nregistrar vuestro equipo como [team:].",
+        });
+    } else {
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" I never thought of that.",
+                    french=" On n\'y a pas réfléchi.",
+                    german=" Daran habe ich noch gar nicht\ngedacht.",
+                    italian=" Non ci ho mai pensato.",
+                    spanish=" No me había parado a pensarlo.",
+                }
+            case 2:
+                {
+                    english=" We didn\'t think of that.",
+                    french=" On n\'y a pas réfléchi.",
+                    german=" Daran haben wir noch nicht\ngedacht.",
+                    italian=" Non ci abbiamo mai pensato.",
+                    spanish=" No habíamos pensado en ello.",
+                }
+            default:
+                {
+                    english=" I didn\'t think about a team name.",
+                    french=" On n\'y a pas réfléchi.",
+                    german=" Ich habe mir noch keinen Namen\nüberlegt.",
+                    italian=" Non ci ho mai pensato.",
+                    spanish=" No me había parado a pensarlo.",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+        }
+        with (actor ACTOR_NPC_PERAPPU) {
+            Turn2Direction(4, 10, DIR_DOWNLEFT);
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Hey, do you have any ideas for a\ncool name, [hero]?",
+                    french=" Hé! Est-ce que tu as une idée?\nIl nous faut un nom qui sonne bien,\n[hero]!",
+                    german=" Hey, fällt dir ein cooler Name\nein, [hero]?",
+                    italian=" Ehi, tu hai qualche idea,\n[hero]?",
+                    spanish=" Oye, ¿a ti se te ha ocurrido\nalgún nombre interesante, [hero]?",
+                }
+            case 2:
+                {
+                    english=" So what do you think would be a\ngood name for us, [hero]?",
+                    french=" Hé! Est-ce que tu as une idée?\nIl nous faut un nom qui sonne bien,\n[hero]!",
+                    german=" Welchen Namen würdest du denn\ngut finden, [hero]?",
+                    italian=" Ehi, tu hai qualche idea,\n[hero]?",
+                    spanish=" ¿A ti cuál te parece que sería\nun buen nombre, [hero]?",
+                }
+            default:
+                {
+                    english=" So what do you think would be a\ngood name for us, [hero]?",
+                    french=" Hé! Est-ce que tu as une idée?\nIl nous faut un nom qui sonne bien,\n[hero]!",
+                    german=" Welchen Namen würdest du denn\ngut finden, [hero]?",
+                    italian=" Ehi, tu hai qualche idea,\n[hero]?",
+                    spanish=" ¿Tú cuál crees que sería\nun buen nombre para el equipo, [hero]?",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" You can\'t think of one either?[K]\nOh well, I suppose the name can wait.[K] You\nnever know when [CS:C]inspiration[CR] will hit, right?");
+        message_Close();
+//  switch ( message_Menu(MENU_TEAM_NAME) ) { }
+//  $PERFORMANCE_PROGRESS_LIST[1] = 1;
+/*
+    se_Play(8965);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" ...[team:]?![K]\nTeam [team:]!",
+                french=" ... [team:]?![K] L\'Equipe\n[team:]!",
+                german=" ...[team:]?!?[K]\nTeam [team:]!",
+                italian=" ... [team:]?![K]\nTeam [team:]!",
+                spanish=" ¡¿[CS:X]Equipo[CR] [team:]?![K]\n¡[CS:X]Equipo[CR] [team:]!",
+            }
+        case 2:
+            {
+                english=" ...[team:]?![K]\nTeam [team:]!",
+                french=" ... [team:]?![K] L\'Equipe\n[team:]!",
+                german=" ...[team:]?!?[K]\nTeam [team:]!",
+                italian=" ... [team:]?![K]\nTeam [team:]!",
+                spanish=" ¡¿[CS:X]Equipo[CR] [team:]?![K]\n¡[CS:X]Equipo[CR] [team:]!",
+            }
+        default:
+            {
+                english=" ...[team:]?![K]\nTeam [team:]!",
+                french=" ... [team:]?![K] L\'Equipe\n[team:]!",
+                german=" ...[team:]?!?[K]\nTeam [team:]!",
+                italian=" ... [team:]?![K]\nTeam [team:]!",
+                spanish=" ¡¿[CS:X]Equipo[CR] [team:]?![K]\n¡[CS:X]Equipo[CR] [team:]!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yeah... That\'s a good name![K]\nI like it!",
+                french=" Ça me plaît bien... C\'est un nom\nsuper![K] Il nous va bien!",
+                german=" Jep, der Name ist gut![K]\nEr gefällt mir!",
+                italian=" Sì... È un bel nome![K]\nMi piace!",
+                spanish=" Sí... ¡Es un buen nombre![K]\n¡Me gusta!",
+            }
+        case 2:
+            {
+                english=" Yeah... That\'s a good name![K]\nIt suits us!",
+                french=" Ça me plaît bien... C\'est un nom\nsuper![K] Il nous va bien!",
+                german=" Ja, das ist ein guter Name![K]\nEr passt zu uns!",
+                italian=" Sì... È un bel nome![K]\nMi piace!",
+                spanish=" Sí... ¡Es un buen nombre![K]\n¡Es apropiado para nosotros!",
+            }
+        default:
+            {
+                english=" I like it! It\'s a good name![K]\nIt\'s perfect for us!",
+                french=" Ça me plaît bien... C\'est un nom\nsuper![K] Il nous va bien!",
+                german=" Das gefällt mir! Ein guter\nName![K] Er passt perfekt zu uns!",
+                italian=" Sì... È un bel nome![K]\nMi piace!",
+                spanish=" Sí... ¡Es un buen nombre![K]\n¡Me encanta!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+*/
+        message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+        message_Talk({
+            english="  All settled, then![K] I\'ll register\nyour team as [team:] for now, but it won\'t be\nofficial until you come up with one yourself!.",
+            french=" C\'est décidé![K] J\'enregistre votre\néquipe sous le nom [team:].",
+            german=" Dann hätten wir das![K] Ich\nregistriere euer Team unter dem Namen\n[team:].",
+            italian=" Allora è tutto stabilito![K] Vi \nregistrerò come Team [team:].",
+            spanish=" ¡Pues ya está decidido![K] Voy a\nregistrar vuestro equipo como [team:].",
+        });
+    }
+    message_Talk({
+        english=" Registering! ♪ Registering! ♪",
+        french=" Enregistrement! ♪\nEnregistrement! ♪",
+        german=" Registriere! ♪ Registriere! ♪",
+        italian=" Registrazione! ♪ \nRegistrazione! ♪",
+        spanish=" ¡Registrando! ♪\n¡Registrando! ♪",
+    });
+    message_Talk({
+        english=" All registered...",
+        french=" Enregistrement terminé...",
+        german=" Alles registriert...",
+        italian=" Fatto...",
+        spanish=" Ya está registrado...",
+    });
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_SIGH, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" YOOM...TAH!",
+        french=" TA-DAAAAA!",
+        german=" LUUUU... FIIII!",
+        italian=" BADABUM!",
+        spanish=" ¡Genial!",
+    });
+    with (actor ACTOR_NPC_PUKURIN) {
+        SetAnimation(17);
+    }
+    with (actor ACTOR_NPC_PUKURIN) {
+        WaitAnimation();
+    }
+    bgm_Stop();
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(5);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    WaitExecuteLives(ACTOR_NPC_PUKURIN);
+    with (actor ACTOR_NPC_PUKURIN) {
+        SetAnimation(2);
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    message_Talk({
+        english=" Congratulations![K] From now on,\nyou\'re an official exploration team!",
+        french=" Félicitations![K] Dorénavant,\nvous formez une équipe d\'exploration\nen bonne et due forme!",
+        german=" Glückwunsch![K] Ab heute seid ihr\noffiziell ein Erkundungsteam!",
+        italian=" Congratulazioni![K] Ora siete\nufficialmente una squadra d\'esplorazione!",
+        spanish=" ¡Enhorabuena![K] Desde ahora,\nsois oficialmente un equipo explorador.",
+    });
+    message_Talk({
+        english=" I present you with this in\ncommemoration.",
+        french=" En gage de bienvenue, je vous\noffre ceci.",
+        german=" Zu diesem Anlass überreiche ich\neuch dies hier.",
+        italian=" In ricordo di questo evento,\nvi dono questo.",
+        spanish=" Aquí tenéis un regalito\npara celebrarlo.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_PUKURIN) {
+        MovePositionOffset(32972, 0, 16);
+    }
+    WaitExecuteLives(ACTOR_NPC_PUKURIN);
+    with (actor ACTOR_NPC_PERAPPU) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    se_Play(6410);
+    supervision_Acting(1);
+    Wait(30);
+    message_Mail({
+        english="[CN][CS:N]Wigglytuff[CR] set down\n[CN]a Pokémon Exploration Team Kit!",
+        french="[CN][CS:N]Grodoudou[CR] dépose\n[CN]un Kit d\'Exploration!",
+        german="[CN][CS:N]Knuddeluff[CR] überreicht\n[CN]ein Pokémon-Erkundungsteam-Kit!",
+        italian="[CN][CS:N]Wigglytuff[CR] porge\n[CN]un Kit per esploratori!",
+        spanish="[CN]¡[CS:N]Wigglytuff[CR] ofreció\n[CN]un Kit de Exploración Pokémon!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_PUKURIN) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_NPC_PUKURIN) {
+        SlidePositionOffset(32972, 0, -16);
+    }
+    WaitExecuteLives(ACTOR_NPC_PUKURIN);
+    with (actor ACTOR_NPC_PUKURIN) {
+        SetAnimation(2);
+    }
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" A Pokémon Exploration\nTeam Kit?",
+                french=" Un Kit d\'Exploration?",
+                german=" Pokémon-Erkundungsteam-Kit?",
+                italian=" Un Kit per esploratori Pokémon?",
+                spanish=" ¿Un Kit de Exploración\nPokémon?",
+            }
+        case 2:
+            {
+                english=" A Pokémon Exploration\nTeam Kit?",
+                french=" Un Kit d\'Exploration?",
+                german=" Pokémon-Erkundungsteam-Kit?",
+                italian=" Un Kit per esploratori Pokémon?",
+                spanish=" ¿Un Kit de Exploración\nPokémon?",
+            }
+        default:
+            {
+                english=" A Pokémon Exploration\nTeam Kit?",
+                french=" Un Kit d\'Exploration?",
+                german=" Pokémon-Erkundungsteam-Kit?",
+                italian=" Un Kit per esploratori Pokémon?",
+                spanish=" ¿Un Kit de Exploración\nPokémon?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Yup. It\'s what every exploration\nteam needs.",
+        french=" Ouaip. N\'importe quelle équipe\nd\'exploration en a toujours besoin.",
+        german=" Jep. Jedes Erkundungsteam\nbraucht eines.",
+        italian=" Già. Ogni squadra d\'esplorazione\ndeve averne uno.",
+        spanish=" Exacto. Contiene justo lo que\nnecesita un equipo explorador.",
+    });
+    message_Talk({
+        english=" Quick, open it up.",
+        french=" Vite, ouvrez-le.",
+        german=" Schnell, macht es auf!",
+        italian=" Forza, apritelo!",
+        spanish=" ¡Venga, abridlo!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionOffset(1, 0, -12);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        MovePositionOffset(1, 0, -12);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    Wait(15);
+    se_Play(6411);
+    with (object OBJECT_G01P05A1_106) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_G01P05A1_106) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P05A1_106);
+    Wait(30);
+    message_Mail({
+        english="[CN][partner] opened the\n[CN]Pokémon Exploration Team Kit.",
+        french="[CN][partner] ouvre\n[CN]le Kit d\'Exploration.",
+        german="[CN][partner] öffnet\n[CN]das Pokémon-Erkundungsteam-Kit.",
+        italian="[CN][partner] apre\n[CN]il Kit per esploratori Pokémon.",
+        spanish="[CN][partner] abrió el\n[CN]Kit de Exploración Pokémon.",
+    });
+    message_Close();
+    screen_FadeOut(1, 30);
+    Wait(10);
+    back_SetGround(LEVEL_V02P08A);
+    supervision_RemoveActing(0);
+    supervision_Acting(2);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    Wait(30);
+    me_Play(4);
+    message_Mail({
+        english="[CN]There was an\n[CN]Explorer Badge inside...",
+        french="[CN]A l\'intérieur, il y a un\n[CN]Badge d\'Explorateur...",
+        german="[CN]Darin sind\n[CN]ein Erkunderorden,",
+        italian="[CN]Contiene una\n[CN]Targhetta dell\'esploratore...",
+        spanish="[CN]Dentro hay una\n[CN]Placa de Explorador...",
+    });
+    WaitMe(4);
+    message_KeyWait();
+    me_Play(4);
+    message_Mail({
+        english="[CN]And a Wonder Map...",
+        french="[CN]... une Carte Miracle...",
+        german="[CN]eine Wunderkarte",
+        italian="[CN]... una Mappa delle meraviglie...",
+        spanish="[CN]un Mapa Mágico...",
+    });
+    WaitMe(4);
+    message_KeyWait();
+    me_Play(4);
+    message_Mail({
+        english="[CN]And possibly a Treasure Bag!",
+        french="[CN]... et un Sac à Trésor!",
+        german="[CN]und ein Schatzbeutel!",
+        italian="[CN]... e persino una Sacca dei tesori!",
+        spanish="[CN]¡Y una Bolsa para guardar tesoros!",
+    });
+    WaitMe(4);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yeah! There\'s all sorts of good\nstuff in here!",
+                french=" Ouais! Il y a plein d\'objets super\nlà-dedans!",
+                german=" Hey! Da sind lauter coole\nSachen drin!",
+                italian=" Wow! Ci sono un sacco di cose \nutili qui dentro!",
+                spanish=" ¡Genial! ¡Hay cantidad de objetos\ndentro!",
+            }
+        case 2:
+            {
+                english=" Yeah! There are all sorts of \ngreat items in here!",
+                french=" Ouais! Il y a plein d\'objets super\nlà-dedans!",
+                german=" Hey! Da sind lauter tolle\nItems drin!",
+                italian=" Wow! Ci sono un sacco di cose \nutili qui dentro!",
+                spanish=" ¡Qué bien! ¡Aquí dentro hay todo\ntipo de objetos!",
+            }
+        default:
+            {
+                english=" Yes! There are all sorts of\ngreat items in here!",
+                french=" Ouais! Il y a plein d\'objets super\nlà-dedans!",
+                german=" Ja! Da sind lauter tolle\nItems drin!",
+                italian=" Wow! Ci sono un sacco di cose \nutili qui dentro!",
+                spanish=" ¡Vaya! ¡Mira qué objetos tan\ninteresantes hay dentro!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" That\'s your Explorer Badge! It\'s\nyour official team identification!",
+        french=" Voici votre Badge d\'Explorateur!\nIl permet de vous identifier en tant qu\'équipe\nd\'exploration officielle!",
+        german=" Das ist euer Erkunderorden. Er\nist das offizielle Erkennungszeichen eures\nTeams.",
+        italian=" Questa è la vostra Targhetta \ndell\'esploratore! È il documento di \nriconoscimento ufficiale della vostra squadra!",
+        spanish=" Esa es vuestra Placa de\nExplorador. Sirve como identificación\noficial de vuestro equipo.",
+    });
+    message_Talk({
+        english=" And there\'s the Wonder Map,\nwhich is a wonder of convenience!",
+        french=" Ceci est la Carte Miracle, qui\nest si pratique, si géniale! Cette carte,\nc\'est un miracle, en somme!",
+        german=" Und diese Wunderkarte ist\neinfach wunderbar praktisch!",
+        italian=" E poi c\'è la Mappa delle \nmeraviglie, un oggetto utilissimo!",
+        spanish=" Y eso es el Mapa Mágico.\n¡Os resultará bastante útil!",
+    });
+    message_Talk({
+        english=" Finally, there\'s a Treasure Bag.[K] \nIt lets you [CS:C]carry more than one item![CR]",
+        french=" Pour finir, voici votre Sac\nà Trésor.[K] Il vous permet de transporter\nles objets que vous trouvez dans les donjons.",
+        german=" Dann ist da noch der\nSchatzbeutel.[K] Darin bewahrt ihr auf, was ihr in\nDungeons findet.",
+        italian=" Infine, la Sacca dei tesori.[K] \nVi permette di trasportare gli strumenti che\ntrovate nei dungeon.",
+        spanish=" Por último está la Bolsa.[K] \nOs servirá para guardar los objetos que\nencontréis en vuestras exploraciones.",
+    });
+    message_Talk({
+        english=" Your successes as an exploration\nteam can lead to bigger and bigger space for\nyour Treasure Bag.",
+        french=" Plus vous accomplirez d\'exploits\nen tant qu\'équipe d\'exploration, plus votre Sac\nà Trésor pourra contenir d\'objets.",
+        german=" Wenn ihr als Erkundungsteam\nErfolg habt, könnt ihr das Fassungsvermögen\neures Schatzbeutels vergrößern.",
+        italian=" In seguito ai vostri successi \ncome squadra d\'esplorazione, lo spazio nella\nSacca aumenterà sempre di più.",
+        spanish=" Si conseguís muchos éxitos\ncomo exploradores, podréis llevar más\nobjetos en la Bolsa.",
+    });
+    message_Talk({
+        english=" It\'s a very wonderful bag! ♪[K]\n...I think!",
+        french=" C\'est un sac exceptionnel! ♪",
+        german=" Es ist einfach ein wundervoller\nBeutel! ♪",
+        italian=" È una sacca meravigliosa! ♪",
+        spanish=" ¡Es una bolsa estupenda! ♪",
+    });
+    message_Talk({
+        english=" Have a peek inside your\nTreasure Bag.",
+        french=" Jetez un coup d\'œil dans votre\nSac à Trésor.",
+        german=" Werft doch mal einen Blick in\neuren Schatzbeutel.",
+        italian=" Date un\'occhiata all\'interno della\nSacca dei tesori.",
+        spanish=" Echad un vistazo dentro de\nla Bolsa.",
+    });
+    message_Close();
+    screen_FadeOut(1, 30);
+    supervision_RemoveActing(2);
+    back_SetGround(LEVEL_G01P05A);
+    supervision_Acting(3);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (object OBJECT_G01P05A1_106) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_G01P05A1_106) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P05A1_106);
+    screen_FadeIn(1, 30);
+    Wait(30);
+    message_Mail({
+        english="[CN][partner] peered into\n[CN]Schrödinger\'s Treasure Bag.",
+        french="[CN][partner] regarde dans\n[CN]le Sac à Trésor.",
+        german="[CN][partner] wirft einen Blick in\n[CN]den Schatzbeutel.",
+        italian="[CN][partner] guarda nella\n[CN]Sacca dei tesori.",
+        spanish="[CN][partner] miró\n[CN]dentro de la Bolsa.",
+    });
+    message_KeyWait();
+    switch ( ProcessSpecial(PROCESS_SPECIAL_GET_HERO_KIND, 0, 0) ) {
+        case 0:
+        default:
+            §label_0;
+            item_Set(0, 37, 0);
+            break;
+        case 1:
+            item_Set(0, 40, 0);
+            jump @label_21;
+        case 2:
+            item_Set(0, 41, 0);
+            jump @label_21;
+        case 3:
+            item_Set(0, 23, 0);
+            jump @label_21;
+        case 4:
+            item_Set(0, 23, 0);
+            jump @label_21;
+        case 5:
+            item_Set(0, 37, 0);
+            jump @label_21;
+        case 6:
+            item_Set(0, 37, 0);
+            jump @label_21;
+        case 7:
+            item_Set(0, 40, 0);
+            jump @label_21;
+        case 8:
+            item_Set(0, 41, 0);
+            jump @label_21;
+        case 9:
+            item_Set(0, 26, 0);
+            jump @label_21;
+        case 10:
+            item_Set(0, 40, 0);
+            jump @label_21;
+        case 11:
+            item_Set(0, 26, 0);
+            jump @label_21;
+        case 12:
+            item_Set(0, 41, 0);
+            jump @label_21;
+        case 13:
+            item_Set(0, 26, 0);
+            jump @label_21;
+        case 14:
+            item_Set(0, 23, 0);
+            jump @label_21;
+        case 15:
+            item_Set(0, 40, 0);
+            jump @label_21;
+        case 16:
+            item_Set(0, 40, 0);
+            jump @label_21;
+        case 17:
+            item_Set(0, 41, 0);
+            jump @label_21;
+        case 18:
+            item_Set(0, 26, 0);
+            jump @label_21;
+        case 19:
+            item_Set(0, 41, 0);
+            jump @label_21;
+        case 20:
+            item_Set(0, 37, 0);
+            jump @label_21;
+    }
+    §label_21;
+    me_Play(4);
+    message_Mail({
+        english="[CN]The [s_item:0]\n[CN]was inside!",
+        french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
+        german="[CN]Darin ist das Item\n[CN][s_item:0]!",
+        italian="[CN]Al suo interno c\'è lo strumento\n[CN][s_item:0]!",
+        spanish="[CN]¡Dentro había\n[CN]el objeto [s_item:0]!",
+    });
+    WaitMe(4);
+    message_KeyWait();
+    switch(ProcessSpecial(56,0,0)) {
+        case 0: // Bag NOT full
+            switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+            break;
+        case 1:
+            message_Mail(" But the bag disappeared, and you don't have room for it!");
+            message_Close();
+            switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+            break;
+    }
+    switch ( $CONFIG_COLOR_KIND ) {
+        case 0:
+        default:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Silver Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Argent[CR]!",
+                german="\n[CN]Es ist ein [CS:I]Silberband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccargento[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Plata[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 428, 0);
+            jump @label_38;
+        case 1:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Brown Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Brun[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Braunband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccobruno[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Marrón[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 429, 0);
+            jump @label_38;
+        case 2:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Red Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Rouge[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Rotband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccorosso[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Granate[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 430, 0);
+            jump @label_38;
+        case 3:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Pink Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Rose[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Rosaband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccorosa[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Salmón[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 431, 0);
+            jump @label_38;
+        case 4:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]An [CS:I]Orange Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Orange[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Orangeband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccarancio[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Naranja[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 432, 0);
+            jump @label_38;
+        case 5:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Yellow Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Jaune[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Gelbband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccogiallo[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Ámbar[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 433, 0);
+            jump @label_38;
+        case 6:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Lime Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Citron[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Neonband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccolimone[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Lima[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 434, 0);
+            jump @label_38;
+        case 7:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Green Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Vert[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Grünband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccoverde[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Oliva[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 435, 0);
+            jump @label_38;
+        case 8:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Viridian Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Jade[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Smaragdband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccogiada[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Glauco[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 436, 0);
+            jump @label_38;
+        case 9:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Minty Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Menthe[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Türkisband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccomenta[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Jade[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 437, 0);
+            jump @label_38;
+        case 10:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Sky Blue Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Azur[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Hellblauband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccazzurro[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Celeste[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 438, 0);
+            jump @label_38;
+        case 11:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Blue Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Bleu[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Blauband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccoblu[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Añil[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 439, 0);
+            jump @label_38;
+        case 12:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Cobalt Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Cobalt[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Kobaltband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccobalto[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Cobalto[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 440, 0);
+            jump @label_38;
+        case 13:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Purple Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Mauve[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Lilaband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccoindaco[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Púrpura[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 441, 0);
+            jump @label_38;
+        case 14:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Violet Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Violet[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Violettband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccoviola[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Violeta[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 442, 0);
+            jump @label_38;
+        case 15:
+            me_Play(4);
+            message_Mail({
+                english="\n[CN]A [CS:I]Fuchsia Bow[CR] was also inside!",
+                french="\n[CN]Il y a aussi un [CS:I]Ruban Fuchsia[CR]!",
+                german="\n[CN]Es ist auch ein [CS:I]Purpurband[CR] darin!",
+                italian="[CN]Ma non solo! Dentro c\'è anche\n[CN]un [CS:I]Fioccofucsia[CR]!",
+                spanish="[CN]¡Dentro también hay un [CS:I]Lazo Fucsia[CR]!",
+            });
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 443, 0);
+            jump @label_38;
+    }
+    §label_38;
+    switch(ProcessSpecial(56,0,0)) {
+        case 0: // Bag NOT full
+            switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+            break;
+        case 1:
+            message_Mail(" But the bag disappeared, and you don't have room for it!");
+            message_Close();
+            switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+            break;
+    }
+    Wait(10);
+    Wait(20);
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Those two items are special.",
+        french=" Ces deux objets sont très\nparticuliers.",
+        german=" Das sind zwei besondere Items.",
+        italian=" Si tratta di due strumenti \nspeciali.",
+        spanish=" Estos dos objetos son especiales.",
+    });
+    message_Talk({
+        english=" I\'m sure they will help you on\nyour adventures! ♪",
+        french=" Je suis sûr qu\'ils vous seront\nutiles lors de vos aventures! ♪",
+        german=" Sie werden euch auf euren\nAbenteuern sicherlich von Nutzen sein! ♪",
+        italian=" Sono certo che vi aiuteranno \nnelle vostre avventure! ♪",
+        spanish=" ¡Estoy seguro de que os\nresultarán útiles en vuestras aventuras! ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Th-thank you![K] We\'ll do our best!",
+                french=" M-merci![K] Nous allons faire\nde notre mieux!",
+                german=" D-danke![K] Wir werden unser\nBestes geben!",
+                italian=" G-Grazie![K] Faremo del nostro\nmeglio!",
+                spanish=" ¡Gracias![K]\n¡Nos esforzaremos todo lo que podamos!",
+            }
+        case 2:
+            {
+                english=" Th-thank you![K] We\'ll do our best!",
+                french=" M-merci![K] Nous allons faire\nde notre mieux!",
+                german=" D-danke![K] Wir werden unser\nBestes geben!",
+                italian=" G-Grazie![K] Faremo del nostro\nmeglio!",
+                spanish=" ¡Gracias![K]\n¡Intentaremos esforzarnos al máximo!",
+            }
+        default:
+            {
+                english=" Th-thank you![K] We\'ll do our best!",
+                french=" M-merci![K] Nous allons faire\nde notre mieux!",
+                german=" D-danke![K] Wir werden unser\nBestes geben!",
+                italian=" G-Grazie![K] Faremo del nostro\nmeglio!",
+                spanish=" ¡Muchas gracias![K]\n¡Haremos todo lo que podamos!",
+            }
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Yup.[K] But you\'re only apprenticing\nright now. So do your best...to train!",
+        french=" Ouaip.[K] Mais en attendant,\nvous n\'êtes qu\'en apprentissage. Alors faites\nde votre mieux... pour vous entraîner!",
+        german=" Jep.[K] Aber im Moment seid ihr\nnur Lehrlinge. Gebt euer Bestes und trainiert!",
+        italian=" Sì.[K] Ma per il momento siete\nsolo apprendisti. Quindi fate del vostro\nmeglio... in allenamento!",
+        spanish=" Sí.[K] Pero por ahora solo sois\naprendices. Así que esforzaos todo lo que\npodáis durante vuestro entrenamiento.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" We will!",
+                french=" D\'accord!",
+                german=" Das werden wir!",
+                italian=" Certo!",
+                spanish=" ¡Lo haremos!",
+            }
+        case 2:
+            {
+                english=" We will!",
+                french=" D\'accord!",
+                german=" Das werden wir!",
+                italian=" Certo!",
+                spanish=" ¡Así será!",
+            }
+        default:
+            {
+                english=" We will!",
+                french=" D\'accord!",
+                german=" Das werden wir!",
+                italian=" Certo!",
+                spanish=" ¡Lo intentaremos!",
+            }
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s do this right, [hero]!",
+                french=" Donnons le meilleur\nde nous-mêmes, [hero]!",
+                german=" Wir schaffen das, [hero]!",
+                italian=" Mettiamocela \ntutta, [hero]!",
+                spanish=" ¡Tenemos que hacer las cosas\nbien, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s always do our best,\n[hero]!",
+                french=" Donnons le meilleur\nde nous-mêmes, [hero]!",
+                german=" Lass uns immer unser Bestes\ngeben, [hero]!",
+                italian=" Mettiamocela \ntutta, [hero]!",
+                spanish=" ¡Hay que esforzarse al máximo,\n[hero]!",
+            }
+        default:
+            {
+                english=" Let\'s always do our best,\n[hero]!",
+                french=" Donnons le meilleur\nde nous-mêmes, [hero]!",
+                german=" Lass uns immer unser Bestes\ngeben, [hero]!",
+                italian=" Mettiamocela \ntutta, [hero]!",
+                spanish=" ¡Lo haremos siempre lo mejor\nque podamos, [hero]!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    Wait(45);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(20);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(66);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(66);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    Wait(80);
+    bgm_FadeOut(120);
+    screen_FadeOut(1, 60);
+    WaitBgm(BGM_WIGGLYTUFFS_GUILD);
+    end;
+}

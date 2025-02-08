@@ -1,0 +1,21 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_Notice({
+        english="[CN]Move Linking and\n[CN]Banking Services This Way →\n[CN][CS:K]Electivire[CR] Link Shop    [CS:K]Duskull[CR] Bank",
+        french="[CN]Création de chaînes de capacités\n[CN]Services bancaires →\n[CN][CS:K]Stand Chaîne Elekable[CR]    [CS:K]Banque Skelénox[CR]",
+        german="[CN]Zum Kombinieren von Attacken (Link)\n[CN]und für Bankgeschäfte hier entlang →\n[CN][CS:K]Elevoltek-Link[CR]    [CS:K]Zwirrlicht-Bank[CR]",
+        italian="[CN]Combinazione Mosse e\n[CN]Servizi Bancari da questa parte →\n[CN]Combiteca [CS:K]Electivire[CR]                Banca [CS:K]Duskull[CR]",
+        spanish="[CN]Enlace de movimientos y\n[CN]Servicios Bancarios por aquí →\n[CN][CS:K]Enlaces Electivire[CR]    [CS:K]Banco Duskull[CR]",
+    });
+    JumpCommon(CORO_END_TALK);
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

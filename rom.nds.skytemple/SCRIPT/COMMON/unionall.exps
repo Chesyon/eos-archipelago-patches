@@ -12187,9 +12187,7 @@ coro BUBBLE_TEST {
 }
 
 coro MAP_TEST {
-    if ($PERFORMANCE_PROGRESS_LIST[37]) {
-        
-    }
+
     return;
 }
 

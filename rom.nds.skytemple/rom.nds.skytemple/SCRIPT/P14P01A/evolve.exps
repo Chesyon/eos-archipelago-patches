@@ -1,0 +1,57 @@
+
+def 0 {
+    back_SetDungeonBanner(177, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    back_SetGround(LEVEL_P14P01A);
+    supervision_Acting(0);
+    with (object OBJECT_P14P01A1_153) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    bgm_PlayFadeIn(BGM_CRYSTAL_CAVE, 0, 256);
+    screen_FadeIn(1, 30);
+    switch ( message_Menu(MENU_EVOLUTION_SEQUENCE) ) { }
+    §label_5;
+    forever {
+        switch ( message_Menu(MENU_EVOLUTION_SEQUENCE2) ) {
+            case 1:
+                §label_0;
+                screen_WhiteOut(1, 2);
+                Wait(2);
+                screen_FadeIn(1, 2);
+                Wait(5);
+                screen_WhiteOut(1, 2);
+                Wait(2);
+                screen_FadeIn(1, 2);
+                continue;  // may be redundant
+            case 2:
+                screen_FadeOut(1, 30);
+                continue;  // may be redundant
+            case 3:
+                supervision_SpecialActing(19, 0, 0);
+                Wait(120);
+                continue;  // may be redundant
+            case 4:
+                supervision_SpecialActing(3, 0, 0);
+                continue;  // may be redundant
+            default:
+                break_loop;
+                break;
+        }
+    }
+    switch ( scn($SCENARIO_SELECT)[0] ) {
+        case == 53:
+            screen_FadeOut(1, 30);
+            supervision_ExecuteStation(LEVEL_T00P01, 'M01A01', 0);
+            hold;
+        default:
+            bgm_FadeOut(60);
+            main_EnterGround(LEVEL_P01P01A, 30);
+            end;
+    }
+}
