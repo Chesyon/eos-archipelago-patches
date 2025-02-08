@@ -50,8 +50,7 @@ typedef struct CustomSaveArea {
     MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
     uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
     uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
-    uint8_t nameCheckResult;             // 0x186: Saves the outcome from SpDoNameCheck.
-    undefined fields[0xF79];             // 0x187: Unused.
+    undefined fields[0xF7A];             // 0x186: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
