@@ -11,8 +11,6 @@ static int SpGetLevelScalingStatus() {
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
 static int SpAccessMissionStatuses(short arg1, short arg2) {
-    int completed_jobs;
-    int total_jobs;
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[LoadScriptVariableValue(0, 41)]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (arg2 == 1) { // outlaws
