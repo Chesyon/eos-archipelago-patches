@@ -329,7 +329,7 @@ def 0 {
         bgm_FadeOut(120);
         screen_FadeOut(1, 60);
         WaitBgm(BGM_OCEAN1);
-        $SCENARIO_TALK_BIT_FLAG[249] = 0;
+        $PERFORMANCE_PROGRESS_LIST[37] = 0;
     } // End If
     if ($DUNGEON_ENTER_INDEX == 0) {
         message_Mail(" Stay out of my way, [CS:G]Zelulo[CR]!");
