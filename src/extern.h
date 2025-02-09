@@ -26,11 +26,13 @@ extern char slot_name[16];
 extern int seed; // 64 bits = 8 bytes
 
 typedef struct MissionMax {
-    uint8_t totalJobs;    // 0x0
-    uint8_t totalOutlaws; // 0x1
+    uint8_t totalJobsEarly;    // 0x0
+    uint8_t totalOutlawsEarly; // 0x1
+    uint8_t totalJobsLate;     // 0x2
+    uint8_t totalOutlawsLate;  // 0x3
 } MissionMax;
-ASSERT_SIZE(MissionMax, 0x2);
-extern MissionMax missionMaxes[192];
+ASSERT_SIZE(MissionMax, 0x4);
+extern MissionMax missionMaxes;
 
 typedef struct MacguffinMax {
     uint8_t totalRelicFragmentShards; // 0x0

@@ -9,29 +9,39 @@ static int SpGetLevelScalingStatus() {
   return apSettings.levelScaling;
 }
 
+bool IsDungeonPostDialga(short dunId) { // rn this is the AP logic- making it a function in case the logic changes
+    return dunId >= 44;
+}
+
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
 static int SpAccessMissionStatuses(short arg1, short arg2) {
-    MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[LoadScriptVariableValue(0, 41)]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
+    int dungeonId = LoadScriptVariableValue(0, 41);
+    int totalNumber;
+    MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (arg2 == 1) { // outlaws
+        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
+        else totalNumber = missionMaxes.totalOutlawsEarly;
         if (arg1 == 1) { // Write mode
-            if (missionStats->completedOutlaws < missionMaxes->totalOutlaws) {
+            if (missionStats->completedOutlaws < totalNumber) {
                 missionStats->completedOutlaws++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return missionMaxes->totalOutlaws - missionStats->completedOutlaws; // Read mode
+        else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
+        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
+        else totalNumber = missionMaxes.totalJobsEarly;
         if (arg1 == 1) { // Write mode
-            if (missionStats->completedJobs < missionMaxes->totalJobs) {
+            if (missionStats->completedJobs < totalNumber) {
                 missionStats->completedJobs++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return missionMaxes->totalJobs - missionStats->completedJobs; // Read mode
+        else return totalNumber - missionStats->completedJobs; // Read mode
     }
 }
 

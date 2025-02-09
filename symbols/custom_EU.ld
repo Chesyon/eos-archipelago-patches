@@ -44,7 +44,7 @@ apSlotName = 0x23DE000;
 apSeed = 0x23DE010;
 apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
-macguffinMaxes = 0x23DE19A;
+macguffinMaxes = 0x23DE01E;
 CUSTOM_SAVE_AREA = 0x23B0000;
 
 /* Undocumented Functions 
