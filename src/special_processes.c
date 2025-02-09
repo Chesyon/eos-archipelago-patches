@@ -10,7 +10,8 @@ static int SpGetLevelScalingStatus() {
 }
 
 bool IsDungeonPostDialga(short dunId) { // rn this is the AP logic- making it a function in case the logic changes
-    return dunId >= 44;
+    if (dunId >= 44) return dunId <= 86 || dunId >= 93;
+    else return false;
 }
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
