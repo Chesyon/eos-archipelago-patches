@@ -267,7 +267,7 @@ def 0 {
             worldmap_BlinkMark(88);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN][CS:P]Serenity River[CR]!",
+                english="[CN]Your ability to go to [CS:P]Serenity River[CR]\n[CN]has not changed!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Rivière Sérénité[CR]!",
                 german="[CN]Du kannst nun zum\n[CN][CS:P]Fluss der Klarheit[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]al [CS:P]Fiume Serenità[CR]!",
@@ -310,7 +310,7 @@ def 0 {
             worldmap_BlinkMark(90);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN]the [CS:P]Lush Prairie[CR]!",
+                english="[CN]Your abiliy to go to [CS:P]Lush Prairie[CR]\n[CN]has not changed!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Prairie Luxuriante[CR]!",
                 german="[CN]Du kannst nun zur\n[CN][CS:P]Üppigen Steppe[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]alle [CS:P]Piane Rigogliose[CR]!",
@@ -329,7 +329,7 @@ def 0 {
             worldmap_BlinkMark(95);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN][CS:P]Happy Outlook[CR]!",
+                english="[CN]Your abiliy to go to [CS:P]Happy Outlook[CR]\n[CN]has not changed!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Cap Enchanteur[CR]!",
                 german="[CN]Du kannst nun zum\n[CN][CS:P]Frohen Ausguck[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]al [CS:P]Promontorio Sereno[CR]!",
@@ -348,7 +348,7 @@ def 0 {
             worldmap_BlinkMark(96);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN][CS:P]Mt. Mistral[CR]!",
+                english="[CN]Your abiliy to go to [CS:P]Mt. Mistral[CR]\n[CN]has not changed!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Mt Mistral[CR]!",
                 german="[CN]Du kannst nun zum\n[CN][CS:P]Mistralberg[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]al [CS:P]Monte Mistral[CR]!",
@@ -367,7 +367,7 @@ def 0 {
             worldmap_BlinkMark(98);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN][CS:P]Lost Wilderness[CR]!",
+                english="[CN]Your abiliy to go to [CS:P]Lost Wilderness[CR]\n[CN]has not changed!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Contrée Inexplorée[CR]!",
                 german="[CN]Du kannst nun zur\n[CN][CS:P]Verlorenen Wildnis[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]alla [CS:P]Landa Perduta[CR]!",
@@ -386,7 +386,7 @@ def 0 {
             worldmap_BlinkMark(105);
             me_Play(6);
             message_Mail({
-                english="[CN]You can now go to\n[CN][CS:P]Destiny Tower[CR]!",
+                english="Your abiliy to go to [CS:P]Destiny Tower[CR]\n[CN]has not changed!!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Tour du Destin[CR]!",
                 german="[CN]Du kannst nun zum\n[CN][CS:P]Verhängnisturm[CR] gelangen!",
                 italian="[CN]Ora potete andare\n[CN]alla [CS:P]Torre Destino[CR]!",

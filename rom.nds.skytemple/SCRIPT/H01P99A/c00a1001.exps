@@ -1,7 +1,9 @@
 
 def 0 {
     $EVENT_LOCAL = 22;
-    $SCENARIO_TALK_BIT_FLAG[249] = 1;
+    if ($PERFORMANCE_PROGRESS_LIST[37]) {
+        $SCENARIO_TALK_BIT_FLAG[249] = 1;
+    }
     sound_Stop();
     back_SetGround(LEVEL_H01P99A);
     supervision_StationCommon(0);
@@ -210,7 +212,7 @@ def 0 {
             if ($EVENT_LOCAL == 16) {
                 message_Mail("[CN]Wait, what?[K] The rare and elusive\n[CN][CS:G]Manaphy[CR] wants to join team [team]?\n[CN]How could you possibly say no to that?");
             } else {
-                message_Mail("[CN]Wait, what?[K] It seems a rare and powerful\n[CN]Pokemon wants to join team [team]!\n[CN]Will you accept their gracious offer?");
+                message_Mail("[CN]Wait, what?[K] It seems a rare and powerful\n[CN]Pokémon wants to join team [team]!\n[CN]Will you accept their gracious offer?");
             }
             message_KeyWait();
             §legendary_recruit;

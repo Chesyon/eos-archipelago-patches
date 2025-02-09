@@ -24,10 +24,12 @@ def 0 {
             message_Close();
             screen_FadeOut(1, 120);
             Wait(90);
+/*
             screen_WhiteIn(29, 0);
             $GROUND_PLACE = 307;
             switch ( message_Menu(MENU_SAVE_MENU) ) { }
             switch ( ProcessSpecial(24, 0, 0) ) { }
+*/
             end;
         case 3:
             back_SetGround(LEVEL_V26P11A3);

@@ -114,6 +114,10 @@ def 0 {
                     supervision_StationCommon(10);
                     jump @label_6;
                 default:
+                    if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                        debug_Print('RESUME');
+                        ProcessSpecial(23,0,0); // Randomize Demo Actors
+                    }
                     switch (dungeon_mode(4)) {
                         case DMODE_OPEN_AND_REQUEST:
                             switch (dungeon_mode(63)) {

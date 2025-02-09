@@ -814,6 +814,15 @@ coro EVENT_DIVIDE {
                 CallCommon(CORO_EVENT_DIVIDE_INIT_FUNC);
                 JumpCommon(CORO_EVENT_M02_03_04);
             default:
+            /*
+                if ($PERFORMANCE_PROGRESS_LIST[63]) {
+                } else {
+                    message_Mail("You do not yet have the main episode!");
+                    message_Close();
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_JUMP_TO_TITLE_SCREEN, 0, 0) ) { }
+                    hold;
+                }
+                */
                 $SCENARIO_MAIN_BIT_FLAG[3] = 0;
                 switch ( scn($SCENARIO_MAIN)[1] ) {
                     case 0:
@@ -8585,6 +8594,10 @@ coro GETOUT_NORMAL {
                     jump @label_689;
                 }
                 break;
+            case 177:
+                dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
+                supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
+                hold;
             case 178:
                 dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
                 main_EnterGround(LEVEL_P02P01A, 30);

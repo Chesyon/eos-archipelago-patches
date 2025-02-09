@@ -1,12 +1,21 @@
 
 def 0 {
     if (debug) {
-        dungeon_mode(67) = DMODE_OPEN;
-        dungeon_mode(158) = DMODE_OPEN;
-        dungeon_mode(178) = DMODE_OPEN_AND_REQUEST; // Works OPEN
-        dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
-        dungeon_mode(179) = DMODE_OPEN_AND_REQUEST;
-        $PERFORMANCE_PROGRESS_LIST[17] = 1;
+        $SCENARIO_BALANCE_FLAG = 7;
+        $PERFORMANCE_PROGRESS_LIST[2] = 1;
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
     }
     
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
