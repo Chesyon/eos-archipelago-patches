@@ -40,6 +40,7 @@ IqScalingDungeonHook = 0x22FAB68;
 RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
 SpawnRateInstrumentHook = 0x230F174;
+IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;

@@ -92,6 +92,9 @@
 
     .org IqScalingDungeonHook
         bl IqScalingDungeon
+
+    .org IqScalingDungeonGummiHook
+        bl IqScalingDungeonGummi
         
     .org RecruitInstrumentHook
         beq ExtraInstrumentsCheck
