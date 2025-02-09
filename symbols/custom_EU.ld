@@ -37,6 +37,9 @@ AddShopItemToInventoryHook4 = 0x238B784;
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 IqScalingDungeonHook = 0x22FAB68;
+RecruitInstrumentHook = 0x230EA28;
+RecruitInstrumentUnhook = 0x230EA48;
+SpawnRateInstrumentHook = 0x230F174;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;

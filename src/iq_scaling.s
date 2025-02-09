@@ -1,6 +1,5 @@
 // access bits 7 8 9 10 of apSettings
 // 0b 0 0 0 0 0 00 1111 0 0 0 0 0
-// lsr #7
 // AND 0b1111
 // this should leave us with just those bits, which is our multiplier!
 

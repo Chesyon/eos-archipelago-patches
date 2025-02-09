@@ -92,4 +92,10 @@
 
     .org IqScalingDungeonHook
         bl IqScalingDungeon
+        
+    .org RecruitInstrumentHook
+        beq ExtraInstrumentsCheck
+        
+    .org SpawnRateInstrumentHook
+        bl ReduceSpawnInstrumentCheck
 .close

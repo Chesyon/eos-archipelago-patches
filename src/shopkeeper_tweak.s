@@ -4,6 +4,7 @@
 #define MAX_MULTIWORLD_ITEMS_AT_ONCE_KEC1 #7;
 #define MAX_MULTIWORLD_ITEMS_AT_ONCE_KEC2 #3;
 
+.align
 GenerateShop1Tweak:
     sub  sp,sp,#0x8
     mov  r0,NULL
