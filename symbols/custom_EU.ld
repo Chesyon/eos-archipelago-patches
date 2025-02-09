@@ -28,6 +28,9 @@ QuizChooseTweakHook = 0x238B7BC;
 QuizTypeHeroTweakHook = 0x238C3C0;
 QuizTypeHeroTweakUnhook = 0x238C3E0;
 
+/* ! For Overlay19 */
+CancelSpindunlock = 0x238DE18;
+
 /* ! For Overlay22 */
 AddShopItemToInventoryHook1 = 0x238B0D8;
 AddShopItemToInventoryHook2 = 0x238B138;

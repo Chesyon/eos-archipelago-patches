@@ -72,6 +72,11 @@
         bl TypeHeroTweak
 .close
 
+.open "overlay19.bin", overlay19_start
+    .org CancelSpindunlock
+        nop
+.close
+
 .open "overlay22.bin", overlay22_start
     .org AddShopItemToInventoryHook1
         bl AddItemToBagWithMultiworldCheck
