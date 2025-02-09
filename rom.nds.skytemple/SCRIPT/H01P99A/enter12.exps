@@ -1,0 +1,21 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_Notice({
+        english="[CN]\n[CN]Treasure Town →",
+        french="[CN]\n[CN]Bourg-Trésor →",
+        german="[CN]\n[CN]Schatzstadt →",
+        italian="[CN]\n[CN]Borgo Tesoro →",
+        spanish="[CN]\n[CN]Aldea Tesoro →",
+    });
+    JumpCommon(CORO_END_TALK);
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}
