@@ -10,7 +10,7 @@ typedef struct ArchipelagoSettings { // size: 2 bytes
     bool teamFormation : 1;     // 6 (0x6)
     bool levelScaling : 1;      // 7 (0x7)
     bool typesanity : 1;        // 8 (0x8)
-    uint8_t starterOptions : 2; // 10 (0x9)
+    uint8_t starterOptions : 2; // 10 (0xA)
     bool unused_1 : 1;          // 11 (0xB)
     bool unused_2 : 1;          // 12 (0xC)
     bool unused_3 : 1;          // 13 (0xD)
