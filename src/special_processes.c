@@ -88,6 +88,12 @@ static int SpDoNameCheck() {
     return 0;
 }
 
+// Special process 104: Regenerates board missions.
+static int SpRegenerateMissions() {
+    GenerateDailyMissions();
+    return 0;
+}
+
 // Called for special process IDs 100 and greater.
 //
 // Set return_val to the return value that should be passed back to the game's script engine. Return true,
@@ -105,6 +111,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 103:
         *return_val = SpDoNameCheck();
+        return true;
+    case 104:
+        *return_val = SpRegenerateMissions();
         return true;
     default:
         return false;
