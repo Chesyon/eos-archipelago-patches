@@ -94,6 +94,14 @@ static int SpRegenerateMissions() {
     return 0;
 }
 
+// Special process 105: Enable Archipelago settings. No parameters.
+static int SpEnableArchipelagoSettings() {
+    if (apSettings.recruitment) SaveScriptVariableValueAtIndex(0, 0x4E, 5, 1);
+    if (apSettings.evolution) SaveScriptVariableValueAtIndex(0, 0x4E, 6, 1);
+    if (apSettings.teamFormation) { SaveScriptVariableValueAtIndex(0, 0x4E, 7, 1); SaveScriptVariableValueAtIndex(0, 0x4E, 20, 1); }
+    return 0;
+}
+
 // Called for special process IDs 100 and greater.
 //
 // Set return_val to the return value that should be passed back to the game's script engine. Return true,
@@ -114,6 +122,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 104:
         *return_val = SpRegenerateMissions();
+        return true;
+    case 105:
+        *return_val = SpEnableArchipelagoSettings();
         return true;
     default:
         return false;
