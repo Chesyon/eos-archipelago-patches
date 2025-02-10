@@ -62,7 +62,7 @@ def 0 {
             }
 */
             §rewind_9;
-            switch(ProcessSpecial(101, 1, 0)) {
+            switch(ProcessSpecial(101, 0, 1)) {
                 case > 0:
                     message_Mail("\n[CN]You got a check for this outlaw mission!");
                     message_Close();
@@ -175,9 +175,9 @@ def 0 {
             }
 */
             §rewind_10;
-            switch(ProcessSpecial(101, 1, 0)) {
+            switch(ProcessSpecial(101, 0, 1)) {
                 case > 0:
-                    message_Mail("\n[CN]You got a check for this outlaw mission!");
+                    message_Mail("\n[CN]You got a check for this outlaw mission!\n[CN]Expect it to arrive soon!");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[252] = 1;
                     ProcessSpecial(101, 1, 1);
@@ -293,7 +293,7 @@ def 0 {
                     message_Mail("\n[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
-                    ProcessSpecial(101, 0, 1);
+                    ProcessSpecial(101, 1, 0);
                     break;
                 case 0:
                     message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
@@ -363,7 +363,7 @@ def 0 {
                     message_Mail("\n[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
-                    ProcessSpecial(101, 0, 1);
+                    ProcessSpecial(101, 1, 0);
                     break;
                 case 0:
                     message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
@@ -437,7 +437,7 @@ def 0 {
                             message_Mail("\n[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
                             message_Close();
                             $SCENARIO_TALK_BIT_FLAG[253] = 1;
-                            ProcessSpecial(101, 0, 1);
+                            ProcessSpecial(101, 1, 0);
                             break;
                         case 0:
                             message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");

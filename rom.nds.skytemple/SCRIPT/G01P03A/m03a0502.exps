@@ -1,0 +1,436 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    screen_WhiteIn(4, 4);
+    supervision_Acting(0);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk({
+        english=" Oh, yes sirree! Reckon you all\nare all ready!",
+        french=" Ah, sapristi! Z\'avez fini d\'vous\npréparer!",
+        german=" Oh, jawollja! Ich wette, ihr seid\njetzt bereit!",
+        italian=" Sissignore! Direi che potete\npartire!",
+        spanish=" ¡Sí, señor! ¡Veo que ya lo tenéis\ntodo listo!",
+    });
+    message_Talk({
+        english=" Then let\'s pick ourselves a\nlawbreaker for you to find.",
+        french=" Allez, on va vous choisir un\np\'tit criminel à débusquer.",
+        german=" Dann suchen wir jetzt einen\nGanoven für euch aus.",
+        italian=" Forza, scegliamo un ricercato\nche vada bene per voi.",
+        spanish=" Vamos a escoger un malhechor\nadecuado para vuestro nivel.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m0', 52.5, 26.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m1', 55.5, 26.5>);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Well, you\'ve got your pick of\nthis sorry bunch of characters.",
+        french=" Voilà, vous devez choisir parmi\nc\'te bande de bandits et d\'voyous.",
+        german=" Tja, ihr habt die Wahl zwischen\nall diesen erbärmlichen Typen.",
+        italian=" Bene, avete una bella scelta.\nGuardate quanti tipi loschi!",
+        spanish=" Como veis, hay un buen surtido\nde Pokémon malvados donde escoger.",
+    });
+    message_Close();
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V03P01A);
+    camera2_SetPositionMark(Position<'m2', 19.5, 16.5>);
+    screen2_FadeIn(1, 15);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s see. Which should we pick?",
+                french=" Alors, lequel choisir?",
+                german=" Mal sehen. Welchen sollen wir\nuns aussuchen?",
+                italian=" Vediamo un po\'. Quale scegliamo?",
+                spanish=" Veamos. ¿Cuál podríamos\nelegir?",
+            }
+        case 2:
+            {
+                english=" Let\'s see. Which should we pick?",
+                french=" Alors, lequel choisir?",
+                german=" Mal sehen. Welchen sollen wir\nuns aussuchen?",
+                italian=" Vediamo un po\'. Quale scegliamo?",
+                spanish=" Veamos. ¿Cuál podríamos\nelegir?",
+            }
+        default:
+            {
+                english=" Let\'s see. Which should we pick?",
+                french=" Alors, lequel choisir?",
+                german=" Mal sehen. Welchen sollen wir\nuns aussuchen?",
+                italian=" Vediamo un po\'. Quale scegliamo?",
+                spanish=" Veamos. ¿Cuál podríamos\nelegir?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_NPC_BIPPA);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+    }
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Ahem.[K] As your mentor, how\nabout I do the choosing?",
+        french=" Hum hum.[K] Comme j\'suis vot\'\nmanteau... enfin vot\' mentor, j\'pourrais\np\'têt\' choisir?",
+        german=" Ähem.[K] Wie wäre es, wenn ich,\nals euer Mentor, einen aussuche?",
+        italian=" Ahem.[K] Cosa ne dite se lo scelgo\nio, in qualità di mentore?",
+        spanish=" Ejem.[K] Como mentor vuestro,\n¿no debería decidirlo yo?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Don\'t pick one that looks scary!",
+                french=" Choisis-en un qui ne soit pas\ntrop effrayant!",
+                german=" Nimm keinen, der gruselig\naussieht!",
+                italian=" Non sceglierne uno che fa \ntroppa paura!",
+                spanish=" ¡Procura que no sea uno\nque dé mucho miedo!",
+            }
+        case 2:
+            {
+                english=" Don\'t choose anyone too scary!",
+                french=" Choisis-en un qui ne soit pas\ntrop effrayant!",
+                german=" Nimm keinen zu Gruseligen!",
+                italian=" Non sceglierne uno che fa \ntroppa paura!",
+                spanish=" ¡Procura evitar los que den\nmucho miedo!",
+            }
+        default:
+            {
+                english=" Please don\'t pick anyone scary!",
+                french=" Choisis-en un qui ne soit pas\ntrop effrayant!",
+                german=" Nimm bitte keinen Gruseligen!",
+                italian=" Non sceglierne uno che fa \ntroppa paura!",
+                spanish=" ¡No escojas ninguno\nque dé mucho miedo!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Yes sirree, I hear you![K] Let\'s see.\nEenie, meenie...",
+        french=" Ouaip, pigé![K] Voyons voir!\nPlouf, plouf... Ce sera toi le hors-la-loi!",
+        german=" Jawollja, verstanden![K] Mal sehen.\nEne mene...",
+        italian=" Sissignore, va bene![K] Vediamo.\nAmbarabà...",
+        spanish=" ¡Sí, señor, entendido![K] Veamos.\nPito, pito, colorito...",
+    });
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    Wait(15);
+    bgm_Stop();
+    se_Play(6415);
+    Wait(15);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_ResetActor();
+    message_Talk({
+        english=" Stand clear! Updating listings!",
+        french=" Reculez! Mise à jour des tableaux!",
+        german=" Zurücktreten! Infobrett-Aktualisierung!",
+        italian=" Allontanatevi! Aggiornamento lista!",
+        spanish=" ¡A un lado! ¡Cambiando las listas!",
+    });
+    message_Talk({
+        english=" Stand clear! Updating listings!",
+        french=" Reculez! Mise à jour des tableaux!",
+        german=" Zurücktreten! Infobrett-Aktualisierung!",
+        italian=" Allontanatevi! Aggiornamento lista!",
+        spanish=" ¡A un lado! ¡Cambiando las listas!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    bgm_PlayFadeIn(BGM_EARTHQUAKE1, 0, 256);
+    camera_SetEffect(2, 1, 33024);
+    Wait(15);
+    camera_SetPositionMark(Position<'m3', 55.5, 26.5>);
+    with (actor ACTOR_NPC_BIPPA) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        SlidePositionOffset(1, 0, 8);
+    }
+    Wait(10);
+    with (actor ACTOR_NPC_BIPPA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, 0, 8);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(1, 0, 8);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" What\'s that? What\'s happening?",
+                french=" Qu\'est-ce que c\'est? Que se\npasse-t-il?",
+                german=" Was ist das? Was passiert?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué es eso? ¿Qué pasa?",
+            }
+        case 2:
+            {
+                english=" What\'s that? What\'s happening?",
+                french=" Qu\'est-ce que c\'est? Que se\npasse-t-il?",
+                german=" Was ist das? Was passiert?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué es eso? ¿Qué ocurre?",
+            }
+        default:
+            {
+                english=" What\'s that? What\'s happening?",
+                french=" Qu\'est-ce que c\'est? Que se\npasse-t-il?",
+                german=" Was ist das? Was passiert?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué es eso? ¿Qué sucede?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Oh, the data\'s getting updated.",
+        french=" Oh, les infos, elles vont être\nmises à jour.",
+        german=" Oh, die Daten werden\naktualisiert.",
+        italian=" Oh, stanno aggiornando i dati.",
+        spanish=" Ah, están colgando las listas\nmás recientes.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It\'s being...updated?",
+                french=" Mises à jour?",
+                german=" Sie werden... aktualisiert?",
+                italian=" Li stanno... aggiornando?",
+                spanish=" ¿Las listas más recientes?",
+            }
+        case 2:
+            {
+                english=" It\'s being...updated?",
+                french=" Mises à jour?",
+                german=" Sie werden... aktualisiert?",
+                italian=" Li stanno... aggiornando?",
+                spanish=" ¿Las listas más recientes?",
+            }
+        default:
+            {
+                english=" It\'s being...updated?",
+                french=" Mises à jour?",
+                german=" Sie werden... aktualisiert?",
+                italian=" Li stanno... aggiornando?",
+                spanish=" ¿Las listas más recientes?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_Stop();
+    se_Play(6416);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_G01P03A1_100) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P03A1_100);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(11);
+    }
+    camera_SetEffect(0, 0, 0);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yikes! Did you see that?! The\npanel flipped over!",
+                french=" Hé! T\'as vu ça?! Le\npanneau s\'est retourné!",
+                german=" Oh Mann! Hast du das gesehen?\nDas Brett hat sich umgedreht!",
+                italian=" Hai visto?! Il pannello si è\ncapovolto!",
+                spanish=" ¡Vaya! ¿Habéis visto?\n¡Han dado la vuelta al panel!",
+            }
+        case 2:
+            {
+                english=" Yikes! Did you see that?! The\npanel flipped over!",
+                french=" Hé! T\'as vu ça?! Le\npanneau s\'est retourné!",
+                german=" Oh Mann! Hast du das gesehen?\nDas Brett hat sich umgedreht!",
+                italian=" Hai visto?! Il pannello\nsi è capovolto!",
+                spanish=" ¡Vaya! ¿Habéis visto?\n¡Han dado la vuelta al panel!",
+            }
+        default:
+            {
+                english=" Yikes! Did you see that?! The\npanel flipped over!",
+                french=" Hé! T\'as vu ça?! Le\npanneau s\'est retourné!",
+                german=" Oh Mann! Hast du das gesehen?\nDas Brett hat sich umgedreht!",
+                italian=" Hai visto?! Il pannello\nsi è capovolto!",
+                spanish=" ¡Vaya! ¿Habéis visto?\n¡Han dado la vuelta al panel!",
+            }
+    }
+    message_Close();
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V03P02A);
+    camera2_SetPositionMark(Position<'m4', 19.5, 16.5>);
+    screen2_FadeIn(1, 15);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" What\'s going on here?",
+                french=" Ils font quoi, là?",
+                german=" Was passiert denn da?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué pasa aquí?",
+            }
+        case 2:
+            {
+                english=" What\'s going on here?",
+                french=" Ils font quoi, là?",
+                german=" Was passiert denn da?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué pasa aquí?",
+            }
+        default:
+            {
+                english=" What\'s going on here?",
+                french=" Ils font quoi, là?",
+                german=" Was passiert denn da?",
+                italian=" Cosa sta succedendo?",
+                spanish=" ¿Qué pasa aquí?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_NPC_BIPPA);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+    }
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" The Outlaw Notice Board and Job\nBulletin Board are set up on revolving panels.",
+        french=" L\'Tableau des Missions et celui\ndes Avis d\'Recherche, c\'est des panneaux\nqu\'on peut basculer.",
+        german=" Die Job- und Ganoven-\nInfobretter sind auf drehbaren Platten\nangebracht.",
+        italian=" La Bacheca dei ricercati e quella\ndelle missioni sono affisse a dei pannelli\nrovesciabili.",
+        spanish=" El Tablón \"Se Busca\" y el\nTablón de Anuncios son paneles giratorios.",
+    });
+    message_Talk({
+        english=" While the panel is flipped over...",
+        french=" Quand ils sont basculés...",
+        german=" Das Brett wird auf die andere\nSeite gedreht...",
+        italian=" Quando il pannello è capovolto...",
+        spanish=" Cuando se le da la vuelta\nal panel...",
+    });
+    message_Talk({
+        english=" A Pokémon named [CS:N]Dugtrio[CR]\nswaps out the old jobs with new ones.",
+        french=" ... y\'a un Pokémon appelé\n[CS:N]Triopikeur[CR] qui remplace les anciennes\nmissions par des nouvelles.",
+        german=" Dann tauscht ein Pokémon\nnamens [CS:N]Digdri[CR] die alten Jobs gegen neue aus.",
+        italian=" ... un Pokémon chiamato [CS:N]Dugtrio[CR]\nsostituisce le missioni vecchie con quelle \nnuove.",
+        spanish=" Un Pokémon llamado [CS:N]Dugtrio[CR]\ncambia las misiones antiguas por las nuevas.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]Dugtrio[CR]?",
+                french=" [CS:N]Triopikeur[CR]?",
+                german=" [CS:N]Digdri[CR]?",
+                italian=" [CS:N]Dugtrio[CR]?",
+                spanish=" ¿[CS:N]Dugtrio[CR]?",
+            }
+        case 2:
+            {
+                english=" [CS:N]Dugtrio[CR]?",
+                french=" [CS:N]Triopikeur[CR]?",
+                german=" [CS:N]Digdri[CR]?",
+                italian=" [CS:N]Dugtrio[CR]?",
+                spanish=" ¿[CS:N]Dugtrio[CR]?",
+            }
+        default:
+            {
+                english=" [CS:N]Dugtrio[CR]?",
+                french=" [CS:N]Triopikeur[CR]?",
+                german=" [CS:N]Digdri[CR]?",
+                italian=" [CS:N]Dugtrio[CR]?",
+                spanish=" ¿[CS:N]Dugtrio[CR]?",
+            }
+    }
+    message_Close();
+    screen2_FadeOut(0, 30);
+    screen_FadeOut(1, 30);
+    back2_SetMode(0);
+    end;
+}

@@ -1,0 +1,135 @@
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Hello [hero] and [partner]!\nHow are you doing today!");
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Refresh Boards"):
+            message_Close();
+            message_Talk(" I can't exactly do that on my own, but\nPapa should be refreshing them soon, if you\nwant to wait a minute or two...");
+            message_Close();
+            screen_FadeOut(1,30);
+            message_Mail("\n[CN]A few minutes later...");
+            message_Close();
+            screen_FadeIn(1,30);
+            break;
+        case menu("Never Mind"):
+        default:
+            message_Close();
+            message_Talk(" Okay, best of luck on your\nmissions today, [hero] and [partner]!");
+            message_Close();
+            jump @end_talk;
+    } 
+        
+    Wait(15);
+    bgm_Stop();
+    se_Play(6415);
+    Wait(15); 
+    message_SetWaitMode(60,60);
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_ResetActor();
+    message_Talk({
+        english=" Stand clear! Updating listings![W:60]",
+        french=" Reculez! Mise à jour des tableaux![W:60]",
+        german=" Zurücktreten! Infobrett-Aktualisierung![W:60]",
+        italian=" Allontanatevi! Aggiornamento lista![W:60]",
+        spanish=" ¡A un lado! ¡Cambiando las listas![W:60]",
+    });
+    message_Talk({
+        english=" Stand clear! Updating listings![W:60]",
+        french=" Reculez! Mise à jour des tableaux![W:60]",
+        german=" Zurücktreten! Infobrett-Aktualisierung![W:60]",
+        italian=" Allontanatevi! Aggiornamento lista![W:60]",
+        spanish=" ¡A un lado! ¡Cambiando las listas![W:60]",
+    });
+    message_Close();
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    bgm_PlayFadeIn(BGM_EARTHQUAKE1, 0, 256);
+    camera_SetEffect(2, 1, 33024);
+    Wait(15);
+    se_Play(6416);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_G01P03A1_100) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P03A1_100);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(11);
+    }
+    Wait(60);
+    se_Play(6416);
+    with (object OBJECT_G01P03A1_103) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_G01P03A1_103) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P03A1_103);
+    with (object OBJECT_G01P03A1_103) {
+        SetAnimation(11);
+    }
+    ProcessSpecial(104,0,0);
+    Wait(180);
+    se_Play(6415);
+    Wait(15);
+    message_SetActor(ACTOR_NPC_DAGUTORIO);
+    message_Talk({
+        english=" Update completed! Stand clear![W:60]",
+        french=" Mise à jour terminée! Reculez![W:60]",
+        german=" Aktualisierung fertig!\nZurücktreten![W:60]",
+        italian=" Aggiornamento completato! State\nlontani![W:60]",
+        spanish=" ¡Tablones listos! ¡A un lado![W:60]",
+    });
+    message_Talk({
+        english=" Update completed! Stand clear![W:60]",
+        french=" Mise à jour terminée! Reculez![W:60]",
+        german=" Aktualisierung fertig!\nZurücktreten![W:60]",
+        italian=" Aggiornamento completato! State\nlontani![W:60]",
+        spanish=" ¡Tablones listos! ¡A un lado![W:60]",
+    });
+    message_Close();
+    message_SetWaitMode(-1,-1);
+    camera_SetEffect(2, 1, 33024);
+    Wait(45);
+    se_Play(6416);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(20);
+    }
+    with (object OBJECT_G01P03A1_100) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P03A1_100);
+    with (object OBJECT_G01P03A1_100) {
+        SetAnimation(9);
+    }
+    Wait(60);
+    se_Play(6416);
+    with (object OBJECT_G01P03A1_103) {
+        SetAnimation(20);
+    }
+    with (object OBJECT_G01P03A1_103) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_G01P03A1_103);
+    with (object OBJECT_G01P03A1_103) {
+        SetAnimation(9);
+    }
+    bgm2_Stop();
+    camera_SetEffect(0, 0, 0);
+    Wait(45);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+    
+    §end_talk;
+    JumpCommon(CORO_END_TALK);
+    hold;
+}
