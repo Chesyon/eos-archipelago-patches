@@ -29,18 +29,18 @@
 
 .align 4
     ExtraInstrumentsCheck:
-        stmdb sp!,{r3,r4,r5,r6}
+        stmdb sp!,{r3,r4,r5,r9}
         mov r4,#0
         ldr r5,=instrument_type_generic_table
-        ldr r6,=POISON_INSTRUMENT_ID
+        ldr r9,=POISON_INSTRUMENT_ID
         check_for_custom_type_instrument_loop:
             mov r0,r8
-            add r1,r6,r4
+            add r1,r9,r4
             bl  ItemIsActive
             cmp r0,#0x0
             beq check_for_custom_type_instrument_iter
             mov r0,r7
-            ldrb r1,[r6,r4]
+            ldrb r1,[r5,r4]
             bl MonsterIsType
             cmp r0,#0x0
             beq check_for_custom_type_instrument_iter
@@ -62,7 +62,7 @@
         cmp r0,#0x0
         addne r6,r6,#MINOR_INSTRUMENT_RECRUIT_BONUS
         instrument_found_return:   
-        ldmia sp!,{r3,r4,r5,r6}
+        ldmia sp!,{r3,r4,r5,r9}
         b RecruitInstrumentUnhook
         .pool
         .align
