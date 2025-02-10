@@ -15,7 +15,7 @@ typedef struct ArchipelagoSettings { // size: 2 bytes
     bool levelScaling : 1;      // 7 (0x7)
     bool typesanity : 1;        // 8 (0x8)
     uint8_t starterOptions : 2; // 9 (0x9)
-    uint8_t deathLinkType : 2;          // 11 (0xB)
+    uint8_t deathLinkType : 2;  // 11 (0xB)
     bool unused_3 : 1;          // 13 (0xD)
     bool unused_4 : 1;          // 14 (0xE)
     bool unused_5 : 1;          // 15 (0xF)
@@ -60,6 +60,16 @@ typedef struct CustomSaveArea {
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
 extern CustomSaveArea CUSTOM_SAVE_AREA;
+
+typedef struct DeathLinkTracker {
+    bool reciever;
+    bool sender;
+    char skyDeathMessage[1024];
+    char allyDeathName[18];
+} DeathLinkTracker
+ASSERT_SIZE(DeathLink, 1044);
+
+extern DeathLinkTracker deathLinkTracker;
 
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;

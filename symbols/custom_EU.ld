@@ -44,6 +44,8 @@ RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
 SpawnRateInstrumentHook = 0x230F174;
 IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
+DeathLinkHook = 0x22DFB28; /* In RunDungeon near RunFractionalTurn call. */
+DeathLinkUnhook = 0x22DFB14;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
@@ -52,6 +54,7 @@ apSeed = 0x23DE010;
 apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
+deathLinkTracker = 0x23B0000;
 CUSTOM_SAVE_AREA = 0x23B0000;
 
 /* Undocumented Functions 
