@@ -50,26 +50,25 @@ typedef struct MissionStatus {
 } MissionStatus;
 ASSERT_SIZE(MissionStatus, 0x2);
 
+typedef struct DeathLinkTracker {
+    bool reciever;
+    bool sender;
+    char skyDeathMessage[1024]; // The way of storing death messages should be optimized. Either trim the char[] to be smaller (we do NOT need 1024 bytes...), or store the text string IDs and let Cryptic recreate the death message with the text strings.
+    char allyDeathName[18];
+} DeathLinkTracker;
+ASSERT_SIZE(DeathLinkTracker, 0x414);
+
 typedef struct CustomSaveArea {
     uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
     MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
     uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
     uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
-    undefined fields[0xF7A];             // 0x186: Unused.
+    DeathLinkTracker deathLinkTracker;   // 0x186: Stores information for deathlink.
+    undefined fields[0xB66];             // 0x59A: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
 extern CustomSaveArea CUSTOM_SAVE_AREA;
-
-typedef struct DeathLinkTracker {
-    bool reciever;
-    bool sender;
-    char skyDeathMessage[1024];
-    char allyDeathName[18];
-} DeathLinkTracker;
-ASSERT_SIZE(DeathLinkTracker, 1044);
-
-extern DeathLinkTracker deathLinkTracker;
 
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;

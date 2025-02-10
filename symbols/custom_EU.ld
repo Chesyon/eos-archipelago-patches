@@ -54,7 +54,7 @@ apSeed = 0x23DE010;
 apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
-deathLinkTracker = 0x23B0000;
+deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 
 /* Undocumented Functions 
