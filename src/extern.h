@@ -3,6 +3,10 @@
 #define STARTER_OPTION_OVERRIDE 0b10
 #define STARTER_OPTION_CHOOSE 0b11
 
+#define DEATHLINK_NONE 0b00
+#define DEATHLINK_REVIVER 0b01
+#define DEATHLINK_TRUE_DEATH 0b10
+
 typedef struct ArchipelagoSettings { // size: 2 bytes
     uint8_t iqMultiplier : 4;   // 0 (0x0)
     bool recruitment : 1;       // 4 (0x4)
@@ -11,8 +15,7 @@ typedef struct ArchipelagoSettings { // size: 2 bytes
     bool levelScaling : 1;      // 7 (0x7)
     bool typesanity : 1;        // 8 (0x8)
     uint8_t starterOptions : 2; // 9 (0x9)
-    bool unused_1 : 1;          // 11 (0xB)
-    bool unused_2 : 1;          // 12 (0xC)
+    uint8_t deathLinkType : 2;          // 11 (0xB)
     bool unused_3 : 1;          // 13 (0xD)
     bool unused_4 : 1;          // 14 (0xE)
     bool unused_5 : 1;          // 15 (0xF)

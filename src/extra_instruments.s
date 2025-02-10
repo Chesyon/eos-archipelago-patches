@@ -80,7 +80,7 @@
 
 .align 4
     ReduceSpawnInstrumentCheck:
-        stmdb sp!,{r0,r1,r2,r3,r4,r5,r6,r7,r8,lr}
+        stmdb sp!,{r1,r2,r3,r4,r5,r6,r7,r8,lr}
         mov r4,r1
         add r5,r0,#0x12400
         add r5,r5,#0x28 // DUNGEON + 0x12B28
@@ -103,6 +103,6 @@
             blt reduce_spawn_instrument_loop
         ldrsh r0,[r4,#0x0] // original instruction
         reduce_spawn_instrument_found:
-        ldmia sp!,{r0,r1,r2,r3,r4,r5,r6,r7,r8,pc}
+        ldmia sp!,{r1,r2,r3,r4,r5,r6,r7,r8,pc}
         .pool
         .align
