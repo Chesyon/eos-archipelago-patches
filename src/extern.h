@@ -66,14 +66,16 @@ typedef struct DeathLinkTracker {
     bool sender;
     char skyDeathMessage[1024];
     char allyDeathName[18];
-} DeathLinkTracker
-ASSERT_SIZE(DeathLink, 1044);
+} DeathLinkTracker;
+ASSERT_SIZE(DeathLinkTracker, 1044);
 
 extern DeathLinkTracker deathLinkTracker;
 
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
+
+void PlayEffectAnimationEntityWrapper(struct entity*, int effect_id);
 
 /*typedef struct SomeTeamSetupThing {
     struct monster_id_16 hero_id;

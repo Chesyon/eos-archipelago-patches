@@ -44,8 +44,8 @@ RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
 SpawnRateInstrumentHook = 0x230F174;
 IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
-DeathLinkHook = 0x22DFB28; /* In RunDungeon near RunFractionalTurn call. */
-DeathLinkUnhook = 0x22DFB14;
+DeathLinkHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
+DeathLinkUnhook = 0x22E0454;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
@@ -65,7 +65,7 @@ AddItemToKecleon2 = 0x2010E74;
 PARTNER_SELECT_MENU_OPTION_TRACKER = 0x238D9E4;
 PARTNER_SELECT_MENU_OPTION_TIMER = 0x238D9E8;
 PARTNER_SELECT_PORTRAIT_OFFSETS = 0x238CB54;
-UNK_FUN_2039514_EU = 0x2039514; /* Keyboard Related? or Keyboard Confirm Related? */
+PlayEffectAnimationEntityWrapper = 0x22E4C98;
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;
