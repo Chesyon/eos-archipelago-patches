@@ -4,6 +4,12 @@
         b   QuizCustomStateHandler
     .pool
 
+.align 4 // Use for hooks where we need to check every turn.
+    DungeonTurnEndChecksTrampoline:
+        bl DeathLinkReceiverCheck
+        b DungeonTurnUnhook
+        
+
 .align 4
 cotInternalTrampolineScriptSpecialProcessCall:
     // If the special process ID is >= 100, handle it as a custom special process

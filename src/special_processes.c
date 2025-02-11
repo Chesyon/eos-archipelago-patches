@@ -102,6 +102,22 @@ static int SpEnableArchipelagoSettings() {
     return 0;
 }
 
+// Special process Read/write DeathLink
+/*static int SpAccessDeathLinkStatus(short action, short value) {
+    switch (action) {
+        case 0: // Check Deathlink Type
+            return apSettings.deathLinkType;
+        case 1: // Check If We Have Received
+            return CUSTOM_SAVE_AREA.deathLinkTracker.receiver;
+        case 2: // Check If We Have Sent? Not sure why we would need to test this.
+            return CUSTOM_SAVE_AREA.deathLinkTracker.sender;
+        case 3: // Set Received
+            CUSTOM_SAVE_AREA.deathLinkTracker.receiver = value;
+        case 4: // Set Sender
+            CUSTOM_SAVE_AREA.deathLinkTracker.sender = value;
+    }
+}*/
+
 // Called for special process IDs 100 and greater.
 //
 // Set return_val to the return value that should be passed back to the game's script engine. Return true,

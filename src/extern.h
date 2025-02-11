@@ -50,13 +50,15 @@ typedef struct MissionStatus {
 } MissionStatus;
 ASSERT_SIZE(MissionStatus, 0x2);
 
+// Note: Please set allyDeathMessage before reciever.
 typedef struct DeathLinkTracker {
-    bool reciever;
+    bool receiver;
     bool sender;
-    char skyDeathMessage[1024]; // The way of storing death messages should be optimized. Either trim the char[] to be smaller (we do NOT need 1024 bytes...), or store the text string IDs and let Cryptic recreate the death message with the text strings.
+    char skyDeathMessage[128];
+    char allyDeathMessage[128];
     char allyDeathName[18];
 } DeathLinkTracker;
-ASSERT_SIZE(DeathLinkTracker, 0x414);
+ASSERT_SIZE(DeathLinkTracker, 0x114);
 
 typedef struct CustomSaveArea {
     uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
@@ -64,7 +66,7 @@ typedef struct CustomSaveArea {
     uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
     uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
     DeathLinkTracker deathLinkTracker;   // 0x186: Stores information for deathlink.
-    undefined fields[0xB66];             // 0x59A: Unused.
+    undefined fields[0xE66];             // 0x29A: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
@@ -74,7 +76,8 @@ extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 
-void PlayEffectAnimationEntityWrapper(struct entity*, int effect_id);
+void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
+void DetermineTileAppearence(int x, int y);
 
 /*typedef struct SomeTeamSetupThing {
     struct monster_id_16 hero_id;

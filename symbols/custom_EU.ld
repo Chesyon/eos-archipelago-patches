@@ -9,6 +9,7 @@ WriteSaveFileCallsite4 = 0x020494D8;
 LoadSaveFileCallsite1 = 0x020496F4;
 LoadSaveFileCallsite2 = 0x02049714;
 ClearAdventureLogStructCallsite = 0x02048774;
+CallGetDungeonResultMsg = 0x200C778;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -44,8 +45,9 @@ RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
 SpawnRateInstrumentHook = 0x230F174;
 IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
-DeathLinkHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
-DeathLinkUnhook = 0x22E0454;
+DungeonTurnHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
+DungeonTurnUnhook = 0x22E0454;
+DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
@@ -66,6 +68,10 @@ PARTNER_SELECT_MENU_OPTION_TRACKER = 0x238D9E4;
 PARTNER_SELECT_MENU_OPTION_TIMER = 0x238D9E8;
 PARTNER_SELECT_PORTRAIT_OFFSETS = 0x238CB54;
 PlayEffectAnimationEntityWrapper = 0x22E4C98;
+Unk_Fun_23194F0_Eu = 0x23194F0;
+Unk_Fun_2319534_Eu = 0x2319534;
+Unk_Fun_22EAD20_Eu = 0x22EAD20;
+DetermineTileAppearence = 0x2337264;
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;

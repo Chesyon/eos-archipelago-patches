@@ -10,6 +10,9 @@
 
     .org IqScalingGroundHook
         bl IqScalingGround
+        
+    ;.org CallGetDungeonResultMsg
+    ;    bl DeathLinkSenderCheck
     
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
@@ -106,4 +109,10 @@
         
     .org SpawnRateInstrumentHook
         bl ReduceSpawnInstrumentCheck
+    
+    ;.org DungeonTurnHook
+    ;    beq DungeonTurnEndChecksTrampoline
+    
+    ;.org DeathLinkDungeonInitHook
+    ;    bl DeathLinkInitDungeon
 .close
