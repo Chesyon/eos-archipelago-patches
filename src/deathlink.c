@@ -13,11 +13,6 @@ void DeathLinkInitDungeon() {
 union damage_source damageSource = {.other = DEATHLINK_DAMAGE_SOURCE};
 void DeathLinkReceiverCheck() {
     int dlType = apSettings.deathLinkType;
-    // case 4 would throw an error if we don't declare these up here
-    int xStart;
-    int yStart;
-    int xEnd;
-    int yEnd;
 
     if(dlType == DEATHLINK_NONE) {
         return; // Do nothing if not deathLink.
@@ -60,11 +55,11 @@ void DeathLinkReceiverCheck() {
                 GenerateStandardItem(&item, GetItemIdToSpawn(ITEM_LIST_REGULAR), GEN_ITEM_STICKY_RANDOM);
                 SpawnDroppedItemWrapper(leader, &pos, &item, 0);
                 break;
-            case 4: // Blocked In
-                xStart = leader->pos.x - 1;
-                yStart = leader->pos.y - 1;
-                xEnd = leader->pos.x + 1;
-                yEnd = leader->pos.y + 1;
+            case 4:; // Blocked In
+                int xStart = leader->pos.x - 1;
+                int yStart = leader->pos.y - 1;
+                int xEnd = leader->pos.x + 1;
+                int yEnd = leader->pos.y + 1;
                 if(xStart < 0) {
                     xStart = 0;
                 }
