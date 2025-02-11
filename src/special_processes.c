@@ -78,8 +78,8 @@ void GetLowercaseName(const char* src, char* dst) // Used in NameCheck
 
 // Special process 103: Checks if HERO_FIRST_NAME matches any name in a list of dev names. Returns the index of the name plus one if there's a match, otherwise returns zero. Saves the return value to nameCheckResult in the save.
 static int SpDoNameCheck() {
-    #define num_of_names 3
-    char name_check_names[num_of_names][10] = {"chesyon", "happylappy", "cryptic"};
+    #define num_of_names 7
+    char name_check_names[num_of_names][10] = {"chesyon", "happylappy", "cryptic", "katnip", "hecka", "tails", "fieryblizz"};
     char name[10];
     char lower_name[10];
     LoadScriptVariableValueBytes(VAR_HERO_FIRST_NAME, name, 10);
