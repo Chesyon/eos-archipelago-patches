@@ -15,15 +15,15 @@ bool IsDungeonPostDialga(short dunId) { // rn this is the AP logic- making it a 
 }
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
-static int SpAccessMissionStatuses(short arg1, short arg2) {
+static int SpAccessMissionStatuses(short mode, short missionType) {
     int dungeonId = LoadScriptVariableValue(0, 41);
     int totalNumber;
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
-    if (arg2 == 1) { // outlaws
+    if (missionType == 1) { // outlaws
         if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
         else totalNumber = missionMaxes.totalOutlawsEarly;
-        if (arg1 == 1) { // Write mode
+        if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
                 missionStats->completedOutlaws++; // increment by one
                 return 1;
@@ -35,7 +35,7 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
     else { // jobs
         if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
         else totalNumber = missionMaxes.totalJobsEarly;
-        if (arg1 == 1) { // Write mode
+        if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {
                 missionStats->completedJobs++; // increment by one
                 return 1;
@@ -47,9 +47,9 @@ static int SpAccessMissionStatuses(short arg1, short arg2) {
 }
 
 // Special process 102: Read/write Instrument/Relic Fragment
-static int SpAccessMacguffinStatus(short arg1, short arg2) {
-    if(arg2 == 1) { // instruments
-        if (arg1 == 1) { // Write mode
+static int SpAccessMacguffinStatus(short mode, short macguffin) {
+    if(macguffin == 1) { // instruments
+        if (mode == 1) { // Write mode
             if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.totalInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
                 return 1;
@@ -59,7 +59,7 @@ static int SpAccessMacguffinStatus(short arg1, short arg2) {
         else return macguffinMaxes.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
-        if (arg1 == 1) { // Write mode
+        if (mode == 1) { // Write mode
             if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.totalRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
                 return 1;
