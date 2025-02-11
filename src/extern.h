@@ -86,6 +86,3 @@ void DetermineTileAppearence(int x, int y);
     char partnerName[0x14]; // maybe only 11 long idk
     int auraColor;
 } SomeTeamSetupThing;
-
-undefined UNK_FUN_2039514_EU(void);
-undefined UNK_FUN_2038AB0_EU(SomeTeamSetupThing* thing);*/
