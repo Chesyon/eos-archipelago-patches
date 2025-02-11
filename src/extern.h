@@ -85,4 +85,4 @@ void DetermineTileAppearence(int x, int y);
     uint8_t unk_0x4[0x14]; // maybe like hero name idk
     char partnerName[0x14]; // maybe only 11 long idk
     int auraColor;
-} SomeTeamSetupThing;
+} SomeTeamSetupThing;*/
