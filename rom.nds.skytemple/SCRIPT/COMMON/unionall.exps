@@ -2354,9 +2354,7 @@ coro EVENT_M00A_01 {
     $PERFORMANCE_PROGRESS_LIST[4] = 1; // Friend Rescue Enabled :)
     // Check archipelago settings and enable variables accordingly
     $VERSION = $PERFORMANCE_PROGRESS_LIST; // set the list to update to PERFORMANCE_PROGRESS_LIST
-    ProcessSpecial(64, 5, 0); // Recruits Enabled
-    ProcessSpecial(64, 6, 1); // Recruits Can Evolve (NOT Hero/Partner)
-    ProcessSpecial(64, 7, 2); // Full Team Formation control 
+    ProcessSpecial(105, 0, 0); // Handle all of the settings!
     $VERSION = 1;
     //TODO: uncomment this SP call!
     // ProcessSpecial(103,0,0);

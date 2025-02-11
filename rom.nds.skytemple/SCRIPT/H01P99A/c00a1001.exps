@@ -261,6 +261,15 @@ def 0 {
                             with (actor ACTOR_NPC_REJIROKKU) {
                                 MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
                             }
+                            with (actor ACTOR_NPC_PARUKIA) {
+                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                            }
+                            with (actor ACTOR_NPC_PARUKIA) {
+                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                            }
+                            with (actor ACTOR_NPC_GURAADON) {
+                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                            }
                             with (actor ACTOR_NPC_REJIAISU) {
                                 MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
                             }
@@ -318,7 +327,12 @@ def 0 {
                             with (actor ACTOR_NPC_SHEIMI_FC) {
                                 MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
                             }
-                            Wait(180);
+                            Wait(60);
+                            se_Play(7170);
+                            WaitSe(7170);
+                            Wait(30);
+                            se_Play(7947);
+                            Wait(60);
                             break;
                     }
                     break;
