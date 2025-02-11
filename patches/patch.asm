@@ -10,7 +10,10 @@
 
     .org IqScalingGroundHook
         bl IqScalingGround
-        
+
+    .org NoLowercaseQTagBranch
+        b NoLowercaseQTagFound
+
     ;.org CallGetDungeonResultMsg
     ;    bl DeathLinkSenderCheck
     

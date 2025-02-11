@@ -7,6 +7,15 @@
 #define DEATHLINK_REVIVER 0b01
 #define DEATHLINK_TRUE_DEATH 0b10
 
+#define HINTABLE_ITEM_COUNT 10
+#define ITEM_NAME_LENGTH 42
+typedef struct PreviewableItems {
+    char names[HINTABLE_ITEM_COUNT][ITEM_NAME_LENGTH];
+} PreviewableItems;
+ASSERT_SIZE(PreviewableItems, 0x1A4);
+
+extern PreviewableItems hintableItems;
+
 typedef struct ArchipelagoSettings { // size: 2 bytes
     uint8_t iqMultiplier : 4;   // 0 (0x0)
     bool recruitment : 1;       // 4 (0x4)
@@ -61,12 +70,13 @@ typedef struct DeathLinkTracker {
 ASSERT_SIZE(DeathLinkTracker, 0x114);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
-    uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
-    DeathLinkTracker deathLinkTracker;   // 0x186: Stores information for deathlink.
-    undefined fields[0xE66];             // 0x29A: Unused.
+    uint32_t checksum;                           // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];             // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards;         // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;                 // 0x185: How many instruments the player has collected.
+    DeathLinkTracker deathLinkTracker;           // 0x186: Stores information for deathlink.
+    bool hintedItems[HINTABLE_ITEM_COUNT];       // 0x29A: list of which items have been hinted.
+    undefined fields[0xE66-HINTABLE_ITEM_COUNT]; // 0x2AA: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 

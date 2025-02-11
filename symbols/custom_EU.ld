@@ -2,6 +2,9 @@
 GenerateKecleonItems1Hook = 0x2010B20;
 GenerateKecleonItems2Hook = 0x2010E30;
 IqScalingGroundHook = 0x20119FC;
+NoLowercaseQTagBranch = 0x2022808;
+LowercaseTagCodeError = 0x20234C4;
+AfterLowercaseTagIsFound = 0x20234EC;
 WriteSaveFileCallsite1 = 0x02049470;
 WriteSaveFileCallsite2 = 0x02049498;
 WriteSaveFileCallsite3 = 0x020494B0;
@@ -56,8 +59,10 @@ apSeed = 0x23DE010;
 apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
+hintableItems = 0x23DE022;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
+
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined
