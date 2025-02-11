@@ -1,8 +1,10 @@
 
 def 0 {
     $EVENT_LOCAL = 22;
-    if ($PERFORMANCE_PROGRESS_LIST[37]) {
-        $SCENARIO_TALK_BIT_FLAG[249] = 1;
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        if ($PERFORMANCE_PROGRESS_LIST[37]) {
+            $SCENARIO_TALK_BIT_FLAG[249] = 1;
+        }
     }
     sound_Stop();
     back_SetGround(LEVEL_H01P99A);

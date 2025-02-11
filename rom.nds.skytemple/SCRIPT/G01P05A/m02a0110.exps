@@ -609,6 +609,19 @@ def 0 {
         spanish="[CN][partner] miró\n[CN]dentro de la Bolsa.",
     });
     message_KeyWait();
+    switch( ProcessSpecial(103,0,0)) {
+        case 1: // Chesyon
+            item_Set(0, 500, 0);
+            jump @label_21;              
+        case 2: // Happylappy
+            item_Set(0, 9, 99);
+            jump @label_21;        
+        case 3: // Cryptic
+            item_Set(0, 186, 0);
+            jump @label_21;
+        default: // No special name
+            break;
+    }
     switch ( ProcessSpecial(PROCESS_SPECIAL_GET_HERO_KIND, 0, 0) ) {
         case 0:
         default:
@@ -692,9 +705,33 @@ def 0 {
             switch ( message_Menu(MENU_GIVE_ITEM) ) { }
             break;
         case 1:
-            message_Mail(" But the bag disappeared, and you don't have room for it!");
+            message_Mail(" But the bag disappeared, so you don't have room for it!");
             message_Close();
             switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+            break;
+    }
+    switch( ProcessSpecial(103,0,0)) {
+        case 1: // Chesyon
+            me_Play(4);
+            message_Mail("Nothing was inside![K]\nWait, what?[W:60] the bag had a false bottom!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            break;           
+        case 2: // Happylappy
+            me_Play(4);
+            message_Mail("A [CS:I]Curve Band[CR] was inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 46, 0);
+            jump @label_38;        
+        case 3: // Cryptic
+            me_Play(4);
+            message_Mail("A [CS:I]Gold Ribbon[CR] was inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 32, 0);
+            jump @label_38;
+        default: // No special name
             break;
     }
     switch ( $CONFIG_COLOR_KIND ) {
@@ -914,7 +951,7 @@ def 0 {
             switch ( message_Menu(MENU_GIVE_ITEM) ) { }
             break;
         case 1:
-            message_Mail(" But the bag disappeared, and you don't have room for it!");
+            message_Mail(" But the bag disappeared, so you don't have room for it!");
             message_Close();
             switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
             break;
