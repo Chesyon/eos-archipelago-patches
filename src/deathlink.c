@@ -181,7 +181,7 @@ void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buf
                           int buffer_size, struct preprocessor_args* args) {
     GetDungeonResultMsg(damage_source_or_result, buffer, buffer_size, (undefined*) args);
     
-    // If this was a succesful mission (or we got smited by the deathlink,
+    // If this was a succesful mission (or we got smited by the deathlink),
     // do nothing.
     if (damage_source_or_result.other == DEATHLINK_DAMAGE_SOURCE ||
         damage_source_or_result.other >= DAMAGE_SOURCE_ESCAPE) {
