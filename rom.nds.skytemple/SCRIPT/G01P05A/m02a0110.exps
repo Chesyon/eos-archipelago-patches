@@ -619,6 +619,25 @@ def 0 {
         case 3: // Cryptic
             item_Set(0, 186, 0);
             jump @label_21;
+        case 4: // Katt
+            item_Set(0, 115, 0);
+            jump @label_21;
+        case 5: // Hecka
+            jump @hecka_1;
+        case 6: // Tailsdx
+        message_Mail("Would you like your signature item?");
+        switch(message_SwitchMenu(0,1)) {
+            case menu("Yes!"):
+                message_Close();
+                item_Set(0, 524, 0);
+                jump @label_21;  
+            case menu("No thanks!"):
+                message_Close();
+                break;              
+            }
+        case 7: // FieryBlizzard
+            item_Set(0, 512, 0);
+            jump @label_21;
         default: // No special name
             break;
     }
@@ -710,10 +729,36 @@ def 0 {
             switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
             break;
     }
+    $EVENT_LOCAL = 0;
+    if ($EVENT_LOCAL != 0) {
+        §hecka_1;
+        message_Mail("[CN]A smaller bag was inside, containing\n[CN]a mix of [CS:I]Eyedrop Seeds[CR] and [CS:I]Dropeye Seeds[CR]!");
+        $EVENT_LOCAL = 8;
+        message_Close();
+        while ($EVENT_LOCAL > 0) {
+            switch(random(2)) {
+                case 0:
+                    item_Set(0, 72, 0); 
+                    break;       
+                case 1:
+                    item_Set(0, 104, 0);
+                    break;
+            }
+            switch(ProcessSpecial(56,0,0)) {
+                case 0: // Bag NOT full
+                    switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+                    break;
+                case 1:
+                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                    break;
+            }
+            $EVENT_LOCAL -= 1;
+        }
+    }
     switch( ProcessSpecial(103,0,0)) {
         case 1: // Chesyon
             me_Play(4);
-            message_Mail("Nothing was inside![K]\nWait, what?[W:60] the bag had a false bottom!");
+            message_Mail("A [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] was inside![K]\nWait, what?[W:60] the bag had a false bottom![K]\nYou cast aside the [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] for an [CS:I]Aura Bow[CR]!");
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
             break;           
@@ -730,6 +775,45 @@ def 0 {
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
             item_Set(0, 32, 0);
+            jump @label_38;
+        case 4: // Katt
+            me_Play(4);
+            message_Mail("A [M:T5][CS:I]Stamina Band[CR] was inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 38, 0);
+            jump @label_38;
+        case 5: // Hecka
+            me_Play(4);
+            message_Mail("The [M:T5][CS:I]Spooky Old AP Item #9[CR] were inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 176, 0);
+            jump @label_38;
+        case 6: // Tailsdx
+            me_Play(4);
+            message_Mail("A [CS:I][M:I1]All-Mach Orb[CR] was inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_Mail("Will you take it?");
+            switch(message_SwitchMenu(0,1)) {
+                case menu("Yes!"):
+                    message_Close();
+                    item_Set(0,356, 0);
+                    jump @label_38;  
+                case menu("No thanks!"):
+                    message_Close();
+                    break;              
+            }
+            break;
+        case 7: // FieryBlizzard
+            me_Play(4);
+            message_Mail("A [CS:Y]Icy Gem[CR] was inside!");
+            WaitMe(4);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            item_Set(0, 528, 0);
+            $PERFORMANCE_PROGRESS_LIST[34] = 1;
+            $SCENARIO_TALK_BIT_FLAG[254] = 1;
             jump @label_38;
         default: // No special name
             break;

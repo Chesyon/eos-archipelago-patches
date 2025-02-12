@@ -1,20 +1,43 @@
 def 0 {
     message_SetFace(ACTOR_NPC_DEMO_PARTNER,FACE_DIZZY,FACE_POS_STANDARD);
-    switch(random(100)) {
-        case 0:
-            message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
-            break;
+    switch (ProcessSpecial(103,0,0)) {
         case 1:
-            message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
-            break;
-        case 2:
-            message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
-            break;
-        case 3:
-            message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");
+            switch(random(5)) {
+                case 0:
+                    message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
+                    break;
+                case 1:
+                    message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
+                    break;
+                case 2:
+                    message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
+                    break;
+                case 3:
+                    message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");
+                    break;
+                default:
+                    message_Talk(" Zzz...[W:60] [CS:C]Zelulo[CR]-zzzz");
+                    break;
+            }    
             break;
         default:
-            message_Talk(" ...");
+            switch(random(100)) {
+                case 0:
+                    message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
+                    break;
+                case 1:
+                    message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
+                    break;
+                case 2:
+                    message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
+                    break;
+                case 3:
+                    message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");
+                    break;
+                default:
+                    message_Talk(" ...");
+                    break;
+            }
             break;
     }
     message_Close();

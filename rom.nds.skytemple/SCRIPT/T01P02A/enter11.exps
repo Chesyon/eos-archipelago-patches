@@ -64,23 +64,35 @@ def 0 {
             JumpCommon(CORO_END_TALK);
         } else {
             $SCENARIO_TALK_BIT_FLAG[95] = 1;
-            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk({
-                english=" Ah, the returning heroes\nof Team [team:]!",
-                french=" Ah, les voilà de retour,\nle duo héroïque de l\'Equipe [team:]!",
-                german=" Ah, die heimkehrenden Helden\nvon Team [team:]!",
-                italian=" Ah, l\'eroico Team [team:] \nè di ritorno!",
-                spanish=" Ah, ¡aquí tenemos de vuelta\nel heroico [CS:X]Equipo[CR] [team:]!",
-            });
-            message_Talk({
-                english=" I thank you sincerely for\nstopping the spreading nightmare!",
-                french=" Merci beaucoup d\'avoir mis un\nterme à la propagation du cauchemar!",
-                german=" Ich danke euch zutiefst, dass ihr\ndie Ausbreitung des Albtraums verhindert habt!",
-                italian=" Vi ringrazio di cuore per\naver fermato la diffusione dell\'incubo!",
-                spanish=" ¡Les agradezco sinceramente que\ndetuvieran el avance de esa pesadilla!",
-            });
-            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            jump @label_131;
+            switch(ProcessSpecial(103,0,0)) {
+                case 4:
+                    message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk("Ah, the returning artist [hero]![K]\nAs thanks, here are your\ncommissions on today\'s sales...");            
+                    message_Close();
+                    $CARRY_GOLD += 100;
+                    message_Mail("Got [CS:G]100[CR][M:S0] in commissions!");
+                    message_Close();
+                    jump @label_131;
+                default:
+                    message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" Ah, the returning heroes\nof Team [team:]!",
+                        french=" Ah, les voilà de retour,\nle duo héroïque de l\'Equipe [team:]!",
+                        german=" Ah, die heimkehrenden Helden\nvon Team [team:]!",
+                        italian=" Ah, l\'eroico Team [team:] \nè di ritorno!",
+                        spanish=" Ah, ¡aquí tenemos de vuelta\nel heroico [CS:X]Equipo[CR] [team:]!",
+                    });
+                    message_Talk({
+                        english=" I thank you sincerely for\nstopping the spreading nightmare!",
+                        french=" Merci beaucoup d\'avoir mis un\nterme à la propagation du cauchemar!",
+                        german=" Ich danke euch zutiefst, dass ihr\ndie Ausbreitung des Albtraums verhindert habt!",
+                        italian=" Vi ringrazio di cuore per\naver fermato la diffusione dell\'incubo!",
+                        spanish=" ¡Les agradezco sinceramente que\ndetuvieran el avance de esa pesadilla!",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    jump @label_131;
+            }
+
         }
     } elseif ( scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] ) {
         with (actor ACTOR_TALK_MAIN) {

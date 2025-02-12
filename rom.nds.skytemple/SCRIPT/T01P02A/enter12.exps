@@ -64,30 +64,41 @@ def 0 {
             JumpCommon(CORO_END_TALK);
         } else {
             $SCENARIO_TALK_BIT_FLAG[83] = 1;
-            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk({
-                english=" Ah, yes, I\'ve heard!",
-                french=" Ah oui! J\'ai appris la nouvelle!",
-                german=" Ah, ja. Ich habe es gehört!",
-                italian=" Ah, sì, ho sentito!",
-                spanish=" Ah, sí, ¡ya me he enterado!",
-            });
-            message_Talk({
-                english=" You\'ve defeated [CS:N]Darkrai[CR]?!",
-                french=" Vous avez vaincu [CS:N]Darkrai[CR]?!",
-                german=" Ihr habt [CS:N]Darkrai[CR] besiegt?!?",
-                italian=" Avete sconfitto [CS:N]Darkrai[CR]?!",
-                spanish=" ¡Han derrotado a [CS:N]Darkrai[CR]!",
-            });
-            message_Talk({
-                english=" That\'s the [hero] and\n[partner] I revere! So fantastic!",
-                french=" Voilà les incomparables\n[hero] et [partner]! Formidable!",
-                german=" Das sind [hero] und\n[partner]. Ich bewundere euch! Einfach\nfantastisch!",
-                italian=" [hero] e [partner], \nvi adoro! Siete grandi!",
-                spanish=" ¡Mi admiración por ustedes,\n[hero] y [partner], no tiene límites!",
-            });
-            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            jump @label_131;
+            switch(ProcessSpecial(103,0,0)) {
+                case 4:
+                    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk("Ah, the returning artist [hero]![K]\nAs thanks, here are your\ncommissions on today\'s sales...");            
+                    message_Close();
+                    $CARRY_GOLD += 100;
+                    message_Mail("Got [CS:G]100[CR][M:S0] in commissions!");
+                    message_Close();
+                    jump @label_131;
+                default:
+                    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" Ah, yes, I\'ve heard!",
+                        french=" Ah oui! J\'ai appris la nouvelle!",
+                        german=" Ah, ja. Ich habe es gehört!",
+                        italian=" Ah, sì, ho sentito!",
+                        spanish=" Ah, sí, ¡ya me he enterado!",
+                    });
+                    message_Talk({
+                        english=" You\'ve defeated [CS:N]Darkrai[CR]?!",
+                        french=" Vous avez vaincu [CS:N]Darkrai[CR]?!",
+                        german=" Ihr habt [CS:N]Darkrai[CR] besiegt?!?",
+                        italian=" Avete sconfitto [CS:N]Darkrai[CR]?!",
+                        spanish=" ¡Han derrotado a [CS:N]Darkrai[CR]!",
+                    });
+                    message_Talk({
+                        english=" That\'s the [hero] and\n[partner] I revere! So fantastic!",
+                        french=" Voilà les incomparables\n[hero] et [partner]! Formidable!",
+                        german=" Das sind [hero] und\n[partner]. Ich bewundere euch! Einfach\nfantastisch!",
+                        italian=" [hero] e [partner], \nvi adoro! Siete grandi!",
+                        spanish=" ¡Mi admiración por ustedes,\n[hero] y [partner], no tiene límites!",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    jump @label_131;
+            }
         }
     } elseif ( scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] ) {
         with (actor ACTOR_TALK_MAIN) {

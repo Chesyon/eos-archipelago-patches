@@ -121,5 +121,39 @@ def 0 {
     message_Close();
     screen2_FadeOut(1, 30);
     back2_SetMode(0);
+    switch(ProcessSpecial(103,0,0)) {
+        case 3:
+            if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                if ($BANK_GOLD > 100) {
+                    $BANK_GOLD -= 100;
+                    message_Mail("Paid off the loan's interest!");
+                    message_Close();
+                } elseif ($CARRY_GOLD > 100) {
+                    $CARRY_GOLD -= 100;
+                    message_Mail("Paid off the loan's interest!");
+                    message_Close();
+                } else {
+                    message_Mail("You\'re flat broke! [M:T6]");
+                    message_Close();
+                }
+            }
+            break;
+        case 4:
+            $SCENARIO_TALK_BIT_FLAG[95] = 0;
+            $SCENARIO_TALK_BIT_FLAG[83] = 0;
+            break;
+        case 5:
+            message_Mail("[hero] used [CS:K]Synodic Flip[CR]");
+            if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                screen_FadeChange(1, 0, 0, 128);
+                $SCENARIO_TALK_BIT_FLAG[251] = 0;
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[251] = 1;
+                screen_FadeChange(1, 0, 0, 255);
+            }
+            break;
+        default:
+            break;
+    }
     end;
 }

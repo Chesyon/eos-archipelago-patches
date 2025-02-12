@@ -1380,7 +1380,19 @@ def 0 {
         spanish="[CN]¡Felicidades, [CS:X]Equipo[CR] [team:]!\n[CN]¡Lo lograsteis![W:240]",
     });
     message_Close();
-    $CARRY_GOLD += 10000;
+    switch(ProcessSpecial(103,0,0)) {
+        case 3: 
+            message_Mail("Cryptic managed to get a small loan of [CS:C]100,000[CR][M:S0]\nfrom the guild instead!");
+            $BANK_GOLD += 40000;
+            $BANK_GOLD += 60000;
+            $SCENARIO_TALK_BIT_FLAG[251] = 1;
+            message_Mail("The loan will slowly pay itself off over time!");
+            message_Close();
+            break;
+        default:
+            $CARRY_GOLD += 10000;
+            break;
+    }
     Wait(60);
     end;
 }
