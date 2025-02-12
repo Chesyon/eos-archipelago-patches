@@ -188,17 +188,17 @@ asmdump: build
 headers:
 	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --deprecate-aliases --docstrings
 	
-.PHONY: 
+.PHONY: apply-xdelta
 apply-xdelta:
 	xdelta patch unpatched-base.xdelta vanilla.nds rom.nds
 	
-.PHONY: 
+.PHONY: apply-cot
 apply-cot: patch
 
-.PHONY: 
+.PHONY: build-xdelta
 build-xdelta:
 	xdelta delta vanilla.nds rom.nds unpatched-base.xdelta
 	
-.PHONY: 
+.PHONY: build-bsdiff
 build-bsdiff:
 	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
