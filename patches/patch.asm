@@ -14,8 +14,8 @@
     .org NoLowercaseQTagBranch
         b NoLowercaseQTagFound
 
-    ;.org CallGetDungeonResultMsg
-    ;    bl DeathLinkSenderCheck
+    .org CallGetDungeonResultMsg
+        bl DeathLinkSenderCheck
     
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
@@ -113,9 +113,9 @@
     .org SpawnRateInstrumentHook
         bl ReduceSpawnInstrumentCheck
     
-    ;.org DungeonTurnHook
-    ;    beq DungeonTurnEndChecksTrampoline
+    .org DungeonTurnHook
+        beq DungeonTurnEndChecksTrampoline
     
-    ;.org DeathLinkDungeonInitHook
-    ;    bl DeathLinkInitDungeon
+    .org DeathLinkDungeonInitHook
+        bl DeathLinkInitDungeon
 .close

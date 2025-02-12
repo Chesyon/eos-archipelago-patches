@@ -359,37 +359,37 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             int selected = (int)GetAdvancedMenuCurrentOption(quizData->menuId);
             if (PARTNER_SELECT_MENU_OPTION_TRACKER == selected) {
                 int currentCounter = PARTNER_SELECT_MENU_OPTION_TIMER;
-                int emotionThing = currentCounter & 0xFF;
                 PARTNER_SELECT_MENU_OPTION_TIMER = currentCounter + 1;
-                if (emotionThing == 0xF0) { // TODO: Fix the fancy schmancy way this is supposed to look.
+                if (currentCounter == 0xF0) {
                     InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
                     (quizData->partners[selected]).val);
                     SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_NORMAL);
                     SetPortraitLayout(&quizData->portraitParams, 4);
                     SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
                     ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
-                } else if (emotionThing == 0xC0) {
+                    PARTNER_SELECT_MENU_OPTION_TIMER = 0x00;
+                } else if (currentCounter == 0xC0) {
                     InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
                     (quizData->partners[selected]).val);
                     SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_JOYOUS);
                     SetPortraitLayout(&quizData->portraitParams, 4);
                     SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
                     ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
-                } else if (emotionThing == 0x90) {
+                } else if (currentCounter == 0x90) {
                     InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
                     (quizData->partners[selected]).val);
                     SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_SURPRISED);
                     SetPortraitLayout(&quizData->portraitParams, 4);
                     SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
                     ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
-                } else if (emotionThing == 0x60) {
+                } else if (currentCounter == 0x60) {
                     InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
                     (quizData->partners[selected]).val);
                     SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_ANGRY);
                     SetPortraitLayout(&quizData->portraitParams, 4);
                     SetPortraitOffset(&quizData->portraitParams, &PARTNER_SELECT_PORTRAIT_OFFSETS);
                     ShowPortraitInPortraitBox(quizData->portraitBoxId, &quizData->portraitParams);
-                } else if (emotionThing == 0x30) {
+                } else if (currentCounter == 0x30) {
                     InitPortraitParamsWithMonsterId(&(quizData->portraitParams),
                     (quizData->partners[selected]).val);
                     SetPortraitEmotion(&quizData->portraitParams, PORTRAIT_HAPPY);
