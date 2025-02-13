@@ -95,14 +95,6 @@ static int SpRegenerateMissions() {
     return 0;
 }
 
-// Special process 105: Enable Archipelago settings. No parameters.
-static int SpEnableArchipelagoSettings() {
-    if (apSettings.recruitment) SaveScriptVariableValueAtIndex(0, VAR_PERFORMANCE_PROGRESS_LIST, 5, 1);
-    if (apSettings.evolution) SaveScriptVariableValueAtIndex(0, VAR_PERFORMANCE_PROGRESS_LIST, 6, 1);
-    if (apSettings.teamFormation) { SaveScriptVariableValueAtIndex(0, VAR_PERFORMANCE_PROGRESS_LIST, 7, 1); SaveScriptVariableValueAtIndex(0, VAR_PERFORMANCE_PROGRESS_LIST, 20, 1); }
-    return 0;
-}
-
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -139,9 +131,6 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 104:
         *return_val = SpRegenerateMissions();
-        return true;
-    case 105:
-        *return_val = SpEnableArchipelagoSettings();
         return true;
     default:
         return false;
