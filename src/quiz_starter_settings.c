@@ -152,13 +152,13 @@ void __attribute__((naked)) ForcedPartnerCheck() {
 
 void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("blt QuizForcedPartnerRollUnhook"); // originalish instruction
-    asm("stmdb sp!,{lr}");
     asm("ldr r1,=apSettings");
     asm("ldr r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000011000000000");
     asm("lsr r1,r1,#0x9");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("bxne lr");
+    asm("stmdb sp!,{lr}");
     asm("ldr r0,=apSlotName");
     asm("ldr r1,=apSeed");
     asm("ldr r2,[r1,#0x0]");
