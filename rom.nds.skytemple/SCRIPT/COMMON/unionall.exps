@@ -2355,10 +2355,7 @@ coro EVENT_M00A_01 {
     $PERFORMANCE_PROGRESS_LIST[4] = 1; // Friend Rescue Enabled :)
     // Check archipelago settings and enable variables accordingly
     $VERSION = $PERFORMANCE_PROGRESS_LIST; // set the list to update to PERFORMANCE_PROGRESS_LIST
-    ProcessSpecial(105, 0, 0); // Handle all of the settings!
     $VERSION = 1;
-    //TODO: uncomment this SP call!
-    // ProcessSpecial(103,0,0);
     JumpCommon(CORO_EVENT_DIVIDE);
 }
 
