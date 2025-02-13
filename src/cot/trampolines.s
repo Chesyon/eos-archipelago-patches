@@ -7,7 +7,7 @@
 .align 4 // Use for hooks where we need to check every turn.
     DungeonTurnEndChecksTrampoline:
         bl DeathLinkReceiverCheck
-        // bl DungeonModeTrapCheck
+        bl DungeonModeTrapCheck
         b DungeonTurnUnhook
         
 
