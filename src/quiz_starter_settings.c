@@ -138,10 +138,21 @@ void __attribute__((naked)) ForcedPlayerCheck() {
     asm("b QuizForcedPlayerUnhook");
 }
 
-// Lazy hook to force a specific partner by... replacing all entries with the
-// same monster.
+// Force the game to use an unrandom order.
 void __attribute__((naked)) ForcedPartnerCheck() {
     asm("mov r7,#0x0"); // Original Instruction
+    asm("ldr r1,=apSettings");
+    asm("ldr r1,[r1,#0x0]");
+    asm("and r1,r1,#0b0000011000000000");
+    asm("lsr r1,r1,#0x9");
+    asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
+    asm("moveq r6,#0x0");
+    asm("bx lr");
+}
+
+void __attribute__((naked)) ForcedPartnerRollCheck() {
+    asm("blt QuizForcedPartnerRollUnhook"); // originalish instruction
+    asm("stmdb sp!,{lr}");
     asm("ldr r1,=apSettings");
     asm("ldr r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000011000000000");
@@ -159,22 +170,26 @@ void __attribute__((naked)) ForcedPartnerCheck() {
     asm("and r3,r3,r1");
     asm("ldr r1,[r0,#0xC]");
     asm("eor r3,r3,r1");
-    asm("eor r3,r3,r2");
-    asm("and r3,r3,#0b1111");
+    asm("eor r0,r3,r2");
+    asm("ldr r2,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
+    asm("ldr r2,[r2,#0x0]");
+    asm("ldr r1,[r2,#0x370]"); // numSelectablePartners
+    asm("bl _s32_div_f");
     asm("ldr r0,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r0,[r0,#0x0]");
     asm("add r0,r0,#0x300");
-    asm("lsl r2,r3,#0x1");
-    asm("ldr r1,=STARTERS_PARTNER_IDS");
-    asm("ldrsh r3,[r1,r2]");
+    asm("lsl r2,r1,#0x1");
+    asm("ldr r3,=STARTERS_PARTNER_IDS");
+    asm("ldrsh r1,[r3,r2]");
+    asm("mov r7,#0");
     asm("force_partner_fill_entry_loop:");
-    asm("add r1,r0,r7,lsl #0x1");
-    asm("strh r3,[r1,#0x74]"); // #0x374
+    asm("add r3,r0,r7,lsl #0x1");
+    asm("strh r1,[r3,#0x74]"); // #0x374
     asm("add r7,r7,#1");
     asm("cmp r7,#0x15");
     asm("blt force_partner_fill_entry_loop");
     asm("str r7,[r0,#0x70]"); // 0x370
-    asm("b QuizForcedPartnerUnhook");
+    asm("ldmia sp!,{lr}");
 }
 
 // Check if override is active. If so, allow the quiz result to be overwritten.
@@ -197,7 +212,7 @@ void __attribute__((naked)) HeroTweakCheck() {
     asm("lsr r3,r3,#0x9");
     asm("cmp r3,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("cmpne r3,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("ldrne r3,[r1,r0]"); // originalish instruction
+    asm("ldrnesh r3,[r1,r0]"); // originalish instruction
     asm("bxne lr");
     asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r3,[r3,#0x0]");

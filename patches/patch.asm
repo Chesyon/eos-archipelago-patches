@@ -71,6 +71,8 @@
         b ForcedPlayerCheck
     .org QuizForcedPartnerHook
         bl ForcedPartnerCheck
+    .org QuizForcedPartnerRollHook
+        bl ForcedPartnerRollCheck
     .org QuizOverrideHook
         bl OverrideHeroCheck
     .org QuizHeroTweakHook
