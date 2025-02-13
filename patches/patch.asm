@@ -17,6 +17,9 @@
     .org CallGetDungeonResultMsg
         bl DeathLinkSenderCheck
     
+    .org MissionTypeRollHook
+        bl ExploreNewDungeonCheck
+
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
     .area 0x4
