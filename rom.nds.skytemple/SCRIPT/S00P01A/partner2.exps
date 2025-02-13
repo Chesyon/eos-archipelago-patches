@@ -43,6 +43,7 @@ def 0 {
             call @current_goals;
             jump @anything_else;
         case menu("Any ideas"): 
+            /*
             switch(random(10)) {
                 case 0: 
                     message_Talk(" You should check X Placeholder 0");
@@ -75,6 +76,9 @@ def 0 {
                     message_Talk(" You should check X Placeholder 9");
                     break;
             }
+            */
+            message_Talk(" Not yet, no.[K] I will be able to\nhelp you find checks you\'ve missed in [CS:G]0.2.1[CR] though!");
+            message_Close();
             jump @anything_else;
         case menu("Just Chatting"):
             message_Close();

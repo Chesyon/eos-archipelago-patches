@@ -132,8 +132,16 @@ def 0 {
                     $CARRY_GOLD -= 100;
                     message_Mail("Paid off the loan's interest!");
                     message_Close();
+                } elseif ($BANK_GOLD > 0) {
+                    $BANK_GOLD = 0;
+                    message_Mail("Paid off the loan's interest!\n[K]Your bank account is drained!");
+                    message_Close();
+                } elseif ($CARRY_GOLD > 0) {
+                    $CARRY_GOLD = 0;
+                    message_Mail("Paid off the loan's interest!\n[K]You\'re flat broke!");
+                    message_Close();
                 } else {
-                    message_Mail("You\'re flat broke! [M:T6]");
+                    message_Mail("You\'re still flat broke! [M:T6]");
                     message_Close();
                 }
             }
@@ -145,12 +153,14 @@ def 0 {
         case 5:
             message_Mail("[hero] used [CS:K]Synodic Flip[CR]");
             if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                screen_FadeChange(1, 0, 0, 128);
                 $SCENARIO_TALK_BIT_FLAG[251] = 0;
+                screen_FadeChange(1, 0, 0, 255);
             } else {
                 $SCENARIO_TALK_BIT_FLAG[251] = 1;
-                screen_FadeChange(1, 0, 0, 255);
+                
+                screen_FadeChange(1, 0, 0, 128);
             }
+            message_Close();
             break;
         default:
             break;

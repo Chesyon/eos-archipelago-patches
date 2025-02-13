@@ -635,6 +635,7 @@ def 0 {
                 message_Close();
                 break;              
             }
+            break;
         case 7: // FieryBlizzard
             item_Set(0, 512, 0);
             jump @label_21;
@@ -724,7 +725,7 @@ def 0 {
             switch ( message_Menu(MENU_GIVE_ITEM) ) { }
             break;
         case 1:
-            message_Mail(" But the bag disappeared, so you don't have room for it!");
+            message_Mail(" But the bag disappeared,\nso you don't have room for it!");
             message_Close();
             switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
             break;
@@ -758,7 +759,7 @@ def 0 {
     switch( ProcessSpecial(103,0,0)) {
         case 1: // Chesyon
             me_Play(4);
-            message_Mail("A [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] was inside![K]\nWait, what?[W:60] the bag had a false bottom![K]\nYou cast aside the [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] for an [CS:I]Aura Bow[CR]!");
+            message_Mail("A [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] was inside![K] Wait, what?\n[W:60]the bag had a false bottom![K] You cast aside\nthe [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] for an [CS:I]Aura Bow[CR]!");
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
             break;           
@@ -1035,7 +1036,7 @@ def 0 {
             switch ( message_Menu(MENU_GIVE_ITEM) ) { }
             break;
         case 1:
-            message_Mail(" But the bag disappeared, so you don't have room for it!");
+            message_Mail(" But the bag disappeared,\nso you don't have room for it!");
             message_Close();
             switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
             break;

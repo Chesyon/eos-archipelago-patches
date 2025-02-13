@@ -8496,6 +8496,30 @@ coro COMMON_ENTER {
     debug_Print('COMMON_ENTER');
     screen_FadeInAll(0, 30);
     screen_FadeIn(1, 0);
+    switch(ProcessSpecial(103,0,0)) {
+        case 5:
+            switch(random(1000)) {
+                case 0:
+                    message_Mail("... and everything turned blue\nfor the next 3 minutes!");
+                    screen2_FlushOut(0,30,4,0,30,255);
+                    screen_FlushOut(1,30,4,0,30,255);
+                    message_Close();
+                    Wait(90);
+                    screen2_FlushIn(0,10000,4,0,30,255);
+                    screen_FlushIn(0,10000,4,0,30,255);
+                    
+                    break;
+                default:            
+                    if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                        screen_FadeChange(1, 0, 0, 128);
+                    } else {
+                        screen_FadeChange(1, 0, 0, 255);
+                    }
+                    break;
+            }
+        default:
+            break;
+    }
     end;
 }
 
@@ -11805,80 +11829,101 @@ coro RESCUE_DEBUG {
             }
             break;
             §label_729;
+            message_EmptyActor();
             switch(ProcessSpecial(103,0,0)) {               
                 case 1:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]Chesyon[CR]?");
-                    message_Mail("Has [CS:C]Crowned[CR] released yet?[K]\nWhat?[K] No?[K] For shame!");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("If you hadn\'t taken up the reins\nwhen you did, who knows where\nwe\'d all be![K] Probably not here..."); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Chesyon[CR]?");
+                    message_Talk("Has [CS:C]Crowned[CR] released yet?[K]\nWhat?[K] No?[K] For shame!");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("If you hadn\'t taken up the reins\nwhen you did, who knows where\nwe\'d all be![K] Probably not here..."); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     Wait(70);
                     message_Mail("[STS]\n[CN][CS:G]Handbrain[CR][STE]");
                     message_CloseEnforce();
                     break;
                 case 2:
+                    se_Play(8968);
+                    Wait(60);
                     message_Mail("...wait a minute.[K] You\'re THE [CS:G]happylappy[CR]?");
                     message_Mail("Huge fan![K] Anyway, without further ado...");
-                    Wait(360);
-                    message_Mail("What, did you expect me to thank\nmyself for contributing?[K] I\'ll pass for now, thanks!");
+                    Wait(180);
+                    message_CloseEnforce();
+                    message_Mail("What, did you expect me to thank\nmyself for contributing?[K] I\'ll\npass for now, thanks!");
                     message_Close();
                     Wait(70);
                     message_Mail("Play [CS:G]GoHL[CR]![W:30]");
                     message_CloseEnforce();
                     break;
                 case 3:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]Cryptic[CR]?");
-                    message_Mail("You need a refill on popcorn?[K]\nHere you go:  [M:T6][M:T6][M:T6][M:T6][M:T6]");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Without you, we wouldn\'t have\nany idea how to use the AP client,\nmuch less program item and location logic..."); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Cryptic[CR]?");
+                    message_Talk("You need a refill on popcorn?[K]\nHere you go:  [M:T6][M:T6][M:T6][M:T6][M:T6]");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Without you, we wouldn\'t have\nany idea how to use the AP client,\nmuch less program item and location logic..."); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 case 4:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]kattnip[CR]?");
-                    message_Mail("You\'re the reason we have this: [M:T5]");
-                    message_Mail("However...[W:60] I think we need it in a different\npalette![K] Do you think you can make it look\nthis colorful using only grayscale instead?");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Without you, we wouldn\'t have these small\nbut important touches to make our APWorld\nstand out![K] Art is scary, I much prefer coding..."); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]kattnip[CR]?");
+                    message_Talk("You\'re the reason we have this: [M:T5]");
+                    message_Talk("However...[W:60] I think we need it in a different\npalette![K] Do you think you can make it look\nthis colorful using only grayscale instead?");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Without you, we wouldn\'t have these small\nbut important touches to make our APWorld\nstand out![K] Art is scary, I much prefer coding..."); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 case 5:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]Hecka[CR]?");
-                    message_Mail("I\'ve got this funny dungeon-mode trap idea\nI wanted you to make, where it leaks the IP\naddress of the player and puts it on-screen...");
-                    message_Mail("Given your past track-record, I imagine\nyou\'ll have no trouble getting that all\nset for [CS:G]0.2.1[CR], right Hecka? :P");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Without you, there\'s so many things that we\njust couldn\'t have done: Shop Items, Starter\nSettings, Extra Instruments, and much more..."); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Hecka[CR]?");
+                    message_Talk("I\'ve got this funny dungeon-mode trap idea\nI wanted you to make, where it leaks the IP\naddress of the player and puts it on-screen...");
+                    message_Talk("Given your past track-record, I imagine\nyou\'ll have no trouble getting that all\nset for [CS:G]0.2.1[CR], right Hecka? :P");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Without you, there\'s so many things that we\njust couldn\'t have done: Shop Items, Starter\nSettings, Extra Instruments, and much more..."); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 case 6:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]Tailsdx[CR]?");
-                    message_Mail("Alright, so on this run I need you to confirm that\n[CS:P]Zero Isle South[CR] missions function as normal\nokay?[K] Just clear it a few times, piece of cake!");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Without you, there\'s so many things that we\nwould have never found before release: the\n\"quirks\" of [CS:P]Special Rift[CR] come to mind... "); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Tailsdx[CR]?");
+                    message_Talk("Alright, so on this run I need you to confirm if\n[CS:P]Zero Isle South[CR] missions function as normal\nokay?[K] Just clear it a few times, piece of cake!");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"quirks\" of [CS:P]Special Rift[CR] come to mind... "); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 case 7:
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]FieryBlizzard[CR]?");
-                    message_Mail("So I was thinking...[W:60] It\'s a little weird that\n[CS:L]Charizard[CR] can learn [CS:K]Heat Wave[CR], right?[K] So I\nchanged it to... [W:60]Wait, you LIKE [CS:K]Heat Wave[CR]?");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Without you, there\'s so many things that we\nwould have never found before release: the\n\"excessive\" [CS:G]Pelipper[CR] deliveries come to mind... "); 
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]FieryBlizzard[CR]?");
+                    message_Talk("So I was thinking...[W:60] It\'s a little weird that\n[CS:L]Charizard[CR] can learn [CS:K]Heat Wave[CR], right?[K] So I\nchanged it to... [W:60]Wait, you LIKE [CS:K]Heat Wave[CR]?");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"excessive\" [CS:G]Pelipper[CR] deliveries come to mind..."); 
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 case 1000: // Sadge this won't ever play. oh well!
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]Adex[CR]?");
-                    message_Mail("It\'s so much harder to be on the\nother end of these things, isn\'t it?\nHow did you do it for MM5?"); 
-                    message_Mail("Anyway, I hid yours in unionall for you,\ninstead of making it play naturally.[K] Happy?");
-                    message_Mail("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Mail("Cutscene skipping is a HUGE deal to the\npeople who play this stuff regularly![K] The\ntracker is looking incredible too![K] Now then...");
-                    message_Mail("So thank you for contributing!");
+                    se_Play(8968);
+                    Wait(60);
+                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Adex[CR]?");
+                    message_Talk("It\'s so much harder to be on the\nother end of these things, isn\'t it?\nHow did you do it for MM5?"); 
+                    message_Talk("Anyway, I hid yours in unionall for you,\ninstead of making it play naturally.[K] Happy?");
+                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                    message_Talk("Cutscene skipping is a HUGE deal to the\npeople who play this stuff regularly![K] The\ntracker is looking incredible too![K] Now then...");
+                    message_Talk("So thank you for contributing!");
                     message_Close();
                     break;
                 default:
+                    message_Talk("[hero]?[K] What a nice name![K]\nI don\'t recognize it, but...");
+                    message_Talk("Thank you for playing!");
+                    message_Close();
                     break;
             }
             return;
@@ -12327,6 +12372,9 @@ coro BUBBLE_TEST {
                             ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,443,0);
                             break;
                     }
+                case < 10:
+                    message_Mail("[CN]You feel like your bag suddenly\ngot a little bit heavier...");
+                    message_Close();
                     break;
                 default:
                     break;

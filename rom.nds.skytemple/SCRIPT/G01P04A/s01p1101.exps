@@ -1382,13 +1382,13 @@ def 0 {
     message_Close();
     switch(ProcessSpecial(103,0,0)) {
         case 3: 
-            message_Mail("Cryptic managed to get a small loan of [CS:C]100,000[CR][M:S0]\nfrom the guild instead!");
-            $BANK_GOLD += 40000;
-            $BANK_GOLD += 60000;
+            me_Play(9);
+            message_Mail("Cryptic managed to get a small loan of\n[CS:G]30,000[CR][M:S0] from the guild in addition!");
+            WaitMe(9);
+            $BANK_GOLD += 30000;
             $SCENARIO_TALK_BIT_FLAG[251] = 1;
             message_Mail("The loan will slowly pay itself off over time!");
             message_Close();
-            break;
         default:
             $CARRY_GOLD += 10000;
             break;
