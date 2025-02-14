@@ -200,8 +200,8 @@ void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buf
     if (SomeDeathMsgCheckFun(damage_source_or_result) != 0) {
         strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
         int remaining = 127 - strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
-        if(remaining > 1) {
-            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, space, 1);
+        if(remaining > 2) {
+            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, space, remaining);
             remaining--;
             strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, remaining);
         }
