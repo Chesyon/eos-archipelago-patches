@@ -17,7 +17,6 @@ def 0 {
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
     }
-    
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;
     message_Talk(" What\'s on your mind, [hero]?");

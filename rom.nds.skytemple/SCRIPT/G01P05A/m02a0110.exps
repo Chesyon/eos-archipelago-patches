@@ -629,7 +629,7 @@ def 0 {
         switch(message_SwitchMenu(0,1)) {
             case menu("Yes!"):
                 message_Close();
-                item_Set(0, 524, 0);
+                item_Set(0, 387, 524);
                 jump @label_21;  
             case menu("No thanks!"):
                 message_Close();
@@ -637,7 +637,7 @@ def 0 {
             }
             break;
         case 7: // FieryBlizzard
-            item_Set(0, 512, 0);
+            item_Set(0, 387, 512);
             jump @label_21;
         default: // No special name
             break;
@@ -792,15 +792,16 @@ def 0 {
             item_Set(0, 176, 0);
             jump @label_38;
         case 6: // Tailsdx
-            me_Play(4);
-            message_Mail("A [CS:I][M:I1]All-Mach Orb[CR] was inside!");
-            WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            message_Mail("Will you take it?");
+            message_Mail("Will you take this one too?");
             switch(message_SwitchMenu(0,1)) {
                 case menu("Yes!"):
                     message_Close();
                     item_Set(0,356, 0);
+                    me_Play(4);
+                    message_Mail("A [CS:I][M:I1]All-Mach Orb[CR] was inside!");
+                    WaitMe(4);
+                    message_Close();
                     jump @label_38;  
                 case menu("No thanks!"):
                     message_Close();
@@ -809,10 +810,10 @@ def 0 {
             break;
         case 7: // FieryBlizzard
             me_Play(4);
-            message_Mail("A [CS:Y]Icy Gem[CR] was inside!");
+            message_Mail("A [CS:I]Mysterious Box[CR] was inside!");
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            item_Set(0, 528, 0);
+            item_Set(0, 387, 528);
             $PERFORMANCE_PROGRESS_LIST[34] = 1;
             $SCENARIO_TALK_BIT_FLAG[254] = 1;
             jump @label_38;

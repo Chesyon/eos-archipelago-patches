@@ -8493,7 +8493,7 @@ coro COMMON_ENTER {
     debug_Print('COMMON_ENTER');
     screen_FadeInAll(0, 30);
     screen_FadeIn(1, 0);
-    switch(ProcessSpecial(103,0,0)) {
+    switch(ProcessSpecial(103,0,0)){
         case 5:
             switch(random(1000)) {
                 case 0:
@@ -11827,7 +11827,8 @@ coro RESCUE_DEBUG {
             break;
             §label_729;
             message_EmptyActor();
-            switch(ProcessSpecial(103,0,0)) {               
+
+            switch(ProcessSpecial(103,0,0)){               
                 case 1:
                     se_Play(8968);
                     Wait(60);
@@ -12314,7 +12315,7 @@ coro BUBBLE_TEST {
         supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
     }
-    switch( ProcessSpecial(103,0,0)) {
+    switch(ProcessSpecial(103,0,0)){
         case 1: // Chesyon
             switch(random(500)) {
                 case 0:

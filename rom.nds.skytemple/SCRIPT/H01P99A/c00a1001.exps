@@ -103,260 +103,266 @@ def 0 {
     WaitBgm(BGM_OCEAN1);
     Wait(30);
     if ($PERFORMANCE_PROGRESS_LIST[37]) {
-        message_Mail("But suddenly...");
-        with (actor ACTOR_PLAYER) {
-            MovePositionMark(2, Position<'m0', 38.5, 24.5>);
-        }
-        with (actor ACTOR_PLAYER) {
-            Turn2Direction(4, 10, DIR_RIGHT);
-        }
-        message_Close();
-        $LOCAL0 = 0;
-        §cryptic_why;
-        if ($LOCAL0 < 100) {
-            switch($EVENT_LOCAL) {
-                case 0:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,0,0);
-                    supervision_Acting(1);
-                    break;
-                case 1:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,1,0);
-                    supervision_Acting(2);
-                    break;
-                case 2:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,2,0);
-                    supervision_Acting(3);
-                    break;
-                case 3:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,3,0);
-                    supervision_Acting(4);
-                    break;
-                case 4:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,4,0);
-                    supervision_Acting(5);
-                    break;
-                case 5:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,5,0);
-                    supervision_Acting(6);
-                    break;
-                case 6:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,6,0);
-                    supervision_Acting(7);
-                    break;
-                case 7:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,7,0);
-                    supervision_Acting(8);
-                    break;
-                case 8:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,8,0);
-                    supervision_Acting(9);
-                    break;
-                case 9:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,9,0);
-                    supervision_Acting(10);
-                    break;
-                case 10:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,10,0);
-                    supervision_Acting(11);
-                    break;
-                case 11:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,11,0);
-                    supervision_Acting(12);
-                    break;
-                case 12:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,12,0);
-                    supervision_Acting(13);
-                    break;
-                case 13:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,13,0);
-                    supervision_Acting(14);
-                    break;
-                case 14:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,14,0);
-                    supervision_Acting(15);
-                    break;
-                case 15:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,15,0);
-                    supervision_Acting(16);
-                    break;
-                case 16:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,16,0);
-                    supervision_Acting(17);
-                    break;
-                case 17:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,17,0);
-                    supervision_Acting(18);
-                    break;
-                case 18:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,18,0);
-                    supervision_Acting(19);
-                    break;
-                case 19:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,19,0);
-                    supervision_Acting(20);
-                    break;
-                case 20:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,20,0);
-                    supervision_Acting(21);
-                    break;
-                case 21:
-                    ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,21,0);
-                    supervision_Acting(22);
-                    break;
-                case 22:
-                    $LOCAL0 += 1;
-                    Wait(10);
-                    jump @cryptic_why;
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+            message_Mail("But suddenly...");
+            with (actor ACTOR_PLAYER) {
+                MovePositionMark(2, Position<'m0', 38.5, 24.5>);
             }
-            bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
-            screen_FadeIn(1, 30);
-            Wait(30);
-            if ($EVENT_LOCAL == 16) {
-                message_Mail("[CN]Wait, what?[K] The rare and elusive\n[CN][CS:G]Manaphy[CR] wants to join team [team]?\n[CN]How could you possibly say no to that?");
+            with (actor ACTOR_PLAYER) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            message_Close();
+            $LOCAL0 = 0;
+            §cryptic_why;
+            if ($LOCAL0 < 100) {
+                switch($EVENT_LOCAL) {
+                    case 0:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,0,0);
+                        supervision_Acting(1);
+                        break;
+                    case 1:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,1,0);
+                        supervision_Acting(2);
+                        break;
+                    case 2:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,2,0);
+                        supervision_Acting(3);
+                        break;
+                    case 3:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,3,0);
+                        supervision_Acting(4);
+                        break;
+                    case 4:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,4,0);
+                        supervision_Acting(5);
+                        break;
+                    case 5:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,5,0);
+                        supervision_Acting(6);
+                        break;
+                    case 6:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,6,0);
+                        supervision_Acting(7);
+                        break;
+                    case 7:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,7,0);
+                        supervision_Acting(8);
+                        break;
+                    case 8:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,8,0);
+                        supervision_Acting(9);
+                        break;
+                    case 9:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,9,0);
+                        supervision_Acting(10);
+                        break;
+                    case 10:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,10,0);
+                        supervision_Acting(11);
+                        break;
+                    case 11:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,11,0);
+                        supervision_Acting(12);
+                        break;
+                    case 12:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,12,0);
+                        supervision_Acting(13);
+                        break;
+                    case 13:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,13,0);
+                        supervision_Acting(14);
+                        break;
+                    case 14:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,14,0);
+                        supervision_Acting(15);
+                        break;
+                    case 15:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,15,0);
+                        supervision_Acting(16);
+                        break;
+                    case 16:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,16,0);
+                        supervision_Acting(17);
+                        break;
+                    case 17:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,17,0);
+                        supervision_Acting(18);
+                        break;
+                    case 18:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,18,0);
+                        supervision_Acting(19);
+                        break;
+                    case 19:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,19,0);
+                        supervision_Acting(20);
+                        break;
+                    case 20:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,20,0);
+                        supervision_Acting(21);
+                        break;
+                    case 21:
+                        ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER,21,0);
+                        supervision_Acting(22);
+                        break;
+                    case 22:
+                        $LOCAL0 += 1;
+                        Wait(10);
+                        jump @cryptic_why;
+                }
+                bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
+                screen_FadeIn(1, 30);
+                Wait(30);
+                if ($EVENT_LOCAL == 16) {
+                    message_Mail("[CN]Wait, what?[K] The rare and elusive\n[CN][CS:G]Manaphy[CR] wants to join team [team]?\n[CN]How could you possibly say no to that?");
+                } else {
+                    message_Mail("[CN]Wait, what?[K] It seems a rare and powerful\n[CN]Pokémon wants to join team [team]!\n[CN]Will you accept their gracious offer?");
+                }
+                message_KeyWait();
+                §legendary_recruit;
+                switch ( message_Menu(MENU_ACCEPT_TEAM_MEMBER) ) {
+                    case 1:
+                        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                        me_Play(5);
+                        message_Mail({
+                            english="[CN][c_name:NPC_NEW_FRIEND] joined the team!",
+                            french="[CN][c_name:NPC_NEW_FRIEND] rejoint l\'équipe!",
+                            german="[CN][c_name:NPC_NEW_FRIEND] gehört nun zum Team.",
+                            italian="[CN][c_name:NPC_NEW_FRIEND] si unisce alla squadra!",
+                            spanish="[CN]¡[c_name:NPC_NEW_FRIEND] se ha unido al equipo!",
+                        });
+                        WaitMe(5);
+                        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                        break;
+                    default:
+                        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                        message_Mail({
+                            english="[CN]Are you sure?[K]\n[CN]You\'re sure you won\'t accept\n[CN]this potential new member?",
+                            french="[CN]Etes-vous sûr?[K]\n[CN]Vous ne voulez vraiment pas\n[CN]accepter cette nouvelle recrue?",
+                            german="[CN]Bist du sicher?[K]\n[CN]Möchtest du dieses potenzielle neue\n[CN]Mitglied wirklich abweisen?",
+                            italian="[CN]Davvero?[K]\n[CN]Confermi di non voler accettare\n[CN]questo potenziale nuovo membro?",
+                            spanish="[CN]¿Seguro?[K]\n[CN]¿Seguro que prefieres que no\n[CN]se incorpore al equipo?",
+                        });
+                        switch ( message_SwitchMenu(0, 1) ) {
+                            case menu({
+                                english="Reconsider",
+                                french="Reconsidérer",
+                                german="Überdenken",
+                                italian="Ripensaci",
+                                spanish="Reconsiderar",
+                            }):
+                                jump @legendary_recruit;
+                            case menu({
+                                english="Refuse",
+                                french="Refuser",
+                                german="Ablehnen",
+                                italian="Rifiuta",
+                                spanish="Rechazar",
+                            }):
+                            default:
+                                message_Mail("The Pokemon went away...");
+                                message_Close();
+                                with (actor ACTOR_NPC_REJIROKKU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_PARUKIA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_PARUKIA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_GURAADON) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_REJIAISU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_REJISUCHIRU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_REJIGIGASU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_YUKUSHII) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_EMURITTO) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_AGUNOMU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_DIARUGA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_GIRATYINA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_SEREBII) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_FURIIZAA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_HIIDORAN) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_DARK_DIARUGA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_MYUU) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_MANAFI) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_FIONE1) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_KURESERIA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_REKKUUZA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_KAIOOGA) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                with (actor ACTOR_NPC_SHEIMI_FC) {
+                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                }
+                                Wait(60);
+                                se_Play(7170);
+                                WaitSe(7170);
+                                Wait(30);
+                                se_Play(7947);
+                                Wait(60);
+                                switch(ProcessSpecial(103,0,0)) {
+                                    case 1:
+                                         message_ResetActor();
+                                         message_Talk("Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
+                                         message_Close();
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
+                message_Mail("After all that excitement,\nit\'s time to get some sleep!");
             } else {
-                message_Mail("[CN]Wait, what?[K] It seems a rare and powerful\n[CN]Pokémon wants to join team [team]!\n[CN]Will you accept their gracious offer?");
+                message_Mail("[CS:B]But nobody came...[CR][W:360]");
             }
-            message_KeyWait();
-            §legendary_recruit;
-            switch ( message_Menu(MENU_ACCEPT_TEAM_MEMBER) ) {
-                case 1:
-                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                    me_Play(5);
-                    message_Mail({
-                        english="[CN][c_name:NPC_NEW_FRIEND] joined the team!",
-                        french="[CN][c_name:NPC_NEW_FRIEND] rejoint l\'équipe!",
-                        german="[CN][c_name:NPC_NEW_FRIEND] gehört nun zum Team.",
-                        italian="[CN][c_name:NPC_NEW_FRIEND] si unisce alla squadra!",
-                        spanish="[CN]¡[c_name:NPC_NEW_FRIEND] se ha unido al equipo!",
-                    });
-                    WaitMe(5);
-                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                    break;
-                default:
-                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                    message_Mail({
-                        english="[CN]Are you sure?[K]\n[CN]You\'re sure you won\'t accept\n[CN]this potential new member?",
-                        french="[CN]Etes-vous sûr?[K]\n[CN]Vous ne voulez vraiment pas\n[CN]accepter cette nouvelle recrue?",
-                        german="[CN]Bist du sicher?[K]\n[CN]Möchtest du dieses potenzielle neue\n[CN]Mitglied wirklich abweisen?",
-                        italian="[CN]Davvero?[K]\n[CN]Confermi di non voler accettare\n[CN]questo potenziale nuovo membro?",
-                        spanish="[CN]¿Seguro?[K]\n[CN]¿Seguro que prefieres que no\n[CN]se incorpore al equipo?",
-                    });
-                    switch ( message_SwitchMenu(0, 1) ) {
-                        case menu({
-                            english="Reconsider",
-                            french="Reconsidérer",
-                            german="Überdenken",
-                            italian="Ripensaci",
-                            spanish="Reconsiderar",
-                        }):
-                            jump @legendary_recruit;
-                        case menu({
-                            english="Refuse",
-                            french="Refuser",
-                            german="Ablehnen",
-                            italian="Rifiuta",
-                            spanish="Rechazar",
-                        }):
-                        default:
-                            message_Mail("The Pokemon went away...");
-                            message_Close();
-                            with (actor ACTOR_NPC_REJIROKKU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_PARUKIA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_PARUKIA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_GURAADON) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_REJIAISU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_REJISUCHIRU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_REJIGIGASU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_YUKUSHII) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_EMURITTO) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_AGUNOMU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_DIARUGA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_GIRATYINA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_SEREBII) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_FURIIZAA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_HIIDORAN) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_DARK_DIARUGA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_MYUU) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_MANAFI) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_FIONE1) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_KURESERIA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_REKKUUZA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_KAIOOGA) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            with (actor ACTOR_NPC_SHEIMI_FC) {
-                                MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                            }
-                            Wait(60);
-                            se_Play(7170);
-                            WaitSe(7170);
-                            Wait(30);
-                            se_Play(7947);
-                            Wait(60);
-                            switch(ProcessSpecial(103,0,0)) {
-                                case 1:
-                                     message_ResetActor();
-                                     message_Talk("Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
-                                     message_Close();
-                                default:
-                                    break;
-                            }
-                            break;
-                    }
-                    break;
-            }
-            message_Mail("After all that excitement,\nit\'s time to get some sleep!");
+            message_Close();
+            bgm_FadeOut(120);
+            screen_FadeOut(1, 60);
+            WaitBgm(BGM_OCEAN1);
+            $PERFORMANCE_PROGRESS_LIST[37] = 0;
         } else {
-            message_Mail("[CS:B]But nobody came...[CR][W:360]");
+            message_Mail("[STS]You feel as if you are being watched\nby a powerful being! Perhaps if\nyou prove yourself, it may join you![STE]");
+            message_Close();
         }
-        message_Close();
-        bgm_FadeOut(120);
-        screen_FadeOut(1, 60);
-        WaitBgm(BGM_OCEAN1);
-        $PERFORMANCE_PROGRESS_LIST[37] = 0;
-    } // End If
+    }
+     // End If
     if ($DUNGEON_ENTER_INDEX == 0) {
         message_Mail(" Stay out of my way, [CS:G]Zelulo[CR]!");
     }
