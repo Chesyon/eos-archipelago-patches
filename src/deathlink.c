@@ -183,6 +183,7 @@ void DeathLinkReceiverCheck() {
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
 
+char space[2] = " ";
 void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buffer,
                           int buffer_size, struct preprocessor_args* args) {
     GetDungeonResultMsg(damage_source_or_result, buffer, buffer_size, (undefined*) args);
@@ -198,10 +199,16 @@ void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buf
     
     if (SomeDeathMsgCheckFun(damage_source_or_result) != 0) {
         strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
+        int remaining = 127 - strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
+        if(remaining > 1) {
+            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, space, 1);
+            remaining--;
+            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, remaining);
+        }
+    } else {
+        strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, 127);
     }
     
-    strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer,
-        127-strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage));
     CUSTOM_SAVE_AREA.deathLinkTracker.sender = true;
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
