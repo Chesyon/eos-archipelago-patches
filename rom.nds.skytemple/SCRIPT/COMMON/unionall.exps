@@ -11827,7 +11827,6 @@ coro RESCUE_DEBUG {
             break;
             §label_729;
             message_EmptyActor();
-
             switch(ProcessSpecial(103,0,0)){               
                 case 1:
                     se_Play(8968);
