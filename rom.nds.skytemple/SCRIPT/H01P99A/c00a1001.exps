@@ -366,5 +366,10 @@ def 0 {
     if ($DUNGEON_ENTER_INDEX == 0) {
         message_Mail(" Stay out of my way, [CS:G]Zelulo[CR]!");
     }
+    if ($SCENARIO_TALK_BIT_FLAG[248]) {
+        message_Mail("You are no longer [CS:K]green[CR]!");
+        message_Close();
+        $SCENARIO_TALK_BIT_FLAG[248] = 0;
+    }
     end;
 }

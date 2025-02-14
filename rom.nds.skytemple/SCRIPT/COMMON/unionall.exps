@@ -8493,29 +8493,36 @@ coro COMMON_ENTER {
     debug_Print('COMMON_ENTER');
     screen_FadeInAll(0, 30);
     screen_FadeIn(1, 0);
-    switch(ProcessSpecial(103,0,0)){
-        case 5:
-            switch(random(1000)) {
-                case 0:
-                    message_Mail("... and everything turned blue\nfor the next 3 minutes!");
-                    screen2_FlushOut(0,30,4,0,30,255);
-                    screen_FlushOut(1,30,4,0,30,255);
-                    message_Close();
-                    Wait(90);
-                    screen2_FlushIn(0,10000,4,0,30,255);
-                    screen_FlushIn(0,10000,4,0,30,255);
-                    
-                    break;
-                default:            
-                    if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                        screen_FadeChange(1, 0, 0, 128);
-                    } else {
-                        screen_FadeChange(1, 0, 0, 255);
-                    }
-                    break;
-            }
-        default:
-            break;
+    if ($SCENARIO_TALK_BIT_FLAG[248]) {
+        screen2_FlushOut(0,1,4,0,255,30);
+        screen_FlushOut(1,1,4,0,255,30);
+    } else {
+        switch(ProcessSpecial(103,0,0)){
+            case 5:
+                switch(random(1000)) {
+                    case 0:
+                        message_Mail("... and everything turned blue\nfor the next 3 minutes!");
+                        screen2_FlushOut(0,30,4,0,30,255);
+                        screen_FlushOut(1,30,4,0,30,255);
+                        message_Close();
+                        Wait(90);
+                        screen2_FlushIn(0,10000,4,0,30,255);
+                        screen_FlushIn(0,10000,4,0,30,255);
+                        
+                        break;
+                    default:            
+                        if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                            screen_FadeChange(1, 0, 0, 128);
+                            screen2_FadeChange(1, 0, 0, 128);
+                        } else {
+                            screen_FadeChange(1, 0, 0, 255);
+                            screen2_FadeChange(1, 0, 0, 255);
+                        }
+                        break;
+                }
+            default:
+                break;
+        }
     }
     end;
 }
@@ -8618,6 +8625,19 @@ coro GETOUT_NORMAL {
                 dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
                 supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
                 hold;
+            case 16:
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("Wait a minute, this isn\'t [CS:P]Steam Cave[CR]![K]\nIt\'s actually [CS:P]Steamy Cave[CR]!");
+                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:P]Steamy[CR]?");
+                message_Mail("Yes, [CS:P]Steamy[CR]!");
+                message_Mail("The cave led to the [CS:P]Hot Springs[CR]!");
+                message_Close();
+                main_EnterGround(LEVEL_P02P01A, 30);
+                hold;
+                end;
             case 178:
                 dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
                 main_EnterGround(LEVEL_P02P01A, 30);
@@ -8629,6 +8649,74 @@ coro GETOUT_NORMAL {
                 main_EnterGround(LEVEL_P02P01A, 30);
                 hold;
                 end;
+            case 15: // Froggy Forest
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("Wait a minute, this isn\'t [CS:P]Foggy Forest[CR]![K]\nIt\'s actually [CS:P]Froggy Forest[CR]!");
+                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:P]Froggy[CR]?");
+                message_Mail("Yes, [CS:P]Froggy[CR]!");
+                message_Close();
+                $SCENARIO_TALK_BIT_FLAG[248] = 1;
+                message_SetFaceEmpty(ACTOR_NPC_NIDOKINGU,FACE_PAIN, FACE_POS_STANDARD);
+                message_Talk("[CS:G]Kermit[CR]: Howdy partner, been a while\nsince someone\'s entered [CS:P]Froggy Forest[CR]!");
+                message_Talk("[CS:G]Kermit[CR]: ");
+                message_SetFaceEmpty(ACTOR_NPC_NIDOKINGU,FACE_PAIN, FACE_POS_STANDARD);
+                message_Talk("[CS:G]Kermit[CR]: ");
+                // Keep going!
+                message_Close();
+                main_EnterGround(LEVEL_H02P99A, 30);
+                hold;
+                end;
+            case 18: // Craggy Cost
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("Wait a minute, this isn\'t [CS:P]Craggy Coast[CR]![K]\nIt\'s actually [CS:P]Craggy Cost[CR]!");
+                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:P]Cost[CR]?");
+                message_Mail("Yes, [CS:P]Cost[CR].");
+                message_Close();
+                if ($CARRY_GOLD > 2000) {
+                    $CARRY_GOLD -= 2000;
+                    message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+                } elseif($BANK_GOLD > 2000) {
+                    $BANK_GOLD -= 2000;
+                    message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+                } elseif($CARRY_GOLD > 0) {
+                    $CARRY_GOLD = 0;
+                    message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                    CallCommon(CORO_BUBBLE_TEST);
+                } elseif($BANK_GOLD > 0) {
+                    $CARRY_GOLD = 0;
+                    message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                    CallCommon(CORO_BUBBLE_TEST);
+                } else {
+                    message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nbut you had no money on you![K] You paid\nthe fee with a curse, when suddenly...");
+                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                    $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                    CallCommon(CORO_BUBBLE_TEST);
+                }
+                message_Close();
+                message_Mail("After a long day of exploring [CS:P]Craggy\nCost[CR], you wonder...[W:60] \'Was it really and\ntruly worth the [CS:C]cost[CR] of admission?'");
+                JumpCommon(CORO_EVENT_DIVIDE);
+                hold;
+            case 65:
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("Wait a minute, this isn\'t [CS:P]Spacial Rift[CR]![K]\nIt\'s actually [CS:P]Special Rift[CR]!");
+                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:P]Special[CR]?");
+                message_Mail("Yes, [CS:P]Special[CR].");
+                message_Close();
+                main_EnterDungeon(173,30);
+                main_EnterDungeon(-1,30);
+                hold;
             default:
                 jump @label_667;
         }
@@ -8865,6 +8953,7 @@ coro ENTER_REQUEST_DUNGEON {
             supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
             hold;
             end;
+        case 15:
         case 178:
             main_EnterGround(LEVEL_P02P01A, 30);
             hold;
@@ -9883,6 +9972,12 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 174:
                         dungeon_mode(174) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 173:
+                        message_Mail("The dungeon kept going!");
+                        message_Close();
+                        main_EnterDungeon(173,30);
+                        main_EnterDungeon(-1,30);
+                        hold;
                 }
             }
             break;

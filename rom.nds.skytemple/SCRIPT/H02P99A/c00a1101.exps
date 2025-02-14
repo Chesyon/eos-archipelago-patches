@@ -151,16 +151,13 @@ def 0 {
             $SCENARIO_TALK_BIT_FLAG[83] = 0;
             break;
         case 5:
-            message_Mail("[hero] used [CS:K]Synodic Flip[CR]");
+            message_Mail("[hero] used [CS:K]Synodic Flip[CR]![K]\n...but nothing seems to have happened!");
+            message_Close();
             if ($SCENARIO_TALK_BIT_FLAG[251]) {
                 $SCENARIO_TALK_BIT_FLAG[251] = 0;
-                screen_FadeChange(1, 0, 0, 255);
             } else {
                 $SCENARIO_TALK_BIT_FLAG[251] = 1;
-                
-                screen_FadeChange(1, 0, 0, 128);
             }
-            message_Close();
             break;
         default:
             break;
