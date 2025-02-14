@@ -89,6 +89,7 @@ extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);
 void DungeonModeSetupAndShowKeyboard(char* buf1, char* buf2, undefined thing);
+int SomeDeathMsgCheckFun(union damage_source damage_source_or_result);
 
 /*typedef struct SomeTeamSetupThing {
     struct monster_id_16 hero_id;

@@ -79,6 +79,7 @@ PARTNER_SELECT_PORTRAIT_OFFSETS = 0x238CB54;
 PlayEffectAnimationEntityWrapper = 0x22E4C98;
 DetermineTileAppearence = 0x2337264;
 DungeonModeSetupAndShowKeyboard = 0x234FC14;
+SomeDeathMsgCheckFun = 0x200C63C;
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;

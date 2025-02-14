@@ -194,7 +194,14 @@ void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buf
         return;
     }
     
-    strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, 127);
+    CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[0] = '\0';
+    
+    if (SomeDeathMsgCheckFun(damage_source_or_result) != 0) {
+        strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
+    }
+    
+    strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer,
+        127-strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage));
     CUSTOM_SAVE_AREA.deathLinkTracker.sender = true;
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
