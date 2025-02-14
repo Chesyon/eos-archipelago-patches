@@ -85,7 +85,7 @@ static int SpDoNameCheck() {
     LoadScriptVariableValueBytes(VAR_HERO_FIRST_NAME, name, 10);
     GetLowercaseName(name, lower_name);
     // return i+1
-    for (int i = 0; i < num_of_names; i++) if (strncmp(lower_name, name_check_names[i], 10) == 0) return 0;
+    for (int i = 0; i < num_of_names; i++) if (strncmp(lower_name, name_check_names[i], 10) == 0) return i+1;
     return 0;
 }
 
