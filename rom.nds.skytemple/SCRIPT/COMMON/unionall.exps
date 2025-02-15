@@ -12413,7 +12413,7 @@ coro BUBBLE_TEST {
                     jump @box_iteration; // Next Item given by Cryptic!
                 } else {
                     message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Mail(" That appears to be everything!\nHave a great day, team [team]!");
+                    message_Talk(" That appears to be everything!\nHave a great day, team [team]!");
                     message_Close();
                 }
             }
