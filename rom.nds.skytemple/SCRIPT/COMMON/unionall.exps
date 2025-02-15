@@ -8717,6 +8717,20 @@ coro GETOUT_NORMAL {
                 main_EnterDungeon(173,30);
                 main_EnterDungeon(-1,30);
                 hold;
+            case 86:
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("Wait a minute, this isn\'t [CS:P]Labyrinth Cave[CR]![K]\nIt\'s actually [CS:P]Labyrinth Cove[CR]!");
+                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:P]Cove[CR]?");
+                message_Mail("Yes, [CS:P]Cove[CR].");
+                message_Close();
+                main_EnterDungeon(172,30);
+                main_EnterDungeon(-1,30);
+                hold;
+            
+            
             default:
                 jump @label_667;
         }
@@ -9972,6 +9986,12 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 174:
                         dungeon_mode(174) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 172:
+                        message_Mail("The dungeon kept going!");
+                        message_Close();
+                        main_EnterDungeon(172,30);
+                        main_EnterDungeon(-1,30);
+                        hold;                    
                     case 173:
                         message_Mail("The dungeon kept going!");
                         message_Close();
