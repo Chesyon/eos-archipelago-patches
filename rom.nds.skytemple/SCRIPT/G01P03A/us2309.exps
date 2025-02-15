@@ -11,16 +11,16 @@ def 0 {
     message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
     message_Talk(" Hello [hero] and [partner]!\nHow are you doing today!");
     switch(message_SwitchMenu(1,1)) {
-        case menu("Refresh Boards"):
+        case menu("Refresh boards"):
             message_Close();
-            message_Talk(" I can't exactly do that on my own, but\nPapa should be refreshing them soon, if you\nwant to wait a minute or two...");
+            message_Talk(" I can't exactly do that on my own, but\nmy dad should be refreshing them soon, if you\nwant to wait a minute or two...");
             message_Close();
             screen_FadeOut(1,30);
             message_Mail("\n[CN]A few minutes later...");
             message_Close();
             screen_FadeIn(1,30);
             break;
-        case menu("Never Mind"):
+        case menu("Never mind"):
         default:
             message_Close();
             message_Talk(" Okay, best of luck on your\nmissions today, [hero] and [partner]!");

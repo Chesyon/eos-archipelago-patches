@@ -1,0 +1,28 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_Notice({
+        english="[CN]Welcome!\n[CN][CS:N]Wigglytuff[CR]\'s Guild!",
+        french="[CN]Bienvenue!\n[CN]Voici la Guilde de [CS:N]Grodoudou[CR]!",
+        german="[CN]Willkommen!\n[CN][CS:N]Knuddeluff-Gilde[CR]!",
+        italian="[CN]Benvenuti!\n[CN]Gilda di [CS:N]Wigglytuff[CR]!",
+        spanish="[CN]¡Disfrutad de vuestra estancia\n[CN]en el [CS:N]Pokégremio de Exploradores[CR]!",
+    });
+    message_Notice({
+        english="[CN]No salespeople!\n[CN]No agents!\n[CN]No survey takers!",
+        french="[CN]Démarcheurs, colporteurs et enquêteurs\n[CN]de tous poils, passez votre chemin!",
+        german="[CN]Keine Anwälte!\n[CN]Keine Agenten!\n[CN]Keine Meinungsforscher!",
+        italian="[CN]Vietato l\'accesso a scocciatori, rappresentanti\n[CN]e venditori!",
+        spanish="[CN]¡Vendedores no!\n[CN]¡Representantes no!\n[CN]¡Encuestadores no!",
+    });
+    JumpCommon(CORO_END_TALK);
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

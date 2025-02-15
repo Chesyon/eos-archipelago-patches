@@ -2344,6 +2344,7 @@ coro EVENT_M00A_01 {
     message_Close();
     switch ( message_Menu(MENU_PLAYER_NAME) ) { }
     call @label_729;
+    dungeon_mode(1) = DMODE_OPEN;
     $SCENARIO_MAIN_BIT_FLAG[95] = 1; // Ursaring you liar, we can't evolve!!!
     $SCENARIO_MAIN_BIT_FLAG[96] = 1; // Yes Krabby, we know bottles exist!!!
     $SCENARIO_MAIN_BIT_FLAG[97] = 1; // Chimecho Go Awayyyyyyyyyyyyyyyy
@@ -2353,10 +2354,17 @@ coro EVENT_M00A_01 {
     // $PERFORMANCE_PROGRESS_LIST[1] = 1; // Show Team Name (?)
     $PERFORMANCE_PROGRESS_LIST[3] = 1; // Random Missions can generate
     $PERFORMANCE_PROGRESS_LIST[4] = 1; // Friend Rescue Enabled :)
+    $SCENARIO_TALK_BIT_FLAG[83] = 1;
+    $SCENARIO_TALK_BIT_FLAG[95] = 1;
+    $SCENARIO_TALK_BIT_FLAG[118] = 1;
+    $SCENARIO_TALK_BIT_FLAG[109] = 1;
+    $SCENARIO_TALK_BIT_FLAG[59] = 1;
+    $SCENARIO_TALK_BIT_FLAG[71] = 1;
     // Check archipelago settings and enable variables accordingly
     $VERSION = $PERFORMANCE_PROGRESS_LIST; // set the list to update to PERFORMANCE_PROGRESS_LIST
     $VERSION = 1;
-    JumpCommon(CORO_EVENT_DIVIDE);
+    main_EnterGround(LEVEL_H02P99A,30);
+    hold;
 }
 
 coro EVENT_HA_YU_KI {
@@ -11988,6 +11996,8 @@ coro RESCUE_DEBUG {
                     message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
                     message_Talk("Without you, we wouldn\'t have these small\nbut important touches to make our APWorld\nstand out![K] Art is scary, I much prefer coding..."); 
                     message_Talk("So thank you for contributing!");
+                    $SCENARIO_TALK_BIT_FLAG[83] = 0;
+                    $SCENARIO_TALK_BIT_FLAG[95] = 0;
                     message_Close();
                     break;
                 case 5:

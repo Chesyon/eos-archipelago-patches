@@ -78,6 +78,7 @@ def 0 {
                     spanish=" ¡Seguid explorando! ♪",
                 });
                 message_Close();
+                bgm_FadeOut(30);
                 screen_FadeOut(1,30);
                 Wait(30);
                 me_Play(5);
