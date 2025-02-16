@@ -12146,7 +12146,7 @@ coro RESCUE_DEBUG {
                     message_Close();
                     break;
                 default:
-                    message_Talk("[hero]?[K] What a nice name![K]\nI don\'t recognize it, but...");
+                    message_Talk("[hero]?[K] What a nice name!");
                     message_Talk("Thank you for playing!");
                     message_Close();
                     break;
