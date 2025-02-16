@@ -155,6 +155,17 @@ def 0 {
                                     jump @label_5;
                                 case == 29:
                                     debug_Print('SET_SUB');
+                                    if ($PERFORMANCE_PROGRESS_LIST[24]) {
+                                        if($SCENARIO_SUB2 &<< 4) {
+                                        } else {
+                                            message_Narration(30,"[CN][CS:B]Manaphy Progression Error Found![K]\n[CN]Please ping [CS:G]Happylappy[CR] if you see this![CR][K]");
+                                            $PERFORMANCE_PROGRESS_LIST[24] = 0;
+                                            $PERFORMANCE_PROGRESS_LIST[23] = 0;
+                                            message_Close();
+                                        }
+                                        supervision_ExecuteStationSub(LEVEL_G01P04A, 'US23', 0);
+                                        jump @label_5;
+                                    }
                                     if ($PERFORMANCE_PROGRESS_LIST[23]) {
                                         supervision_ExecuteStationSub(LEVEL_G01P04A, 'US03', 0);
                                         jump @label_5;
