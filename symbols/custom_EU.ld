@@ -15,6 +15,8 @@ ClearAdventureLogStructCallsite = 0x02048774;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
 CallGetDungeonResultMsg = 0x200C778;
+CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
+CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
