@@ -294,7 +294,7 @@ def 0 {
 */
         message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
         message_Talk({
-            english="  All settled, then![K] I\'ll register\nyour team as [team:] for now, but it won\'t be\nofficial until you come up with one yourself!.",
+            english=" All settled, then![K] I\'ll register\nyour team as [team:] for now, but it won\'t be\nofficial until you come up with one yourself!",
             french=" C\'est décidé![K] J\'enregistre votre\néquipe sous le nom [team:].",
             german=" Dann hätten wir das![K] Ich\nregistriere euer Team unter dem Namen\n[team:].",
             italian=" Allora è tutto stabilito![K] Vi \nregistrerò come Team [team:].",

@@ -127,7 +127,7 @@ def 0 {
     bgm2_Stop();
     camera_SetEffect(0, 0, 0);
     Wait(45);
-    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
     
     §end_talk;
     JumpCommon(CORO_END_TALK);
