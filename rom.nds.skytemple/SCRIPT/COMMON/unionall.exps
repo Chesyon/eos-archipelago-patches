@@ -12498,14 +12498,14 @@ coro BUBBLE_TEST {
     }
     if ($PERFORMANCE_PROGRESS_LIST[35]) { // If true, run ITEM LOOP
         message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk(" I\'ve got a special delivery for team\n[team]!");
+        message_Talk("[STS] I\'ve got a special delivery for team\n[team]![STE]");
         
         if ($ITEM_BACKUP > 0) { // ITEM_BACKUP is non-zero! 
             §box_iteration;
             item_SetVariable(0,$ITEM_BACKUP);
             message_EmptyActor();
             me_Play(4);
-            message_Monologue("[CN][CS:G]Pelipper[CR] handed you a [s_item:0]!");
+            message_Monologue("[STS][CN][CS:G]Pelipper[CR] handed you a [s_item:0]![STE]");
             WaitMe(4);
             Wait(30);
             message_Close();
@@ -12521,10 +12521,10 @@ coro BUBBLE_TEST {
             $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item
             message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
             if ($LOTTERY_RESULT == -1) {
-                message_Talk(" My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)");
+                message_Talk("[STS] My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)[STE]");
                 message_Close();
             } else {
-                message_Talk(" One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]!");
+                message_Talk("[STS] One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]![STE]");
                 message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");        
                 §box_halt;
                 if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
@@ -12554,12 +12554,12 @@ coro BUBBLE_TEST {
                 message_CloseEnforce();
                 if ($ITEM_BACKUP > 0) {
                     message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk(" I do have another delivery for you!\nHere you are, team [team]!");
+                    message_Talk("[STS] I do have another delivery for you!\nHere you are, team [team]![STE]");
                     message_Close();
                     jump @box_iteration; // Next Item given by Cryptic!
                 } else {
                     message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk(" That appears to be everything!\nHave a great day, team [team]!");
+                    message_Talk("[STS] That appears to be everything!\nHave a great day, team [team]![STE]");
                     message_Close();
                 }
             }
