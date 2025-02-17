@@ -9,6 +9,7 @@
 
 #define HINTABLE_ITEM_COUNT 10
 #define ITEM_NAME_LENGTH 42
+
 typedef struct PreviewableItems {
     char names[HINTABLE_ITEM_COUNT][ITEM_NAME_LENGTH];
 } PreviewableItems;
@@ -19,7 +20,7 @@ extern PreviewableItems hintableItems;
 typedef struct ArchipelagoSettings { // size: 2 bytes
     uint8_t iqMultiplier : 4;    // 0 (0x0)
     bool earlyMissionFloors : 1; // 4 (0x4)
-    bool unused_1 : 1;           // 5 (0x5)
+    bool moveShortcuts : 1;      // 5 (0x5)
     bool unused_2 : 1;           // 6 (0x6)
     bool levelScaling : 1;       // 7 (0x7)
     bool typesanity : 1;         // 8 (0x8)

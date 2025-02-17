@@ -55,6 +55,9 @@ void DeathLinkReceiverCheck() {
             SpawnDroppedItemWrapper(leader, &pos, &item, 0);
             break;
         case 4:; // Blocked In
+            if (dlType == DEATHLINK_REVIVER) {
+                break;
+            }
             int xStart = leader->pos.x - 1;
             int yStart = leader->pos.y - 1;
             int xEnd = leader->pos.x + 1;
@@ -78,6 +81,22 @@ void DeathLinkReceiverCheck() {
                 }
             }
             ChangeMonsterAnimation(leader, 6, DIR_NONE);
+            xStart = xStart - 1;
+            yStart = yStart - 1;
+            xEnd = xEnd + 1;
+            yEnd = yEnd + 1;
+            if(xStart < 0) {
+                xStart = 0;
+            }
+            if(yStart < 0) {
+                yStart = 0;
+            }
+            if(xEnd > 0x37) {
+                xEnd = 0x37;
+            }
+            if(yEnd > 0x20) {
+                yEnd = 0x20;
+            }
             for(int x = xStart; x <= xEnd; x++) {
                 for(int y = yStart; y <= yEnd; y++) {
                     DetermineTileAppearence(x, y);
@@ -172,6 +191,7 @@ void DeathLinkReceiverCheck() {
     if(dlType == DEATHLINK_TRUE_DEATH) {
         HandleFaint(leader, damageSource, leader);
     } else if (dlType == DEATHLINK_REVIVER) {
+        leader->is_visible = true;
         struct monster *leaderMonster = leader->info;
         leaderMonster->statuses.reflect.val = STATUS_REFLECT_NONE; // Stop Endure from Activating.
         CalcDamageFixedNoCategory(leader, leader, 9999, false, NULL, TYPE_NONE, damageSource,
