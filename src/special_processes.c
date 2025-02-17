@@ -1,6 +1,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "crass.h"
 
 #if CUSTOM_SPECIAL_PROCESSES
 
@@ -111,6 +112,15 @@ static int SpRegenerateMissions() {
     }
 }*/
 
+// Special process 255: Return either the current cutscene_skip_settings::skip_kind value or the ID of the OPCODE_MESSAGE_MENU that was skipped.
+static int SpGetCutsceneSkipKind() {
+    #if CANCEL_RECOVER_ACTING_SKIP_SYSTEM
+    return CRASS_SETTINGS.menu_skipped > 0 ? CRASS_SETTINGS.menu_skipped : CRASS_SETTINGS.skip_kind;
+    #else
+    return 0;
+    #endif
+}
+
 // Called for special process IDs 100 and greater.
 //
 // Set return_val to the return value that should be passed back to the game's script engine. Return true,
@@ -132,6 +142,8 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 104:
         *return_val = SpRegenerateMissions();
         return true;
+    case 255:
+        *return_val = SpGetCutsceneSkipKind();
     default:
         return false;
   }

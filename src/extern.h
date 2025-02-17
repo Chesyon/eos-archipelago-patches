@@ -1,3 +1,8 @@
+#pragma once
+
+#include <pmdsky.h>
+#include <cot.h>
+
 #define STARTER_OPTION_VANILLA 0b00
 #define STARTER_OPTION_RANDOM 0b01
 #define STARTER_OPTION_OVERRIDE 0b10
@@ -85,11 +90,17 @@ extern CustomSaveArea CUSTOM_SAVE_AREA;
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
+extern int MESSAGE_SET_WAIT_MODE_PARAMS[2];
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);
 void DungeonModeSetupAndShowKeyboard(char* buf1, char* buf2, undefined thing);
 int SomeDeathMsgCheckFun(union damage_source damage_source_or_result);
+void MessageSetWaitMode(int speed1, int speed2);
+void InitScriptRoutineFromCoroutineInfo(struct script_routine* routine, undefined4 param_2, struct coroutine_info* coroutine_info, int status);
+void GetSceneName(char* dst, const char* src);
+
+static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }
 
 /*typedef struct SomeTeamSetupThing {
     struct monster_id_16 hero_id;
