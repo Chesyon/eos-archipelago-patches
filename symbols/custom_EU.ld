@@ -17,6 +17,7 @@ MissionTypeRollHook = 0x2062948;
 CallGetDungeonResultMsg = 0x200C778;
 CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
 CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
+GenerateMissionMinFloorRollHook = 0x206301C;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -68,7 +69,6 @@ macguffinMaxes = 0x23DE01E;
 hintableItems = 0x23DE022;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
-
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined

@@ -23,6 +23,8 @@
         bl ExploreNewDungeonCheck
     .org CrystalCaveCrossingMissionCheckAddr
         b CrystalCaveCrossingMissionSkipCheckAddr
+    .org GenerateMissionMinFloorRollHook
+        bl EarlyMissionFloorsCheck
 
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
