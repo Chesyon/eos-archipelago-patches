@@ -90,7 +90,7 @@ typedef struct QuizData {
 
 void __attribute__((naked)) TypesanityCheck() {
     asm("ldr r0,=apSettings");
-    asm("ldr r0,[r0,#0x0]");
+    asm("ldrh r0,[r0,#0x0]");
     asm("tst r0,#0b0000000100000000");
     asm("bxne lr");
     asm("b SameTypeUnhook");
@@ -100,7 +100,7 @@ void __attribute__((naked)) TypesanityCheck() {
 // the player at the same time.
 void __attribute__((naked)) ForcedPlayerCheck() {
     asm("ldr r1,=apSettings");
-    asm("ldr r1,[r1,#0x0]");
+    asm("ldrh r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000011000000000");
     asm("lsr r1,r1,#0x9");
     asm("cmp r1,#0b11"); // STARTER_OPTION_CHOOSE
@@ -142,7 +142,7 @@ void __attribute__((naked)) ForcedPlayerCheck() {
 void __attribute__((naked)) ForcedPartnerCheck() {
     asm("mov r7,#0x0"); // Original Instruction
     asm("ldr r1,=apSettings");
-    asm("ldr r1,[r1,#0x0]");
+    asm("ldrh r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000011000000000");
     asm("lsr r1,r1,#0x9");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
@@ -153,7 +153,7 @@ void __attribute__((naked)) ForcedPartnerCheck() {
 void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("blt QuizForcedPartnerRollUnhook"); // originalish instruction
     asm("ldr r1,=apSettings");
-    asm("ldr r1,[r1,#0x0]");
+    asm("ldrh r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000011000000000");
     asm("lsr r1,r1,#0x9");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM

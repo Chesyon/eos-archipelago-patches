@@ -15,6 +15,9 @@ ClearAdventureLogStructCallsite = 0x02048774;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
 CallGetDungeonResultMsg = 0x200C778;
+CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
+CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
+GenerateMissionMinFloorRollHook = 0x206301C;
 MessageSetWaitMode = 0x2035154;
 CreateDefaultScriptEngineBox = 0x2035420;
 ShowStringInDialogueBoxCallsite1 = 0x2035560;
@@ -99,7 +102,6 @@ macguffinMaxes = 0x23DE01E;
 hintableItems = 0x23DE022;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
-
 
 /* Undocumented Functions 
    Note: You may to remove some of these definitions if they become defined

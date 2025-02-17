@@ -2,9 +2,10 @@
 .include "symbols.asm"
 
 .open "arm9.bin", arm9_start
+
+    ; AP Shop Items
     .org GenerateKecleonItems1Hook
         b  GenerateShop1Tweak
-    
     .org GenerateKecleonItems2Hook
         b  GenerateShop2Tweak
 
@@ -17,8 +18,13 @@
     .org CallGetDungeonResultMsg
         bl DeathLinkSenderCheck
     
+    ; Mission Related Hooks
     .org MissionTypeRollHook
         bl ExploreNewDungeonCheck
+    .org CrystalCaveCrossingMissionCheckAddr
+        b CrystalCaveCrossingMissionSkipCheckAddr
+    .org GenerateMissionMinFloorRollHook
+        bl EarlyMissionFloorsCheck
 
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite

@@ -167,7 +167,8 @@ coro TALK_PARTNER_MESSAGE {
                                         with (actor ACTOR_TALK_SUB) {
                                             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
                                         }
-                                        supervision_ExecuteExport('PARTNER');
+                                        debug_Print("Used to be PARTNER");
+                                        supervision_ExecuteExport('PARTNER2');
                                         JumpCommon(CORO_END_TALK);
                                     } else {
                                         jump @label_1;
@@ -2360,6 +2361,7 @@ coro EVENT_M00A_01 {
     $SCENARIO_TALK_BIT_FLAG[109] = 1;
     $SCENARIO_TALK_BIT_FLAG[59] = 1;
     $SCENARIO_TALK_BIT_FLAG[71] = 1;
+    $SUB30_PROJECTP = 1;
     // Check archipelago settings and enable variables accordingly
     $VERSION = $PERFORMANCE_PROGRESS_LIST; // set the list to update to PERFORMANCE_PROGRESS_LIST
     $VERSION = 1;
@@ -2401,7 +2403,7 @@ coro EVENT_HA_YU_KI {
                                         end;
                                     } else {
                                         CancelRecoverCommon(CORO_EVENT_HA_SAME);
-  debug_Print("Used to be HA_KI");
+                                        debug_Print("Used to be HA_KI");
                                         supervision_ExecuteActingSub(LEVEL_G01P04A, 'C00A0501', 0);
                                         supervision_ExecuteActingSub(LEVEL_G01P06B, 'C00A0601', 0);
                                         supervision_ExecuteActingSub(LEVEL_G01P07C, 'C00A0301', 0);
@@ -8505,31 +8507,34 @@ coro COMMON_ENTER {
         screen2_FlushOut(0,1,4,0,255,30);
         screen_FlushOut(1,1,4,0,255,30);
     } else {
-        switch(ProcessSpecial(103,0,0)){
-            case 5:
-                switch(random(1000)) {
-                    case 0:
-                        message_Mail("... and everything turned blue\nfor the next 3 minutes!");
-                        screen2_FlushOut(0,30,4,0,30,255);
-                        screen_FlushOut(1,30,4,0,30,255);
-                        message_Close();
-                        Wait(90);
-                        screen2_FlushIn(0,10000,4,0,30,255);
-                        screen_FlushIn(0,10000,4,0,30,255);
-                        
-                        break;
-                    default:            
-                        if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                            screen_FadeChange(1, 0, 0, 128);
-                            screen2_FadeChange(1, 0, 0, 128);
-                        } else {
-                            screen_FadeChange(1, 0, 0, 255);
-                            screen2_FadeChange(1, 0, 0, 255);
-                        }
-                        break;
-                }
-            default:
-                break;
+        if (debug) {
+        } else {
+            switch(ProcessSpecial(103,0,0)){
+                case 5:
+                    switch(random(1000)) {
+                        case 0:
+                            message_Mail("... and everything turned blue\nfor the next 3 minutes!");
+                            screen2_FlushOut(0,30,4,0,30,255);
+                            screen_FlushOut(1,30,4,0,30,255);
+                            message_Close();
+                            Wait(90);
+                            screen2_FlushIn(0,10000,4,0,30,255);
+                            screen_FlushIn(0,10000,4,0,30,255);
+                            
+                            break;
+                        default:            
+                            if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                                screen_FadeChange(1, 0, 0, 128);
+                                screen2_FadeChange(1, 0, 0, 128);
+                            } else {
+                                screen_FadeChange(1, 0, 0, 255);
+                                screen2_FadeChange(1, 0, 0, 255);
+                            }
+                            break;
+                    }
+                default:
+                    break;
+            }
         }
     }
     end;
@@ -9102,14 +9107,17 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 2:
                         debug_Print("Missions Beach Cave");
                         dungeon_mode(1) = DMODE_OPEN_AND_REQUEST;
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M01_07_08);
                         
                     case 3:
                         debug_Print("Missions Drenched Bluff");
                         dungeon_mode(3) = DMODE_OPEN_AND_REQUEST;
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         jump @label_746;
                     case 4:
                         debug_Print("Drowzee Boss Fight Flag 201");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ($SCENARIO_TALK_BIT_FLAG[201]) {
                             supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03A0901', 0);
                             hold;
@@ -9120,18 +9128,22 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 5:
                         debug_Print("Missions Mt. Bristle");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(4) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_M03_10_13);
                     case 6:
                         debug_Print("Missions Waterfall Cave");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(6) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_M05_06_09);
                     case 212:
                         debug_Print("Hotspring ???");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_P02P01A, 30);
                         hold;
                     case 7:
                         debug_Print("Missions Apple Woods");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(7) = DMODE_OPEN_AND_REQUEST; 
                         JumpCommon(CORO_EVENT_M07_07_12);
                     case 8:
@@ -9166,6 +9178,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 12:
                         debug_Print("Missions Foggy Forest");
                         dungeon_mode(12) = DMODE_OPEN_AND_REQUEST; 
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M09_06_07);
                     case 13:
                         debug_Print("Break Glass if Softlock!");
@@ -9188,6 +9201,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 14:
                         debug_Print("Cleared Steam Cave Flag 202");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( $SCENARIO_TALK_BIT_FLAG[202] ) {
                             main_EnterGround(LEVEL_D10P21A, 30);
                         } else {
@@ -9198,6 +9212,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 15:
                         debug_Print("Cleared Upper Steam Cave Flag 203");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ($SCENARIO_TALK_BIT_FLAG[203]) {
                             JumpCommon(CORO_EVENT_M10_10);
                         } else {
@@ -9208,12 +9223,14 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 16:
                         debug_Print("Missions Steam Cave");
                         dungeon_mode(14) = DMODE_OPEN_AND_REQUEST;
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M10_11_12);
                     case 17:
                         main_EnterGround(LEVEL_D12P21A, 30);
                         hold;
                     case 18:
                         debug_Print("Cleared Far Amp Plains Flag 204");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ($SCENARIO_TALK_BIT_FLAG[204]) {
                             JumpCommon(CORO_EVENT_M12_09);
                         } else {
@@ -9232,9 +9249,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_M13_07);
                     case 21:
                         main_EnterGround(LEVEL_D15P21A, 30);
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         hold;
                     case 22:
                         debug_Print("Cleared Quicksand Cave Pit Flag 205");
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ($SCENARIO_TALK_BIT_FLAG[205]) {
                             JumpCommon(CORO_EVENT_M14_07);
                         } else {
@@ -9245,18 +9264,22 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 23:
                         debug_Print("Missions Quicksand Cave");
                         dungeon_mode(21) = DMODE_OPEN_AND_REQUEST;
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M14_08_09);
                     case 24:
                         debug_Print("Haha Crystal Puzzle go brrrrrr");
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_M15_04);
+                        dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_HA_SAME);
+                        // JumpCommon(CORO_EVENT_M15_04);
                     case 25:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M15_09);
                     case 26:
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
-                        dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M15_10_12);
                     case 27:
                         screen_WhiteIn(19, 0);
@@ -9269,9 +9292,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_HA_SAME);
                         JumpCommon(CORO_EVENT_M18_04_05);
                     case 29:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D21P21A, 30);
                         hold;
                     case 30:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Deep Sealed Ruin Flag 206");
                         if ($SCENARIO_TALK_BIT_FLAG[206]) {
                             JumpCommon(CORO_EVENT_M18_12);
@@ -9281,6 +9306,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 31:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(29) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_M18_13_14);
                     case 32:
@@ -9292,10 +9318,12 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_M19_10);
                     case 34:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Treeshroud Forest");
                         dungeon_mode(34) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_M20_07_09);
                     case 35:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Brine Cave Flag 207");
                         if ($SCENARIO_TALK_BIT_FLAG[207]) {
                             main_EnterGround(LEVEL_D26P21A, 30);                            
@@ -9305,6 +9333,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 36:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Lower Brine Cave Flag 208");
                         if ($SCENARIO_TALK_BIT_FLAG[208]) {
                             JumpCommon(CORO_EVENT_M23_08);
@@ -9314,14 +9343,17 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 37:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Brine Cave");
                         dungeon_mode(35) = DMODE_OPEN_AND_REQUEST;
                         // JumpCommon(CORO_EVENT_HA_SAME);
                         JumpCommon(CORO_EVENT_M23_09_10);
                     case 38:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D28P21A, 30);
                         hold;
                     case 39:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Hidden Highland Flag 209");
                         switch(dungeon_mode(38)) {
                             case DMODE_OPEN_AND_REQUEST:
@@ -9336,11 +9368,13 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 break;
                         }
                     case 40:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Dusknoir Dungeon, Likely do nothing");
                         dungeon_mode(38) = DMODE_OPEN_AND_REQUEST;
                         screen_WhiteIn(26, 0);
                         JumpCommon(CORO_EVENT_M25_01_05);
                     case 41:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Temporal Tower Flag 210");
                         if ($SCENARIO_TALK_BIT_FLAG[210]) {
                             main_EnterGround(LEVEL_D30P21A, 30);
@@ -9350,6 +9384,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 42:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Temporal Spire Flag 211");
                         if ($SCENARIO_TALK_BIT_FLAG[211]) {
                             JumpCommon(CORO_EVENT_M25_12);
@@ -9359,11 +9394,13 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 43:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("GG you win now!");
                         dungeon_mode(41) = DMODE_OPEN_AND_REQUEST;
                         screen_WhiteIn(27, 0);
                         JumpCommon(CORO_EVENT_M26_01_08);
                     case 44:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Mystifying Forest Flag 212");
                         if ($SCENARIO_TALK_BIT_FLAG[212]) {
                             JumpCommon(CORO_EVENT_S01_08);
@@ -9373,6 +9410,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 45:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Mystifying Forest... Luminous Spring?");
                         dungeon_mode(44) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S01_09_10);
@@ -9383,9 +9421,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_S02_02);
                     case 47:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D79P21A, 30);
                         hold;
                     case 48:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Lower Crevice Cave Flag 213");
                         if ($SCENARIO_TALK_BIT_FLAG[213]) {
                             JumpCommon(CORO_EVENT_S02_06);
@@ -9395,6 +9435,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 49:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Crevice Cave.");
                         dungeon_mode(47) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S02_07);
@@ -9405,9 +9446,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 51:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D35P21A, 30);
                         hold;
                     case 52:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Deep Miracle Sea Flag 214");
                         if ($SCENARIO_SUB2 &<< 5) {                    
                             if ($SCENARIO_TALK_BIT_FLAG[214]) {
@@ -9423,10 +9466,12 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 53:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Miracle Sea");
                         dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
                     case 54:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 58] ) {
                             main_EnterGround(LEVEL_D32P11A, 30);
                             hold;
@@ -9435,9 +9480,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 55:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("This will take extra effort! Regice, Regirock, and Registeel do checks in their EVENT coroutines");
                         JumpCommon(CORO_EVENT_S04_06_07);
                     case 56:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 61] ) {
                             main_EnterGround(LEVEL_D32P12A, 30);
                             hold;
@@ -9446,11 +9493,14 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 57:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_S04_11);
                     case 58:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D32P13A, 30);
                         hold;
                     case 59:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 65] ) {
                             JumpCommon(CORO_EVENT_S04_15);
                         } else {
@@ -9458,6 +9508,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 60:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 66] ) {
                             JumpCommon(CORO_EVENT_S04_17);
                         } else {
@@ -9465,23 +9516,28 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 61:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Aegis Cave");
                         dungeon_mode(54) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S04_19);
                     case 62:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Mt. Travail");
                         dungeon_mode(62) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S20_07_08);
                     case 63:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Nightmare... What a riot!");
                         dungeon_mode(63) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S20_11);
                     case 64:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print('LABEL_D064_CLEAR');
                         debug_Print("This used to bump up $SCENARIO_MAIN");
                         main_EnterGround(LEVEL_D39P21A, 30);
                         break;
                     case 65:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Jumping to 225 bc of Aegis Cave");
                         debug_Print("Cleared Deep Spacial Rift Flag 225");
                         if ($SCENARIO_TALK_BIT_FLAG[225]) {
@@ -9492,15 +9548,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 66:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Spacial Rift");
                         dungeon_mode(64) = DMODE_OPEN_AND_REQUEST;
                         screen_WhiteIn(29, 86);
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 67:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         screen_WhiteIn(29, 89);
                         main_EnterGround(LEVEL_D41P21A, 30);
                         hold;
                     case 68:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Deep Dark Crater Flag 226");
                         if ($SCENARIO_TALK_BIT_FLAG[226]) {
                             JumpCommon(CORO_EVENT_S22_13);
@@ -9510,118 +9569,153 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 69:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Dark Crater");
                         dungeon_mode(67) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S22_14_15);
                     case 71:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Congealed Ruins");
                         dungeon_mode(71) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 72:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Marine Resort");
                         dungeon_mode(72) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 73:
                     case 74:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(73) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 75:
                     case 76:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(75) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 77:
                     case 78:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(77) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 79:
                     case 80:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(79) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 81:
                     case 82:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(81) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 83:
                     case 84:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(83) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 85:
                     case 86:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(85) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 87:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(87) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 88:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(88) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 89:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(89) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 90:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(90) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 91:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(91) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 92:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(92) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 93:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(93) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 94:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(94) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 95:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(95) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 96:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(96) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 97:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(97) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 98:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(98) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 99:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(99) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 100:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(100) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 101:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(101) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 102:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(102) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 103:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(103) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 104:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(104) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 105:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(105) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 106:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(106) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 107:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(107) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 108:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(108) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 109:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(109) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 110:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(110) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 111:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to this station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[227]) {
                             main_EnterGround(LEVEL_D73P21A, 30);
@@ -9632,6 +9726,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 112:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         $BIT_FUWARANTE_LOCAL[1] = 1; // 2F Gondola
                         if ($SCENARIO_TALK_BIT_FLAG[228]) {
@@ -9643,6 +9738,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 113:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[229]) {
                             main_EnterGround(LEVEL_D73P23A, 30);
@@ -9653,6 +9749,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 114:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         $BIT_FUWARANTE_LOCAL[2] = 1; // 4F gondola
                         if ($SCENARIO_TALK_BIT_FLAG[230]) {
@@ -9664,6 +9761,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 115:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[231]) {
                             main_EnterGround(LEVEL_D73P25A, 30);
@@ -9674,6 +9772,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 116:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         $BIT_FUWARANTE_LOCAL[3] = 1; // 6F gondola
                         if ($SCENARIO_TALK_BIT_FLAG[232]) {
@@ -9685,6 +9784,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 117:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[233]) {
                             main_EnterGround(LEVEL_D73P27A, 30);
@@ -9695,6 +9795,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 118:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[234]) {
                             main_EnterGround(LEVEL_D73P28A, 30);
@@ -9705,6 +9806,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 119:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[235]) {
                             main_EnterGround(LEVEL_D73P29A, 30);
@@ -9715,6 +9817,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 120:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
                         if ($SCENARIO_TALK_BIT_FLAG[236]) {
                             JumpCommon(CORO_EVENT_S31_36);
@@ -9725,8 +9828,10 @@ coro GETOUT_SCENARIO_DUNGEON {
                         }
                         break;
                     case 121:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         jump @label_827;
                     case 122:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Sky Peak... How though? Idk we try this!");
                         dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
@@ -9995,12 +10100,14 @@ coro GETOUT_SCENARIO_DUNGEON {
                         dungeon_mode(174) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 172:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         message_Mail("The dungeon kept going!");
                         message_Close();
                         main_EnterDungeon(172,30);
                         main_EnterDungeon(-1,30);
                         hold;                    
                     case 173:
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         message_Mail("The dungeon kept going!");
                         message_Close();
                         main_EnterDungeon(173,30);
@@ -10090,6 +10197,19 @@ coro GETOUT_SCENARIO_DUNGEON {
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);
+                    case 29:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                JumpCommon(CORO_EVENT_M18_07);
+                        }
+                        break;
                     case 30:
                         JumpCommon(CORO_EVENT_M18_07);
                     case 31:
@@ -11314,7 +11434,7 @@ coro GETOUT_REQUEST_CONQUEST {
                     jump @no_articuno;
                 }
             } else {
-                message_Mail("[CS:G]Articuno[CR] and the [CS:I]Icy-Flute[CR]\nare Post-Dialga checks!");
+                message_Mail("[CS:G]Articuno[CR] and the [CS:I]Icy Flute[CR]\nare Post-Dialga checks!");
                 message_Close();
                 jump @no_articuno;
             }
@@ -11950,105 +12070,108 @@ coro RESCUE_DEBUG {
             break;
             §label_729;
             message_EmptyActor();
-            switch(ProcessSpecial(103,0,0)){               
-                case 1:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Chesyon[CR]?");
-                    message_Talk("Has [CS:C]Crowned[CR] released yet?[K]\nWhat?[K] No?[K] For shame!");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("If you hadn\'t taken up the reins\nwhen you did, who knows where\nwe\'d all be![K] Probably not here..."); 
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    Wait(70);
-                    message_Mail("[STS]\n[CN][CS:G]Handbrain[CR][STE]");
-                    message_CloseEnforce();
-                    break;
-                case 2:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Mail("...wait a minute.[K] You\'re THE [CS:G]happylappy[CR]?");
-                    message_Mail("Huge fan![K] Anyway, without further ado...");
-                    Wait(180);
-                    message_CloseEnforce();
-                    message_Mail("What, did you expect me to thank\nmyself for contributing?[K] I\'ll\npass for now, thanks!");
-                    message_Close();
-                    Wait(70);
-                    message_Mail("Play [CS:G]GoHL[CR]![W:30]");
-                    message_CloseEnforce();
-                    break;
-                case 3:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Cryptic[CR]?");
-                    message_Talk("You need a refill on popcorn?[K]\nHere you go:  [M:T6][M:T6][M:T6][M:T6][M:T6]");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Without you, we wouldn\'t have\nany idea how to use the AP client,\nmuch less program item and location logic..."); 
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    break;
-                case 4:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]kattnip[CR]?");
-                    message_Talk("You\'re the reason we have this: [M:T5]");
-                    message_Talk("However...[W:60] I think we need it in a different\npalette![K] Do you think you can make it look\nthis colorful using only grayscale instead?");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Without you, we wouldn\'t have these small\nbut important touches to make our APWorld\nstand out![K] Art is scary, I much prefer coding..."); 
-                    message_Talk("So thank you for contributing!");
-                    $SCENARIO_TALK_BIT_FLAG[83] = 0;
-                    $SCENARIO_TALK_BIT_FLAG[95] = 0;
-                    message_Close();
-                    break;
-                case 5:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Hecka[CR]?");
-                    message_Talk("I\'ve got this funny dungeon-mode trap idea\nI wanted you to make, where it leaks the IP\naddress of the player and puts it on-screen...");
-                    message_Talk("Given your past track-record, I imagine\nyou\'ll have no trouble getting that all\nset for [CS:G]0.2.1[CR], right Hecka? :P");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Without you, there\'s so many things that we\njust couldn\'t have done: Shop Items, Starter\nSettings, Extra Instruments, and much more..."); 
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    break;
-                case 6:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Tailsdx[CR]?");
-                    message_Talk("Alright, so on this run I need you to confirm if\n[CS:P]Zero Isle South[CR] missions function as normal\nokay?[K] Just clear it a few times, piece of cake!");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"quirks\" of [CS:P]Special Rift[CR] come to mind... "); 
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    break;
-                case 7:
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]FieryBlizzard[CR]?");
-                    message_Talk("So I was thinking...[W:60] It\'s a little weird that\n[CS:L]Charizard[CR] can learn [CS:K]Heat Wave[CR], right?[K] So I\nchanged it to... [W:60]Wait, you LIKE [CS:K]Heat Wave[CR]?");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"excessive\" [CS:G]Pelipper[CR] deliveries come to mind..."); 
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    break;
-                case 1000: // Sadge this won't ever play. oh well!
-                    se_Play(8968);
-                    Wait(60);
-                    message_Talk("...wait a minute.[K] You\'re THE [CS:G]Adex[CR]?");
-                    message_Talk("It\'s so much harder to be on the\nother end of these things, isn\'t it?\nHow did you do it for MM5?"); 
-                    message_Talk("Anyway, I hid yours in unionall for you,\ninstead of making it play naturally.[K] Happy?");
-                    message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
-                    message_Talk("Cutscene skipping is a HUGE deal to the\npeople who play this stuff regularly![K] The\ntracker is looking incredible too![K] Now then...");
-                    message_Talk("So thank you for contributing!");
-                    message_Close();
-                    break;
-                default:
-                    message_Talk("[hero]?[K] What a nice name![K]\nI don\'t recognize it, but...");
-                    message_Talk("Thank you for playing!");
-                    message_Close();
-                    break;
-            }
-            return;
+            if (debug) {
+            } else {
+                switch(ProcessSpecial(103,0,0)){               
+                    case 1:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Chesyon[CR]?");
+                        message_Talk("Has [CS:C]Crowned[CR] released yet?[K]\nWhat?[K] No?[K] For shame!");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("If you hadn\'t taken up the reins\nwhen you did, who knows where\nwe\'d all be![K] Probably not here..."); 
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        Wait(70);
+                        message_Mail("[STS]\n[CN][CS:G]Handbrain[CR][STE]");
+                        message_CloseEnforce();
+                        break;
+                    case 2:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Mail("...wait a minute.[K] You\'re THE [CS:G]happylappy[CR]?");
+                        message_Mail("Huge fan![K] Anyway, without further ado...");
+                        Wait(180);
+                        message_CloseEnforce();
+                        message_Mail("What, did you expect me to thank\nmyself for contributing?[K] I\'ll\npass for now, thanks!");
+                        message_Close();
+                        Wait(70);
+                        message_Mail("Play [CS:G]GoHL[CR]![W:30]");
+                        message_CloseEnforce();
+                        break;
+                    case 3:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Cryptic[CR]?");
+                        message_Talk("You need a refill on popcorn?[K]\nHere you go:  [M:T6][M:T6][M:T6][M:T6][M:T6]");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Without you, we wouldn\'t have\nany idea how to use the AP client,\nmuch less program item and location logic..."); 
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        break;
+                    case 4:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]kattnip[CR]?");
+                        message_Talk("You\'re the reason we have this: [M:T5]");
+                        message_Talk("However...[W:60] I think we need it in a different\npalette![K] Do you think you can make it look\nthis colorful using only grayscale instead?");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Without you, we wouldn\'t have these small\nbut important touches to make our APWorld\nstand out![K] Art is scary, I much prefer coding..."); 
+                        message_Talk("So thank you for contributing!");
+                        $SCENARIO_TALK_BIT_FLAG[83] = 0;
+                        $SCENARIO_TALK_BIT_FLAG[95] = 0;
+                        message_Close();
+                        break;
+                    case 5:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Hecka[CR]?");
+                        message_Talk("I\'ve got this funny dungeon-mode trap idea\nI wanted you to make, where it leaks the IP\naddress of the player and puts it on-screen...");
+                        message_Talk("Given your past track-record, I imagine\nyou\'ll have no trouble getting that all\nset for [CS:G]0.2.1[CR], right Hecka? :P");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Without you, there\'s so many things that we\njust couldn\'t have done: Shop Items, Starter\nSettings, Extra Instruments, and much more..."); 
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        break;
+                    case 6:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Tailsdx[CR]?");
+                        message_Talk("Alright, so on this run I need you to confirm if\n[CS:P]Zero Isle South[CR] missions function as normal\nokay?[K] Just clear it a few times, piece of cake!");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"quirks\" of [CS:P]Special Rift[CR] come to mind... "); 
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        break;
+                    case 7:
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]FieryBlizzard[CR]?");
+                        message_Talk("So I was thinking...[W:60] It\'s a little weird that\n[CS:L]Charizard[CR] can learn [CS:K]Heat Wave[CR], right?[K] So I\nchanged it to... [W:60]Wait, you LIKE [CS:K]Heat Wave[CR]?");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"excessive\" [CS:G]Pelipper[CR] deliveries come to mind..."); 
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        break;
+                    case 1000: // Sadge this won't ever play. oh well!
+                        se_Play(8968);
+                        Wait(60);
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Adex[CR]?");
+                        message_Talk("It\'s so much harder to be on the\nother end of these things, isn\'t it?\nHow did you do it for MM5?"); 
+                        message_Talk("Anyway, I hid yours in unionall for you,\ninstead of making it play naturally.[K] Happy?");
+                        message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
+                        message_Talk("Cutscene skipping is a HUGE deal to the\npeople who play this stuff regularly![K] The\ntracker is looking incredible too![K] Now then...");
+                        message_Talk("So thank you for contributing!");
+                        message_Close();
+                        break;
+                    default:
+                        message_Talk("[hero]?[K] What a nice name!");
+                        message_Talk("Thank you for playing!");
+                        message_Close();
+                        break;
+                }
+                return;
+        }
     }
 }
 
@@ -12255,6 +12378,19 @@ coro TITLE_TEST {
 }
 
 coro BUBBLE_TEST {
+    switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            return;
+        default:
+            break;
+    }
+    if ($SCENARIO_MAIN_BIT_FLAG[3]) {
+        return;
+    }
     if ($PERFORMANCE_PROGRESS_LIST[6]) {
         dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
     }
@@ -12362,14 +12498,14 @@ coro BUBBLE_TEST {
     }
     if ($PERFORMANCE_PROGRESS_LIST[35]) { // If true, run ITEM LOOP
         message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk(" I\'ve got a special delivery for team\n[team]!");
+        message_Talk("[STS] I\'ve got a special delivery for team\n[team]![STE]");
         
         if ($ITEM_BACKUP > 0) { // ITEM_BACKUP is non-zero! 
             §box_iteration;
             item_SetVariable(0,$ITEM_BACKUP);
             message_EmptyActor();
             me_Play(4);
-            message_Monologue("[CN][CS:G]Pelipper[CR] handed you a [s_item:0]!");
+            message_Monologue("[STS][CN][CS:G]Pelipper[CR] handed you a [s_item:0]![STE]");
             WaitMe(4);
             Wait(30);
             message_Close();
@@ -12385,10 +12521,10 @@ coro BUBBLE_TEST {
             $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item
             message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
             if ($LOTTERY_RESULT == -1) {
-                message_Talk(" My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)");
+                message_Talk("[STS] My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)[STE]");
                 message_Close();
             } else {
-                message_Talk(" One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]!");
+                message_Talk("[STS] One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]![STE]");
                 message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");        
                 §box_halt;
                 if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
@@ -12418,12 +12554,12 @@ coro BUBBLE_TEST {
                 message_CloseEnforce();
                 if ($ITEM_BACKUP > 0) {
                     message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk(" I do have another delivery for you!\nHere you are, team [team]!");
+                    message_Talk("[STS] I do have another delivery for you!\nHere you are, team [team]![STE]");
                     message_Close();
                     jump @box_iteration; // Next Item given by Cryptic!
                 } else {
                     message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk(" That appears to be everything!\nHave a great day, team [team]!");
+                    message_Talk("[STS] That appears to be everything!\nHave a great day, team [team]![STE]");
                     message_Close();
                 }
             }
@@ -12439,144 +12575,147 @@ coro BUBBLE_TEST {
         supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
     }
-    switch(ProcessSpecial(103,0,0)){
-        case 1: // Chesyon
-            switch(random(500)) {
-                case 0:
-                    switch ( $CONFIG_COLOR_KIND ) {
-                        case 0: 
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,428,0);
-                            break;
-                        case 1:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,429,0);
-                            break;
-                        case 2:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,430,0);
-                            break;
-                        case 3:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,431,0);
-                            break;
-                        case 4:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,432,0);
-                            break;
-                        case 5:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,433,0);
-                            break;
-                        case 6:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,434,0);
-                            break;
-                        case 7:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,435,0);
-                            break;
-                        case 8:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,436,0);
-                            break;
-                        case 9:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,437,0);
-                            break;
-                        case 10:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,438,0);
-                            break;
-                        case 11:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,439,0);
-                            break;
-                        case 12:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,440,0);
-                            break;
-                        case 13:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,441,0);
-                            break;
-                        case 14:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,442,0);
-                            break;
-                        case 15:
-                        default:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,443,0);
-                            break;
-                    }
-                case < 10:
-                    message_Mail("[CN]You feel like your bag suddenly\ngot a little bit heavier...");
-                    message_Close();
-                    break;
-                default:
-                    break;
-            }
-            break;            
-        case 2: // Happylappy
-            switch(random(10000)) {
-                case 0:
-                    $PERFORMANCE_PROGRESS_LIST[32] = 1;
-                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
-                    $PERFORMANCE_PROGRESS_LIST[34] = 1;
-                    $PERFORMANCE_PROGRESS_LIST[36] = 1;
-                case < 10:
-                    message_Mail("[CN]You feel like you\'re about to get\nyour shit rocked in a few minutes...");
-                    message_Close();
-                default:
-                    break;
-            }
-            break;                
-            break;      
-        case 3: // Cryptic
-            switch(random(500)) {
-                case 0:
-                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
-                    message_Mail("[CN][M:T6][CN]");
-                    message_CloseEnforce();
-                case < 10:
-                    message_Mail("[CN]I heard you like seeing the world\n[CN]in a rather [CS:C]Cryptic Font[CR]...");
-                    message_Close();
-                default:
-                    break;
-            }
-            break;
-        case 4: // Katt
-            switch(random(500)) {
-                case 0:
-                    $PERFORMANCE_PROGRESS_LIST[32] = 1;
-                    message_Mail("[CN][M:T5][CN]");
-                    message_CloseEnforce();
-                case < 10:
-                    message_Mail("[CN]I heard you like coming up with\n[CN]new ideas and [CS:C]creative names[CR]...");
-                    message_Close();
-                default:
-                    break;
-            }           
-            break;
-        case 5: // Hecka
-            switch(random(500)) {
-                case < 3:
-                    message_Mail("[CN]I heard you liked\n[CN][CS:C]Synodic Flip[CR]...");
-                    message_Close();
-                default:
-                    break;
-            }
-            break;
-        case 6: // Tailsdx
-            message_Close();
-            switch(random(5000)) {
-                case 0:
-                    $PERFORMANCE_PROGRESS_LIST[36] = 1;
-                case < 10:
-                    message_Mail("[CN]I heard you like\n[CN][CS:C]Stopping and smelling the roses[CR]...");
-                    message_Close();
-                default:
-                    break;
-            }
-            break;
-        case 7: // FieryBlizzard
-            switch(random(5000)) {
-                case 0:
-                    $PERFORMANCE_PROGRESS_LIST[34] = 1;
-                case < 10:
-                    message_Mail("[CN]I heard you like\n[CN][CS:C]Sentry Duty[CR]...");
-                    message_Close();
-                default:
-                    break;
-            }
-            break;
-        default: // No special name
-            break;
+    if (debug) {
+    } else {
+        switch(ProcessSpecial(103,0,0)){
+            case 1: // Chesyon
+                switch(random(500)) {
+                    case 0:
+                        switch ( $CONFIG_COLOR_KIND ) {
+                            case 0: 
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,428,0);
+                                break;
+                            case 1:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,429,0);
+                                break;
+                            case 2:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,430,0);
+                                break;
+                            case 3:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,431,0);
+                                break;
+                            case 4:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,432,0);
+                                break;
+                            case 5:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,433,0);
+                                break;
+                            case 6:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,434,0);
+                                break;
+                            case 7:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,435,0);
+                                break;
+                            case 8:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,436,0);
+                                break;
+                            case 9:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,437,0);
+                                break;
+                            case 10:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,438,0);
+                                break;
+                            case 11:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,439,0);
+                                break;
+                            case 12:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,440,0);
+                                break;
+                            case 13:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,441,0);
+                                break;
+                            case 14:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,442,0);
+                                break;
+                            case 15:
+                            default:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,443,0);
+                                break;
+                        }
+                    case < 10:
+                        message_Mail("[CN]You feel like your bag suddenly\ngot a little bit heavier...");
+                        message_Close();
+                        break;
+                    default:
+                        break;
+                }
+                break;            
+            case 2: // Happylappy
+                switch(random(10000)) {
+                    case 0:
+                        $PERFORMANCE_PROGRESS_LIST[32] = 1;
+                        $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                        $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                        $PERFORMANCE_PROGRESS_LIST[36] = 1;
+                    case < 10:
+                        message_Mail("[CN]You feel like you\'re about to get\nyour shit rocked in a few minutes...");
+                        message_Close();
+                    default:
+                        break;
+                }
+                break;                
+                break;      
+            case 3: // Cryptic
+                switch(random(500)) {
+                    case 0:
+                        $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                        message_Mail("[CN][M:T6][CN]");
+                        message_CloseEnforce();
+                    case < 10:
+                        message_Mail("[CN]I heard you like seeing the world\n[CN]in a rather [CS:C]Cryptic Font[CR]...");
+                        message_Close();
+                    default:
+                        break;
+                }
+                break;
+            case 4: // Katt
+                switch(random(500)) {
+                    case 0:
+                        $PERFORMANCE_PROGRESS_LIST[32] = 1;
+                        message_Mail("[CN][M:T5][CN]");
+                        message_CloseEnforce();
+                    case < 10:
+                        message_Mail("[CN]I heard you like coming up with\n[CN]new ideas and [CS:C]creative names[CR]...");
+                        message_Close();
+                    default:
+                        break;
+                }           
+                break;
+            case 5: // Hecka
+                switch(random(500)) {
+                    case < 3:
+                        message_Mail("[CN]I heard you liked\n[CN][CS:C]Synodic Flip[CR]...");
+                        message_Close();
+                    default:
+                        break;
+                }
+                break;
+            case 6: // Tailsdx
+                message_Close();
+                switch(random(5000)) {
+                    case 0:
+                        $PERFORMANCE_PROGRESS_LIST[36] = 1;
+                    case < 10:
+                        message_Mail("[CN]I heard you like\n[CN][CS:C]Stopping and smelling the roses[CR]...");
+                        message_Close();
+                    default:
+                        break;
+                }
+                break;
+            case 7: // FieryBlizzard
+                switch(random(5000)) {
+                    case 0:
+                        $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                    case < 10:
+                        message_Mail("[CN]I heard you like\n[CN][CS:C]Sentry Duty[CR]...");
+                        message_Close();
+                    default:
+                        break;
+                }
+                break;
+            default: // No special name
+                break;
+        }
     }
     return;
     
