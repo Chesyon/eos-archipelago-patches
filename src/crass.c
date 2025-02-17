@@ -202,7 +202,7 @@ bool TryCutsceneSkipScanInner(struct script_routine* routine, uint16_t* switch_m
   the string start address, without care for flow control. Important opcodes like variable manipulation are not properly executed.
   If neither opcode is found, then the cutscene cannot be skipped and will fall back to performing a cutscene speedup.
 
-  If the return value of TryCutsceneSkipScanInner is false, then a redirect will be performed to reload the game at ROUTINE_MAP_TEST with a skip kind of SKIP_ERROR.
+  If the return value of TryCutsceneSkipScanInner is false, then a redirect will be performed to reload the game at ROUTINE_MAP_TEST with a skip kind of CRASS_ERROR.
 */
 __attribute((used)) bool TryCutsceneSkipScan(void) {
   if(CRASS_SETTINGS.skip_active) {
@@ -245,7 +245,7 @@ __attribute((used)) bool TryCutsceneSkipScan(void) {
       // Error encountered with cutscene skipping, so attempt a redirect and note the error!
       CRASS_SETTINGS.redirect = true;
       CRASS_SETTINGS.menu_skipped = 0;
-      CRASS_SETTINGS.skip_kind = SKIP_ERROR;
+      CRASS_SETTINGS.crass_kind = CRASS_ERROR;
       return false;
     }
   }
@@ -305,47 +305,42 @@ __attribute((used)) int DebugPrintGameCancel(char* fmt) {
 }
 
 /*
-  This function obtains the name of an Acting scene and an optional "skip_kind" parameter.
+  This function obtains the name of an Acting scene and an optional "crass_kind" parameter.
 
   To allow some degree of customizability with cutscene skips, each cutscene can have a parameter via its name similar to text tags.
   See the "crass_kind" enum in "crass.h" for more info.
 
-  For example, if the scene name "s12a0701:1" is encountered, scene s12a0701 will be loaded and have a skip_kind of SKIP_OFF (1), making it unskippable.
-  Omitting a skip_kind parameter is the same as using a parameter of SKIP_DEFAULT (0), making the cutscene have its default skip settings.
+  For example, if the scene name "s12a0701:1" is encountered, scene s12a0701 will be loaded and have a crass_kind of CRASS_OFF (1), making it unskippable.
+  Omitting a crass_kind parameter is the same as using a parameter of CRASS_DEFAULT (0), making the cutscene have its default skip settings.
 */
 __attribute((used)) void CustomGetSceneName(char* truncated_scene_name, char* full_scene_name) {
   GetSceneName(truncated_scene_name, full_scene_name); // Clamps the scene name down to 8 characters; may not contain null byte
-  int skip_kind = -1;
+  int crass_kind = -1;
   char current_char = *full_scene_name;
   int len = 0;
-  // Scan through the full scene name manually to try and find a skip_kind parameter!
+  // Scan through the full scene name manually to try and find a crass_kind parameter!
   while(current_char != '\0') {
     if(current_char == ':') {
-      skip_kind = AtoiTag(full_scene_name+1); // Get the integer value of anything beyond a ":" in the scene name
+      crass_kind = AtoiTag(full_scene_name+1); // Get the integer value of anything beyond a ":" in the scene name
       break;
     }
     full_scene_name++;
     len++;
     current_char = *full_scene_name;
   }
-  if(skip_kind < SKIP_DEFAULT)
-    skip_kind = SKIP_DEFAULT; // No parameter, default to normal skip settings
+  if(crass_kind < CRASS_DEFAULT)
+    crass_kind = CRASS_DEFAULT; // No parameter, default to normal skip settings
   else if(len < 8)
     truncated_scene_name[len] = '\0'; // Ensure we don't try to treat any part of the skip parameter as the scene name
   uint16_t* next_opcode_addr = GROUND_STATE_PTRS.main_routine->states[0].ssb_info[0].next_opcode_addr;
   uint16_t next_opcode_id = *next_opcode_addr;
   MemZero(&CRASS_SETTINGS, sizeof(struct crass_settings));
-  // Only allow a cutscene to be skipped if it's loaded by Unionall, i.e. don't skip a cutscene that loads a cutscene
-  if(GROUND_STATE_PTRS.main_routine->routine_kind.val != ROUTINE_UNIONALL) {
-    CRASS_SETTINGS.skip_kind = SKIP_OFF;
-    return;
-  }
-  CRASS_SETTINGS.skip_kind = skip_kind;
-  // Decide what sort of action should be taken, given a skip_kind parameter to a scene...
-  switch(skip_kind) {
-    case SKIP_OFF:;
+  CRASS_SETTINGS.crass_kind = crass_kind;
+  // Decide what sort of action should be taken, given a crass_kind parameter to a scene...
+  switch(crass_kind) {
+    case CRASS_OFF:;
       break;
-    case SKIP_DEFAULT:;
+    case CRASS_DEFAULT:;
     skip_default:;
       // If a cutscene-to-overworld transition is the next opcode, fall back to a speedup instead
       if(next_opcode_id == OPCODE_CALL_COMMON) {
@@ -359,12 +354,12 @@ __attribute((used)) void CustomGetSceneName(char* truncated_scene_name, char* fu
       // Save the state of the script runtime info to perform a proper return after a skip
       MemcpySimple(&(CRASS_SETTINGS.return_info), &(GROUND_STATE_PTRS.main_routine->states[0].ssb_info[0]), sizeof(struct ssb_runtime_info));
       break;
-    case SKIP_SPEEDUP:;
+    case CRASS_SPEEDUP:;
     skip_speedup:;
       CRASS_SETTINGS.can_speedup = true;
       break;
     default:;
-      if(skip_kind >= SKIP_REDIRECT)
+      if(crass_kind >= CRASS_REDIRECT)
         CRASS_SETTINGS.redirect = true;
       goto skip_default;
   }

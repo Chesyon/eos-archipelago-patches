@@ -24,15 +24,16 @@ enum opcode_parse_kind {
 };
 
 enum crass_kind {
-  SKIP_DEFAULT =
+  CRASS_DEFAULT =
       0, // The cutscene skip will perform its default settings: Attempting to
          // skip naturally, and if it fails, it performs a speedup.
-  SKIP_OFF = 1,     // The cutscene cannot be skipped or sped up no matter what.
-  SKIP_SPEEDUP = 2, // The cutscene skip will not attempt a natural skip and
-                    // instead force a speedup.
-  SKIP_ERROR = 99, // An error has occured with an attempted cutscene script; this is not meant to be supplied as a parameter.
-  SKIP_REDIRECT =
-      100 // The cutscene will perform the same operations as SKIP_DEFAULT,
+  CRASS_OFF = 1, // The cutscene cannot be skipped or sped up no matter what.
+  CRASS_SPEEDUP = 2, // The cutscene skip will not attempt a natural skip and
+                     // instead force a speedup.
+  CRASS_ERROR = 99,  // An error has occured with an attempted cutscene script;
+                     // this is not meant to be supplied as a parameter.
+  CRASS_REDIRECT =
+      100 // The cutscene will perform the same operations as CRASS_DEFAULT,
           // however, a skip will redirect control flow to ROUTINE_MAP_TEST.
           // Additionally, anything greater than or equal to 100 will be
           // treated as a redirection, and this can be checked within
@@ -45,11 +46,11 @@ struct crass_settings {
                    // after OPCODE_SUPERVISION_EXECUTE_ACTING_SUB or via
                    // OPCODE_RETURN in ROUTINE_MAP_TEST.
   enum crass_kind
-      skip_kind; // To indicate the kind of cutscene skip taken place. Only
-                 // really intended to be used in ROUTINE_MAP_TEST, when
-                 // performing manual redirection.
+      crass_kind; // To indicate the kind of cutscene skip taken place. Only
+                  // really intended to be used in ROUTINE_MAP_TEST, when
+                  // performing manual redirection.
   uint16_t menu_skipped; // For certain important menus that were skipped. This
-                         // takes priority over the skip_kind field when
+                         // takes priority over the crass_kind field when
                          // performing manual redirection.
   bool can_skip;         // If the current cutscene being played can be skipped.
   bool can_speedup;      // If the current cutscene being played can be sped up,

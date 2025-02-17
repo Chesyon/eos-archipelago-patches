@@ -112,10 +112,10 @@ static int SpRegenerateMissions() {
     }
 }*/
 
-// Special process 255: Return either the current cutscene_skip_settings::skip_kind value or the ID of the OPCODE_MESSAGE_MENU that was skipped.
-static int SpGetCutsceneSkipKind() {
+// Special process 255: Return either the current cutscene_skip_settings::crass_kind value or the ID of the OPCODE_MESSAGE_MENU that was skipped.
+static int SpGetCrassKind() {
     #if CANCEL_RECOVER_ACTING_SKIP_SYSTEM
-    return CRASS_SETTINGS.menu_skipped > 0 ? CRASS_SETTINGS.menu_skipped : CRASS_SETTINGS.skip_kind;
+    return CRASS_SETTINGS.menu_skipped > 0 ? CRASS_SETTINGS.menu_skipped : CRASS_SETTINGS.crass_kind;
     #else
     return 0;
     #endif
@@ -143,7 +143,7 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         *return_val = SpRegenerateMissions();
         return true;
     case 255:
-        *return_val = SpGetCutsceneSkipKind();
+        *return_val = SpGetCrassKind();
     default:
         return false;
   }
