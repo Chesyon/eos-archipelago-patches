@@ -203,7 +203,6 @@ void DeathLinkReceiverCheck() {
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
 
-char space[2] = " ";
 void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buffer,
                           int buffer_size, struct preprocessor_args* args) {
     GetDungeonResultMsg(damage_source_or_result, buffer, buffer_size, (undefined*) args);
@@ -215,17 +214,18 @@ void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buf
         return;
     }
     
-    CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[0] = '\0';
+    // Zero our death message to remove old one.
+    MemZero(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, 128);
     
     if (SomeDeathMsgCheckFun(damage_source_or_result) != 0) {
         strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
-        int remaining = 127 - strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
-        if(remaining > 2) {
-            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, space, remaining);
-            remaining--;
-            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, remaining);
+        int used = strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
+        if(used > 125) {
+            CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[used] = ' ';
+            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, 127 - used);
         }
     } else {
+        CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[0] = ' ';
         strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, 127);
     }
     
