@@ -15,18 +15,19 @@ struct crass_settings CRASS_SETTINGS;
   Returns if the current main routine originates from Unionall.
   At least one of the following conditions must be met:
   - If the main routine kind is ROUTINE_UNIONALL
+  - If the main routine's hanger (suspected field, not 100% sure) is 0
   - If the main routine kind's file address is UNIONALL_RAM_ADDRESS...and...
     - If the call stack is non-null (i.e. the main routine used OPCODE_CALL_COMMON or OPCODE_CALL to a Unionall address), the saved file address is also UNIONALL_RAM_ADDRESS
     - But if the call stack is null, we're for sure in Unionall.
 */
 bool IsMainRoutineBornFromUnionall(void) {
   struct script_routine* main_routine = GROUND_STATE_PTRS.main_routine;
-  return main_routine->routine_kind.val == ROUTINE_UNIONALL || (main_routine->states[0].ssb_info[0].file == UNIONALL_RAM_ADDRESS && (main_routine->states[0].ssb_info[1].next_opcode_addr != NULL ? main_routine->states[0].ssb_info[1].file == UNIONALL_RAM_ADDRESS : true));
+  return main_routine->routine_kind.val == ROUTINE_UNIONALL || main_routine->states[0].field_0x4 == 0 || (main_routine->states[0].ssb_info[0].file == UNIONALL_RAM_ADDRESS && (main_routine->states[0].ssb_info[1].next_opcode_addr != NULL ? main_routine->states[0].ssb_info[1].file == UNIONALL_RAM_ADDRESS : true));
 }
 
 /*
   Returns if the current main routine should not be skipped due to some of the routine's attributes.
-  In particular, to be skipped, a main routine must have valid ssb_info addresses and must not be in Unionall.
+  In particular, to be skipped, a main routine must have valid ssb_info addresses, must not be in Unionall, and must be currently performing an Acting scene.
 */
 bool IsMainRoutineInvalidToSkip(void) {
   struct script_routine* main_routine = GROUND_STATE_PTRS.main_routine;
@@ -35,7 +36,7 @@ bool IsMainRoutineInvalidToSkip(void) {
   // Add up all the fields of script_routine::ssb_info
   for(int i = 0; i < 4; i++)
     checksum += routine_addresses[i];
-  return (checksum == NULL || IsMainRoutineBornFromUnionall());
+  return (checksum == NULL || IsMainRoutineBornFromUnionall() || main_routine->states[0].field_0x4 != 3);
 }
 
 /*
