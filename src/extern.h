@@ -104,6 +104,7 @@ extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 extern int MESSAGE_SET_WAIT_MODE_PARAMS[2];
+extern void* UNIONALL_RAM_ADDRESS;
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);
