@@ -10232,7 +10232,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 }
                                 break;
                         }
-                        break;
+                        hold;
                     case 65:
                         message_Mail("Would you like to return home for the day?");
                         switch(message_SwitchMenu(1,1)) {
@@ -10250,7 +10250,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 }
                                 break;
                         }
-                        break;
+                        hold;
                     case 66:
                         message_Mail("Would you like to return home for the day?");
                         switch(message_SwitchMenu(1,1)) {
@@ -10264,7 +10264,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 JumpCommon(CORO_EVENT_S21_12);
                                 break;
                         }
-                        break;
+                        hold;
                     case 68:
                     case 69:
                     case 112:
