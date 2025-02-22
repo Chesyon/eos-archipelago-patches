@@ -42,6 +42,12 @@ def 0 {
             call @current_goals;
             jump @anything_else;
         case menu("Any ideas"): 
+            // TODO: NEW FEATURE
+            if (not debug) {
+                message_Talk(" Not implemented until 0.3.0!");
+                message_Close();
+                jump @anything_else;
+            }
             jump @any_ideas;
         case menu("Just Chatting"):
             message_Close();
