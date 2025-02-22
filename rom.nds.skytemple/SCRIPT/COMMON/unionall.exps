@@ -3387,6 +3387,7 @@ coro EVENT_M05_06_09 {
         §label_598;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
         adventure_log = 0;
+        JumpCommon(CORO_EVENT_HA_SAME);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M05A0701', 0);
         supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05D0314', 0);
         supervision_ExecuteActingSub(LEVEL_D04P31A, 'M05D0614', 0);
@@ -9223,6 +9224,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 16:
                         debug_Print("Missions Steam Cave");
                         dungeon_mode(14) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(15) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M10_11_12);
                     case 17:
@@ -9241,6 +9243,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 19:
                         debug_Print("Missions Amp Plains");
                         dungeon_mode(17) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(18) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_M12_10_12);
                     case 20:
                         debug_Print("Northen Desert is a dead-end in base-game!");
@@ -9264,10 +9267,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 23:
                         debug_Print("Missions Quicksand Cave");
                         dungeon_mode(21) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(22) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M14_08_09);
                     case 24:
-                        debug_Print("Haha Crystal Puzzle go brrrrrr");
+                        debug_Print("Haha Crystal Puzzle go brrrrrr... NOT!");
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
@@ -9308,6 +9312,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 31:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(29) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(30) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_M18_13_14);
                     case 32:
                         dungeon_mode(32) = DMODE_OPEN_AND_REQUEST;
@@ -9346,6 +9351,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Brine Cave");
                         dungeon_mode(35) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(36) = DMODE_REQUEST;
                         // JumpCommon(CORO_EVENT_HA_SAME);
                         JumpCommon(CORO_EVENT_M23_09_10);
                     case 38:
@@ -9371,6 +9377,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Dusknoir Dungeon, Likely do nothing");
                         dungeon_mode(38) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(39) = DMODE_REQUEST;
                         screen_WhiteIn(26, 0);
                         JumpCommon(CORO_EVENT_M25_01_05);
                     case 41:
@@ -9397,6 +9404,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("GG you win now!");
                         dungeon_mode(41) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(42) = DMODE_REQUEST;
                         screen_WhiteIn(27, 0);
                         JumpCommon(CORO_EVENT_M26_01_08);
                     case 44:
@@ -9417,7 +9425,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 46:
                         debug_Print("Missons Blizzard Island");
                         dungeon_mode(46) = DMODE_OPEN_AND_REQUEST;
-                        JumpCommon(CORO_EVENT_DIVIDE);
+                        JumpCommon(CORO_EVENT_HA_SAME);
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_S02_02);
                     case 47:
@@ -9438,9 +9446,10 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Crevice Cave.");
                         dungeon_mode(47) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(48) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S02_07);
                     case 50:
-                        debug_Print("Missions Surround Sea. Manaphy?");
+                        debug_Print("Missions Surround Sea...");
                         dungeon_mode(50) = DMODE_OPEN_AND_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
@@ -9469,6 +9478,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Miracle Sea");
                         dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(52) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -9551,6 +9561,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Spacial Rift");
                         dungeon_mode(64) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(65) = DMODE_REQUEST;
                         screen_WhiteIn(29, 86);
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 67:
@@ -9572,11 +9583,15 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Dark Crater");
                         dungeon_mode(67) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(66) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S22_14_15);
+                    case 70:
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 71:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Congealed Ruins");
-                        dungeon_mode(71) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(70) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(71) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 72:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -10131,56 +10146,6 @@ coro GETOUT_SCENARIO_DUNGEON {
                 JumpCommon(CORO_EVENT_DIVIDE);
             } else {
                 switch ( $DUNGEON_ENTER ) {
-                    case 64:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
-                                    jump @failed_65;
-                                } else {
-                                    jump @failed_64;
-                                }
-                                break;
-                        }
-                        break;
-                    case 65:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
-                                    jump @failed_67;
-                                } else {
-                                    jump @failed_66;
-                                }
-                                break;
-                        }
-                        break;
-                    case 66:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                JumpCommon(CORO_EVENT_S21_12);
-                                break;
-                        }
-                        break;
                     case 15:
                     case 16:
                         JumpCommon(CORO_EVENT_M10_08);    
@@ -10194,6 +10159,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
                         dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(25) = DMODE_REQUEST;
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);
@@ -10249,8 +10215,56 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 60:
                     case 61:
                         jump @label_877;
+                    case 64:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
+                                    jump @failed_65;
+                                } else {
+                                    jump @failed_64;
+                                }
+                                break;
+                        }
+                        hold;
                     case 65:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
+                                    jump @failed_67;
+                                } else {
+                                    jump @failed_66;
+                                }
+                                break;
+                        }
+                        hold;
                     case 66:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                JumpCommon(CORO_EVENT_S21_12);
+                                break;
+                        }
+                        hold;
                     case 68:
                     case 69:
                     case 112:
@@ -10335,9 +10349,9 @@ coro GETOUT_REQUEST_DUNGEON {
                     message_Close();
                     switch ( $DUNGEON_ENTER_INDEX ) {
                         case 1:
-                        default:
                             debug_Print('LABEL_D001_CLEAR');
                             supervision_ExecuteActingSub(LEVEL_D01P41A, 'M01A0601', 0);
+                        default:
                             §label_957;
                             switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                             switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
@@ -11526,7 +11540,7 @@ coro GETOUT_REQUEST_CONQUEST {
             } else {
                 message_Mail("[CS:G]Rayquaza[CR] and the [CS:I]Sky Melodica[CR]\nare Post-Dialga checks!");
                 message_Close();
-                jump @no_giratina;
+                jump @no_rayquaza;
             }
             break;
         case 84:
