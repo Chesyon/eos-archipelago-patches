@@ -10,6 +10,15 @@ IqScalingGround:
     add  r0,r1,r4 // original instruction
     bx   lr // return
 .align
+IqScalingGroundMisc:
+    // original instruction: mov r4, r0. iq increase in r1
+    ldr  r4,=apSettings // load pointer to settings struct
+    ldrb r4,[r4] // load first byte in settings struct
+    and  r4,r4,#0b1111 // cut down to just the first 4 bits, which is the multiplier
+    mul  r1,r1,r4 // multiply IQ increase by the multiplier
+    mov  r4,r0 // original instruction
+    bx   lr // return
+.align
 IqScalingDungeon:
     push {r0} // we need a free register to work with so we free up r0
     ldr  r0,=apSettings // load pointer to settings struct

@@ -12,6 +12,9 @@
     .org IqScalingGroundHook
         bl IqScalingGround
 
+    .org MiscIqScalingGroundHook
+        bl IqScalingGroundMisc
+
     .org NoLowercaseQTagBranch
         b NoLowercaseQTagFound
 
