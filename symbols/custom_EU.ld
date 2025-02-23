@@ -15,7 +15,7 @@ ClearAdventureLogStructCallsite = 0x02048774;
 MiscIqScalingGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
-CallGetDungeonResultMsg = 0x200C778;
+DeathLinkSendHookOld = 0x200C778;
 CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
 CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
 GenerateMissionMinFloorRollHook = 0x206301C;
@@ -59,6 +59,7 @@ IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
 DungeonTurnHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
 DungeonTurnUnhook = 0x22E0454;
 DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/
+DeathLinkSendHook = 0x22ED8E0;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;

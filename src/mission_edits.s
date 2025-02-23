@@ -14,7 +14,7 @@ EarlyMissionFloorsCheck:
     ldr r3,=apSettings
     ldrh r3,[r3,#0x0]
     tst r3,#0b0000000000010000 // apSettings->earlyMissionFloors
-    movne r0,#2
+    movne r0,#1
     str r0,[sp,#0x8] // original instruction
     bx lr
     

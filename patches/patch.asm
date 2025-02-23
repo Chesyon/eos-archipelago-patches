@@ -18,8 +18,10 @@
     .org NoLowercaseQTagBranch
         b NoLowercaseQTagFound
 
-    .org CallGetDungeonResultMsg
-        bl DeathLinkSenderCheck
+    ; An Old Hook For Deathlink. We need to hook even earlier to avoid some
+    ; bugs. Return this to its original instruction.
+    .org DeathLinkSendHookOld
+        bl GetDungeonResultMsg
     
     ; Mission Related Hooks
     .org MissionTypeRollHook
@@ -132,4 +134,6 @@
     
     .org DeathLinkDungeonInitHook
         bl DeathLinkInitDungeon
+    .org DeathLinkSendHook
+        b DeathLinkSenderTrampoline
 .close
