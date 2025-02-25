@@ -95,6 +95,13 @@ static int SpRegenerateMissions() {
     return 0;
 }
 
+// Special process 105. Backup BIT_FUWARANTE_LOCAL. Used for precise mission gen. 0 = backup, anything else = restore.
+static int SpFuwaranteBackup(short mode) {
+    if(mode == 0) FUWARANTE_BACKUP = LoadScriptVariableValue(0, VAR_BIT_FUWARANTE_LOCAL); // backup
+    else SaveScriptVariableValue(0, VAR_BIT_FUWARANTE_LOCAL, FUWARANTE_BACKUP); // restore
+    return 0;
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -131,6 +138,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 104:
         *return_val = SpRegenerateMissions();
+        return true;
+    case 105:
+        *return_val = SpFuwaranteBackup(arg1);
         return true;
     default:
         return false;
