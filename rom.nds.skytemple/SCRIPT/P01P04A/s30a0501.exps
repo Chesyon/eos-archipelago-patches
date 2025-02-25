@@ -1,4 +1,5 @@
-
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
     $SUB30_SPOT_DISCOVER[0] = 0;
     supervision_Acting(0);
@@ -124,6 +125,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir a la\n[CN][CS:P]Cueva Alud[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             §label_5;
             screen2_FadeOut(0, 15);
@@ -156,6 +158,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Prado Chico[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_5;
         case 3:
@@ -175,6 +178,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Aranjal[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_5;
         case 4:
@@ -194,6 +198,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Lago Recóndito[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_5;
         case 5:
@@ -213,7 +218,38 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Corazón de la Isla Cero[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_5;
     }
+    §gib_check;
+    // TODO: NEW FEATURE
+    if (debug) {
+        switch ( $SUB30_SPOT_LEVEL ) {
+            case 1:
+                message_Mail("However, you did get a check!");
+                ~AssignCheck(60);
+                break;
+            case 2:
+                message_Mail("However, you did get a check!");
+                ~AssignCheck(61);
+                break;
+            case 3:
+                message_Mail("However, you did get a check!");
+                ~AssignCheck(62);
+                break;
+            case 4:
+                message_Mail("However, you did get a check!");
+                ~AssignCheck(63);
+                break;
+            case 5:
+                message_Mail("However, you did get a check!");
+                ~AssignCheck(64);
+                break;
+            default:
+                message_Mail("Huh? Whaaat? No you didn't!\n[CS:B]Tell happylappy if you see this![CR]");
+                break;
+        }
+    }
+    
 }

@@ -10,108 +10,131 @@ def 0 {
             JumpCommon(CORO_END_TALK);
         case 2:
             §label_1;
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                Turn2Direction(4, 10, DIR_RIGHT);
-            }
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetEffect(EFFECT_JOYOUS, 3);
-            }
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
-            }
-            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
-            message_Talk({
-                english=" Added the [s_item:0]...",
-                french=" On ajoute l\'ingrédient\n[s_item:0]...",
-                german=" [s_item:0] in den\nSaft-Shaker getan...",
-                italian=" Aggiunto lo strumento\n[s_item:0]...",
-                spanish=" ¡Se ha añadido [s_item:0]!",
-            });
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            Wait(15);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetEffect(EFFECT_NONE, 3);
-            }
-            message_SetFace(ACTOR_NPC_SOONANSU, FACE_HAPPY, FACE_POS_BOTTOM_R_FACEINW);
-            message_Talk({
-                english=" That\'s right!",
-                french=" Banco!",
-                german=" Ganz genau!",
-                italian=" Giusto!",
-                spanish=" ¡Eso, eso!",
-            });
-            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                Turn2Direction(4, 10, DIR_DOWN);
-            }
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetAnimation(24);
-            }
-            Wait(20);
-            se_Play(11267);
-            message_SetWaitMode(51, 0);
-            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_SIGH, FACE_POS_STANDARD);
-            message_Talk({
-                english=" Shake it this way...",
-                french=" On secoue, on secoue...",
-                german=" In diese Richtung schütteln...",
-                italian=" Scuoti di qua...",
-                spanish=" Se agita por aquí...",
-            });
-            message_KeyWait();
-            message_Talk({
-                english=" Shake it that way...",
-                french=" On agite, on agite...",
-                german=" In jene Richtung schütteln...",
-                italian=" Scuoti di là...",
-                spanish=" Se agita por allá...",
-            });
-            message_KeyWait();
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                WaitAnimation();
-            }
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            se_Play(11023);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetAnimation(25);
-            }
-            message_SetWaitMode(30, 0);
-            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_SIGH, FACE_POS_STANDARD);
-            message_Talk({
-                english=" And stir it all around...",
-                french=" On remue le tout...",
-                german=" Ordentlich verquirlen...",
-                italian=" Una bella mescolata...",
-                spanish=" Se remueve bien...",
-            });
-            message_KeyWait();
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                WaitAnimation();
-            }
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetAnimation(26);
-            }
-            message_SetWaitMode(40, 0);
-            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
-            message_Talk({
-                english=" And it\'s done!",
-                french=" Et c\'est prêt!",
-                german=" Und schon ist der Drink fertig!",
-                italian=" ... ed è pronto!",
-                spanish=" ¡Y ya está!",
-            });
-            message_Close();
-            message_SetWaitMode(32767, 32767);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                WaitAnimation();
-            }
-            WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
-            with (actor ACTOR_NPC_PATCHIIRU) {
-                SetAnimation(2);
+            if (not debug) {
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    Turn2Direction(4, 10, DIR_RIGHT);
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetEffect(EFFECT_JOYOUS, 3);
+                }
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                }
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Added the [s_item:0]...",
+                    french=" On ajoute l\'ingrédient\n[s_item:0]...",
+                    german=" [s_item:0] in den\nSaft-Shaker getan...",
+                    italian=" Aggiunto lo strumento\n[s_item:0]...",
+                    spanish=" ¡Se ha añadido [s_item:0]!",
+                });
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                Wait(15);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetEffect(EFFECT_NONE, 3);
+                }
+                message_SetFace(ACTOR_NPC_SOONANSU, FACE_HAPPY, FACE_POS_BOTTOM_R_FACEINW);
+                message_Talk({
+                    english=" That\'s right!",
+                    french=" Banco!",
+                    german=" Ganz genau!",
+                    italian=" Giusto!",
+                    spanish=" ¡Eso, eso!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    Turn2Direction(4, 10, DIR_DOWN);
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetAnimation(24);
+                }
+                Wait(20);
+                se_Play(11267);
+                message_SetWaitMode(51, 0);
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_SIGH, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Shake it this way...",
+                    french=" On secoue, on secoue...",
+                    german=" In diese Richtung schütteln...",
+                    italian=" Scuoti di qua...",
+                    spanish=" Se agita por aquí...",
+                });
+                message_KeyWait();
+                message_Talk({
+                    english=" Shake it that way...",
+                    french=" On agite, on agite...",
+                    german=" In jene Richtung schütteln...",
+                    italian=" Scuoti di là...",
+                    spanish=" Se agita por allá...",
+                });
+                message_KeyWait();
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    WaitAnimation();
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                se_Play(11023);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetAnimation(25);
+                }
+                message_SetWaitMode(30, 0);
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_SIGH, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" And stir it all around...",
+                    french=" On remue le tout...",
+                    german=" Ordentlich verquirlen...",
+                    italian=" Una bella mescolata...",
+                    spanish=" Se remueve bien...",
+                });
+                message_KeyWait();
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    WaitAnimation();
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetAnimation(26);
+                }
+                message_SetWaitMode(40, 0);
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" And it\'s done!",
+                    french=" Et c\'est prêt!",
+                    german=" Und schon ist der Drink fertig!",
+                    italian=" ... ed è pronto!",
+                    spanish=" ¡Y ya está!",
+                });
+                message_Close();
+                message_SetWaitMode(32767, 32767);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    WaitAnimation();
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetAnimation(2);
+                }
+            } else {
+                // TODO: NEW FEATURE
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+                message_Talk(" Spiiiiiiiiiin!");
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    Turn2DirectionTurn(3, 1, 5); 
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    Turn2DirectionTurn(3, 1, 5); 
+                }
+                WaitExecuteLives(ACTOR_NPC_PATCHIIRU);
+                message_Close();
+                message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+                message_Talk(" Here you go! Enjoy!");
+                message_Close();
+                message_SetWaitMode(-1, -1);
+                with (actor ACTOR_NPC_PATCHIIRU) {
+                    SetAnimation(2);
+                }
+                Wait(10);
             }
             jump @label_35;
         case 5:
@@ -274,6 +297,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Río Sereno[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             §label_36;
             screen2_FadeOut(0, 15);
@@ -317,6 +341,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir a la\n[CN][CS:P]Pradera Exuberante[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_36;
         case 27:
@@ -336,6 +361,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Mirador Alegría[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_36;
         case 28:
@@ -355,6 +381,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Monte Mistral[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_36;
         case 30:
@@ -374,6 +401,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir a la\n[CN][CS:P]Espesura Perdida[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_36;
         case 32:
@@ -393,6 +421,7 @@ def 0 {
                 spanish="[CN]¡Ahora ya puedes ir a la\n[CN][CS:P]Torre Destino[CR]!",
             });
             WaitMe(6);
+            call @gib_check;
             message_Close();
             jump @label_36;
         case 40:
@@ -443,6 +472,11 @@ def 0 {
                 Turn2Direction(4, 10, DIR_UP);
             }
             supervision_RemoveActing(2);
+            // TODO: NEW FEATURE
+            if (debug) {
+                message_Mail(" The Pokémon over there gave you something...");
+                call @gib_check;
+            }
             jump @label_35;
         case 41:
             supervision_Acting(2);
@@ -503,6 +537,11 @@ def 0 {
                 Turn2Direction(4, 10, DIR_UP);
             }
             supervision_RemoveActing(2);
+            // TODO: NEW FEATURE
+            if (debug) {
+                message_Mail(" The Pokémon over there gave you something...");
+                call @gib_check;
+            }
             jump @label_35;
         case 45:
             supervision_Acting(3);
@@ -542,6 +581,11 @@ def 0 {
             WaitExecutePerformer(0);
             WaitExecuteLives(ACTOR_EVENT_NPC02);
             Wait(10);
+            // TODO: NEW FEATURE
+            if (debug) {
+                message_Mail(" The Pokémon over there gave you something...");
+                call @gib_check;
+            }
             jump @label_35;
         case 46:
             supervision_Acting(3);
@@ -588,6 +632,11 @@ def 0 {
             WaitExecutePerformer(0);
             WaitExecuteLives(ACTOR_EVENT_NPC02);
             Wait(10);
+            // TODO: NEW FEATURE
+            if (debug) {
+                message_Mail(" The Pokémon over there gave you something...");
+                call @gib_check;
+            }
             jump @label_35;
         case 50:
             se_Play(531);
@@ -690,4 +739,35 @@ def 0 {
         default:
             jump @label_34;
     }
+    §gib_check; // Gives an incremental Cafe check up to a limit
+    // TODO: NEW FEATURE
+    if (debug) {
+        switch( ProcessSpecial(101,2,0)) {
+            case > 0:
+                ProcessSpecial(101,2,1);
+                message_Mail("You got a check!");
+                $SCENARIO_TALK_BIT_FLAG[247] = 1;
+                break;
+            default:
+                switch(random(100)) {
+                    case < 40:
+                        item_Set(0,169,0);
+                        break;
+                    case < 70:
+                        item_Set(0,170,0);
+                        break;
+                    case < 90:
+                        item_Set(0,171,0);
+                        break;
+                    default:
+                        item_Set(0,172,0);
+                        break;
+                }
+                message_Mail("You got a [s_item:0]!");
+                message_KeyWait();
+                switch(message_Menu(MENU_GIVE_ITEM)) {}
+                break;
+        }
+    }
+    return;
 }

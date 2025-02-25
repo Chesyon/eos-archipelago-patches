@@ -2519,7 +2519,7 @@ coro EVENT_HA_YU_KI {
                 break;
         }
     } else {
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         jump @label_430;
     }
 }
@@ -2658,7 +2658,7 @@ coro EVENT_HA_SAME {
     switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
     CallCommon(CORO_BUBBLE_TEST);
     debug_Print('HANYOU_SAMEHADA');
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    //$PERFORMANCE_PROGRESS_LIST[5] = 1;
     CallCommon(CORO_RESCUE_DEBUG);
     if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
         screen_WhiteIn(29, 6);
@@ -3892,7 +3892,7 @@ coro EVENT_M10_11_12 {
 
 coro EVENT_M11_01 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[5] = 1;
     supervision_ExecuteActingSub(LEVEL_G01P07A, 'M11A0101', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_G01P07A);
@@ -4903,7 +4903,7 @@ coro EVENT_M23_09_10 {
 
 coro EVENT_M24_01_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[5] = 1;
     if ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
         §label_624;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
@@ -5264,7 +5264,7 @@ coro EVENT_S01_09_10 {
         }
         ~AssignCheck(4);
         adventure_log = 4;
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_H02P99A);
         supervision_ExecuteStationCommon(LEVEL_H02P99A, 1);
@@ -5937,7 +5937,7 @@ coro EVENT_S20_07_08 {
         supervision_ExecuteStationCommon(LEVEL_G01P07A, 1);
         end;
     } else {
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         supervision_ExecuteActingSub(LEVEL_D36P41A, 'S20P0701', 0);
         jump @label_632;
     }
@@ -6107,7 +6107,7 @@ coro EVENT_S22_01_04 {
                 supervision_ExecuteActingSub(LEVEL_D39P41A, 'S22P0304', 0);
                 supervision_ExecuteActingSub(LEVEL_T01P01A, 'S22P0305', 0);
                 supervision_ExecuteActingSub(LEVEL_H01P99A, 'S22P0401', 0);
-                $PERFORMANCE_PROGRESS_LIST[5] = 1;
+                // $PERFORMANCE_PROGRESS_LIST[5] = 1;
                 CallCommon(CORO_EVENT_END_MAPIN);
                 main_SetGround(LEVEL_H01P99A);
                 supervision_ExecuteStationCommon(LEVEL_H01P99A, 1);
@@ -9545,7 +9545,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print('LABEL_D064_CLEAR');
                         debug_Print("This used to bump up $SCENARIO_MAIN");
                         main_EnterGround(LEVEL_D39P21A, 30);
-                        break;
+                        hold;
                     case 65:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Jumping to 225 bc of Aegis Cave");
@@ -10279,6 +10279,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         jump @switch2_223;
                     case 121:
                         §label_827;
+                        $DUNGEON_CONQUEST_LIST[121] = 1;
                         JumpCommon(CORO_EVENT_S31_20);
                     case 122:
                     case 124:
