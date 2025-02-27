@@ -1,5 +1,6 @@
 #include <pmdsky.h>
 #include <cot.h>
+#include <ap_utils.h>
 #include "extern.h"
 
 #if CUSTOM_SPECIAL_PROCESSES
@@ -7,11 +8,6 @@
 // Special process 100: Get level scaling status
 static int SpGetLevelScalingStatus() {
   return apSettings.levelScaling;
-}
-
-bool IsDungeonPostDialga(short dunId) { // rn this is the AP logic- making it a function in case the logic changes
-    if (dunId >= 44) return dunId <= 86 || dunId >= 93;
-    else return false;
 }
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
@@ -95,13 +91,6 @@ static int SpRegenerateMissions() {
     return 0;
 }
 
-// Special process 105. Backup BIT_FUWARANTE_LOCAL. Used for precise mission gen. 0 = backup, anything else = restore.
-static int SpFuwaranteBackup(short mode) {
-    if(mode == 0) FUWARANTE_BACKUP = LoadScriptVariableValue(0, VAR_BIT_FUWARANTE_LOCAL); // backup
-    else SaveScriptVariableValue(0, VAR_BIT_FUWARANTE_LOCAL, FUWARANTE_BACKUP); // restore
-    return 0;
-}
-
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -138,9 +127,6 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 104:
         *return_val = SpRegenerateMissions();
-        return true;
-    case 105:
-        *return_val = SpFuwaranteBackup(arg1);
         return true;
     default:
         return false;

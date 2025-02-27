@@ -89,14 +89,12 @@ typedef struct CustomSaveArea {
     uint8_t acquiredInstruments;                 // 0x185: How many instruments the player has collected.
     DeathLinkTracker deathLinkTracker;           // 0x186: Stores information for deathlink.
     bool hintedItems[HINTABLE_ITEM_COUNT];       // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;                   // 0x2A4
+    DungeonTraps dungeonTraps;                   // 0x2A4: wip dungeons traps
     undefined fields[0xE5B];                     // 0x2A5: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
 extern CustomSaveArea CUSTOM_SAVE_AREA;
-
-extern int FUWARANTE_BACKUP;
 
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
