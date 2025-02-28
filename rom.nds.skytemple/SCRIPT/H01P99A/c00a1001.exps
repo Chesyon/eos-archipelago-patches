@@ -339,7 +339,7 @@ def 0 {
                                 switch(ProcessSpecial(103,0,0)) {
                                     case 1:
                                          message_ResetActor();
-                                         message_Talk("Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
+                                         message_Talk(" Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
                                          message_Close();
                                     default:
                                         break;
