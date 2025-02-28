@@ -72,14 +72,14 @@ typedef struct DeathLinkTracker {
 ASSERT_SIZE(DeathLinkTracker, 0x114);
 
 typedef struct DungeonTraps { // size: 1 byte
-    bool maze : 1;       // 0x0
-    bool yawn : 1;       // 0x1
-    bool whiffer : 1;    // 0x2
-    bool dropItems : 1;  // 0x3
-    bool warp : 1;       // 0x4
-    bool weather : 1;    // 0x5
-    bool pitfall : 1;    // 0x6
-    bool embargo : 1;    // 0x7
+    bool maze : 1;      // 0x01
+    bool yawn : 1;      // 0x02
+    bool whiffer : 1;   // 0x04
+    bool dropItems : 1; // 0x08
+    bool warp : 1;      // 0x10
+    bool weather : 1;   // 0x20
+    bool pitfall : 1;   // 0x40
+    bool embargo : 1;   // 0x80
 } DungeonTraps;
 ASSERT_SIZE(DungeonTraps, 0x1);
 
@@ -101,6 +101,8 @@ extern CustomSaveArea CUSTOM_SAVE_AREA;
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
+
+extern uint32_t TAILORED_MISSION_DUNGEON;
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);

@@ -8,11 +8,11 @@
 
 #if CUSTOM_SCRIPT_MENUS
 
-char* noMissionChecksString = "[S:13]"; // Probably redundant, but the base game uses ths.
+char* noMissionChecksString = "[S:13]"; // Probably redundant, but the base game also does this.
 char* halfMissionChecksString = "[M:R1]";
 char* fullMissionChecksString = "[M:S3]";
 
-char* DungeonOpenRequestMenuEntryFn(char* buffer, int option_id) {
+char* TailoredDungeonMissionMenuEntryFn(char* buffer, int option_id) {
     uint8_t *dungeonIdArray = GLOBAL_MENU_INFO.extra_info_ptr;
     uint32_t dungeonId = dungeonIdArray[option_id];
     
@@ -63,7 +63,7 @@ char* DungeonOpenRequestMenuEntryFn(char* buffer, int option_id) {
     return buffer;
 }
 
-void CreateDungeonOpenRequestMenu(void) {
+void CreateTailoredDungeonMissionMenu(void) {
     GLOBAL_MENU_INFO.state = 0;
     struct window_params winParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
     struct window_flags winFlags = {.a_accept = true, .b_cancel = true, .se_on = true, .menu_title = true, .menu_lower_bar = true};
@@ -85,26 +85,41 @@ void CreateDungeonOpenRequestMenu(void) {
         return;
     }
     
-    GLOBAL_MENU_INFO.window_ids[0] = CreateAdvancedMenu(&winParams, winFlags, &winExInfo, DungeonOpenRequestMenuEntryFn, numDungeonsToPick, 8);
+    GLOBAL_MENU_INFO.window_ids[0] = CreateAdvancedMenu(&winParams, winFlags, &winExInfo, TailoredDungeonMissionMenuEntryFn, numDungeonsToPick, 8);
 }
 
-void CloseDungeonOpenRequestMenu(void) {
+void CloseTailoredDungeonMissionMenu(void) {
     if(GLOBAL_MENU_INFO.state == -1) {
+        TAILORED_MISSION_DUNGEON = 0;
         MemFree(GLOBAL_MENU_INFO.extra_info_ptr);
         GLOBAL_MENU_INFO.return_val = 0xFF;
         return; // Failure to find any dungeons in dmode 3.
+    } else if (GLOBAL_MENU_INFO.state == -2) {
+        if (GLOBAL_MENU_INFO.window_ids[0] >= 0) {
+            CloseAdvancedMenu(GLOBAL_MENU_INFO.window_ids[0]);
+            GLOBAL_MENU_INFO.window_ids[0] = -1;
+        }
+        TAILORED_MISSION_DUNGEON = 0;
+        MemFree(GLOBAL_MENU_INFO.extra_info_ptr);
+        GLOBAL_MENU_INFO.return_val = 0xFE;
+        return; // B Button 'failure'.
     }
     
-    GLOBAL_MENU_INFO.return_val = ((uint8_t*)GLOBAL_MENU_INFO.extra_info_ptr)[GLOBAL_MENU_INFO.menu_results[0]];
+    uint8_t selectedDungeon = ((uint8_t*)GLOBAL_MENU_INFO.extra_info_ptr)[GLOBAL_MENU_INFO.menu_results[0]];
+    GLOBAL_MENU_INFO.return_val = selectedDungeon;
+    TAILORED_MISSION_DUNGEON = selectedDungeon;
     MemFree(GLOBAL_MENU_INFO.extra_info_ptr);
     if (GLOBAL_MENU_INFO.window_ids[0] >= 0) {
         CloseAdvancedMenu(GLOBAL_MENU_INFO.window_ids[0]);
+        GLOBAL_MENU_INFO.window_ids[0] = -1;
     }
+    GenerateDailyMissions();
+    TAILORED_MISSION_DUNGEON = 0;
 }
 
 // Normally this has a switch on the state but we only have one state for
 // updating in this menu (waiting for the advanced menu to close).
-bool UpdateDungeonOpenRequestMenu(void) {
+bool UpdateTailoredDungeonMissionMenu(void) {
     if(GLOBAL_MENU_INFO.state == -1) {
         return true; // Failure to find any dungeons in dmode3.
     }
@@ -117,7 +132,6 @@ bool UpdateDungeonOpenRequestMenu(void) {
             GLOBAL_MENU_INFO.state = 2;
         } else {
             GLOBAL_MENU_INFO.state = -2; // Menu was cancelled w/ B button.
-            GLOBAL_MENU_INFO.return_val = 0xFE;
         }
         return true;
     } else {
@@ -152,9 +166,9 @@ struct custom_menu CUSTOM_MENUS[] = {
     // Attempts to open a list of all dungeons that are DMODE_OPEN_AND_REQUEST.
     // If none are found, panic!
     {
-        .create = CreateDungeonOpenRequestMenu,
-        .close = CloseDungeonOpenRequestMenu,
-        .update = UpdateDungeonOpenRequestMenu
+        .create = CreateTailoredDungeonMissionMenu,
+        .close = CloseTailoredDungeonMissionMenu,
+        .update = UpdateTailoredDungeonMissionMenu
     }
 };
 
