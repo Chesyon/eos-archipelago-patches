@@ -91,6 +91,19 @@ static int SpRegenerateMissions() {
     return 0;
 }
 
+// Special process 105: Read/write Cafe check count. 1 = write, anything else = 0.
+// This is a really lazy implementation based on SP 102. Could be merged into SP 102 if I actually bothered to reorganize the structs, which... I don't feel like doing right now. This is future Chesyon's problem.
+static int SpAccessCafeStatus(short mode) {
+    if (mode == 1) { // Write mode
+        if (CUSTOM_SAVE_AREA.acquiredCafeChecks < cafeMax) {
+            CUSTOM_SAVE_AREA.acquiredCafeChecks++; // increment by one
+            return 1;
+        }
+        else return 0;
+    }
+    else return cafeMax - CUSTOM_SAVE_AREA.acquiredCafeChecks; // Read mode
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -128,6 +141,8 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 104:
         *return_val = SpRegenerateMissions();
         return true;
+    case 105:
+        *return_val = SpAccessCafeStatus(arg1);
     default:
         return false;
   }
