@@ -1,6 +1,6 @@
 
 def 0 {
-    if ( $SCENARIO_MAIN_BIT_FLAG[62] || $SCENARIO_MAIN_BIT_FLAG[63] || $SCENARIO_MAIN_BIT_FLAG[64] || $SCENARIO_MAIN_BIT_FLAG[65] || $SCENARIO_MAIN_BIT_FLAG[66] || $SCENARIO_MAIN_BIT_FLAG[67] || $SCENARIO_MAIN_BIT_FLAG[68] || $SCENARIO_MAIN_BIT_FLAG[69] || $SCENARIO_MAIN_BIT_FLAG[70] || $SCENARIO_MAIN_BIT_FLAG[71] || $SCENARIO_MAIN_BIT_FLAG[72] || $SCENARIO_MAIN_BIT_FLAG[73] ) {
+    if ( $SCENARIO_MAIN_BIT_FLAG[62] || $SCENARIO_MAIN_BIT_FLAG[63] || $SCENARIO_MAIN_BIT_FLAG[64] || $SCENARIO_MAIN_BIT_FLAG[65] || $SCENARIO_MAIN_BIT_FLAG[66] || $SCENARIO_MAIN_BIT_FLAG[67] || $SCENARIO_MAIN_BIT_FLAG[68] || $SCENARIO_MAIN_BIT_FLAG[69] || $SCENARIO_MAIN_BIT_FLAG[70] || $SCENARIO_MAIN_BIT_FLAG[71] || $SCENARIO_MAIN_BIT_FLAG[72] || $SCENARIO_MAIN_BIT_FLAG[73] || $SCENARIO_TALK_BIT_FLAG[228] ) {
         §label_0;
         with (actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -126,7 +126,7 @@ def 0 {
                     });
                     message_Close();
                     §label_18;
-                    if ( $SCENARIO_MAIN_BIT_FLAG[62] || $SCENARIO_MAIN_BIT_FLAG[63] || $SCENARIO_MAIN_BIT_FLAG[64] || $SCENARIO_MAIN_BIT_FLAG[65] || $SCENARIO_MAIN_BIT_FLAG[66] || $SCENARIO_MAIN_BIT_FLAG[67] || $SCENARIO_MAIN_BIT_FLAG[68] || $SCENARIO_MAIN_BIT_FLAG[69] || $SCENARIO_MAIN_BIT_FLAG[70] || $SCENARIO_MAIN_BIT_FLAG[71] || $SCENARIO_MAIN_BIT_FLAG[72] || $SCENARIO_MAIN_BIT_FLAG[73] ) {
+                    if ( $SCENARIO_MAIN_BIT_FLAG[62] || $SCENARIO_MAIN_BIT_FLAG[63] || $SCENARIO_MAIN_BIT_FLAG[64] || $SCENARIO_MAIN_BIT_FLAG[65] || $SCENARIO_MAIN_BIT_FLAG[66] || $SCENARIO_MAIN_BIT_FLAG[67] || $SCENARIO_MAIN_BIT_FLAG[68] || $SCENARIO_MAIN_BIT_FLAG[69] || $SCENARIO_MAIN_BIT_FLAG[70] || $SCENARIO_MAIN_BIT_FLAG[71] || $SCENARIO_MAIN_BIT_FLAG[72] || $SCENARIO_MAIN_BIT_FLAG[73] || $SCENARIO_TALK_BIT_FLAG[228] ) {
                         message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_NORMAL, FACE_POS_STANDARD);
                         message_Talk({
                             english=" You got more.",
@@ -879,6 +879,63 @@ def 0 {
                         italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
                         spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
                     });
+                    message_Mail({
+                        english="[CN]A warm and fuzzy feeling falls over you...",
+                        french="[CN]Que c\'est agréable de recevoir un cadeau...",
+                        german="[CN]Ein warmes, angenehmes Kribbeln\n[CN]überkommt dich...",
+                        italian="[CN]Una dolce sensazione di calore ti investe...",
+                        spanish="[CN]Te invade una sensación de calidez...",
+                    });
+                    message_Close();
+                    jump @label_18;
+                } elseif ($SCENARIO_TALK_BIT_FLAG[228] ) {
+                    $SCENARIO_MAIN_BIT_FLAG[73] = 0;
+                    $SCENARIO_MAIN_BIT_FLAG[61] = 0;
+                    message_Mail("[CN]It\'s a gift from\n[CN][CS:N]Ampheros[CR]!");
+                    message_Mail({
+                        english="[CN]There\'s a message too.",
+                        french="[CN]Un message l\'accompagne.",
+                        german="[CN]Zusammen mit einer Nachricht:",
+                        italian="[CN]C\'è anche un messaggio.",
+                        spanish="[CN]También hay un mensaje.",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_Mail("[CN]I wanted to apologize for my\n[CN]behavior the other day.");
+                    message_Mail({
+                        english="[CN]If I didn\'t get that item,\n[CN]I could have ended up being lost.",
+                        french="[CN]Si vous ne m\'aviez pas donné cet objet\n[CN]j\'aurais pu me perdre.",
+                        german="[CN]Ohne dieses Item hätte ich\n[CN]leicht verlorengehen können.",
+                        italian="[CN]Se non l\'avessi ricevuto,\n[CN]avrei rischiato di perdermi.",
+                        spanish="[CN]Si no lo hubiera tenido, puede que\n[CN]me hubiera perdido.",
+                    });
+                    message_Mail("[CN]It\'s not much, but please accept this\n[CN]token of my appreciation.\n--[CS:N]Ampheros[CR]");
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    message_Mail({
+                        english="[CN][hero]\n[CN]gently opens the lid...",
+                        french="[CN][hero] ouvre\n[CN]délicatement le couvercle...",
+                        german="[CN][hero] öffnet\n[CN]behutsam den Deckel...",
+                        italian="[CN][hero] apre\n[CN]lentamente il pacchetto...",
+                        spanish="[CN][hero] abre la tapa\n[CN]con cuidado...",
+                    });
+                    message_Close();
+                    se_Play(11021);
+                    WaitSe(11021);
+                    message_Mail({
+                        english="[CN]Inside was the\n[CN][s_item:0]!\n[CN]...as well as a [CS:I]Heal Seed[CR]!",
+                        french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
+                        german="[CN]Im Paket liegt das Item\n[CN][s_item:0]!",
+                        italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
+                        spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
+                    });
+                    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL, 0, 0)) {
+                        case 0:
+                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 69, 0);
+                            break;
+                        default:
+                            item_Set(0,69,0);
+                            message_Menu(MENU_GIVE_ITEM2);
+                            break;
+                    }
                     message_Mail({
                         english="[CN]A warm and fuzzy feeling falls over you...",
                         french="[CN]Que c\'est agréable de recevoir un cadeau...",

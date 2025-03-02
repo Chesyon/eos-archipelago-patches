@@ -1,6 +1,18 @@
 
 def 0 {
-    $BIT_FUWARANTE_LOCAL[0] = 1;
+    if ($DUNGEON_CONQUEST_LIST[112]) {
+        $BIT_FUWARANTE_LOCAL[1] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[114]) {
+        $BIT_FUWARANTE_LOCAL[2] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[116]) {
+        $BIT_FUWARANTE_LOCAL[3] = 1;
+    }
+    
+    if ($DUNGEON_OPEN_LIST[175]) {
+       $BIT_FUWARANTE_LOCAL[0] = 0;
+    }
     $BIT_FUWARANTE_LOCAL[4] = 1;
     switch ( $GROUND_ENTER ) {
         case 156:

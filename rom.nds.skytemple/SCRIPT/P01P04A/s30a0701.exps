@@ -742,9 +742,9 @@ def 0 {
     §gib_check; // Gives an incremental Cafe check up to a limit
     // TODO: NEW FEATURE
     if (debug) {
-        switch( ProcessSpecial(101,2,0)) {
+        switch( ProcessSpecial(105,0,0)) {
             case > 0:
-                ProcessSpecial(101,2,1);
+                ProcessSpecial(105,1,0);
                 message_Mail("You got a check!");
                 $SCENARIO_TALK_BIT_FLAG[247] = 1;
                 break;

@@ -2664,6 +2664,7 @@ coro EVENT_HA_SAME {
         screen_WhiteIn(29, 6);
         $REQUEST_CLEAR_COUNT = 0;
         §label_484;
+        // Sky Gift 1
         if ( $SCENARIO_MAIN_BIT_FLAG[50] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2673,6 +2674,7 @@ coro EVENT_HA_SAME {
             }
         }
         §label_486;
+        // Sky Gift 2
         if ( $SCENARIO_MAIN_BIT_FLAG[51] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2682,6 +2684,7 @@ coro EVENT_HA_SAME {
             }
         }
         §label_490;
+        // Sky Gift 3
         if ( $SCENARIO_MAIN_BIT_FLAG[52] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2771,6 +2774,16 @@ coro EVENT_HA_SAME {
                         break;
                 }
         }
+        // Ampheros Gift
+        if ( $SCENARIO_TALK_BIT_FLAG[227] ) {
+            switch ( random(100) ) {
+                case < 70:
+                    $SCENARIO_TALK_BIT_FLAG[228] = 1;
+                    default:
+                        break;
+                }
+        }
+        
         §label_530;
         // Manaphy Stuff
         switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 16, 0) ) {
@@ -4682,7 +4695,7 @@ coro EVENT_M20_07_09 {
     supervision_ExecuteActingSub(LEVEL_V03P06A, 'M20A0707', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'M20A0801', 0);
     supervision_ExecuteActingSub(LEVEL_D01P11A, 'M20A0901', 0);
-    JumpCommon(CORO_EVENT_DIVIDE);
+    JumpCommon(CORO_EVENT_HA_SAME);
 }
 
 coro EVENT_M21_01_03 {
@@ -9731,114 +9744,123 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 111:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to this station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[227]) {
-                            main_EnterGround(LEVEL_D73P21A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[227] = 1;
-                            JumpCommon(CORO_EVENT_S31_06);
+                        switch(dungeon_mode(112)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_06);
                         break;
                     case 112:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[1] = 1; // 2F Gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[228]) {
-                            main_EnterGround(LEVEL_D73P22A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[228] = 1;
-                            JumpCommon(CORO_EVENT_S31_09);
+                        switch(dungeon_mode(113)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_09);
                         break;
                     case 113:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[229]) {
-                            main_EnterGround(LEVEL_D73P23A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[229] = 1;
-                            JumpCommon(CORO_EVENT_S31_12);
+                        switch(dungeon_mode(114)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_12);
                         break;
                     case 114:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[2] = 1; // 4F gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[230]) {
-                            main_EnterGround(LEVEL_D73P24A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[230] = 1;
-                            JumpCommon(CORO_EVENT_S31_15);
+                        switch(dungeon_mode(115)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_15);
                         break;
                     case 115:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[231]) {
+                        switch(dungeon_mode(116)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
+                        }
+                        dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
+                        if ($DUNGEON_CONQUEST_LIST[121]) {
                             main_EnterGround(LEVEL_D73P25A, 30);
-                            hold;
+                            hold;                         
                         } else {
-                            $SCENARIO_TALK_BIT_FLAG[231] = 1;
                             JumpCommon(CORO_EVENT_S31_19);
                         }
                         break;
                     case 116:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[3] = 1; // 6F gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[232]) {
-                            main_EnterGround(LEVEL_D73P26A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[232] = 1;
-                            JumpCommon(CORO_EVENT_S31_21);
+                        switch(dungeon_mode(117)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_21);
                         break;
                     case 117:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[233]) {
-                            main_EnterGround(LEVEL_D73P27A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[233] = 1;
-                            JumpCommon(CORO_EVENT_S31_24);
+                        switch(dungeon_mode(118)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_24);
                         break;
                     case 118:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[234]) {
-                            main_EnterGround(LEVEL_D73P28A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[234] = 1;
-                            JumpCommon(CORO_EVENT_S31_28);
+                        switch(dungeon_mode(119)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_24);
                         break;
                     case 119:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[235]) {
-                            main_EnterGround(LEVEL_D73P29A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[235] = 1;
-                            JumpCommon(CORO_EVENT_S31_31);
+                        switch(dungeon_mode(120)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_EVENT_S31_31);
                         break;
                     case 120:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[236]) {
+                        if ($DUNGEON_CONQUEST_LIST[122]) {
                             JumpCommon(CORO_EVENT_S31_36);
-                            hold;
                         } else {
-                            $SCENARIO_TALK_BIT_FLAG[236] = 1;
                             JumpCommon(CORO_EVENT_S31_34);
                         }
                         break;
@@ -9847,16 +9869,6 @@ coro GETOUT_SCENARIO_DUNGEON {
                         jump @label_827;
                     case 122:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("Missions Sky Peak... How though? Idk we try this!");
-                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(120) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S31_37);
                     case 123:
@@ -11646,36 +11658,104 @@ coro GETOUT_REQUEST_CONQUEST {
             debug_Print('LABEL_D110_CLEAR');
             jump @label_1167;
         case 111:
+            switch(dungeon_mode(112)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P21A, 30);
             hold;
         case 112:
+            switch(dungeon_mode(113)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P22A, 30);
             hold;
         case 113:
+            switch(dungeon_mode(114)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P23A, 30);
             hold;
         case 114:
+            switch(dungeon_mode(115)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P24A, 30);
             hold;
         case 115:
+            switch(dungeon_mode(116)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P25A, 30);
             hold;
         case 116:
+            switch(dungeon_mode(117)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P26A, 30);
             hold;
         case 117:
+            switch(dungeon_mode(118)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P27A, 30);
             hold;
         case 118:
-            if ( $SCENARIO_MAIN_BIT_FLAG[47] ) {
+            switch(dungeon_mode(119)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($DUNGEON_CONQUEST_LIST[122]) {
+                if ( $SCENARIO_MAIN_BIT_FLAG[47] ) {
+                    main_EnterGround(LEVEL_D73P28A, 30);
+                } else {
+                    $SCENARIO_MAIN_BIT_FLAG[47] = 1;
+                    JumpCommon(CORO_EVENT_S32_01);
+                }
+            } else {
+                message_Mail(" You must reach the summit to\nreceive [CS:G]Sneasel[CR]\'s gratitude!");
                 main_EnterGround(LEVEL_D73P28A, 30);
                 hold;
-            } else {
-                $SCENARIO_MAIN_BIT_FLAG[47] = 1;
-                JumpCommon(CORO_EVENT_S32_01);
             }
             break;
         case 119:
+            switch(dungeon_mode(120)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P29A, 30);
             hold;
         case 120:
@@ -12734,7 +12814,265 @@ coro BUBBLE_TEST {
     }
     return;
     
-    
+    // Sky Peak Station stuff
+    §sky_peak_closed;
+    // TODO: NEW FEATURE
+    if (not debug) {
+        return; // Do nothing, because not 0.3.0
+    }
+    switch($DUNGEON_ENTER_INDEX) {
+        case 111: // 1st Station Clearing, 2nd Station Pass not unlocked!    
+            message_SetFace(ACTOR_ATTENDANT1, FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk(" Ugh, what IS that smell?\n[K]Ugh, it\'s almost as bad as when [CS:X]Team Skull[CR]\nblasted us with their noxious gas combo...");
+            message_Close();
+            Wait(30);
+            message_SetFace(ACTOR_NPC_SHEIMI, FACE_ANGRY, FACE_POS_STANDARD);
+            message_Talk(" Ugh, again?[K] The [CS:K]Skuntank[CR] are holding\nanother \"stink-off\". If we keep going, we\'ll\nsmell like that for weeks! Let\'s turn back!");
+            message_Close();
+            Wait(30);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk(" That explains a lot...\nWe can just come back later then.\nLet\'s head home for the day, [hero]...");
+            message_Close();
+            Wait(30);
+            break;
+        case 112: // 1st Station Clearing, 2nd Station Pass not unlocked! 
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]2nd Station Clearing[CR] is\nclosed for now.[K] We\'re currently clearing the\nfallen trees from the last thunderstorm.");
+            §station_2_reward;
+            switch(random(100)) {
+                case < 50: // Sticks x 50
+                    item_Set(0, 1, 50);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nIt would save me a trip down the mountain...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 70: // Silver Spike x 20
+                    item_Set(0, 3, 20);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you? The\ngondola was hit, sending shrapnel all over...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 80: // Big Apple x 3
+                    item_Set(0, 110, 0);
+                    message_Talk(" Say, could you do me a favor and\ntake these [s_item:0] home with you? I\'ve had\nseveral already, and I can\'t stomach more...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 90: // Nectar x 3
+                    item_Set(0, 103, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0][CS:G](3)[CR] as a souvenir.[K] Please take it, I\nhave really bad allergies, so I can\'t use it...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 98: // Golden Apple x 1
+                    item_Set(0, 115, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I\ncouldn\'t bear to eat such a beautiful [CS:I]Apple[CR]...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                default:   // Thunder Stone x 1
+                    item_Set(0, 186, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
+            break;
+
+        case 113:
+            §station_3_reward;
+            break;
+        case 114:
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]4th Station Clearing[CR] is\nclosed for now.[K] We\'re currently clearing the\nrubble and debris from the last rockslide.");
+            §station_4_reward;
+            switch(random(100)) {
+                case < 40: // Geo Pebble x 50
+                    item_Set(0, 8, 50);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nThey\'re too heavy for me to lift back down...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 60: // Gravelerock x 30
+                    item_Set(0, 7, 30);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nThey\'re too heavy for me to lift back down...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 75: // Gone Pebble x 3
+                    item_Set(0, 167, 0);
+                    message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nWe can\'t seem to focus with them around...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 90: // Gravelyrock x 3
+                    item_Set(0, 137, 0);
+                    message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nI hear a certain kind of Pokémon like them...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 98: // Key x 1
+                    item_Set(0, 182, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take these\n[s_item:0] as a souvenir.[K] Please take it, I\ndoubt it actually unlocks anything up here...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                default:   // Moon Stone x 1
+                    item_Set(0, 163, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
+            break;
+        case 115:
+            §station_5_reward;
+            break;
+        case 116:
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]6th Station Clearing[CR] is\nclosed for now.[K] We\'re currently clearing the\nice, snow, and debris from the last avalanche.");
+            §station_6_reward;
+            switch(random(100)) {
+                case < 40: // Iron Thorn x 50
+                    item_Set(0, 2, 50);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nWe found them in the snow, and they\'re heavy!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 60: // Gold Thorn x 30
+                    item_Set(0, 9, 30);
+                    message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nSome kind of mineral deposit, but very sharp!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 75: // Gone Pebble x 3
+                    item_Set(0, 167, 0);
+                    message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nWe can\'t seem to focus with them around...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 90: // Gravelyrock x 3
+                    item_Set(0, 137, 0);
+                    message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nI hear a certain kind of Pokémon like them...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 98: // Rare Fossil x 5
+                    item_Set(0, 10, 5);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I\nimagine these are pretty valuable...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                default:   // Frozen Rock x 1
+                    item_Set(0, 165, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
+            break;
+        case 117:
+            §station_7_reward;
+            break;
+        case 118:
+            §station_8_reward;
+            
+            switch(random(100)) {
+                case < 50: // Mix Elixir
+                    item_Set(0, 111, 0);
+                    message_Talk(" ingredients went sour");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 80: // Grimy Food
+                    item_Set(0, 2, 50);
+                    message_Talk(" bad batch");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 60: // Max Elixir
+                    item_Set(0, 9, 30);
+                    message_Talk(" passable");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 65: // Protein
+                    item_Set(0, 167, 0);
+                    message_Talk(" Rampardos Punch");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 70: // Iron
+                    item_Set(0, 167, 0);
+                    message_Talk(" Bastiodon Brew");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 75: // Calcium
+                    item_Set(0, 167, 0);
+                    message_Talk(" Alakazam Antidote");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 80: // Zinc
+                    item_Set(0, 167, 0);
+                    message_Talk(" Tentacruel Tonic");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                
+                default:   // Frozen Rock x 1
+                    item_Set(0, 165, 0);
+                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
+            break;
+            break;
+        case 119:
+            §station_9_reward;
+            break;
+        default:
+            break;
+    }
+    message_Close();
+    JumpCommon(CORO_EVENT_HA_SAME);
+    §sky_peak_closed_request;
+    // TODO: NEW FEATURE
+    if (not debug) {
+        return;
+    }
+    switch($DUNGEON_ENTER_INDEX) {
+        case 111:
+            message_SetFace(ACTOR_NPC_SHEIMI, FACE_ANGRY, FACE_POS_STANDARD);
+            message_Talk(" still? time to die, Skuntank!");
+            message_Close();
+            break;
+        case 112:
+            break;
+        // Add more cases here!
+        default:
+            break;
+    }
+    JumpCommon(CORO_EVENT_HA_SAME);
+    return;
     
 }
 
