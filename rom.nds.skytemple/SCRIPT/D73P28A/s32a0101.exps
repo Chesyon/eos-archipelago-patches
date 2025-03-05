@@ -303,7 +303,7 @@ def 0 {
             }
             Wait(20);
             message_Talk({
-                english=" All right, I\'ll hold on to this\nfor you, then.",
+                english=" All right, I\'ll hold on to this\nfor you, then.\nWhy don\'t you go put something in storage first.",
                 french=" Très bien, je vous le garde\nau chaud, en attendant.",
                 german=" Na gut, ich werde es solange\nfür euch aufbewahren.",
                 italian=" Va bene, allora lo conserverò io\nper voi.",

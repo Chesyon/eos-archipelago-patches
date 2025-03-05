@@ -2774,7 +2774,7 @@ coro EVENT_HA_SAME {
                         break;
                 }
         }
-        // Ampheros Gift
+        // Ampharos Gift
         if ( $SCENARIO_TALK_BIT_FLAG[227] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -6462,6 +6462,14 @@ coro EVENT_S31_19 {
 coro EVENT_S31_20 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D73P25A, 'S31A2001', 0);
+    dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
+    switch(dungeon_mode(116)) {
+        case DMODE_CLOSED:
+        case DMODE_REQUEST:
+            call @sky_peak_closed;
+        default:
+            break;
+    }
     CallCommon(CORO_EVENT_END_MAPIN_AE);
     main_SetGround(LEVEL_D73P25A);
     supervision_ExecuteStationCommon(LEVEL_D73P25A, 1);
@@ -6587,6 +6595,7 @@ coro EVENT_S31_34 {
 
 coro EVENT_S31_35 {
     CallCommon(CORO_SUBSCREEN_INIT);
+    dungeon_mode(122) = DMODE_REQUEST;
     supervision_ExecuteActingSub(LEVEL_D73P29A, 'S31A3501', 0);
     CallCommon(CORO_EVENT_END_MAPIN_AE);
     main_SetGround(LEVEL_D73P29A);
@@ -9744,6 +9753,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 111:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(112)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9751,11 +9761,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
-                        JumpCommon(CORO_EVENT_S31_06);
+                        if ($CRYSTAL_COLOR_01 &<< 0) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 1;
+                        }                          
+                        JumpCommon(CORO_EVENT_S31_06);               
                         break;
                     case 112:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(113)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9763,11 +9778,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 1) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 2;
+                        }
                         JumpCommon(CORO_EVENT_S31_09);
                         break;
                     case 113:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(114)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9775,11 +9795,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 2) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 4;
+                        }
                         JumpCommon(CORO_EVENT_S31_12);
                         break;
                     case 114:
-                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {}
+                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(115)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9787,19 +9812,15 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 3) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 8;
+                        }
                         JumpCommon(CORO_EVENT_S31_15);
                         break;
                     case 115:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        switch(dungeon_mode(116)) {
-                            case DMODE_CLOSED:
-                            case DMODE_REQUEST:
-                                call @sky_peak_closed;
-                            default:
-                                break;
-                        }
-                        dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
                         if ($DUNGEON_CONQUEST_LIST[121]) {
                             main_EnterGround(LEVEL_D73P25A, 30);
                             hold;                         
@@ -9809,6 +9830,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 116:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(117)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9816,11 +9838,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 4) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 16;
+                        }
                         JumpCommon(CORO_EVENT_S31_21);
                         break;
                     case 117:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(118)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9828,11 +9855,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 5) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 32;
+                        }
                         JumpCommon(CORO_EVENT_S31_24);
                         break;
                     case 118:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(119)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9840,11 +9872,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
-                        JumpCommon(CORO_EVENT_S31_24);
+                        if ($CRYSTAL_COLOR_01 &<< 6) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 64;
+                        }
+                        JumpCommon(CORO_EVENT_S31_28);
                         break;
                     case 119:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
                         switch(dungeon_mode(120)) {
                             case DMODE_CLOSED:
                             case DMODE_REQUEST:
@@ -9852,13 +9889,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                             default:
                                 break;
                         }
-                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
+                        if ($CRYSTAL_COLOR_01 &<< 7) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 128;
+                        }
                         JumpCommon(CORO_EVENT_S31_31);
                         break;
                     case 120:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
-                        if ($DUNGEON_CONQUEST_LIST[122]) {
+                        if ($DUNGEON_REQUEST_LIST[122]) {
+                            dungeon_mode(122) = DMODE_CLOSED;
                             JumpCommon(CORO_EVENT_S31_36);
                         } else {
                             JumpCommon(CORO_EVENT_S31_34);
@@ -10290,8 +10332,10 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 120:
                         jump @switch2_223;
                     case 121:
+                        message_Mail("You just gave up, didn't you?[K] For shame!");
+                        message_Close();
                         §label_827;
-                        $DUNGEON_CONQUEST_LIST[121] = 1;
+                        $DUNGEON_CONQUEST_LIST[121] = 1;                                                                                                                                                                                                                                                                                                             
                         JumpCommon(CORO_EVENT_S31_20);
                     case 122:
                     case 124:
@@ -11665,7 +11709,12 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
-            main_EnterGround(LEVEL_D73P21A, 30);
+            if ($CRYSTAL_COLOR_01 &<< 0) {
+                main_EnterGround(LEVEL_D73P21A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 1;
+                JumpCommon(CORO_EVENT_S31_06);
+            }
             hold;
         case 112:
             switch(dungeon_mode(113)) {
@@ -11675,7 +11724,12 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
-            main_EnterGround(LEVEL_D73P22A, 30);
+            if ($CRYSTAL_COLOR_01 &<< 1) {
+                main_EnterGround(LEVEL_D73P22A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 2;
+                JumpCommon(CORO_EVENT_S31_09);
+            }
             hold;
         case 113:
             switch(dungeon_mode(114)) {
@@ -11685,7 +11739,12 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
-            main_EnterGround(LEVEL_D73P23A, 30);
+            if ($CRYSTAL_COLOR_01 &<< 2) {
+                main_EnterGround(LEVEL_D73P23A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 4;
+                JumpCommon(CORO_EVENT_S31_12);
+            }
             hold;
         case 114:
             switch(dungeon_mode(115)) {
@@ -11695,7 +11754,12 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
-            main_EnterGround(LEVEL_D73P24A, 30);
+            if ($CRYSTAL_COLOR_01 &<< 3) {
+                main_EnterGround(LEVEL_D73P24A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 8;
+                JumpCommon(CORO_EVENT_S31_15);
+            }
             hold;
         case 115:
             switch(dungeon_mode(116)) {
@@ -11705,6 +11769,7 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
+            // Always do this!
             main_EnterGround(LEVEL_D73P25A, 30);
             hold;
         case 116:
@@ -11715,7 +11780,12 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
-            main_EnterGround(LEVEL_D73P26A, 30);
+            if ($CRYSTAL_COLOR_01 &<< 4) {
+                main_EnterGround(LEVEL_D73P26A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 16;
+                JumpCommon(CORO_EVENT_S31_21);
+            }
             hold;
         case 117:
             switch(dungeon_mode(118)) {
@@ -11727,6 +11797,11 @@ coro GETOUT_REQUEST_CONQUEST {
             }
             main_EnterGround(LEVEL_D73P27A, 30);
             hold;
+            if ($CRYSTAL_COLOR_01 &<< 5) {
+            } else {
+                $CRYSTAL_COLOR_01 += 32;
+                JumpCommon(CORO_EVENT_S31_24);
+            }
         case 118:
             switch(dungeon_mode(119)) {
                 case DMODE_CLOSED:
@@ -11735,7 +11810,14 @@ coro GETOUT_REQUEST_CONQUEST {
                 default:
                     break;
             }
+            if ($CRYSTAL_COLOR_01 &<< 6) {
+            } else {
+                $CRYSTAL_COLOR_01 += 64;
+                JumpCommon(CORO_EVENT_S31_28);
+            }
             if ($DUNGEON_CONQUEST_LIST[122]) {
+                if ( $SCENARIO_MAIN_BIT_FLAG[49]) { } // Gift Claimed and player ascended!
+                if ( $SCENARIO_MAIN_BIT_FLAG[48]) { } // Gift Claimed and player still in room!
                 if ( $SCENARIO_MAIN_BIT_FLAG[47] ) {
                     main_EnterGround(LEVEL_D73P28A, 30);
                 } else {
@@ -11755,6 +11837,11 @@ coro GETOUT_REQUEST_CONQUEST {
                     call @sky_peak_closed_request;
                 default:
                     break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 7) {
+            } else {
+                $CRYSTAL_COLOR_01 += 128;
+                JumpCommon(CORO_EVENT_S31_28);
             }
             main_EnterGround(LEVEL_D73P29A, 30);
             hold;
@@ -12556,41 +12643,6 @@ coro BUBBLE_TEST {
         message_Close();
         return;
     }
-    if ($PERFORMANCE_PROGRESS_LIST[33]) {
-        $PERFORMANCE_PROGRESS_LIST[33] = 0;
-        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
-        message_Mail("[FT:1]OOPS! ALL UNOWN!");
-        message_Close();
-    }
-    if ($PERFORMANCE_PROGRESS_LIST[34]) {
-            bgm_FadeOut(90);
-            Wait(90);
-            message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_BOTTOM_R_FACEINW);
-            message_Talk(" Wah![K] [CS:G]Diglett[CR]?[K]\nWhere did you come from?");
-        if ($SCENARIO_TALK_BIT_FLAG[254]) {
-            $SCENARIO_TALK_BIT_FLAG[254] = 0;
-            $PERFORMANCE_PROGRESS_LIST[34] = 0;
-            message_SetFace(ACTOR_NPC_DIGUDA,FACE_PAIN, FACE_POS_STANDARD);
-            message_Talk(" Not important! Listen:[K] [CS:G]Chatot[CR] was so\nmad about yesterday, that he\'s making you do\nSentry Duty again![K] He wanted me to tell you...");
-            message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_BOTTOM_R_FACEINW);
-            message_Talk(" But..[W:60] We have stuff we\nneed to get done today! Can\'t someone\nelse cover for you instead?");
-            message_SetFace(ACTOR_NPC_DIGUDA,FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk(' Sorry, but [CS:G]Chatot[CR] specifically wanted\nyou to do it today, said he would make you do\nsentry duty until you\"get it right\" apparently.');
-            message_Talk(" Anyway, you better hurry over\nthere, [CS:G]Chatot[CR] is going to give you an earful\nif you\'re any later than you are now...[W:90] Bye!");
-            message_Close();            
-        } else {
-            $PERFORMANCE_PROGRESS_LIST[34] = 0;
-            message_SetFace(ACTOR_NPC_DIGUDA,FACE_PAIN, FACE_POS_STANDARD);
-            message_Talk(" Not important right now. Listen:[K] my\npapa tried to go ~22swimming~22 again today.\nI need you two to cover me for [CS:C]Sentry Duty[CR]!");
-            message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_BOTTOM_R_FACEINW);
-            message_Talk(" But..[W:60] We have stuff we\nneed to get done today! Can\'t someone\nelse cover for you instead?");
-            message_SetFace(ACTOR_NPC_DIGUDA,FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk(" Sorry, but [CS:G]Chatot[CR] specifically wanted\nyou to fill in, since you\'re almost as good at it\nas I am.[K] Just...[W:60] think of it like [CS:C]Jury Duty[CR]?");
-            message_Talk(" Anyway, you better hurry over there\nfast![K] [CS:G]Chatot[CR] [CS:C]has been taking guild security\nway more seriously[CR] then usual lately.[W:90] Bye!");
-            message_Close();
-        }
-        JumpCommon(CORO_HA_MIHARIBAN);
-    }
     if ($PERFORMANCE_PROGRESS_LIST[35]) { // If true, run ITEM LOOP
         message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk("[STS] I\'ve got a special delivery for team\n[team]![STE]");
@@ -12620,7 +12672,7 @@ coro BUBBLE_TEST {
                 message_Close();
             } else {
                 message_Talk("[STS] One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]![STE]");
-                message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");        
+                message_Mail("[STS]\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...[STE]");        
                 §box_halt;
                 if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
                     if ($LOTTERY_RESULT < 65535) {
@@ -12629,6 +12681,7 @@ coro BUBBLE_TEST {
                         se_Play(7443);
                         WaitSe(7443);
                         $LOTTERY_RESULT += 1;
+                        Wait(3);
                         jump @box_halt;
                     } else {
                         message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you may lose\n[CN]any unreceived boxes!");
@@ -12665,6 +12718,41 @@ coro BUBBLE_TEST {
         }
         debug_Print("Transaction Complete!");
         $PERFORMANCE_PROGRESS_LIST[35] = 0;
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[33]) {
+        $PERFORMANCE_PROGRESS_LIST[33] = 0;
+        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+        message_Mail("[FT:1]OOPS! ALL UNOWN!");
+        message_Close();
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[34]) {
+            bgm_FadeOut(90);
+            Wait(90);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Wah![K] [CS:G]Diglett[CR]?[K]\nWhere did you come from?");
+        if ($SCENARIO_TALK_BIT_FLAG[254]) {
+            $SCENARIO_TALK_BIT_FLAG[254] = 0;
+            $PERFORMANCE_PROGRESS_LIST[34] = 0;
+            message_SetFace(ACTOR_NPC_DIGUDA,FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk(" Not important! Listen:[K] [CS:G]Chatot[CR] was so\nmad about yesterday, that he\'s making you do\nSentry Duty again![K] He wanted me to tell you...");
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" But..[W:60] We have stuff we\nneed to get done today! Can\'t someone\nelse cover for you instead?");
+            message_SetFace(ACTOR_NPC_DIGUDA,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(' Sorry, but [CS:G]Chatot[CR] specifically wanted\nyou to do it today, said he would make you do\nsentry duty until you\"get it right\" apparently.');
+            message_Talk(" Anyway, you better hurry over\nthere, [CS:G]Chatot[CR] is going to give you an earful\nif you\'re any later than you are now...[W:90] Bye!");
+            message_Close();            
+        } else {
+            $PERFORMANCE_PROGRESS_LIST[34] = 0;
+            message_SetFace(ACTOR_NPC_DIGUDA,FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk(" Not important right now. Listen:[K] my\npapa tried to go ~22swimming~22 again today.\nI need you two to cover me for [CS:C]Sentry Duty[CR]!");
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" But..[W:60] We have stuff we\nneed to get done today! Can\'t someone\nelse cover for you instead?");
+            message_SetFace(ACTOR_NPC_DIGUDA,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Sorry, but [CS:G]Chatot[CR] specifically wanted\nyou to fill in, since you\'re almost as good at it\nas I am.[K] Just...[W:60] think of it like [CS:C]Jury Duty[CR]?");
+            message_Talk(" Anyway, you better hurry over there\nfast![K] [CS:G]Chatot[CR] [CS:C]has been taking guild security\nway more seriously[CR] then usual lately.[W:90] Bye!");
+            message_Close();
+        }
+        JumpCommon(CORO_HA_MIHARIBAN);
     }
     if ($PERFORMANCE_PROGRESS_LIST[36]) {
         supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
@@ -12820,20 +12908,21 @@ coro BUBBLE_TEST {
     if (not debug) {
         return; // Do nothing, because not 0.3.0
     }
+    $EVENT_LOCAL = 0;
     switch($DUNGEON_ENTER_INDEX) {
         case 111: // 1st Station Clearing, 2nd Station Pass not unlocked!    
             message_SetFace(ACTOR_ATTENDANT1, FACE_PAIN, FACE_POS_STANDARD);
             message_Talk(" Ugh, what IS that smell?\n[K]Ugh, it\'s almost as bad as when [CS:X]Team Skull[CR]\nblasted us with their noxious gas combo...");
             message_Close();
-            Wait(30);
+            Wait(10);
             message_SetFace(ACTOR_NPC_SHEIMI, FACE_ANGRY, FACE_POS_STANDARD);
             message_Talk(" Ugh, again?[K] The [CS:K]Skuntank[CR] are holding\nanother \"stink-off\". If we keep going, we\'ll\nsmell like that for weeks! Let\'s turn back!");
             message_Close();
-            Wait(30);
+            Wait(10);
             message_SetFace(ACTOR_ATTENDANT1, FACE_PAIN, FACE_POS_STANDARD);
             message_Talk(" That explains a lot...\nWe can just come back later then.\nLet\'s head home for the day, [hero]...");
             message_Close();
-            Wait(30);
+            Wait(10);
             break;
         case 112: // 1st Station Clearing, 2nd Station Pass not unlocked! 
             message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
@@ -12843,18 +12932,21 @@ coro BUBBLE_TEST {
                 case < 50: // Sticks x 50
                     item_Set(0, 1, 50);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nIt would save me a trip down the mountain...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 70: // Silver Spike x 20
                     item_Set(0, 3, 20);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you? The\ngondola was hit, sending shrapnel all over...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 80: // Big Apple x 3
                     item_Set(0, 110, 0);
                     message_Talk(" Say, could you do me a favor and\ntake these [s_item:0] home with you? I\'ve had\nseveral already, and I can\'t stomach more...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12863,6 +12955,7 @@ coro BUBBLE_TEST {
                 case < 90: // Nectar x 3
                     item_Set(0, 103, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0][CS:G](3)[CR] as a souvenir.[K] Please take it, I\nhave really bad allergies, so I can\'t use it...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12871,20 +12964,79 @@ coro BUBBLE_TEST {
                 case < 98: // Golden Apple x 1
                     item_Set(0, 115, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I\ncouldn\'t bear to eat such a beautiful [CS:I]Apple[CR]...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 default:   // Thunder Stone x 1
                     item_Set(0, 186, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
             }
             break;
-
         case 113:
             §station_3_reward;
+            message_SetFace(ACTOR_NPC_KAKUREON1,FACE_ANGRY,FACE_POS_STANDARD);
+            message_Talk(" Halt, my friend! I implore you, go no\nfurther! We are currently hunting down a\nthief, and wish to avoid harming innocents!");
+            message_Close();
+            Wait(10);        
+            message_SetFace(ACTOR_ATTENDANT1,FACE_STUNNED,FACE_POS_STANDARD);
+            message_Talk(" ...");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_PLAYER_HERO,FACE_STUNNED,FACE_POS_STANDARD);
+            message_Talk(" ...");
+            message_Close();
+            Wait(10);
+            if ($EVENT_LOCAL == 0) {
+                message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+                message_Talk(" Another greedy one?[K] There have been\nso many since we opened up the mountain...[W:60]\nI\'m truly sorry about this, [CS:G]Kecleon[CR]!");
+                message_Close();
+                Wait(10);
+                message_SetFace(ACTOR_NPC_KAKUREON1,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" It is no trouble at all, [CS:G]Shaymin[CR]! Our\nprofit margins have never been higher with\nall of these thefts. It is good for business!");
+            } else {
+                message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+                message_Talk(" I see...[W:30] We\'ll be going then.");
+                message_Close();
+                Wait(10);
+            }
+            switch(random(100)) {
+                case < 50: // Plain Seed
+                    item_Set(0, 85, 0);
+                    message_SetFace(ACTOR_NPC_KAKUREON1,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" My condolences about your trek up\nthe mountain. I suppose I could give you some\n[CS:I]Plain Seed[CR] for your trouble. Here you are...");
+                    message_Mail("[CS:G]Kecleon[CR] gave you a\nconcerning amount of [s_item:0][CS:I]s[CR]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 90:
+                    item_Set(0,180,0);
+                    message_SetFace(ACTOR_NPC_KAKUREON1,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" My condolences about your trek up\nthe mountain. Here, take this as recompense.\nUnfortunately, [CS:I]Sky Gifts[CR] don\'t sell very well...");
+                    message_Mail("[CS:G]Kecleon[CR] gave you a [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);                    
+                    break;
+                default:
+                    item_Set(0,73,0);
+                    message_SetFace(ACTOR_NPC_KAKUREON1,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" My condolences about your trek up\nthe mountain. I suppose I could permit you a\nfree sample. Here, one free [CS:I]Reviver Seed[CR]...");
+                    message_Mail("[CS:G]Kecleon[CR] gave you a [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
             break;
         case 114:
             message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
@@ -12894,18 +13046,21 @@ coro BUBBLE_TEST {
                 case < 40: // Geo Pebble x 50
                     item_Set(0, 8, 50);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nThey\'re too heavy for me to lift back down...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 60: // Gravelerock x 30
                     item_Set(0, 7, 30);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nThey\'re too heavy for me to lift back down...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 75: // Gone Pebble x 3
                     item_Set(0, 167, 0);
                     message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nWe can\'t seem to focus with them around...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12914,6 +13069,7 @@ coro BUBBLE_TEST {
                 case < 90: // Gravelyrock x 3
                     item_Set(0, 137, 0);
                     message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nI hear a certain kind of Pokémon like them...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12922,19 +13078,65 @@ coro BUBBLE_TEST {
                 case < 98: // Key x 1
                     item_Set(0, 182, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take these\n[s_item:0] as a souvenir.[K] Please take it, I\ndoubt it actually unlocks anything up here...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 default:   // Moon Stone x 1
                     item_Set(0, 163, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
             }
             break;
         case 115:
+        case 121:
+            message_SetFace(ACTOR_NPC_MASUKIPPA,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Hey, [CS:G]Shaymin[CR]...[W:60] Sorry to be a\nbother, but do you think you could help me\nout?[K] I hurt all over from fighting that thief...");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_ANGRY,FACE_POS_STANDARD);
+            message_Talk(" All of this could have been\navoided if you just talked things out instead\nof harassing the explorers, you know!");
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" Fine![K] We can help you out! Let\'s get\nyou down to the village...[W:60] Sorry about this,\n[hero] and [partner]...");
+            message_Close();
             §station_5_reward;
+            Wait(60);
+            message_Mail("[STS][CS:G]Carnivine[CR] was brought back to [CS:P]Shaymin Village[CR]\nand their injuries were treated.[STE]");
+            message_Close();
+            Wait(60);
+            switch(random(100)) {
+                case < 40: // Carnivine Fang x 50
+                    item_Set(0, 5, 50);
+                    message_Mail("[CN]Several [CS:I]Carnivine Fangs[CR] were extracted\n[CN]from the wounded [CS:K]Carnivine[CR]!");
+                    message_Mail("You got a dubiously sourced [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 80: // Sneasel Claw x30
+                    item_Set(0, 6, 50);
+                    message_Mail("[CN]Several [CS:I]Sneasel Claws[CR] were extracted\n[CN]from the wounded [CS:K]Carnivine[CR]!");
+                    message_Mail("You got dubiously sourced [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 95: // Vile Seed x1
+                    item_Set(0, 94, 0);
+                    message_Mail("[CN]The wounded [CS:K]Carnivine[CR] coughed up an\n[CN]intact [CS:I]Vile Seed[CR] during recovery!");
+                    message_Mail("You got dubiously sourced [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                default:   // Diet Ribbon x1
+                    item_Set(0, 34, 0);
+                    message_Talk("[CN]The wounded [CS:K]Carnivine[CR] coughed up an\n[CN]intact [CS:I]Vile Seed[CR] during recovery!");
+                    message_Mail("You got a dubiously sourced [s_item:0]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
             break;
         case 116:
             message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
@@ -12944,18 +13146,21 @@ coro BUBBLE_TEST {
                 case < 40: // Iron Thorn x 50
                     item_Set(0, 2, 50);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nWe found them in the snow, and they\'re heavy!");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 60: // Gold Thorn x 30
                     item_Set(0, 9, 30);
                     message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nSome kind of mineral deposit, but very sharp!");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 case < 75: // Gone Pebble x 3
                     item_Set(0, 167, 0);
                     message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nWe can\'t seem to focus with them around...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12964,6 +13169,7 @@ coro BUBBLE_TEST {
                 case < 90: // Gravelyrock x 3
                     item_Set(0, 137, 0);
                     message_Talk(" Say, could you do me a favor and\ntake these [s_item:0][CS:G](3)[CR] home with you?\nI hear a certain kind of Pokémon like them...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0][CS:G](3)[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
@@ -12972,82 +13178,465 @@ coro BUBBLE_TEST {
                 case < 98: // Rare Fossil x 5
                     item_Set(0, 10, 5);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I\nimagine these are pretty valuable...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
                 default:   // Frozen Rock x 1
                     item_Set(0, 165, 0);
                     message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                    message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
             }
             break;
         case 117:
+            se_Play(9223);
+            message_SetFace(ACTOR_NPC_OKORIZARU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" I\'m so angry, I could punch\nyou into tomorrow![W:30]");
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223);
+            message_CloseEnforce();
+            
+            message_SetFace(ACTOR_NPC_OKORIZARU,FACE_NORMAL,FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Oh yeah? Well, I\'m so angry,\nI could punch you into next week![W:30]");
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223);
+            message_CloseEnforce();
+            
+            message_SetFace(ACTOR_PLAYER_HERO,FACE_STUNNED,FACE_POS_STANDARD);
+            message_Talk(" ...");
+            message_Close();
+            
+            message_SetFace(ACTOR_ATTENDANT1,FACE_STUNNED,FACE_POS_STANDARD);
+            message_Talk(" Should we...[W:30] do something about them?");
+            message_Close();
+            Wait(10);      
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" You would think so, but this is for\nthe best.");
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223);
+            message_CloseEnforce();
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk("[STS] You would think so, but this is for\nthe best.[STE] [CS:K]Primeape[CR] are always angry, and this\nwill occupy them until they tire out.");
+            message_Talk(" It\'s really important that we don\'t\nget involved.[K] We used to pacify them with\n[CS:I]Chestnuts[CR], but those don\'t grow here anymore.");
+            message_Close();
+            
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" I see! We should head back\nfor today then, and maybe they\'ll be out\nof the way by tomorrow, right [CS:G]Shaymin[CR]?");
+            message_Close();
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223); 
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" I don\'t know, I\'ve seen a pair of\n[CS:K]Primeape[CR] duke it out for weeks on end before.\nWe should head back, but it may be a while...");
+            message_Close();            
             §station_7_reward;
+            se_FadeOut(9223,30);
+            Wait(60);
+            se_Play(276);
+            switch(random(100)) {
+                case < 30:
+                    item_Set(0,5,10);
+                    break;
+                case < 60:
+                    item_Set(0,6,10);
+                    break;
+                case < 70:
+                    item_Set(0,180,0);
+                    break;
+                case < 71:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 34463) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 1;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]1[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]1[CR][M:S0]!");
+                    message_Close();
+                    break;
+                case < 80:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 34454) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 10;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]10[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]10[CR][M:S0]!");
+                    message_Close();
+                    break; 
+                case < 90:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 34364) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 100;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]100[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]100[CR][M:S0]!");
+                    message_Close();
+                    break;
+                case < 95:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 33964) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 500;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]500[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]500[CR][M:S0]!");
+                    message_Close();
+                    break;
+                case < 98:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 33464) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 1000;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]1000[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]1000[CR][M:S0]!");
+                    message_Close();
+                    break;                
+                default:
+                    $EVENT_LOCAL = value($CARRY_GOLD);
+                    if ($EVENT_LOCAL > 65535) {
+                        $EVENT_LOCAL -= 65535;
+                        if ($EVENT_LOCAL >= 24964) { // Max gold is 34464
+                            jump @station_7_reward; // Reroll!
+                        }
+                    }
+                    $CARRY_GOLD += 10000;
+                    $EVENT_LOCAL = 2;
+                    message_Mail("Youch![K] [CS:G]10000[CR][M:S0] hit you in the\nback of the head! [W:60]...You got [CS:G]10000[CR][M:S0]!");
+                    message_Close();
+                    break;     
+            }
+            if ($EVENT_LOCAL < 2) {      
+                message_Mail("Youch![K] A [s_item:0] hit you in the\nback of the head! [W:60]...You got a [s_item:0]!");
+                message_KeyWait();
+                message_Menu(MENU_GIVE_ITEM);
+            }
             break;
         case 118:
+            message_SetFace(ACTOR_NPC_DENRYUU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Not another step![K] Go away![K] I\nam NOT in the mood for visitors right now!");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_SURPRISED,FACE_POS_STANDARD);
+            message_Talk(" ...but[W:60]");
+            message_CloseEnforce();
+            message_SetFace(ACTOR_NPC_DENRYUU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" No! Whatever it is, I am not\navailable, nor is [CS:P]8th Station Clearing[CR]!\nPlease! Just... come back some other time!");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" ...[CS:G]Shaymin[CR]?");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_NPC_SHEIMI,FACE_PAIN,FACE_POS_STANDARD);
+            message_Talk(" [CS:G]Ampharos[CR] gets like this sometimes...[K]\nhe brews his own [CS:I]Max Elixir[CR] up here, and\noccasionally he dabbles in self-experimentation.");
             §station_8_reward;
-            
+            message_Talk(" We won\'t be making it any further\nup the mountain today.[K] If you have a spare\n[CS:I]Heal Seed[CR], [CS:G]Ampharos[CR] could use one right now...");
+            message_Close();
+            Wait(10);
+            $SCENARIO_TALK_BIT_FLAG[227] = 1;
+            switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,92,0)) {
+                case 0:
+                    break;
+                default:
+                    message_Mail("Give [CS:G]Ampharos[CR] a [CS:I]Gabite Scale[CR]?");
+                    switch(message_SwitchMenu(0,1)) {
+                        case menu("Yes"):
+                            message_Close();
+                            if ($EVENT_LOCAL == 0) {
+                                message_SetFace(ACTOR_NPC_SHEIMI,FACE_NORMAL,FACE_POS_STANDARD);
+                                message_Talk(" You happen to have a [CS:I]Gabite Scale[CR]\nwith you?[K] [CS:G]Ampharos[CR] had better thank you\ngenerously for giving him one of these!");
+                            } else {
+                                message_SetFace(ACTOR_NPC_SHEIMI,FACE_NORMAL,FACE_POS_STANDARD);
+                                message_Talk(" Really? You think we should give [CS:G]Ampharos[CR]\none of our [CS:I]Gabite Scales[CR] [hero]?");
+                            }
+                            
+                            message_Close();
+                            Wait(60);
+                            message_Mail("\n[STS][CN]A few minutes later...[STE]");
+                            $SCENARIO_TALK_BIT_FLAG[230] = 1;
+                            jump @gabite_scale;
+                        case menu("No"):
+                            message_Close();
+                            break;
+                    }
+                    break;
+            }
+            switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,69,0)) {
+                case 0:
+                    message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+                    if ($EVENT_LOCAL == 0) {
+                        message_Talk(" As much as we\'d like to help,\nwe don\'t have any [CS:I]Heal Seeds[CR] in the bag...");
+                    } else { 
+                        message_Talk(" I suppose there isn\'t much we\ncan do. We don\'t have a [CS:I]Heal Seed[CR] today...");
+                    }
+                    message_Close();
+                    Wait(10);
+                    §ampharos_cruelty;
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_NORMAL,FACE_POS_STANDARD);
+                        message_Talk(" No worries, I\'ll come by to check on\nhim later...[W:60] I have a stash of [CS:I]Heal Seeds[CR] down\nat the base of the mountain.");
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_ANGRY,FACE_POS_STANDARD);
+                        message_Talk(" I can\'t give them all to [CS:G]Ampharos[CR], I\ncan\'t trust him to not experiment with them.\nI really wish he would put his health first...");
+                        message_Close();
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+                        message_Talk(" The least we can do is tell\n[CS:G]Shaymin[CR] about it. Let\'s go\ndo that, [hero]!");
+                    }
+                    JumpCommon(CORO_EVENT_HA_SAME);
+                default:
+                    message_Mail("Give [CS:G]Ampharos[CR] a [CS:I]Heal Seed[CR]?");
+                    break;
+            }
+            switch(message_SwitchMenu(0,1)) {
+                case menu("Yes"):
+                    message_Close();
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" Perfect, I\'ll quickly go give it to him!\nYou two stay here, I\'ll be right back!");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" Perfect, I\'m gonna go give it to him!\nStay right, okay [hero]?");
+                    }
+                    message_Close();
+                    Wait(60);
+                    message_Mail("\n[STS][CN]A few minutes later...[STE]");
+                    $SCENARIO_TALK_BIT_FLAG[229] = 1;
+                    break;
+                case menu("No"):
+                    message_Close();
+                    jump @ampharos_cruelty;
+            }
+            §gabite_scale;
             switch(random(100)) {
-                case < 50: // Mix Elixir
+                case < 40: // Mix Elixir
+                    item_Set(0, 116, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+                        message_Talk(" He was a bit delusional today, and...[W:30]\nseemed to believe you two were [CS:K]Linoone[CR]...[W:30]\nSo he said to give you all of this as thanks...");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+                        message_Talk(" He thought I was a [CS:K]Linoone[CR]\nand gave me these for some reason...");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you a concerning\namount of [CS:I]Mix Elixir[CR]!");
+                    message_KeyWait();
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 60: // Grimy Food
                     item_Set(0, 111, 0);
-                    message_Talk(" ingredients went sour");
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_WORRIED,FACE_POS_STANDARD);
+                        message_Talk(" He gave me these, and didn\'t explain\nfurther.[K] I don\'t want them, and I suggest you\ndon\'t consume them, but maybe they\'re useful?");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+                        message_Talk(" He gave me these, and didn\'t explain\nfurther.[K] I\'m pretty sure we can\'t eat these,\nbut maybe we can [CS:C]recycle[CR] them instead?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you a concerning\namount of [CS:I]Grimy Food[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
                     break;
-                case < 80: // Grimy Food
-                    item_Set(0, 2, 50);
-                    message_Talk(" bad batch");
+                case < 75: // Max Elixir
+                    item_Set(0, 99, 30);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He wanted to thank you two with a\nfresh and tested batch of [CS:I]Max Elixir[CR]. I hear\nit tastes better than that stuff [CS:G]Kecleon[CR] sells.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He wanted to thank us with a\nfresh and tested batch of [CS:I]Max Elixir[CR]. I\nbet these will come in handy later!");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you a generous\n[CS:G]3[CR] bottles of [CS:I]Max Elixir[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     message_Menu(MENU_GIVE_ITEM);
-                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);                                                                                                                                                           
                     break;
-                case < 60: // Max Elixir
-                    item_Set(0, 9, 30);
-                    message_Talk(" passable");
+                case < 80: // Protein
+                    item_Set(0, 100, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured you a bottle of something he called\n\"[CS:I]Rampardos Punch[CR]\". Never heard of it before.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured us a bottle of something he called\n\"[CS:I]Rampardos Punch[CR]\". I wonder what it is?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you bottle of [CS:I]Protein[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
-                case < 65: // Protein
-                    item_Set(0, 167, 0);
-                    message_Talk(" Rampardos Punch");
+                case < 85: // Iron
+                    item_Set(0, 102, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured you a bottle of something he called\n\"[CS:I]Bastiodon Brew[CR]\". Never heard of it before.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured us a bottle of something he called\n\"[CS:I]Bastiodon Brew[CR]\". I wonder what it is?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you bottle of [CS:I]Iron[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
-                case < 70: // Iron
-                    item_Set(0, 167, 0);
-                    message_Talk(" Bastiodon Brew");
+                case < 90: // Calcium
+                    item_Set(0, 101, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured you a bottle of something he called\n\"[CS:I]Alakazam Antidote[CR]\". Never heard of it before.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured us a bottle of something he called\n\"[CS:I]Alakazam Antidote[CR]\". I wonder what it is?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you bottle of [CS:I]Calcium[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
-                case < 75: // Calcium
-                    item_Set(0, 167, 0);
-                    message_Talk(" Alakazam Antidote");
+                case < 95: // Zinc
+                    item_Set(0, 108, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured you a bottle of something he called\n\"[CS:I]Tentacruel Tonic[CR]\". Never heard of it before.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured us a bottle of something he called\n\"[CS:I]Tentacruel Tonic[CR]\". I wonder what it is?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you bottle of [CS:I]Zinc[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
-                case < 80: // Zinc
-                    item_Set(0, 167, 0);
-                    message_Talk(" Tentacruel Tonic");
-                    message_KeyWait();
-                    message_Menu(MENU_GIVE_ITEM);
-                    break;
-                
-                default:   // Frozen Rock x 1
-                    item_Set(0, 165, 0);
-                    message_Talk(" Don\'t look so glum![K] Here, take this\n[s_item:0] as a souvenir.[K] Please take it, I have\nno use for this evoluton item...");
+                default:   // Ginseng
+                    item_Set(0, 88, 0);
+                    if ($EVENT_LOCAL == 0) {
+                        message_SetFace(ACTOR_NPC_SHEIMI,FACE_HAPPY,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured you a bottle of something he called\n\"[CS:I]SECRETPOTION[CR]\". Never heard of it before.");
+                    } else {
+                        message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+                        message_Talk(" He rolled out a keg out of his cellar,\nand poured us a bottle of something he called\n\"[CS:I]SECRETPOTION[CR]\". I wonder what it is?");
+                    }
+                    message_Mail("[CS:G]Ampharos[CR] gave you bottle of [CS:I]Ginseng[CR]!");
                     message_KeyWait();
                     message_Menu(MENU_GIVE_ITEM);
                     break;
             }
             break;
-            break;
         case 119:
+            message_SetFace(ACTOR_NPC_BETOBETAA,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" Icky, sticky, surprise!");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_NPC_BETOBETON,FACE_NORMAL,FACE_POS_BOTTOM_C_FACER);
+            message_Talk(" You\'re not grimy and slimy!");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_NPC_BETOBETAA2,FACE_NORMAL,FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" We throw you away, just\nlike you litterers toss your garbage!");
+            message_Close();
+            Wait(10);
             §station_9_reward;
+            message_SetWaitMode(1,1);
+            se_Play(274);
+            WaitSe(274);
+            message_Mail("[CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]![W:30]");
+            se_Play(274);
+            WaitSe(274);
+            message_Mail("[STS][CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]![STE]\n[CN][CS:G]Muk[CR] used [CS:L]Fling[CR]![W:30]");
+            se_Play(274);
+            WaitSe(274);
+            message_Mail("[STS][CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]!\n[CN][CS:G]Muk[CR] used [CS:L]Fling[CR]![STE]\n[CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]!");
+            message_SetWaitMode(-1,-1);
+            message_Mail("[STS][CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]!\n[CN][CS:G]Muk[CR] used [CS:L]Fling[CR]!\n[CN][CS:G]Grimer[CR] used [CS:L]Fling[CR]![STE]");
+            message_Close();
+            Wait(30);
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SHOUTING, FACE_POS_BOTTOM_L_FACEINW);
+            message_SwitchTalk ($PARTNER_TALK_KIND) {
+                case 1:
+                    {
+                        english=" Waaaaaaah!",
+                        french=" Wouaaaaaaah!",
+                        german=" Waaaaaaah!",
+                        italian=" Waaaaaaah!",
+                        spanish=" ¡Aaaaaaaah!",
+                    }
+                case 2:
+                    {
+                        english=" Waaaaaaah!",
+                        french=" Wouaaaaaaah!",
+                        german=" Waaaaaaah!",
+                        italian=" Waaaaaaah!",
+                        spanish=" ¡Aaaaaaaah!",
+                    }
+                default:
+                    {
+                        english=" Waaaaaaah!",
+                        french=" Wouaaaaaaah!",
+                        german=" Waaaaaaah!",
+                        italian=" Waaaaaaah!",
+                        spanish=" ¡Aaaaaaaah!",
+                    }
+            }
+            message_Close();
+            se_Play(7170);
+            WaitSe(7170);
+            Wait(30);
+            se_Play(7171);
+            Wait(10);
+            se_Play(7171);
+            Wait(10);
+            se_Play(7171);
+            Wait(10);
+            message_Mail("[STS][CN]You got flung all the way\n[CN]back to [CS:P]Shaymin Village[CR]![STE][K]\n[CN][STS]Luckily you landed in the water...[STE]");
+            switch(random(100)) {
+                case < 90:
+                    message_Mail("Some grimy ooze was stuck to you!\n[W:60]...you got [CS:I]Grimy Food[CR][CS:G](3)[CR]!");
+                    message_KeyWait();
+                    item_Set(0,111,0);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                case < 95:
+                    message_Mail("A [CS:I]No-Slip Cap[CR] was stuck to you!\n[W:60]...you got a [CS:I]No-Slip Cap[CR]!");
+                    message_KeyWait();
+                    item_Set(0,13,0);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+                default:
+                    message_Mail("A [CS:I]No-Stick Cap[CR] was stuck to you!\n[W:60]...you got a [CS:I]No-Stick Cap[CR]!");
+                    message_KeyWait();
+                    item_Set(0,21,0);
+                    message_Menu(MENU_GIVE_ITEM);
+                    break;
+            }
             break;
         default:
             break;
@@ -13059,15 +13648,83 @@ coro BUBBLE_TEST {
     if (not debug) {
         return;
     }
+    $EVENT_LOCAL = 1;
     switch($DUNGEON_ENTER_INDEX) {
         case 111:
-            message_SetFace(ACTOR_NPC_SHEIMI, FACE_ANGRY, FACE_POS_STANDARD);
-            message_Talk(" still? time to die, Skuntank!");
+            message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+            message_Talk(" How can I STILL smell it?\nWe\'re going home, [hero]!");
             message_Close();
             break;
         case 112:
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]2nd Station Clearing[CR] is\nstill closed for cleanup.");
+            jump @station_2_reward;            
+        case 113:
+            
+            jump @station_3_reward;
             break;
-        // Add more cases here!
+        case 114:
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]4th Station Clearing[CR] is\nstill closed for cleanup.");
+            jump @station_4_reward;            
+        case 115:
+            message_SetFace(ACTOR_NPC_MASUKIPPA,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Hey, team [team], right?[K]\nSorry to be a bother, but could you help me\nout?[K] I hurt all over from fighting...");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" [hero], he looks seriously hurt!\nWe need to get him to [CS:P]Shaymin Village[CR]!");
+            message_Close();
+            Wait(10);
+            jump @station_5_reward;
+            break;          
+        case 116:
+            message_SetFace(ACTOR_NPC_FUWARAIDO,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Sorry folks, [CS:P]6th Station Clearing[CR] is\nstill closed for cleanup.");
+            jump @station_6_reward;            
+        case 117:
+            se_Play(9223);
+            message_SetFace(ACTOR_NPC_OKORIZARU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" I\'m so angry, I could punch\nyou into next decade![W:30]");
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223);
+            message_CloseEnforce();
+            
+            message_SetFace(ACTOR_NPC_OKORIZARU,FACE_NORMAL,FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Oh yeah? Well, I\'m so angry,\nI could punch you into next century![W:30]");
+            se_Stop(9223);
+            se_Play(7947);
+            WaitSe(7947);
+            se_Play(9223);
+            message_CloseEnforce();
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" I suppose [CS:G]Shaymin[CR] did warn us\nthey might still be fighting when we got back,\nbut I didn\'t really believe it at the time...");
+            message_Close();
+            Wait(10);
+            jump @station_7_reward;  
+            break; 
+        case 118:
+            message_SetFace(ACTOR_NPC_DENRYUU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Not another step![K] Go away![K] I\nam NOT in the mood for visitors right now!");
+            message_Close();
+            Wait(10);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" ...Still?");
+            message_Close();
+            Wait(10);
+            jump @station_8_reward;
+        case 119:
+            message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Something weird happened the\nlast time we were here, right?[K] I can\'t seem\nto remember what happened, so let\'s be care-[W:60]");
+            message_CloseEnforce();
+            Wait(10);
+            message_SetFace(ACTOR_NPC_BETOBETON,FACE_NORMAL,FACE_POS_BOTTOM_C_FACER);
+            message_Talk(" \n[CN]Ic[W:30]ky,[W:30] sti[W:30]cky,[W:30] yi[W:15]ck[W:15]ity,[W:30] goo! ♪ [W:60]\nDown[W:30] to[W:15] the[W:15] bot[W:15]tom[W:15] of[W:15] the[W:15] moun[W:15]tain[W:15] with[W:30] you!");
+            message_Close();
+            jump @station_9_reward;
+            break;
         default:
             break;
     }

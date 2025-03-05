@@ -889,9 +889,9 @@ def 0 {
                     message_Close();
                     jump @label_18;
                 } elseif ($SCENARIO_TALK_BIT_FLAG[228] ) {
-                    $SCENARIO_MAIN_BIT_FLAG[73] = 0;
-                    $SCENARIO_MAIN_BIT_FLAG[61] = 0;
-                    message_Mail("[CN]It\'s a gift from\n[CN][CS:N]Ampheros[CR]!");
+                    $SCENARIO_TALK_BIT_FLAG[228] = 0;
+                    $SCENARIO_TALK_BIT_FLAG[227] = 0;
+                    message_Mail("[CN]It\'s a gift from\n[CN][CS:N]Ampharos[CR]!");
                     message_Mail({
                         english="[CN]There\'s a message too.",
                         french="[CN]Un message l\'accompagne.",
@@ -901,13 +901,7 @@ def 0 {
                     });
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     message_Mail("[CN]I wanted to apologize for my\n[CN]behavior the other day.");
-                    message_Mail({
-                        english="[CN]If I didn\'t get that item,\n[CN]I could have ended up being lost.",
-                        french="[CN]Si vous ne m\'aviez pas donné cet objet\n[CN]j\'aurais pu me perdre.",
-                        german="[CN]Ohne dieses Item hätte ich\n[CN]leicht verlorengehen können.",
-                        italian="[CN]Se non l\'avessi ricevuto,\n[CN]avrei rischiato di perdermi.",
-                        spanish="[CN]Si no lo hubiera tenido, puede que\n[CN]me hubiera perdido.",
-                    });
+                    message_Mail("[CN]Sometimes I act a bit reckless, and\n[CN]I\'ll try to be more careful next\n[CN]time, but I make no promises!");
                     message_Mail("[CN]It\'s not much, but please accept this\n[CN]token of my appreciation.\n--[CS:N]Ampheros[CR]");
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     message_Mail({
@@ -920,22 +914,51 @@ def 0 {
                     message_Close();
                     se_Play(11021);
                     WaitSe(11021);
-                    message_Mail({
-                        english="[CN]Inside was the\n[CN][s_item:0]!\n[CN]...as well as a [CS:I]Heal Seed[CR]!",
-                        french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
-                        german="[CN]Im Paket liegt das Item\n[CN][s_item:0]!",
-                        italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
-                        spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
-                    });
-                    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL, 0, 0)) {
-                        case 0:
-                            ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 69, 0);
-                            break;
-                        default:
-                            item_Set(0,69,0);
-                            message_Menu(MENU_GIVE_ITEM2);
-                            break;
-                    }
+                    if ($SCENARIO_TALK_BIT_FLAG[230]) {
+                        $SCENARIO_TALK_BIT_FLAG[230] = 0;
+                        message_Mail({
+                            english="[CN]Inside was the\n[CN][s_item:0]!\n[CN]...as well as a [CS:I]Ginseng[CR]!",
+                            french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
+                            german="[CN]Im Paket liegt das Item\n[CN][s_item:0]!",
+                            italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
+                            spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
+                        });
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL, 0, 0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 88, 0);
+                                break;
+                            default:
+                                item_Set(0,88,0);
+                                message_Menu(MENU_GIVE_ITEM2);
+                                break;
+                        }
+                    } elseif($SCENARIO_TALK_BIT_FLAG[229]) {
+                        $SCENARIO_TALK_BIT_FLAG[229] = 0;
+                        message_Mail({
+                            english="[CN]Inside was the\n[CN][s_item:0]!\n[CN]...as well as a [CS:I]Heal Seed[CR]!",
+                            french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
+                            german="[CN]Im Paket liegt das Item\n[CN][s_item:0]!",
+                            italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
+                            spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
+                        });
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL, 0, 0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 69, 0);
+                                break;
+                            default:
+                                item_Set(0,69,0);
+                                message_Menu(MENU_GIVE_ITEM2);
+                                break;
+                        }
+                    } else {
+                        message_Mail({
+                            english="[CN]Inside was the\n[CN][s_item:0]!",
+                            french="[CN]A l\'intérieur se trouve l\'objet\n[CN][s_item:0]!",
+                            german="[CN]Im Paket liegt das Item\n[CN][s_item:0]!",
+                            italian="[CN]... e al suo interno trova\n[CN][s_item:0]!",
+                            spanish="[CN]¡Había un objeto\n[CN][s_item:0] dentro!",
+                        });
+                    }                                                                                                                                                                                                                                                                                                               
                     message_Mail({
                         english="[CN]A warm and fuzzy feeling falls over you...",
                         french="[CN]Que c\'est agréable de recevoir un cadeau...",

@@ -625,5 +625,12 @@ def 0 {
         spanish=" ¡Bieeen!",
     });
     message_Close();
-    end;
+    switch(dungeon_mode(116)) {
+        case DMODE_CLOSED:
+        case DMODE_REQUEST:
+            bgm_FadeOut(30);
+            screen_FadeOut(1,30);
+        default:
+            end;
+    }
 }

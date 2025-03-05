@@ -3,24 +3,21 @@ def 0 {
     if (debug) {
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,69,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,69,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,69,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,92,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,92,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,92,0);
+        dungeon_mode(118) = DMODE_OPEN;
+        dungeon_mode(116) = DMODE_OPEN; 
+        dungeon_mode(114) = DMODE_OPEN;
+        dungeon_mode(112) = DMODE_OPEN;                                                                                                                                                     
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;
     message_Talk(" What\'s on your mind, [hero]?");
-    switch(message_SwitchMenu(4,4)) {
+    switch(message_SwitchMenu(4,6)) {
         case menu("Add To Team"):
             message_Close();
             message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
