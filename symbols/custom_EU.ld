@@ -15,6 +15,7 @@ ClearAdventureLogStructCallsite = 0x02048774;
 MiscIqScalingGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
+MissionTryOpenDungeon = 0x20682BC;
 DeathLinkSendHookOld = 0x200C778;
 CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
 CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
