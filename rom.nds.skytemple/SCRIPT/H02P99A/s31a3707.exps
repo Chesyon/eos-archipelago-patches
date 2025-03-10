@@ -497,3 +497,14 @@ def 0 {
             jump @label_2;
     }
 }
+
+def 1 for_actor(ACTOR_NPC_PERIPPAA1) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        SetAnimation(2);
+    } else {
+        SetAnimation(6);
+    }
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

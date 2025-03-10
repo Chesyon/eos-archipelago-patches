@@ -1,0 +1,145 @@
+import "pelipper.exps"; // Pelipper has been exported to a macro for convenience!
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_PERIPPAA1);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_PERIPPAA1);
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" Good morning, team [team]!\nYou have a delivery! Will you claim it now?");
+        switch(message_SwitchMenu(1,1)) {
+            case menu("Yes"):
+                message_Close();
+                ~PelipperBaseDelivery();
+                debug_Print("Items Delivered");
+                break;
+            case menu("No"):
+                message_Close();
+                message_Talk(" Very well, I\'ll hold on to it for you.");
+                message_Close();
+                break;
+        }
+        $EVENT_LOCAL = 1;
+        message_Talk(" Now then, was there anything else\nyou wanted to speak to me about?");
+    } elseif($EVENT_LOCAL == 0) {
+        // Shamelessly borrowed from Okami's Cheat Sheet
+        $EVENT_LOCAL = 1;
+        se_Play(8968);
+        with (actor ACTOR_NPC_PERIPPAA1) {
+	    SetEffect(EFFECT_SHOCKED, 3);
+        }
+        with (actor ACTOR_NPC_PERIPPAA1) {
+	    WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_PERIPPAA1);
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            SetAnimation(17);
+        }
+        WaitExecuteLives(ACTOR_NPC_PERIPPAA1);
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" I wasn\'t sleeping on the job, I swear!\n[K]Hello, team [team], You have no pending\ndeliveries. How may I be of service today?");
+    } else {
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_PERIPPAA1) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" Good morning, team [team]!\nYou have no pending deliveries right now.\nHow may I be of service today?");
+    }
+    §pelipper_menu;
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Express Mail"):
+            message_Close();
+            if ($PERFORMANCE_PROGRESS_LIST[37]) {
+                message_Talk(" [CS:C]Express Mail[CR] is currently suspended.\nWould you like to reactivate it?");
+                switch(message_SwitchMenu(1,1)) {
+                    case menu("Yes"):
+                        message_Close();
+                        $PERFORMANCE_PROGRESS_LIST[37] = 0;
+                        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+                        message_Talk(" Very well, I\'ll reactivate your\n[CS:C]Express Mail[CR] service once more. I will now\npersonally deliver your mail wherever you go!");
+                        message_Close();
+                        break;
+                    case menu("No"):
+                        message_Close();
+                        message_Talk(" Very well, it shall remain enabled.");
+                        message_Close();
+                        break;
+                }     
+            } else {
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+                message_Talk(" [CS:C]Express Mail[CR] is currently enabled.\nWould you like to deactivate it?");
+                switch(message_SwitchMenu(1,1)) {
+                    case menu("Yes"):
+                        message_Close();
+                        $PERFORMANCE_PROGRESS_LIST[37] = 1;
+                        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL,FACE_POS_STANDARD);
+                        message_Talk(" Very well, I\'ll suspend your\n[CS:C]Express Mail[CR] service for now. Any and all\ndeliveries will be here from now on, okay?");
+                        message_Close();
+                        break;
+                    case menu("No"):
+                        message_Close();
+                        message_Talk(" Very well, it shall remain enabled.");
+                        message_Close();
+                        break;
+                }       
+                
+                
+            }
+            message_Close();
+            break;
+        case menu("Info"):
+            message_Close();
+            message_Talk(" Has nobody filled you in?[K] A rather\ngenerous benefactor has sponsored you with\na Platinum Pelipper Post Office subscription!");
+            message_Talk(" As a platinum member, you receive\nall sorts of perks![K] I am your personal courier\nagent, here to fulfil all of your postal needs!");
+            message_Talk(" One of our most prestigious services\nincluded in your subscription is [CS:C]Express Mail[CR]!\n[K]Transcend the concept of a mailing address!");
+            message_Talk(" No matter where you are, I can\ndeliver you inbound packages![K] Rain, shine, or\nparalyzed future, your courier can find you!");
+            message_Talk(" If you find this particular feature to\nbe cumbersome, an invasion of privacy, or a\ndistraction from exploration, just disable it!");
+            message_Talk(" You can also send packages to other\nEOS Archipelago players free of charge![K] Or...[W:60]\nyou can in [CS:C]0.3.0[CR]. It isn\'t functional yet, sorry.");
+            message_Close();
+            break;
+        case menu("Never Mind"):
+        default:
+            message_Close();
+            message_Talk(" Splendid! Have an excellent day of\nexploration, team [team]!");
+            message_Close();
+            Wait(10);
+            $EVENT_LOCAL = 1;
+            JumpCommon(CORO_END_TALK);
+    }
+    message_Talk(" Now then, was there anything else\nyou wanted to speak to me about?");
+    jump @pelipper_menu;
+    
+    
+    
+}
