@@ -902,7 +902,7 @@ def 0 {
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     message_Mail("[CN]I wanted to apologize for my\n[CN]behavior the other day.");
                     message_Mail("[CN]Sometimes I act a bit reckless, and\n[CN]I\'ll try to be more careful next\n[CN]time, but I make no promises!");
-                    message_Mail("[CN]It\'s not much, but please accept this\n[CN]token of my appreciation.\n--[CS:N]Ampheros[CR]");
+                    message_Mail("[CN]It\'s not much, but please accept this\n[CN]token of my appreciation.\n--[CS:N]Ampharos[CR]");
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     message_Mail({
                         english="[CN][hero]\n[CN]gently opens the lid...",

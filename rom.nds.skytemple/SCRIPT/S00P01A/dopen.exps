@@ -213,7 +213,7 @@ def 0 {
             worldmap_BlinkMark(76);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Shimmer Desert[CR] remains unchanged![W:60]...but you did get a check!",
+                english="[CN]Your ability to go to [CS:P]Shimmer Desert[CR]\nremains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Désert Chatoyant[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Flimmerwüste[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]al [CS:P]Deserto Folgore[CR]!",

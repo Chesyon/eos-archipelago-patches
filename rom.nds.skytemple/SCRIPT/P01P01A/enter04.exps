@@ -24,6 +24,27 @@ def 0 {
                                 message_CloseEnforce();
                                 break;
                             case 8:
+                                switch (dungeon_mode(8)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });                            
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]14[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 9:
                                 switch (dungeon_mode(9)) {
                                     case DMODE_OPEN:
@@ -47,6 +68,28 @@ def 0 {
                                 }
                                 jump @label_12;
                             case 10:
+                                switch (dungeon_mode(10)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });  
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]16[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;   
                             case 11:
                                 switch (dungeon_mode(11)) {
                                     case DMODE_OPEN:
@@ -70,6 +113,27 @@ def 0 {
                                 }
                                 jump @label_12;
                             case 32:
+                                switch (dungeon_mode(32)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon group, [CS:G]Grovyle[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that group only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 34:
                                 switch (dungeon_mode(34)) {
                                     case DMODE_OPEN:
@@ -173,7 +237,7 @@ def 0 {
                                         break;
                                 }
                                 jump @label_12;
-                            case 110:
+                            case 111:
                                 switch (dungeon_mode(110)) {
                                     case DMODE_OPEN:
                                         switch ( ProcessSpecial(100,0,0) ) {

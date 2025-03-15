@@ -14,7 +14,10 @@ def 0 {
         message_Mail("[CN]You see a vision of a distant place![K]\n[CN]Might as well sit back and enjoy the view!");
         message_Close();
         call @da_view;
-        Wait(1800);
+        Wait(300);
+        message_Mail("[STS][HR][CN]Now might be a good time to take\n[CN]a break and get some fresh air...[STE][W:300]");
+        message_CloseEnforce();
+        Wait(1200);
         switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_INIT, 0, 0) ) { }
         switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_PRESS, 0, 0) ) { }
         screen2_FadeOut(0, 60);
