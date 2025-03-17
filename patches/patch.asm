@@ -47,6 +47,10 @@
     .org GenerateMissionMinFloorRollHook
         bl EarlyMissionFloorsCheck
 
+    ; A hook to determine how Guest Pokemon stats will be generated.
+    .org GuestMonsterToGroundMonsterCallsite
+        bl CustomGuestMonsterToGroundMonster
+
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
     .area 0x4
