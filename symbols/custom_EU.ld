@@ -21,6 +21,7 @@ MissionMultipurposeCheckAreaEnd = 0x2062F94;
 TAILORED_MISSION_DUNGEON = 0x2062F94;
 TailoredMissionOverlapFloorsHook = 0x2063064;
 GenerateMissionMinFloorRollHook = 0x206301C;
+GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;

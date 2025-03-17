@@ -23,29 +23,9 @@
 
     // Calcs max party level
     StartScale:
-        mov r1,#0 // r1: Loop counter
-    loopLevelScale:
-        mov r0, r1
-        // Validates the entity
-        // push pop on r1-r4 because this function tends to mess up registers
-        stmdb sp!,{r1-r4}
-        bl GetActiveTeamMember
-        ldmia sp!,{r1-r4}
-        cmp r0,#0
-        beq nextIterScaling
-        ldrb r4, [r0]
-        tst r4,#1
-        beq nextIterScaling
-        ldrb r2, [r0,#0x2]
+        bl GetHighestLevelTeamMember
         // r3 will keep your max party level
-        cmp r1, #0
-        moveq r3, #0
-        cmp r2, r3
-        movgt r3, r2
-    nextIterScaling:
-        add r1,r1,#1
-        cmp r1,#0x3
-        blt loopLevelScale
+        mov r3,r0
 
     // Checks if the level has to scale
     ContinueScale:
