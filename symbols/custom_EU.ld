@@ -89,6 +89,8 @@ PlayEffectAnimationEntityWrapper = 0x22E4C98;
 DetermineTileAppearence = 0x2337264;
 DungeonModeSetupAndShowKeyboard = 0x234FC14;
 SomeDeathMsgCheckFun = 0x200C63C;
+SetupTopGroundMenuNext = 0x23016F8;
+SetupMenuNext = 0x2034BD8;
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;

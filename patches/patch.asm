@@ -91,6 +91,15 @@
 .open "overlay11.bin", overlay11_start
     .org NameAutofillHook
         bl AutofillName
+    .org 0x2301a7c
+        b ApTrackerSetupFromTopMenu
+    .org 0x23231d4
+        .area 0x8
+        .pool
+            .halfword 541
+            .halfword 0
+            .word 6
+        .endarea
 .close
 
 .open "overlay13.bin", overlay13_start

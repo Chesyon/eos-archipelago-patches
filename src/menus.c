@@ -97,7 +97,7 @@ void CloseTailoredDungeonMissionMenu(void) {
     } else if (GLOBAL_MENU_INFO.state == -2) {
         if (GLOBAL_MENU_INFO.window_ids[0] >= 0) {
             CloseAdvancedMenu(GLOBAL_MENU_INFO.window_ids[0]);
-            GLOBAL_MENU_INFO.window_ids[0] = -1;
+            GLOBAL_MENU_INFO.window_ids[0] = -2;
         }
         TAILORED_MISSION_DUNGEON = 0;
         MemFree(GLOBAL_MENU_INFO.extra_info_ptr);
@@ -111,7 +111,7 @@ void CloseTailoredDungeonMissionMenu(void) {
     MemFree(GLOBAL_MENU_INFO.extra_info_ptr);
     if (GLOBAL_MENU_INFO.window_ids[0] >= 0) {
         CloseAdvancedMenu(GLOBAL_MENU_INFO.window_ids[0]);
-        GLOBAL_MENU_INFO.window_ids[0] = -1;
+        GLOBAL_MENU_INFO.window_ids[0] = -2;
     }
     GenerateDailyMissions();
     TAILORED_MISSION_DUNGEON = 0;
