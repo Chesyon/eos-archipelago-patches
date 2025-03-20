@@ -9506,15 +9506,16 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 JumpCommon(CORO_EVENT_S03_15);
                             }
                         } else {
-                            message_Mail("You cannot proceed further in this\ndungeon until [CS:G]Manaphy[CR] is sick!");
+                            message_Mail("[CN]You cannot challenge [CS:G]Gyarados[CR]\n[CN]until [CS:G]Manaphy[CR] is sick!");
                             message_Close();
+                            debug_Print("Missions Miracle Sea");
+                            dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
                             JumpCommon(CORO_EVENT_HA_SAME);
                         }
                         break;
                     case 53:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("Missions Miracle Sea");
-                        dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
+                        debug_Print("Phione Unlocked");
                         dungeon_mode(52) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
                     case 54:

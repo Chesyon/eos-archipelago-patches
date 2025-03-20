@@ -19,11 +19,11 @@
                 message_Close();
                 $LOCAL1 = 0;
                 break;
-            case menu("Storage Only"):
+            case menu("Storage First"):
                 message_Close();
-                message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
+                message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
                 message_Close();
-                $LOCAL1 = 1;
+                $LOCAL1 = 3;
                 break;
             case menu("Bag Only"):
                 message_Close();
@@ -31,11 +31,11 @@
                 message_Close();
                 $LOCAL1 = 2;
                 break;
-            case menu("Storage First"):
+            case menu("Storage Only"):
                 message_Close();
-                message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
+                message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
                 message_Close();
-                $LOCAL1 = 3;
+                $LOCAL1 = 1;
                 break;
             case menu("Review All"):
                 message_Close();
@@ -85,11 +85,11 @@
                     message_Close();
                     $LOCAL1 = 0;
                     break;
-                case menu("Storage Only"):
+                case menu("Storage First"):
                     message_Close();
-                    message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
+                    message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
                     message_Close();
-                    $LOCAL1 = 1;
+                    $LOCAL1 = 3;
                     break;
                 case menu("Bag Only"):
                     message_Close();
@@ -97,11 +97,11 @@
                     message_Close();
                     $LOCAL1 = 2;
                     break;
-                case menu("Storage First"):
+                case menu("Storage Only"):
                     message_Close();
-                    message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
+                    message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
                     message_Close();
-                    $LOCAL1 = 3;
+                    $LOCAL1 = 1;
                     break;
                 case menu("Review All"):
                     message_Close();
