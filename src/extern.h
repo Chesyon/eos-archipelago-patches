@@ -48,8 +48,8 @@ ASSERT_SIZE(MissionMax, 0x4);
 extern MissionMax missionMaxes;
 
 typedef struct MacguffinMax {
-    uint8_t totalRelicFragmentShards; // 0x0
-    uint8_t totalInstruments;         // 0x1
+    uint8_t requiredRelicFragmentShards; // 0x0
+    uint8_t requiredInstruments;         // 0x1
 } MacguffinMax;
 ASSERT_SIZE(MacguffinMax, 0x2);
 extern MacguffinMax macguffinMaxes;
@@ -72,25 +72,25 @@ ASSERT_SIZE(DeathLinkTracker, 0x114);
 
 typedef struct DungeonTraps { // size: 1 byte
     bool maze : 1;      // 0x0
-    bool yawn : 1;  // 0x1
-    bool whiffer : 1;  // 0x2
-    bool dropItems : 1;  // 0x3
-    bool warp : 1;  // 0x4
-    bool weather : 1;  // 0x5
-    bool pitfall : 1;  // 0x6
-    bool embargo : 1;  // 0x7
+    bool yawn : 1;      // 0x1
+    bool whiffer : 1;   // 0x2
+    bool dropItems : 1; // 0x3
+    bool warp : 1;      // 0x4
+    bool weather : 1;   // 0x5
+    bool pitfall : 1;   // 0x6
+    bool embargo : 1;   // 0x7
 } DungeonTraps;
 ASSERT_SIZE(DungeonTraps, 0x1);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;                           // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192];             // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards;         // 0x184: How many relic fragment shards the player has collected.
-    uint8_t acquiredInstruments;                 // 0x185: How many instruments the player has collected.
-    DeathLinkTracker deathLinkTracker;           // 0x186: Stores information for deathlink.
-    bool hintedItems[HINTABLE_ITEM_COUNT];       // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;                   // 0x2A4
-    undefined fields[0xE5B];                     // 0x2A5: Unused.
+    uint32_t checksum;                     // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];       // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards;   // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;           // 0x185: How many instruments the player has collected.
+    DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
+    bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
+    DungeonTraps dungeonTraps;             // 0x2A4
+    undefined fields[0xE5B];               // 0x2A5: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
