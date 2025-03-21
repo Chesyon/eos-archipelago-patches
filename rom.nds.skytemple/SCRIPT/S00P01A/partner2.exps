@@ -3,16 +3,15 @@ def 0 {
     if (debug) {
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        dungeon_mode(111) = DMODE_OPEN;  
-        dungeon_mode(112) = DMODE_OPEN;  
-        dungeon_mode(113) = DMODE_OPEN;  
-        dungeon_mode(114) = DMODE_OPEN;  
-        dungeon_mode(115) = DMODE_OPEN;  
-        dungeon_mode(116) = DMODE_OPEN;  
-        dungeon_mode(117) = DMODE_OPEN;  
-        dungeon_mode(118) = DMODE_OPEN;  
-        dungeon_mode(119) = DMODE_OPEN;  
-        dungeon_mode(120) = DMODE_OPEN;                                                                                                                                                     
+        switch(dungeon_mode(21)) {
+            case DMODE_OPEN_AND_REQUEST:
+                $PERFORMANCE_PROGRESS_LIST[17] = 1;
+                dungeon_mode(23) = DMODE_REQUEST;
+                break;
+            default:
+                dungeon_mode(21) = DMODE_OPEN;               
+                break;
+        }                                                                                                                                   
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;

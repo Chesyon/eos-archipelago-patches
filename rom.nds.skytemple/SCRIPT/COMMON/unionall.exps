@@ -9262,6 +9262,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missions Steam Cave");
                         dungeon_mode(14) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(15) = DMODE_REQUEST;
+                        dungeon_mode(16) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M10_11_12);
                     case 17:
@@ -9305,6 +9306,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missions Quicksand Cave");
                         dungeon_mode(21) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(22) = DMODE_REQUEST;
+                        dungeon_mode(23) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M14_08_09);
                     case 24:
@@ -9320,6 +9322,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
                         dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(26) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M15_10_12);
                     case 27:
@@ -9442,6 +9445,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("GG you win now!");
                         dungeon_mode(41) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(42) = DMODE_REQUEST;
+                        dungeon_mode(43) = DMODE_REQUEST;
                         screen_WhiteIn(27, 0);
                         JumpCommon(CORO_EVENT_M26_01_08);
                     case 44:
@@ -9484,6 +9488,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missions Crevice Cave.");
                         dungeon_mode(47) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(48) = DMODE_REQUEST;
+                        dungeon_mode(49) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S02_07);
                     case 50:
                         debug_Print("Missions Surround Sea...");
@@ -9517,6 +9522,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Phione Unlocked");
                         dungeon_mode(52) = DMODE_REQUEST;
+                        dungeon_mode(53) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -9600,6 +9606,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missions Spacial Rift");
                         dungeon_mode(64) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(65) = DMODE_REQUEST;
+                        dungeon_mode(66) = DMODE_REQUEST;
                         screen_WhiteIn(29, 86);
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 67:
@@ -9621,7 +9628,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Dark Crater");
                         dungeon_mode(67) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(66) = DMODE_REQUEST;
+                        dungeon_mode(68) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S22_14_15);
                     case 70:
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
@@ -10228,8 +10235,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 26:
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
-                        dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(25) = DMODE_REQUEST;
+                        dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(26) = DMODE_REQUEST;
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);
@@ -11458,7 +11465,7 @@ coro GETOUT_REQUEST_CONQUEST {
                     jump @no_kyogre;
                 }
             } else {
-                message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!");
+                message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!\n");
                 message_Close();
                 jump @no_kyogre;
             }

@@ -39,6 +39,8 @@ def 0 {
         });
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
         ~AssignCheck(27);
+        bgm_FadeOut(120);
+        screen_FadeOut(1, 60);
         jump @label_4;
         §label_7;
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
