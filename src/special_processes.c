@@ -17,7 +17,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (missionType == 1) { // outlaws
-        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
         else totalNumber = missionMaxes.totalOutlawsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
@@ -29,7 +29,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
         else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
-        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
         else totalNumber = missionMaxes.totalJobsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {

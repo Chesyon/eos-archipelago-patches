@@ -18,7 +18,7 @@ char* TailoredDungeonMissionMenuEntryFn(char* buffer, int option_id) {
     
     int completedHalves = 0;
     char* dungeonSymbol = noMissionChecksString;
-    if(IsDungeonPostDialga(dungeonId)) {
+    if(IsDungeonLateGame(dungeonId)) {
         uint32_t regularJobMax = missionMaxes.totalJobsLate;
         if(regularJobMax > 0) {
             if(regularJobMax <= CUSTOM_SAVE_AREA.missionStats[dungeonId].completedJobs) {
