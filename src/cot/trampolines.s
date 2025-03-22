@@ -10,6 +10,11 @@
         bl DungeonModeTrapCheck
         b DungeonTurnUnhook
         
+.align 4 // Hook for our check.
+    DeathLinkSenderTrampoline:
+        bl DeathLinkSenderCheck
+        ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+        
 
 .align 4
 cotInternalTrampolineScriptSpecialProcessCall:

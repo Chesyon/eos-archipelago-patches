@@ -1,0 +1,748 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] ) {
+        §label_0;
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡Hombre, [hero] y\n[partner]!",
+        });
+        message_Talk({
+            english=" I\'m happy to see you! Are you\nvisiting us?",
+            french=" Content de vous revoir!\nVous venez nous rendre visite?",
+            german=" Ich freue mich, euch zu sehen!\nBesucht ihr uns?",
+            italian=" Sono contento di vedervi! Siete\nqui in visita?",
+            spanish=" ¡Me alegro de veros! ¿Venís\nde visita?",
+        });
+        message_Talk({
+            english=" By the way...[K] Have you seen my\ndad anywhere?",
+            french=" Au fait...[K] Vous n\'auriez pas vu\nmon père?",
+            german=" Übrigens...[K] Habt ihr meinen\nVater gesehen?",
+            italian=" A proposito...[K] Avete visto mio\npadre da qualche parte?",
+            spanish=" Por cierto...[K] ¿Habéis visto\na mi padre por ahí?",
+        });
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I haven\'t seen him for a while.\nI\'m beginning to get worried...",
+            french=" Ça fait un moment que je ne l\'ai\npas vu. Ça commence à m\'inquiéter...",
+            german=" Ich habe ihn eine Weile nicht\ngesehen. So langsam fange ich an, mir Sorgen\nzu machen...",
+            italian=" Non lo vedo da un po\'. Comincio\na essere preoccupato...",
+            spanish=" Hace tiempo que no le veo. Estoy\nempezando a preocuparme...",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I\'m glad to see your team back\nsafely, [hero]!",
+            french=" Je suis heureux que tu sois\nde retour indemne, [hero]!",
+            german=" Es freut mich, euer Team\nunversehrt zurück zu sehen, [hero]!",
+            italian=" Sono contento di vedervi di\nnuovo qui, [hero]!",
+            spanish=" ¡Me alegro de verte de vuelta\npor aquí, [hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I hope your team does well,\n[hero]!",
+            french=" J\'espère que ton équipe s\'en\nsortira, [hero]!",
+            german=" Ich hoffe, euer Team schlägt\nsich gut, [hero]!",
+            italian=" Spero che la tua squadra ce la\nfaccia, [hero]!",
+            spanish=" ¡Espero que todo salga bien,\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It sounds like a challenging\ndungeon, that [CS:P]Aegis Cave[CR].",
+            french=" La [CS:P]Grotte Egide[CR] a l\'air d\'un\ndonjon difficile.",
+            german=" Hört sich wie ein\nherausfordernder Dungeon an, diese [CS:P]Ägishöhle[CR].",
+            italian=" Sembra un dungeon impegnativo,\nquella [CS:P]Grotta Egida[CR].",
+            spanish=" La [CS:P]Cueva Regia[CR] debe de ser todo\nun reto.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 55] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        se_Play(8972);
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Ugh...[K] I would love to go too...",
+            french=" Ooh...[K] J\'adorerais y aller\nmoi aussi...",
+            german=" Hmpf...[K] Ich würde auch gerne\ngehen...",
+            italian=" Uh...[K] Piacerebbe anche a me \nandarci...",
+            spanish=" Uf...[K] Me encantaría ir a mí\ntambién...",
+        });
+        message_Talk({
+            english=" But [CS:N]Loudred[CR] is all set and raring\nto go...[K] He\'s beaten me to the punch.",
+            french=" Mais [CS:N]Ramboum[CR] est prêt et\nil est impatient d\'y aller...[K] Il m\'a pris de court.",
+            german=" Aber [CS:N]Krakeelo[CR] ist entschlossen\nund brennt darauf, zu gehen...[K] Er ist mir\nzuvorgekommen.",
+            italian=" Ma [CS:N]Loudred[CR] è gia pronto ed è\nimpaziente di andare...[K] È stato più veloce di\nme.",
+            spanish=" Pero [CS:N]Loudred[CR] ya está preparado\ny con muchas ganas de ir...[K] Se me ha\nadelantado.",
+        });
+        message_Talk({
+            english=" I\'ll have to stay behind at the\nguild to look after the sentry post.",
+            french=" Il faut que je reste à la Guilde\npour m\'occuper du poste de guet.",
+            german=" Ich werde in der Gilde\nzurückbleiben müssen, um nach dem\nWachposten zu sehen.",
+            italian=" Dovrò restare a fare la guardia\nalla Gilda.",
+            spanish=" Tendré que quedarme en el\n[CS:N]Pokégremio[CR] para encargarme de vigilar.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" ...........................",
+            french=" ...........................",
+            german=" ...........................",
+            italian=" ...........................",
+            spanish=" ...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Excuse me?![K] The grand master of\nall things bad?!",
+            french=" Pardon?![K] Le grand maître de\ntous les maux?!",
+            german=" Entschuldigt bitte?!?[K] Der\nGroßmeister allen Übels?!?",
+            italian=" Scusa?![K] Sua Malvagità?",
+            spanish=" ¿Cómo?[K] ¿El gran malo\nrequetemalo?",
+        });
+        message_Talk({
+            english=" I...I really can\'t tell you...[K]\nPlease, I just can\'t...",
+            french=" Je... je ne peux rien vous dire...\nJe vous en prie, je n\'ai pas le droit...",
+            german=" Ich... Ich kann es euch wirklich\nnicht sagen...[K] Bitte, ich kann es wirklich\nnicht...",
+            italian=" Io... davvero, non te lo posso\ndire...[K] Mi spiace, è solo che non posso...",
+            spanish=" No puedo deciros nada...[K] Es que\nno puedo...",
+        });
+        message_Talk({
+            english=" I\'m so sorry...",
+            french=" Je suis vraiment désolé...",
+            german=" Es tut mir so leid...",
+            italian=" Mi dispiace tanto...",
+            spanish=" Lo siento...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [partner] and\n[hero]!",
+            french=" Hé, [partner] et\n[hero]!",
+            german=" Oh, [partner] und\n[hero]!",
+            italian=" Oh, [partner] e\n[hero]!",
+            spanish=" ¡Oh, [partner] y\n[hero]!",
+        });
+        message_Talk({
+            english=" My thoughts go with you![K]\nGood luck!",
+            french=" Mes pensées vous accompagnent!\nBonne chance!",
+            german=" In Gedanken bin ich bei euch![K]\nViel Glück!",
+            italian=" Vi penserò![K] In bocca al lupo!",
+            spanish=" ¡Ojalá os vaya bien![K]\n¡Buena suerte!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Ugh...[K] Our team was wiped out\nas well.",
+            french=" Argh...[K] Notre équipe aussi a été\nvaincue.",
+            german=" Hmpf...[K] Unser Team wurde auch\nbesiegt.",
+            italian=" Uh...[K] Anche la nostra squadra\nè stata sconfitta.",
+            spanish=" Uf...[K] También han derrotado a\nnuestro equipo.",
+        });
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" But we won\'t give up! We\'ll do\nour best!",
+            french=" Mais on n\'abandonnera pas!\nOn se donnera à fond!",
+            german=" Aber wir geben nicht auf! Wir\ngeben unser Bestes!",
+            italian=" Ma non molleremo! Ce la \nmetteremo tutta!",
+            spanish=" ¡Pero no nos rendiremos!\n¡Lo haremos lo mejor posible!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I\'m helping to get word out\nabout what really happened.",
+            french=" J\'aide à répandre la nouvelle\nde ce qui s\'est réellement passé.",
+            german=" Ich helfe dabei, zu verbreiten,\nwas wirklich geschehen ist.",
+            italian=" Sto cercando di capire\ncos\'è successo davvero.",
+            spanish=" Estoy ayudando a difundir lo\nque sucedió en realidad.",
+        });
+        message_Talk({
+            english=" The others are finding it hard to\nbelieve right away...",
+            french=" Les autres Pokémon trouvent ça\ndifficile à croire au début...",
+            german=" Die anderen können das so ohne\nWeiteres nur schwer glauben...",
+            italian=" Gli altri stentano a crederlo...",
+            spanish=" A los demás les cuesta\ncreérselo así de golpe...",
+        });
+        message_Talk({
+            english=" But I\'ll do my best!",
+            french=" Mais je ferai de mon mieux!",
+            german=" Aber ich werde mein Bestes\ngeben!",
+            italian=" Ma farò del mio meglio!",
+            spanish=" ¡Pero haré todo lo que esté\nen mi mano!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] ) {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Yes, [CS:N]Loudred[CR]!",
+            french=" Oui, [CS:N]Ramboum[CR]!",
+            german=" Ja, [CS:N]Krakeelo[CR]!",
+            italian=" Sì, [CS:N]Loudred[CR]!",
+            spanish=" ¡Sí, [CS:N]Loudred[CR]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey![K] [hero]!\n[partner]!",
+            french=" Hé![K] [hero]!\n[partner]!",
+            german=" Hey![K] [hero]!\n[partner]!",
+            italian=" Ehi![K] [hero]!\n[partner]!",
+            spanish=" ¡Eh![K] ¡[hero]!\n¡[partner]!",
+        });
+        message_Talk({
+            english=" This is my first time out on an\nexpedition, so I\'m a little nervous.",
+            french=" C\'est ma première expédition,\nalors je suis un peu nerveux.",
+            german=" Das ist meine erste Expedition,\ndeswegen bin ich ein wenig aufgeregt.",
+            italian=" È la prima volta che partecipo\na una spedizione... Sono un po\' nervoso.",
+            spanish=" Es la primera vez que salgo de\nexpedición, así que estoy nerviosillo.",
+        });
+        message_Talk({
+            english=" But let\'s be sure to make this a\nsuccess!",
+            french=" Mais faisons en sorte\nque ce soit un succès!",
+            german=" Aber lasst uns erfolgreich sein!",
+            italian=" Ma se ci impegniamo a fondo,\nsarà un successo!",
+            spanish=" ¡Hay que asegurarse de que\nsea un éxito!",
+        });
+        message_Talk({
+            english=" Incidentally...",
+            french=" A propos...",
+            german=" Übrigens...",
+            italian=" A proposito...",
+            spanish=" A propósito...",
+        });
+        message_Talk({
+            english=" Do you know anything about the\nSecret Bazaar, [hero]?",
+            french=" Tu as entendu parler\ndu Bazar Secret, [hero]?",
+            german=" Weißt du etwas über den\nGeheimbasar, [hero]?",
+            italian=" Hai mai sentito parlare del\nBazar Segreto, [hero]?",
+            spanish=" ¿Sabes algo del\nBazar Secreto, [hero]?",
+        });
+        message_Talk({
+            english=" I haven\'t seen it either, but...[K]\nA rumor tells me that the Secret Bazaar is...",
+            french=" Je ne l\'ai pas encore vu, moi non\nplus...[K] mais on raconte que le Bazar Secret...",
+            german=" Ich habe ihn auch noch nicht\ngesehen...[K] Einem Gerücht zufolge ist\nder Geheimbasar...",
+            italian=" Io non l\'ho mai trovato, ma...[K]\na quanto si dice, il Bazar Segreto è...",
+            spanish=" Yo tampoco lo he visto, pero...[K]\ncircula el rumor de que es...",
+        });
+        message_Talk({
+            english=" A mysterious facility that\nappears occasionally in dungeons...",
+            french=" ... est un endroit mystérieux qui\napparaît parfois dans les donjons...",
+            german=" Nun, er scheint wohl eine\nmysteriöse Einrichtung zu sein, die ab und zu\nin Dungeons auftaucht...",
+            italian=" ... un luogo misterioso che\nappare di tanto in tanto nei dungeon.",
+            spanish=" Un local misterioso que aparece\na veces en los territorios.",
+        });
+        message_Talk({
+            english=" You can heal your wounds and\neven buy a Grab Bag there, so I hear...",
+            french=" On peut s\'y faire soigner et\nmême y acheter des Pochettes Surprises.",
+            german=" Dort kannst du deine Wunden\nheilen und sogar eine Wundertüte kaufen,\nhabe ich gehört...",
+            italian=" Lì puoi curare le tue ferite e\ncomprare addirittura un Sacco Sorpresa...\nma non solo!",
+            spanish=" Por lo visto puedes curarte y\nhasta hacerte con una Bolsa Sorpresa.",
+        });
+        message_Talk({
+            english=" Several kinds of shops\nare there.",
+            french=" Il paraît qu\'il abrite plusieurs\nmagasins!",
+            german=" Und es gibt dort wohl\nverschiedene Läden!",
+            italian=" Pare che ci siano un sacco di\naltri negozi!",
+            spanish=" Tiene varios tipos de tiendas.",
+        });
+        message_Talk({
+            english=" I wonder what other shops can\nbe found there...[K] I\'d love to find out\nfor myself...",
+            french=" Je me demande quel genre de\nmagasins on peut trouver là-bas...[K]\nJ\'adorerais aller vérifier par moi-même...",
+            german=" Ich frage mich, welche anderen\nLäden es dort wohl gibt...[K] Ich würde es gerne\nselbst herausfinden...",
+            italian=" Chissà di che negozi si tratta...[K]\nmi piacerebbe un sacco scoprirlo.",
+            spanish=" Me pregunto qué otras tiendas\nhabrá...[K] Me encantaría verlo\ncon mis propios ojos.",
+        });
+        message_Talk({
+            english=" Maybe there\'s a chance we can\nfind the Secret Bazaar on our expedition?",
+            french=" Avec un peu de chance\non tombera sur le Bazar Secret\npendant notre expédition...",
+            german=" Vielleicht ist es ja möglich,\ndass wir auf unserer Expedition einen\nGeheimbasar entdecken?",
+            italian=" Magari troveremo un Bazar\nSegreto durante la nostra spedizione...",
+            spanish=" Quizá tengamos ocasión de hallar\nel Bazar Secreto durante nuestra expedición.",
+        });
+        message_Talk({
+            english=" Ooh, I\'m so excited!",
+            french=" Oh, comme c\'est excitant!",
+            german=" Oooh, ich bin so aufgeregt!",
+            italian=" Oooh, non sto nella pelle!",
+            spanish=" ¡Uf, no me aguanto los nervios!",
+        });
+        message_Talk({
+            english=" If you happen to find the\nSecret Bazaar, [hero], be sure to tell\nme all about it!",
+            french=" Si jamais tu trouves le Bazar\nSecret, [hero], tu me préviens, promis?",
+            german=" Wenn du einen Geheimbasar\nfinden solltest, [hero], sag mir auf\njeden Fall Bescheid!",
+            italian=" [hero], se dovessi\nimbatterti in un Bazar Segreto, voglio\nche mi racconti tutto!",
+            spanish=" [hero], si logras hallar\nel Bazar Secreto, ¡me lo tienes que contar\ncon pelos y señales!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] ) {
+        $SCENARIO_TALK_BIT_FLAG[26] = 1;
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DAGUTORIO, FACE_NORMAL, FACE_POS_TOP_LC_FACEOUTW);
+        message_Talk({
+            english=" My son.",
+            french=" Notre fils.",
+            german=" Mein Sohn.",
+            italian=" Figlio.",
+            spanish=" Hijo mío.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_DIGUDA) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DAGUTORIO);
+        }
+        WaitExecuteLives(ACTOR_NPC_DIGUDA);
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk({
+            english=" Yes, Dad?",
+            french=" Oui, père?",
+            german=" Ja, Papa?",
+            italian=" Sì, papà?",
+            spanish=" ¿Sí, papá?",
+        });
+        message_Talk({
+            english=" Why did you call me out here?",
+            french=" Pourquoi est-ce que tu m\'as fait\nvenir ici?",
+            german=" Warum hast du mich hierher\nbestellt?",
+            italian=" Perché mi hai fatto venire qui?",
+            spanish=" ¿Para qué me has hecho venir\naquí?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_DAGUTORIO, FACE_NORMAL, FACE_POS_TOP_LC_FACEOUTW);
+        message_Talk({
+            english=" See?[K] The sea is vast.",
+            french=" Tu vois?[K] Contemple comme\nla mer est vaste.",
+            german=" Siehst du?[K] Das Meer ist riesig.",
+            italian=" Vedi?[K] Il mare è immenso.",
+            spanish=" ¿Ves?[K] El mar es inmenso.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8962);
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetEffect(EFFECT_QUESTION_MARK, 3);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_DIGUDA);
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk({
+            english=" Um, yes... But why are you\ntelling me this?",
+            french=" Euh, oui... Mais pourquoi est-ce\nque tu me racontes tout ça?",
+            german=" Ähm, ja... Aber warum erzählst\ndu mir das?",
+            italian=" Uhm, sì... Ma perché mi dici\nquesto?",
+            spanish=" Hum, sí... Pero, ¿a qué viene\nesto?",
+        });
+        message_Talk({
+            english=" I\'m supposed to be working, Dad.",
+            french=" Je devrais retourner au travail,\npère.",
+            german=" Ich sollte bei der Arbeit sein,\nPapa.",
+            italian=" Dovrei essere al lavoro, papà.",
+            spanish=" Debería estar trabajando, papá.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8972);
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_DIGUDA);
+        message_Talk({
+            english=" If I don\'t go back soon, I\'ll get\nan earful from [CS:N]Loudred[CR].",
+            french=" Si je n\'y retourne pas très vite,\n[CS:N]Ramboum[CR] va me passer un savon.\nIl va encore crier comme un sourd!",
+            german=" Wenn ich nicht bald zurückgehe,\nbekomme ich Ärger mit [CS:N]Krakeelo[CR].",
+            italian=" Se non torno presto, [CS:N]Loudred[CR] mi\nfarà una lavata di capo.",
+            spanish=" Si no vuelvo pronto, [CS:N]Loudred[CR] me\nechará la bronca.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_DAGUTORIO, FACE_NORMAL, FACE_POS_TOP_LC_FACEOUTW);
+        message_Talk({
+            english=" You\'ll be scolded?",
+            french=" Un savon?",
+            german=" Man wird dich ausschimpfen?",
+            italian=" Una lavata di capo?",
+            spanish=" ¿Te van a regañar?",
+        });
+        message_Talk({
+            english=" Why let such a paltry matter\ncloud your thoughts?",
+            french=" Pourquoi laisser un problème si\ndérisoire assombrir tes pensées?",
+            german=" Warum lässt du deine Gedanken\nvon solch einer geringfügigen Angelegenheit\neinhüllen?",
+            italian=" Perché farsi annebbiare la\nmente da un pensiero così banale?",
+            spanish=" ¿Por qué dejar que una cuestión\ntan irrelevante nuble tu cabeza?",
+        });
+        message_Talk({
+            english=" Broaden your perspective...[K]\nLike the sea before you.",
+            french=" Ouvre ton esprit...[K]\nComme la mer devant toi.",
+            german=" Erweitere deine Perspektive...[K]\nSo wie das Meer vor dir.",
+            italian=" Amplia la tua prospettiva...[K]\nCome il mare di fronte a te.",
+            spanish=" Expande tus horizontes...[K] como\nel mar ante ti.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8972);
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_DIGUDA);
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk({
+            english=" I don\'t know what that means!",
+            french=" Mais je n\'y comprends rien à ton\ntruc, moi, père!",
+            german=" Ich weiß nicht, was das\nbedeuten soll!",
+            italian=" Non capisco cosa vuoi dire!",
+            spanish=" No entiendo lo que me quieres\ndecir.",
+        });
+        message_Talk({
+            english=" I\'m going back to the guild.[K]\nI want to be chosen for the expedition.",
+            french=" Je retourne à la Guilde.[K]\nJe veux être sélectionné pour l\'expédition.",
+            german=" Ich gehe zurück zur Gilde.[K] Ich\nwill für die Expedition ausgewählt werden.",
+            italian=" Torno alla Gilda.[K] Voglio essere\nscelto per la spedizione.",
+            spanish=" Me vuelvo al [CS:N]Pokégremio[CR].[K]\nQuiero que me elijan para la expedición.",
+        });
+        message_Talk({
+            english=" Dad, you should quit wasting\ntime here and get back to work.[K] See you.",
+            french=" Père, arrête de perdre ton\ntemps ici et retourne à ton poste.[K] A plus.",
+            german=" Papa, du solltest aufhören, hier\ndeine Zeit zu verschwenden, und wieder zurück\nan die Arbeit gehen.[K] Bis später.",
+            italian=" Papà, dovresti smetterla di star\nqui a perdere tempo e tornare a lavoro.[K]\nCi vediamo.",
+            spanish=" Papá, deberías dejar de perder\nel tiempo y ponerte a trabajar.[K] Adiós.",
+        });
+        message_Close();
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetDirection(DIR_UP);
+        }
+        se_Play(6422);
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(24);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            WaitAnimation();
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            Destroy();
+        }
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 6] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Team [CS:X]Skull[CR] is kind of scary...",
+            french=" L\'Equipe [CS:X]Crâne[CR] me donne\nfroid dans le dos...",
+            german=" Team [CS:X]Totenkopf[CR] ist ziemlich\nunheimlich...",
+            italian=" Il Team [CS:X]Teschio[CR] ha qualcosa\ndi sinistro...",
+            spanish=" El [CS:X]Equipo Calavera[CR] da un poco\nde miedo...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] ) {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEOUTW);
+        message_Talk({
+            english=" Let\'s do a good job again today,\n[CS:N]Loudred[CR]!",
+            french=" Faisons notre travail du mieux\nque nous pouvons, [CS:N]Ramboum[CR]!",
+            german=" Leisten wir heute wieder gute\nArbeit, [CS:N]Krakeelo[CR]!",
+            italian=" Impegniamoci al massimo anche \noggi, [CS:N]Loudred[CR]!",
+            spanish=" ¡Hagamos un buen trabajo,\n[CS:N]Loudred[CR]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you for covering my\nsentry shift!",
+            french=" Merci de m\'avoir remplacé pour\nmon tour de garde!",
+            german=" Danke, dass ihr meine Wache\nübernommen habt!",
+            italian=" Grazie per aver coperto il mio\nturno di guardia!",
+            spanish=" ¡Gracias por cubrir mi turno\nde vigilancia!",
+        });
+        message_Talk({
+            english=" I may have to ask you again.\nI hope you\'ll cover for me then!",
+            french=" Je vous demanderai peut-être\nde me rendre à nouveau ce service.\nJ\'espère que cela ne vous dérangera pas!",
+            german=" Ich werde euch eventuell noch\neinmal fragen müssen. Ich hoffe, ihr werdet\nmich dann vertreten!",
+            italian=" Può darsi che ve lo chieda di \nnuovo. Spero che potrete sostituirmi ancora!",
+            spanish=" Tal vez tenga que pedíroslo en\notra ocasión. Espero que podáis ayudarme\ntambién.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [4, 7] ) {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Let\'s do our best, [CS:N]Loudred[CR]!",
+            french=" Faisons de notre mieux,\n[CS:N]Ramboum[CR]!",
+            german=" Geben wir unser Bestes,\n[CS:N]Krakeelo[CR]!",
+            italian=" Diamoci dentro, [CS:N]Loudred[CR]!",
+            spanish=" ¡A por todas, [CS:N]Loudred[CR]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Yes![K] I\'ll try my hardest!",
+            french=" Oui![K] Je ferai de mon mieux!",
+            german=" Ja![K] Ich werde mein Möglichstes\ntun!",
+            italian=" Sì![K] Ce la metterò tutta!",
+            spanish=" ¡Sí![K] ¡Me esforzaré al máximo!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

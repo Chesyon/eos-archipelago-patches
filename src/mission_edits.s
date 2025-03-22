@@ -18,4 +18,11 @@ EarlyMissionFloorsCheck:
     str r0,[sp,#0x8] // original instruction
     bx lr
     
+// When missions are being tailored, allow the floors to be duplicates.
+TailoredMissionBoardCheck:
+    ldr r1,=TAILORED_MISSION_DUNGEON
+    ldr r2,[r1,#0x0]
+    cmp r4,r2
+    movne r0,#0x0 // original instruction
+    bx lr
     

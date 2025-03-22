@@ -14,6 +14,7 @@
 
 #define HINTABLE_ITEM_COUNT 10
 #define ITEM_NAME_LENGTH 42
+
 typedef struct PreviewableItems {
     char names[HINTABLE_ITEM_COUNT][ITEM_NAME_LENGTH];
 } PreviewableItems;
@@ -24,7 +25,7 @@ extern PreviewableItems hintableItems;
 typedef struct ArchipelagoSettings { // size: 2 bytes
     uint8_t iqMultiplier : 4;    // 0 (0x0)
     bool earlyMissionFloors : 1; // 4 (0x4)
-    bool unused_1 : 1;           // 5 (0x5)
+    bool moveShortcuts : 1;      // 5 (0x5)
     bool unused_2 : 1;           // 6 (0x6)
     bool levelScaling : 1;       // 7 (0x7)
     bool typesanity : 1;         // 8 (0x8)
@@ -52,11 +53,12 @@ ASSERT_SIZE(MissionMax, 0x4);
 extern MissionMax missionMaxes;
 
 typedef struct MacguffinMax {
-    uint8_t totalRelicFragmentShards; // 0x0
-    uint8_t totalInstruments;         // 0x1
+    uint8_t requiredRelicFragmentShards; // 0x0
+    uint8_t requiredInstruments;         // 0x1
 } MacguffinMax;
 ASSERT_SIZE(MacguffinMax, 0x2);
 extern MacguffinMax macguffinMaxes;
+extern uint8_t cafeMax; // See my comment on SP 105.
 
 typedef struct MissionStatus {
     uint8_t completedJobs : 8;    // 0x0
@@ -76,25 +78,26 @@ ASSERT_SIZE(DeathLinkTracker, 0x114);
 
 typedef struct DungeonTraps { // size: 1 byte
     bool maze : 1;      // 0x0
-    bool yawn : 1;  // 0x1
-    bool whiffer : 1;  // 0x2
-    bool dropItems : 1;  // 0x3
-    bool warp : 1;  // 0x4
-    bool weather : 1;  // 0x5
-    bool pitfall : 1;  // 0x6
-    bool embargo : 1;  // 0x7
+    bool yawn : 1;      // 0x1
+    bool whiffer : 1;   // 0x2
+    bool dropItems : 1; // 0x3
+    bool warp : 1;      // 0x4
+    bool weather : 1;   // 0x5
+    bool pitfall : 1;   // 0x6
+    bool embargo : 1;   // 0x7
 } DungeonTraps;
 ASSERT_SIZE(DungeonTraps, 0x1);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;                           // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192];             // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards;         // 0x184: How many relic fragment shards the player has collected.
-    uint8_t acquiredInstruments;                 // 0x185: How many instruments the player has collected.
-    DeathLinkTracker deathLinkTracker;           // 0x186: Stores information for deathlink.
-    bool hintedItems[HINTABLE_ITEM_COUNT];       // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;                   // 0x2A4
-    undefined fields[0xE5B];                     // 0x2A5: Unused.
+    uint32_t checksum;                     // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];       // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards;   // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;           // 0x185: How many instruments the player has collected.
+    DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
+    bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
+    DungeonTraps dungeonTraps;             // 0x2A4: wip dungeons traps
+    uint8_t acquiredCafeChecks;            // 0x2A5: How many cafe checks have been obtained. See my comment on SP 105.
+    undefined fields[0xE5A];               // 0x2A6: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
@@ -105,6 +108,8 @@ extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 extern int MESSAGE_SET_WAIT_MODE_PARAMS[2];
 extern void* UNIONALL_RAM_ADDRESS;
+
+extern uint32_t TAILORED_MISSION_DUNGEON;
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);

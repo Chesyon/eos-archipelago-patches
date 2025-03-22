@@ -17,6 +17,7 @@ void DungeonModeTrapCheck() {
         StrncpyName(buffer2, defaultTeamName, 10);
         DungeonModeSetupAndShowKeyboard(buffer1, buffer2, NULL);
         SetMainTeamName(buffer1);
+        SaveScriptVariableValueAtIndex(NULL, VAR_PERFORMANCE_PROGRESS_LIST, 1, 1);
     }
     
     /* Work In Progress For New Traps

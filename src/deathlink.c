@@ -27,7 +27,7 @@ void DeathLinkReceiverCheck() {
     // Messages may not look so cool because of how EoS wraps text.
     if(CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage[0] != '\0') {
         LogMessageWithPopupCheckUser(leader, CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage);
-        CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage[0] = '\0';
+        MemZero(CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage, 128);
     }
     
     // Roll for a random cool visual experience for your death.
@@ -55,6 +55,9 @@ void DeathLinkReceiverCheck() {
             SpawnDroppedItemWrapper(leader, &pos, &item, 0);
             break;
         case 4:; // Blocked In
+            if (dlType == DEATHLINK_REVIVER) {
+                break;
+            }
             int xStart = leader->pos.x - 1;
             int yStart = leader->pos.y - 1;
             int xEnd = leader->pos.x + 1;
@@ -78,6 +81,22 @@ void DeathLinkReceiverCheck() {
                 }
             }
             ChangeMonsterAnimation(leader, 6, DIR_NONE);
+            xStart = xStart - 1;
+            yStart = yStart - 1;
+            xEnd = xEnd + 1;
+            yEnd = yEnd + 1;
+            if(xStart < 0) {
+                xStart = 0;
+            }
+            if(yStart < 0) {
+                yStart = 0;
+            }
+            if(xEnd > 0x37) {
+                xEnd = 0x37;
+            }
+            if(yEnd > 0x20) {
+                yEnd = 0x20;
+            }
             for(int x = xStart; x <= xEnd; x++) {
                 for(int y = yStart; y <= yEnd; y++) {
                     DetermineTileAppearence(x, y);
@@ -172,6 +191,7 @@ void DeathLinkReceiverCheck() {
     if(dlType == DEATHLINK_TRUE_DEATH) {
         HandleFaint(leader, damageSource, leader);
     } else if (dlType == DEATHLINK_REVIVER) {
+        leader->is_visible = true;
         struct monster *leaderMonster = leader->info;
         leaderMonster->statuses.reflect.val = STATUS_REFLECT_NONE; // Stop Endure from Activating.
         CalcDamageFixedNoCategory(leader, leader, 9999, false, NULL, TYPE_NONE, damageSource,
@@ -180,33 +200,43 @@ void DeathLinkReceiverCheck() {
         leader->is_visible = true;
     }
     
+    // Reuse [string:2] to use our fallen ally name.
+    strncpy(DUNGEON_PTR->loss_related_monster_name, CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathName, 10);
+    
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
 
-char space[2] = " ";
-void DeathLinkSenderCheck(union damage_source damage_source_or_result, char* buffer,
-                          int buffer_size, struct preprocessor_args* args) {
-    GetDungeonResultMsg(damage_source_or_result, buffer, buffer_size, (undefined*) args);
-    
+void DeathLinkSenderCheck() {
+    union damage_source damageSource = {.other = (DUNGEON_PTR->fainted_monster_dungeon_end_reason.other.val)};
     // If this was a succesful mission, we got smited by the deathlink,
     // or deathlink is disabled, do nothing.
-    if (damage_source_or_result.other == DEATHLINK_DAMAGE_SOURCE ||
-        damage_source_or_result.other >= DAMAGE_SOURCE_ESCAPE || apSettings.deathLinkType == DEATHLINK_NONE) {
+    if (damageSource.other == DEATHLINK_DAMAGE_SOURCE || damageSource.other >= DAMAGE_SOURCE_ESCAPE
+        || damageSource.other == DEATHLINK_NONE) {
         return;
     }
     
-    CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[0] = '\0';
+    // Zero our death message to remove old one.
+    MemZero(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, 128);
     
-    if (SomeDeathMsgCheckFun(damage_source_or_result) != 0) {
+    // We have to rebuild the death string manually.
+    struct preprocessor_args preArgs;    
+    preArgs.strings[0] = DUNGEON_PTR->fainted_monster_cause_entity_name;
+    preArgs.strings[1] = DUNGEON_PTR->fainted_monster_name;
+    preArgs.strings[2] = DUNGEON_PTR->loss_related_monster_name;
+    
+    if (SomeDeathMsgCheckFun(damageSource) != 0) {
         strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
-        int remaining = 127 - strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
-        if(remaining > 2) {
-            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, space, remaining);
-            remaining--;
-            strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, remaining);
+        int used = strlen(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage);
+        if(used < 125) {
+            CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[used] = ' ';
+            GetDungeonResultMsg(damageSource,
+                CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage + used + 1,
+                127 - used - 1, (undefined*)&preArgs);
         }
     } else {
-        strncat(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, buffer, 127);
+        CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage[0] = ' ';
+        GetDungeonResultMsg(damageSource, CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage + 1,
+            127 - 1, (undefined*)&preArgs);
     }
     
     CUSTOM_SAVE_AREA.deathLinkTracker.sender = true;

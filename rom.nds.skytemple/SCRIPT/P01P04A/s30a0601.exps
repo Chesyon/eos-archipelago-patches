@@ -1,3 +1,4 @@
+// Note: Freed up $LOTTERY_RESULT by replacing all instances here with $LOCAL0. I foresee no consequences here...
 
 def 0 {
     supervision_Acting(0);
@@ -68,7 +69,7 @@ def 0 {
                                 switch ( random(100) ) {
                                     case <= 50:
                                         §label_51;
-                                        $LOTTERY_RESULT = 0;
+                                        $LOCAL0 = 0;
                                         §label_59;
                                         message_Close();
                                         with (actor ACTOR_NPC_SOONANSU) {
@@ -107,7 +108,7 @@ def 0 {
                                             spanish=" ¿Hay premio? ¿O no?",
                                         });
                                         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                                        switch ( $LOTTERY_RESULT ) {
+                                        switch ( $LOCAL0 ) {
                                             case 0:
                                                 message_SetFace(ACTOR_NPC_SOONANSU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
                                                 message_Talk({
@@ -915,7 +916,7 @@ def 0 {
                                                     spanish=" Entonces... ¿ha ganado o no?",
                                                 });
                                                 CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                                                switch ( $LOTTERY_RESULT ) {
+                                                switch ( $LOCAL0 ) {
                                                     case 1:
                                                         with (actor ACTOR_NPC_SOONANSU) {
                                                             Turn2Direction(1, 2, DIR_DOWN);
@@ -1090,7 +1091,7 @@ def 0 {
                                                         with (actor ACTOR_UNIT_NPC2) {
                                                             Turn2Direction(4, 10, DIR_RIGHT);
                                                         }
-                                                        switch ( $LOTTERY_RESULT ) {
+                                                        switch ( $LOCAL0 ) {
                                                             case 2:
                                                                 Wait(60);
                                                                 se_Play(8961);
@@ -2066,15 +2067,15 @@ def 0 {
                                         break;
                                     case <= 80:
                                         §label_52;
-                                        $LOTTERY_RESULT = 1;
+                                        $LOCAL0 = 1;
                                         jump @label_59;
                                     case <= 95:
                                         §label_53;
-                                        $LOTTERY_RESULT = 2;
+                                        $LOCAL0 = 2;
                                         jump @label_59;
                                     default:
                                         §label_54;
-                                        $LOTTERY_RESULT = 3;
+                                        $LOCAL0 = 3;
                                         switch ( ProcessSpecial(59, 0, 0) ) { }
                                         jump @label_59;
                                 }

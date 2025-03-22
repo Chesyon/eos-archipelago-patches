@@ -1,5 +1,7 @@
 // import "internal_checks.exps";
 import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+import "pelipper.exps"; // Pelipper has been exported to a macro for convenience!
+import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
 coro END_TALK {
     message_Close();
     supervision_Suspend(-2);
@@ -2344,7 +2346,10 @@ coro EVENT_M00A_01 {
     message_Mail("Oh![K] One more thing...");
     message_Close();
     switch ( message_Menu(MENU_PLAYER_NAME) ) { }
-    call @label_729;
+    if (not debug) {
+        jump @name_check;
+    }
+    §done_name_check;
     dungeon_mode(1) = DMODE_OPEN;
     $SCENARIO_MAIN_BIT_FLAG[95] = 1; // Ursaring you liar, we can't evolve!!!
     $SCENARIO_MAIN_BIT_FLAG[96] = 1; // Yes Krabby, we know bottles exist!!!
@@ -2363,8 +2368,6 @@ coro EVENT_M00A_01 {
     $SCENARIO_TALK_BIT_FLAG[71] = 1;
     $SUB30_PROJECTP = 1;
     // Check archipelago settings and enable variables accordingly
-    $VERSION = $PERFORMANCE_PROGRESS_LIST; // set the list to update to PERFORMANCE_PROGRESS_LIST
-    $VERSION = 1;
     main_EnterGround(LEVEL_H02P99A,30);
     hold;
 }
@@ -2519,7 +2522,7 @@ coro EVENT_HA_YU_KI {
                 break;
         }
     } else {
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         jump @label_430;
     }
 }
@@ -2658,12 +2661,13 @@ coro EVENT_HA_SAME {
     switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
     CallCommon(CORO_BUBBLE_TEST);
     debug_Print('HANYOU_SAMEHADA');
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    //$PERFORMANCE_PROGRESS_LIST[5] = 1;
     CallCommon(CORO_RESCUE_DEBUG);
     if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
         screen_WhiteIn(29, 6);
         $REQUEST_CLEAR_COUNT = 0;
         §label_484;
+        // Sky Gift 1
         if ( $SCENARIO_MAIN_BIT_FLAG[50] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2673,6 +2677,7 @@ coro EVENT_HA_SAME {
             }
         }
         §label_486;
+        // Sky Gift 2
         if ( $SCENARIO_MAIN_BIT_FLAG[51] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2682,6 +2687,7 @@ coro EVENT_HA_SAME {
             }
         }
         §label_490;
+        // Sky Gift 3
         if ( $SCENARIO_MAIN_BIT_FLAG[52] ) {
             switch ( random(100) ) {
                 case < 70:
@@ -2771,6 +2777,16 @@ coro EVENT_HA_SAME {
                         break;
                 }
         }
+        // Ampharos Gift
+        if ( $SCENARIO_TALK_BIT_FLAG[227] ) {
+            switch ( random(100) ) {
+                case < 70:
+                    $SCENARIO_TALK_BIT_FLAG[228] = 1;
+                    default:
+                        break;
+                }
+        }
+        
         §label_530;
         // Manaphy Stuff
         switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 16, 0) ) {
@@ -3038,7 +3054,11 @@ coro EVENT_M01_01_02 {
     supervision_ExecuteActingSub(LEVEL_D01P11B, 'M01A0204', 0);
     supervision_ExecuteActingSub(LEVEL_V26P05A, 'M01A0205', 0);
     supervision_ExecuteActingSub(LEVEL_D01P11B, 'M01A0206', 0);
-    supervision_ExecuteActingSub(LEVEL_V26P05A, 'M01A0207', 0);
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        $PERFORMANCE_PROGRESS_LIST[36] = 0;
+        supervision_ExecuteActingSub(LEVEL_V26P05A, 'M01A0207', 0);
+        $PERFORMANCE_PROGRESS_LIST[36] = 1;
+    }
     supervision_ExecuteActingSub(LEVEL_D01P11B, 'M01A0208', 0);
     end;
 }
@@ -3387,6 +3407,7 @@ coro EVENT_M05_06_09 {
         §label_598;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
         adventure_log = 0;
+        JumpCommon(CORO_EVENT_HA_SAME);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M05A0701', 0);
         supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05D0314', 0);
         supervision_ExecuteActingSub(LEVEL_D04P31A, 'M05D0614', 0);
@@ -3874,7 +3895,11 @@ coro EVENT_M10_11_12 {
         supervision_ExecuteActingSub(LEVEL_P04P01C, 'M10A1206', 0);
         supervision_ExecuteActingSub(LEVEL_V10P01C, 'M10A1207', 0);
         supervision_ExecuteActingSub(LEVEL_P04P01C, 'M10A1208', 0);
-        supervision_ExecuteActingSub(LEVEL_V10P03C, 'M10A1209', 0);
+        if ($PERFORMANCE_PROGRESS_LIST[36]) { // This will ensure no coincidences ruin our day. Probably. 
+            $PERFORMANCE_PROGRESS_LIST[36] = 0;
+            supervision_ExecuteActingSub(LEVEL_V10P03C, 'M10A1209', 0);
+            $PERFORMANCE_PROGRESS_LIST[36] = 1;
+        }
         supervision_ExecuteActingSub(LEVEL_P04P01C, 'M10A1210', 0);
         supervision_ExecuteActingSub(LEVEL_V10P03C, 'M10A1211', 0);
         supervision_ExecuteActingSub(LEVEL_V03P09A, 'M10A1212', 0);
@@ -3891,7 +3916,7 @@ coro EVENT_M10_11_12 {
 
 coro EVENT_M11_01 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[5] = 1;
     supervision_ExecuteActingSub(LEVEL_G01P07A, 'M11A0101', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_G01P07A);
@@ -4681,7 +4706,7 @@ coro EVENT_M20_07_09 {
     supervision_ExecuteActingSub(LEVEL_V03P06A, 'M20A0707', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'M20A0801', 0);
     supervision_ExecuteActingSub(LEVEL_D01P11A, 'M20A0901', 0);
-    JumpCommon(CORO_EVENT_DIVIDE);
+    JumpCommon(CORO_EVENT_HA_SAME);
 }
 
 coro EVENT_M21_01_03 {
@@ -4902,7 +4927,7 @@ coro EVENT_M23_09_10 {
 
 coro EVENT_M24_01_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    // $PERFORMANCE_PROGRESS_LIST[5] = 1;
     if ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
         §label_624;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
@@ -5263,7 +5288,7 @@ coro EVENT_S01_09_10 {
         }
         ~AssignCheck(4);
         adventure_log = 4;
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_H02P99A);
         supervision_ExecuteStationCommon(LEVEL_H02P99A, 1);
@@ -5936,7 +5961,7 @@ coro EVENT_S20_07_08 {
         supervision_ExecuteStationCommon(LEVEL_G01P07A, 1);
         end;
     } else {
-        $PERFORMANCE_PROGRESS_LIST[5] = 1;
+        // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         supervision_ExecuteActingSub(LEVEL_D36P41A, 'S20P0701', 0);
         jump @label_632;
     }
@@ -6106,7 +6131,7 @@ coro EVENT_S22_01_04 {
                 supervision_ExecuteActingSub(LEVEL_D39P41A, 'S22P0304', 0);
                 supervision_ExecuteActingSub(LEVEL_T01P01A, 'S22P0305', 0);
                 supervision_ExecuteActingSub(LEVEL_H01P99A, 'S22P0401', 0);
-                $PERFORMANCE_PROGRESS_LIST[5] = 1;
+                // $PERFORMANCE_PROGRESS_LIST[5] = 1;
                 CallCommon(CORO_EVENT_END_MAPIN);
                 main_SetGround(LEVEL_H01P99A);
                 supervision_ExecuteStationCommon(LEVEL_H01P99A, 1);
@@ -6448,6 +6473,14 @@ coro EVENT_S31_19 {
 coro EVENT_S31_20 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D73P25A, 'S31A2001', 0);
+    dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
+    switch(dungeon_mode(116)) {
+        case DMODE_CLOSED:
+        case DMODE_REQUEST:
+            call @sky_peak_closed;
+        default:
+            break;
+    }
     CallCommon(CORO_EVENT_END_MAPIN_AE);
     main_SetGround(LEVEL_D73P25A);
     supervision_ExecuteStationCommon(LEVEL_D73P25A, 1);
@@ -6573,6 +6606,7 @@ coro EVENT_S31_34 {
 
 coro EVENT_S31_35 {
     CallCommon(CORO_SUBSCREEN_INIT);
+    dungeon_mode(122) = DMODE_REQUEST;
     supervision_ExecuteActingSub(LEVEL_D73P29A, 'S31A3501', 0);
     CallCommon(CORO_EVENT_END_MAPIN_AE);
     main_SetGround(LEVEL_D73P29A);
@@ -8335,7 +8369,11 @@ coro EVENT_N09_21 {
 coro EVENT_N09_22 {
     CallCommon(CORO_DEBUG_FLAG_SETTING_FUTURE);
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_D53P41B, 'N09A2201', 0);
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        $PERFORMANCE_PROGRESS_LIST[36] = 0;
+        supervision_ExecuteActingSub(LEVEL_D53P41B, 'N09A2201', 0);
+        $PERFORMANCE_PROGRESS_LIST[36] = 1;
+    }
     supervision_ExecuteActingSub(LEVEL_D53P11A, 'N09A2202', 0);
     supervision_ExecuteActingSub(LEVEL_V38P07A, 'N09A2203', 0);
     supervision_ExecuteActingSub(LEVEL_V38P08A, 'N09A2213', 0);
@@ -9154,7 +9192,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_M08_10);
                     case 9:
                         debug_Print("Break Glass if Softlock!");
-                        message_Mail("[CS:P]Side Path[CR] returned you to where you\ncame from!");
+                        message_Mail("[CS:P]Side Path[CR] returned\nyou to where you\ncame from!");
                         dungeon_mode(9) = DMODE_OPEN_AND_REQUEST; 
                         message_Close();
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
@@ -9169,7 +9207,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 11:
                         debug_Print("Break Glass if Softlock!");
-                        message_Mail("[CS:P]Rock Path[CR] returned you to where you came from!");
+                        message_Mail("[CS:P]Rock Path[CR] returned\nyou to where you came from!");
                         dungeon_mode(11) = DMODE_OPEN_AND_REQUEST; 
                         message_Close();
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
@@ -9182,7 +9220,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_M09_06_07);
                     case 13:
                         debug_Print("Break Glass if Softlock!");
-                        message_Mail("[CS:P]Forest Path[CR] returned you to where you came from!");
+                        message_Mail("[CS:P]Forest Path[CR] returned\nyou to where you came from!");
                         message_Close();
                         dungeon_mode(13) = DMODE_OPEN_AND_REQUEST;
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
@@ -9223,6 +9261,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 16:
                         debug_Print("Missions Steam Cave");
                         dungeon_mode(14) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(15) = DMODE_REQUEST;
+                        dungeon_mode(16) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M10_11_12);
                     case 17:
@@ -9241,6 +9281,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 19:
                         debug_Print("Missions Amp Plains");
                         dungeon_mode(17) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(18) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_M12_10_12);
                     case 20:
                         debug_Print("Northen Desert is a dead-end in base-game!");
@@ -9264,10 +9305,12 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 23:
                         debug_Print("Missions Quicksand Cave");
                         dungeon_mode(21) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(22) = DMODE_REQUEST;
+                        dungeon_mode(23) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M14_08_09);
                     case 24:
-                        debug_Print("Haha Crystal Puzzle go brrrrrr");
+                        debug_Print("Haha Crystal Puzzle go brrrrrr... NOT!");
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
@@ -9279,6 +9322,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
                         dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(26) = DMODE_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M15_10_12);
                     case 27:
@@ -9308,6 +9352,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 31:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(29) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(30) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_M18_13_14);
                     case 32:
                         dungeon_mode(32) = DMODE_OPEN_AND_REQUEST;
@@ -9346,6 +9391,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Brine Cave");
                         dungeon_mode(35) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(36) = DMODE_REQUEST;
                         // JumpCommon(CORO_EVENT_HA_SAME);
                         JumpCommon(CORO_EVENT_M23_09_10);
                     case 38:
@@ -9371,6 +9417,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Dusknoir Dungeon, Likely do nothing");
                         dungeon_mode(38) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(39) = DMODE_REQUEST;
                         screen_WhiteIn(26, 0);
                         JumpCommon(CORO_EVENT_M25_01_05);
                     case 41:
@@ -9397,6 +9444,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("GG you win now!");
                         dungeon_mode(41) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(42) = DMODE_REQUEST;
+                        dungeon_mode(43) = DMODE_REQUEST;
                         screen_WhiteIn(27, 0);
                         JumpCommon(CORO_EVENT_M26_01_08);
                     case 44:
@@ -9417,7 +9466,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 46:
                         debug_Print("Missons Blizzard Island");
                         dungeon_mode(46) = DMODE_OPEN_AND_REQUEST;
-                        JumpCommon(CORO_EVENT_DIVIDE);
+                        JumpCommon(CORO_EVENT_HA_SAME);
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_S02_02);
                     case 47:
@@ -9438,9 +9487,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Crevice Cave.");
                         dungeon_mode(47) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(48) = DMODE_REQUEST;
+                        dungeon_mode(49) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S02_07);
                     case 50:
-                        debug_Print("Missions Surround Sea. Manaphy?");
+                        debug_Print("Missions Surround Sea...");
                         dungeon_mode(50) = DMODE_OPEN_AND_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
@@ -9460,15 +9511,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                                 JumpCommon(CORO_EVENT_S03_15);
                             }
                         } else {
-                            message_Mail("You cannot proceed further in this\ndungeon until [CS:G]Manaphy[CR] is sick!");
+                            message_Mail("[CN]You cannot challenge [CS:G]Gyarados[CR]\n[CN]until [CS:G]Manaphy[CR] is sick!");
                             message_Close();
+                            debug_Print("Missions Miracle Sea");
+                            dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
                             JumpCommon(CORO_EVENT_HA_SAME);
                         }
                         break;
                     case 53:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("Missions Miracle Sea");
-                        dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
+                        debug_Print("Phione Unlocked");
+                        dungeon_mode(52) = DMODE_REQUEST;
+                        dungeon_mode(53) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -9535,7 +9589,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print('LABEL_D064_CLEAR');
                         debug_Print("This used to bump up $SCENARIO_MAIN");
                         main_EnterGround(LEVEL_D39P21A, 30);
-                        break;
+                        hold;
                     case 65:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Jumping to 225 bc of Aegis Cave");
@@ -9551,6 +9605,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Spacial Rift");
                         dungeon_mode(64) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(65) = DMODE_REQUEST;
+                        dungeon_mode(66) = DMODE_REQUEST;
                         screen_WhiteIn(29, 86);
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 67:
@@ -9572,11 +9628,15 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Dark Crater");
                         dungeon_mode(67) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(68) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S22_14_15);
+                    case 70:
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 71:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Congealed Ruins");
-                        dungeon_mode(71) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(70) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(71) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 72:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -9716,114 +9776,156 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 111:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to this station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[227]) {
-                            main_EnterGround(LEVEL_D73P21A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[227] = 1;
-                            JumpCommon(CORO_EVENT_S31_06);
+                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(112)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 0) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 1;
+                        }                          
+                        JumpCommon(CORO_EVENT_S31_06);               
                         break;
                     case 112:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[1] = 1; // 2F Gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[228]) {
-                            main_EnterGround(LEVEL_D73P22A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[228] = 1;
-                            JumpCommon(CORO_EVENT_S31_09);
+                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(113)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 1) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 2;
+                        }
+                        JumpCommon(CORO_EVENT_S31_09);
                         break;
                     case 113:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[229]) {
-                            main_EnterGround(LEVEL_D73P23A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[229] = 1;
-                            JumpCommon(CORO_EVENT_S31_12);
+                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(114)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 2) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 4;
+                        }
+                        JumpCommon(CORO_EVENT_S31_12);
                         break;
                     case 114:
-                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[2] = 1; // 4F gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[230]) {
-                            main_EnterGround(LEVEL_D73P24A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[230] = 1;
-                            JumpCommon(CORO_EVENT_S31_15);
+                        switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {}
+                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(115)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 3) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 8;
+                        }
+                        JumpCommon(CORO_EVENT_S31_15);
                         break;
                     case 115:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[231]) {
+                        if ($DUNGEON_CONQUEST_LIST[121]) {
                             main_EnterGround(LEVEL_D73P25A, 30);
-                            hold;
+                            hold;                         
                         } else {
-                            $SCENARIO_TALK_BIT_FLAG[231] = 1;
                             JumpCommon(CORO_EVENT_S31_19);
                         }
                         break;
                     case 116:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        $BIT_FUWARANTE_LOCAL[3] = 1; // 6F gondola
-                        if ($SCENARIO_TALK_BIT_FLAG[232]) {
-                            main_EnterGround(LEVEL_D73P26A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[232] = 1;
-                            JumpCommon(CORO_EVENT_S31_21);
+                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(117)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 4) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 16;
+                        }
+                        JumpCommon(CORO_EVENT_S31_21);
                         break;
                     case 117:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[233]) {
-                            main_EnterGround(LEVEL_D73P27A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[233] = 1;
-                            JumpCommon(CORO_EVENT_S31_24);
+                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(118)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 5) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 32;
+                        }
+                        JumpCommon(CORO_EVENT_S31_24);
                         break;
                     case 118:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[234]) {
-                            main_EnterGround(LEVEL_D73P28A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[234] = 1;
-                            JumpCommon(CORO_EVENT_S31_28);
+                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(119)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 6) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 64;
+                        }
+                        JumpCommon(CORO_EVENT_S31_28);
                         break;
                     case 119:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[235]) {
-                            main_EnterGround(LEVEL_D73P29A, 30);
-                            hold;
-                        } else {
-                            $SCENARIO_TALK_BIT_FLAG[235] = 1;
-                            JumpCommon(CORO_EVENT_S31_31);
+                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
+                        switch(dungeon_mode(120)) {
+                            case DMODE_CLOSED:
+                            case DMODE_REQUEST:
+                                call @sky_peak_closed;
+                            default:
+                                break;
                         }
+                        if ($CRYSTAL_COLOR_01 &<< 7) {
+                            JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                        } else {
+                            $CRYSTAL_COLOR_01 += 128;
+                        }
+                        JumpCommon(CORO_EVENT_S31_31);
                         break;
                     case 120:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("If the player has been to the station before...");
-                        if ($SCENARIO_TALK_BIT_FLAG[236]) {
+                        if ($DUNGEON_REQUEST_LIST[122]) {
+                            dungeon_mode(122) = DMODE_CLOSED;
                             JumpCommon(CORO_EVENT_S31_36);
-                            hold;
                         } else {
-                            $SCENARIO_TALK_BIT_FLAG[236] = 1;
                             JumpCommon(CORO_EVENT_S31_34);
                         }
                         break;
@@ -9832,16 +9934,6 @@ coro GETOUT_SCENARIO_DUNGEON {
                         jump @label_827;
                     case 122:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("Missions Sky Peak... How though? Idk we try this!");
-                        dungeon_mode(111) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(112) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(113) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(114) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(116) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(117) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(118) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(119) = DMODE_OPEN_AND_REQUEST;
                         dungeon_mode(120) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_EVENT_S31_37);
                     case 123:
@@ -10131,56 +10223,6 @@ coro GETOUT_SCENARIO_DUNGEON {
                 JumpCommon(CORO_EVENT_DIVIDE);
             } else {
                 switch ( $DUNGEON_ENTER ) {
-                    case 64:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
-                                    jump @failed_65;
-                                } else {
-                                    jump @failed_64;
-                                }
-                                break;
-                        }
-                        break;
-                    case 65:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
-                                    jump @failed_67;
-                                } else {
-                                    jump @failed_66;
-                                }
-                                break;
-                        }
-                        break;
-                    case 66:
-                        message_Mail("Would you like to return home for the day?");
-                        switch(message_SwitchMenu(1,1)) {
-                            case menu("Yes"):
-                                message_Close();
-                                JumpCommon(CORO_EVENT_HA_SAMEX);
-                                hold;
-                            case menu("No"):
-                            default:
-                                message_Close();
-                                JumpCommon(CORO_EVENT_S21_12);
-                                break;
-                        }
-                        break;
                     case 15:
                     case 16:
                         JumpCommon(CORO_EVENT_M10_08);    
@@ -10193,7 +10235,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 26:
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
-                        dungeon_mode(24) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
+                        dungeon_mode(26) = DMODE_REQUEST;
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);
@@ -10249,8 +10292,56 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 60:
                     case 61:
                         jump @label_877;
+                    case 64:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
+                                    jump @failed_65;
+                                } else {
+                                    jump @failed_64;
+                                }
+                                break;
+                        }
+                        hold;
                     case 65:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                if ($SCENARIO_TALK_BIT_FLAG[225]) {
+                                    jump @failed_67;
+                                } else {
+                                    jump @failed_66;
+                                }
+                                break;
+                        }
+                        hold;
                     case 66:
+                        message_Mail("Would you like to return home for the day?");
+                        switch(message_SwitchMenu(1,1)) {
+                            case menu("Yes"):
+                                message_Close();
+                                JumpCommon(CORO_EVENT_HA_SAMEX);
+                                hold;
+                            case menu("No"):
+                            default:
+                                message_Close();
+                                JumpCommon(CORO_EVENT_S21_12);
+                                break;
+                        }
+                        hold;
                     case 68:
                     case 69:
                     case 112:
@@ -10264,7 +10355,10 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 120:
                         jump @switch2_223;
                     case 121:
+                        message_Mail("You just gave up, didn't you?[K] For shame!");
+                        message_Close();
                         §label_827;
+                        $DUNGEON_CONQUEST_LIST[121] = 1;                                                                                                                                                                                                                                                                                                             
                         JumpCommon(CORO_EVENT_S31_20);
                     case 122:
                     case 124:
@@ -10309,7 +10403,6 @@ coro GETOUT_SCENARIO_DUNGEON {
 
 coro GETOUT_REQUEST_DUNGEON {
     debug_Print('GETOUT_REQUEST_DUNGEON');
-    CallCommon(CORO_BUBBLE_TEST);
     CallCommon(CORO_RESCUE_SET);
     switch ( ProcessSpecial(PROCESS_SPECIAL_DUNGEON_HAD_REQUEST_DONE, 0, 0) ) {
         case 0:
@@ -10335,9 +10428,9 @@ coro GETOUT_REQUEST_DUNGEON {
                     message_Close();
                     switch ( $DUNGEON_ENTER_INDEX ) {
                         case 1:
-                        default:
                             debug_Print('LABEL_D001_CLEAR');
                             supervision_ExecuteActingSub(LEVEL_D01P41A, 'M01A0601', 0);
+                        default:
                             §label_957;
                             switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                             switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
@@ -10597,7 +10690,6 @@ coro GETOUT_REQUEST_DUNGEON {
 
 coro GETOUT_REQUEST_RETURN {
     debug_Print('GETOUT_NO_REQUEST_RETURN');
-    CallCommon(CORO_BUBBLE_TEST);
     if ( $SCENARIO_MAIN_BIT_FLAG[29] ) {
         §label_1029;
         $SCENARIO_MAIN_BIT_FLAG[29] = 0;
@@ -10725,7 +10817,6 @@ coro GETOUT_REQUEST_RETURN {
 
 coro GETOUT_REQUEST_CONQUEST {
     debug_Print('GETOUT_REQUEST_CONQUEST');
-    CallCommon(CORO_BUBBLE_TEST);
     switch ( $DUNGEON_ENTER_INDEX ) {
         case 0:
         case 1:
@@ -11374,7 +11465,7 @@ coro GETOUT_REQUEST_CONQUEST {
                     jump @no_kyogre;
                 }
             } else {
-                message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!");
+                message_Mail("[CS:G]Kyogre[CR] and the [CS:I]Aqua-Monica[CR]\nare Post-Dialga checks!\n");
                 message_Close();
                 jump @no_kyogre;
             }
@@ -11526,7 +11617,7 @@ coro GETOUT_REQUEST_CONQUEST {
             } else {
                 message_Mail("[CS:G]Rayquaza[CR] and the [CS:I]Sky Melodica[CR]\nare Post-Dialga checks!");
                 message_Close();
-                jump @no_giratina;
+                jump @no_rayquaza;
             }
             break;
         case 84:
@@ -11631,36 +11722,147 @@ coro GETOUT_REQUEST_CONQUEST {
             debug_Print('LABEL_D110_CLEAR');
             jump @label_1167;
         case 111:
-            main_EnterGround(LEVEL_D73P21A, 30);
+            switch(dungeon_mode(112)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 0) {
+                main_EnterGround(LEVEL_D73P21A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 1;
+                JumpCommon(CORO_EVENT_S31_06);
+            }
             hold;
         case 112:
-            main_EnterGround(LEVEL_D73P22A, 30);
+            switch(dungeon_mode(113)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 1) {
+                main_EnterGround(LEVEL_D73P22A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 2;
+                JumpCommon(CORO_EVENT_S31_09);
+            }
             hold;
         case 113:
-            main_EnterGround(LEVEL_D73P23A, 30);
+            switch(dungeon_mode(114)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 2) {
+                main_EnterGround(LEVEL_D73P23A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 4;
+                JumpCommon(CORO_EVENT_S31_12);
+            }
             hold;
         case 114:
-            main_EnterGround(LEVEL_D73P24A, 30);
+            switch(dungeon_mode(115)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 3) {
+                main_EnterGround(LEVEL_D73P24A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 8;
+                JumpCommon(CORO_EVENT_S31_15);
+            }
             hold;
         case 115:
+            switch(dungeon_mode(116)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            // Always do this!
             main_EnterGround(LEVEL_D73P25A, 30);
             hold;
         case 116:
-            main_EnterGround(LEVEL_D73P26A, 30);
+            switch(dungeon_mode(117)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 4) {
+                main_EnterGround(LEVEL_D73P26A, 30);
+            } else {
+                $CRYSTAL_COLOR_01 += 16;
+                JumpCommon(CORO_EVENT_S31_21);
+            }
             hold;
         case 117:
+            switch(dungeon_mode(118)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
             main_EnterGround(LEVEL_D73P27A, 30);
             hold;
+            if ($CRYSTAL_COLOR_01 &<< 5) {
+            } else {
+                $CRYSTAL_COLOR_01 += 32;
+                JumpCommon(CORO_EVENT_S31_24);
+            }
         case 118:
-            if ( $SCENARIO_MAIN_BIT_FLAG[47] ) {
+            switch(dungeon_mode(119)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 6) {
+            } else {
+                $CRYSTAL_COLOR_01 += 64;
+                JumpCommon(CORO_EVENT_S31_28);
+            }
+            if ($DUNGEON_CONQUEST_LIST[122]) {
+                if ( $SCENARIO_MAIN_BIT_FLAG[49]) { } // Gift Claimed and player ascended!
+                if ( $SCENARIO_MAIN_BIT_FLAG[48]) { } // Gift Claimed and player still in room!
+                if ( $SCENARIO_MAIN_BIT_FLAG[47] ) {
+                    main_EnterGround(LEVEL_D73P28A, 30);
+                } else {
+                    $SCENARIO_MAIN_BIT_FLAG[47] = 1;
+                    JumpCommon(CORO_EVENT_S32_01);
+                }
+            } else {
+                message_Mail(" You must reach the summit to\nreceive [CS:G]Sneasel[CR]\'s gratitude!");
                 main_EnterGround(LEVEL_D73P28A, 30);
                 hold;
-            } else {
-                $SCENARIO_MAIN_BIT_FLAG[47] = 1;
-                JumpCommon(CORO_EVENT_S32_01);
             }
             break;
         case 119:
+            switch(dungeon_mode(120)) {
+                case DMODE_CLOSED:
+                case DMODE_REQUEST:
+                    call @sky_peak_closed_request;
+                default:
+                    break;
+            }
+            if ($CRYSTAL_COLOR_01 &<< 7) {
+            } else {
+                $CRYSTAL_COLOR_01 += 128;
+                JumpCommon(CORO_EVENT_S31_28);
+            }
             main_EnterGround(LEVEL_D73P29A, 30);
             hold;
         case 120:
@@ -11694,7 +11896,6 @@ coro GETOUT_REQUEST_CONQUEST {
 
 coro GETOUT_TRAINING_DUNGEON {
     debug_Print('GETOUT_TRAINING_DUNGEON');
-    CallCommon(CORO_BUBBLE_TEST);
     switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
     switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
     JumpCommon(CORO_EVENT_M00_09);
@@ -11702,7 +11903,6 @@ coro GETOUT_TRAINING_DUNGEON {
 
 coro GETOUT_DEBUG_DUNGEON {
     debug_PrintFlag($GROUND_START_MODE, 'GETOUT_DEBUG_DUNGEON');
-    CallCommon(CORO_BUBBLE_TEST);
     switch ( $GROUND_START_MODE ) {
         case 10:
             §label_1220;
@@ -12068,9 +12268,11 @@ coro RESCUE_DEBUG {
                 }
             }
             break;
-            §label_729;
+            §name_check;
             message_EmptyActor();
+            debug_Print("We're here now!");
             if (debug) {
+                jump @done_name_check;
             } else {
                 switch(ProcessSpecial(103,0,0)){               
                     case 1:
@@ -12170,7 +12372,7 @@ coro RESCUE_DEBUG {
                         message_Close();
                         break;
                 }
-                return;
+                jump @done_name_check;
         }
     }
 }
@@ -12461,10 +12663,11 @@ coro BUBBLE_TEST {
         message_Close();
         return;
     }
+    ~PelipperTransition();
     if ($PERFORMANCE_PROGRESS_LIST[33]) {
         $PERFORMANCE_PROGRESS_LIST[33] = 0;
         $SCENARIO_MAIN_BIT_FLAG[127] = 1;
-        message_Mail("[FT:1]OOPS! ALL UNOWN!");
+        message_Mail("You and [partner] begin to feel strange...[W:60]\n[FT:1]OOPS! ALL UNOWN!");
         message_Close();
     }
     if ($PERFORMANCE_PROGRESS_LIST[34]) {
@@ -12496,143 +12699,46 @@ coro BUBBLE_TEST {
         }
         JumpCommon(CORO_HA_MIHARIBAN);
     }
-    if ($PERFORMANCE_PROGRESS_LIST[35]) { // If true, run ITEM LOOP
-        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk("[STS] I\'ve got a special delivery for team\n[team]![STE]");
-        
-        if ($ITEM_BACKUP > 0) { // ITEM_BACKUP is non-zero! 
-            §box_iteration;
-            item_SetVariable(0,$ITEM_BACKUP);
-            message_EmptyActor();
-            me_Play(4);
-            message_Monologue("[STS][CN][CS:G]Pelipper[CR] handed you a [s_item:0]![STE]");
-            WaitMe(4);
-            Wait(30);
-            message_Close();
-            switch(ProcessSpecial(56,0,0)) { // Give the player the item
-                case 0: // Bag NOT full
-                    switch ( message_Menu(MENU_GIVE_ITEM) ) { } // Put it in their bag
-                    break;
-                case 1: 
-                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
-                    break;
-            }
-            message_Close();
-            $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item
-            message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-            if ($LOTTERY_RESULT == -1) {
-                message_Talk("[STS] My apologies, I can\'t give you this\nright now![K] You\'re [CS:C]out of network[CR] right now!\n[CN](Client has previously timed out)[STE]");
-                message_Close();
-            } else {
-                message_Talk("[STS] One second, I need to check if I\nhave any other deliveries for you! This\nshouldn\'t take long, [CS:C]let me know if it does[CR]![STE]");
-                message_Mail("\n[CN][CS:G]Pelipper[CR] began rifling through their mail bag...");        
-                §box_halt;
-                if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
-                    if ($LOTTERY_RESULT < 65535) {
-                        se_Play(7450);
-                        WaitSe(7450);
-                        se_Play(7443);
-                        WaitSe(7443);
-                        $LOTTERY_RESULT += 1;
-                        jump @box_halt;
-                    } else {
-                        message_Mail("[CN]Client unresponsive! Continue waiting?\n[CN]Note: If you select Give Up, you may lose\n[CN]any unreceived boxes!");
-                        switch(message_SwitchMenu(0,1)) {
-                            case menu("Keep Waiting"):
-                                message_Close();
-                                $LOTTERY_RESULT = 0;
-                                jump @box_halt;
-                            case menu("Give Up"):
-                                message_Close();
-                                $LOTTERY_RESULT = -1;
-                                $SCENARIO_TALK_BIT_FLAG[250] = 0;
-                                jump @box_lost;
-                                break;
-                        }
-                    }
-                }
-                message_CloseEnforce();
-                if ($ITEM_BACKUP > 0) {
-                    message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk("[STS] I do have another delivery for you!\nHere you are, team [team]![STE]");
-                    message_Close();
-                    jump @box_iteration; // Next Item given by Cryptic!
-                } else {
-                    message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
-                    message_Talk("[STS] That appears to be everything!\nHave a great day, team [team]![STE]");
-                    message_Close();
-                }
-            }
-        } else { // Next Item was null, we're out of items!
-            §box_lost;
-            message_Talk(" How strange...[K] I can\'t seem to find\nyour package right now![K] This is really weird,\n[CS:C]you should tell[CR] [CS:G]happylappy[CR] [CS:C]if you see this[CR]![K][K][K]");
-            message_Close();
-        }
-        debug_Print("Transaction Complete!");
-        $PERFORMANCE_PROGRESS_LIST[35] = 0;
-    }
     if ($PERFORMANCE_PROGRESS_LIST[36]) {
-        supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
+        bgm_FadeOut(30);
+        // TODO: NEW FEATURE
+        if (debug) {
+            switch(random(5)) {
+                case 0: // Sky Peak
+                    supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
+                    break;
+                case 1: // Fogbound Lake
+                    supervision_ExecuteActingSub(LEVEL_V10P03C, 'M10A1209', 0);
+                    break;
+                case 2: // Future Sunrise
+                    supervision_ExecuteActingSub(LEVEL_D53P41B, 'N09A2201', 0);
+                    break;
+                case 3: // Beach Bubbles
+                    supervision_ExecuteActingSub(LEVEL_V26P05A, 'M01A0207', 0);
+                    break;
+                case 4: // Wigglytuff's Big Head
+                    supervision_ExecuteActingSub(LEVEL_G01P01B, 'M02A0101', 0);
+                    break;
+            }
+        } else {
+            supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
+        }
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
     }
     if (debug) {
     } else {
         switch(ProcessSpecial(103,0,0)){
             case 1: // Chesyon
+                §moar_seeds;
                 switch(random(500)) {
                     case 0:
-                        switch ( $CONFIG_COLOR_KIND ) {
+                        switch ( ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
                             case 0: 
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,428,0);
-                                break;
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,85,0);
+                                jump @moar_seeds;
                             case 1:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,429,0);
-                                break;
-                            case 2:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,430,0);
-                                break;
-                            case 3:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,431,0);
-                                break;
-                            case 4:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,432,0);
-                                break;
-                            case 5:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,433,0);
-                                break;
-                            case 6:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,434,0);
-                                break;
-                            case 7:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,435,0);
-                                break;
-                            case 8:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,436,0);
-                                break;
-                            case 9:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,437,0);
-                                break;
-                            case 10:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,438,0);
-                                break;
-                            case 11:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,439,0);
-                                break;
-                            case 12:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,440,0);
-                                break;
-                            case 13:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,441,0);
-                                break;
-                            case 14:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,442,0);
-                                break;
-                            case 15:
-                            default:
-                                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,443,0);
                                 break;
                         }
-                    case < 10:
                         message_Mail("[CN]You feel like your bag suddenly\ngot a little bit heavier...");
                         message_Close();
                         break;
@@ -12641,13 +12747,13 @@ coro BUBBLE_TEST {
                 }
                 break;            
             case 2: // Happylappy
-                switch(random(10000)) {
+                switch(random(1000)) {
                     case 0:
                         $PERFORMANCE_PROGRESS_LIST[32] = 1;
                         $PERFORMANCE_PROGRESS_LIST[33] = 1;
                         $PERFORMANCE_PROGRESS_LIST[34] = 1;
                         $PERFORMANCE_PROGRESS_LIST[36] = 1;
-                    case < 10:
+                    case < 3:
                         message_Mail("[CN]You feel like you\'re about to get\nyour shit rocked in a few minutes...");
                         message_Close();
                     default:
@@ -12683,9 +12789,52 @@ coro BUBBLE_TEST {
                 break;
             case 5: // Hecka
                 switch(random(500)) {
-                    case < 3:
-                        message_Mail("[CN]I heard you liked\n[CN][CS:C]Synodic Flip[CR]...");
+                    case 0:
+                        message_Mail("[CN]I heard you liked\nhoarding useless baubles...");
                         message_Close();
+                        switch ( ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+                            case 0: 
+                                switch(random(11)) {
+                                    case 0:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,11,0);
+                                        break;
+                                    case 1:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,12,0);
+                                        break;
+                                    case 2:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,98,0);
+                                        break;
+                                    case 3:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,113,0);
+                                        break;
+                                    case 4:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,114,0);
+                                        break;
+                                    case 5:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0);
+                                        break;
+                                    case 6:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,166,0);
+                                        break;
+                                    case 7:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,175,0);
+                                        break;
+                                    case 8:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,176,0);
+                                        break;
+                                    case 9:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,177,0);
+                                        break;
+                                    case 10:
+                                    default:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,184,0);
+                                        break;
+                                }
+                            case 1:
+                                message_Mail("[CN]But you don\'t have any room...");
+                                message_Close();
+                                break;
+                        }
                     default:
                         break;
                 }
@@ -12695,8 +12844,7 @@ coro BUBBLE_TEST {
                 switch(random(5000)) {
                     case 0:
                         $PERFORMANCE_PROGRESS_LIST[36] = 1;
-                    case < 10:
-                        message_Mail("[CN]I heard you like\n[CN][CS:C]Stopping and smelling the roses[CR]...");
+                        message_Mail("[CN]I heard you like\n[CN][CS:C]stopping and smelling the roses[CR]...");
                         message_Close();
                     default:
                         break;
@@ -12706,8 +12854,7 @@ coro BUBBLE_TEST {
                 switch(random(5000)) {
                     case 0:
                         $PERFORMANCE_PROGRESS_LIST[34] = 1;
-                    case < 10:
-                        message_Mail("[CN]I heard you like\n[CN][CS:C]Sentry Duty[CR]...");
+                        message_Mail("[CN]I heard you might\n[CN]have an interest in feet...");
                         message_Close();
                     default:
                         break;
@@ -12719,7 +12866,24 @@ coro BUBBLE_TEST {
     }
     return;
     
-    
+    // Sky Peak Station stuff
+    §sky_peak_closed;
+    // TODO: NEW FEATURE
+    if (not debug) {
+        return; // Do nothing, because not 0.3.0
+    }
+    $EVENT_LOCAL = 0;
+    if ($EVENT_LOCAL == 1) { // Only a jump can enter this branch!
+        §sky_peak_closed_request;
+        // TODO: NEW FEATURE
+        if (not debug) {
+            return;
+        }
+        $EVENT_LOCAL = 1;
+    }
+    ~PeakBlock();
+    JumpCommon(CORO_EVENT_HA_SAME);
+    return;
     
 }
 

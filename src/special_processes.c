@@ -1,5 +1,6 @@
 #include <pmdsky.h>
 #include <cot.h>
+#include <ap_utils.h>
 #include "extern.h"
 #include "crass.h"
 
@@ -10,11 +11,6 @@ static int SpGetLevelScalingStatus() {
   return apSettings.levelScaling;
 }
 
-bool IsDungeonPostDialga(short dunId) { // rn this is the AP logic- making it a function in case the logic changes
-    if (dunId >= 44) return dunId <= 86 || dunId >= 93;
-    else return false;
-}
-
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
 static int SpAccessMissionStatuses(short mode, short missionType) {
     int dungeonId = LoadScriptVariableValue(0, 41);
@@ -22,7 +18,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (missionType == 1) { // outlaws
-        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
         else totalNumber = missionMaxes.totalOutlawsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
@@ -34,7 +30,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
         else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
-        if(IsDungeonPostDialga(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
         else totalNumber = missionMaxes.totalJobsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {
@@ -49,26 +45,29 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
 
 // Special process 102: Read/write Instrument/Relic Fragment
 static int SpAccessMacguffinStatus(short mode, short macguffin) {
+    short numberToReturn;
     if(macguffin == 1) { // instruments
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.totalInstruments) {
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.requiredInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
-                return 1;
+                numberToReturn = 1;
             }
-            else return 0;
+            else numberToReturn = 0;
         }
-        else return macguffinMaxes.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+        else numberToReturn = macguffinMaxes.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.totalRelicFragmentShards) {
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.requiredRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
-                return 1;
+                numberToReturn = 1;
             }
-            else return 0;
+            else numberToReturn = 0;
         }
-        else return macguffinMaxes.totalRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+        else numberToReturn = macguffinMaxes.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
     }
+    if (numberToReturn < 0) return 0;
+    else return numberToReturn;
 }
 
 void GetLowercaseName(const char* src, char* dst) // Used in NameCheck
@@ -94,6 +93,19 @@ static int SpDoNameCheck() {
 static int SpRegenerateMissions() {
     GenerateDailyMissions();
     return 0;
+}
+
+// Special process 105: Read/write Cafe check count. 1 = write, anything else = 0.
+// This is a really lazy implementation based on SP 102. Could be merged into SP 102 if I actually bothered to reorganize the structs, which... I don't feel like doing right now. This is future Chesyon's problem.
+static int SpAccessCafeStatus(short mode) {
+    if (mode == 1) { // Write mode
+        if (CUSTOM_SAVE_AREA.acquiredCafeChecks < cafeMax) {
+            CUSTOM_SAVE_AREA.acquiredCafeChecks++; // increment by one
+            return 1;
+        }
+        else return 0;
+    }
+    else return cafeMax - CUSTOM_SAVE_AREA.acquiredCafeChecks; // Read mode
 }
 
 // Special process Read/write DeathLink
@@ -142,8 +154,12 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 104:
         *return_val = SpRegenerateMissions();
         return true;
+    case 105:
+        *return_val = SpAccessCafeStatus(arg1);
+        return true;
     case 255:
         *return_val = SpGetCrassKind();
+        return true;
     default:
         return false;
   }

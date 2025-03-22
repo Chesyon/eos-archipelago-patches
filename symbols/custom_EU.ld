@@ -12,16 +12,21 @@ WriteSaveFileCallsite4 = 0x020494D8;
 LoadSaveFileCallsite1 = 0x020496F4;
 LoadSaveFileCallsite2 = 0x02049714;
 ClearAdventureLogStructCallsite = 0x02048774;
+MiscIqScalingGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
-CallGetDungeonResultMsg = 0x200C778;
-CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
-CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
+MissionTryOpenDungeon = 0x20682BC;
+DeathLinkSendHookOld = 0x200C778;
+MissionMultipurposeCheckAreaStart = 0x2062F74;
+MissionMultipurposeCheckAreaEnd = 0x2062F94;
+TAILORED_MISSION_DUNGEON = 0x2062F94;
+TailoredMissionOverlapFloorsHook = 0x2063064;
 GenerateMissionMinFloorRollHook = 0x206301C;
 MessageSetWaitMode = 0x2035154;
 CreateDefaultScriptEngineBox = 0x2035420;
 ShowStringInDialogueBoxCallsite1 = 0x2035560;
 IsValidPortraitCallsite = 0x2035814;
+GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -91,6 +96,7 @@ IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
 DungeonTurnHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
 DungeonTurnUnhook = 0x22E0454;
 DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/
+DeathLinkSendHook = 0x22ED8E0;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
@@ -100,6 +106,7 @@ apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
 hintableItems = 0x23DE022;
+cafeMax = 0x23DE1C6; /* See my comment on SP 105. */
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 

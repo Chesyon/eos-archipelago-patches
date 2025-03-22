@@ -4,7 +4,7 @@
 #include <pmdsky.h>
 
 // Set this value to 1 to enable support for custom script engine menus
-#define CUSTOM_SCRIPT_MENUS 0
+#define CUSTOM_SCRIPT_MENUS 1
 
 struct custom_menu {
   uint16_t keyboard_prompt_string_id; // The string used for the first keyboard menu prompt, e.g., "What is your partner's nickname?"
@@ -22,7 +22,7 @@ struct global_menu_info {
   struct portrait_params portrait_params; // Global portrait params to easily reference for portrait functions!
   int menu_results[20]; // To store previous results of menus across update calls!
   int window_ids[20]; // Maximum number of windows that can be active at a time.
-  // Can add more fields here as necessary to use for custom script menus!
+  void* extra_info_ptr;
 };
 
 void InitializeCustomScriptMenu(int index);

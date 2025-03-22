@@ -25,6 +25,13 @@ def 0 {
         italian=" IO...[K] SONO STATO \nSCONFITTO...[K] GRRR...",
         spanish=" HE...[K] HE SIDO DERROTADO...[K]\nGRRR...",
     });
+    message_Talk({
+        english=" TO THE VICTOR...[K]GO THE\nSPOILS! I ACCEPT THAT!",
+        french=" SOIT...[K] MALHEUR\nAUX VAINCUS!",
+        german=" DER SIEGER[K] ERHÄLT ALLES!\nICH AKZEPTIERE DAS!",
+        italian=" AL VINCITORE...[K] GLI ONORI!\nACCETTO!",
+        spanish=" LOS VENCEDORES...[K] HAN DE\nDISPONER DE LOS VENCIDOS.",
+    });
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     Wait(60);
     message_Mail({
@@ -37,6 +44,8 @@ def 0 {
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     §label_5;
     ~AssignCheck(28);
+    screen_FadeOut(1, 60);
+    bgm_FadeOut(120);
     jump @label_2;
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     switch ( ProcessSpecial(PROCESS_SPECIAL_PREPARE_MENU_ACCEPT_TEAM_MEMBER, 7, 0) ) { }

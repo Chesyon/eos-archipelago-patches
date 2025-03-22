@@ -1,0 +1,144 @@
+
+def 0 {
+    sound_Stop();
+    message_Narration(30, {
+        english="[CN]The next morning...",
+        french="[CN]Le lendemain matin...",
+        german="[CN]Am nächsten Morgen...",
+        italian="[CN]La mattina dopo...",
+        spanish="[CN]Al día siguiente...",
+    });
+    message_Close();
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V24P08A);
+    back_SetGround(LEVEL_H02P99A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    camera2_SetPositionMark(Position<'m0', 19, 15.5>);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetDirection(DIR_LEFT);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(76);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(76);
+    }
+    screen2_FadeIn(0, 30);
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(63);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(63);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEOUTW);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Oh, yeah! The weather\'s great\ntoday again!",
+                french=" Oh, oui! Quel temps magnifique\naujourd\'hui!",
+                german=" Oh ja! Das Wetter ist heute\nwieder klasse!",
+                italian=" Oh, sì! Il tempo è di nuovo\nbello oggi!",
+                spanish=" ¡Hoy hace un tiempo excelente!",
+            }
+        case 2:
+            {
+                english=" Oh, yeah! The weather\'s great\ntoday again!",
+                french=" Oh, oui! Quel temps magnifique\naujourd\'hui!",
+                german=" Oh ja! Das Wetter ist heute\nwieder klasse!",
+                italian=" Oh, sì! Il tempo è di nuovo\nbello oggi!",
+                spanish=" ¡Hoy hace un tiempo excelente!",
+            }
+        default:
+            {
+                english=" Ooh, yes! The weather\'s great\ntoday again!",
+                french=" Oh, oui! Quel temps magnifique\naujourd\'hui!",
+                german=" Oh ja! Das Wetter ist heute\nwieder klasse!",
+                italian=" Oh, sì! Il tempo è di nuovo\nbello oggi!",
+                spanish=" ¡Hoy hace un tiempo excelente!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 2, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s do good again today,\n[hero]!",
+                french=" Faisons encore de notre mieux\naujourd\'hui, [hero]!",
+                german=" Lass uns heute unser Bestes\ngeben, [hero]!",
+                italian=" Mettiamocela tutta anche oggi,\n[hero]!",
+                spanish=" ¡Sigamos con nuestras\naventuras, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s do good again today,\n[hero]!",
+                french=" Faisons encore de notre mieux\naujourd\'hui, [hero]!",
+                german=" Lass uns heute unser Bestes\ngeben, [hero]!",
+                italian=" Mettiamocela tutta anche oggi,\n[hero]!",
+                spanish=" ¡Sigamos con nuestras\naventuras, [hero]!",
+            }
+        default:
+            {
+                english=" Let\'s do good again today,\n[hero]!",
+                french=" Faisons encore de notre mieux\naujourd\'hui, [hero]!",
+                german=" Lass uns heute unser Bestes\ngeben, [hero]!",
+                italian=" Mettiamocela tutta anche oggi,\n[hero]!",
+                spanish=" ¡Sigamos con nuestras\naventuras, [hero]!",
+            }
+    }
+    message_Close();
+    screen2_FadeOut(1, 30);
+    back2_SetMode(0);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_PERIPPAA1) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        SetAnimation(2);
+    } else {
+        SetAnimation(6);
+    }
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

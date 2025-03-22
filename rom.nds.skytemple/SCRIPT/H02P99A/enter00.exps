@@ -19,6 +19,7 @@ def 0 {
                             debug_Print('SET_BGM');
                             if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
                                 bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+                                $EVENT_LOCAL = 0;
                                 §label_20;
                                 JumpCommon(CORO_COMMON_ENTER);
                             } else {
@@ -108,3 +109,15 @@ def 2 for_actor(ACTOR_ATTENDANT1) {
     WaitScreenFadeAll();
     end;
 }
+
+def 2 for_actor(ACTOR_NPC_PERIPPAA1) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        SetAnimation(2);
+    } else {
+        SetAnimation(6);
+    }
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+

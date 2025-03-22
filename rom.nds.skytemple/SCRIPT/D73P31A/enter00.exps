@@ -1,0 +1,99 @@
+
+def 0 {
+    debug_Print('START');
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 21, 0) ) {
+                case 1:
+                    §label_1;
+                    if ( scn($SCENARIO_MAIN) >= [29, 93] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US23', 0);
+                        §label_10;
+                        supervision_StationCommon(7);
+                        debug_Print('LABEL_TEAM_SET');
+                        supervision_StationCommon(9);
+                        switch ( sector() ) {
+                            case 1:
+                                §label_12;
+                                debug_Print('LABEL_END');
+                                JumpCommon(CORO_COMMON_ENTER);
+                            default:
+                                debug_Print('LABEL_PLAYER_SET');
+                                switch ( $GROUND_GETOUT ) {
+                                    case 430:
+                                        debug_Print('LABEL_FROM_VISUAL');
+                                        supervision_StationCommon(2);
+                                        §label_14;
+                                        debug_Print('SET_BGM');
+                                        bgm_PlayFadeIn(BGM_TIME_RESTORED, 0, 256);
+                                        debug_Print('LABEL_ENTER_END');
+                                        jump @label_12;
+                                    default:
+                                        supervision_StationCommon(1);
+                                        jump @label_14;
+                                }
+                                break;
+                        }
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 86] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US22', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 77] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US21', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 68] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US20', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 54] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US04', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US03', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 32] ) {
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US02', 0);
+                        jump @label_10;
+                    } elseif ( scn($SCENARIO_MAIN) >= [29, 7] ) {
+                        §label_9;
+                        supervision_ExecuteStationSub(LEVEL_D73P31A, 'US31', 0);
+                        jump @label_10;
+                    } else {
+                        jump @label_9;
+                    }
+                    break;
+                default:
+                    supervision_StationCommon(10);
+                    jump @label_1;
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            debug_Print('LABEL_BACK_SET');
+            back_SetGround(LEVEL_D73P31A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER_APPOINT) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_NPC_SHEIMI) {
+    JumpCommon(CORO_LIVES_MOVE_NORMAL);
+}
+
+def 3 for_actor(ACTOR_NPC_WATAKKO) {
+    if ( scn($SCENARIO_MAIN) < [29, 31] ) {
+        §label_16;
+        Destroy();
+    } elseif ( $SCENARIO_MAIN_BIT_FLAG[87] ) {
+        SetMoveRange(Position<'m0', 19, 37>, 8, 6);
+        JumpCommon(CORO_MOVE_TYPE1);
+    } else {
+        jump @label_16;
+    }
+}

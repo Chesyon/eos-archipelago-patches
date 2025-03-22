@@ -1,0 +1,453 @@
+
+def 0 {
+    sound_Stop();
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V24P08A);
+    back_SetGround(LEVEL_H02P99A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    camera2_SetPositionMark(Position<'m0', 19.5, 15.5>);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
+    screen2_FadeIn(0, 30);
+    screen_FadeIn(1, 30);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Oh, [hero].[K] I was just\nthinking...",
+                french=" Oh, [hero].[K] Je pensais\nà quelque chose...",
+                german=" Oh, [hero].[K] Ich überlege\ngerade...",
+                italian=" Oh, [hero].[K] Stavo \npensando...",
+                spanish=" Ah, [hero]...[K] He estado\npensando que...",
+            }
+        case 2:
+            {
+                english=" Oh, [hero].[K] I was just\nthinking...",
+                french=" Oh, [hero].[K] Je pensais\nà quelque chose...",
+                german=" Oh, [hero].[K] Ich überlege\ngerade...",
+                italian=" Oh, [hero].[K] Stavo \npensando...",
+                spanish=" Ah, [hero]...[K] He estado\npensando que...",
+            }
+        default:
+            {
+                english=" Oh, [hero].[K] I was just\nthinking...",
+                french=" Oh, [hero].[K] Je pensais\nà quelque chose...",
+                german=" Oh, [hero].[K] Ich überlege\ngerade...",
+                italian=" Oh, [hero].[K] Stavo \npensando...",
+                spanish=" Ah, [hero]...[K] He estado\npensando que...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It was time that was being \ndestroyed before, right?",
+                french=" La dernière fois, c\'était le\ntemps qui allait être détruit, n\'est-ce pas?",
+                german=" Vorher ging es darum, dass die\nZeit zerstört wurde, richtig?",
+                italian=" L\'altra volta era il tempo che\nrischiava di essere distrutto, giusto?",
+                spanish=" Antes era el tiempo lo que se\nestaba destruyendo, ¿no?",
+            }
+        case 2:
+            {
+                english=" It was time that was being \ndestroyed before, right?",
+                french=" La dernière fois, c\'était le\ntemps qui allait être détruit, n\'est-ce pas?",
+                german=" Vorher ging es darum, dass die\nZeit zerstört wurde, richtig?",
+                italian=" L\'altra volta era il tempo che\nrischiava di essere distrutto, giusto?",
+                spanish=" Antes era el tiempo lo que se\nestaba destruyendo, ¿no?",
+            }
+        default:
+            {
+                english=" It was time that was being \ndestroyed before, right?",
+                french=" La dernière fois, c\'était le\ntemps qui allait être détruit, n\'est-ce pas?",
+                german=" Vorher ging es darum, dass die\nZeit zerstört wurde, richtig?",
+                italian=" L\'altra volta era il tempo che\nrischiava di essere distrutto, giusto?",
+                spanish=" Antes era el tiempo lo que se\nestaba destruyendo, ¿no?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" And now the very fabric of\nspace is becoming distorted.",
+                french=" Et maintenant, c\'est la trame de\nl\'espace elle-même qui est menacée.",
+                german=" Und nun verzerrt sich das\nRaumgefüge.",
+                italian=" E adesso la struttura dello\nspazio viene distorta.",
+                spanish=" Y ahora es la estructura del\nespacio la que se está deformando.",
+            }
+        case 2:
+            {
+                english=" And now the very fabric of\nspace is becoming distorted.",
+                french=" Et maintenant, c\'est la trame de\nl\'espace elle-même qui est menacée.",
+                german=" Und nun verzerrt sich das\nRaumgefüge.",
+                italian=" E adesso la struttura dello\nspazio viene distorta.",
+                spanish=" Y ahora es la estructura del\nespacio la que se está deformando.",
+            }
+        default:
+            {
+                english=" And now the very fabric of\nspace is becoming distorted.",
+                french=" Et maintenant, c\'est la trame de\nl\'espace elle-même qui est menacée.",
+                german=" Und nun verzerrt sich das\nRaumgefüge.",
+                italian=" E adesso la struttura dello\nspazio viene distorta.",
+                spanish=" Y ahora es la estructura del\nespacio la que se está deformando.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" The destruction of time and the\ndistortion of space...[K] I can\'t begin to\nconceive of such things.",
+                french=" La destruction du temps et la\ndistorsion de l\'espace...[K] ce sont des notions\nque j\'ai du mal à concevoir.",
+                german=" Die Zerstörung der Zeit und die\nVerzerrung des Raumes...[K] Ich kann mir das gar\nnicht vorstellen.",
+                italian=" La distruzione del tempo e la\ndistorsione dello spazio...[K] Non riesco\na immaginare cose del genere.",
+                spanish=" La destrucción del tiempo y la\ndeformación del espacio...[K] Me cuesta\nimaginármelo.",
+            }
+        case 2:
+            {
+                english=" The destruction of time and the\ndistortion of space...[K] I can\'t begin to\nconceive of such things.",
+                french=" La destruction du temps et la\ndistorsion de l\'espace...[K] ce sont des notions\nque j\'ai du mal à concevoir.",
+                german=" Die Zerstörung der Zeit und die\nVerzerrung des Raumes...[K] Ich kann mir das gar\nnicht vorstellen.",
+                italian=" La distruzione del tempo e la\ndistorsione dello spazio...[K] Non riesco\na immaginare cose del genere.",
+                spanish=" La destrucción del tiempo y la\ndeformación del espacio...[K] Me cuesta\nimaginármelo.",
+            }
+        default:
+            {
+                english=" The destruction of time and the\ndistortion of space...[K] I can\'t begin to\nconceive of such things.",
+                french=" La destruction du temps et la\ndistorsion de l\'espace...[K] ce sont des notions\nque j\'ai du mal à concevoir.",
+                german=" Die Zerstörung der Zeit und die\nVerzerrung des Raumes...[K] Ich kann mir das gar\nnicht vorstellen.",
+                italian=" La distruzione del tempo e la\ndistorsione dello spazio...[K] Non riesco\na immaginare cose del genere.",
+                spanish=" La destrucción del tiempo y la\ndeformación del espacio...[K] Me cuesta\nimaginármelo.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" But these troubles of time and\nspace...[K] I have a feeling that they\'re related.",
+                french=" Ces destructions du temps et\nde l\'espace...[K] j\'ai le sentiment\nqu\'elles sont étroitement liées.",
+                german=" Aber die Zerstörung von Zeit\nund Raum...[K] Das muss irgendwie\nzusammenhängen.",
+                italian=" Ma questi due fenomeni...[K] \nHo l\'impressione che siano collegati.",
+                spanish=" Aunque tengo la sensación...[K]\nde que ambos problemas podrían estar\nrelacionados.",
+            }
+        case 2:
+            {
+                english=" But these troubles of time and\nspace...[K] I have a feeling that they\'re related.",
+                french=" Ces destructions du temps et\nde l\'espace...[K] j\'ai le sentiment\nqu\'elles sont étroitement liées.",
+                german=" Aber die Zerstörung von Zeit\nund Raum...[K] Das muss irgendwie\nzusammenhängen.",
+                italian=" Ma questi due fenomeni...[K] \nHo l\'impressione che siano collegati.",
+                spanish=" Aunque tengo la sensación...[K]\nde que ambos problemas podrían estar\nrelacionados.",
+            }
+        default:
+            {
+                english=" But these troubles of time and\nspace...[K] I have a feeling that they\'re related.",
+                french=" Ces destructions du temps et\nde l\'espace...[K] j\'ai le sentiment\nqu\'elles sont étroitement liées.",
+                german=" Aber die Zerstörung von Zeit\nund Raum...[K] Das muss irgendwie\nzusammenhängen.",
+                italian=" Ma questi due fenomeni...[K] \nHo l\'impressione che siano collegati.",
+                spanish=" Aunque tengo la sensación...[K]\nde que ambos problemas podrían estar\nrelacionados.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Time and space...[K] A possible connection...?)",
+                french="(Temps et espace...[K] y aurait-il un lien...?)",
+                german="(Zeit und Raum...[K] Ein möglicher\nZusammenhang?)",
+                italian="(Tempo e spazio...[K] Un possibile legame...?)",
+                spanish="(El tiempo y el espacio...[K] ¿Conectados?)",
+            }
+        default:
+            {
+                english="(Time and space...[K] A possible connection...?)",
+                french="(Temps et espace...[K] y aurait-il un lien...?)",
+                german="(Zeit und Raum...[K] Ein möglicher\nZusammenhang?)",
+                italian="(Tempo e spazio...[K] Un possibile legame...?)",
+                spanish="(El tiempo y el espacio...[K] ¿Conectados?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Do you remember when time\nwas breaking down?",
+                french=" Tu te rappelles quand le temps\nse détraquait?",
+                german=" Erinnerst du dich, als die Zeit\nzusammenbrach?",
+                italian=" Ti ricordi quando il tempo\nrischiava di essere distrutto?",
+                spanish=" ¿Te acuerdas de cuando el\ntiempo se estaba desmoronando?",
+            }
+        case 2:
+            {
+                english=" Do you remember when time\nwas breaking down?",
+                french=" Tu te rappelles quand le temps\nse détraquait?",
+                german=" Erinnerst du dich, als die Zeit\nzusammenbrach?",
+                italian=" Ti ricordi quando il tempo\nrischiava di essere distrutto?",
+                spanish=" ¿Te acuerdas de cuando el\ntiempo se estaba desmoronando?",
+            }
+        default:
+            {
+                english=" Do you remember when time\nwas breaking down?",
+                french=" Tu te rappelles quand le temps\nse détraquait?",
+                german=" Erinnerst du dich, als die Zeit\nzusammenbrach?",
+                italian=" Ti ricordi quando il tempo\nrischiava di essere distrutto?",
+                spanish=" ¿Te acuerdas de cuando el\ntiempo se estaba desmoronando?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]Lapras[CR] gave us a lot of insight\ninto [CS:P]Temporal Tower[CR].\n",
+                french=" [CS:N]Lokhlass[CR] nous a expliqué\nbeaucoup de choses sur la [CS:P]Tour du Temps[CR].",
+                german=" [CS:N]Lapras[CR] gab uns viele Einblicke\nin den [CS:P]Zeitturm[CR].\n",
+                italian=" [CS:N]Lapras[CR] ci ha fatto capire molte\ncose riguardo la [CS:P]Torre del Tempo[CR].",
+                spanish=" [CS:N]Lapras[CR] nos lo hizo comprender\nen la [CS:P]Torre del Tiempo[CR].",
+            }
+        case 2:
+            {
+                english=" [CS:N]Lapras[CR] gave us a lot of insight\ninto [CS:P]Temporal Tower[CR].",
+                french=" [CS:N]Lokhlass[CR] nous a expliqué\nbeaucoup de choses sur la [CS:P]Tour du Temps[CR].",
+                german=" [CS:N]Lapras[CR] gab uns viele Einblicke\nin den [CS:P]Zeitturm[CR].\n",
+                italian=" [CS:N]Lapras[CR] ci ha fatto capire molte\ncose riguardo la [CS:P]Torre del Tempo[CR].",
+                spanish=" [CS:N]Lapras[CR] nos lo hizo comprender\nen la [CS:P]Torre del Tiempo[CR].",
+            }
+        default:
+            {
+                english=" [CS:N]Lapras[CR] gave us a lot of insight\ninto [CS:P]Temporal Tower[CR].",
+                french=" [CS:N]Lokhlass[CR] nous a expliqué\nbeaucoup de choses sur la [CS:P]Tour du Temps[CR].",
+                german=" [CS:N]Lapras[CR] gab uns viele Einblicke\nin den [CS:P]Zeitturm[CR].\n",
+                italian=" [CS:N]Lapras[CR] ci ha dato tanti\nindizi sulla [CS:P]Torre del Tempo[CR].",
+                spanish=" [CS:N]Lapras[CR] nos lo hizo comprender\nen la [CS:P]Torre del Tiempo[CR].",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" So about this distortion of\nspace...",
+                french=" Donc, en ce qui concerne la\ndistorsion de l\'espace...",
+                german=" Also, was die Verzerrung des\nRaumes angeht...",
+                italian=" Quindi, in merito a questa \ndistorsione dello spazio...",
+                spanish=" En cuanto a la deformación del\nespacio...",
+            }
+        case 2:
+            {
+                english=" So about this distortion of\nspace...",
+                french=" Donc, en ce qui concerne la\ndistorsion de l\'espace...",
+                german=" Also, was die Verzerrung des\nRaumes angeht...",
+                italian=" Quindi, in merito a questa \ndistorsione dello spazio...",
+                spanish=" En cuanto a la deformación del\nespacio...",
+            }
+        default:
+            {
+                english=" So about this distortion of\nspace...",
+                french=" Donc, en ce qui concerne la\ndistorsion de l\'espace...",
+                german=" Also, was die Verzerrung des\nRaumes angeht...",
+                italian=" Quindi, in merito a questa \ndistorsione dello spazio...",
+                spanish=" En cuanto a la deformación del\nespacio...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Do you think [CS:N]Lapras[CR] might know\nsomething about it?",
+                french=" ... tu crois que [CS:N]Lokhlass[CR] sait\nquelque chose aussi?",
+                german=" Denkst du, [CS:N]Lapras[CR] könnte\ndarüber etwas wissen?",
+                italian=" Pensi che [CS:N]Lapras[CR] potrebbe \nsaperne qualcosa?",
+                spanish=" ¿Crees que [CS:N]Lapras[CR] podría saber\nalgo?",
+            }
+        case 2:
+            {
+                english=" Do you think [CS:N]Lapras[CR] might know\nsomething about it?",
+                french=" ... tu crois que [CS:N]Lokhlass[CR] sait\nquelque chose aussi?",
+                german=" Denkst du, [CS:N]Lapras[CR] könnte\ndarüber etwas wissen?",
+                italian=" Pensi che [CS:N]Lapras[CR] potrebbe \nsaperne qualcosa?",
+                spanish=" ¿Crees que [CS:N]Lapras[CR] podría saber\nalgo?",
+            }
+        default:
+            {
+                english=" Do you think [CS:N]Lapras[CR] might know\nsomething about it?",
+                french=" ... tu crois que [CS:N]Lokhlass[CR] sait\nquelque chose aussi?",
+                german=" Denkst du, [CS:N]Lapras[CR] könnte\ndarüber etwas wissen?",
+                italian=" Pensi che [CS:N]Lapras[CR] potrebbe \nsaperne qualcosa?",
+                spanish=" ¿Crees que [CS:N]Lapras[CR] podría saber\nalgo?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="([CS:N]Lapras[CR]...?)",
+                french="([CS:N]Lokhlass[CR]...?)",
+                german="([CS:N]Lapras[CR]?)",
+                italian="([CS:N]Lapras[CR]...?)",
+                spanish="(¿[CS:N]Lapras[CR]...?)",
+            }
+        default:
+            {
+                english="([CS:N]Lapras[CR]...?)",
+                french="([CS:N]Lokhlass[CR]...?)",
+                german="([CS:N]Lapras[CR]?)",
+                italian="([CS:N]Lapras[CR]...?)",
+                spanish="(¿[CS:N]Lapras[CR]...?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Well...[K] Actually...)",
+                french="(Euh...[K] en fait...)",
+                german="(Nun ja...[K] Eigentlich...)",
+                italian="(Beh...[K] In realtà...)",
+                spanish="(Bueno...[K] La verdad...)",
+            }
+        default:
+            {
+                english="(Well...[K] Actually...)",
+                french="(Euh...[K] en fait...)",
+                german="(Nun ja...[K] Eigentlich...)",
+                italian="(Beh...[K] In realtà...)",
+                spanish="(Bueno...[K] La verdad...)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(It wouldn\'t be unusual if [CS:N]Lapras[CR] did know\nsomething about this...)",
+                french="(Je ne serais pas étonné si [CS:N]Lokhlass[CR] savait\nquelque chose à ce sujet...)",
+                german="(Es wäre nicht verwunderlich, wenn [CS:N]Lapras[CR]\netwas darüber wüsste.)",
+                italian="(Non sarebbe strano se [CS:N]Lapras[CR] ne sapesse\nqualcosa...)",
+                spanish="(No sería de extrañar que [CS:N]Lapras[CR] supiera\nalgo de todo esto...)",
+            }
+        default:
+            {
+                english="(It wouldn\'t be unusual if [CS:N]Lapras[CR] did know\nsomething about this...)",
+                french="(Je ne serais pas étonnée si [CS:N]Lokhlass[CR] savait\nquelque chose à ce sujet...)",
+                german="(Es wäre nicht verwunderlich, wenn [CS:N]Lapras[CR]\netwas darüber wüsste.)",
+                italian="(Non sarebbe strano se [CS:N]Lapras[CR] ne sapesse\nqualcosa...)",
+                spanish="(No sería de extrañar que [CS:N]Lapras[CR] supiera\nalgo de todo esto...)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yeah, you think so too,\n[hero].",
+                french=" Ouais! Je savais que tu\nserais d\'accord avec moi,\n[hero].",
+                german=" Nicht wahr, [hero]?",
+                italian=" Sì, penso tu sia d\'accordo con\nme, [hero].",
+                spanish=" Sabía que estarías de acuerdo\nconmigo, [hero].",
+            }
+        case 2:
+            {
+                english=" I thought you\'d think so too,\n[hero].",
+                french=" Ouais! Je savais que tu\nserais d\'accord avec moi,\n[hero].",
+                german=" Ich dachte mir, dass du so\ndenkst, [hero].",
+                italian=" Penso che tu sia d\'accordo con\nme, [hero].",
+                spanish=" Sabía que estarías de acuerdo\nconmigo, [hero].",
+            }
+        default:
+            {
+                english=" I knew you\'d agree with me,\n[hero].",
+                french=" Ouais! Je savais que tu\nserais d\'accord avec moi,\n[hero].",
+                german=" Ich wusste, du würdest mir\nzustimmen, [hero].",
+                italian=" Penso che tu sia d\'accordo con\nme, [hero].",
+                spanish=" Sabía que estarías de acuerdo\nconmigo, [hero].",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Then let\'s go see [CS:N]Lapras[CR]!",
+                french=" Bien, alors allons voir [CS:N]Lokhlass[CR]!",
+                german=" Gehen wir zu [CS:N]Lapras[CR]!",
+                italian=" Allora andiamo a trovare [CS:N]Lapras[CR]!",
+                spanish=" ¡Entonces vayamos a ver a\n[CS:N]Lapras[CR]!",
+            }
+        case 2:
+            {
+                english=" Well, then that settles it! Let\'s\ngo see [CS:N]Lapras[CR]!",
+                french=" Bien, alors allons voir [CS:N]Lokhlass[CR]!",
+                german=" Okay, das wäre geregelt! Machen\nwir uns auf zu [CS:N]Lapras[CR]!",
+                italian=" Bene, allora è deciso! Andiamo a\ntrovare [CS:N]Lapras[CR]!",
+                spanish=" ¡Entonces vayamos a ver a\n[CS:N]Lapras[CR]!",
+            }
+        default:
+            {
+                english=" Well, that\'s that, then! Let\'s go\nsee [CS:N]Lapras[CR]!",
+                french=" Bien, alors allons voir [CS:N]Lokhlass[CR]!",
+                german=" Okay, das wäre geklärt! Machen\nwir uns auf zu [CS:N]Lapras[CR]!",
+                italian=" Bene, allora è deciso! Andiamo a\ntrovare [CS:N]Lapras[CR]!",
+                spanish=" ¡Entonces vayamos a ver a\n[CS:N]Lapras[CR]!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]Lapras[CR] should be at the beach.",
+                french=" [CS:N]Lokhlass[CR] devrait être à la\nplage.",
+                german=" [CS:N]Lapras[CR] sollte am Strand sein.",
+                italian=" [CS:N]Lapras[CR] dovrebbe \nessere in spiaggia.",
+                spanish=" [CS:N]Lapras[CR] debería de estar en\nla playa.",
+            }
+        case 2:
+            {
+                english=" [CS:N]Lapras[CR] should be at the beach.",
+                french=" [CS:N]Lokhlass[CR] devrait être à la\nplage.",
+                german=" [CS:N]Lapras[CR] sollte am Strand sein.",
+                italian=" [CS:N]Lapras[CR] dovrebbe \nessere in spiaggia.",
+                spanish=" [CS:N]Lapras[CR] debería de estar en\nla playa.",
+            }
+        default:
+            {
+                english=" [CS:N]Lapras[CR] should be at the beach.",
+                french=" [CS:N]Lokhlass[CR] devrait être à la\nplage.",
+                german=" [CS:N]Lapras[CR] sollte am Strand sein.",
+                italian=" [CS:N]Lapras[CR] dovrebbe \nessere in spiaggia.",
+                spanish=" [CS:N]Lapras[CR] debería de estar en\nla playa.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" So let\'s hurry to the beach,\n[hero]!",
+                french=" Dépêchons-nous, [hero]!",
+                german=" Ab zum Strand mit uns,\n[hero]!",
+                italian=" Forza, andiamo in spiaggia,\n[hero]!",
+                spanish=" ¡Vámonos para allá,\n[hero]! ¡Deprisa!",
+            }
+        case 2:
+            {
+                english=" So let\'s hurry to the beach,\n[hero]!",
+                french=" Dépêchons-nous, [hero]!",
+                german=" Ab zum Strand mit uns,\n[hero]!",
+                italian=" Forza, andiamo in spiaggia,\n[hero]!",
+                spanish=" ¡Vámonos para allá,\n[hero]! ¡Deprisa!",
+            }
+        default:
+            {
+                english=" So let\'s hurry to the beach,\n[hero]!",
+                french=" Dépêchons-nous, [hero]!",
+                german=" Ab zum Strand mit uns,\n[hero]!",
+                italian=" Forza, andiamo in spiaggia,\n[hero]!",
+                spanish=" ¡Vámonos para allá,\n[hero]! ¡Deprisa!",
+            }
+    }
+    message_Close();
+    screen2_FadeOut(1, 30);
+    back2_SetMode(0);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_PERIPPAA1) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        SetAnimation(2);
+    } else {
+        SetAnimation(6);
+    }
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

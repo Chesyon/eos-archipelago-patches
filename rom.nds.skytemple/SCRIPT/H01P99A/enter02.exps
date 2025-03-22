@@ -1,0 +1,35 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+            §label_0;
+            JumpCommon(CORO_END_TALK);
+        case 2:
+            JumpCommon(CORO_END_TALK);
+        default:
+            if ( scn($SCENARIO_MAIN) >= [21, 0] ) {
+                switch ( $GROUND_ENTER ) {
+                    case 218:
+                        if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
+                            debug_Print('BGM_FADEOUT');
+                            bgm_FadeOut(60);
+                            §label_4;
+                            main_EnterGround(LEVEL_H02P99A, 30);
+                            hold;
+                        } else {
+                            jump @label_4;
+                        }
+                        break;
+                    default:
+                        jump @label_4;
+                }
+            } else {
+                JumpCommon(CORO_END_TALK);
+            }
+            break;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}
