@@ -1,0 +1,547 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    screen_WhiteIn(4, 2);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    supervision_Acting(1);
+    Wait(1);
+    with (actor ACTOR_NPC_MARIRU) {
+        Move2PositionMark(1, Position<'m0', 43.5, 24.5>);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        Move2PositionMark(1, Position<'m1', 44.5, 26.5>);
+    }
+    bgm_FadeOut(120);
+    message_SetActor(ACTOR_NPC_MARIRU);
+    message_Talk({
+        english=" Misters [CS:N]Kecleon[CR]!",
+        french=" Bonjour, Messieurs [CS:N]Kecleon[CR]!",
+        german=" Hallo, die Herren [CS:N]Kecleon[CR]!",
+        italian=" Signori [CS:N]Kecleon[CR]!",
+        spanish=" ¡Señores [CS:N]Kecleon[CR]!",
+    });
+    Wait(5);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(8, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    Wait(90);
+    message_CloseEnforce();
+    with (performer 0) {
+        SetPositionLives(0);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (performer 0) {
+        Move2PositionMark(1, Position<'m2', 42, 24.5>);
+    }
+    with (actor ACTOR_PLAYER) {
+        Move2PositionMark(1, Position<'m3', 39, 24.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Move2PositionMark(1, Position<'m4', 39, 26.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(8, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    bgm_PlayFadeIn(BGM_HEARTWARMING, 0, 256);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Ah! Little [CS:N]Marill[CR] and [CS:N]Azurill[CR]![K]\nWelcome, my young friends! ♪",
+        french=" Ah! Les petits [CS:N]Marill[CR] et [CS:N]Azurill[CR]![K]\nBienvenue, mes jeunes amis! ♪",
+        german=" Ah! Der kleine [CS:N]Marill[CR] und der\nkleine [CS:N]Azurill[CR]![K] Willkommen, meine kleinen\nFreunde! ♪",
+        italian=" Ah! I piccoli [CS:N]Marill[CR] e [CS:N]Azurill[CR]![K]\nBenvenuti, miei piccoli amici! ♪",
+        spanish=" ¡Ah! ¡Los pequeños [CS:N]Marill[CR] y\n[CS:N]Azurill[CR]![K] ¡Bienvenidos, jovenzuelos! ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Hello. May I buy an [CS:I]Apple[CR]?",
+        french=" Bonjour. Puis-je acheter une\n[CS:I]Pomme[CR]?",
+        german=" Hallo. Könnte ich bitte einen\n[CS:I]Apfel[CR] kaufen?",
+        italian=" Buongiorno. Vorrei comprare\nuna [CS:I]Mela[CR].",
+        spanish=" Hola. ¿Puedo comprar\nuna [CS:I]Manzanita[CR]?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh, most certainly!",
+        french=" Oh, mais bien sûr!",
+        german=" Oh, aber natürlich!",
+        italian=" Oh, sicuro!",
+        spanish=" ¡Claro que sí!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Mail({
+        english="[CN][CS:N]Marill[CR] and [CS:N]Azurill[CR] bought\n[CN]an [CS:I]Apple[CR] at [CS:K]Kecleon[CR] Market.",
+        french="[CN][CS:N]Marill[CR] et [CS:N]Azurill[CR] achètent\n[CN]une [CS:I]Pomme[CR] au [CS:K]Marché Kecleon[CR].",
+        german="[CN][CS:N]Marill[CR] und [CS:N]Azurill[CR] kaufen\n[CN]einen [CS:I]Apfel[CR] im [CS:K]Kecleon-Markt[CR].",
+        italian="[CN][CS:N]Marill[CR] e [CS:N]Azurill[CR] comprano\n[CN]una [CS:I]Mela[CR] al [CS:K]Kecleon[CR] Market.",
+        spanish="[CN][CS:N]Marill[CR] y [CS:N]Azurill[CR] compraron\n[CN]una [CS:I]Manzanita[CR] en el [CS:K]Bazar Kecleon[CR].",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+    message_FacePositionOffset(-3, -1);
+    message_Talk({
+        english=" Thank you, Misters [CS:N]Kecleon[CR]!",
+        french=" Merci, Messieurs [CS:N]Kecleon[CR]!",
+        german=" Vielen Dank, die Herren [CS:N]Kecleon[CR]!",
+        italian=" Grazie, signori [CS:N]Kecleon[CR]!",
+        spanish=" ¡Gracias, señores [CS:N]Kecleon[CR]!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" No, thank you, my young friends!\nYou are to be admired! ♪",
+        french=" Non, merci à vous, mes jeunes\namis! Vous êtes si admirables! ♪",
+        german=" Nein, wir haben uns zu bedanken,\nmeine kleinen Freunde! Ihr seid zu\nliebenswert! ♪",
+        italian=" No, grazie a voi, miei giovani \namici! Siete eccezionali! ♪",
+        spanish=" Gracias a vosotros, jovenzuelos.\nSois encantadores. ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        Turn2Direction(16, 10, DIR_RIGHT);
+    }
+    Wait(4);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(16, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        Move2PositionMark(1, Position<'m5', 66, 24.5>);
+    }
+    Wait(20);
+    with (actor ACTOR_NPC_RURIRI) {
+        Move2PositionMark(1, Position<'m6', 66, 26.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_KAKUREON1);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_KAKUREON2);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" You see, those delightful\nchildren are brothers.",
+        french=" Vous voyez, ces charmants\nenfants sont frères.",
+        german=" Wisst ihr, diese entzückenden\nKinder sind Brüder.",
+        italian=" Sapete, quei simpatici cuccioli\nsono fratelli.",
+        spanish=" Ustedes verán, estos chicos tan\nmajos son hermanos.",
+    });
+    message_Talk({
+        english=" Lately, their poor mother has\nfallen sick. So those youngsters come and\ndo the shopping for her.",
+        french=" Leur pauvre mère est tombée\nmalade il y a peu. Alors ces jeunes garçons\nviennent faire les courses pour elle.",
+        german=" Seit Kurzem ist ihre arme\nMutter krank. Also kommen die beiden Kleinen\nund kaufen für sie ein.",
+        italian=" Poco tempo fa, la loro povera\nmadre si è ammalata. Quindi quei giovanotti\nvengono a fare la spesa per lei.",
+        spanish=" Su pobre madre está enferma.\nPor eso, estos jovencitos vienen a hacer\nla compra por ella.",
+    });
+    message_Talk({
+        english=" It\'s quite remarkable. Though\nvery young, they\'ve stepped up and\ntaken charge. ♪",
+        french=" C\'est remarquable. Malgré leur\njeune âge, ils prennent des responsabilités\npour aider leur mère. ♪",
+        german=" Es ist wirklich bemerkenswert.\nObwohl sie so jung sind, übernehmen sie schon\nVerantwortung. ♪",
+        italian=" È davvero ammirevole. Anche se\nsono molto giovani, si sono rimboccati le \nmaniche e si danno un gran da fare. ♪",
+        spanish=" Es admirable. Incluso siendo\ntan jóvenes, son muy responsables. ♪",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_MARIRU) {
+        Move2PositionMark(3, Position<'m7', 43.5, 24.5>);
+    }
+    Wait(20);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(1024);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        Move2PositionMark(3, Position<'m8', 44.5, 26.5>);
+    }
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    message_SetActor(ACTOR_NPC_MARIRU);
+    message_Talk({
+        english=" Misters [CS:N]Kecleon[CR]!",
+        french=" Messieurs [CS:N]Kecleon[CR]!",
+        german=" Die Herren [CS:N]Kecleon[CR]!",
+        italian=" Signori [CS:N]Kecleon[CR]!",
+        spanish=" ¡Señores [CS:N]Kecleon[CR]!",
+    });
+    with (actor ACTOR_NPC_KAKUREON1) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8962);
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_KAKUREON1) {
+        WaitEffect();
+    }
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh? What\'s the hurry? What\nmakes you return in such a rush?",
+        french=" Oh? Quel empressement!\nQu\'est-ce qui vous fait revenir si vite?",
+        german=" Oh? Wieso die Eile? Warum\nkommt ihr so schnell zurückgelaufen?",
+        italian=" Oh? Come mai tanta fretta?\nChe è successo?",
+        spanish=" ¿Por qué esas prisas?\n¿Qué os hace volver tan apurados?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_RURIRI) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" There was an extra [CS:I]Apple[CR]!",
+        french=" Il y a une [CS:I]Pomme[CR] en trop!",
+        german=" Es ist ein [CS:I]Apfel[CR] zu viel!",
+        italian=" C\'era una [CS:I]Mela[CR] in più!",
+        spanish=" ¡Había una [CS:I]Manzanita[CR] de más!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_FacePositionOffset(-3, -1);
+    message_Talk({
+        english=" We didn\'t pay for this many.",
+        french=" Nous ne l\'avons pas payée.",
+        german=" Für den haben wir nicht bezahlt.",
+        italian=" Non l\'abbiamo pagata.",
+        spanish=" No habíamos pagado por esta.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh, yes... That, young friends,\nis a gift from me and my brother.",
+        french=" Ah, oui... Voyez-vous, mes\njeunes amis, c\'est un cadeau de la part\nde mon frère et moi-même.",
+        german=" Oh ja. Das, meine kleinen\nFreunde, ist ein Geschenk von mir und meinem\nBruder.",
+        italian=" Oh, sì... Quello, miei giovani\namici, è un regalo da parte mia e di mio\nfratello.",
+        spanish=" Ah, sí... Es un regalo\nde nuestra parte.",
+    });
+    message_Talk({
+        english=" Please, share it among\nyourselves and do enjoy.",
+        french=" Partagez-la et régalez-vous.",
+        german=" Bitte teilt ihn euch und lasst ihn\neuch schmecken.",
+        italian=" Potete dividervela e gustarvela.",
+        spanish=" Por favor, compartidla\nentre vosotros y disfrutadla.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8978);
+    with (actor ACTOR_NPC_MARIRU) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        WaitEffect();
+    }
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_FacePositionOffset(-3, -1);
+    message_Talk({
+        english=" Really?!",
+        french=" Vraiment?!",
+        german=" Wirklich?!?",
+        italian=" Davvero?!",
+        spanish=" ¡¿En serio?!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Yay! Thank you, Mr. [CS:N]Kecleon[CR]\nand Mr. [CS:N]Kecleon[CR]!",
+        french=" Youpi! Merci, M. [CS:N]Kecleon[CR]\net M. [CS:N]Kecleon[CR]!",
+        german=" Jippie! Danke, Herr [CS:N]Kecleon[CR]\nund Herr [CS:N]Kecleon[CR]!",
+        italian=" Wow! Grazie, signor [CS:N]Kecleon[CR]\ne signor [CS:N]Kecleon[CR]!",
+        spanish=" ¡Chachi! \n¡Gracias, señores [CS:N]Kecleon[CR]!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh, not to worry, my friends.\nDo take care on your way home. ♪",
+        french=" Oh, pas de quoi, mes amis.\nFaites attention en rentrant. ♪",
+        german=" Oh, keine Ursache, meine\nFreunde. Kommt gut nach Hause. ♪",
+        italian=" Oh, non c\'è di che, amici miei.\nState attenti tornando a casa. ♪",
+        spanish=" Ah, no os preocupéis, muchachos.\nTened cuidado al volver a casa. ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        MovePositionMark(1, Position<'m9', 61, 24.5>);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    Wait(30);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(768);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        MovePositionMark(1, Position<'m10', 52, 26.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    bgm_FadeOut(10);
+    se_Play(6412);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(22);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_NPC_KAKUREON1) {
+        SetEffect(EFFECT_SHOCKED_MIRRORED, 3);
+    }
+    with (actor ACTOR_NPC_KAKUREON2) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_SHOCKED_MIRRORED, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_TEARY_EYED, FACE_POS_BOTTOM_RC_FACEOUTW);
+    message_FacePositionOffset(2, -3);
+    message_Talk({
+        english=" Yowch!",
+        french=" Ouille!",
+        german=" Autsch!",
+        italian=" Ups!",
+        spanish=" ¡Ay!",
+    });
+    se_Play(6413);
+    supervision_Acting(2);
+    with (object OBJECT_P03P02A1_128) {
+        SlidePositionMark(1, Position<'m11', 42, 24.5>);
+    }
+    with (object OBJECT_P03P02A1_128) {
+        SetAnimation(18);
+    }
+    with (object OBJECT_P03P02A1_128) {
+        WaitAnimation();
+    }
+    Wait(30);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_NPC_KAKUREON1) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    Wait(4);
+    with (actor ACTOR_NPC_KAKUREON2) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteObject(OBJECT_P03P02A1_128);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        MovePositionOffset(1, 20, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    se_Play(8710);
+    with (object OBJECT_P03P02A1_128) {
+        Destroy();
+    }
+    Wait(30);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        Move2PositionOffset(33152, -8, -16);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_RURIRI) {
+        MovePositionMark(33152, Position<'m12', 45, 24.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    Wait(20);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(23);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" W-we\'re sorry to bother you.\nThank you so much.",
+        french=" M-merci beaucoup... Pardon\npour le dérangement.",
+        german=" T-tut uns leid, dass wir gestört\nhaben. Vielen Dank.",
+        italian=" S-Scusi per il disturbo. Grazie\ntante.",
+        spanish=" Sentimos haberte molestado.\nMuchas gracias.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m13', 43, 24.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_Mail({
+        english="[CN][hero] gave the [CS:I]Apple[CR]\n[CN]back to [CS:N]Azurill[CR].",
+        french="[CN][hero] rend la [CS:I]Pomme[CR]\n[CN]à [CS:N]Azurill[CR].",
+        german="[CN][hero] gibt [CS:N]Azurill[CR]\n[CN]den [CS:I]Apfel[CR] zurück.",
+        italian="[CN][hero] restituisce la [CS:I]Mela[CR]\n[CN]ad [CS:N]Azurill[CR].",
+        spanish="[CN][hero] devolvió\n[CN]la [CS:I]Manzanita[CR] a [CS:N]Azurill[CR].",
+    });
+    message_Mail({
+        english="\n[CN]But then suddenly...",
+        french="\n[CN]C\'est à cet instant précis que...",
+        german="\n[CN]Doch auf einmal...",
+        italian="\n[CN]Ma poi, improvvisamente...",
+        spanish="\n[CN]Pero de pronto...",
+    });
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_L_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Huh? What was that?)",
+                french="(Quoi? Qu\'est-ce que c\'était?)",
+                german="(Äh? Was war das?)",
+                italian="(Eh? Cosa è stato?)",
+                spanish="(¿Eh? ¿Qué ha sido eso?)",
+            }
+        default:
+            {
+                english="(Huh? What was that?)",
+                french="(Quoi? Qu\'est-ce que c\'était?)",
+                german="(Äh? Was war das?)",
+                italian="(Eh? Cosa è stato?)",
+                spanish="(¿Eh? ¿Qué ha sido eso?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(D-dizzy? Or am I...?)",
+                french="(J\'ai des vertiges? Ou alors...?)",
+                german="(Sch-schwindelig? Wirklich?)",
+                italian="(U-Un capogiro? O sono...?)",
+                spanish="(¿Es un mareo? ¿O qué me está...?)",
+            }
+        default:
+            {
+                english="(D-dizzy? Or am I...?)",
+                french="(J\'ai des vertiges? Ou alors...?)",
+                german="(Sch-schwindelig? Wirklich?)",
+                italian="(U-Un capogiro? O sono...?)",
+                spanish="(¿Es un mareo? ¿O qué me está...?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    screen_FadeOutAll(1, 5);
+    CallCommon(CORO_FADE_OUT_ALL_AFTER);
+    end;
+}

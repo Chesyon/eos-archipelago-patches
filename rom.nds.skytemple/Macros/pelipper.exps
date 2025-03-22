@@ -1,0 +1,259 @@
+
+    macro PelipperTransition() {
+        if ($PERFORMANCE_PROGRESS_LIST[37]) { // Pelipper Transitions Disabled?  
+            return; // 
+        } else {
+            if ($PERFORMANCE_PROGRESS_LIST[35]) {
+                // Continue!
+            } else {
+                return; // Exit macro!
+            }
+        }
+        §trans_choose;
+        message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I\'ve got a special delivery for\nteam [team] via [CS:C]Express Mail[CR]!\nHow would you like to receive your delivery?");
+        switch(message_SwitchMenu(1,1)) {
+            case menu("Bag First"):
+                message_Close();
+                message_Talk(" [STS]Understood, here you go![STE]");
+                message_Close();
+                $LOCAL1 = 0;
+                break;
+            case menu("Storage First"):
+                message_Close();
+                message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
+                message_Close();
+                $LOCAL1 = 3;
+                break;
+            case menu("Bag Only"):
+                message_Close();
+                message_Talk(" Very well, I\'ll hold onto anything\nyou can\'t carry on your person.");
+                message_Close();
+                $LOCAL1 = 2;
+                break;
+            case menu("Storage Only"):
+                message_Close();
+                message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
+                message_Close();
+                $LOCAL1 = 1;
+                break;
+            case menu("Review All"):
+                message_Close();
+                message_Talk(" You want to decide where each item\ngoes for yourself? Understood, let\'s see...");
+                message_Close();
+                $LOCAL1 = 4;
+                break;                    
+            case menu("Discard All"):
+                message_Close();
+                message_Talk(" Huh?[K] I flew all the way here to\nget you these items, and you don\'t want them?\n[K]Just to be sure, you DON'T want this delivery?");
+                switch(message_SwitchMenu(2,2)) {
+                    case menu("Throw it away!"):
+                        message_Close();
+                        message_Talk(" Very well...");
+                        message_Close();
+                        break;
+                    case menu("Never Mind..."):
+                        message_Close();
+                        message_Talk(" Let\'s try that again, shall we?");
+                        jump @trans_choose;
+                }
+                $LOCAL1 = 5;
+                break;
+            case menu("Not Right Now"):
+            default:
+                message_Close();
+                message_Talk(" You don\'t want them right now? I\'ll\ndisable [CS:C]Express Mail[CR] then.[K] When you\'re ready\nto receive it, talk to me in your base, okay?");
+                message_Close();
+                $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                return;
+        }
+        ~PelipperDeliverAll();
+        $LOCAL1 = 0;
+        return;
+    }
+    
+    
+    macro PelipperBaseDelivery() {
+        if ($PERFORMANCE_PROGRESS_LIST[35]) {
+            §base_choose;
+            message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Very well, how would you like\nme to disburse your deliveries?");
+            switch(message_SwitchMenu(1,1)) {
+                case menu("Bag First"):
+                    message_Close();
+                    message_Talk(" [STS]Understood, here you go![STE]");
+                    message_Close();
+                    $LOCAL1 = 0;
+                    break;
+                case menu("Storage First"):
+                    message_Close();
+                    message_Talk(" How peculiar, I don\'t typically get\nthat request. If your storage is nearly full,\nI suggest visiting the Wynaut Recycle Shop...");
+                    message_Close();
+                    $LOCAL1 = 3;
+                    break;
+                case menu("Bag Only"):
+                    message_Close();
+                    message_Talk(" Very well, I\'ll hold onto anything\nyou can\'t carry on your person.");
+                    message_Close();
+                    $LOCAL1 = 2;
+                    break;
+                case menu("Storage Only"):
+                    message_Close();
+                    message_Talk(" Very well, I\'ll deposit what I can\nto Kangaskhan Storage on your behalf.");
+                    message_Close();
+                    $LOCAL1 = 1;
+                    break;
+                case menu("Review All"):
+                    message_Close();
+                    message_Talk(" You want to decide where each item\ngoes for yourself? Understood, let\'s see...");
+                    message_Close();
+                    $LOCAL1 = 4;
+                    break;                    
+                case menu("Discard All"):
+                    message_Close();
+                    message_Talk(" Huh?[K] I\'ve been holding onto these\nfor a while now, and you don\'t want them?\n[K]Just to be sure, you DON'T want this delivery?");
+                    switch(message_SwitchMenu(2,2)) {
+                        case menu("Throw it away!"):
+                            message_Close();
+                            message_Talk(" Very well...");
+                            message_Close();
+                            break;
+                        case menu("Never Mind..."):
+                            message_Close();
+                            message_Talk(" I thought so...");
+                            jump @base_choose;
+                    }
+                    $LOCAL1 = 5;
+                    break;
+                case menu("Never Mind"):
+                default:
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                    message_Talk(" Very well, I can hold onto your\nitems for a bit longer. Best of luck today!");
+                    message_Close();
+                    JumpCommon(CORO_EVENT_END_FREE);
+        }
+        ~PelipperDeliverAll();
+    }
+        JumpCommon(CORO_EVENT_END_FREE);
+    }
+    
+    macro PelipperDeliverAll() {
+        debug_Print("Deliver All");
+        if ($ITEM_BACKUP == 0) { // ITEM_BACKUP is null, the first item doesn't exist!
+            §box_lost;
+            message_Talk(" How strange...[K] I can\'t seem to find\nyour package right now![K] This is really weird,\n[CS:C]you should tell[CR] [CS:G]happylappy[CR] [CS:C]if you see this[CR]![K][K][K]");
+            message_Close();
+            $PERFORMANCE_PROGRESS_LIST[35] = 0;
+            JumpCommon(CORO_EVENT_END_FREE);
+        }
+        §box_iteration;
+        item_SetVariable(0,$ITEM_BACKUP);
+        message_EmptyActor();
+        $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item 
+        $LOCAL0 = 0; // Reset the counter!
+        if ($LOCAL1 < 4) {
+            me_Play(4);
+            message_Monologue("[STS][CN][CS:G]Pelipper[CR] handed you a [s_item:0]![STE]");
+            WaitMe(4);
+            message_Close();
+        }
+        switch($LOCAL1) {
+            case 0: // Bag then Storage
+            case 2: // Bag Only
+                §check_bag;
+                switch(ProcessSpecial(56,0,0)) { // Is bag full?
+                    case 0:
+                        if ($LOCAL1 > 2) {
+                            message_Mail("[STS][s_item:0] was put in your bag[STE]");
+                            message_Close();
+                        }
+                        switch ( message_Menu(MENU_GIVE_ITEM) ) { } // Put it in their bag
+                        jump @box_halt;
+                    default: // Item not put in bag!
+                        break;
+                }
+                if ($LOCAL1 == 2 || $LOCAL1 == 3) {  
+                    jump @no_room;
+                }
+            case 1: // Storage Only
+            case 3: // Storage then Bag
+                §check_storage;
+                switch (ProcessSpecial(57,0,0)) { // Is storage full?
+                    case 0: // Storage NOT full!
+                        switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
+                        jump @box_halt;
+                    default: // Storage full!
+                        break;
+                }
+                if ($LOCAL1 == 3 || $LOCAL1 == 4) {
+                    message_Mail("[STS]There\'s no more room in storage![STE]");
+                    message_Close();
+                    jump @check_bag;
+                }
+                §no_room;
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Looks like you have no room for\nthis delivery! I\'ll hold onto it and any others\nfor you to retrieve in your base later, okay?");
+                message_Close();
+                $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                JumpCommon(CORO_EVENT_END_FREE);
+                break;
+            case 4: // Review each one...
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("[STS] Where should this [s_item:0] go?[STE]");
+                switch(message_SwitchMenu(1,1)) {
+                    default:
+                    case menu("Storage First"):
+                        message_Close();
+                        jump @check_storage;
+                    case menu("Bag First"):
+                        message_Close();
+                        jump @check_bag;
+                    case menu("Discard"):
+                        message_Close();
+                        break;
+                }
+            case 5: // Discard All
+                message_Mail("[STS][CN][s_item:0] was thrown away!\n[CN]What a waste![STE]");
+                message_Close();
+                break;
+        }
+        message_Close();
+        §box_halt;
+        if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
+            if ($LOCAL0 > 3600) { // 1 minute timer for Cryptic. Should be sufficient!
+                message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" The [M:T5][CS:H]APWorld[CR] client doesn\'t seem\nto be responding right now. Should I keep\ntrying, or hold onto your deliveries for now?");
+                switch(message_SwitchMenu(0,1)) {
+                    case menu("Keep Trying"):
+                        message_Close();
+                        $LOCAL0 = 0;
+                        jump @box_halt;
+                    case menu("Give Up"):
+                        message_Close();
+                        $SCENARIO_TALK_BIT_FLAG[250] = 0;
+                        $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                        message_Talk(" Understood. I\'ll be in your base with\nyour delivery when you\'re ready to receive it.\nTalk to me when the client is connected, okay?");
+                        jump @box_lost;
+                        break;
+                }
+            } else {
+                $LOCAL0 += 1;
+                Wait(1);
+                jump @box_halt;
+            }
+        }
+        
+        if ($ITEM_BACKUP != 0) {
+            message_Close();
+            jump @box_iteration; // Next Item given by Cryptic!
+        } else {
+            message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk("[STS] That appears to be everything!\nHave a great day, team [team]![STE]");
+            message_Close();
+            debug_Print("Transaction Complete!");
+            $PERFORMANCE_PROGRESS_LIST[35] = 0;
+            JumpCommon(CORO_EVENT_END_FREE);
+        }
+        JumpCommon(CORO_EVENT_END_FREE);
+    }

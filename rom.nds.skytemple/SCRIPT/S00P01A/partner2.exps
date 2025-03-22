@@ -3,24 +3,20 @@ def 0 {
     if (debug) {
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+        switch(dungeon_mode(21)) {
+            case DMODE_OPEN_AND_REQUEST:
+                $PERFORMANCE_PROGRESS_LIST[17] = 1;
+                dungeon_mode(23) = DMODE_REQUEST;
+                break;
+            default:
+                dungeon_mode(21) = DMODE_OPEN;               
+                break;
+        }                                                                                                                                   
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;
     message_Talk(" What\'s on your mind, [hero]?");
-    switch(message_SwitchMenu(4,4)) {
+    switch(message_SwitchMenu(4,6)) {
         case menu("Add To Team"):
             message_Close();
             message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
@@ -79,8 +75,26 @@ def 0 {
         message_Talk(" Our current goal is to defeat\nthat wicked [CS:G]Darkrai[CR] in [CS:P]Dark Crater[CR].[K] To open\nthe way, we need the [CS:C]Legendary Treasures[CR]!");
         switch(ProcessSpecial(102,0,1)) { // Instruments
             case 0: // Have all of them!
-                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
-                message_Talk(" If my records are correct, we\nhave all of the treasures we need![K] Let\'s go to\n[CS:P]Dark Crater[CR] and beat [CS:G]Darkrai[CR], [hero]!");
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_JOYOUS, FACE_POS_STANDARD);
+                        message_Talk(" GG [hero]! We did it!");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" If my records are correct, we\nhave all of the treasures we need![K] Let\'s go to\n[CS:P]Dark Crater[CR] and beat [CS:G]Darkrai[CR], [hero]!");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we have\nall the [CS:I]Instruments[CR] we need![K] But [CS:P]Dark Crater[CR]\nis still closed?[K] Probably [CS:G]Cryptic[CR]\'s fault!");
+                        message_Talk(" Okay, so I can open [CS:P]Dark Crater[CR]\nfor us, but [CS:B]definitely report this as a bug[CR] if\nyou see this message, okay [hero]?");
+                        screen_FadeOut(1,30);
+                        message_Mail("[CN][partner] pulled out a [CS:I]Rusty Trumpet[CR] and\n[CN]began playing it![K] Suddenly, a beam of light\n[CN]burst out of it, heading to the North-West![W:90]");
+                        dungeon_mode(67) = DMODE_OPEN;
+                        screen_FadeIn(1,30);
+                        message_Talk(" There we go, [CS:G]Cresselia[CR]\nshould be ready for us at [CS:P]Dark Crater[CR]![K]\nDon\'t forget, [CS:B]this wasn\'t supposed to happen![CR]");
+                        break;
+                }
                 break;
             
             case 1: // Missing one!

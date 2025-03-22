@@ -1,0 +1,401 @@
+
+def 0 {
+    sound_Stop();
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V24P08A);
+    back_SetGround(LEVEL_H02P99A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    camera2_SetPositionMark(Position<'m0', 19, 15.5>);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    bgm_PlayFadeIn(BGM_OCEAN1, 90, 256);
+    screen2_FadeIn(0, 15);
+    screen_FadeIn(1, 15);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_SURPRISED, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(I was told I was somehow connected to the\ndistortion of space.)",
+                french="(On m\'a dit que c\'était lié\nà la distorsion de l\'espace.)",
+                german="(Mir wurde gesagt, dass ich irgendetwas mit\nder Verzerrung des Raumes zu tun hätte.)",
+                italian="(Mi è stato detto che in qualche modo ho \na che fare con la distorsione dello spazio.)",
+                spanish="(Si no recuerdo mal, no podía evolucionar\nporque estaba relacionado, de algún modo,\ncon la deformación del espacio.)",
+            }
+        default:
+            {
+                english="(I was told I was somehow connected to the\ndistortion of space.)",
+                french="(On m\'a dit que c\'était lié\nà la distorsion de l\'espace.)",
+                german="(Mir wurde gesagt, dass ich irgendetwas mit\nder Verzerrung des Raumes zu tun hätte.)",
+                italian="(Mi è stato detto che in qualche modo ho \na che fare con la distorsione dello spazio.)",
+                spanish="(Si no recuerdo mal, no podía evolucionar\nporque estaba relacionada, de algún modo,\ncon la deformación del espacio.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(I heard that at [CS:P]Luminous Spring[CR].)",
+                french="(C\'est à la [CS:P]Source Lumineuse[CR] que j\'ai\nentendu ça.)",
+                german="(Das habe ich bei der [CS:P]Glitzerquelle[CR] gehört.)",
+                italian="(L\'ho sentito alla [CS:P]Sorgente Luccichio[CR].)",
+                spanish="(Eso fue en el [CS:P]Manantial Luminoso[CR].)",
+            }
+        default:
+            {
+                english="(I heard that at [CS:P]Luminous Spring[CR].)",
+                french="(C\'est à la [CS:P]Source Lumineuse[CR] que j\'ai\nentendu ça.)",
+                german="(Das habe ich bei der [CS:P]Glitzerquelle[CR] gehört.)",
+                italian="(L\'ho sentito alla [CS:P]Sorgente Luccichio[CR].)",
+                spanish="(Eso fue en el [CS:P]Manantial Luminoso[CR].)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(20);
+    message_SetFace(ACTOR_PLAYER, FACE_SAD, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(In that case...[K] What I heard about my\nexistence ruining the world...",
+                french="(Dans ce cas...[K] ce que j\'ai entendu sur\nmon existence dévastant le monde...)",
+                german="(Wenn das so ist...[K] Was ich gehört habe über\ndie Zerstörung der Welt durch meine\nExistenz...)",
+                italian="(In tal caso...[K] ciò che ho sentito riguardo alla\nmia presenza che sta distruggendo il mondo...)",
+                spanish="(Entonces...[K] lo que oí sobre que mi presencia\nen este mundo podría acabar con él...)",
+            }
+        default:
+            {
+                english="(In that case...[K] What I heard about my\nexistence ruining the world...)",
+                french="(Dans ce cas...[K] ce que j\'ai entendu sur\nmon existence dévastant le monde...)",
+                german="(Wenn das so ist...[K] Was ich gehört habe über\ndie Zerstörung der Welt durch meine\nExistenz...)",
+                italian="(In tal caso...[K] ciò che ho sentito riguardo alla\nmia presenza che sta distruggendo il mondo...)",
+                spanish="(Entonces...[K] lo que oí sobre que mi presencia\nen este mundo podría acabar con él...)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Maybe...[K] Maybe it\'s true.)",
+                french="(Peut-être...[K] peut-être que c\'est vrai.)",
+                german="(Vielleicht...[K] Vielleicht stimmt es.)",
+                italian="(Potrebbe...[K] Potrebbe essere vero.)",
+                spanish="(Tal vez...[K] Tal vez sea cierto.)",
+            }
+        default:
+            {
+                english="(Maybe...[K] Maybe it\'s true.)",
+                french="(Peut-être...[K] peut-être que c\'est vrai.)",
+                german="(Vielleicht...[K] Vielleicht stimmt es.)",
+                italian="(Potrebbe...[K] Potrebbe essere vero.)",
+                spanish="(Tal vez...[K] Tal vez sea cierto.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Merely by existing here, I might cause the\nworld\'s destruction.)",
+                french="(Peut-être que ma simple présence ici peut\ncauser la destruction du monde.)",
+                german="(Vielleicht steht durch meine bloße Existenz\ndie Welt vor ihrer Zerstörung.)",
+                italian="(La mia esistenza qui potrebbe causare la\ndistruzione del mondo.)",
+                spanish="(Podría causar la destrucción de este mundo\ntan solo por mi existencia.)",
+            }
+        default:
+            {
+                english="(Merely by existing here, I might cause the\nworld\'s destruction.)",
+                french="(Peut-être que ma simple présence ici peut\ncauser la destruction du monde.)",
+                german="(Vielleicht steht durch meine bloße Existenz\ndie Welt vor ihrer Zerstörung.)",
+                italian="(La mia esistenza qui potrebbe causare la\ndistruzione del mondo.)",
+                spanish="(Podría causar la destrucción de este mundo\ntan solo por mi existencia.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Is that what I am here...?)",
+                french="(Est-ce que c\'est pour cela que je suis là...?)",
+                german="(Liegt es wirklich an mir?)",
+                italian="(Io sto causando tutto questo..?)",
+                spanish="(¿Es eso lo que soy aquí? ¿Un peligro?)",
+            }
+        default:
+            {
+                english="(Is that what I am here...?)",
+                french="(Est-ce que c\'est pour cela que je suis là...?)",
+                german="(Liegt es wirklich an mir?)",
+                italian="(Io sto causando tutto questo..?)",
+                spanish="(¿Es eso lo que soy aquí? ¿Un peligro?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionOffset(32972, 36, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(10);
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Why are you daydreaming?[K]\nIt\'s not like you, [hero].",
+                french=" Tu es ailleurs ou quoi?[K]\nÇa ne te ressemble pas, [hero].",
+                german=" Warum bist du so\ngedankenverloren?[K] Das kenne ich gar nicht\nvon dir, [hero].",
+                italian=" Stai sognando a occhi aperti?[K]\nNon è da te, [hero].",
+                spanish=" ¿Qué haces mirando a las\nmusarañas?[K] No es propio de ti, [hero].",
+            }
+        case 2:
+            {
+                english=" Why are you daydreaming?[K]\nIt\'s not like you, [hero].",
+                french=" Tu es ailleurs ou quoi?[K]\nÇa ne te ressemble pas, [hero].",
+                german=" Warum bist du so\ngedankenverloren?[K] Das kenne ich gar nicht\nvon dir, [hero].",
+                italian=" Stai sognando a occhi aperti?[K]\nNon è da te, [hero].",
+                spanish=" ¿Qué haces mirando a las\nmusarañas?[K] No es propio de ti, [hero].",
+            }
+        default:
+            {
+                english=" Why are you daydreaming?[K]\nIt\'s not like you, [hero].",
+                french=" Tu es ailleurs ou quoi?[K]\nÇa ne te ressemble pas, [hero].",
+                german=" Warum bist du so\ngedankenverloren?[K] Das kenne ich gar nicht\nvon dir, [hero].",
+                italian=" Stai sognando a occhi aperti?[K]\nNon è da te, [hero].",
+                spanish=" ¿Qué haces mirando a las\nmusarañas?[K] No es propio de ti, [hero].",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    Wait(15);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Come on, let\'s see some energy,\n[hero]!",
+                french=" Allons, un peu d\'entrain,\n[hero]!",
+                german=" Komm schon, zeig etwas Elan,\n[hero]!",
+                italian=" Forza, mettici un po\' di energia,\n[hero]!",
+                spanish=" Venga, ¡un poco de energía,\n[hero]!",
+            }
+        case 2:
+            {
+                english=" Come on, let\'s see some energy,\n[hero]!",
+                french=" Allons, un peu d\'entrain,\n[hero]!",
+                german=" Komm schon, zeig etwas Elan,\n[hero]!",
+                italian=" Forza, mettici un po\' di energia,\n[hero]!",
+                spanish=" Venga, ¡un poco de energía,\n[hero]!",
+            }
+        default:
+            {
+                english=" Come on, let\'s see some energy,\n[hero]!",
+                french=" Allons, un peu d\'entrain,\n[hero]!",
+                german=" Komm schon, zeig etwas Elan,\n[hero]!",
+                italian=" Forza, mettici un po\' di energia,\n[hero]!",
+                spanish=" Venga, ¡un poco de energía,\n[hero]!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_PLAYER, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="([partner]\'s even peppier than usual.)",
+                french="([partner] montre encore plus de vivacité\nque d\'habitude.)",
+                german="([partner] ist sogar noch schwungvoller\nals gewöhnlich.)",
+                italian="([partner] è più vivace del solito.)",
+                spanish="(Qué vitalidad la de [partner].)",
+            }
+        default:
+            {
+                english="([partner]\'s even peppier than usual.)",
+                french="([partner] montre encore plus de vivacité\nque d\'habitude.)",
+                german="([partner] ist sogar noch schwungvoller\nals gewöhnlich.)",
+                italian="([partner] è più vivace del solito.)",
+                spanish="(Qué vitalidad la de [partner].)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(But...[K][partner] could be right.)",
+                french="(Mais...[K] [partner] a sûrement raison.)",
+                german="(Aber...[K] [partner] könnte recht haben.)",
+                italian="(Ma...[K] [partner] forse ha ragione.)",
+                spanish="(Aunque...[K] [partner] tal vez tenga razón.)",
+            }
+        default:
+            {
+                english="(But...[K][partner] could be right.)",
+                french="(Mais...[K] [partner] a sûrement raison.)",
+                german="(Aber...[K] [partner] könnte recht haben.)",
+                italian="(Ma...[K] [partner] forse ha ragione.)",
+                spanish="(Aunque...[K] [partner] tal vez tenga razón.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(It\'s not for sure that I\'m going to destroy\nthe world!)",
+                french="(Je ne vais peut-être pas détruire le monde,\naprès tout!)",
+                german="(Es ist nicht sicher, dass ich die Welt\nzerstören werde!)",
+                italian="(Non è scontato che io distruggerò il\nmondo!)",
+                spanish="(¡No es seguro que vaya a destruir\nel mundo!)",
+            }
+        default:
+            {
+                english="(It\'s not for sure that I\'m going to destroy\nthe world!)",
+                french="(Je ne vais peut-être pas détruire le monde,\naprès tout!)",
+                german="(Es ist nicht sicher, dass ich die Welt\nzerstören werde!)",
+                italian="(Non è scontato che io distruggerò il\nmondo!)",
+                spanish="(¡No es seguro que vaya a destruir\nel mundo!)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(There\'s no point feeling sorry for myself.)",
+                french="(Ça ne sert à rien de s\'apitoyer.)",
+                german="(Selbstmitleid hilft ja auch nicht weiter.)",
+                italian="(Non ha senso essere tristi.)",
+                spanish="(Y no sirve de nada quedarme aquí\nlamentándome.)",
+            }
+        default:
+            {
+                english="(There\'s no point feeling sorry for myself.)",
+                french="(Ça ne sert à rien de s\'apitoyer.)",
+                german="(Selbstmitleid hilft ja auch nicht weiter.)",
+                italian="(Non ha senso essere tristi.)",
+                spanish="(Y no sirve de nada quedarme aquí\nlamentándome.)",
+            }
+    }
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(I gotta cheer up!)",
+                french="(Je dois remonter la pente!)",
+                german="(Ich muss mich aufrappeln!)",
+                italian="(Devo tirarmi su!)",
+                spanish="(¡Tengo que animarme!)",
+            }
+        default:
+            {
+                english="(I gotta cheer up!)",
+                french="(Je dois remonter la pente!)",
+                german="(Ich muss mich aufrappeln!)",
+                italian="(Devo tirarmi su!)",
+                spanish="(¡Tengo que animarme!)",
+            }
+    }
+    message_Close();
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(71);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    Wait(30);
+    bgm_FadeOut(120);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yup![K] That\'s the [hero]\nI know!",
+                french=" Oui![K] Ça, ça te ressemble plus,\n[hero]!",
+                german=" Genau![K] So kenne ich dich,\n[hero]!",
+                italian=" Sì![K] Adesso ti riconosco,\n[hero]!",
+                spanish=" ¡Sí![K]\n¡Así se hace, [hero]!\n",
+            }
+        case 2:
+            {
+                english=" Yes![K] That\'s the [hero]\nI know!",
+                french=" Oui![K] Ça, ça te ressemble plus,\n[hero]!",
+                german=" Ja![K] So kenne ich dich,\n[hero]!",
+                italian=" Sì![K] Adesso ti riconosco,\n[hero]!",
+                spanish=" ¡Sí![K]\n¡Así se hace, [hero]!",
+            }
+        default:
+            {
+                english=" Yep![K] That\'s the [hero]\nI know!",
+                french=" Oui![K] Ça, ça te ressemble plus,\n[hero]!",
+                german=" Genau![K] So kenne ich dich,\n[hero]!",
+                italian=" Sì![K] Adesso ti riconosco,\n[hero]!",
+                spanish=" ¡Sí![K]\n¡Así se hace, [hero]!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s make this another big day,\n[hero]!",
+                french=" C\'est parti pour une nouvelle\njournée magnifique, [hero]!",
+                german=" Machen wir auch diesen Tag zu\netwas Besonderem, [hero]!",
+                italian=" Facciamo anche oggi del nostro\nmeglio, [hero]!",
+                spanish=" ¡Seguro que hoy será un\ngran día, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s make this another big day,\n[hero]!",
+                french=" C\'est parti pour une nouvelle\njournée magnifique, [hero]!",
+                german=" Machen wir auch diesen Tag zu\netwas Besonderem, [hero]!",
+                italian=" Facciamo anche oggi del nostro\nmeglio, [hero]!",
+                spanish=" ¡Seguro que hoy será un\ngran día, [hero]!",
+            }
+        default:
+            {
+                english=" Let\'s make this another big day,\n[hero]!",
+                french=" C\'est parti pour une nouvelle\njournée magnifique, [hero]!",
+                german=" Machen wir auch diesen Tag zu\netwas Besonderem, [hero]!",
+                italian=" Facciamo anche oggi del nostro\nmeglio, [hero]!",
+                spanish=" ¡Seguro que hoy será un\ngran día, [hero]!",
+            }
+    }
+    message_Close();
+    screen2_FadeOut(1, 30);
+    back2_SetMode(0);
+    with (performer 0) {
+        MovePositionLives(1, 0);
+    }
+    WaitExecutePerformer(0);
+    bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+    end;
+}
+
+
+def 1 for_actor(ACTOR_NPC_PERIPPAA1) {
+    if ($PERFORMANCE_PROGRESS_LIST[35]) {
+        SetAnimation(2);
+    } else {
+        SetAnimation(6);
+    }
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

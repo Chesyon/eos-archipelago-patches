@@ -1,0 +1,508 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We\'re leaving soon.",
+            french=" On part bientôt.",
+            german=" Wir brechen bald auf.",
+            italian=" Ce ne andremo presto.",
+            spanish=" Pronto nos iremos.",
+        });
+        message_Talk({
+            english=" We\'re back on the hunt for\nnew treasures.",
+            french=" Nous voilà de nouveau en quête\nde trésors.",
+            german=" Wir sind zurück auf der Jagd\nnach neuen Schätzen.",
+            italian=" Siamo tornati a caccia di tesori.",
+            spanish=" Vamos en busca de nuevos\ntesoros.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I hear that Phione Dew is\npretty rare.",
+            french=" J\'ai entendu dire que la Rosée\nPhione est très rare.",
+            german=" Phione-Tau soll ziemlich selten\nsein.",
+            italian=" Ho sentito che la Brina Phione è\npiuttosto rara.",
+            spanish=" He oído que el Rocío Phione es\nmuy difícil de encontrar, muy inusual.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" What was his name again? Was\nit [CS:N]Manaphy[CR], that little Pokémon?",
+            french=" Quel est le nom de ce bébé,\ndéjà? [CS:N]Manaphy[CR], c\'est bien ça?",
+            german=" Wie war sein Name noch gleich?\nWar es [CS:N]Manaphy[CR], dieses kleine Pokémon?",
+            italian=" Come avete detto che si chiama?\nÈ [CS:N]Manaphy[CR], quel piccolo Pokémon?",
+            spanish=" ¿Cómo dices que se llamaba\nese pequeño Pokémon? ¿[CS:N]Manaphy[CR]?",
+        });
+        message_Talk({
+            english=" Where could he have gotten to?",
+            french=" Où a-t-il bien pu aller?",
+            german=" Wo kann das Kleine nur sein?",
+            italian=" Dove può essere andato?",
+            spanish=" ¿Dónde estará?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 46] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" So the baby\'s called [CS:N]Manaphy[CR]...",
+            french=" Alors, le bébé s\'appelle\n[CS:N]Manaphy[CR]...",
+            german=" Das Kleine heißt also [CS:N]Manaphy[CR]...",
+            italian=" Quindi questo piccoletto si \nchiama [CS:N]Manaphy[CR]...",
+            spanish=" Así que el bebé se llama\n[CS:N]Manaphy[CR]...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We dropped by before we\nheaded out to [CS:P]Midnight Forest[CR].",
+            french=" On fait un saut dans le coin\navant d\'aller à la [CS:P]Forêt Minuit[CR].",
+            german=" Wir sind vor unserem Aufbruch\nin den [CS:P]Mitternachtswald[CR] vorbeigekommen.",
+            italian=" Siamo passati prima di \ndirigerci verso la [CS:P]Foresta Mezzanotte[CR].",
+            spanish=" Decidimos hacer una visita antes\nde ir al [CS:P]Bosque Nocturno[CR].",
+        });
+        message_Talk({
+            english=" We needed to swing by [CS:K]Kecleon[CR]\nMarket to buy a [CS:I]Key[CR].",
+            french=" Il fallait qu\'on passe par le\n[CS:K]Marché Kecleon[CR] pour acheter une [CS:I]Clé[CR].",
+            german=" Wir mussten beim\n[CS:K]Kecleon-Markt[CR] vorbeischauen, um einen\n[CS:I]Schlüssel[CR] zu kaufen.",
+            italian=" Dobbiamo fare un salto al\n[CS:K]Kecleon[CR] Market per comprare una [CS:I]Chiave[CR].",
+            spanish=" Teníamos que pasarnos por el\n[CS:K]Bazar Kecleon[CR] para comprar una [CS:I]Llave[CR].",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" An Honorary Member of the\nPokémon Exploration Team Federation?",
+            french=" Quoi? Membre Honoraire de la\nFédération des Equipes d\'Exploration Pokémon?",
+            german=" Ein Ehrenmitglied des\nErkundungsteamverbandes?",
+            italian=" Un membro onorario della \nFederazione Squadre d\'Esplorazione dei\nPokémon?",
+            spanish=" ¿Un miembro honorario de la\nFederación de Exploradores?",
+        });
+        message_Talk({
+            english=" What\'s that about? An Honorary\nMember?",
+            french=" Qu\'est-ce que ça veut dire,\nMembre Honoraire?",
+            german=" Was soll das sein, ein\nEhrenmitglied?",
+            italian=" In che senso? Un membro\nonorario?",
+            spanish=" ¿Qué es eso de miembro\nhonorario?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I don\'t think we\'re truly\ncut out to be mountain climbers.",
+            french=" Je ne pense pas qu\'on soit\nvraiment taillés pour la haute montagne.",
+            german=" Ich glaube nicht, dass wir zum\nBergsteigen geboren sind.",
+            italian=" Non credo che siamo tagliati per\nfare gli scalatori...",
+            spanish=" No creo que tengamos madera\nde alpinistas, sinceramente.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Aah... This is an amazingly\ndelicious drink.",
+            french=" Aah... Cette boisson est\nun pur délice!",
+            german=" Aaah... Das ist ein vorzüglicher,\nleckerer Drink!",
+            italian=" Aaah... Questa bevanda è\nassolutamente deliziosa.",
+            spanish=" Aah... Esta bebida está\nde rechupete.",
+        });
+        message_Talk({
+            english=" It\'s really great for tired bones.",
+            french=" Il n\'y a rien de mieux pour\nsoulager les vieux os.",
+            german=" Wirkt großartig bei müden\nKnochen!",
+            italian=" È perfetta per combattere\nla stanchezza.",
+            spanish=" Es un gran reconstituyente.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" There\'s snow around this area...\nI wonder what the summit looks like.",
+            french=" Il y a de la neige par ici... Je me\ndemande à quoi peut ressembler le sommet.",
+            german=" Rundherum liegt Schnee...\nIch frage mich, wie der Gipfel aussieht?",
+            italian=" Questa zona è ricoperta di\nneve... chissà cosa ci aspetta in cima?",
+            spanish=" Por esta zona hay nieve...\n¿Qué aspecto tendrá la cima?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We come all the way here, and\nthe path has become much steeper...",
+            french=" On a fait tout ce chemin\njusqu\'ici mais ça devient très escarpé...",
+            german=" Nun sind wir so weit\ngekommen... Und der Pfad ist um einiges\nsteiler geworden...",
+            italian=" Siamo arrivati fin qui e\nil sentiero è diventato ancora più ripido\ne faticoso...",
+            spanish=" Hemos llegado hasta aquí y de\nrepente el sendero es mucho más escarpado...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It\'s a little strange...\nA treasure that has to be given as a gift...",
+            french=" C\'est un peu bizarre, tout ça...\nUn trésor qu\'il faut donner...",
+            german=" Eigenartig... Ein Schatz, der als\nGeschenk weitergegeben wird...",
+            italian=" Un tesoro da regalare a\nqualcuno... certo che è strano...",
+            spanish=" Es un poco raro...\nUn tesoro que se da como regalo...",
+        });
+        message_Talk({
+            english=" I don\'t know whether to be\nhappy about it or not. It\'s not like you get to\nkeep what\'s inside...",
+            french=" Je ne sais pas s\'il faut s\'en\nréjouir ou pas. Après tout, ce n\'est pas comme\nsi on pouvait garder le contenu du cadeau...",
+            german=" Ich weiß nicht, wie ich das\nfinden soll. Der Inhalt ist ja dann auf jeden\nFall kein Thema mehr...",
+            italian=" Non so se essere felice oppure\nno. Non si può nemmeno tenere quello che\nc\'è dentro...",
+            spanish=" La verdad es que no sé si\nalegrarme o ponerme triste. Si no te puedes\nquedar lo que hay dentro...",
+        });
+        message_Close();
+        se_Play(8964);
+        with (actor ACTOR_NPC_SUTORAIKU) {
+            SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+        }
+        with (actor ACTOR_NPC_SUTORAIKU) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_SUTORAIKU);
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Tch! No! What am I saying?",
+            french=" Tss! Non mais! Qu\'est-ce que\nje raconte, moi?",
+            german=" Nein! Was rede ich da?",
+            italian=" Argh! No! No!",
+            spanish=" ¡Ay! ¡No! ¿Qué estoy diciendo?",
+        });
+        message_Talk({
+            english=" What a greedy point of view...\nI\'m ashamed to be so selfish...",
+            french=" Quel avare je fais...\nJe devrais avoir honte...",
+            german=" Wie kann ich nur so kleinlich,\nknauserig und berechnend davon sprechen...\nIch schäme mich, so selbstsüchtig zu sein!",
+            italian=" Come posso essere così egoista?\nÈ troppo meschino... perfino per me.",
+            spanish=" Mira que hay que ser avaricioso.\nMe da vergüenza ser tan egoísta...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] || scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Save the world![K] You\'re our\nonly hope!",
+            french=" Sauvez le monde![K] Vous êtes\nnotre seul espoir!",
+            german=" Rettet die Welt![K] Ihr seid unsere\neinzige Hoffnung!",
+            italian=" Salvate il mondo![K] Siete la\nnostra unica speranza!",
+            spanish=" ¡Salvad el mundo![K] ¡Sois nuestra\núnica esperanza!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" They\'re saying [CS:N]Grovyle[CR]\'s actually\na good guy?",
+            french=" Il paraît que [CS:N]Massko[CR] est\nun bon Pokémon finalement?",
+            german=" Sie behaupten, [CS:N]Reptain[CR] sei in\nWirklichkeit einer von den Guten?",
+            italian=" Stanno dicendo che [CS:N]Grovyle[CR] ora\nè diventato buono?",
+            spanish=" O sea, ¿que ese [CS:N]Grovyle[CR] es en\nrealidad un buen Pokémon?",
+        });
+        message_Talk({
+            english=" Humph![K] How do they expect me\nto believe that now?",
+            french=" Hum![K] Comment veulent-ils me\nfaire avaler ça?",
+            german=" Hmpf![K] Und das soll ich glauben?",
+            italian=" Umpf![K] Come possono\naspettarsi che ci creda, adesso?",
+            spanish=" ¡Hay que ver![K] ¡¿No esperaréis\nque me trague eso ahora?!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" He must have been a nasty piece\nof work in the future too, eh?",
+            french=" Dans le futur aussi, ce devait\nêtre un bandit notoire, pas vrai?",
+            german=" Er muss auch in der Zukunft ein\nschwieriger Fall gewesen sein, oder?",
+            italian=" Sarà stato un bell\'osso duro\nanche nel futuro, eh?",
+            spanish=" Seguro que ya en el futuro era\nuna buena pieza, ¿eh?",
+        });
+        message_Talk({
+            english=" That [CS:N]Grovyle[CR].",
+            french=" Cet abominable [CS:N]Massko[CR].",
+            german=" Dieser [CS:N]Reptain[CR]!",
+            italian=" Quel [CS:N]Grovyle[CR]...",
+            spanish=" Ese [CS:N]Grovyle[CR]...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That [CS:N]Grovyle[CR]...[K] I\'ll rough him up\nwith my claws!",
+            french=" Ce [CS:N]Massko[CR]...[K]\nil devra tâter de mes griffes!",
+            german=" Dieser [CS:N]Reptain[CR].[K] Ich werde ihn\nmit meinen Klauen auseinandernehmen!",
+            italian=" Quel [CS:N]Grovyle[CR]...[K] Lo graffierei\ncoi miei artigli!",
+            spanish=" A ese tal [CS:N]Grovyle[CR]...[K] ¡le voy a\nponer en su sitio!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" All right! So which outlaw should\nwe punish today?",
+            french=" Très bien! Alors, quel\nhors-la-loi on va punir aujourd\'hui?",
+            german=" In Ordnung! Also, welchen\nGanoven sollen wir heute bestrafen?",
+            italian=" Va bene! Allora quali ricercati\ndobbiamo sistemare oggi?",
+            spanish=" ¡Muy bien! ¿A qué malhechor\ncastigamos hoy?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It\'s eco-friendly, you know?",
+            french=" C\'est une bourse, vous savez?",
+            german=" Es ist umweltfreundlich,\nweißt du?",
+            italian=" È rispettoso dell\'ambiente, sai?",
+            spanish=" Es respetuosa con el medio\nambiente, ¿lo sabías?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It\'s like this shop just sprang\nup overnight...",
+            french=" On dirait que ce magasin est\napparu dans la nuit...",
+            german=" Es scheint, als sei dieser Laden\nüber Nacht entstanden...",
+            italian=" Sembra quasi che questo locale\nsia spuntato fuori durante la notte...",
+            spanish=" Es como si esa tienda hubiera\naparecido de la noche a la mañana...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUTORAIKU);
+        }
+        message_SetFace(ACTOR_NPC_SUTORAIKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We like finding new places\nwhere no one\'s gone before.",
+            french=" Ce qu\'on adore, c\'est découvrir\nde nouvelles contrées et être les premiers\nà les explorer.",
+            german=" Wir lieben es, noch unerforschte\nOrte zu erkunden.",
+            italian=" Ci piace trovare dei posti nuovi\ndove non è mai stato nessuno.",
+            spanish=" Nos gusta ir a sitios donde nunca\nha estado nadie antes.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

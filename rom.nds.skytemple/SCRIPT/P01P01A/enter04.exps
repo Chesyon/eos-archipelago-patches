@@ -3,6 +3,11 @@ def 0 {
     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
         case 0:
             §label_0;
+            if ($SCENARIO_TALK_BIT_FLAG[126]) {
+            } else {
+                message_Mail("[CN]You think it may be wise to speak\n[CN]with [CS:G]Marowak[CR] before you depart...");
+                message_Close();
+            }
             with (actor ACTOR_PLAYER_BIPPA) {
                 SetAnimation(2);
             }
@@ -24,6 +29,27 @@ def 0 {
                                 message_CloseEnforce();
                                 break;
                             case 8:
+                                switch (dungeon_mode(8)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });                            
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]14[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 9:
                                 switch (dungeon_mode(9)) {
                                     case DMODE_OPEN:
@@ -47,6 +73,28 @@ def 0 {
                                 }
                                 jump @label_12;
                             case 10:
+                                switch (dungeon_mode(10)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });  
+                                                message_Mail("[CN]In this dungeon, [CS:G]Bidoof[CR] will join you at\n[CN]level [CS:C]16[CR]. Enemies will scale to [CS:G]Bidoof[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon, [CS:G]Bidoof[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that dungeon only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;   
                             case 11:
                                 switch (dungeon_mode(11)) {
                                     case DMODE_OPEN:
@@ -70,6 +118,27 @@ def 0 {
                                 }
                                 jump @label_12;
                             case 32:
+                                switch (dungeon_mode(32)) {
+                                    case DMODE_OPEN:
+                                        switch ( ProcessSpecial(100,0,0) ) {
+                                            case 1:
+                                                message_Mail({
+                                                    english="\n[CN]Caution!",
+                                                    french="\n[CN]Attention!",
+                                                    german="\n[CN]Achtung!",
+                                                    italian="\n[CN]Attenzione!",
+                                                    spanish="\n[CN]¡Atención!",
+                                                });
+                                                message_Mail("[CN]In this dungeon, [CS:G]Grovyle[CR] will join you at\n[CN]level [CS:C]46[CR]. Enemies will scale to [CS:G]Grovyle[CR] if he\n[CN]is higher level than you!");
+                                                message_Mail("[CN]Upon clearing this dungeon group, [CS:G]Grovyle[CR]\n[CN]will leave your team, returning scaling to\n[CN]normal in that group only. Is that OK?");
+                                                jump @label_32;
+                                            default:
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
+                                jump @label_12;
                             case 34:
                                 switch (dungeon_mode(34)) {
                                     case DMODE_OPEN:
@@ -147,7 +216,8 @@ def 0 {
                                         italian="\n[CN]Attenzione!",
                                         spanish="\n[CN]¡Atención!",
                                     });
-                                    message_Mail("[CN][CS:P]Miracle Sea[CR] cannot be cleared until [CS:G]Manaphy[CR]\n[CN]falls ill. You can still enter, but you will not\n[CN]receive a check for completion. Is that OK?");
+                                    message_Mail("[CN][CS:P]Miracle Sea[CR] is intended to be cleared only\n[CN]once [CS:G]Manaphy[CR] falls ill.[K] You can still obtain\n[CN]normal dungeon checks and complete missions.");
+                                    message_Mail("[CN]However, you will not fight [CS:G]Gyarados[CR],\n[CN]cannot obtain the Phione Dew, nor recruit\n[CS:G]Phione[CR] until [CN][CS:G]Manaphy[CR] is sick. Is that OK?");
                                     jump @label_32;
                                 }
                                 break;
@@ -173,7 +243,7 @@ def 0 {
                                         break;
                                 }
                                 jump @label_12;
-                            case 110:
+                            case 111:
                                 switch (dungeon_mode(110)) {
                                     case DMODE_OPEN:
                                         switch ( ProcessSpecial(100,0,0) ) {
@@ -1075,7 +1145,7 @@ def 0 {
                     jump @label_3;
                 }
             } else {
-                $PERFORMANCE_PROGRESS_LIST[5] = 1;
+                // $PERFORMANCE_PROGRESS_LIST[5] = 1;
                 jump @label_6;
             }
             break;

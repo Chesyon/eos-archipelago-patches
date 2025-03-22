@@ -213,7 +213,7 @@ def 0 {
             worldmap_BlinkMark(76);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Shimmer Desert[CR] remains unchanged![W:60]...but you did get a check!",
+                english="[CN]Your ability to go to [CS:P]Shimmer Desert[CR]\n[CN]remains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Désert Chatoyant[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Flimmerwüste[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]al [CS:P]Deserto Folgore[CR]!",
@@ -577,7 +577,7 @@ def 0 {
             worldmap_BlinkMark(88);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Serenity River[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Serenity River[CR]\n[CN]remains unchanged!\n[CN](There is no check for this dungeon...)",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Rivière Sérénité[CR]!",
                 german="[CN]Du kannst jetzt zum\n[CN][CS:P]Fluss der Klarheit[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]al [CS:P]Fiume Serenità[CR]!",
@@ -614,7 +614,7 @@ def 0 {
             worldmap_BlinkMark(89);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Landslide Cave[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Landslide Cave[CR]\n[CN]remains unchanged!\n[CN](You can obtain this check through [CS:G]Wynaut[CR])",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Grotte Eboulement[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Erdrutschhöhle[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alla [CS:P]Grotta Slavina[CR]!",
@@ -651,7 +651,7 @@ def 0 {
             worldmap_BlinkMark(90);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to the [CS:P]Lush Prairie[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to the [CS:P]Lush Prairie[CR]\n[CN]remains unchanged!\n[CN](There is no check for this dungeon...)",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Prairie Luxuriante[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Üppigen Steppe[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alle [CS:P]Piane Rigogliose[CR]!",
@@ -688,7 +688,7 @@ def 0 {
             worldmap_BlinkMark(91);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to the [CS:P]Tiny Meadow[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to the [CS:P]Tiny Meadow[CR]\n[CN]remains unchanged!\n[CN](You can obtain this check through [CS:G]Wynaut[CR])",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Petit Pré[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Kleinen Weide[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]al [CS:P]Praticello[CR]!",
@@ -755,7 +755,7 @@ def 0 {
             worldmap_BlinkMark(93);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Oran Forest[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Oran Forest[CR]\n[CN]remains unchanged!\n(You can obtain this check through [CS:G]Wynaut[CR])",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Forêt Oran[CR]!",
                 german="[CN]Du kannst jetzt zum\n[CN][CS:P]Sinelwald[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alla [CS:P]Foresta d\'Aranci[CR]!",
@@ -792,7 +792,7 @@ def 0 {
             worldmap_BlinkMark(94);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Lake Afar[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Lake Afar[CR]\n[CN]remains unchanged!\n(You can obtain this check through [CS:G]Wynaut[CR])",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]au [CS:P]Lac Lointain[CR]!",
                 german="[CN]Du kannst jetzt zum\n[CN][CS:P]Fernen See[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]al [CS:P]Lago Lontano[CR]!",
@@ -1044,13 +1044,14 @@ def 0 {
             worldmap_BlinkMark(108);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Oblivion Forest[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Oblivion Forest[CR]\n[CN]remains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Forêt de l\'Oubli[CR]!",
                 german="[CN]Du kannst jetzt zum\n[CN][CS:P]Vergessenswald[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alla [CS:P]Foresta Oblio[CR]!",
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Bosque Olvido[CR]!",
             });
             WaitMe(6);
+            ~AssignCheck(55);
             message_Close();
             screen2_FadeOut(1, 15);
             back2_SetMode(0);
@@ -1080,13 +1081,14 @@ def 0 {
             worldmap_BlinkMark(109);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to the [CS:P]Treacherous Waters[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to the [CS:P]Treacherous Waters[CR]\n[CN]remains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Mer Perfide[CR]!",
                 german="[CN]Du kannst jetzt zu den\n[CN][CS:P]Trügerischen Gewässern[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alle [CS:P]Acque Traditrici[CR]!",
                 spanish="[CN]¡Ahora ya puedes ir a las\n[CN][CS:P]Aguas Peligrosas[CR]!",
             });
             WaitMe(6);
+            ~AssignCheck(56);
             message_Close();
             screen2_FadeOut(1, 15);
             back2_SetMode(0);
@@ -1116,13 +1118,14 @@ def 0 {
             worldmap_BlinkMark(110);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to the [CS:P]Southeastern Islands[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to the [CS:P]Southeastern Islands[CR]\n[CN]remains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]aux [CS:P]Iles du Sud-Est[CR]!",
                 german="[CN]Du kannst jetzt zu den\n[CN][CS:P]Südöstlichen Inseln[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alle [CS:P]Isole Sudorientali[CR]!",
                 spanish="[CN]¡Ahora ya puedes ir al\n[CN][CS:P]Archipiélago Sureste[CR]!",
             });
             WaitMe(6);
+            ~AssignCheck(57);
             message_Close();
             screen2_FadeOut(1, 15);
             back2_SetMode(0);
@@ -1152,13 +1155,14 @@ def 0 {
             worldmap_BlinkMark(111);
             me_Play(6);
             message_Mail({
-                english="[CN]Your ability to go to [CS:P]Inferno Cave[CR]\n[CN]remains unchanged!",
+                english="[CN]Your ability to go to [CS:P]Inferno Cave[CR]\n[CN]remains unchanged![W:60]...but you did get a check!",
                 french="[CN]Désormais, vous pouvez accéder\n[CN]à la [CS:P]Caverne Brasier[CR]!",
                 german="[CN]Du kannst jetzt zur\n[CN][CS:P]Infernohöhle[CR] gehen!",
                 italian="[CN]Adesso potete andare\n[CN]alla [CS:P]Grotta Infuocata[CR]!",
                 spanish="[CN]¡Ahora ya puedes ir a la\n[CN][CS:P]Cueva Flama[CR]!",
             });
             WaitMe(6);
+            ~AssignCheck(58);
             message_Close();
             screen2_FadeOut(1, 15);
             back2_SetMode(0);

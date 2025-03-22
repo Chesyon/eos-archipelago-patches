@@ -1,0 +1,180 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] ) {
+        if ( $SUB30_TREASURE_DISCOVER[0] ) {
+            §label_133;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            supervision_ExecuteCommon(CORO_EVENT_S30_04);
+            §label_134;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            supervision_ExecuteCommon(CORO_EVENT_S30_05);
+            §label_131;
+            JumpCommon(CORO_END_TALK);
+        } elseif ( $SUB30_SPOT_DISCOVER[0] ) {
+            jump @label_134;
+        } else {
+            §label_132;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+            }
+            supervision_ExecuteCommon(CORO_EVENT_S30_06);
+            jump @label_133;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 9] || scn($SCENARIO_MAIN) >= [29, 8] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+        }
+        message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We made a wonderful discovery!",
+            french=" Nous avons fait une découverte\nfabuleuse!",
+            german=" Wir haben eine wunderbare\nEntdeckung gemacht!",
+            italian=" Abbiamo fatto una scoperta\nsensazionale!",
+            spanish=" ¡Menudo descubrimiento\nhemos hecho!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] || scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] ) {
+        if ( $SUB30_TREASURE_DISCOVER[0] ) {
+            jump @label_133;
+        } elseif ( $SUB30_SPOT_DISCOVER[0] ) {
+            jump @label_134;
+        } else {
+            jump @label_132;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+        }
+        message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" If we make a new discovery,\nwe\'ll make sure to let everyone know.",
+            french=" Si nous faisons une nouvelle\ndécouverte, nous nous assurerons\nque tout le monde soit au courant.",
+            german=" Wenn wir eine neue Entdeckung\nmachen, werden wir sicherstellen, dass alle\nes erfahren.",
+            italian=" Se scopriamo qualcosa di nuovo,\nfaremo in modo di farlo sapere a tutti.",
+            spanish=" Si descubrimos algo, nos\naseguraremos de que se entere todo el mundo.",
+        });
+        message_Talk({
+            english=" Please look forward to it!",
+            french=" Guettez attentivement\ncet instant, s\'il vous plaît!",
+            german=" Freu dich darauf!",
+            italian=" Aspetta e vedrai!",
+            spanish=" ¡Seguid a la espera!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] ) {
+        jump @label_132;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] ) {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+        }
+        with (actor ACTOR_NPC_SOONANO) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_SOONANSU) {
+            SetAnimation(2);
+        }
+        message_SetFaceOnly(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" Right here, right?",
+            french=" O.K., non?",
+            german=" Genau hier, genau?",
+            italian=" Proprio qui, no?",
+            spanish=" Aquí, ¿no?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_SOONANSU) {
+            Turn2Direction(1, 10, DIR_DOWN);
+        }
+        WaitExecuteLives(ACTOR_NPC_SOONANSU);
+        with (actor ACTOR_NPC_SOONANSU) {
+            SetAnimation(22);
+        }
+        with (actor ACTOR_NPC_SOONANSU) {
+            WaitAnimation();
+        }
+        message_SetFaceOnly(ACTOR_NPC_SOONANSU, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That\'s right!",
+            french=" Banco!",
+            german=" Wo denn sonst, genau?",
+            italian=" Esatto!",
+            spanish=" ¡Eso, eso!",
+        });
+        WaitExecuteLives(ACTOR_NPC_SOONANSU);
+        message_Close();
+        with (actor ACTOR_NPC_SOONANSU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_SOONANSU) {
+            Turn2Direction(1, 2, DIR_UP);
+        }
+        WaitExecuteLives(ACTOR_NPC_SOONANSU);
+        with (actor ACTOR_NPC_SOONANSU) {
+            SetAnimation(4);
+        }
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_132;
+    } else {
+        jump @label_131;
+    }
+}

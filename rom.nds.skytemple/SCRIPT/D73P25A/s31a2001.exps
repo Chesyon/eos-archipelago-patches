@@ -1,0 +1,636 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_D73P25A);
+    supervision_LoadStation(LEVEL_D73P25A, 'US31');
+    supervision_Station(11);
+    supervision_Station(12);
+    supervision_StationCommon(9);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_GOORIKII) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_GOORIKII) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetAnimation(2);
+    }
+    se_Play(5143);
+    screen_WhiteOutAll(1, 2);
+    Wait(2);
+    screen_FadeInAll(1, 2);
+    Wait(5);
+    se_Play(5143);
+    screen_WhiteOutAll(1, 2);
+    Wait(2);
+    screen_FadeInAll(1, 2);
+    WaitSe(5143);
+    Wait(15);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_SHOUTING, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Everyone wait a second!",
+        french=" Que tout le monde se calme!",
+        german=" Alle mal kurz innehalten!",
+        italian=" Ascoltatemi tutti!",
+        spanish=" ¡Esperad todos un momento!",
+    });
+    message_Close();
+    screen_FadeIn(1, 15);
+    se_Play(8973);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SlidePositionOffset(33152, 0, -8);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        SlidePositionOffset(33152, 0, -4);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SlidePositionOffset(33152, -8, 8);
+    }
+    Wait(2);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SlidePositionOffset(33152, 8, 8);
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(2);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA3) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(4);
+    message_SetFace(ACTOR_NPC_KUCHIITO, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Wh-what?!",
+        french=" Qu-quoi?!",
+        german=" W-was?!?",
+        italian=" C-Come?!",
+        spanish=" ¡¿Qué... Qué pasa?!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8962);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_MASUKIPPA);
+    message_SetFace(ACTOR_NPC_MASUKIPPA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Huh? You...",
+        french=" Hein? Tu...",
+        german=" Wie? Du...",
+        italian=" Eh? Tu...",
+        spanish=" ¿Eh? Eres...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    Wait(30);
+    se_Play(8967);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    Wait(3);
+    message_SetFace(ACTOR_NPC_MASUKIPPA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Oh!\nA [CS:N]Shaymin[CR] from the village! It\'s been a while!",
+        french=" Oh!\nUn [CS:N]Shaymin[CR] du village!\nÇa fait un bout de temps!",
+        german=" Oh! Ein [CS:N]Shaymin[CR] aus dem Dorf!\nIst schon ein Weilchen her!",
+        italian=" Oh! Ma guarda, [CS:N]Shaymin[CR]\ndel villaggio! Ne è passato di tempo!",
+        spanish=" ¡Anda! ¡Una [CS:N]Shaymin[CR] de la aldea!\n¡Cuánto tiempo!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_PlayFadeIn(BGM_GUILDMASTER_WIGGLYTUFF, 0, 256);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_PAIN, FACE_POS_BOTTOM_L_CENTER);
+    message_Talk({
+        english=" We owe you...",
+        french=" Je dois vous remercier pour les\nservices rendus par le passé...",
+        german=" Nun...",
+        italian=" Sono in debito con voi...",
+        spanish=" Os debemos mucho...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8971);
+    with (actor ACTOR_NPC_SHEIMI) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_ANGRY, FACE_POS_BOTTOM_L_CENTER);
+    message_Talk({
+        english=" You haven\'t changed a bit,\n[CS:N]Carnivine[CR]!",
+        french=" Mais vous n\'avez pas changé,\nvous, les [CS:N]Vortente[CR]!",
+        german=" Anscheinend habt ihr euch\nkein bisschen verändert, [CS:N]Venuflibis[CR]!",
+        italian=" Non siete cambiati affatto, eh,\n[CS:N]Carnivine[CR]?!",
+        spanish=" ¡No habéis cambiado ni pizca,\n[CS:N]Carnivine[CR]!",
+    });
+    message_Talk({
+        english=" We\'ve asked you before to stop\nbothering the explorers, haven\'t we?!",
+        french=" On vous a pourtant déjà\ndemandé d\'arrêter d\'embêter les explorateurs,\npas vrai?",
+        german=" Wir haben euch doch bereits\ndarum gebeten, keine Erkunder mehr\nzu stören, oder etwa nicht?",
+        italian=" Vi avevamo già detto\ndi smetterla di importunare gli esploratori,\nnon è vero?!",
+        spanish=" No es la primera vez que os\npedimos que dejéis de incordiar a los\nexploradores, ¿verdad?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8972);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_MASUKIPPA);
+    message_SetFace(ACTOR_NPC_MASUKIPPA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Yeah, but!\nThat [CS:N]Sneasel[CR] started it!",
+        french=" Ouais, mais...!\nC\'est [CS:N]Farfuret[CR] qui a commencé!",
+        german=" Ja, aber...\n[CS:N]Sniebel[CR] hat angefangen!",
+        italian=" Sì, però...!\nÈ stato quello [CS:N]Sneasel[CR] a cominciare!",
+        spanish=" Ya, tienes razón, pero... ¡Fue él!\n¡Ese [CS:N]Sneasel[CR] fue quien lo empezó todo!",
+    });
+    message_Talk({
+        english=" We found some treasure earlier,\nand he snatched it right out from under\nour noses!",
+        french=" On a trouvé un trésor tout à\nl\'heure, et il est venu nous le chiper\nsous notre nez!",
+        german=" Wir haben einen Schatz\ngefunden und er hat ihn uns direkt vor den\nBlättern weggeschnappt!",
+        italian=" Avevamo trovato un tesoro, ma\nlui è saltato fuori e ce l\'ha fregato!",
+        spanish=" Antes encontramos un tesoro\ny nos lo quitó delante de nuestras narices.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(11010);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        ExecuteCommon(CORO_LOOK_AROUND_LEFT_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_MASUKIPPA4);
+    se_Play(8964);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_MASUKIPPA4);
+    message_SetFace(ACTOR_NPC_MASUKIPPA, FACE_NORMAL, FACE_POS_TOP_L_FACEINW);
+    message_Talk({
+        english=" !!![K] Where\'d he go?!",
+        french=" !!![K] Où est-il passé?!",
+        german=" ...[K]Wo ist er überhaupt?!?",
+        italian=" !!![K] Dov\'è finito?!",
+        spanish=" ¡Eh![K] ¡¿Adónde ha ido?!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    Wait(2);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA3) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    Wait(3);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA4);
+    }
+    Wait(4);
+    se_Play(8971);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        SetEffect(EFFECT_ANGRY, 3);
+    }
+    message_Talk({
+        english=" That...!\nHe ran off in the confusion!",
+        french=" Grrrr... Ce...!\nIl a profité de la confusion pour s\'enfuir!",
+        german=" So ein...\nEr hat sich im Trubel davongemacht!",
+        italian=" Quel...!\nNella confusione se l\'è svignata!",
+        spanish=" ¡Será...!\n¡Ha aprovechado todo este lío para huir!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    se_Play(8969);
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+    message_SetFace(ACTOR_NPC_KINOGASSA, FACE_SURPRISED, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Huh...? Really...?",
+        french=" Hein...? Vraiment...?",
+        german=" Was? Im Ernst?",
+        italian=" Uh...? Davvero...?",
+        spanish=" ¿Pero...? ¿En serio...?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_KUCHIITO);
+    message_SetFace(ACTOR_NPC_KUCHIITO, FACE_SIGH, FACE_POS_STANDARD);
+    message_Talk({
+        english=" We all thought you were the\nbad guys...",
+        french=" Dire qu\'on vous a tous pris pour\nles méchants...",
+        german=" Wir alle dachten, ihr würdet\ndafür die Verantwortung tragen...",
+        italian=" Pensavamo che i cattivi\nfoste voi...",
+        spanish=" Pensábamos que vosotros erais\nlos malos de la película...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_TOP_L_FACEINW);
+    message_Talk({
+        english=" .........",
+        french=" ..........",
+        german=" ..........",
+        italian=" ..........",
+        spanish=" ...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 2, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_WORRIED, FACE_POS_BOTTOM_C_FACEL);
+    message_FacePositionOffset(0, -2);
+    message_Talk({
+        english=" Well, you can\'t exactly say\nthey\'re the good guys, either...",
+        french=" Eh bien... on ne peut pas\nexactement dire que ce sont les gentils,\nnon plus...",
+        german=" Na ja, man kann auch nicht\nunbedingt das Gegenteil behaupten...",
+        italian=" Beh, non si può certo dire\nche siano dolci e gentili...",
+        spanish=" En fin, no es que se pueda decir\nque son los buenos, en realidad...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(2);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA3) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(3);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI);
+    }
+    Wait(4);
+    se_Play(8973);
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    message_SetFace(ACTOR_NPC_MASUKIPPA, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Hey!\nWe haven\'t seen you in so long, [CS:N]Shaymin[CR], and\nthis is how you treat us?!",
+        french=" Hé!\nOn se revoit après tout ce temps, [CS:N]Shaymin[CR],\net c\'est comme ça que tu nous traites?!",
+        german=" He! Da haben wir uns so lange\nnicht gesehen, [CS:N]Shaymin[CR], und dann werden wir\nso behandelt?!?",
+        italian=" Ehi, [CS:N]Shaymin[CR]!\nÈ questo il modo di trattarci dopo che non\nci vediamo da così tanto tempo?!",
+        spanish=" Oye, [CS:N]Shaymin[CR], con todo el tiempo\nque hace que no nos vemos, ¿y así es como\nnos tratas?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA);
+    }
+    Wait(5);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_MASUKIPPA);
+    }
+    WaitExecuteLives(ACTOR_NPC_GOORIKII);
+    message_Talk({
+        english=" Meh, it\'s fine.\nSince it\'s [CS:N]Shaymin[CR], we\'ll let it go.",
+        french=" Mmh, soit!\nÇa ira pour cette fois, mais c\'est bien parce\nque c\'est toi, [CS:N]Shaymin[CR].",
+        german=" Ach, ist schon okay.\nEs handelt sich um [CS:N]Shaymin[CR],\nalso belassen wir es dabei.",
+        italian=" Bah, non importa...\nPer questa volta lasciamo perdere, ma solo\nperché sei tu, [CS:N]Shaymin[CR].",
+        spanish=" Bueno, por esta vez, pase.\nPero solo porque eres tú, [CS:N]Shaymin[CR]...",
+    });
+    message_Talk({
+        english=" The decision to climb the\nmountain is your own. But I don\'t like to let\nPokémon just do as they please.",
+        french=" Si un Pokémon veut gravir la\nmontagne, c\'est son droit. Mais ce n\'est pas\nune raison pour le laisser faire n\'importe quoi.",
+        german=" Eure Entscheidung, den Berg zu\nbesteigen. Aber ich mag es nicht, wenn jedes\nPokémon einfach tut, wonach ihm gerade ist.",
+        italian=" La decisione di scalare\nla montagna è solo vostra, ma non mi piace\nche i Pokémon facciano quello che vogliono.",
+        spanish=" Normalmente no me gusta dejar\nque los Pokémon hagan lo que les plazca, pero\nla decisión de subir a la montaña es vuestra.",
+    });
+    message_Talk({
+        english=" See you!",
+        french=" A la prochaine!",
+        german=" Macht\'s gut!",
+        italian=" Ci vediamo!",
+        spanish=" ¡Nos vemos!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_FadeOut(210);
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2Direction(16, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(16, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_NPC_MASUKIPPA) {
+        MovePositionMark(1, Position<'m0', 28.5, 10.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_MASUKIPPA3) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    Wait(3);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    Wait(4);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    Wait(30);
+    with (actor ACTOR_NPC_MASUKIPPA5) {
+        MovePositionMark(1, Position<'m1', 28.5, 10.5>);
+    }
+    Wait(20);
+    with (actor ACTOR_NPC_MASUKIPPA4) {
+        MovePositionMark(1, Position<'m2', 28.5, 10.5>);
+    }
+    Wait(15);
+    with (actor ACTOR_NPC_MASUKIPPA3) {
+        MovePositionMark(1, Position<'m3', 28.5, 10.5>);
+    }
+    Wait(30);
+    with (actor ACTOR_NPC_MASUKIPPA2) {
+        MovePositionMark(1, Position<'m4', 28.5, 10.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_MASUKIPPA2);
+    supervision_RemoveActing(1);
+    Wait(30);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 2, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_WORRIED, FACE_POS_BOTTOM_C_FACEL);
+    message_FacePositionOffset(0, -2);
+    message_Talk({
+        english=" Excuse me.",
+        french=" Il faut les excuser.",
+        german=" Entschuldigt ihr Verhalten.",
+        italian=" Vi prego di scusarli.",
+        spanish=" No se lo tengáis en cuenta.",
+    });
+    message_KeyWait();
+    with (actor ACTOR_NPC_GOORIKII) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    Wait(3);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 2, DIR_LEFT);
+    }
+    Wait(4);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    message_Talk({
+        english=" The [CS:N]Carnivine[CR] have marked this\nas their territory.",
+        french=" Les [CS:N]Vortente[CR] ont décrété que\nce territoire était le leur.",
+        german=" Die [CS:N]Venuflibis[CR] haben das hier\nals ihr Gebiet beansprucht.",
+        italian=" I [CS:N]Carnivine[CR] considerano questo\nluogo come loro territorio.",
+        spanish=" Los [CS:N]Carnivine[CR] están convencidos\nde que este territorio les pertenece.",
+    });
+    message_Talk({
+        english=" They\'re really nice, but they can\nbe a little rough when they speak...",
+        french=" Ils sont vraiment gentils, mais\npeut-être parfois un peu rudes\ndans leur manière de parler...",
+        german=" Sie sind wirklich nett, aber\nmanchmal vergreifen sie sich im Ton...",
+        italian=" Sono molto gentili, ma hanno\nun modo di parlare un po\' aggressivo...",
+        spanish=" Son muy majos, pero a veces\nson un poco brutos en el trato...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_KUCHIITO, FACE_WORRIED, FACE_POS_STANDARD);
+    message_Talk({
+        english=" We\'re also to blame here.\nRather than listening to them, we just jumped\nstraight into a fight...",
+        french=" C\'est notre faute aussi. Au lieu\nde les écouter, on a foncé tête baissée\ndans la mêlée...",
+        german=" Wir sind auch ein wenig selbst\nschuld. Statt ihnen zuzuhören, haben wir uns\ndirekt in einen Kampf verwickeln lassen...",
+        italian=" Però la colpa è anche nostra.\nInvece di ascoltare le loro ragioni, abbiamo\nsubito cercato lo scontro...",
+        spanish=" Pero no toda la culpa es suya.\nEn vez de escucharles, quisimos meternos\ndirectamente en una pelea...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_KINOGASSA, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" That\'s why you shouldn\'t just\njudge by appearances...",
+        french=" Comme quoi, il ne faut jamais\nse fier aux apparences...",
+        german=" Man sollte eben nicht\nvorschnell sein Urteil fällen.",
+        italian=" Ecco perché non bisogna mai\ngiudicare qualcosa in base alle apparenze...",
+        spanish=" Eso nos enseña que no debemos\njuzgar por las apariencias...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8961);
+    with (actor ACTOR_NPC_GOORIKII) {
+        SetEffect(EFFECT_SWEAT_DROP_SLOW, 3);
+    }
+    with (actor ACTOR_NPC_GOORIKII) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_GOORIKII);
+    message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_TOP_L_FACEINW);
+    message_Talk({
+        english=" .........[K] Sorry!",
+        french=" ..........[K] Pardon!",
+        german=" ..........[K] Entschuldigung!",
+        italian=" ..........[K] Ci dispiace!",
+        spanish=" Bueno...[K] ¡Perdón!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    se_Play(8972);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_BOTTOM_C_FACEL);
+    message_FacePositionOffset(0, -2);
+    message_Talk({
+        english=" It\'s all right! As long as you\nunderstand.",
+        french=" Pas de problème! Le principal,\nc\'est de comprendre son erreur.",
+        german=" Schon in Ordnung!\nSolange ihr versteht.",
+        italian=" È tutto a posto! Basta che\nabbiate capito.",
+        spanish=" No pasa nada, siempre y cuando\nhayáis aprendido la lección.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    bgm_PlayFadeIn(BGM_SKY_PEAK_PRAIRIE, 0, 256);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_BOTTOM_C_FACEL);
+    message_FacePositionOffset(0, -2);
+    message_Talk({
+        english=" So! Let\'s put this behind us and\nget back to climbing!",
+        french=" Allons! Oublions cet incident et\npoursuivons l\'ascension!",
+        german=" Gut! Lassen wir das hinter uns\nund steigen weiter den Berg hinauf!",
+        italian=" Ok! Lasciamoci alle spalle tutto\nquanto e proseguiamo la nostra esplorazione!",
+        spanish=" Bueno, vamos a pasar página y\nsigamos ascendiendo.",
+    });
+    message_Talk({
+        english=" This is the 5th Station Clearing![K]\nWe\'re halfway to the summit!",
+        french=" C\'est la trouée du 5[F:E] Relais.[K]\nOn est à mi-chemin du sommet!",
+        german=" Das hier ist die\n5. Zwischenlagerlichtung![K] Wir sind auf halbem\nWeg zum Gipfel!",
+        italian=" Ecco il Bivacco 5![K]\nSiamo a metà strada!",
+        spanish=" ¡La Base del Quinto Puerto![K]\n¡Ya estamos a medio camino!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_KUCHIITO, FACE_HAPPY, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Yeah!",
+        french=" Ouais!",
+        german=" Juchhu!",
+        italian=" Sì!",
+        spanish=" ¡Bieeen!",
+    });
+    message_Close();
+    switch(dungeon_mode(116)) {
+        case DMODE_CLOSED:
+        case DMODE_REQUEST:
+            bgm_FadeOut(30);
+            screen_FadeOut(1,30);
+        default:
+            end;
+    }
+}

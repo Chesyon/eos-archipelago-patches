@@ -1,0 +1,835 @@
+
+def 0 {
+    sound_Stop();
+    screen_WhiteIn(29, 10);
+    back_SetGround(LEVEL_D73P11A);
+    supervision_LoadStation(LEVEL_D73P11A, 'US31');
+    supervision_Station(2);
+    supervision_Station(20);
+    supervision_Station(47);
+    supervision_StationCommon(0);
+    supervision_StationCommon(7);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_KUCHIITO) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        MovePositionOffset(32896, 180, 0);
+    }
+    bgm_PlayFadeIn(BGM_SHAYMIN_VILLAGE, 0, 256);
+    screen_FadeIn(1, 30);
+    Wait(270);
+    screen_FadeOut(1, 30);
+    with (performer 0) {
+        SetPositionMark(Position<'m0', 40.5, 41.5>);
+    }
+    screen_FadeIn(1, 30);
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m1', 43, 42.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m2', 38.5, 42.5>);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        ExecuteCommon(CORO_LOOK_AROUND_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" So this is the\n[CS:P]Shaymin Village[CR], huh?",
+                french=" Alors c\'est ici,\nle [CS:P]Village Shaymin[CR]?",
+                german=" Das ist also [CS:P]Shaymin-Dorf[CR].",
+                italian=" Così questo è\nil [CS:P]Villaggio Shaymin[CR], eh?",
+                spanish=" Así que esta es\n[CS:P]Aldea Shaymin[CR], ¿eh?",
+            }
+        case 2:
+            {
+                english=" So this is the [CS:P]Shaymin Village[CR]?",
+                french=" Alors c\'est ici,\nle [CS:P]Village Shaymin[CR]?",
+                german=" Das ist also [CS:P]Shaymin-Dorf[CR].",
+                italian=" Così è questo\nil [CS:P]Villaggio Shaymin[CR]...",
+                spanish=" ¿Así que esta es [CS:P]Aldea Shaymin[CR]?",
+            }
+        default:
+            {
+                english=" So this is the [CS:P]Shaymin Village[CR]?",
+                french=" Alors c\'est ici,\nle [CS:P]Village Shaymin[CR]?",
+                german=" Das ist also [CS:P]Shaymin-Dorf[CR].",
+                italian=" Così è questo\nil [CS:P]Villaggio Shaymin[CR]...",
+                spanish=" Así que esta es [CS:P]Aldea Shaymin[CR]...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Pretty peaceful.",
+                french=" C\'est un endroit plutôt calme.",
+                german=" Ziemlich friedlich...",
+                italian=" È molto tranquillo.",
+                spanish=" Es tranquilita.",
+            }
+        case 2:
+            {
+                english=" It\'s pretty peaceful...",
+                french=" C\'est un endroit plutôt calme.",
+                german=" Es ist ziemlich friedlich...",
+                italian=" Com\'è tranquillo...",
+                spanish=" Es bastante tranquila...",
+            }
+        default:
+            {
+                english=" It\'s so peaceful...",
+                french=" C\'est un endroit plutôt calme.",
+                german=" Es ist so friedlich...",
+                italian=" Che pace...",
+                spanish=" Es de lo más tranquila.",
+            }
+    }
+    message_Close();
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    Wait(15);
+    se_Play(8978);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    with (actor ACTOR_NPC_SHEIMI) {
+        MovePositionMark(1, Position<'m3', 40.5, 38.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    message_SetFaceOnly(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Welcome to the [CS:P]Shaymin Village[CR].",
+        french=" Bienvenue au [CS:P]Village Shaymin[CR].",
+        german=" Willkommen in [CS:P]Shaymin-Dorf[CR].",
+        italian=" Vi do il benvenuto\nal [CS:P]Villaggio Shaymin[CR].",
+        spanish=" Os doy la bienvenida a [CS:P]Aldea Shaymin[CR].",
+    });
+    message_Talk({
+        english=" It\'s nice to meet you.\nMy name is [CS:N]Shaymin[CR].[K]\nI live here in this village.",
+        french=" C\'est une joie de vous\nrencontrer. Mon nom est [CS:N]Shaymin[CR].[K]\nJe vis ici, dans ce village.",
+        german=" Es freut mich, euch zu treffen.\nMein Name ist [CS:N]Shaymin[CR].[K]\nIch lebe in diesem Dorf.",
+        italian=" Piacere di conoscervi.\nIl mio nome è [CS:N]Shaymin[CR].[K]\nVivo in questo villaggio.",
+        spanish=" Encantada de conoceros. Me llamo\n[CS:N]Shaymin[CR].[K] Y vivo en esta aldea.",
+    });
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Then again, all the residents\nof this village are [CS:N]Shaymin[CR]...[K]\nThat makes it hard to tell us apart, doesn\'t it?",
+        french=" A vrai dire, tous les habitants\nde ce village sont des [CS:N]Shaymin[CR]...[K] et\nil est un peu dur de nous différencier.",
+        german=" Andererseits heißen alle\nEinwohner dieses Ortes [CS:N]Shaymin[CR]...[K] Das macht\nes schwierig, uns auseinanderzuhalten, oder?",
+        italian=" A essere sinceri, tutti coloro\nche vivono in questo villaggio sono [CS:N]Shaymin[CR]...[K]\nImmagino che non sia facile distinguerci, eh?",
+        spanish=" Pero ahora que lo pienso, todos\nlos habitantes de esta aldea somos [CS:N]Shaymin[CR]...[K]\nSupongo que será difícil distinguirnos, ¿no?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Ha ha ha!",
+                french=" Ha ha ha!",
+                german=" Hahaha!",
+                italian=" Ah ah ah!",
+                spanish=" ¡Ja, ja, ja!",
+            }
+        case 2:
+            {
+                english=" Ha ha ha!",
+                french=" Ha ha ha!",
+                german=" Hahaha!",
+                italian=" Ah ah ah!",
+                spanish=" ¡Ja, ja, ja!",
+            }
+        default:
+            {
+                english=" Ha ha ha!",
+                french=" Ha ha ha!",
+                german=" Hahaha!",
+                italian=" Ah ah ah!",
+                spanish=" ¡Ja, ja, ja!",
+            }
+    }
+    message_KeyWait();
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Nice to meet you!\nWe\'re Team [team:]!",
+                french=" Ravi de te rencontrer!\nNous sommes l\'Equipe [team:]!",
+                german=" Schön, dich kennenzulernen!\nWir sind Team [team:]!",
+                italian=" Piacere di conoscerti!\nNoi siamo il Team [team:]!",
+                spanish=" Es un placer conocerte.\nSomos el [CS:X]Equipo[CR] [team:].",
+            }
+        case 2:
+            {
+                english=" Nice to meet you!\nWe\'re Team [team:]!",
+                french=" Ravi de te rencontrer!\nNous sommes l\'Equipe [team:]!",
+                german=" Schön, dich kennenzulernen!\nWir sind Team [team:]!",
+                italian=" Piacere di conoscerti!\nNoi siamo il Team [team:]!",
+                spanish=" Es un placer conocerte.\nSomos el [CS:X]Equipo[CR] [team:].",
+            }
+        default:
+            {
+                english=" Nice to meet you!\nWe\'re Team [team:]!",
+                french=" Ravie de te rencontrer!\nNous sommes l\'Equipe [team:]!",
+                german=" Schön, dich kennenzulernen!\nWir sind Team [team:]!",
+                italian=" Piacere di conoscerti!\nNoi siamo il Team [team:]!",
+                spanish=" Es un placer conocerte.\nSomos el [CS:X]Equipo[CR] [team:].",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Did you come to climb\n[CS:P]Sky Peak[CR] too, Team [team:]?",
+        french=" Vous êtes ici pour gravir le\n[CS:P]Pic Céleste[CR] vous aussi, Equipe [team:]?",
+        german=" Wollt ihr auch den [CS:P]Himmelsgipfel[CR]\nbesteigen, Team [team:]?",
+        italian=" Anche voi siete qui per scalare\nil [CS:P]Picco del Cielo[CR], Team [team:]?",
+        spanish=" ¿También venís a escalar la\n[CS:P]Cumbre del Cielo[CR], [CS:X]Equipo[CR] [team:]?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yep. That\'s it.",
+                french=" Oui, en effet.",
+                german=" Ja. Genau.",
+                italian=" Già, proprio così.",
+                spanish=" Sí, eso mismo.",
+            }
+        case 2:
+            {
+                english=" Yeah, that\'s right.",
+                french=" Oui, en effet.",
+                german=" Ja, stimmt genau.",
+                italian=" Sì, esatto.",
+                spanish=" Sí, eso es.",
+            }
+        default:
+            {
+                english=" Yes, that\'s correct.",
+                french=" Oui, en effet.",
+                german=" Ja, genau so ist es.",
+                italian=" Sì, infatti.",
+                spanish=" Sí, exacto.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" So I bet you know this\nmountain pretty well?",
+                french=" Alors, j\'imagine que tu\nconnais cette montagne comme ta poche?",
+                german=" Also kennt ihr euch recht\ngut mit diesem Berg aus?",
+                italian=" Scommetto che conosci\npiuttosto bene questa montagna, eh?",
+                spanish=" Seguro que conoces esta\nmontaña como la palma de tu mano, ¿no?",
+            }
+        case 2:
+            {
+                english=" I take it you know this\nmountain well?",
+                french=" Alors, j\'imagine que tu\nconnais cette montagne comme ta poche?",
+                german=" Also nehme ich an, ihr kennt\neuch ganz gut mit diesem Berg aus?",
+                italian=" Immagino che tu conosca bene\nquesta montagna...",
+                spanish=" Me imagino que conocerás bien\nesta montaña, ¿verdad?",
+            }
+        default:
+            {
+                english=" I would assume that you know\nthis mountain very well?",
+                french=" Alors, j\'imagine que tu\nconnais cette montagne comme ta poche?",
+                german=" Ich nehme daher an, dass ihr\ndiesen Berg recht gut kennt?",
+                italian=" Suppongo che tu conosca bene\nquesta montagna...",
+                spanish=" Supongo que conocerás muy bien\nesta montaña, ¿me equivoco?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" That\'s right. We\'ve lived here\nfor a very long time...",
+        french=" Effectivement. Notre installation\nici remonte à bien longtemps...",
+        german=" Das stimmt. Wir leben hier\nschon sehr lange Zeit...",
+        italian=" Esatto. Viviamo qui\nda lungo tempo...",
+        spanish=" Así es. Hace muchísimo tiempo\nque vivimos aquí...",
+    });
+    message_Talk({
+        english=" We\'re here to guide travelers up\nthe mountain.",
+        french=" Nous sommes là pour guider les\nvoyageurs dans leur ascension\nde la montagne.",
+        german=" Wir sind hier, um Reisende\nauf den Berg zu führen.",
+        italian=" Il nostro compito è fare\nda guida ai viaggiatori che vogliono\nscalare la montagna.",
+        spanish=" Estamos aquí para guiar a los\nviajeros en su ascenso a la montaña.",
+    });
+    message_Talk({
+        english=" But we haven\'t actually done that\nin quite some time.",
+        french=" Mais cela fait un moment\nque nous n\'avons plus eu l\'occasion de le faire.",
+        german=" Aber um ehrlich zu sein...\nWir haben das schon sehr lange nicht\nmehr gemacht.",
+        italian=" Ma è da tanto tempo che non\nci capita.",
+        spanish=" Aunque lo cierto es que hace\nbastante que no llevamos a cabo esta labor.",
+    });
+    message_Talk({
+        english=" That is, the earthquake that\nhappened here some time ago destroyed\nthe mountain path that led here...",
+        french=" En effet, il y a quelque temps,\nun tremblement de terre a détruit le sentier\nde montagne qui menait jusqu\'ici...",
+        german=" Vor einiger Zeit zerstörte ein\nErdbeben nämlich den Gebirgspfad,\nder hierherführte...",
+        italian=" E tutto a causa del terremoto\nche tempo fa distrusse il sentiero che\nconduceva al nostro villaggio...",
+        spanish=" Resulta que el terremoto que\nhubo hace un tiempo destruyó el sendero\nalpino que conducía a la aldea...",
+    });
+    message_Talk({
+        english=" So explorers from outside\ncouldn\'t get here very easily, and they\nstopped coming.",
+        french=" Du coup, les explorateurs\nont eu plus de mal à trouver le chemin\net ils ont cessé de venir.",
+        german=" Das hat es Erkundern von\naußerhalb erschwert, hierherzukommen,\nund sie blieben fern.",
+        italian=" Per gli esploratori diventò\nsempre più difficile raggiungere questo\nposto, così alla fine smisero di venire.",
+        spanish=" Por lo que los exploradores de\nfuera no podían acceder con facilidad a la\naldea y dejaron de venir.",
+    });
+    message_Talk({
+        english=" We were pretty surprised\nwhen the survey team walked into our\nlittle village.",
+        french=" Ça a été une vraie surprise\nle jour où l\'équipe de reconnaissance est\nentrée dans notre petit village.",
+        german=" Wir waren sehr erstaunt, das\nVermessungsteam in unser kleines Dorf\nspazieren zu sehen.",
+        italian=" Quindi siamo rimasti di stucco\nquando la squadra di indagine è entrata\nnel nostro piccolo villaggio.",
+        spanish=" Nos sorprendimos bastante\ncuando el equipo de reconocimiento llegó a\nnuestra pequeña aldea.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Really? I see.",
+                french=" Vraiment? Je vois.",
+                german=" Wirklich? Verstehe.",
+                italian=" Davvero? Capisco.",
+                spanish=" ¿En serio?",
+            }
+        case 2:
+            {
+                english=" Really? I see.",
+                french=" Vraiment? Je vois.",
+                german=" Wirklich? Verstehe.",
+                italian=" Davvero? Capisco.",
+                spanish=" ¿De verdad?",
+            }
+        default:
+            {
+                english=" Really? I see.",
+                french=" Vraiment? Je vois.",
+                german=" Wirklich? Verstehe.",
+                italian=" Davvero? Capisco.",
+                spanish=" ¿En serio?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" That explains why this place has\nonly been talked about in legends, and nobody\'s\ncome to visit.",
+                french=" Alors c\'est pour ça qu\'on ne\nparlait de cet endroit que dans les légendes\net que plus personne n\'y venait.",
+                german=" Das erklärt, warum über diesen\nOrt nur in Legenden berichtet wurde und\nniemand ihn jemals zu Gesicht bekommen hat.",
+                italian=" Ora si spiega come mai questo\nposto è avvolto nella leggenda e nessuno\nci si avventurava.",
+                spanish=" Eso explica por qué solo\nlas leyendas hablaban de este lugar\ny nadie había venido a visitarlo.",
+            }
+        case 2:
+            {
+                english=" That explains why this place has\nonly been talked about in legends, and nobody\'s\ncome to visit.",
+                french=" Alors c\'est pour ça qu\'on ne\nparlait de cet endroit que dans les légendes\net que plus personne n\'y venait.",
+                german=" Das erklärt, warum über diesen\nOrt nur in Legenden berichtet wurde und\nniemand ihn jemals zu Gesicht bekommen hat.",
+                italian=" Ora si spiega come mai questo\nposto è avvolto nella leggenda e nessuno\nci si avventurava.",
+                spanish=" Eso explica por qué solo\nlas leyendas hablaban de este lugar\ny nadie había venido a visitarlo.",
+            }
+        default:
+            {
+                english=" That explains why this place has\nonly been talked about in legends, and nobody\'s\ncome to visit.",
+                french=" Alors c\'est pour ça qu\'on ne\nparlait de cet endroit que dans les légendes\net que plus personne n\'y venait.",
+                german=" Das erklärt, warum über diesen\nOrt nur in Legenden berichtet wurde und\nniemand ihn jemals zu Gesicht bekommen hat.",
+                italian=" Ora si spiega come mai questo\nposto è avvolto nella leggenda e nessuno\nci si avventurava.",
+                spanish=" Eso explica por qué solo\nlas leyendas hablaban de este lugar\ny nadie había venido a visitarlo.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8964);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Oh, yeah! Speaking of legends...",
+                french=" Ah, oui! A propos de légendes...",
+                german=" Oh, genau! Apropos Legenden...",
+                italian=" Oh, sì! A proposito di leggende...",
+                spanish=" ¡Ah, sí! Hablando de leyendas...",
+            }
+        case 2:
+            {
+                english=" Oh, yeah! Speaking of legends...",
+                french=" Ah, oui! A propos de légendes...",
+                german=" Oh, genau! Apropos Legenden...",
+                italian=" Oh, sì! A proposito di leggende...",
+                spanish=" Por cierto, hablando\nde leyendas...",
+            }
+        default:
+            {
+                english=" Oh, yeah! Speaking of legends...",
+                french=" Ah, oui! A propos de légendes...",
+                german=" Oh, genau! Apropos Legenden...",
+                italian=" Oh, sì! A proposito di leggende...",
+                spanish=" ¡Ah, sí! Ya que hablamos\nde leyendas...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Is it true that there\'s an\nincredible treasure hidden here, one that\nrivals all other treasures?",
+                french=" C\'est vrai qu\'il y a un trésor\nextraordinaire caché ici, qui surpasserait\nles plus beaux trésors?",
+                german=" Stimmt es, dass hier ein\nlegendärer Schatz versteckt liegt? Einer, der\nprächtiger ist als alle anderen?",
+                italian=" È vero che da queste parti\nsi nasconde un tesoro talmente favoloso\nda far impallidire tutti gli altri?",
+                spanish=" ¿Es cierto que hay un tesoro\nincreíble escondido aquí, y que no puede\ncompararse con ningún otro?",
+            }
+        case 2:
+            {
+                english=" Is it true that there\'s an\nincredible treasure hidden here, one that\nrivals all other treasures?",
+                french=" C\'est vrai qu\'il y a un trésor\nextraordinaire caché ici, qui surpasserait\nles plus beaux trésors?",
+                german=" Stimmt es, dass hier ein\nlegendärer Schatz versteckt liegt? Einer, der\nprächtiger ist als alle anderen?",
+                italian=" È vero che da queste parti\nsi nasconde un tesoro talmente favoloso\nda far impallidire tutti gli altri?",
+                spanish=" ¿Es cierto que hay un tesoro\nincreíble escondido aquí, uno sin parangón\nalguno?",
+            }
+        default:
+            {
+                english=" Is it true that there\'s an\nincredible treasure hidden here, one that\nrivals all other treasures?",
+                french=" C\'est vrai qu\'il y a un trésor\nextraordinaire caché ici, qui surpasserait\nles plus beaux trésors?",
+                german=" Stimmt es, dass hier ein\nlegendärer Schatz versteckt liegt? Einer, der\nprächtiger ist als alle anderen?",
+                italian=" È vero che da queste parti\nsi nasconde un tesoro talmente favoloso\nda far impallidire tutti gli altri?",
+                spanish=" ¿Es verdad que hay un tesoro\nincreíble escondido aquí, uno que no puede\ncompararse con ningún otro?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Hee hee hee...\nWhat do you think?",
+        french=" Hi hi hi...\nD\'après vous?",
+        german=" Hihihi...\nWas glaubst du?",
+        italian=" Ih ih ih...\nVoi che ne dite?",
+        spanish=" Ji, ji, ji... ¿Tú qué crees?",
+    });
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Our job is not limited to simply\nacting as your guides.",
+        french=" Notre travail ne se limite pas\nsimplement à vous servir de guide.",
+        german=" Unser Job beschränkt sich nicht\ndarauf, euer Bergführer zu sein.",
+        italian=" Il nostro compito non si limita\na fare da guida a voi esploratori.",
+        spanish=" Nuestra labor no se limita solo\na guiaros.",
+    });
+    message_Talk({
+        english=" But in the end, those climbing\nthe mountain must discover some things\nfor themselves.",
+        french=" Ceux qui gravissent cette\nmontagne doivent découvrir quelque\nchose par eux-mêmes.",
+        german=" Aber letzten Endes müssen die,\ndie den Berg erklimmen, bestimmte Dinge auf\neigene Faust entdecken.",
+        italian=" Ma è pur vero che coloro\nche scalano la montagna devono scoprire\ndeterminate cose per conto proprio.",
+        spanish=" Pero, al final, los que ascienden\nla montaña deben descubrir ciertas cosas\npor sí mismos.",
+    });
+    message_Talk({
+        english=" We are merely assigned to\nassist in those discoveries.",
+        french=" Notre rôle consiste juste à vous\naider à faire cette découverte.",
+        german=" Wir haben bloß die Weisung,\neuch bei diesen Entdeckungen zu unterstützen.",
+        italian=" Noi possiamo solo offrirvi il\nnostro aiuto affinché riusciate a compiere\ntali scoperte.",
+        spanish=" Nosotros solo podemos prestar\nnuestra ayuda en tales descubrimientos.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Really? I\'m not sure I get it, but\nI think there\'s more to it than just that.",
+                french=" Vraiment? Je ne suis pas sûr\nde bien comprendre, mais je parie que votre\nrôle ne se résume pas juste à ça.",
+                german=" Wirklich? Ich bin mir nicht\nsicher, ob ich alles mitbekomme. Aber\nvielleicht ist das noch nicht alles.",
+                italian=" Davvero? Non sono sicuro di\naver afferrato tutto, eppure ho l\'impressione\nche ci sia sotto qualcos\'altro.",
+                spanish=" ¿En serio? No tengo claro si lo\nhe entendido, pero creo que hay más que eso.",
+            }
+        case 2:
+            {
+                english=" Really? I\'m not sure I fully\nunderstand, but I think there\'s a little more to\nit than that.",
+                french=" Vraiment? Je ne suis pas sûr\nde bien comprendre, mais je parie que votre\nrôle ne se résume pas juste à ça.",
+                german=" Wirklich? Ich weiß nicht, ob ich\nalles verstehe, aber vielleicht ist das noch\nnicht alles.",
+                italian=" Davvero? Non sono sicuro di\naver capito fino in fondo, eppure ho\nl\'impressione che ci sia dell\'altro.",
+                spanish=" ¿En serio? No sé si lo he\nentendido, pero creo que hay algo más que eso.",
+            }
+        default:
+            {
+                english=" Really? I\'m not sure I fully\nunderstand, but I think there\'s a little more to\nit than that.",
+                french=" Vraiment? Je ne suis pas sûre\nde bien comprendre, mais je parie que votre\nrôle ne se résume pas juste à ça.",
+                german=" Wirklich? Ich weiß nicht, ob ich\nalles verstehe, aber vielleicht ist das noch\nnicht alles.",
+                italian=" Davvero? Non sono sicura di\naver capito fino in fondo, eppure ho\nl\'impressione che ci sia qualcos\'altro.",
+                spanish=" ¿En serio? No tengo claro si lo\nhe entendido del todo, pero creo que\nhay más que eso.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" That\'s right.",
+        french=" Effectivement.",
+        german=" Stimmt schon.",
+        italian=" Esatto.",
+        spanish=" Así es.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    Wait(10);
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" By the way...[K]\nNow that we\'ve discussed all this...",
+        french=" Au fait...[K]\nMaintenant qu\'on a parlé de tout ça...",
+        german=" Übrigens...[K]\nDa wir das jetzt besprochen haben...",
+        italian=" A proposito...[K]\nVisto che ne abbiamo parlato...",
+        spanish=" Por cierto...[K] Ahora que ya hemos\nhablado de esto...",
+    });
+    message_Talk({
+        english=" If you\'re interested, I could be\nyour guide. What do you think?",
+        french=" ... si ça vous intéresse, je peux\nvous servir de guide. Qu\'en pensez-vous?",
+        german=" Was haltet ihr davon, wenn\nich als euer Bergführer arbeite?",
+        italian=" Se vi interessa, potrei farvi\nda guida... Che ne dite?",
+        spanish=" Si os interesa puedo ser\nvuestra guía. ¿Qué os parece?",
+    });
+    message_Talk({
+        english=" For some reason, while talking\nto you, Team [team:], I\'ve begun to really\nwant to climb the mountain with you.",
+        french=" Bizarrement, le fait de parler de\nla montagne avec vous, Equipe [team:],\nça m\'a donné envie de la gravir à vos côtés.",
+        german=" Irgendwie habe ich während des\nGesprächs Lust bekommen, mit euch zusammen\nden Berg zu besteigen, Team [team:].",
+        italian=" Per qualche motivo, parlando\ncon voi, Team [team:], mi è venuta una\ngran voglia di scalare la montagna.",
+        spanish=" Por alguna razón, mientras os\nhablaba, [CS:X]Equipo[CR] [team:], me han entrado\nmuchas ganas de subir a la montaña.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Really? That\'s nice of you\nto offer.",
+                french=" Vraiment? C\'est une offre\ngénéreuse. Je pensais à la même chose.",
+                german=" Wirklich? Wie nett von dir, uns\ndas anzubieten.",
+                italian=" Davvero? Beh, sei stata gentile\na offrirti.",
+                spanish=" ¿De verdad? Caray, qué maja.",
+            }
+        case 2:
+            {
+                english=" Really? That\'s a nice offer.\nI was thinking the same thing.",
+                french=" Vraiment? C\'est une offre\ngénéreuse. Je pensais à la même chose.",
+                german=" Wirklich? Ein nettes Angebot.\nIch habe auch schon daran gedacht.",
+                italian=" Davvero? Grazie di esserti\nofferta. È quello a cui stavo pensando\nanch\'io.",
+                spanish=" ¿En serio? Pues es buena\nidea, yo estaba pensando lo mismo.",
+            }
+        default:
+            {
+                english=" Really? Why, thank you!\nI was thinking that too.",
+                french=" Vraiment? C\'est une offre\ngénéreuse. Je pensais à la même chose.",
+                german=" Wirklich? Hey, vielen Dank!\nIch habe auch schon daran gedacht.",
+                italian=" Davvero? Grazie mille!\nAnch\'io pensavo che sarebbe stato bello\naverti con noi.",
+                spanish=" ¿En serio? ¡Anda, pues gracias!\nYo estaba pensando lo mismo.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Hey, [hero]?\nWhat do you think? Should we let [CS:N]Shaymin[CR]\njoin us?",
+                french=" Hé, [hero]?\nQu\'en penses-tu? Es-tu d\'accord pour que\n[CS:N]Shaymin[CR] se joigne à nous?",
+                german=" Hey, [hero]?\nWas meinst du? Sollen wir [CS:N]Shaymin[CR]\nmit uns gehen lassen?",
+                italian=" Ehi, [hero]! Che ne pensi?\n[CS:N]Shaymin[CR] può unirsi a noi?",
+                spanish=" Oye, [hero], ¿qué te\nparece? ¿Dejamos que [CS:N]Shaymin[CR]\nforme parte de nuestro equipo?",
+            }
+        case 2:
+            {
+                english=" Hey, [hero]?\nWhat do you think? Should we let [CS:N]Shaymin[CR]\njoin us?",
+                french=" Hé, [hero]?\nQu\'en penses-tu? Es-tu d\'accord pour que\n[CS:N]Shaymin[CR] se joigne à nous?",
+                german=" Hey, [hero]?\nWas meinst du? Sollen wir [CS:N]Shaymin[CR]\nmit uns gehen lassen?",
+                italian=" Ehi, [hero]! Che ne pensi?\n[CS:N]Shaymin[CR] può unirsi a noi?",
+                spanish=" Oye, [hero], ¿tú qué\nopinas? ¿Dejamos que [CS:N]Shaymin[CR]\nse una a nuestro equipo?",
+            }
+        default:
+            {
+                english=" Hey, [hero]?\nWhat do you think? Should we let [CS:N]Shaymin[CR]\njoin us?",
+                french=" Hé, [hero]?\nQu\'en penses-tu? Es-tu d\'accord pour que\n[CS:N]Shaymin[CR] se joigne à nous?",
+                german=" Hey, [hero]?\nWas meinst du? Sollen wir [CS:N]Shaymin[CR]\nmit uns gehen lassen?",
+                italian=" Ehi, [hero]! Che ne pensi?\n[CS:N]Shaymin[CR] può unirsi a noi?",
+                spanish=" Oye, [hero], ¿qué opinas?\n¿Dejamos que [CS:N]Shaymin[CR]\nforme parte de nuestro equipo?",
+            }
+    }
+    §label_2;
+    forever {
+        switch ( message_SwitchMenu(0, 1) ) {
+            case menu({
+                english="Yes",
+                french="Oui",
+                german="Ja",
+                italian="Sì",
+                spanish="Sí",
+            }):
+                break_loop;
+                break;
+            case menu({
+                english="No",
+                french="Non",
+                german="Nein",
+                italian="No",
+                spanish="No",
+            }):
+            default:
+                message_Close();
+                se_Play(8968);
+                with (actor ACTOR_ATTENDANT1) {
+                    SetEffect(EFFECT_SHOCKED_MIRRORED, 3);
+                }
+                with (actor ACTOR_ATTENDANT1) {
+                    WaitEffect();
+                }
+                WaitExecuteLives(ACTOR_ATTENDANT1);
+                message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+                message_SwitchTalk ($PARTNER_TALK_KIND) {
+                    case 1:
+                        {
+                            english=" Whaat?! Really?!",
+                            french=" Quoii?! Sérieusement?!",
+                            german=" Waaaas?!? Im Ernst?!?",
+                            italian=" Cooosa?! Sul serio?!",
+                            spanish=" ¡¿Quéee?! ¡¿En serio?!",
+                        }
+                    case 2:
+                        {
+                            english=" Whaat?! Really?!",
+                            french=" Quoii?! Sérieusement?!",
+                            german=" Waaaas?!? Im Ernst?!?",
+                            italian=" Cooosa?! Sul serio?!",
+                            spanish=" ¡¿Cómo?! ¡¿De verdad?!",
+                        }
+                    default:
+                        {
+                            english=" Whaat?! Really?!",
+                            french=" Quoii?! Sérieusement?!",
+                            german=" Waaaas?!? Im Ernst?!?",
+                            italian=" Cooosa?! Sul serio?!",
+                            spanish=" ¡¿Cómo?! ¡¿En serio?!",
+                        }
+                }
+                message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_STANDARD);
+                message_SwitchTalk ($PARTNER_TALK_KIND) {
+                    case 1:
+                        {
+                            english=" Don\'t you think it would\ndefinitely be better if we had a guide?",
+                            french=" Tu ne penses pas que la\nprésence d\'un guide à nos côtés\nserait un atout précieux?",
+                            german=" Glaubst du nicht, wir sollten\nlieber einen Bergführer mitnehmen?",
+                            italian=" Non pensi che sarebbe meglio\navere una guida con noi?",
+                            spanish=" ¿No crees que nos iría mejor\nsi tuviéramos una guía?",
+                        }
+                    case 2:
+                        {
+                            english=" Don\'t you think it would\nbe better if we had a guide?",
+                            french=" Tu ne penses pas que la\nprésence d\'un guide à nos côtés\nserait un atout précieux?",
+                            german=" Glaubst du nicht, wir sollten\nlieber einen Bergführer mitnehmen?",
+                            italian=" Non pensi che sarebbe meglio\navere una guida con noi?",
+                            spanish=" ¿No crees que sería mejor\nsi contáramos con una guía?",
+                        }
+                    default:
+                        {
+                            english=" Don\'t you think it would\nbe better if we had a guide?",
+                            french=" Tu ne penses pas que la\nprésence d\'un guide à nos côtés\nserait un atout précieux?",
+                            german=" Glaubst du nicht, wir sollten\nlieber einen Bergführer mitnehmen?",
+                            italian=" Non pensi che sarebbe meglio\navere una guida con noi?",
+                            spanish=" ¿No te parece que sería mejor\nsi contáramos con una guía?",
+                        }
+                }
+                message_SwitchTalk ($PARTNER_TALK_KIND) {
+                    case 1:
+                        {
+                            english=" We should ask [CS:N]Shaymin[CR]\nto guide us, OK?",
+                            french=" Acceptons l\'offre de [CS:N]Shaymin[CR] de\nnous servir de guide, d\'accord?",
+                            german=" Wir sollten das Angebot von\n[CS:N]Shaymin[CR] annehmen. In Ordnung?",
+                            italian=" Dovremmo proprio accettare\nl\'offerta di [CS:N]Shaymin[CR], sai?",
+                            spanish=" Deberíamos dejar que [CS:N]Shaymin[CR]\nnos guiara, ¿vale?",
+                        }
+                    case 2:
+                        {
+                            english=" I really think we should ask\n[CS:N]Shaymin[CR] to guide us. OK?",
+                            french=" Acceptons l\'offre de [CS:N]Shaymin[CR] de\nnous servir de guide, d\'accord?",
+                            german=" Ich denke wirklich, wir sollten\ndas Angebot von [CS:N]Shaymin[CR] annehmen. Okay?",
+                            italian=" Dovremmo proprio accettare\nl\'offerta di [CS:N]Shaymin[CR], sai?",
+                            spanish=" Creo que deberíamos dejar que\n[CS:N]Shaymin[CR] nos guiara, ¿no?",
+                        }
+                    default:
+                        {
+                            english=" I really think we should ask\n[CS:N]Shaymin[CR] to guide us. OK?",
+                            french=" Acceptons l\'offre de [CS:N]Shaymin[CR] de\nnous servir de guide, d\'accord?",
+                            german=" Ich denke wirklich, wir sollten\ndas Angebot von [CS:N]Shaymin[CR] annehmen. Okay?",
+                            italian=" Dovremmo proprio accettare\nl\'offerta di [CS:N]Shaymin[CR], sai?",
+                            spanish=" Creo que deberíamos dejar que\n[CS:N]Shaymin[CR] nos guiara, ¿no crees?",
+                        }
+                }
+                continue;  // may be redundant
+        }
+    }
+    §label_0;
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" Hee hee hee. Yay!",
+        french=" Hi hi hi. Youpi!",
+        german=" Hihihi. Juchhu!",
+        italian=" Ih ih ih. Evviva!",
+        spanish=" Ji, ji, ji. ¡Yupi!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+    message_Talk({
+        english=" OK, I\'ll be waiting at the\nmountain-path entrance for you.",
+        french=" Très bien, je vous attendrai au\ndébut du sentier de montagne.",
+        german=" Gut, ich werde am Eingang des\nGebirgspfades auf euch warten.",
+        italian=" Bene, vi aspetto all\'inizio\ndel sentiero che conduce alla montagna.",
+        spanish=" Bueno, pues os espero donde\nempieza el sendero alpino.",
+    });
+    message_Talk({
+        english=" The mountain path is straight\nahead from here.",
+        french=" C\'est juste là, devant vous.",
+        german=" Der Gebirgspfad liegt von hier\nschnurstracks geradeaus.",
+        italian=" Il sentiero è proprio dritto\ndavanti a voi.",
+        spanish=" Encontraréis el sendero alpino\nsi vais todo recto.",
+    });
+    message_Talk({
+        english=" Please come once you\'ve finished\nyour preparations.",
+        french=" Retrouvez-moi là-bas une fois\nque vous aurez terminé vos préparatifs.",
+        german=" Kommt dorthin, wenn ihr mit\nden Vorbereitungen fertig seid.",
+        italian=" Quando avete finito\ndi prepararvi, venite pure da me.",
+        spanish=" Pasaos por allí cuando hayáis\nterminado de prepararos.",
+    });
+    message_Talk({
+        english=" See you later!",
+        french=" A plus tard!",
+        german=" Bis später!",
+        italian=" A più tardi!",
+        spanish=" ¡Hasta luego!",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_SHEIMI) {
+        MovePositionOffset(1, 0, -88);
+    }
+    WaitExecuteLives(ACTOR_NPC_SHEIMI);
+    screen_FadeOut(1, 60);
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetPositionMark(Position<'m4', 45, 16.5>);
+    }
+    with (actor ACTOR_NPC_SHEIMI) {
+        SetDirection(DIR_DOWN);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_OKUTAN) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_BARIYAADO) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_KINOGASSA) {
+        SetDirection(DIR_DOWN);
+    }
+    camera_SetDefault();
+    Wait(30);
+    screen_FadeIn(1, 30);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_KINOGASSA) {
+    SetPositionInitial();
+    SetAnimation(2);
+    §label_3;
+    forever {
+        Turn2Direction(4, 10, DIR_DOWN);
+        SetEffect(EFFECT_JOYOUS, 3);
+        WaitRandom(90, 180);
+        SetEffect(EFFECT_NONE, 3);
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+        SetAnimation(4);
+        WaitRandom(120, 180);
+        continue;  // may be redundant
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_BARIYAADO) {
+    SetPositionInitial();
+    SetAnimation(2);
+    Wait(15);
+    §label_4;
+    forever {
+        SetAnimation(4);
+        WaitRandom(90, 180);
+        SetAnimation(2);
+        WaitRandom(60, 180);
+        continue;  // may be redundant
+    }
+}
+
+def 3 for_actor(ACTOR_NPC_OKUTAN) {
+    SetPositionInitial();
+    SetAnimation(2);
+    Wait(30);
+    §label_5;
+    forever {
+        SetEffect(EFFECT_JOYOUS, 3);
+        WaitRandom(90, 180);
+        SetEffect(EFFECT_NONE, 3);
+        WaitRandom(60, 180);
+        continue;  // may be redundant
+    }
+}

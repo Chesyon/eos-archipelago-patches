@@ -17,6 +17,20 @@ def 0 {
         italian=" ...[K] IO...[K] IO SONO STATO \nSCONFITTO...[K] GRRR-OOOOOO!",
         spanish=" HE...[K] HE...[K] HE SIDO DERROTADO...[K]\n¡GRRRRRRR!",
     });
+    message_Talk({
+        english=" IT IS NOT THE STRONG\nTHAT WIN.[K] THOSE THAT WIN ARE STRONG.",
+        french=" CE N\'EST PAS LE PLUS FORT QUI\nGAGNE.[K] MAIS CEUX QUI GAGNENT QUI SONT\nLES PLUS FORTS.",
+        german=" ES SIND NICHT DIE STARKEN,\nDIE GEWINNEN.[K] DIEJENIGEN, DIE GEWINNEN,\nSIND STARK.",
+        italian=" NON È IL PIÙ FORTE CHE\nVINCE.[K] SONO COLORO CHE VINCONO A\nESSERE I PIÙ FORTI.",
+        spanish=" NO SON LOS FUERTES LOS QUE\nGANAN.[K] LOS QUE GANAN DEMUESTRAN QUE\nSON LOS FUERTES.",
+    });
+    message_Talk({
+        english=" AND YOUR STRENGTH...[K]\nI SUBMIT TO IT.",
+        french=" ET VOTRE FORCE...[K]\nJE M\'Y SOUMETS.",
+        german=" UND EURER STÄRKE...[K]\nBEUGE ICH MICH.",
+        italian=" E LA VOSTRA FORZA...[K]\nMI HA BATTUTO.",
+        spanish=" YO ME SOMETO...[K]\nA DICHA FUERZA.",
+    });
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     Wait(60);
     message_Mail({
@@ -28,6 +42,8 @@ def 0 {
     });
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     ~AssignCheck(30);
+    bgm_FadeOut(120);
+    screen_FadeOut(1, 60);
     jump @label_2;
     §label_5;
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);

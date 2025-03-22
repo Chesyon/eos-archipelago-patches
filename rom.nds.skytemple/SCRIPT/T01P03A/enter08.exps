@@ -1,0 +1,170 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    if ( scn($SCENARIO_SIDE) >= [40, 7] || scn($SCENARIO_SIDE) >= [40, 3] || scn($SCENARIO_SIDE) >= [40, 2] ) {
+        §label_4;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( $SCENARIO_TALK_BIT_FLAG[126] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:K]Marowak[CR] Dojo is\ndefinitely...[K] Just definitely!",
+            french=" Le [CS:K]Dojo Ossatueur[CR], à n\'en\npas douter...[K] c\'est une certitude absolue...",
+            german=" Das [CS:K]Knogga-Dojo[CR] wird\nzweifellos...[K] Ganz zweifellos!",
+            italian=" Sicuramente il Dojo [CS:K]Marowak[CR]...[K]\nInsomma, sicuramente, ecco!",
+            spanish=" El [CS:K]Dojo Marowak[CR], sin el menor\natisbo de duda...[K] ¡No cabe duda!",
+        });
+        message_Talk({
+            english=" Definitely coming back!!",
+            french=" ... renaîtra bientôt de\nses cendres!",
+            german=" Zweifellos zurückkehren!",
+            italian=" Riaprirà sicuramente!",
+            spanish=" ¡¡Volverá!!",
+        });
+        message_Close();
+        jump @label_4;
+    } else {
+        $SCENARIO_TALK_BIT_FLAG[126] = 1;
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" .........[K]\nCus...[K]customers...",
+            french=" ..........[K]\nDe...[K] la visite...",
+            german=" .........[K]\nKun...[K] Kundschaft...",
+            italian=" .........[K]\nCli...[K] Clienti...",
+            spanish=" Anda...[K] Un cliente...[K] ¡Qué fuerte!",
+        });
+        message_Talk({
+            english=" ...[K]You came all the way here,\nbut...",
+            french=" ...[K] Tu as fait tout ce chemin\njusqu\'ici, mais...",
+            german=" ...[K]Du bist den ganzen Weg\nhierhergekommen, aber...",
+            italian=" ...[K] Grazie di essere venuto fino\na qui, ma...",
+            spanish=" Has venido...[K] Has venido hasta aquí,\npero...",
+        });
+        message_Talk({
+            english=" [CS:K]Marowak[CR] Dojo has collapsed as\nof today...",
+            french=" ... le [CS:K]Dojo Ossatueur[CR]\nn\'est plus en service...",
+            german=" Im [CS:K]Knogga-Dojo[CR] ist ab heute\nerst mal kein Training mehr möglich...",
+            italian=" ... i dedali del Dojo [CS:K]Marowak[CR]\nnon sono accessibili. Chiudo il dojo.",
+            spanish=" El [CS:K]Dojo Marowak[CR] está\nfuera de servicio...",
+        });
+        message_Talk({
+            english=" However!",
+            french=" Cependant!",
+            german=" Wie auch immer!",
+            italian=" Però...",
+            spanish=" ¡Peeero...!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8975);
+        with (actor ACTOR_NPC_GARAGARA) {
+            ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+        }
+        WaitExecuteLives(ACTOR_NPC_GARAGARA);
+        message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" One day...definitely...[K]\nI\'ll be reviving it!",
+            french=" Un jour... c\'est sûr...[K]\nje le rouvrirai!",
+            german=" Eines Tages... werde ich...[K]\nes zweifellos wiedereröffnen!",
+            italian=" Un giorno... sicuramente...[K]\nlo riaprirò!",
+            spanish=" Un día... estoy seguro de que...[K]\n¡conseguiré que resurja!",
+        });
+        message_Talk({
+            english=" Definitely! [K]Definitely![K]\nDefinitely reviving it!",
+            french=" C\'est sûr![K]\nArchisûr! [K]Je le rouvrirai!",
+            german=" Zweifellos! [K]Zweifellos![K]\nZweifellos wiedereröffnen!",
+            italian=" Sicuramente! [K]Sicuramente![K]\nLo riaprirò sicuramente!",
+            spanish=" ¡No me cabe duda![K] ¡Seguro![K]\n¡Que renacerá, te digo!",
+        });
+        message_Talk({
+            english=" Uhhn...huhhn...",
+            french=" Hohhh hahhh...",
+            german=" Hrmmmhh... hrmmmhh....",
+            italian=" Eeeh aaah....",
+            spanish=" Arf, arf...",
+        });
+        message_Talk({
+            english=" ...[K]This dojo will be closed\nbeginning tomorrow...",
+            french=" ...[K] Ce dojo sera fermé\ndès demain...",
+            german=" ...[K]Dieses Dojo wird ab morgen\ngeschlossen bleiben...",
+            italian=" ...[K] Questo dojo rimarrà chiuso\na partire da domani...",
+            spanish=" Pues...[K] Este dojo estará cerrado\na partir de mañana...",
+        });
+        message_Talk({
+            english=" Definitely be revived!",
+            french=" Je le rouvrirai, c\'est sûr!",
+            german=" Aber zweifellos wiedereröffnet\nwerden!",
+            italian=" Ma lo riaprirò sicuramente!",
+            spanish=" ¡Renacerá sin lugar a dudas!",
+        });
+        message_Talk({
+            english=" Ah... So you won\'t forget...",
+            french=" Ah... Et pour que tu\nn\'oublies pas...",
+            german=" Das darfst du nicht vergessen!",
+            italian=" Ah... Affinché non te lo\ndimentichi...",
+            spanish=" Ah... Para que no lo olvides...",
+        });
+        message_Talk({
+            english=" I\'ll give this to you.",
+            french=" ... je t\'offre ceci.",
+            german=" Ich gebe dir dies als\nErinnerungsstütze.",
+            italian=" ... ti darò questo.",
+            spanish=" Voy a darte esto.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_Mail({
+            english="[CN]In remembrance of the failed [CS:K]Marowak[CR] Dojo,\n[CN][CS:Y]Bidoof[CR]...",
+            french="[CN]En souvenir du [CS:K]Dojo Ossatueur[CR],\n[CN]condamné à une faillite inexorable,\n[CN][CS:Y]Keunotor[CR]...",
+            german="[CN]In Erinnerung an das gescheiterte\n[CN][CS:K]Knogga-Dojo[CR] erhält [CS:Y]Bidiza[CR]",
+            italian="[CN]Per non essere riuscito ad accedere\nal Dojo [CS:K]Marowak[CR], [CN][CS:Y]Bidoof[CR]...",
+            spanish="[CN]En memoria al fallido [CS:K]Dojo Marowak[CR],\n[CN][CS:Y]Bidoof[CR]...",
+        });
+        message_KeyWait();
+        me_Play(4);
+        message_Mail({
+            english="[CN]Received a [CS:I]Reviver Seed[CR]!\n[CN][W:30]...and a check!",
+            french="[CN]... reçoit une [CS:I]Résugraine[CR]!",
+            german="[CN]einen [CS:I]Belebersamen[CR]!",
+            italian="[CN]... riceve un [CS:I]Revitalseme[CR]!",
+            spanish="[CN]Consiguió una [CS:I]Sem. Revivir[CR].",
+        });
+        WaitMe(4);
+        ~AssignCheck(66);
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        item_Set(0, 73, 0);
+        switch ( message_Menu(MENU_GIVE_ITEM) ) { }
+        message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Remember the dojo whenever\nyou look at it, OK?",
+            french=" Souviens-toi du dojo quand tu\nregarderas cet objet, d\'accord?",
+            german=" Denk an das Dojo, wann immer\ndu ihn betrachtest, in Ordnung?",
+            italian=" Ricordati del dojo ogni volta che\nlo guarderai, ok?",
+            spanish=" Piensa en el dojo cada vez\nque la mires, ¿vale?",
+        });
+        message_Talk({
+            english=" [CS:K]Marowak[CR] Dojo is\ndefinitely...[K] Just definitely!",
+            french=" Le [CS:K]Dojo Ossatueur[CR], à n\'en\npas douter...[K] c\'est une certitude absolue...",
+            german=" Das [CS:K]Knogga-Dojo[CR] wird\nzweifellos...[K] Ganz zweifellos!",
+            italian=" Sicuramente il Dojo [CS:K]Marowak[CR]...[K]\nInsomma, sicuramente, ecco!",
+            spanish=" El [CS:K]Dojo Marowak[CR], sin el menor\natisbo de duda...[K] ¡No cabe duda!",
+        });
+        message_Talk({
+            english=" Definitely coming back!",
+            french=" ... renaîtra bientôt de\nses cendres!",
+            german=" Zweifellos zurückkehren!",
+            italian=" Riaprirà sicuramente!",
+            spanish=" ¡Volverá!",
+        });
+        message_Close();
+        jump @label_4;
+    }
+}

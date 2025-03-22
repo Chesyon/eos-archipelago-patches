@@ -1,0 +1,39 @@
+
+def 0 {
+    sound_Stop();
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        message_Mail("[CN]You see a vision of a distant place![K]\n[CN]Might as well sit back and enjoy the view!");
+        message_Close();
+    }
+    back2_SetMode(5);
+    back_SetGround(LEVEL_V01P08B);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (performer 0) {
+        MovePositionOffset(32896, 0, -32);
+    }
+    bgm_PlayFadeIn(BGM_FIRE_CRACKLING_LOUDER, 60, 256);
+    screen2_FadeIn(0, 30);
+    screen_FadeIn(1, 30);
+    WaitExecutePerformer(0);
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        Wait(600);
+        message_Mail("[HR][STS][CN]Now might be a good time to get\n[CN]a healthy snack... An apple perhaps?[STE][W:300]");
+        message_CloseEnforce();
+        Wait(900);
+        switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_INIT, 0, 0) ) { }
+        switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_PRESS, 0, 0) ) { }
+        screen2_FadeOut(0, 60);
+        screen_FadeOut(1, 60);
+        back2_SetMode(0);
+    } else {
+        Wait(360);
+    }
+    bgm_FadeOut(30);
+    screen2_FadeOut(0, 30);
+    screen_FadeOut(1, 30);
+    back2_SetMode(0);
+    end;
+}

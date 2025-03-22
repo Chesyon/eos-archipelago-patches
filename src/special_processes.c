@@ -44,26 +44,29 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
 
 // Special process 102: Read/write Instrument/Relic Fragment
 static int SpAccessMacguffinStatus(short mode, short macguffin) {
+    short numberToReturn;
     if(macguffin == 1) { // instruments
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.totalInstruments) {
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.requiredInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
-                return 1;
+                numberToReturn = 1;
             }
-            else return 0;
+            else numberToReturn = 0;
         }
-        else return macguffinMaxes.totalInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+        else numberToReturn = macguffinMaxes.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.totalRelicFragmentShards) {
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.requiredRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
-                return 1;
+                numberToReturn = 1;
             }
-            else return 0;
+            else numberToReturn = 0;
         }
-        else return macguffinMaxes.totalRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+        else numberToReturn = macguffinMaxes.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
     }
+    if (numberToReturn < 0) return 0;
+    else return numberToReturn;
 }
 
 void GetLowercaseName(const char* src, char* dst) // Used in NameCheck

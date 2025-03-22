@@ -1,0 +1,63 @@
+
+def 0 {
+    sound_Stop();
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        message_Mail("[CN]You see a vision of a distant place![K]\n[CN]Might as well sit back and enjoy the view!");
+        message_Close();
+    }
+    bgm_PlayFadeIn(BGM_ON_THE_BEACH_AT_DUSK, 0, 256);
+    bgm2_PlayFadeIn(BGM_OCEAN1, 0, 256);
+    back2_SetMode(4);
+    back2_SetGround(LEVEL_V26P06A);
+    back_SetGround(LEVEL_V26P05A);
+    supervision_Acting(0);
+    with (object OBJECT_V26P05A1_345) {
+        SetOutputAttribute(2048);
+    }
+    camera2_SetPositionMark(Position<'m0', 19, 15.5>);
+    supervision_SpecialActing(6, 600, 0);
+    supervision2_SpecialActing(6, 600, 0);
+    screen2_FadeIn(0, 30);
+    screen_FadeIn(1, 30);
+    if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        Wait(400);
+        message_Mail("[STS][HR][CN]Now might be a good time to take\n[CN]a nice long bubble bath...[STE][W:300]");
+        message_CloseEnforce();
+        Wait(1100);
+        switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_INIT, 0, 0) ) { }
+        switch ( ProcessSpecial(PROCESS_SPECIAL_KEY_WAIT_PRESS, 0, 0) ) { }
+        bgm_FadeOut(60);
+    } else {
+        Wait(360);
+    }
+    screen2_FadeOut(0, 30);
+    screen_FadeOut(1, 30);
+    supervision_SpecialActing(3, 0, 0);
+    supervision2_SpecialActing(3, 0, 0);
+    back2_SetMode(0);
+    end;
+}
+
+def 1 for_performer(0) {
+    camera_SetMyself();
+    §label_0;
+    forever {
+        camera_SetPositionMark(Position<'m1', 19.5, 13.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m2', 58.5, 13.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m3', 97.5, 13.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m4', 19.5, 43.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m5', 58.5, 43.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m6', 97.5, 43.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m7', 19.5, 73.5>);
+        Wait(8);
+        camera_SetPositionMark(Position<'m8', 58.5, 73.5>);
+        Wait(8);
+        continue;  // may be redundant
+    }
+}

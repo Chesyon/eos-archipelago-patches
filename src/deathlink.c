@@ -27,7 +27,7 @@ void DeathLinkReceiverCheck() {
     // Messages may not look so cool because of how EoS wraps text.
     if(CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage[0] != '\0') {
         LogMessageWithPopupCheckUser(leader, CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage);
-        CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage[0] = '\0';
+        MemZero(CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathMessage, 128);
     }
     
     // Roll for a random cool visual experience for your death.

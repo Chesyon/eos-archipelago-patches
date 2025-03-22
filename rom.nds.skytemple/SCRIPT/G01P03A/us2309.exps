@@ -9,16 +9,74 @@ def 0 {
         SetAnimation(2);
     }
     message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
-    message_Talk(" Hello, [hero] and [partner]!\nHow are you doing today?");
+    message_Talk("[STS] Hello, [hero] and [partner]!\nHow are you doing today?[STE]");
+    §anything_else;
     switch(message_SwitchMenu(1,1)) {
         case menu("Refresh boards"):
             message_Close();
-            message_Talk(" I can't exactly do that on my own, but\nmy dad should be refreshing them soon, if you\nwant to wait a minute or two...");
+            message_Talk("[STS] I can't exactly do that on my own, but\nmy dad should be refreshing them soon, if you\nwant to wait a minute or two...[STE]");
             message_Close();
+            ProcessSpecial(104,0,0);
             screen_FadeOut(1,30);
             message_Mail("\n[CN]A few minutes later...");
             message_Close();
             screen_FadeIn(1,30);
+            break;
+        case menu("Find Missions by dungeon..."):
+            // TODO: NEW FEATURE
+            if (not debug) {
+                message_Mail(" Not a thing until 0.3.0! Sowwy [CS:C]FieryBlizzard[CR]");
+                jump @end_talk;
+            }
+            message_Close();
+            message_Talk("[STS] Oh, you want missions for a specific dungeon?\nSure, which dungeon?[STE]");
+            switch(message_Menu(80)) {
+                case 255: // 0 dungeons unlocked!
+                    message_Talk(" You uhh...[W:60] don\'t have\nany dungeons unlocked yet.[K] Come back when you do, okay?");
+                    message_Close();
+                    jump @end_talk;
+                case 254: // Cancelled
+                    message_Talk("[STS] Anything else I can help you with?[STE]");
+                    jump @anything_else;
+                case 0:
+                    message_Talk(" I heard that very rarely,\n[CS:G]Drowzee[CR] can send you there by accident.[K]\nCertainly beats hacking it in, right?");
+                    jump @dungeon_only;
+                case 27:
+                case 28:
+                case 29:   
+                case 32:
+                case 33:
+                    message_Talk("[STS] Since when could you two go to the\nfuture whenever you want? This is so unfair!\nWait... why do we even HAVE jobs out there?[STE]");
+                    jump @dungeon_only;
+                case 38:
+                    message_Talk("[STS] Is [CS:P]Hidden Land[CR] still off-limits? [CS:G]Lapras[CR]\nwas really adamant about nobody but you two\nbeing allowed to go there. I wonder though...[STE]");
+                    message_Talk("[STS] My dad is super jealous that you two\ngot to cross the sea, so maybe you could ask\n[CS:G]Lapras[CR] to take him for a ride somewhere?[STE]");
+                    message_Talk("[STS] Besides, why do we even have jobs in\na place that only the two of you are meant to\nbe able to access? Who needs rescuing?[STE]");
+                    jump @dungeon_only;
+                case 41:
+                    message_Talk("[STS] Wait a minute... Why can\'t [CS:G]Dialga[CR]\njust handle these jobs for us? Wouldn\'t that be\nway more efficient? Legendaries...[STE]");
+                    jump @dungeon_only;
+                case 63: 
+                    message_Talk("[STS] I still don\'t get it. Why and how are\nPokemon getting trapped inside the nightmares\nof others? Does this NOT bother anyone else?[STE]");
+                    jump @dungeon_only;
+                case 65:
+                    message_Talk(" You know there\'s no checks there...[W:30]\nRight?[K] You\'re literally just doing [CS:P]Dark Crater[CR]\nmissions for fun![K] You won already, go home!");
+                    jump @dungeon_only;
+                case 99:
+                case 100:
+                case 101:
+                case 102:
+                case 103:
+                    message_Talk(" What!?! Why would you want to set\nfoot in there, much less complete missions on\nthat godforsaken isle? Utter lunacy! Anyway...");
+                    jump @dungeon_only;
+                case 104:
+                    message_Talk(" Wait... [CS:P]Destiny Tower[CR] exists? And\nwe have jobs there? Huh... neat!");
+                default: // Some other dungeon
+                    §dungeon_only;
+                    message_Talk("[STS] All set! When dad next\nresets the boards, you\'ll see just that dungeon!\nOh look, here he comes now![STE]");
+                    Wait(30);
+                    break;
+            }
             break;
         case menu("Never mind"):
         default:
@@ -78,7 +136,6 @@ def 0 {
     with (object OBJECT_G01P03A1_103) {
         SetAnimation(11);
     }
-    ProcessSpecial(104,0,0);
     Wait(180);
     se_Play(6415);
     Wait(15);
