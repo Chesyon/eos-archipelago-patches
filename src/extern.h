@@ -53,6 +53,7 @@ typedef struct MacguffinMax {
 } MacguffinMax;
 ASSERT_SIZE(MacguffinMax, 0x2);
 extern MacguffinMax macguffinMaxes;
+extern uint8_t cafeMax; // See my comment on SP 105.
 
 typedef struct MissionStatus {
     uint8_t completedJobs : 8;    // 0x0
@@ -89,8 +90,9 @@ typedef struct CustomSaveArea {
     uint8_t acquiredInstruments;           // 0x185: How many instruments the player has collected.
     DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
     bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;             // 0x2A4
-    undefined fields[0xE5B];               // 0x2A5: Unused.
+    DungeonTraps dungeonTraps;             // 0x2A4: wip dungeons traps
+    uint8_t acquiredCafeChecks;            // 0x2A5: How many cafe checks have been obtained. See my comment on SP 105.
+    undefined fields[0xE5A];               // 0x2A6: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
@@ -99,6 +101,8 @@ extern CustomSaveArea CUSTOM_SAVE_AREA;
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
 extern int PARTNER_SELECT_MENU_OPTION_TIMER;
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
+
+extern uint32_t TAILORED_MISSION_DUNGEON;
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);
 void DetermineTileAppearence(int x, int y);

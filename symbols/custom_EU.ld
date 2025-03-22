@@ -17,9 +17,12 @@ StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the fun
 MissionTypeRollHook = 0x2062948;
 MissionTryOpenDungeon = 0x20682BC;
 DeathLinkSendHookOld = 0x200C778;
-CrystalCaveCrossingMissionCheckAddr = 0x2062F80;
-CrystalCaveCrossingMissionSkipCheckAddr = 0x2062F98;
+MissionMultipurposeCheckAreaStart = 0x2062F74;
+MissionMultipurposeCheckAreaEnd = 0x2062F94;
+TAILORED_MISSION_DUNGEON = 0x2062F94;
+TailoredMissionOverlapFloorsHook = 0x2063064;
 GenerateMissionMinFloorRollHook = 0x206301C;
+GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
@@ -70,6 +73,7 @@ apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
 hintableItems = 0x23DE022;
+cafeMax = 0x23DE1C6; /* See my comment on SP 105. */
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 
