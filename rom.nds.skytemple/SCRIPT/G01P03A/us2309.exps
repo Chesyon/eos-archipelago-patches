@@ -23,9 +23,8 @@ def 0 {
             screen_FadeIn(1,30);
             break;
         case menu("Find Missions by dungeon..."):
-            // TODO: NEW FEATURE
-            if (not debug) {
-                message_Mail(" Not a thing until 0.3.0! Sowwy [CS:C]FieryBlizzard[CR]");
+            if (debug) {
+                message_Mail(" This would crash if not on out.nds!");
                 jump @end_talk;
             }
             message_Close();

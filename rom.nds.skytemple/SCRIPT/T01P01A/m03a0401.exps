@@ -1,0 +1,527 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    screen_WhiteIn(4, 3);
+    supervision_Acting(0);
+    Wait(1);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    se_Play(8964);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Hey! What\'s that about?",
+                french=" Hé! Qu\'est-ce qui se passe\nlà-bas?",
+                german=" Hey! Was ist denn da los?",
+                italian=" Ehi! Cosa succede?",
+                spanish=" ¡Eh! ¿Qué está pasando allí?",
+            }
+        case 2:
+            {
+                english=" Oh![K] What\'s going on there?",
+                french=" Hé! Qu\'est-ce qui se passe\nlà-bas?",
+                german=" Oh![K] Was ist denn da los?",
+                italian=" Ehi![K] Cosa succede?",
+                spanish=" ¡Eh![K] ¿Qué está pasando allí?",
+            }
+        default:
+            {
+                english=" Say![K] What are they up to?",
+                french=" Hé! Qu\'est-ce qui se passe\nlà-bas?",
+                german=" Na so was![K] Was machen die\ndenn?",
+                italian=" Ehi![K] Cosa succede?",
+                spanish=" ¡Oye![K] ¿Qué está pasando allí?",
+            }
+    }
+    message_Close();
+    with (performer 0) {
+        SetPositionLives(0);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (performer 0) {
+        Move2PositionMark(2, Position<'m0', 44.5, 22.5>);
+    }
+    WaitExecutePerformer(0);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetEffect(EFFECT_LAUGHING, 3);
+    }
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(2, 0);
+    message_Talk({
+        english=" Yaaaay!",
+        french=" Youpi!",
+        german=" Jippieee!",
+        italian=" Yaaaay!",
+        spanish=" ¡Síiii!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetEffect(EFFECT_NONE, 3);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Thank you!",
+        french=" Merci!",
+        german=" Vielen Dank!",
+        italian=" Grazie!",
+        spanish=" ¡Gracias!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Please! It\'s nothing.",
+        french=" De rien! Ce n\'est rien.",
+        german=" Bitte! Nicht der Rede wert.",
+        italian=" Non c\'è di che.",
+        spanish=" ¡No hay de qué!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        MovePositionOffset(1, 48, 0);
+    }
+    Wait(10);
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionOffset(1, 48, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m1', 47, 23.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m2', 43, 23.5>);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" What\'s going on?",
+                french=" Il y a un problème?",
+                german=" Was geht hier vor?",
+                italian=" Cosa succede?",
+                spanish=" ¿Qué pasa aquí?",
+            }
+        case 2:
+            {
+                english=" What\'s going on?",
+                french=" Il y a un problème?",
+                german=" Was geht hier vor?",
+                italian=" Cosa succede?",
+                spanish=" ¿Qué ocurre?",
+            }
+        default:
+            {
+                english=" What\'s happening?",
+                french=" Il y a un problème?",
+                german=" Was gibt es bei euch\nInteressantes?",
+                italian=" Cosa succede?",
+                spanish=" ¿Qué sucede?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    se_Play(8978);
+    with (actor ACTOR_NPC_RURIRI) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        WaitEffect();
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(2, 0);
+    message_Talk({
+        english=" Oh! Hi!",
+        french=" Oh! Bonjour!",
+        german=" Oh! Hallo!",
+        italian=" Oh! Salve!",
+        spanish=" ¡Ah! ¡Hola!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_SIGH, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Some time ago, we lost an item\nthat\'s pretty important to us...",
+        french=" Il y a quelque temps, on a perdu\nun objet auquel on tient beaucoup...",
+        german=" Vor einiger Zeit haben wir ein\nItem verloren, das uns sehr wichtig ist.",
+        italian=" Qualche tempo fa, abbiamo perso\nuno strumento che ci sta molto a cuore...",
+        spanish=" Hace tiempo que perdimos un\nobjeto muy importante...",
+    });
+    message_Talk({
+        english=" We\'ve been looking all over...[K]\nBut we haven\'t found it yet!",
+        french=" On l\'a cherché partout...[K]\nMais on ne l\'a pas encore trouvé!",
+        german=" Wir haben schon überall\ngesucht...[K] Aber wir haben es noch nicht\ngefunden!",
+        italian=" Lo abbiamo cercato\ndappertutto...[K] ma non lo abbiamo\nancora trovato!",
+        spanish=" Lo hemos estado buscando\npor todas partes...[K] pero aún no hemos\npodido encontrarlo.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Then Mr. [CS:N]Drowzee[CR] came along...",
+        french=" Puis M. [CS:N]Soporifik[CR] est venu...",
+        german=" Dann kam Herr [CS:N]Traumato[CR]...",
+        italian=" Poi è arrivato il signor\n[CS:N]Drowzee[CR]...",
+        spanish=" Entonces apareció el Sr. [CS:N]Drowzee[CR]...",
+    });
+    message_Talk({
+        english=" And he says he may have seen\nour lost item somewhere!",
+        french=" Et il nous a dit qu\'il avait vu\nnotre objet quelque part!",
+        german=" Er sagt, er habe unser\nverlorenes Item wahrscheinlich irgendwo\ngesehen!",
+        italian=" Ci ha detto che potrebbe\naverlo visto da qualche parte!",
+        spanish=" ¡Y dice que ha visto nuestro objeto\nen alguna parte!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_Talk({
+        english=" He even offered to help us look\nfor it.",
+        french=" Il nous a même proposé son aide\npour le trouver.",
+        german=" Er hat sogar angeboten, uns bei\nder Suche zu helfen.",
+        italian=" Si è anche offerto di aiutarci a \ncercarlo.",
+        spanish=" Hasta se ha ofrecido a ayudarnos\na buscarlo.",
+    });
+    message_Talk({
+        english=" We\'re so happy about this!",
+        french=" On est tellement contents!",
+        german=" Wir sind ja so froh darüber!",
+        italian=" Siamo così contenti!",
+        spanish=" ¡Estamos tan contentos!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Awesome! That\'s great for you!",
+                french=" Génial! C\'est super!",
+                german=" Super! Das ist ja toll!",
+                italian=" Fantastico! È un\'ottima notizia \nper voi!",
+                spanish=" ¡Genial! ¡Me alegro\npor vosotros!",
+            }
+        case 2:
+            {
+                english=" Yeah! That\'s great for you!",
+                french=" Génial! C\'est super!",
+                german=" Toll! Das freut mich für euch!",
+                italian=" Fantastico! È un\'ottima notizia \nper voi!",
+                spanish=" ¡Muy bien! ¡Me alegro\npor vosotros!",
+            }
+        default:
+            {
+                english=" Is that right? How nice for you!",
+                french=" Génial! C\'est super!",
+                german=" Wirklich? Das ist ja toll!",
+                italian=" Fantastico! È un\'ottima notizia \nper voi!",
+                spanish=" ¿Ah, sí? ¡Eso es estupendo!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_RURIRI) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
+    }
+    Wait(10);
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_RURIRI);
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(2, 0);
+    message_Talk({
+        english=" Thank you, Mr. [CS:N]Drowzee[CR]!",
+        french=" Merci, M. [CS:N]Soporifik[CR]!",
+        german=" Vielen Dank, Herr [CS:N]Traumato[CR]!",
+        italian=" Grazie, signor [CS:N]Drowzee[CR]!",
+        spanish=" ¡Gracias, Sr. [CS:N]Drowzee[CR]!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk({
+        english=" Oh, please...",
+        french=" Oh, de rien...",
+        german=" Aber bitte...",
+        italian=" Non c\'è di che...",
+        spanish=" No es nada...",
+    });
+    message_Talk({
+        english=" I\'d have to have a cold heart to\nignore kids in need! I can\'t turn a blind eye!",
+        french=" Il faudrait avoir un cœur de\npierre pour ne pas aider ces enfants dans\nle besoin! Je ne peux pas fermer les yeux!",
+        german=" Ich müsste ein Herz aus Stein\nhaben, armen Kindern nicht zu helfen! Da kann\nich einfach nicht wegsehen.",
+        italian=" Dovrei proprio essere senza\ncuore per non aiutare dei ragazzi come voi!\nNon posso far finta di niente!",
+        spanish=" ¡Tendría que ser un desalmado\npara no ayudaros, chiquillos!",
+    });
+    message_Talk({
+        english=" Let us be on our way to begin\nour search!",
+        french=" Commençons nos recherches!",
+        german=" Lasst uns aufbrechen und mit\nder Suche beginnen!",
+        italian=" Forza, partiamo e andiamo a \ncercare lo strumento!",
+        spanish=" ¡Vamos a buscar ese objeto!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_JOYOUS, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Yup!",
+        french=" Ouais!",
+        german=" Ja!",
+        italian=" Sì!",
+        spanish=" ¡Sí!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(2, 0);
+    message_Talk({
+        english=" Yup!",
+        french=" Ouais!",
+        german=" Ja!",
+        italian=" Sì!",
+        spanish=" ¡Sí!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        MovePositionMark(1, Position<'m3', 67, 27.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(16, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(16, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        ResetHitAttribute(31);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        MovePositionMark(1, Position<'m4', 67, 24.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_NPC_SURIIPU) {
+        ResetHitAttribute(31);
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        Move2PositionMark(1, Position<'m5', 50, 24.5>);
+    }
+    Wait(45);
+    bgm_Stop();
+    se_Play(6414);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED_MIRRORED, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        MovePositionOffset(1, 4, 0);
+    }
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, -4, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_SURIIPU);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2DirectionLives(4, 1, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_NPC_SURIIPU);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" Whoops![K] Excuse me.",
+        french=" Oh![K] Pardon.",
+        german=" Hoppla![K] Entschuldigung.",
+        italian=" Ops![K] Scusa.",
+        spanish=" ¡Vaya![K] Perdón.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SURIIPU) {
+        MovePositionMark(1, Position<'m6', 65, 24.5>);
+    }
+    Wait(30);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_R_FACEOUTW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Urk...[K] Wh-what is this...?)",
+                french="(Argh...[K] Mais qu\'est-ce que...?)",
+                german="(Urks...[K] W-was ist das?)",
+                italian="(Urk...[K] C-C-Cosa...?)",
+                spanish="(¡Ay!...[K] ¿Qué... qué está pasando?)",
+            }
+        default:
+            {
+                english="(Urk...[K] Wh-what is this...?)",
+                french="(Argh...[K] Mais qu\'est-ce que...?)",
+                german="(Urks...[K] W-was ist das?)",
+                italian="(Urk...[K] C-C-Cosa...?)",
+                spanish="(¡Ay!...[K] ¿Qué... qué está pasando?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" That [CS:N]Drowzee[CR] is sure a nice\nPokémon.[K] You\'ve got to admire that.",
+                french=" Ce [CS:N]Soporifik[CR] est vraiment\nserviable.[K] Un exemple à suivre.",
+                german=" Dieser [CS:N]Traumato[CR] ist aber ein\nnettes Pokémon.[K] Wirklich bewundernswert.",
+                italian=" Quel [CS:N]Drowzee[CR] è davvero un\nPokémon in gamba.[K] Veramente ammirevole.",
+                spanish=" Ese [CS:N]Drowzee[CR] es un Pokémon\nmuy amable.[K] Resulta digno de admiración.",
+            }
+        case 2:
+            {
+                english=" That [CS:N]Drowzee[CR] sure is a nice\nPokémon, isn\'t he?[K] I\'m impressed.",
+                french=" Ce [CS:N]Soporifik[CR] est vraiment\nserviable.[K] Un exemple à suivre.",
+                german=" Dieser [CS:N]Traumato[CR] ist aber ein\nnettes Pokémon, oder?[K] Ich bin beeindruckt.",
+                italian=" Quel [CS:N]Drowzee[CR] è davvero un\nPokémon gentile.[K] Da ammirare!",
+                spanish=" Ese [CS:N]Drowzee[CR] es un Pokémon\nmuy amable, ¿verdad?[K] Estoy impresionado.",
+            }
+        default:
+            {
+                english=" That [CS:N]Drowzee[CR] sure is nice.[K]\nYou\'ve got to admire that!",
+                french=" Ce [CS:N]Soporifik[CR] est vraiment\nserviable.[K] Un exemple à suivre.",
+                german=" Dieser [CS:N]Traumato[CR] ist aber ein\nnettes Pokémon.[K] Wirklich bewundernswert!",
+                italian=" Quel [CS:N]Drowzee[CR] è davvero un\nPokémon gentile.[K] Veramente di buon cuore!",
+                spanish=" Ese [CS:N]Drowzee[CR] les está\nhaciendo un gran favor.[K] ¡Es admirable!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" With more and more bad\nPokémon around...[K]it\'s hard to do good deeds.",
+                french=" Avec le nombre croissant de\nméchants Pokémon aux alentours...[K] les actes\nde pure bienveillance se font rares.",
+                german=" Jetzt, wo es immer mehr böse\nPokémon gibt,[K] findet man gute Taten nur noch\nselten.",
+                italian=" Con tutti i Pokémon cattivi che\nci sono in giro...[K] è difficile fare buone azioni.",
+                spanish=" Con tantos Pokémon malvados\npor ahí sueltos...[K] ya no es frecuente\ndar con alguien honrado.",
+            }
+        case 2:
+            {
+                english=" With more and more bad\nPokémon around...[K]it\'s hard to do good deeds.",
+                french=" Avec le nombre croissant de\nméchants Pokémon aux alentours...[K] les actes\nde pure bienveillance se font rares.",
+                german=" Jetzt, wo es immer mehr böse\nPokémon gibt,[K] findet man gute Taten nur noch\nselten.",
+                italian=" Con tutti i Pokémon cattivi che\nci sono in giro...[K] è difficile fare buone azioni.",
+                spanish=" Con tantos Pokémon malvados\npor ahí sueltos...[K] ya no es frecuente\ndar con alguien honrado.",
+            }
+        default:
+            {
+                english=" With more and more bad\nPokémon around...[K]it\'s hard to do good deeds.",
+                french=" Avec le nombre croissant de\nméchants Pokémon aux alentours...[K] les actes\nde pure bienveillance se font rares.",
+                german=" Jetzt, wo es immer mehr böse\nPokémon gibt,[K] findet man gute Taten nur noch\nselten.",
+                italian=" Con tutti i Pokémon cattivi che\nci sono in giro...[K] è difficile fare buone azioni.",
+                spanish=" Con tantos Pokémon malvados\npor ahí sueltos...[K] ya no es frecuente\ndar con alguien honrado.",
+            }
+    }
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_R_FACEOUTW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(It\'s happening again...)",
+                french="(Ça recommence...)",
+                german="(Es passiert schon wieder.)",
+                italian="(Sta succedendo di nuovo...)",
+                spanish="(Me está volviendo a pasar...)",
+            }
+        default:
+            {
+                english="(It\'s happening again...)",
+                french="(Ça recommence...)",
+                german="(Es passiert schon wieder.)",
+                italian="(Sta succedendo di nuovo...)",
+                spanish="(Me está volviendo a pasar...)",
+            }
+    }
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Another dizzy spell...)",
+                french="(Mes vertiges recommencent...)",
+                german="(Noch ein Schwindelanfall...)",
+                italian="(Un altro capogiro...)",
+                spanish="(Otra vez ese mareo...)",
+            }
+        default:
+            {
+                english="(Another dizzy spell...)",
+                french="(Mes vertiges recommencent...)",
+                german="(Noch ein Schwindelanfall...)",
+                italian="(Un altro capogiro...)",
+                spanish="(Otra vez ese mareo...)",
+            }
+    }
+    message_Close();
+    screen_FadeOutAll(1, 5);
+    CallCommon(CORO_FADE_OUT_ALL_AFTER);
+    end;
+}

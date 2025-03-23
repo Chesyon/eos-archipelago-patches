@@ -1,0 +1,814 @@
+
+def 0 {
+    message_Mail("Warning: Wobbuffet will slurp up a whole\nstack of items right now! Be careful!");
+    message_Close();
+    $LOCAL1 = 0;
+    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+        case 0:
+            break;
+        default:
+            switch(ProcessSpecial(57,0,0)) {
+                case 0:
+                    break;
+                default:
+                    message_Mail("You have too many items in storage!\n[CS:G]Wobbuffet[CR] can\'t trade with you right now...");
+                    message_Close();
+                    jump @label_131;
+                    break;
+            }
+            break;
+    }
+    §label_118;
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_SOONANO) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_SOONANO) {
+        Turn2Direction(4,10,DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_SOONANSU) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_SOONANSU);
+    Wait(15);
+    §item_select;
+    call @reset_bitfield;
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" Wobble Wobble?\n(Exchange which item?)");
+    call @validate_items;
+    switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
+        case menu("[CS:A]Sticks[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 1;
+            $DUNGEON_ARRIVE_LIST[0] = 0;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            jump @stick_exchange;
+            break;
+        case menu("[CS:A]Iron Thorns[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 2;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 0;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            jump @stick_exchange;
+            break;
+        case menu("[CS:A]Silver Spikes[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 3;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 0;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            jump @stick_exchange;
+            break;
+        case menu("[CS:A]Geo Pebbles[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 8;
+            $DUNGEON_ARRIVE_LIST[0] = 0;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            jump @rock_exchange;
+            break;
+        case menu("[CS:A]Gravelerocks[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 7;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 0;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            jump @rock_exchange;
+            break;
+        case menu("[CS:A]Gold Thorns[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 9;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 0;
+            jump @stick_exchange;
+            break;
+        case menu("[CS:A]Rare Fossil[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 10;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 0;
+            jump @rock_exchange;
+            break;
+        case menu("[CS:A]Sharp Icicles[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 4;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            break;
+        case menu("[CS:A]Carnivine Fangs[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 5;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            break;
+        case menu("[CS:A]Sneasel Claws[CR]"):
+            message_Close();
+            call @reset_bitfield;
+            $ITEM_BACKUP_TAKE[0] = 6;
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            break;
+        case menu("Never Mind"):
+        default:
+            message_Close();
+            §label_131;
+            $EVENT_LOCAL = value($LOCAL1);
+            $RECYCLE_COUNT += value($LOCAL1);
+            switch($EVENT_LOCAL) {
+                case 10:
+                    message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+                    message_Talk(" Wow, you did a lot of stackable item\ntrading![K] I lost track after your 10th trade, so\nwe\'ll just put that down for now...");
+                    message_Close();
+                    break;
+                case > 0:
+                    message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+                    message_Talk(" Thanks for this, really.[K]\nFor each trade with [CS:G]Wobbuffett[CR], I\'ll pencil in\n[CS:C]1[CR] recycle for you, okay?");
+                    message_Close();
+                    break;
+                case 0:
+                    break;
+            }
+            with (actor ACTOR_NPC_SOONANO) {
+                Turn2Direction(4,10,DIR_DOWN);
+            }
+            JumpCommon(CORO_END_TALK);
+    }
+    // Is a "Special" Item. Wobbuffet excited, Wynaut explains...
+    // Shock!
+    Wait(30);
+    se_Play(8968);
+    with (actor ACTOR_NPC_SOONANSU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_SOONANSU) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_SOONANSU);
+    Wait(30);
+    
+    with (actor ACTOR_NPC_SOONANSU) {
+        Turn2Direction(1,10,DIR_LEFT);
+    }
+    with (actor ACTOR_NPC_SOONANO) {
+        Turn2Direction(5,10,DIR_RIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SOONANO);
+    Wait(60);
+    se_Play(8974);
+    with (actor ACTOR_NPC_SOONANO) {
+	    SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_SOONANO) {
+	    WaitEffect();
+    }
+    Wait(30);
+    with (actor ACTOR_NPC_SOONANSU) {
+        Turn2Direction(3,10,DIR_DOWN);
+    }
+    with (actor ACTOR_NPC_SOONANO) {
+        Turn2Direction(3,10,DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SOONANSU);
+    Wait(15);
+    message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" Ooh, you\'ve got [CS:G]Wobbuffet[CR]\nreally excited![K] That\'s a really rare stackable\nitem, and [CS:G]Wobbuffet[CR] loves collecting them!");
+    message_Talk(" What do you want in exchange?");
+    switch(message_SwitchMenu(1,2)) {
+        case menu("Sticks"):
+            message_Close();
+            message_Talk(" Understood. [CS:G]Wobbuffet[CR] is prepared\nto offer you [CS:I]Golden Thorn[CR][CS:G](2)[CR] worth of sticks.\nWhich ones do you want?");
+            jump @stick_exchange;
+        
+        case menu("Rocks"):
+            message_Close();
+            message_Talk(" Understood. [CS:G]Wobbuffet[CR] is prepared\nto offer you [CS:I]Rare Fossil[CR][CS:G](2)[CR] worth of rocks.\nWhich ones do you want?");
+            jump @rock_exchange;
+        default:
+        case menu("Never Mind"):
+            message_Close();
+            message_Talk(" What? You don\'t want to trade?\nWhy not?");
+            jump @item_select;
+    }
+    message_Close();
+    
+    
+    
+    
+    §stick_exchange;
+    call @tally_item;
+    switch(scn($ITEM_BACKUP_TAKE)[0]) {
+        case 1: // Sticks
+            switch($EVENT_LOCAL) {
+                case < 4: // 4 Sticks for 1 Iron Thorn
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                case < 8: // 8 Sticks for 1 Silver Spike
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                case < 24: // 24 Sticks for 1 Gold Thorn
+                    $DUNGEON_ARRIVE_LIST[3] = 0;
+                default:
+                    break;
+            }
+            break;
+        case 2: // Iron Thorns
+            switch($EVENT_LOCAL) {
+                case < 1: // 1 Iron Thorn for 4 sticks
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                case < 2: // 2 Iron Thorns for 1 Silver Spike
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                case < 6: // 6 Iron Thorns for 1 Gold Thorn
+                    $DUNGEON_ARRIVE_LIST[3] = 0;
+                default:
+                    break;
+            }
+            break;
+        case 3: // Silver Spikes
+            switch($EVENT_LOCAL) {
+                case < 1: // Duh.
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                case < 3: // 3 Silver Spikes for 1 Gold Thorn
+                    $DUNGEON_ARRIVE_LIST[3] = 0;
+                default:
+                    break;
+            }
+            break;
+        case 9: // Gold Thorns
+            switch($EVENT_LOCAL) {
+                case < 1: // Duh.
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                default:
+                    break;
+            }
+        default: // Collectors Items: Worth 2 Golden Thorns each!
+            switch($EVENT_LOCAL) {
+                case < 1: // Duh.
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                    $DUNGEON_ARRIVE_LIST[3] = 0;
+                default:
+                    break;
+            }
+            break;
+    }
+    $DUNGEON_ARRIVE_LIST[4] = 1;
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" Wobble Wobbuffet?\n(Receive which item?)");
+    switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
+        case menu("[CS:A]Sticks[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 1;
+            switch($ITEM_BACKUP_TAKE) {
+                case 2:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 4;
+                    $LOCAL0 = 1;
+                    break;
+                case 3:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 8;
+                    $LOCAL0 = 1;
+                    break;
+                case 9:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 24;
+                    $LOCAL0 = 1;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 48;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        case menu("[CS:A]Iron Thorns[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 2;
+            switch($ITEM_BACKUP_TAKE) {
+                case 1:
+                    $ITEM_BACKUP_TAKE[1] = 4;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 4;
+                    break;
+                case 3:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 2;
+                    $LOCAL0 = 1;
+                    break;
+                case 9:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 6;
+                    $LOCAL0 = 1;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 12;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        case menu("[CS:A]Silver Spikes[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 3;
+            switch($ITEM_BACKUP_TAKE) {
+                case 1:
+                    $ITEM_BACKUP_TAKE[1] = 8;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 8;
+                    break;
+                case 2:
+                    $ITEM_BACKUP_TAKE[1] = 2;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 2;
+                    break;
+                case 9:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 3;
+                    $LOCAL0 = 1;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 6;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        case menu("[CS:A]Gold Thorns[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 9;
+            switch($ITEM_BACKUP_TAKE) {
+                case 1:
+                    $ITEM_BACKUP_TAKE[1] = 24;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 24;
+                    break;
+                case 2:
+                    $ITEM_BACKUP_TAKE[1] = 6;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 6;
+                    break;
+                case 3:
+                    $ITEM_BACKUP_TAKE[1] = 3;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 3;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 2;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        default:
+        case menu("Never Mind"):
+            message_Close();
+            jump @item_select;
+    }
+    jump @item_transfer;
+    
+    §rock_exchange;
+    call @tally_item;
+    switch(scn($ITEM_BACKUP_TAKE)[0]) {
+        case 8: // Geo Pebbles
+            switch($EVENT_LOCAL) {
+                case < 4: // 4 Geo Pebbles for 1 Gravelerock
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                case < 24: // 24 Geo Pebbles for 1 Rare Fossil
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                default:
+                    break;
+            }
+            break;
+        case 7: // Gravelerocks
+            switch($EVENT_LOCAL) {
+                case < 1: // 1 Gravelerock for 4 Geo Pebbles
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                case < 6: // 6 Graveleroks for 1 Rare Fossil
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                default:
+                    break;
+            }
+            break;
+        case 9: // Rare Fossil
+            switch($EVENT_LOCAL) {
+                case < 1: // Duh.
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                default:
+                    break;
+            }
+        default: // Collectors Items: Worth 2 Rare Fossils each!
+            switch($EVENT_LOCAL) {
+                case < 1: // Duh.
+                    $DUNGEON_ARRIVE_LIST[0] = 0;
+                    $DUNGEON_ARRIVE_LIST[1] = 0;
+                    $DUNGEON_ARRIVE_LIST[2] = 0;
+                default:
+                    break;
+            }
+            break;
+    }
+
+    $DUNGEON_ARRIVE_LIST[3] = 1;
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" Wobbuffet Wobble?\n(Receive which item?)");
+    switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
+        case menu("[CS:A]Geo Pebbles[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 8;
+            switch($ITEM_BACKUP_TAKE) {
+                case 7:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 4;
+                    $LOCAL0 = 1;
+                    break;
+                case 10:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 24;
+                    $LOCAL0 = 1;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 48;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        case menu("[CS:A]Gravelerocks[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 7;
+            switch($ITEM_BACKUP_TAKE) {
+                case 8:
+                    $ITEM_BACKUP_TAKE[1] = 4;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 4;
+                    break;
+                case 10:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 6;
+                    $LOCAL0 = 1;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 12;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        case menu("[CS:A]Rare Fossils[CR]"):
+            message_Close();
+            $ITEM_BACKUP_GET[0] = 10;
+            switch($ITEM_BACKUP_TAKE) {
+                case 8:
+                    $ITEM_BACKUP_TAKE[1] = 24;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 24;
+                    break;
+                case 7:
+                    $ITEM_BACKUP_TAKE[1] = 6;
+                    $ITEM_BACKUP_GET[1] = 1;
+                    $LOCAL0 = 6;
+                    break;
+                default:
+                    $ITEM_BACKUP_TAKE[1] = 1;
+                    $ITEM_BACKUP_GET[1] = 2;
+                    $LOCAL0 = 1;
+                    break;
+            }
+            break;
+        default:
+        case menu("Never Mind"):
+            message_Close();
+            jump @item_select;
+    }
+        
+    §item_transfer;
+    item_SetVariable(3,$ITEM_BACKUP_TAKE);
+    item_SetVariable(2,$ITEM_BACKUP_GET);
+    message_Mail("[STS][CN]You hand [CS:G]Wobbuffet[CR] the [s_item:3]...\n[CN][CS:G]Wobbuffet[CR] gave you the [s_item:2]![STE]");
+    message_Close();
+    // ProcessSpecial(108,3,2);
+    item_SetVariable(0,$ITEM_BACKUP_GET);
+    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+        case 0:
+            ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+            break;
+        default:
+            switch(ProcessSpecial(57,0,0)) {
+                case 0:
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                    break;
+                default:
+                    message_Mail("Error: Storage shouldn\'t be full!\nPing [CS:G]happylappy[CR] immediately!");
+                    message_Menu(MENU_GIVE_ITEM2);
+                    break;
+            }
+            break;
+    }
+    
+    item_SetVariable(0,$ITEM_BACKUP_TAKE);
+    ProcessSpecial(PROCESS_SPECIAL_REMOVE_TABLE_ITEMS_TYPE_IN_BAG,0,0);
+    
+    message_Mail("[CS:G]Wobbuffet[CR] took a whole stack of your items!");
+    message_Close();
+    
+    if ($LOCAL1 <= 10) {
+        $LOCAL1 += 1;
+    }
+    call @tally_item;       
+    if ($LOCAL0 <= value($EVENT_LOCAL)) {
+        message_Mail("[CS:G]Wobbuffet[CR] stares intently at the remaining\n[s_item:3] you have...");
+        switch(message_SwitchMenu(1,1)) {
+            case menu("Continue Trading"):
+                message_Close();
+                item_GetVariable(3, $ITEM_BACKUP_TAKE);
+                item_GetVariable(2, $ITEM_BACKUP_GET);
+                jump @item_transfer;
+            case menu("Exit"):
+                message_Close();
+                message_Mail("[CS:G]Wobbuffet[CR] looks a little sad...");
+                message_Close();
+                break;
+        }
+    } else {
+        message_Mail("[CS:G]Wobbuffet[CR] waves goodbye!");
+    }
+    jump @label_131;
+    
+    §reset_bitfield;
+    $DUNGEON_ARRIVE_LIST[0] = 0;
+    $DUNGEON_ARRIVE_LIST[1] = 0;
+    $DUNGEON_ARRIVE_LIST[2] = 0;
+    $DUNGEON_ARRIVE_LIST[3] = 0;
+    $DUNGEON_ARRIVE_LIST[4] = 0;
+    $DUNGEON_ARRIVE_LIST[5] = 0;
+    $DUNGEON_ARRIVE_LIST[6] = 0;
+    $DUNGEON_ARRIVE_LIST[7] = 0;
+    $DUNGEON_ARRIVE_LIST[8] = 0;
+    $DUNGEON_ARRIVE_LIST[9] = 0;
+    $DUNGEON_ARRIVE_LIST[10] = 0;
+    return;
+    §validate_items;
+    $EVENT_LOCAL = 0;
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,1,0)) {
+        case >= 4:
+            $EVENT_LOCAL += 4;
+            break;
+        case 3:
+            $EVENT_LOCAL += 1;
+        case 2:
+            $EVENT_LOCAL += 1;
+        case 1:
+            $EVENT_LOCAL += 1;
+        case 0:
+            break;
+    }
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,1,0)) {
+        case >= 4:
+            $EVENT_LOCAL += 4;
+            break;
+        case 3:
+            $EVENT_LOCAL += 1;
+        case 2:
+            $EVENT_LOCAL += 1;
+        case 1:
+            $EVENT_LOCAL += 1;
+        case 0:
+            break;
+    }
+    if ($EVENT_LOCAL >= 4) {
+        $DUNGEON_ARRIVE_LIST[0] = 1;
+    }
+    ~OwnsItemID(2,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[1] = 1;
+    }
+    ~OwnsItemID(3,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[2] = 1;
+    }
+    $EVENT_LOCAL = 0;
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,8,0)) {
+        case >= 2:
+            $EVENT_LOCAL += 2;
+            break;
+        case 1:
+            $EVENT_LOCAL += 1;
+        case 0:
+            break;
+    }
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,8,0)) {
+        case >= 4:
+            $EVENT_LOCAL += 2;
+            break;
+        case 1:
+            $EVENT_LOCAL += 1;
+        case 0:
+            break;
+    }
+    if ($EVENT_LOCAL >= 2) {
+        $DUNGEON_ARRIVE_LIST[3] = 1;
+    }
+    ~OwnsItemID(7,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[4] = 1;
+    }
+    ~OwnsItemID(9,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[5] = 1;
+    }
+    ~OwnsItemID(10,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[6] = 1;
+    }
+    ~OwnsItemID(4,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[7] = 1;
+    }
+    ~OwnsItemID(5,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[8] = 1;
+    }
+    ~OwnsItemID(6,$EVENT_LOCAL);
+    if ($EVENT_LOCAL > 0) {
+        $DUNGEON_ARRIVE_LIST[9] = 1;
+    }
+    $DUNGEON_ARRIVE_LIST[10] = 1;
+    $EVENT_LOCAL = 0;
+    return;
+    
+    §tally_item;
+    item_SetVariable(1,$ITEM_BACKUP_TAKE);
+    $EVENT_LOCAL = 0;
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_TABLE_ITEM_TYPE_IN_BAG,1,0)) {
+        case >= 24:
+            $EVENT_LOCAL = 24;
+            break;
+        case 23:
+            $EVENT_LOCAL += 1;
+        case 22:
+            $EVENT_LOCAL += 1;
+        case 21:
+            $EVENT_LOCAL += 1;
+        case 20:
+            $EVENT_LOCAL += 1;
+        case 19:
+            $EVENT_LOCAL += 1;
+        case 18:
+            $EVENT_LOCAL += 1;
+        case 17:
+            $EVENT_LOCAL += 1;
+        case 16:
+            $EVENT_LOCAL += 1;
+        case 15:
+            $EVENT_LOCAL += 1;
+        case 14:
+            $EVENT_LOCAL += 1;
+        case 13:
+            $EVENT_LOCAL += 1;
+        case 12:
+            $EVENT_LOCAL += 1;
+        case 11:
+            $EVENT_LOCAL += 1;
+        case 10:
+            $EVENT_LOCAL += 1;
+        case 9:
+            $EVENT_LOCAL += 1;
+        case 8:
+            $EVENT_LOCAL += 1;
+        case 7:
+            $EVENT_LOCAL += 1;
+        case 6:
+            $EVENT_LOCAL += 1;
+        case 5:
+            $EVENT_LOCAL += 1;
+        case 4:
+            $EVENT_LOCAL += 1;
+        case 3:
+            $EVENT_LOCAL += 1;
+        case 2:
+            $EVENT_LOCAL += 1;
+        case 1:
+            $EVENT_LOCAL += 1;
+        case 0:
+            switch(ProcessSpecial(35,1,0)) { // Table Item Storage!
+                case >= 24:
+                    $EVENT_LOCAL = 24;
+                    break;
+                case 23:
+                    $EVENT_LOCAL += 1;
+                case 22:
+                    $EVENT_LOCAL += 1;
+                case 21:
+                    $EVENT_LOCAL += 1;
+                case 20:
+                    $EVENT_LOCAL += 1;
+                case 19:
+                    $EVENT_LOCAL += 1;
+                case 18:
+                    $EVENT_LOCAL += 1;
+                case 17:
+                    $EVENT_LOCAL += 1;
+                case 16:
+                    $EVENT_LOCAL += 1;
+                case 15:
+                    $EVENT_LOCAL += 1;
+                case 14:
+                    $EVENT_LOCAL += 1;
+                case 13:
+                    $EVENT_LOCAL += 1;
+                case 12:
+                    $EVENT_LOCAL += 1;
+                case 11:
+                    $EVENT_LOCAL += 1;
+                case 10:
+                    $EVENT_LOCAL += 1;
+                case 9:
+                    $EVENT_LOCAL += 1;
+                case 8:
+                    $EVENT_LOCAL += 1;
+                case 7:
+                    $EVENT_LOCAL += 1;
+                case 6:
+                    $EVENT_LOCAL += 1;
+                case 5:
+                    $EVENT_LOCAL += 1;
+                case 4:
+                    $EVENT_LOCAL += 1;
+                case 3:
+                    $EVENT_LOCAL += 1;
+                case 2:
+                    $EVENT_LOCAL += 1;
+                case 1:
+                    $EVENT_LOCAL += 1;
+                case 0:
+                    break;
+            }
+            break;
+    }
+    if ($EVENT_LOCAL > 24) {
+        $EVENT_LOCAL = 24;
+    }
+    return;
+}
+// Stick = 1
+// Iron Thorn = 4
+// Silver Spike = 6
+// Other sticks = 2, but I dislike that!
+// Gold Thorn = 20
+// Geo Pebble = 10
+// Gravelerock = 20
+// Rare Fossil = 100
+
+
+macro OwnsItemID($id,$return) {
+    $return = 0;
+    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,$id,0)) {
+        case 0:
+            switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,$id,0)) {
+                case 0: 
+                    break;
+                default:
+                    $return = 1;
+                    break;
+            }
+            break;
+        default:
+            $return = 1;
+            break;
+    }
+    return;
+}

@@ -3,15 +3,16 @@ def 0 {
     if (debug) {
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        switch(dungeon_mode(21)) {
-            case DMODE_OPEN_AND_REQUEST:
-                $PERFORMANCE_PROGRESS_LIST[17] = 1;
-                dungeon_mode(23) = DMODE_REQUEST;
-                break;
-            default:
-                dungeon_mode(21) = DMODE_OPEN;               
-                break;
-        }                                                                                                                                   
+        /*
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,1,99);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,8,99);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,1,99);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,8,99);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,1,99);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,8,99); 
+        */
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,4,99); 
+        message_Menu(MENU_STORAGE);                                                                                                                        
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;
@@ -37,13 +38,7 @@ def 0 {
             message_Talk(" Sure! I\'d be happy to give you\na recap on what our goals are, [hero]!\nLet\'s see, according to my notes...");
             call @current_goals;
             jump @anything_else;
-        case menu("Any ideas"): 
-            // TODO: NEW FEATURE
-            if (not debug) {
-                message_Talk(" Not implemented until 0.3.0!");
-                message_Close();
-                jump @anything_else;
-            }
+        case menu("Any ideas"):
             jump @any_ideas;
         case menu("Just Chatting"):
             message_Close();

@@ -107,51 +107,48 @@ def 0 {
     bgm_Stop();
     bgm_PlayFadeIn(BGM_PERFECT_SENTRY_DUTY, 0, 256);
     WaitBgm(BGM_PERFECT_SENTRY_DUTY);
-    // TODO: NEW FEATURE
-    if (debug) {
-        message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk(" This couldn\'t have happened without\nyou, [hero] and [partner]![K] Here, I\nhave a gift to thank you for your patronage...");
-        if ($SCENARIO_SUB4 &<< 7) {
-            switch(random(10)) {
-                case 0:
-                    item_Set(0,254,0);
-                    break;
-                case 1:
-                    item_Set(0,73,0);
-                    break;
-                case 2:
-                    item_Set(0,77,0);
-                    break;
-                case 3:
-                    item_Set(0,100,0);
-                    break;
-                case 4:
-                    item_Set(0,101,0);
-                    break;
-                case 5:
-                    item_Set(0,102,0);
-                    break;
-                case 6:
-                    item_Set(0,108,0);
-                    break;
-                case 7:
-                    item_Set(0,362,0);
-                    break;
-                case 8:
-                    item_Set(0,89,0);
-                    break;
-                case 9:
-                    item_Set(0,88,0);
-                    break;
-            }   
-            message_Mail("You got a [s_item:0]!");
-            message_KeyWait();
-            switch(message_Menu(MENU_GIVE_ITEM)) {}
-        } else {
-            message_Mail("You got a check!");
-            ~AssignCheck(59);
-            message_Close();
-        }
+    message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" This couldn\'t have happened without\nyou, [hero] and [partner]![K] Here, I\nhave a gift to thank you for your patronage...");
+    if ($SCENARIO_SUB4 &<< 7) {
+        switch(random(10)) {
+            case 0:
+                item_Set(0,254,0);
+                break;
+            case 1:
+                item_Set(0,73,0);
+                break;
+            case 2:
+                item_Set(0,77,0);
+                break;
+            case 3:
+                item_Set(0,100,0);
+                break;
+            case 4:
+                item_Set(0,101,0);
+                break;
+            case 5:
+                item_Set(0,102,0);
+                break;
+            case 6:
+                item_Set(0,108,0);
+                break;
+            case 7:
+                item_Set(0,362,0);
+                break;
+            case 8:
+                item_Set(0,89,0);
+                break;
+            case 9:
+                item_Set(0,88,0);
+                break;
+        }   
+        message_Mail("You got a [s_item:0]!");
+        message_KeyWait();
+        switch(message_Menu(MENU_GIVE_ITEM)) {}
+    } else {
+        message_Mail("You got a check!");
+        ~AssignCheck(59);
+        message_Close();
     }
     message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
     message_Talk({

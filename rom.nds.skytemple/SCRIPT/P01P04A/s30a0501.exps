@@ -223,33 +223,30 @@ def 0 {
             jump @label_5;
     }
     §gib_check;
-    // TODO: NEW FEATURE
-    if (debug) {
-        switch ( $SUB30_SPOT_LEVEL ) {
-            case 1:
-                message_Mail("However, you did get a check!");
-                ~AssignCheck(60);
-                break;
-            case 2:
-                message_Mail("However, you did get a check!");
-                ~AssignCheck(61);
-                break;
-            case 3:
-                message_Mail("However, you did get a check!");
-                ~AssignCheck(62);
-                break;
-            case 4:
-                message_Mail("However, you did get a check!");
-                ~AssignCheck(63);
-                break;
-            case 5:
-                message_Mail("However, you did get a check!");
-                ~AssignCheck(64);
-                break;
-            default:
-                message_Mail("Huh? Whaaat? No you didn't!\n[CS:B]Tell happylappy if you see this![CR]");
-                break;
-        }
+    switch ( $SUB30_SPOT_LEVEL ) {
+        case 1:
+            message_Mail("However, you did get a check!");
+            ~AssignCheck(60);
+            break;
+        case 2:
+            message_Mail("However, you did get a check!");
+            ~AssignCheck(61);
+            break;
+        case 3:
+            message_Mail("However, you did get a check!");
+            ~AssignCheck(62);
+            break;
+        case 4:
+            message_Mail("However, you did get a check!");
+            ~AssignCheck(63);
+            break;
+        case 5:
+            message_Mail("However, you did get a check!");
+            ~AssignCheck(64);
+            break;
+        default:
+            message_Mail("Huh? Whaaat? No you didn't!\n[CS:B]Tell happylappy if you see this![CR]");
+            break;
     }
-    
+    return;
 }

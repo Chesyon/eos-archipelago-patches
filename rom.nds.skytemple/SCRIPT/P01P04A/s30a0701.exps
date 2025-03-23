@@ -115,9 +115,8 @@ def 0 {
                     SetAnimation(2);
                 }
             } else {
-                // TODO: NEW FEATURE
                 message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
-                message_Talk(" Spiiiiiiiiiin!");
+                message_Talk("[STS] Spiiiiiiiiiin! ♪[STE]");
                 with (actor ACTOR_NPC_PATCHIIRU) {
                     Turn2DirectionTurn(3, 1, 5); 
                 }
@@ -472,11 +471,8 @@ def 0 {
                 Turn2Direction(4, 10, DIR_UP);
             }
             supervision_RemoveActing(2);
-            // TODO: NEW FEATURE
-            if (debug) {
-                message_Mail(" The Pokémon over there gave you something...");
-                call @gib_check;
-            }
+            message_Mail(" The Pokémon over there gave you something... (1)");
+            call @gib_check;
             jump @label_35;
         case 41:
             supervision_Acting(2);
@@ -537,11 +533,8 @@ def 0 {
                 Turn2Direction(4, 10, DIR_UP);
             }
             supervision_RemoveActing(2);
-            // TODO: NEW FEATURE
-            if (debug) {
-                message_Mail(" The Pokémon over there gave you something...");
-                call @gib_check;
-            }
+            message_Mail(" The Pokémon over there gave you something... (2)");
+            call @gib_check;
             jump @label_35;
         case 45:
             supervision_Acting(3);
@@ -581,11 +574,8 @@ def 0 {
             WaitExecutePerformer(0);
             WaitExecuteLives(ACTOR_EVENT_NPC02);
             Wait(10);
-            // TODO: NEW FEATURE
-            if (debug) {
-                message_Mail(" The Pokémon over there gave you something...");
-                call @gib_check;
-            }
+            message_Mail(" The Pokémon over there gave you something... (3)");
+            call @gib_check;
             jump @label_35;
         case 46:
             supervision_Acting(3);
@@ -632,11 +622,8 @@ def 0 {
             WaitExecutePerformer(0);
             WaitExecuteLives(ACTOR_EVENT_NPC02);
             Wait(10);
-            // TODO: NEW FEATURE
-            if (debug) {
-                message_Mail(" The Pokémon over there gave you something...");
-                call @gib_check;
-            }
+            message_Mail(" The Pokémon over there gave you something... (4)");
+            call @gib_check;
             jump @label_35;
         case 50:
             se_Play(531);
@@ -740,34 +727,34 @@ def 0 {
             jump @label_34;
     }
     §gib_check; // Gives an incremental Cafe check up to a limit
-    // TODO: NEW FEATURE
     if (debug) {
-        switch( ProcessSpecial(105,0,0)) {
-            case > 0:
-                ProcessSpecial(105,1,0);
-                message_Mail("You got a check!");
-                $SCENARIO_TALK_BIT_FLAG[247] = 1;
-                break;
-            default:
-                switch(random(100)) {
-                    case < 40:
-                        item_Set(0,169,0);
-                        break;
-                    case < 70:
-                        item_Set(0,170,0);
-                        break;
-                    case < 90:
-                        item_Set(0,171,0);
-                        break;
-                    default:
-                        item_Set(0,172,0);
-                        break;
-                }
-                message_Mail("You got a [s_item:0]!");
-                message_KeyWait();
-                switch(message_Menu(MENU_GIVE_ITEM)) {}
-                break;
-        }
+        return;
+    }
+    switch( ProcessSpecial(105,0,0)) {
+        case > 0:
+            ProcessSpecial(105,1,0);
+            message_Mail("You got a check!");
+            $SCENARIO_TALK_BIT_FLAG[247] = 1;
+            break;
+        default:
+            switch(random(100)) {
+                case < 40:
+                    item_Set(0,169,0);
+                    break;
+                case < 70:
+                    item_Set(0,170,0);
+                    break;
+                case < 90:
+                    item_Set(0,171,0);
+                    break;
+                default:
+                    item_Set(0,172,0);
+                    break;
+            }
+            message_Mail("You got a [s_item:0]!");
+            message_KeyWait();
+            switch(message_Menu(MENU_GIVE_ITEM)) {}
+            break;
     }
     return;
 }

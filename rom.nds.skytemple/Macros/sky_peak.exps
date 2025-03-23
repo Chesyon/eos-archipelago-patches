@@ -280,15 +280,15 @@ macro PeakBlock() {
                 message_Close();
                 Wait(60);
                 switch(random(100)) {
-                    case < 40: // Carnivine Fang x 50
-                        item_Set(0, 5, 50);
+                    case < 40: // Carnivine Fang x 10
+                        item_Set(0, 5, 10);
                         message_Mail("[CN]Several [CS:I]Carnivine Fangs[CR] were extracted\n[CN]from the wounded [CS:K]Carnivine[CR]!");
                         message_Mail("You got a dubiously sourced [s_item:0]!");
                         message_KeyWait();
                         message_Menu(MENU_GIVE_ITEM);
                         break;
-                    case < 80: // Sneasel Claw x30
-                        item_Set(0, 6, 50);
+                    case < 80: // Sneasel Claw x10
+                        item_Set(0, 6, 5);
                         message_Mail("[CN]Several [CS:I]Sneasel Claws[CR] were extracted\n[CN]from the wounded [CS:K]Carnivine[CR]!");
                         message_Mail("You got dubiously sourced [s_item:0]!");
                         message_KeyWait();
@@ -315,15 +315,22 @@ macro PeakBlock() {
                 message_Talk(" Sorry folks, [CS:P]6th Station Clearing[CR] is\nclosed for now.[K] We\'re currently clearing the\nice, snow, and debris from the last avalanche.");
                 §station_6_reward;
                 switch(random(100)) {
-                    case < 40: // Iron Thorn x 50
+                    case < 30: // Iron Thorn x 50
                         item_Set(0, 2, 50);
                         message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nWe found them in the snow, and they\'re heavy!");
                         message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                         message_KeyWait();
                         message_Menu(MENU_GIVE_ITEM);
                         break;
-                    case < 60: // Gold Thorn x 30
-                        item_Set(0, 9, 30);
+                    case < 50: // Sharp Icicle x 10
+                        item_Set(0, 2, 10);
+                        message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nMaybe some kind of collector would want them...");
+                        message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
+                        message_KeyWait();
+                        message_Menu(MENU_GIVE_ITEM);
+                        break;
+                    case < 60: // Gold Thorn x 15
+                        item_Set(0, 9, 15);
                         message_Talk(" Say, could you do me a favor and\ntake this [s_item:0] home with you?\nSome kind of mineral deposit, but very sharp!");
                         message_Mail("[CS:G]Driftblim[CR] saddled you with the [s_item:0]!");
                         message_KeyWait();

@@ -73,6 +73,17 @@ def 0 {
                             spanish="Sí",
                         }):
                             message_Close();
+                            if ($DUNGEON_ENTER_INDEX == 190) {
+                                screen_FadeOut(0,30);
+                                screen2_FadeOut(1,30);
+                                // SetFace to Ghast
+                                message_Talk(" Would you smooch a ghost?");
+                                /*
+                                switch(message_SwitchMenu(0,1)) {
+                                    
+                                }
+                                */
+                            }
                             switch ( main_EnterTraining(251, 30) ) { }
                             hold;
                         case menu({
