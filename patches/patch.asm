@@ -28,8 +28,6 @@
         bl ExploreNewDungeonCheck
     .org MissionTryOpenDungeon
         add r0,r0,#0x0 ; nop, the ds does not have a nop operator do this in case
-    .org CrystalCaveCrossingMissionCheckAddr
-        b CrystalCaveCrossingMissionSkipCheckAddr
     .org MissionMultipurposeCheckAreaStart
     .area MissionMultipurposeCheckAreaEnd - MissionMultipurposeCheckAreaStart ; 8 instruction size
         ldr r1,[tailor] ; This overwrites the crystal cave/crossing checks with

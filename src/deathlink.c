@@ -219,7 +219,7 @@ void DeathLinkSenderCheck() {
     MemZero(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, 128);
     
     // We have to rebuild the death string manually.
-    struct preprocessor_args preArgs;    
+    struct preprocessor_args preArgs;
     preArgs.strings[0] = DUNGEON_PTR->fainted_monster_cause_entity_name;
     preArgs.strings[1] = DUNGEON_PTR->fainted_monster_name;
     preArgs.strings[2] = DUNGEON_PTR->loss_related_monster_name;
