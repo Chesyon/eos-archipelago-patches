@@ -2382,6 +2382,9 @@ coro EVENT_M00A_01 {
     if (debug) {
         $PERFORMANCE_PROGRESS_LIST[63] = 1;
     }
+    // TODO: Remove me when Episode-sanity is working!
+    $PERFORMANCE_PROGRESS_LIST[63] = 1;
+    
     if ($PERFORMANCE_PROGRESS_LIST[63]) {
         $SCENARIO_MAIN = scn[29, 99];
         main_EnterGround(LEVEL_H02P99A,30);
