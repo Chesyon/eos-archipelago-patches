@@ -158,4 +158,7 @@
         bl DeathLinkInitDungeon
     .org DeathLinkSendHook
         b DeathLinkSenderTrampoline
+
+    .org WindCounterCheckHook
+        bl WindCounterCheck
 .close

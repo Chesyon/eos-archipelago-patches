@@ -64,6 +64,7 @@ DungeonTurnHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
 DungeonTurnUnhook = 0x22E0454;
 DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/
 DeathLinkSendHook = 0x22ED8E0;
+WindCounterCheckHook = 0x22ED53C;
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
