@@ -1,0 +1,121 @@
+
+def 0 {
+    sound_Stop();
+    screen_WhiteIn(29, 35);
+    back_SetGround(LEVEL_D79P11A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m0', 37.5, 34.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m1', 40.5, 37>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m2', 34.5, 37>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m3', 37.5, 38.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    se_Play(8967);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    with (performer 0) {
+        MovePositionMark(1, Position<'m4', 37.5, 17.5>);
+    }
+    WaitExecutePerformer(0);
+    Wait(90);
+    with (performer 0) {
+        MovePositionMark(1, Position<'m5', 37.5, 36.5>);
+    }
+    WaitExecutePerformer(0);
+    message_Mail({
+        english="[CN]There is a huge, jagged chasm\n[CN]cutting through the wall of ice!",
+        french="[CN]Il y a une ouverture\n[CN]dans le mur de glace!",
+        german="[CN]Dort zieht sich eine riesige\n[CN]zerklüftete Schlucht durch die Eiswand!",
+        italian="[CN]C\'è un enorme crepaccio frastagliato\n[CN]che attraversa il muro di ghiaccio!",
+        spanish="[CN]¡Una enorme sima dentada\n[CN]atraviesa la pared de hielo!",
+    });
+    message_Mail({
+        english="[CN]It appears to lead into\n[CN]a series of caves.",
+        french="[CN]Il semble qu\'elle conduise\n[CN]à une série de grottes.",
+        german="[CN]Anscheinend führt sie in\n[CN]eine Reihe von Höhlen.",
+        italian="[CN]Sembra che conduca a una\n[CN]serie di caverne.",
+        spanish="[CN]Parece conducir a\n[CN]una serie de cuevas.",
+    });
+    message_KeyWait();
+    se_Play(8966);
+    message_Mail({
+        english="[CN]It\'s the entrance to another dungeon!",
+        french="[CN]C\'est l\'entrée d\'un nouveau donjon!",
+        german="[CN]Das ist der Eingang zu einem weiteren Dungeon!",
+        italian="[CN]È l\'ingresso di un altro dungeon!",
+        spanish="[CN]¡Es la entrada a otro territorio!",
+    });
+    WaitSe(8966);
+    message_Close();
+    bgm_FadeOut(60);
+    screen_FadeOut(1, 30);
+    worldmap_SetMode(4);
+    worldmap_SetLevel(8);
+    back2_SetMode(3);
+    WaitSubScreen();
+    worldmap_SetCamera(48);
+    worldmap_SetArrow(48);
+    worldmap_BlinkMark(48);
+    Wait(30);
+    me_Play(6);
+    message_Mail({
+        english="[CN]Your abilty to enter\n[CN][CS:P]Crevice Cave[CR] has not changed!",
+        french="[CN]Vous pouvez maintenant entrer dans la\n[CN][CS:P]Grotte Lézarde[CR]!",
+        german="[CN]Du kannst jetzt die\n[CN][CS:P]Gletscherhöhle[CR] betreten!",
+        italian="[CN]Adesso potete entrare nella\n[CN][CS:P]Grotta dell\'Abisso[CR]!",
+        spanish="[CN]¡Ahora puedes entrar en la\n[CN][CS:P]Cueva Témpano[CR]!",
+    });
+    WaitMe(6);
+    message_Close();
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    // screen_FadeIn(1, 30);
+    // bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+    end;
+}

@@ -141,9 +141,9 @@
     macro PelipperDeliverAll() {
         debug_Print("Deliver All");
         if ($ITEM_BACKUP == 0) { // ITEM_BACKUP is null, the first item doesn't exist!
-            §box_lost;
             message_Talk(" How strange...[K] I can\'t seem to find\nyour package right now![K] This is really weird,\n[CS:C]you should tell[CR] [CS:G]happylappy[CR] [CS:C]if you see this[CR]![K][K][K]");
             message_Close();
+            §box_lost;
             $PERFORMANCE_PROGRESS_LIST[35] = 0;
             JumpCommon(CORO_EVENT_END_FREE);
         }
@@ -220,30 +220,59 @@
         }
         message_Close();
         §box_halt;
+        if ($LOCAL0 == 0) {
+            message_Mail("[STS]\n[CN]Searching for packages...[STE]");
+        }
         if ($SCENARIO_TALK_BIT_FLAG[250]) { // Stall until Cryptic sends the next item
-            if ($LOCAL0 > 3600) { // 1 minute timer for Cryptic. Should be sufficient!
+            if ($LOCAL0 > 1800) { // 30 second timer for Cryptic. Should be sufficient!
+                message_CloseEnforce();
                 message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" The [M:T5][CS:H]APWorld[CR] client doesn\'t seem\nto be responding right now. Should I keep\ntrying, or hold onto your deliveries for now?");
                 switch(message_SwitchMenu(0,1)) {
                     case menu("Keep Trying"):
                         message_Close();
-                        $LOCAL0 = 0;
+                        $LOCAL0 = 121;
+                        message_Mail("[STS]\n[CN]Searching for packages...[STE]");
                         jump @box_halt;
                     case menu("Give Up"):
+                        // Reset BGM
+                        if ($GROUND_ENTER == 222) {
+                            bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS,60,256);
+                        } else {
+                            bgm_FadeOut(60);
+                        }
                         message_Close();
+                        Wait(60);
                         $SCENARIO_TALK_BIT_FLAG[250] = 0;
                         $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
                         message_Talk(" Understood. I\'ll be in your base with\nyour delivery when you\'re ready to receive it.\nTalk to me when the client is connected, okay?");
+                        message_Close();
                         jump @box_lost;
                         break;
                 }
+            } elseif($LOCAL0 == 60) {
+                bgm_FadeOut(60);
+                $LOCAL0 += 1;
+                Wait(1);
+                jump @box_halt;
+            } elseif($LOCAL0 == 120) {
+                bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX,60,256);
+                $LOCAL0 += 1;
+                Wait(1);
+                jump @box_halt;
             } else {
                 $LOCAL0 += 1;
                 Wait(1);
                 jump @box_halt;
             }
         }
-        
+        // Reset BGM
+        if ($GROUND_ENTER == 222) {
+            bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS,60,256);
+        } else {
+            bgm_FadeOut(60);
+        }
+        Wait(60);
         if ($ITEM_BACKUP != 0) {
             message_Close();
             jump @box_iteration; // Next Item given by Cryptic!

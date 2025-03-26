@@ -79,6 +79,19 @@ def 0 {
                     jump @dungeon_only;
                 case 104:
                     message_Talk(" Wait... [CS:P]Destiny Tower[CR] exists? And\nwe have jobs there? Huh... neat!");
+                    jump @dungeon_only;
+                case 175:
+                    message_Talk(" Huh? Did something happen in [CS:P]Shaymin Village[CR]?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 177: 
+                    message_Talk(" Huh? Has the grandmaster of all things bad resurfaced?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 178:
+                    message_Talk(" Huh? Wait, did [CS:G]Torkoal[CR] finally croak?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 71:
+                    message_Talk(" I\'ve heard nasty rumors about that place!\nThey say that all sorts of valuable items are\nstuck to the walls, fully out of reach.");
+                    message_Talk(" They say one whiff of that place will make\nyou [CS:C]never feel hungry again[CR], but\nit\'s also full of traps! I doubt we have jobs there...");
                 default: // Some other dungeon
                     message_CloseEnforce();
                     §dungeon_only;
