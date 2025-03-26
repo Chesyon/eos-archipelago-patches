@@ -8,8 +8,8 @@
 uint8_t GetHighestLevelTeamMember(void) {
     uint8_t max = 0;
     for(int i = 0; i < 4; i++) {
-        struct ground_monster* monster = GetTeamMember(i);
-        if(monster != NULL && monster->is_valid && monster->level > max)
+        struct team_member* member = GetActiveTeamMember(i);
+        if(member != NULL && member->f_is_valid && member->level > max)
             max = monster->level;
     }
     return max;
