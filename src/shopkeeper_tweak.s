@@ -188,8 +188,8 @@ GenerateShop2Tweak:
     .align
         kec2_multiworld_item_table:
             .hword 113
-            .hword 138
             .hword 177
+            .hword 236
             .hword 400 // Just a way to see errors // padding.
     .align
         kec1_multiworld_item_table:
