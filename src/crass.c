@@ -191,14 +191,14 @@ bool TryCutsceneSkipScanInner(struct script_routine* routine, uint16_t* switch_m
           routine->states[0].ssb_info[0].next_opcode_addr = CalcNextOpcodeAddress(next_opcode_addr);
           ScriptSpecialProcessCall(&unknown, message_menu_id == 63 ? SPECIAL_PROC_ADD_ITEM_TO_BAG : SPECIAL_PROC_ADD_ITEM_TO_STORAGE, item.id.val, item.quantity);
           break;
-        case OPCODE_PARSE_CALL_COMMON:;
-          // Filter which Unionall coroutines are called...
-          enum common_routine_id coroutine_id = ScriptParamToInt(next_opcode_addr[1]);
-          if(coroutine_id == ROUTINE_HANYOU_SAVE_FUNC)
-            goto parse_manual;
-          goto parse_auto;
         }
-        goto parse_manual;
+        goto parse_manual; // May need to simulate each case taken like how OPCODE_PARSE_SWITCH_MENU gets parsed
+      case OPCODE_PARSE_CALL_COMMON:;
+        // Filter which Unionall coroutines are called...
+        enum common_routine_id coroutine_id = ScriptParamToInt(next_opcode_addr[1]);
+        if(coroutine_id == ROUTINE_HANYOU_SAVE_FUNC)
+          goto parse_manual;
+        goto parse_auto;
       }
     next_opcode_id = *(routine->states[0].ssb_info[0].next_opcode_addr);
   }
