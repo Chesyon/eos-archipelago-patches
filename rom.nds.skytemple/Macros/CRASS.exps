@@ -1,0 +1,11 @@
+
+// Implements CRASS for a cutscene!
+// In theory this is redundant for scripts with 8 or more characters, but it's important that I can always run the game and test my scripting without patching!!!
+macro crass($map, $scr1, $num1, $scr2, $num2) {
+  if (debug) {
+    supervision_ExecuteActingSub($map, $scr1, $num1); 
+  } else {
+    supervision_ExecuteActingSub($map, $scr2, $num2); 
+  } 
+}
+

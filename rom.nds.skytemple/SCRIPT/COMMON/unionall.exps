@@ -2,6 +2,7 @@
 import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 import "pelipper.exps"; // Pelipper has been exported to a macro for convenience!
 import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
+import "CRASS.exps"; // This is to prevent CRASS-related crashes pre-patch
 coro END_TALK {
     message_Close();
     supervision_Suspend(-2);
@@ -2352,7 +2353,7 @@ coro EVENT_M00A_01 {
     if (debug) {
         ProcessSpecial(PROCESS_SPECIAL_INIT_MAIN_TEAM_AFTER_QUIZ,0,0);
     } else {
-        supervision_ExecuteActingSub(LEVEL_S02P01A, 'M00A01A', 0);
+        ~crass(LEVEL_S02P01A, 'M00A01A', 0,LEVEL_S02P01A, 'M00A01A:1', 0);
         message_Mail("Oh![K] One more thing...");
         message_Close();
         switch ( message_Menu(MENU_PLAYER_NAME) ) { }
@@ -2848,9 +2849,9 @@ coro EVENT_HA_SAME {
                 default:
                     §label_555;
                     message_Close();
-                    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+                    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
                     supervision_ExecuteActingSub(LEVEL_H02P99A, 'C00A1101', 0);
-                    debug_Print('CAMERA_MOVE');
+                    // debug_Print('CAMERA_MOVE');
                     CallCommon(CORO_EVENT_END_MAPIN);
                     main_SetGround(LEVEL_H02P99A);
                     supervision_ExecuteStationCommon(LEVEL_H02P99A, 1);
@@ -2899,7 +2900,7 @@ coro EVENT_HA_SAME {
                 §label_542;
                 if ( scn($SCENARIO_MAIN) >= [29, 41] ) {
                 } elseif ( scn($SCENARIO_MAIN) == [29, 68] ) {
-                    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+                    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
                     JumpCommon(CORO_EVENT_S20_01);
                 } elseif ( scn($SCENARIO_MAIN) == [29, 69] ) {
                     JumpCommon(CORO_EVENT_S20_02);
@@ -2952,8 +2953,15 @@ coro EVENT_HA_SAME {
 
 coro HA_MIHARIBAN {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_S08P01A, 'QUIZ01', 0);
-    supervision_ExecuteActingSub(LEVEL_G01P04A, 'C00A1701', 0);
+    ~crass(LEVEL_S08P01A, 'QUIZ01', 0,LEVEL_S08P01A, 'QUIZ01:1', 0);
+    // supervision_ExecuteActingSub(LEVEL_S08P01A, 'QUIZ01', 0);
+    if (not debug || $EVENT_LOCAL > 0) {
+        supervision_ExecuteActingSub(LEVEL_G01P04A, 'C00A1701', 0);
+    } else {
+        message_Notice("[CN]You feel like you should have\n[CN]tried harder with sentry duty today...");
+        message_Close();
+        supervision_ExecuteActingSub(LEVEL_G01P04A, 'C00A1701:1', 0);
+    }
     switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
     if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
         JumpCommon(CORO_EVENT_HA_SAME);
@@ -5431,7 +5439,7 @@ coro EVENT_S03_02 {
 
 coro EVENT_S03_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'S03P0301', 0);
     supervision_ExecuteActingSub(LEVEL_G01P04A, 'S03P0302', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
@@ -5442,7 +5450,7 @@ coro EVENT_S03_03 {
 
 coro EVENT_S03_04 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'S03P0401', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_H02P99A);
@@ -5466,7 +5474,7 @@ coro EVENT_S03_05 {
 
 coro EVENT_S03_06 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'S03P0601', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_H02P99A);
@@ -5538,7 +5546,7 @@ coro EVENT_S03_13 {
 
 coro EVENT_S03_14 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'S03P1401', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_H02P99A);
@@ -5782,7 +5790,7 @@ coro EVENT_S04_24 {
 
 coro EVENT_S11_01 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_H01P99A, 'C00A1001', 0);
+    ~crass(LEVEL_H01P99A, 'C00A1001', 0,LEVEL_H01P99A, 'C00A1001:1', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'C00A1101', 0);
     supervision_ExecuteActingSub(LEVEL_H02P99A, 'S11P0101', 0);
     supervision_ExecuteActingSub(LEVEL_H01P99A, 'S11P0102', 0);
@@ -10469,7 +10477,7 @@ coro GETOUT_REQUEST_DUNGEON {
                             $SCENARIO_SELECT = scn[49, 0];
                             clear $EVENT_LOCAL;
                             §label_1025;
-                            supervision_ExecuteActingSub(LEVEL_G01P03A, 'REQUEST', 0);
+                            ~crass(LEVEL_G01P03A, 'REQUEST', 0,LEVEL_G01P03A, 'REQUEST:1', 0);
                             §label_1023;
                             forever {
                                 switch ( message_Menu(76) ) {
@@ -12722,11 +12730,11 @@ coro BUBBLE_TEST {
         screen_FlushIn(1, 12, 4, 128, 96, 64);
         screen_FlushIn(1, 0, 1, 0, 0, 0);
         Wait(30);    
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0,LEVEL_S04P01A, 'C00A0701:1', 0);
         message_Explanation("(Insert Hint Here)");
         message_Close();
         se_Play(5139);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0,LEVEL_S04P01A, 'C00A1701:1', 0);
         message_SetFace(ACTOR_NPC_PARTNER_FIRST, FACE_WORRIED, FACE_POS_STANDARD);
         message_Talk(" Are you okay, [hero]?\n[W:60]Oh, another Dimensional Scream?\nI wonder what caused it...");
         message_Close();
@@ -12771,19 +12779,19 @@ coro BUBBLE_TEST {
         bgm_FadeOut(30);
         switch(random(5)) {
             case 0: // Sky Peak
-                supervision_ExecuteActingSub(LEVEL_V37P03A, 'S32A0201', 0);
+                ~crass(LEVEL_V37P03A, 'S32A0201', 0, LEVEL_V37P03A, 'S32A0201:1', 0);
                 break;
             case 1: // Fogbound Lake
-                supervision_ExecuteActingSub(LEVEL_V10P03C, 'M10A1209', 0);
+                ~crass(LEVEL_V10P03C, 'M10A1209', 0, LEVEL_V10P03C, 'M10A1209:1', 0);
                 break;
             case 2: // Future Sunrise
-                supervision_ExecuteActingSub(LEVEL_D53P41B, 'N09A2201', 0);
+                ~crass(LEVEL_D53P41B, 'N09A2201', 0, LEVEL_D53P41B, 'N09A2201:1', 0);
                 break;
             case 3: // Beach Bubbles
-                supervision_ExecuteActingSub(LEVEL_V26P05A, 'M01A0207', 0);
+                ~crass(LEVEL_V26P05A, 'M01A0207', 0, LEVEL_V26P05A, 'M01A0207:1', 0);
                 break;
             case 4: // Wigglytuff's Big Head
-                supervision_ExecuteActingSub(LEVEL_G01P01B, 'M02A0101', 0);
+                ~crass(LEVEL_G01P01B, 'M02A0101', 0, LEVEL_G01P01B, 'M02A0101:1', 0);
                 break;
         }
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
@@ -12943,8 +12951,27 @@ coro BUBBLE_TEST {
 }
 
 coro MAP_TEST {
-    message_Mail("Do not use! Reserved for [CS:G]Adex[CR]!");
-    message_Close();
+    switch(ProcessSpecial(255, 0, 0)) {
+        case MENU_PLAYER_NAME:
+            message_Menu(MENU_PLAYER_NAME);
+            break;
+        case MENU_TEAM_NAME:
+            message_Menu(MENU_TEAM_NAME);
+            break;
+        case MENU_SAVE_MENU:
+            message_Menu(MENU_SAVE_MENU);
+            break;
+        case 99:
+            message_Notice("[CN][CS:B]SKIP ERROR: Failed to skip![CR]\n[CN]Please tell [CS:G]happylappy[CR] if this happens!");
+            message_Close();
+            break;
+        case 100:
+            // Do something special before returning...
+            break;
+        default:
+            message_Notice("[CN][CS:B]SKIP ERROR: Undefined behavior![CR]\n[CN]Please tell [CS:G]happylappy[CR] if this happens!");
+            break;
+    }
     return;
 }
 
