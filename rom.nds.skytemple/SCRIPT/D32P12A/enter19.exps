@@ -1,0 +1,5 @@
+def 0 {
+    message_Mail("[CN]\"You are a fool![CR]\"");
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+}

@@ -1,0 +1,144 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        SetAnimation(2);
+    }
+    bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetAnimation(2);
+    }
+    message_ResetActor();
+    message_Mail({
+        english="[CN][player] checked\n[CN]the stone marker.",
+        french="[CN][player] examine\n[CN]la stèle.",
+        german="[CN][player] prüft den\n[CN]Steinwegweiser.",
+        italian="[CN][player] controlla\n[CN]la Stele.",
+        spanish="[CN][player] miró la losa.",
+    });
+    message_Mail({
+        english="[CN]There are oddly shaped grooves in it.",
+        french="[CN]Elle est creusée d\'étranges sillons.",
+        german="[CN]Es sind seltsam geformte Rillen darauf.",
+        italian="[CN]La superficie è attraversata da strani solchi.",
+        spanish="[CN]Tiene inscripciones con extrañas formas.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Mail({
+        english="\n[CN][FT:1]STEEL[FT:0]",
+        french="\n[CN][FT:1]STEEL[FT:0]",
+        german="\n[CN][FT:1]STEEL[FT:0]",
+        italian="[CN][FT:1]STEEL[FT:0]",
+        spanish="\n[CN][FT:1]STEEL[FT:0]",
+    });
+    message_Mail("[CN]\"If you seek passage, heed this warning!\nA terrible curse will befall those who awaken\n[CN]us from our slumber [CS:C]prematurely[CR]!\"");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Mail("[CN]Will you push the tablet aside?");
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu({
+            english="Yes",
+            french="Oui",
+            german="Ja",
+            italian="Sì",
+            spanish="Sí",
+        }):
+        default:
+            §label_0;
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            bgm_FadeOut(90);
+            message_Mail("[CN][player] pushed the stone tablet.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_ADVENTURE_NPC1) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_ADVENTURE_NPC2) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_ADVENTURE_NPC3) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            se_Play(7948);
+            with (object OBJECT_D32P44A1_84) {
+                SetAnimation(2);
+            }
+            §label_2;
+            message_Close();
+            se_FadeOut(7948, 15);
+            Wait(15);
+            se_Play(7949);
+            Wait(30);
+            with (object OBJECT_D32P44A1_84) {
+                SetAnimation(5);
+            }
+            Wait(60);
+            with (object OBJECT_D32P44A1_84) {
+                SetAnimation(6);
+            }
+            Wait(60);
+            with (object OBJECT_D32P44A1_84) {
+                SetAnimation(19);
+            }
+            with (object OBJECT_D32P44A1_84) {
+                WaitAnimation();
+            }
+            WaitExecuteObject(OBJECT_D32P44A1_84);
+            screen_WhiteOut(1, 30);
+            supervision_Acting(0);
+            supervision_StationCommon(3);
+            supervision_StationCommon(5);
+            with (actor ACTOR_ADVENTURE_NPC1) {
+                SetAnimation(4);
+            }
+            with (actor ACTOR_ADVENTURE_NPC2) {
+                SetAnimation(4);
+            }
+            with (actor ACTOR_ADVENTURE_NPC3) {
+                SetAnimation(4);
+            }
+            with (actor ACTOR_PLAYER_APPOINT) {
+                SetPositionOffset(432, 0);
+            }
+            with (actor ACTOR_ADVENTURE_NPC1) {
+                SetPositionOffset(432, 0);
+            }
+            with (actor ACTOR_ADVENTURE_NPC2) {
+                SetPositionOffset(432, 0);
+            }
+            with (actor ACTOR_ADVENTURE_NPC3) {
+                SetPositionOffset(432, 0);
+            }
+            Wait(45);
+            screen_FadeIn(1, 15);
+            Wait(45);
+            se_Play(8966);
+            message_Mail({
+                english="[CN]The stone marker disappeared, and\n[CN]a hidden stairway was revealed!",
+                french="[CN]La stèle disparaît,\n[CN]dévoilant un escalier caché!",
+                german="[CN]Der Steinwegweiser ist verschwunden und\n[CN]hat eine versteckte Treppe freigelegt!",
+                italian="[CN]La Stele scompare e si materializza\n[CN]una scalinata nascosta!",
+                spanish="[CN]¡La losa ha desaparecido y, en su lugar,\n[CN]hay ahora una escalera secreta!",
+            });
+            WaitSe(8966);
+            message_Close();
+            $DUNGEON_REQUEST_LIST[59] = 1;
+            bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+            end;
+        case menu({
+            english="No",
+            french="Non",
+            german="Nein",
+            italian="No",
+            spanish="No",
+        }):
+            message_Close();
+            end;
+    }
+}

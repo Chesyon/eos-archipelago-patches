@@ -1,0 +1,176 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_D32P33A);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (object OBJECT_D32P44A5_88) {
+        SetAnimation(9);
+    }
+    screen_FadeIn(1, 30);
+    Wait(30);
+    se_Play(7950);
+    with (object OBJECT_D32P44A5_88) {
+        SetAnimation(17);
+    }
+    with (object OBJECT_D32P44A5_88) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_D32P44A5_88);
+    with (object OBJECT_D32P44A5_88) {
+        SetAnimation(2);
+    }
+    with (object OBJECT_D32P44A5_88) {
+        SetOutputAttribute(4);
+    }
+    Wait(60);
+    with (object OBJECT_D32P44A5_88) {
+        MovePositionMark(32844, Position<'m0', 22.5, 32>);
+    }
+    WaitExecuteObject(OBJECT_D32P44A5_88);
+    Wait(30);
+    se_FadeOut(7950, 90);
+    message_Mail({
+        english="[CN]A mysterious light\n[CN]enveloped [player]!",
+        french="[CN]Une lumière mystérieuse\n[CN]enveloppe [player]!",
+        german="[CN]Ein mysteriöses Licht\n[CN]umhüllt [player]!",
+        italian="[CN]Una luce misteriosa\n[CN]avvolge [player]!",
+        spanish="[CN]¡Una luz misteriosa\n[CN]ha envuelto a [player]!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    WaitSe(7950);
+    se_Play(7951);
+    with (object OBJECT_D32P44A5_88) {
+        SetAnimation(19);
+    }
+    with (object OBJECT_D32P44A5_88) {
+        WaitAnimation();
+    }
+    WaitExecuteObject(OBJECT_D32P44A5_88);
+    with (object OBJECT_D32P44A5_88) {
+        Destroy();
+    }
+    if ( $SCENARIO_MAIN_BIT_FLAG[44] ) {
+        message_Mail({
+            english="[CN]The guardian\'s permission was granted!",
+            french="[CN]Le gardien vous accorde le droit de continuer!",
+            german="[CN]Der Torwächter gewährt seine Erlaubnis!",
+            italian="[CN]Hai ottenuto il permesso del guardiano!",
+            spanish="[CN]¡Has conseguido el permiso del guardián!",
+        });
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+        message_Mail("[FT:0][CN]The guardian lifted the curse!");
+    }
+    WaitSe(7951);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    if ( $PERFORMANCE_PROGRESS_LIST[17] ) {
+        if ($SCENARIO_MAIN_BIT_FLAG[45]) {
+                Wait(15);
+                bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+                message_Mail({
+                    english="[CN]........................",
+                    french="[CN]........................",
+                    german="[CN]........................",
+                    italian="[CN]........................",
+                    spanish="[CN]...",
+                });
+                message_Mail({
+                    english="[CN]A voice echoed from somewhere...",
+                    french="[CN]Une voix retentit de nulle part...",
+                    german="[CN]Eine Stimme schallt von irgendwoher...",
+                    italian="[CN]Si sente una voce echeggiare in lontananza...",
+                    spanish="[CN]Un eco proveniente de algún lugar...",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                se_Play(7175);
+                with (performer 3) {
+                    SetEffect(EFFECT_WHITE_LIGHT_ENGULFING_OUT, 3);
+                }
+                Wait(15);
+                supervision_Acting(2);
+                Wait(15);
+                WaitExecutePerformer(3);
+                with (performer 3) {
+                    SetEffect(EFFECT_NONE, 3);
+                }
+                Wait(15);
+                message_SetFace(ACTOR_NPC_REJISUCHIRU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+                message_Talk({
+                    english=" I AM [CS:N]REGISTEEL[CR]...",
+                    french=" JE SUIS [CS:N]REGISTEEL[CR]...",
+                    german=" ICH BIN [CS:N]REGISTEEL[CR]...",
+                    italian=" IO SONO [CS:N]REGISTEEL[CR]...",
+                    spanish=" YO SOY [CS:N]REGISTEEL[CR]...",
+                });
+                message_Talk({
+                    english=" I PLEDGE... A GIFT TO YOU...",
+                    french=" JE VOUS DOIS... ALLEGEANCE...",
+                    german=" ICH VERSPRECHE, DIR ZU\nDIENEN...",
+                    italian=" MI IMPEGNO A... SERVIRTI...",
+                    spanish=" PROMETO SERVIROS...",
+                });
+                message_Mail("[CN][CS:G]Registeel[CR] gave you something...");
+                ~AssignCheck(71);
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                bgm_FadeOut(30);
+                se_Play(7183);
+                with (performer 3) {
+                    SetEffect(EFFECT_WHITE_LIGHT_ENGULFING, 3);
+                }
+                Wait(10);
+                with (actor ACTOR_NPC_REJISUCHIRU) {
+                    Destroy();
+                }
+                Wait(15);
+                WaitExecutePerformer(3);
+                with (performer 3) {
+                    SetEffect(EFFECT_NONE, 3);
+                }
+                Wait(30);
+        } else {
+            message_Mail("[CN][CS:G]Registeel[CR] cannot be recruited\n[CN]without the Rock Key!");
+        }
+    } else {
+        message_Mail("[CN][CS:G]Registeel[CR] recruitment is\n[CN]a Post-Dialga check!");
+    }
+    §label_0;
+    with (performer 0) {
+        MovePositionMark(1, Position<'m1', 22.5, 20.5>);
+    }
+    WaitExecutePerformer(0);
+    Wait(30);
+    se_Play(7187);
+    camera_SetEffect(2, 2, 33280);
+    Wait(10);
+    supervision_RemoveActing(0);
+    supervision_Acting(1);
+    camera_SetEffect(2, 2, 33280);
+    Wait(15);
+    camera_SetEffect(0, 0, 0);
+    Wait(30);
+    with (performer 0) {
+        MovePositionMark(1, Position<'m2', 76.5, 33.5>);
+    }
+    WaitExecutePerformer(0);
+    Wait(15);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m3', 76.5, 15.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m4', 76.5, 15.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m5', 76.5, 15.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m6', 76.5, 15.5>);
+    }
+    Wait(30);
+    screen_FadeOut(1, 30);
+    end;
+}

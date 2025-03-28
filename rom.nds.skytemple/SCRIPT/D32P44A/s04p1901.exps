@@ -1,8 +1,8 @@
 
 def 0 {
     sound_Stop();
+    dungeon_mode(61) = DMODE_REQUEST;
     back_SetGround(LEVEL_D32P44A);
-    supervision_Acting(1);
     supervision_Acting(0);
     with (performer 0) {
         camera_SetMyself();
@@ -106,7 +106,32 @@ def 0 {
     });
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     se_Play(5133);
-    supervision_Acting(1);
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        if ($SCENARIO_MAIN_BIT_FLAG[43]) {
+            if ($SCENARIO_MAIN_BIT_FLAG[44]) {
+                if ($SCENARIO_MAIN_BIT_FLAG[45]) {
+                    supervision_Acting(1);
+                    $EVENT_LOCAL = 1;
+                } else {
+                    message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Steel Key!");
+                    supervision_Acting(1);
+                    $EVENT_LOCAL = 0;
+                }
+            } else {
+                message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Rock Key!");
+                supervision_Acting(1);
+                $EVENT_LOCAL = 0;
+            }
+        } else {
+            message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Ice Key!");
+            supervision_Acting(1);
+            $EVENT_LOCAL = 0;
+        }
+    } else {
+        message_Mail("[CN]Recruiting [CS:G]Regigigas[CR] is\na Post-Dialga check!");
+        supervision_Acting(1);
+        $EVENT_LOCAL = 0;
+    }
     with (object OBJECT_D32P44A2_85) {
         SetAnimation(18);
     }
@@ -455,6 +480,87 @@ def 0 {
     Wait(45);
     se_Play(7953);
     camera_SetEffect(2, 2, 33280);
+    Wait(40);
+    WaitSe(7953);
+    se_Play(5131);
+    camera_SetEffect(2, 1, 33024);
+    Wait(60);
+    if ($EVENT_LOCAL == 1) {
+            message_SetFace(ACTOR_NPC_REJIGIGASU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk({
+                english=" ........................",
+                french=" ........................",
+                german=" ........................",
+                italian=" ........................",
+                spanish=" ...",
+            });
+            message_Talk({
+                english=" SHOW ALL OF YOUR POWER!",
+                french=" MONTREZ TOUT VOTRE POUVOIR!",
+                german=" DEMONSTRIERT ALL EURE KRAFT!",
+                italian=" DAI PROVA DI TUTTA LA TUA FORZA!",
+                spanish=" ¡DEMOSTRAD TODO VUESTRO PODER!",
+            });
+            message_Talk({
+                english=" PROVE YOURSELVES WORTHY TO\nBECOME MY MASTER!",
+                french=" MONTREZ-VOUS DIGNES DE DEVENIR\nMES MAITRES.",
+                german=" ERWEIST EUCH WÜRDIG, MEIN MEISTER\nZU WERDEN.",
+                italian=" DIMOSTRATI IN GRADO DI FARMI\nDIVENTARE UN TUO SERVITORE.",
+                spanish=" DEMOSTRAD QUE MERECÉIS TENER\nEL DOMINIO.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            bgm_Stop();
+            se_Play(7952);
+            screen_WhiteOut(1, 15);
+            Wait(10);
+            with (actor ACTOR_NPC_CHAAREMU) {
+                MovePositionOffset(999, 0, -60);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                MovePositionOffset(999, 0, -60);
+            }
+            with (actor ACTOR_NPC_MIMIROPPU) {
+                MovePositionOffset(999, 0, -60);
+            }
+            with (actor ACTOR_NPC_CHAAREMU) {
+                SetAnimation(22);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                SetAnimation(22);
+            }
+            with (actor ACTOR_NPC_MIMIROPPU) {
+                SetAnimation(22);
+            }
+            with (object OBJECT_D32P44A2_85) {
+                Destroy();
+            }
+            screen_FadeIn(1, 15);
+            WaitSe(7952);
+            Wait(30);
+            se_Play(5131);
+            bgm_Play(BGM_DEFY_THE_LEGENDS);
+            message_Talk(" THE STRENGTH THAT FELLED\n[CS:G]DIALGA[CR] HIMSELF![K] THAT SWAYED\nMY KIN! [K]SHOW IT TO ME NOW!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(7952);
+            screen_FadeIn(1, 30);
+            Wait(60);
+            se_Play(5143);
+            screen_WhiteOut(1, 2);
+            Wait(2);
+            screen_FadeIn(1, 2);
+            Wait(10);
+            se_Play(5143);
+            screen_WhiteOut(1, 2);
+            Wait(2);
+            screen_FadeIn(1, 2);
+            WaitSe(5143);
+            se_Play(5136);
+            CallCommon(CORO_BOSS_WIPE_FUNC);
+            main_EnterDungeon(61, 30);
+            main_EnterDungeon(-1, 30);
+            hold;
+            end;
+    }
     message_ImitationSound({
         english="Gzzzz...ummmm...mmmm...",
         french="Gzzzz... hmmmm... mmmm...",

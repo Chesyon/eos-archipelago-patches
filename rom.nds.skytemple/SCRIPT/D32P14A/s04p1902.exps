@@ -597,7 +597,7 @@ def 0 {
     Wait(30);
     me_Play(6);
     message_Mail({
-        english="[CN]You can now go to\n[CN]the [CS:P]Concealed Ruins[CR]!",
+        english="[CN]Your ability to go to\n[CN]the [CS:P]Concealed Ruins[CR] remains unchanged!",
         french="[CN]Désormais, vous pouvez accéder\n[CN]aux [CS:P]Ruines Cachées[CR]!",
         german="[CN]Du kannst jetzt zu\n[CN]den [CS:P]Verborgenen Ruinen[CR] gehen!",
         italian="[CN]Adesso potete andare\n[CN]alle [CS:P]Rovine Nascoste[CR]!",

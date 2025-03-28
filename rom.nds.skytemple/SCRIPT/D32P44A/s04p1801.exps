@@ -1,0 +1,92 @@
+
+def 0 {
+    sound_Stop();
+    back_SetDungeonBanner(61, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    back_SetGround(LEVEL_D32P44A);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_LOWER_BRINE_CAVE, 0, 256);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m0', 37.5, 34.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m1', 40.5, 36.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m2', 34.5, 36.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m3', 37.5, 38.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    Wait(30);
+    bgm_FadeOut(60);
+    se_Play(6925);
+    screen_FadeChange(1, 30, 256, 192);
+    WaitSe(6925);
+    message_ResetActor();
+    message_Talk({
+        english=" ........................",
+        french=" ........................",
+        german=" ........................",
+        italian=" ........................",
+        spanish=" ...",
+    });
+    message_Talk({
+        english=" SHOW ALL OF YOUR POWER!",
+        french=" MONTREZ TOUT VOTRE POUVOIR!",
+        german=" DEMONSTRIERT ALL EURE KRAFT!",
+        italian=" DAI PROVA DI TUTTA LA TUA FORZA!",
+        spanish=" ¡DEMOSTRAD TODO VUESTRO PODER!",
+    });
+    message_Talk({
+        english=" PROVE YOURSELVES WORTHY TO\nBECOME MY MASTER.",
+        french=" MONTREZ-VOUS DIGNES DE DEVENIR\nMES MAITRES.",
+        german=" ERWEIST EUCH WÜRDIG, MEIN MEISTER\nZU WERDEN.",
+        italian=" DIMOSTRATI IN GRADO DI FARMI\nDIVENTARE UN TUO SERVITORE.",
+        spanish=" DEMOSTRAD QUE MERECÉIS TENER\nEL DOMINIO.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_Stop();
+    se_Play(7952);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(5);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    screen_WhiteOut(1, 15);
+    Wait(90);
+    supervision_RemoveActing(1);
+    supervision_Acting(2);
+    screen_FadeIn(1, 30);
+    Wait(60);
+    bgm_Play(BGM_DEFY_THE_LEGENDS);
+    message_Talk("THE STRENGTH THAT FELLED\n[CS:G]DIALGA[CR] HIMSELF![K] THAT SWAYED\nMY KIN! [K]SHOW IT TO ME NOW!");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    Wait(30);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    WaitSe(5143);
+    se_Play(5136);
+    CallCommon(CORO_BOSS_WIPE_FUNC);
+    end;
+}

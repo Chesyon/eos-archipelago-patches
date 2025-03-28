@@ -4,7 +4,7 @@ def 0 {
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,72,0);
-        dungeon_mode(71) = DMODE_OPEN;                                                                                                                       
+        dungeon_mode(54) = DMODE_OPEN;                                                                                                                       
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;

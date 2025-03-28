@@ -1,0 +1,62 @@
+
+def 0 {
+    sound_Stop();
+    back_SetDungeonBanner(57, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    back_SetGround(LEVEL_D32P32A);
+    supervision_Acting(0);
+    Wait(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m0', 22.5, 31.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m1', 25.5, 33.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m2', 19.5, 33.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m3', 22.5, 35.5>);
+    }
+    bgm_PlayFadeIn(BGM_SEALED_RUIN, 0, 256);
+    screen_FadeIn(1, 30);
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    Wait(30);
+    if ( $SCENARIO_MAIN_BIT_FLAG[44] ) {
+        §label_0;
+        message_SetFace(ACTOR_NPC_REJIROKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+        message_Talk({
+            english=" IF YOU WANT TO GO ON, SHOW\nTHAT YOU HAVE THE POWER.",
+            french=" SI VOUS VOULEZ CONTINUER,\nMONTREZ QUE VOUS EN AVEZ LE POUVOIR.",
+            german=" WENN IHR WEITERGEHEN\nWOLLT, ZEIGT, DASS IHR DIE KRAFT DAZU\nHABT.",
+            italian=" SE VUOI PROSEGUIRE, \nDIMOSTRA DI AVERNE LA FORZA.",
+            spanish=" SI QUIERES CONTINUAR,\nDEMUESTRA QUE ERES CAPAZ.",
+        });
+        message_Close();
+        bgm_Stop();
+        se_Play(5143);
+        screen_WhiteOut(1, 2);
+        Wait(2);
+        screen_FadeIn(1, 2);
+        Wait(10);
+        se_Play(5143);
+        screen_WhiteOut(1, 2);
+        Wait(2);
+        screen_FadeIn(1, 2);
+        WaitSe(5143);
+        se_Play(5136);
+        CallCommon(CORO_BOSS_WIPE_FUNC);
+        end;
+    } else {
+        message_SetFace(ACTOR_NPC_REJIROKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+        message_Talk(" YOU MEDDLE IN AFFAIRS THAT DO\nNOT CONCERN YOU.[K] THIS PATH WILL TAKE\nYOU NOWHERE, [FT:1]TRESPASSER");
+        jump @label_0;
+    }
+}

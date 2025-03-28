@@ -1,0 +1,216 @@
+
+def 0 {
+    sound_Stop();
+    back_SetDungeonBanner(61, 0);
+    screen_FadeIn(1, 16);
+    Wait(60);
+    screen_FadeOut(1, 16);
+    Wait(15);
+    screen_WhiteIn(29, 66);
+    back_SetGround(LEVEL_D32P44A);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_LOWER_BRINE_CAVE, 0, 256);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m0', 28.5, 50.5>);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m1', 25.5, 51.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m2', 31.5, 51.5>);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m3', 37.5, 52.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m4', 40.5, 54.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m5', 34.5, 54.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m6', 37.5, 56.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk({
+        english=" This appears to be the\nlast chamber...",
+        french=" On dirait que c\'est la dernière\nchambre...",
+        german=" Das hier scheint der letzte Raum\nzu sein...",
+        italian=" Sembra trattarsi dell\'ultima \nstanza...",
+        spanish=" Esta parece ser la última sala...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (performer 0) {
+        MovePositionMark(1, Position<'m7', 37.5, 34.5>);
+    }
+    WaitExecutePerformer(0);
+    Wait(60);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m8', 28.5, 34.5>);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m9', 25.5, 35.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m10', 31.5, 35.5>);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m11', 37.5, 34.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m12', 40.5, 36.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m13', 34.5, 36.5>);
+    }
+    Wait(10);
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m14', 37.5, 38.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC1);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC2);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC3);
+    Wait(15);
+    bgm_FadeOut(60);
+    se_Play(6925);
+    screen_FadeChange(1, 30, 256, 192);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    WaitSe(6925);
+    message_ResetActor();
+    message_Talk({
+        english=" ........................",
+        french=" ........................",
+        german=" ........................",
+        italian=" ........................",
+        spanish=" ...",
+    });
+    message_Talk({
+        english=" THOSE WHO SEEK THE TREASURES\nSLEEPING IN THE GROUND...",
+        french=" QUICONQUE CHERCHE LES TRESORS QUI\nSOMMEILLENT DANS LE VENTRE DE LA TERRE...",
+        german=" ALLE, DIE IHR SCHÄTZE IM BODEN\nSUCHT...",
+        italian=" O VOI CHE CERCATE I TESORI CHE\nRIPOSANO SOTTOTERRA...",
+        spanish=" AQUELLOS QUE BUSCAN LOS TESOROS\nQUE YACEN AQUÍ...",
+    });
+    message_Talk({
+        english=" SHOW ALL OF YOUR POWER!",
+        french=" DOIT MONTRER TOUT SON POUVOIR!",
+        german=" DEMONSTRIERT EURE GANZE KRAFT!",
+        italian=" DIMOSTRATE TUTTA LA VOSTRA FORZA!",
+        spanish=" ¡QUE DEMUESTREN SU PODER!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(7952);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(5);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    screen_WhiteOut(1, 15);
+    Wait(90);
+    supervision_RemoveActing(1);
+    supervision_Acting(2);
+    screen_FadeIn(1, 30);
+    Wait(30);
+    se_Play(8968);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_SetFace(ACTOR_NPC_CHAAREMU, FACE_SURPRISED, FACE_POS_TOP_L_FACEINW);
+    message_Talk({
+        english=" The stone statues![K] They\'re alive!",
+        french=" Les statues de pierre![K] Elles\ns\'animent!",
+        german=" Die Steinstatuen![K] Sie leben!",
+        italian=" Le statue di pietra![K] Si stanno\nmuovendo!",
+        spanish=" Las estatuas de piedra...[K]\n¡Han cobrado vida!",
+    });
+    with (actor ACTOR_NPC_CHAAREMU) {
+        ExecuteCommon(CORO_JUMP_SURPRISE_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_CHAAREMU);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_TOP_L_FACEINW);
+    message_Talk({
+        english=" We\'ll team up for this battle!",
+        french=" Faisons équipe pour cette\nbataille!",
+        german=" Wir bestehen diesen Kampf\nzusammen!",
+        italian=" Uniamo le forze per \nquesto scontro!",
+        spanish=" ¡Hagamos frente común en\neste combate!",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    se_Play(5143);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    WaitSe(5143);
+    se_Play(5136);
+    CallCommon(CORO_BOSS_WIPE_FUNC);
+    end;
+}

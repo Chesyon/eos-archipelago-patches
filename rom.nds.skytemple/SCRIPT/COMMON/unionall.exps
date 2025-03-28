@@ -2377,6 +2377,9 @@ coro EVENT_M00A_01 {
     $SCENARIO_TALK_BIT_FLAG[109] = 1;
     $SCENARIO_TALK_BIT_FLAG[59] = 1;
     $SCENARIO_TALK_BIT_FLAG[71] = 1;
+    $DUNGEON_REQUEST_LIST[55] = 1; // Regice Chamber not entered
+    $DUNGEON_REQUEST_LIST[57] = 1; // Regirock Chamber not entered
+    $DUNGEON_REQUEST_LIST[59] = 1; // Registeel Chamber not entered
     $SUB30_PROJECTP = 1;
     $SCENARIO_MAIN = scn[30, 99]; // If 30, main game not entered yet!
     if (debug) {
@@ -9603,10 +9606,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 60:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        if ( scn($SCENARIO_MAIN) >= [29, 66] ) {
+                        if ($SCENARIO_TALK_BIT_FLAG[224]) {
                             JumpCommon(CORO_EVENT_S04_17);
                         } else {
-                            JumpCommon(CORO_EVENT_S04_16);
+                            $SCENARIO_TALK_BIT_FLAG[224] = 1;
+                            JumpCommon(CORO_EVENT_S04_16);    
                         }
                         break;
                     case 61:
@@ -11422,12 +11426,33 @@ coro GETOUT_REQUEST_CONQUEST {
             debug_Print('LABEL_D059_CLEAR');
             JumpCommon(CORO_EVENT_S04_15);
         case 60:
-            debug_Print('LABEL_D060_CLEAR'); // Nope! So much nope!
-            switch ( ProcessSpecial(PROCESS_SPECIAL_IS_RECURITABLE_IN_TEAM, 9, 0) ) {
-                case 1:
-                    JumpCommon(CORO_EVENT_S04_21);
-                default:
-                    JumpCommon(CORO_EVENT_S04_18);
+            debug_Print('LABEL_D060_CLEAR'); // AAAAAAAAAAAA
+            if ($PERFORMANCE_PROGRESS_LIST[17]) {
+                if ($SCENARIO_MAIN_BIT_FLAG[43]) {
+                    if ($SCENARIO_MAIN_BIT_FLAG[44]) {
+                        if ($SCENARIO_MAIN_BIT_FLAG[45]) {
+                            switch ( scn($SCENARIO_SUB5)[1]) {
+                                case &<< 0:
+                                    §no_regigigas;
+                                    JumpCommon(CORO_EVENT_S04_21);
+                                default:
+                                    JumpCommon(CORO_EVENT_S04_18);
+                            }
+                        } else {
+                            message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Steel Key!");
+                            jump @no_regigigas;
+                        }
+                    } else {
+                        message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Rock Key!");
+                        jump @no_regigigas;
+                    }
+                } else {
+                    message_Mail("[CN]Recruiting [CS:G]Regigigas[CR]\nrequires the Ice Key!");
+                    jump @no_regigigas;
+                }
+            } else {
+                message_Mail("[CN]Recruiting [CS:G]Regigigas[CR] is\na Post-Dialga check!");
+                jump @no_regigigas;
             }
             break;
         case 61:
