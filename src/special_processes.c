@@ -108,6 +108,20 @@ static int SpAccessCafeStatus(short mode) {
     else return cafeMax - CUSTOM_SAVE_AREA.acquiredCafeChecks; // Read mode
 }
 
+// Special process 106: Check for Unown Rocks. No parameters.
+// Used by the Unown curse. Finds the first item in the bag that is a Unown rock and returns the item ID. If none is found, return 0.
+static int SpCheckForUnownRocks(){
+    int BagSize = GetCurrentBagCapacity(); // may be redundant? idk what happens if we call GetItemAtIdx on an index that the bag isn't large enough for.
+    for (int i = 0; i < BagSize; i++) {
+        int item_id = GetItemAtIdx(i)->id.val;
+        if(item_id >= 400 && item_id <= 427) {  // is the item id a unown rock?
+            RemoveItem(i);
+            return item_id;
+        }
+    }
+    return 0;
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -156,6 +170,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 105:
         *return_val = SpAccessCafeStatus(arg1);
+        return true;
+    case 106:
+        *return_val = SpCheckForUnownRocks();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
