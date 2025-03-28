@@ -12,6 +12,7 @@ WriteSaveFileCallsite4 = 0x020494D8;
 LoadSaveFileCallsite1 = 0x020496F4;
 LoadSaveFileCallsite2 = 0x02049714;
 ClearAdventureLogStructCallsite = 0x02048774;
+AllowDefaultPortaitInInit = 0x204DB04;
 MiscIqScalingGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;

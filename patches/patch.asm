@@ -53,6 +53,13 @@
     .org GuestMonsterToGroundMonsterCallsite
         bl CustomGuestMonsterToGroundMonster
 
+    ; Set allow_default to true when initializing portraits
+    .org AllowDefaultPortaitInInit
+    .area 0x8
+        mov r2,#1
+        b AlwaysAllowPortraitDefault ; this is intentionally not bl
+    .endarea
+
     ; Save-related stuff
     .org ClearAdventureLogStructCallsite
     .area 0x4
