@@ -1,0 +1,128 @@
+
+macro UnownTrap() {
+    if ($SCENARIO_MAIN_BIT_FLAG[127]) {
+    } else {
+        if (debug) {
+            jump @do_trap;
+        }
+        switch(ProcessSpecial(106,0,0)) {
+            case 0:
+                §do_trap;
+                message_Mail('You and [partner] begin to feel strange...[W:30]\n[CN][FT:1]OOPS, ALL UNOWN!');
+                $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+                break;
+            case 400: // A
+                message_Mail('The [CS:I][FT:1]A[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                break;
+            case 401: // B
+                message_Mail('The [CS:I][FT:1]B[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 402: // C
+                message_Mail('The [CS:I][FT:1]C[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 403: // D
+                message_Mail('The [CS:I][FT:1]D[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 404: // E
+                message_Mail('The [CS:I][FT:1]E[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 405: // F
+                message_Mail('The [CS:I][FT:1]F[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 406: // G
+                message_Mail('The [CS:I][FT:1]G[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 407: // H
+                message_Mail('The [CS:I][FT:1]H[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 408: // I
+                message_Mail('The [CS:I][FT:1]I[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 409: // J
+                message_Mail('The [CS:I][FT:1]J[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 410: // K
+                message_Mail('The [CS:I][FT:1]K[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 411: // L
+                message_Mail('The [CS:I][FT:1]L[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 412: // M
+                message_Mail('The [CS:I][FT:1]M[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 413: // N
+                message_Mail('The [CS:I][FT:1]N[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 414: // O
+                message_Mail('The [CS:I][FT:1]O[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 415: // P
+                message_Mail('The [CS:I][FT:1]P[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 416: // Q
+                message_Mail('The [CS:I][FT:1]Q[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 417: // R
+                message_Mail('The [CS:I][FT:1]R[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 418: // S
+                message_Mail('The [CS:I][FT:1]S[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 419: // T
+                message_Mail('The [CS:I][FT:1]T[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 420: // U
+                message_Mail('The [CS:I][FT:1]U[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 421: // V
+                message_Mail('The [CS:I][FT:1]V[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 422: // W
+                message_Mail('The [CS:I][FT:1]W[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 423: // X
+                message_Mail('The [CS:I][FT:1]X[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 424: // Y
+                message_Mail('The [CS:I][FT:1]Y[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 425: // Z
+                message_Mail('The [CS:I][FT:1]Z[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 426: // !
+                message_Mail('The [CS:I][FT:1]![FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+            case 427: // ?
+                message_Mail('The [CS:I][FT:1]?[FT:0] Stone[CR] in your bag began faintly glowing![K]\nIt disintegrated into a fine powder...[W:30] Perhaps\nit shielded you from the effects of a curse?');
+                message_Close();
+                break;
+        }
+        message_Close();
+    }
+}

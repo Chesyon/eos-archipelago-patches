@@ -3,6 +3,8 @@ import "checks.exps"; // Leave this for me, I don't want to rename this later lo
 import "pelipper.exps"; // Pelipper has been exported to a macro for convenience!
 import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
 import "CRASS.exps"; // This is to prevent CRASS-related crashes pre-patch
+import "traps.exps"; // This handles traps like the unown trap! 
+
 coro END_TALK {
     message_Close();
     supervision_Suspend(-2);
@@ -12767,7 +12769,7 @@ coro BUBBLE_TEST {
     }
     if ($PERFORMANCE_PROGRESS_LIST[33]) {
         $PERFORMANCE_PROGRESS_LIST[33] = 0;
-        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+        ~UnownTrap();
         message_Mail("You and [partner] begin to feel strange...[W:60]\n[FT:1]OOPS! ALL UNOWN!");
         message_Close();
     }
