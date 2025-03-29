@@ -1611,19 +1611,20 @@ coro EVENT_DIVIDE_RESUME {
     ProcessSpecial(23,0,0); // Randomize Demo Actors
     if ( $SPECIAL_EPISODE_TYPE == -1) {
         debug_Print("Main Episode Detected!");
-        if ($PERFORMANCE_PROGRESS_LIST[63]) {
-            if ($SCENARIO_MAIN == 30) { // Main game never entered
-                $SCENARIO_MAIN = scn[29, 99];
-                main_EnterGround(LEVEL_H02P99A,30);
-                hold;
+        if ($SCENARIO_MAIN == 30) { // Main game not entered!
+            switch (ProcessSpecial(107,0,0)) {
+                case 1:
+                    $SCENARIO_MAIN = scn[29, 99];
+                    main_EnterGround(LEVEL_H02P99A,30);
+                    hold;
+                default:
+                    message_Mail("[STS][CN]You do not yet have the main episode!\n[CN]Booting to title screen![STE]");
+                    message_Close();
+                    screen2_FadeOut(0, 30);
+                    screen_FadeOut(1, 30);
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_JUMP_TO_TITLE_SCREEN, 0, 0) ) { }
+                    hold;
             }
-        } else {
-            message_Mail("[STS][CN]You do not yet have the main episode!\n[CN]Booting to title screen![STE]");
-            message_Close();
-            screen2_FadeOut(0, 30);
-            screen_FadeOut(1, 30);
-            switch ( ProcessSpecial(PROCESS_SPECIAL_JUMP_TO_TITLE_SCREEN, 0, 0) ) { }
-            hold;
         }
     }
     if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
@@ -2385,26 +2386,28 @@ coro EVENT_M00A_01 {
     $SUB30_PROJECTP = 1;
     $SCENARIO_MAIN = scn[30, 99]; // If 30, main game not entered yet!
     if (debug) {
-        $PERFORMANCE_PROGRESS_LIST[63] = 1;
-    }
-    // TODO: Remove me when Episode-sanity is working!
-    $PERFORMANCE_PROGRESS_LIST[63] = 1;
-    
-    if ($PERFORMANCE_PROGRESS_LIST[63]) {
         $SCENARIO_MAIN = scn[29, 99];
         main_EnterGround(LEVEL_H02P99A,30);
-    } else {
-        Wait(90);
-        $SCENARIO_MAIN_BIT_FLAG[6] = 1;
-        switch ( message_Menu(MENU_SAVE_MENU) ) { }
-        bgm_FadeOut(60);
-        message_Mail("[STS][CN]You do not yet have the main episode!\n[CN]Booting to title screen![STE]");
-        message_Close();
-        screen2_FadeOut(0, 30);
-        screen_FadeOut(1, 30);
-        switch ( ProcessSpecial(PROCESS_SPECIAL_JUMP_TO_TITLE_SCREEN, 0, 0) ) { }
+        hold;
     }
-    hold;
+    
+    switch (ProcessSpecial(107,0,0)) {
+        case 1:
+            $SCENARIO_MAIN = scn[29, 99];
+            main_EnterGround(LEVEL_H02P99A,30);
+            hold;
+        default:
+            Wait(90);
+            $SCENARIO_MAIN_BIT_FLAG[6] = 1;
+            switch ( message_Menu(MENU_SAVE_MENU) ) { }
+            bgm_FadeOut(60);
+            message_Mail("[STS][CN]You do not yet have the main episode!\n[CN]Booting to title screen![STE]");
+            message_Close();
+            screen2_FadeOut(0, 30);
+            screen_FadeOut(1, 30);
+            switch ( ProcessSpecial(PROCESS_SPECIAL_JUMP_TO_TITLE_SCREEN, 0, 0) ) { }
+            hold;
+    }
 }
 
 coro EVENT_HA_YU_KI {

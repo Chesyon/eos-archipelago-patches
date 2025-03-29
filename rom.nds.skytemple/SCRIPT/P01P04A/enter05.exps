@@ -1,7 +1,5 @@
 
 def 0 {
-    message_Mail("Warning: Wobbuffet will slurp up a whole\nstack of items right now! Be careful!");
-    message_Close();
     $LOCAL1 = 0;
     switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
         case 0:
@@ -514,48 +512,41 @@ def 0 {
             message_Close();
             jump @item_select;
     }
-        
-    §item_transfer;
     item_SetVariable(3,$ITEM_BACKUP_TAKE);
     item_SetVariable(2,$ITEM_BACKUP_GET);
+    §item_transfer;
     message_Mail("[STS][CN]You hand [CS:G]Wobbuffet[CR] the [s_item:3]...\n[CN][CS:G]Wobbuffet[CR] gave you the [s_item:2]![STE]");
     message_Close();
-    // ProcessSpecial(108,3,2);
-    item_SetVariable(0,$ITEM_BACKUP_GET);
-    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
-        case 0:
-            ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+    switch(ProcessSpecial(108,3,2)) {
+        case 3:
+            message_Mail("[STS][CS:B]Error: Storage shouldn\'t be full![CR]\nPing [CS:G]happylappy[CR] immediately![STE]");
+            message_Mail("...but you have no more room for items!\n[CS:G]Wobbuffet[CR] gleefully holds onto both\n[s_item:2] and [s_item:3]...");
+            message_Close();
+            jump @label_131;
+        case 2:
+            message_Mail("[STS][CS:B]Error: Insufficient items detected![CR]\nPing [CS:G]happylappy[CR] immediately![STE]");
+            message_Mail("...but you don\'t have enough items!\n[CS:G]Wobbuffet[CR] takes back the [s_item:2]!");
+            message_Close();
+            jump @label_131;
+        case 1: // Storage
+            message_Mail("The [s_item:2] was sent to storage.");
+            message_Close();
             break;
-        default:
-            switch(ProcessSpecial(57,0,0)) {
-                case 0:
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
-                    break;
-                default:
-                    message_Mail("Error: Storage shouldn\'t be full!\nPing [CS:G]happylappy[CR] immediately!");
-                    message_Menu(MENU_GIVE_ITEM2);
-                    break;
-            }
+        case 0: // Bag
+            me_Play(4);
+            message_Mail("You got [s_item:2]!");
+            WaitMe(4);
+            message_Close();
             break;
+    
     }
     
-    item_SetVariable(0,$ITEM_BACKUP_TAKE);
-    ProcessSpecial(PROCESS_SPECIAL_REMOVE_TABLE_ITEMS_TYPE_IN_BAG,0,0);
-    
-    message_Mail("[CS:G]Wobbuffet[CR] took a whole stack of your items!");
-    message_Close();
-    
-    if ($LOCAL1 <= 10) {
-        $LOCAL1 += 1;
-    }
     call @tally_item;       
     if ($LOCAL0 <= value($EVENT_LOCAL)) {
         message_Mail("[CS:G]Wobbuffet[CR] stares intently at the remaining\n[s_item:3] you have...");
         switch(message_SwitchMenu(1,1)) {
             case menu("Continue Trading"):
                 message_Close();
-                item_GetVariable(3, $ITEM_BACKUP_TAKE);
-                item_GetVariable(2, $ITEM_BACKUP_GET);
                 jump @item_transfer;
             case menu("Exit"):
                 message_Close();

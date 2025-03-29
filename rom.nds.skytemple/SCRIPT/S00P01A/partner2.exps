@@ -1,13 +1,14 @@
 
 def 0 {
     if (debug) {
+        jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,72,0);
-        dungeon_mode(54) = DMODE_OPEN;                                                                                                                       
+        dungeon_mode(54) = DMODE_OPEN;                                                                                                        
     }
-    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     §decision_tree;
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     message_Talk(" What\'s on your mind, [hero]?");
     switch(message_SwitchMenu(4,6)) {
         case menu("Add To Team"):
@@ -4494,6 +4495,606 @@ def 0 {
             break;
     }
     */
+    §debug_menu;
+    message_Notice("[M:D2][CS:C]Choose Debug Setting[CR]");        
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu("Bag Size"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Pick a bag size:[CR]");  
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu("Size 7"):
+                    $SCENARIO_BALANCE_FLAG = 7;
+                    break;
+                case menu("Size 6"):
+                    $SCENARIO_BALANCE_FLAG = 6;
+                    break;
+                case menu("Size 5"):
+                    $SCENARIO_BALANCE_FLAG = 5;
+                    break;
+                case menu("Size 4"):
+                    $SCENARIO_BALANCE_FLAG = 4;
+                    break;
+                case menu("Size 3"):
+                    $SCENARIO_BALANCE_FLAG = 3;
+                    break;
+                case menu("Size 2"):
+                    $SCENARIO_BALANCE_FLAG = 2;
+                    break;
+                case menu("Size 1"):
+                    $SCENARIO_BALANCE_FLAG = 1;
+                    break;
+                case menu("Size 0"):
+                    $SCENARIO_BALANCE_FLAG = 0;
+                    break;
+
+            }
+            jump @debug_menu;
+        case menu("Enable Performance Flags"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Pick a flag:[CR]");
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu('0: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[0] = 1;
+                    break;
+                case menu('1: Team name'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[1] = 1;
+                    break;
+                case menu('2: Treasure Bag'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[2] = 1;
+                    break;
+                case menu('3: Random Mission'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[3] = 1;
+                    break;
+                case menu('4: Friend Rescue'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[4] = 1;
+                    break;
+                case menu('5: Friends'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+                    break;
+                case menu('6: Recruit Evolution'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[6] = 1;
+                    break;
+                case menu('7: Formation Change'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[7] = 1;
+                    break;
+                case menu('8: Move Alone / Training'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[8] = 1;
+                    break;
+                case menu('9: Post ending'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[9] = 1;
+                    break;
+                case menu('10: Hero + Partner Evo.'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[10] = 1;
+                    break;
+                case menu('11: Dojo clear'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[11] = 1;
+                    break;
+                case menu('12: Defeat Drowzee'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[12] = 1;
+                    break;
+                case menu('13: Defeat fake Groudon'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[13] = 1;
+                    break;
+                case menu('14: Defeat Luxray (Electrike lol)'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[14] = 1;
+                    break;
+                case menu('15: Cleared Future World'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[15] = 1;
+                    break;
+                case menu('16: Defeat Dusknoir'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[16] = 1;
+                    break;
+                case menu('17: Defeat Dialga (Post-Dialga)'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[17] = 1;
+                    break;
+                case menu('18: Defeat Darkrai'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[18] = 1;
+                    break;
+                case menu('19: Defeat Regigigas'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[19] = 1;
+                    break;
+                case menu('20: Guild Graduation'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[20] = 1;
+                    break;
+                case menu('21: Collect 7 Treasures'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[21] = 1;
+                    break;
+                case menu('22: Secret Rank'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[22] = 1;
+                    break;
+                case menu('23: Get Manaphy'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[23] = 1;
+                    break;
+                case menu('24: Manaphy ev. clear'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[24] = 1;
+                    break;
+                case menu('25: Chatot Repellant'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[25] = 1;
+                    break;
+                case menu('26: Jukebox'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[26] = 1;
+                    break;
+                case menu('27: Identify Waterfall'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[27] = 1;
+                    break;
+                case menu('28: Identify Quicksand'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[28] = 1;
+                    break;
+                case menu('29: Recruit Sensor'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[29] = 1;
+                    break;
+                case menu('30: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[30] = 1;
+                    break;
+                case menu('31: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[31] = 1;
+                    break;
+                case menu('32: Team Name Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[32] = 1;
+                    break;
+                case menu('33: Unown Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                    break;
+                case menu('34: Sentry Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                    break;
+                case menu('35: Pelipper Package'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[35] = 1;
+                    break;
+                case menu('36: Touch Grass Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[36] = 1;
+                    break;
+                case menu('37: Pelipper Base Only'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[37] = 1;
+                    break;
+                case menu('38: Dimensional Scream'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[38] = 1;
+                    break;
+                case menu('39: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[39] = 1;
+                    break;
+                case menu('40: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[40] = 1;
+                    break;
+                case menu('41: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[41] = 1;
+                    break;
+                case menu('42: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[42] = 1;
+                    break;
+                case menu('43: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[43] = 1;
+                    break;
+                case menu('44: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[44] = 1;
+                    break;
+                case menu('45: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[45] = 1;
+                    break;
+                case menu('46: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[46] = 1;
+                    break;
+                case menu('47: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[47] = 1;
+                    break;
+                case menu('48: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[48] = 1;
+                    break;
+                case menu('49: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[49] = 1;
+                    break;
+                case menu('50: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[50] = 1;
+                    break;
+                case menu('51: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[51] = 1;
+                    break;
+                case menu('52: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[52] = 1;
+                    break;
+                case menu('53: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[53] = 1;
+                    break;
+                case menu('54: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[54] = 1;
+                    break;
+                case menu('55: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[55] = 1;
+                    break;
+                case menu('56: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[56] = 1;
+                    break;
+                case menu('57: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[57] = 1;
+                    break;
+                case menu('58: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[58] = 1;
+                    break;
+                case menu('59: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[59] = 1;
+                    break;
+                case menu('60: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[60] = 1;
+                    break;
+                case menu('61: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[61] = 1;
+                    break;
+                case menu('62: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[62] = 1;
+                    break;
+                case menu('63: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[63] = 1;
+                    break;
+            }
+            jump @debug_menu;
+        case menu("Gib Money"):
+            message_Close();
+            $BANK_GOLD = 65535;
+            $CARRY_GOLD = 65535;
+            jump @debug_menu;
+        case menu("Gib All Dungeons"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]All Dungeons set to DMODE_OPEN[CR]");
+            message_Close();
+            dungeon_mode(0) = DMODE_OPEN;
+            dungeon_mode(1) = DMODE_OPEN;
+            dungeon_mode(2) = DMODE_OPEN;
+            dungeon_mode(3) = DMODE_OPEN;
+            dungeon_mode(4) = DMODE_OPEN;
+            dungeon_mode(5) = DMODE_OPEN;
+            dungeon_mode(6) = DMODE_OPEN;
+            dungeon_mode(7) = DMODE_OPEN;
+            dungeon_mode(8) = DMODE_OPEN;
+            dungeon_mode(9) = DMODE_OPEN;
+            dungeon_mode(10) = DMODE_OPEN;
+            dungeon_mode(11) = DMODE_OPEN;
+            dungeon_mode(12) = DMODE_OPEN;
+            dungeon_mode(13) = DMODE_OPEN;
+            dungeon_mode(14) = DMODE_OPEN;
+            dungeon_mode(15) = DMODE_OPEN;
+            dungeon_mode(16) = DMODE_OPEN;
+            dungeon_mode(17) = DMODE_OPEN;
+            dungeon_mode(18) = DMODE_OPEN;
+            dungeon_mode(19) = DMODE_OPEN;
+            dungeon_mode(20) = DMODE_OPEN;
+            dungeon_mode(21) = DMODE_OPEN;
+            dungeon_mode(22) = DMODE_OPEN;
+            dungeon_mode(23) = DMODE_OPEN;
+            dungeon_mode(24) = DMODE_OPEN;
+            dungeon_mode(25) = DMODE_OPEN;
+            dungeon_mode(26) = DMODE_OPEN;
+            dungeon_mode(27) = DMODE_OPEN;
+            dungeon_mode(28) = DMODE_OPEN;
+            dungeon_mode(29) = DMODE_OPEN;
+            dungeon_mode(30) = DMODE_OPEN;
+            dungeon_mode(31) = DMODE_OPEN;
+            dungeon_mode(32) = DMODE_OPEN;
+            dungeon_mode(33) = DMODE_OPEN;
+            dungeon_mode(34) = DMODE_OPEN;
+            dungeon_mode(35) = DMODE_OPEN;
+            dungeon_mode(36) = DMODE_OPEN;
+            dungeon_mode(37) = DMODE_OPEN;
+            dungeon_mode(38) = DMODE_OPEN;
+            dungeon_mode(39) = DMODE_OPEN;
+            dungeon_mode(40) = DMODE_OPEN;
+            dungeon_mode(41) = DMODE_OPEN;
+            dungeon_mode(42) = DMODE_OPEN;
+            dungeon_mode(43) = DMODE_OPEN;
+            dungeon_mode(44) = DMODE_OPEN;
+            dungeon_mode(45) = DMODE_OPEN;
+            dungeon_mode(46) = DMODE_OPEN;
+            dungeon_mode(47) = DMODE_OPEN;
+            dungeon_mode(48) = DMODE_OPEN;
+            dungeon_mode(49) = DMODE_OPEN;
+            dungeon_mode(50) = DMODE_OPEN;
+            dungeon_mode(51) = DMODE_OPEN;
+            dungeon_mode(52) = DMODE_OPEN;
+            dungeon_mode(53) = DMODE_OPEN;
+            dungeon_mode(54) = DMODE_OPEN;
+            dungeon_mode(55) = DMODE_OPEN;
+            dungeon_mode(56) = DMODE_OPEN;
+            dungeon_mode(57) = DMODE_OPEN;
+            dungeon_mode(58) = DMODE_OPEN;
+            dungeon_mode(59) = DMODE_OPEN;
+            dungeon_mode(60) = DMODE_OPEN;
+            dungeon_mode(61) = DMODE_OPEN;
+            dungeon_mode(62) = DMODE_OPEN;
+            dungeon_mode(63) = DMODE_OPEN;
+            dungeon_mode(64) = DMODE_OPEN;
+            dungeon_mode(65) = DMODE_OPEN;
+            dungeon_mode(66) = DMODE_OPEN;
+            dungeon_mode(67) = DMODE_OPEN;
+            dungeon_mode(68) = DMODE_OPEN;
+            dungeon_mode(69) = DMODE_OPEN;
+            dungeon_mode(70) = DMODE_OPEN;
+            dungeon_mode(71) = DMODE_OPEN;
+            dungeon_mode(72) = DMODE_OPEN;
+            dungeon_mode(73) = DMODE_OPEN;
+            dungeon_mode(74) = DMODE_OPEN;
+            dungeon_mode(75) = DMODE_OPEN;
+            dungeon_mode(76) = DMODE_OPEN;
+            dungeon_mode(77) = DMODE_OPEN;
+            dungeon_mode(78) = DMODE_OPEN;
+            dungeon_mode(79) = DMODE_OPEN;
+            dungeon_mode(80) = DMODE_OPEN;
+            dungeon_mode(81) = DMODE_OPEN;
+            dungeon_mode(82) = DMODE_OPEN;
+            dungeon_mode(83) = DMODE_OPEN;
+            dungeon_mode(84) = DMODE_OPEN;
+            dungeon_mode(85) = DMODE_OPEN;
+            dungeon_mode(86) = DMODE_OPEN;
+            dungeon_mode(87) = DMODE_OPEN;
+            dungeon_mode(88) = DMODE_OPEN;
+            dungeon_mode(89) = DMODE_OPEN;
+            dungeon_mode(90) = DMODE_OPEN;
+            dungeon_mode(91) = DMODE_OPEN;
+            dungeon_mode(92) = DMODE_OPEN;
+            dungeon_mode(93) = DMODE_OPEN;
+            dungeon_mode(94) = DMODE_OPEN;
+            dungeon_mode(95) = DMODE_OPEN;
+            dungeon_mode(96) = DMODE_OPEN;
+            dungeon_mode(97) = DMODE_OPEN;
+            dungeon_mode(98) = DMODE_OPEN;
+            dungeon_mode(99) = DMODE_OPEN;
+            dungeon_mode(100) = DMODE_OPEN;
+            dungeon_mode(101) = DMODE_OPEN;
+            dungeon_mode(102) = DMODE_OPEN;
+            dungeon_mode(103) = DMODE_OPEN;
+            dungeon_mode(104) = DMODE_OPEN;
+            dungeon_mode(105) = DMODE_OPEN;
+            dungeon_mode(106) = DMODE_OPEN;
+            dungeon_mode(107) = DMODE_OPEN;
+            dungeon_mode(108) = DMODE_OPEN;
+            dungeon_mode(109) = DMODE_OPEN;
+            dungeon_mode(110) = DMODE_OPEN;
+            dungeon_mode(111) = DMODE_OPEN;
+            dungeon_mode(112) = DMODE_OPEN;
+            dungeon_mode(113) = DMODE_OPEN;
+            dungeon_mode(114) = DMODE_OPEN;
+            dungeon_mode(115) = DMODE_OPEN;
+            dungeon_mode(116) = DMODE_OPEN;
+            dungeon_mode(117) = DMODE_OPEN;
+            dungeon_mode(118) = DMODE_OPEN;
+            dungeon_mode(119) = DMODE_OPEN;
+            dungeon_mode(120) = DMODE_OPEN;
+            dungeon_mode(121) = DMODE_OPEN;
+            dungeon_mode(122) = DMODE_OPEN;
+            dungeon_mode(123) = DMODE_OPEN;
+            dungeon_mode(124) = DMODE_OPEN;
+            dungeon_mode(125) = DMODE_OPEN;
+            dungeon_mode(126) = DMODE_OPEN;
+            dungeon_mode(127) = DMODE_OPEN;
+            dungeon_mode(128) = DMODE_OPEN;
+            dungeon_mode(129) = DMODE_OPEN;
+            dungeon_mode(130) = DMODE_OPEN;
+            dungeon_mode(131) = DMODE_OPEN;
+            dungeon_mode(132) = DMODE_OPEN;
+            dungeon_mode(133) = DMODE_OPEN;
+            dungeon_mode(134) = DMODE_OPEN;
+            dungeon_mode(135) = DMODE_OPEN;
+            dungeon_mode(136) = DMODE_OPEN;
+            dungeon_mode(137) = DMODE_OPEN;
+            dungeon_mode(138) = DMODE_OPEN;
+            dungeon_mode(139) = DMODE_OPEN;
+            dungeon_mode(140) = DMODE_OPEN;
+            dungeon_mode(141) = DMODE_OPEN;
+            dungeon_mode(142) = DMODE_OPEN;
+            dungeon_mode(143) = DMODE_OPEN;
+            dungeon_mode(144) = DMODE_OPEN;
+            dungeon_mode(145) = DMODE_OPEN;
+            dungeon_mode(146) = DMODE_OPEN;
+            dungeon_mode(147) = DMODE_OPEN;
+            dungeon_mode(148) = DMODE_OPEN;
+            dungeon_mode(149) = DMODE_OPEN;
+            dungeon_mode(150) = DMODE_OPEN;
+            dungeon_mode(151) = DMODE_OPEN;
+            dungeon_mode(152) = DMODE_OPEN;
+            dungeon_mode(153) = DMODE_OPEN;
+            dungeon_mode(154) = DMODE_OPEN;
+            dungeon_mode(155) = DMODE_OPEN;
+            dungeon_mode(156) = DMODE_OPEN;
+            dungeon_mode(157) = DMODE_OPEN;
+            dungeon_mode(158) = DMODE_OPEN;
+            dungeon_mode(159) = DMODE_OPEN;
+            dungeon_mode(160) = DMODE_OPEN;
+            dungeon_mode(161) = DMODE_OPEN;
+            dungeon_mode(162) = DMODE_OPEN;
+            dungeon_mode(163) = DMODE_OPEN;
+            dungeon_mode(164) = DMODE_OPEN;
+            dungeon_mode(165) = DMODE_OPEN;
+            dungeon_mode(166) = DMODE_OPEN;
+            dungeon_mode(167) = DMODE_OPEN;
+            dungeon_mode(168) = DMODE_OPEN;
+            dungeon_mode(169) = DMODE_OPEN;
+            dungeon_mode(170) = DMODE_OPEN;
+            dungeon_mode(171) = DMODE_OPEN;
+            dungeon_mode(172) = DMODE_OPEN;
+            dungeon_mode(173) = DMODE_OPEN;
+            dungeon_mode(174) = DMODE_OPEN;
+            dungeon_mode(175) = DMODE_OPEN;
+            dungeon_mode(176) = DMODE_OPEN;
+            dungeon_mode(177) = DMODE_OPEN;
+            dungeon_mode(178) = DMODE_OPEN;
+            dungeon_mode(179) = DMODE_OPEN;
+            dungeon_mode(180) = DMODE_OPEN;
+            dungeon_mode(181) = DMODE_OPEN;
+            dungeon_mode(182) = DMODE_OPEN;
+            dungeon_mode(183) = DMODE_OPEN;
+            dungeon_mode(184) = DMODE_OPEN;
+            dungeon_mode(185) = DMODE_OPEN;
+            dungeon_mode(186) = DMODE_OPEN;
+            dungeon_mode(187) = DMODE_OPEN;
+            dungeon_mode(188) = DMODE_OPEN;
+            dungeon_mode(189) = DMODE_OPEN;
+            dungeon_mode(190) = DMODE_OPEN;
+            dungeon_mode(191) = DMODE_OPEN;
+            jump @debug_menu;
+        case menu("Gib Items"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Select How:[CR]");
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu("1 Of Each"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 1400) {
+                        $ITEM_BACKUP = value($EVENT_LOCAL);
+                        $ITEM_BACKUP[1] = 99;
+                        item_SetVariable(0,$ITEM_BACKUP);
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+                                break;
+                            default:
+                                switch(ProcessSpecial(57,0,0)) {
+                                    case 0:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                    default:
+                                        message_Mail("Storage Full!");
+                                        message_Close();
+                                        jump @debug_menu;
+                                }
+                                break;
+                        }
+                        $EVENT_LOCAL += 1;       
+                    }
+                    break;
+                case menu("Good Stuff"):
+                    message_Close();
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,24,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,182,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    break;
+                case menu("Golden Seeds (x40)"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 40) {
+                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,93,0);
+                        $EVENT_LOCAL += 1;
+                    }
+                    break;
+                case menu("Sticks & Stones"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 11) {
+                        $ITEM_BACKUP = value($EVENT_LOCAL);
+                        $ITEM_BACKUP[1] = 99;
+                        item_SetVariable(0,$ITEM_BACKUP);
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+                                break;
+                            default:
+                                switch(ProcessSpecial(57,0,0)) {
+                                    case 0:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                    default:
+                                        message_Mail("Storage Full!");
+                                        message_Close();
+                                        jump @debug_menu;
+                                }
+                                break;
+                        }
+                        $EVENT_LOCAL += 1;       
+                    }
+                    break;
+            }
+            jump @debug_menu;
+        case menu("Cancel"):
+            message_Close();
+            break;
+    }
+    jump @decision_tree;
     §variable_checkup;
     message_Mail("[CS:S]$VERSION[CR]: [var:0:0]\n[CS:S]$CONDITION[CR]: [var:1:0]\n[CS:S]$SCENARIO_SELECT[CR]: ~5b[var:2:0], [var:2:1]~5d");
     message_Mail("[CS:S]$SCENARIO_MAIN[CR]: ~5b[var:3:0], [var:3:1]~5d\n[CS:S]$SCENARIO_SIDE[CR]: ~5b[var:4:0], [var:4:1]~5d\n[CS:S]$SCENARIO_SUB1[CR]: ~5b[var:5:0], [var:5:1]~5d");

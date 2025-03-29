@@ -814,8 +814,6 @@ def 0 {
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
             item_Set(0, 387, 528);
-            $PERFORMANCE_PROGRESS_LIST[34] = 1;
-            $SCENARIO_TALK_BIT_FLAG[254] = 1;
             jump @label_38;
         default: // No special name
             break;
