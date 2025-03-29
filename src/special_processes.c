@@ -127,6 +127,118 @@ static bool SpIsMainGameUnlocked(){
     return CUSTOM_SAVE_AREA.mainGameUnlocked;
 }
 
+
+// Used by SP 108.
+int __attribute__((naked)) GetItemIdAtStorageIdx(int index)
+{
+    // get BAG_ITEMS to r0
+    asm("ldr r1,=BAG_ITEMS_PTR_MIRROR");
+    asm("ldr r1,[r1]");
+    // get the location in BAG_ITEMS by multiplying the index by 2 and adding 0x38A.
+    asm("ldr r2,=0x38A");
+    asm("add r0,r2,r0,lsl #1");
+    // access the id from the bag
+    asm("ldrsh r0,[r1,r0]");
+    asm("bx lr");
+    asm(".pool");
+}
+
+int __attribute__((naked)) GetItemQuantityAtStorageIdx(int index)
+{
+    // get BAG_ITEMS to r1
+    asm("ldr r1,=BAG_ITEMS_PTR_MIRROR");
+    asm("ldr r1,[r1]");
+    // get the location in BAG_ITEMS by multiplying the index by 2 and adding 0x38A.
+    asm("ldr r2,=0xB5A");
+    asm("add r0,r2,r0,lsl #1");
+    // access the quantity from the bag
+    asm("ldrsh r0,[r1,r0]");
+    asm("bx lr");
+    asm(".pool");
+}
+
+void __attribute__((naked)) DecreaseQuantityOfStorageItem(int index, int amountToRemoveBy)
+{
+    // get BAG_ITEMS to r1
+    asm("ldr r2,=BAG_ITEMS_PTR_MIRROR");
+    asm("ldr r2,[r2]");
+    // get the location in BAG_ITEMS to r0 by multiplying the index by 2 and adding 0x38A.
+    asm("ldr r3,=0xB5A");
+    asm("add r0,r3,r0,lsl #1");
+    // access the quantity and save it to r3.
+    asm("ldrsh r3,[r2,r0]");
+    // decrease the quantity by amountToRemoveBy.
+    asm("sub r3,r3,r1");
+    // save the lowered quantity back to BAG_ITEMS.
+    asm("strsh r3,[r2,r0]");
+    asm("bx lr");
+    asm(".pool");
+}
+
+// Special process 108: Recycle shop stuff. 
+static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
+    struct bulk_item* itemToRemove;
+    ItemAtTableIdx(itemSetId1, itemToRemove);
+    int idRequired = itemToRemove->id.val;
+    int nbItemsInBag = CountItemTypeInBag(idRequired);
+    int nbItemsInStorage = CountItemTypeInStorage(idRequired);
+    if(nbItemsInBag + nbItemsInStorage >= itemToRemove->quantity){
+        bool bagIsFull = IsBagFull();
+        bool storageIsFull = IsStorageFull();
+        if (bagIsFull && storageIsFull) return 3; // player does not have the needed space to recieve the output item.
+        struct bulk_item* itemToAdd;
+        ItemAtTableIdx(itemSetId2, itemToAdd);
+        int idToAdd = itemToAdd->id.val;
+        int amountToRemove = itemToRemove->quantity;
+        // TODO: remove items.
+        int bagSize = GetCurrentBagCapacity();
+        for (int i = 0; i < bagSize; i++){
+            if(amountToRemove <= 0) break;
+            struct item* thisItem = GetItemAtIdx(i);
+            if(thisItem->id.val == idRequired){
+                if(thisItem->quantity > amountToRemove){ // if there's more than enough in this one slot to finish removing, then just lower the quantity and move on.
+                    thisItem->quantity -= amountToRemove;
+                    amountToRemove = 0;
+                    break;
+                }
+                else { // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
+                    amountToRemove -= thisItem->quantity;
+                    RemoveItem(i);
+                }
+            }
+        }
+        if (amountToRemove > 0){ // if there's still more items to remove, repeat the process with storage!
+            // remove from storage
+            int storageSize = GetRankStorageSize();
+            for(int i = 0; i < storageSize; i++){
+                if (amountToRemove <= 0) break;
+                if (GetItemIdAtStorageIdx(i) == idRequired){
+                    int itemQuantity = GetItemQuantityAtStorageIdx(i);
+                    if(itemQuantity > amountToRemove) { // if there's more than enough in this one slot to finish removing, then just lower the quantity and move on.
+                        DecreaseQuantityOfStorageItem(i, amountToRemove);
+                        // we don't need amountToRemove past this point so we can just break without updating it.
+                        break;
+                    }
+                    else {
+                        amountToRemove -= itemQuantity;
+                        RemoveItemAtIdxInStorage(i);
+                        // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
+                    }
+                }
+            }
+        }
+        if(bagIsFull){
+            AddBulkItemToStorage(itemToAdd);
+            return 1; // item is added to storage.
+        }
+        else{
+            SpecialProcAddItemToBag(itemToAdd);
+            return 0; // item is added to bag.
+        }
+    }
+    else return 2; // player does not have the required amount of the needed item.
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -181,6 +293,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 107:
         *return_val = SpIsMainGameUnlocked();
+        return true;
+    case 108:
+        *return_val = SpRecycleShopStuff(arg1, arg2);
         return true;
     case 255:
         *return_val = SpGetCrassKind();
