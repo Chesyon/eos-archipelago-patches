@@ -170,7 +170,7 @@ void __attribute__((naked)) DecreaseQuantityOfStorageItem(int index, int amountT
     // decrease the quantity by amountToRemoveBy.
     asm("sub r3,r3,r1");
     // save the lowered quantity back to BAG_ITEMS.
-    asm("strsh r3,[r2,r0]");
+    asm("strh r3,[r2,r0]");
     asm("bx lr");
     asm(".pool");
 }
