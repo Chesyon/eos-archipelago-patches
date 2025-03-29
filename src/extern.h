@@ -97,7 +97,8 @@ typedef struct CustomSaveArea {
     bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
     DungeonTraps dungeonTraps;             // 0x2A4: wip dungeons traps
     uint8_t acquiredCafeChecks;            // 0x2A5: How many cafe checks have been obtained. See my comment on SP 105.
-    undefined fields[0xE5A];               // 0x2A6: Unused.
+    bool mainGameUnlocked;                 // 0x2A6: Is main game unlocked?
+    undefined fields[0xE59];               // 0x2A7: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 

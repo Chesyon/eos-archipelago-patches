@@ -122,6 +122,11 @@ static int SpCheckForUnownRocks(){
     return 0;
 }
 
+// Special process 107: Is the main game unlocked? No parameters.
+static bool SpIsMainGameUnlocked(){
+    return CUSTOM_SAVE_AREA.mainGameUnlocked;
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -173,6 +178,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 106:
         *return_val = SpCheckForUnownRocks();
+        return true;
+    case 107:
+        *return_val = SpIsMainGameUnlocked();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
