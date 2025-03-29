@@ -8756,12 +8756,14 @@ coro GETOUT_NORMAL {
                 message_Mail("Yes, [CS:P]Froggy[CR]!");
                 message_Close();
                 $SCENARIO_TALK_BIT_FLAG[248] = 1;
-                message_SetFaceEmpty(ACTOR_NPC_NIDOKINGU,FACE_PAIN, FACE_POS_STANDARD);
-                message_Talk("[CS:G]Kermit[CR]: Howdy partner, been a while\nsince someone\'s entered [CS:P]Froggy Forest[CR]!");
-                message_Talk("[CS:G]Kermit[CR]: It\'s been real quiet these\ndays. ");
-                message_SetFaceEmpty(ACTOR_NPC_NIDOKINGU,FACE_PAIN, FACE_POS_STANDARD);
-                message_Talk("[CS:G]Kermit[CR]: ");
+                message_SetFaceEmpty(ACTOR_NPC_NYOROTONO,FACE_PAIN, FACE_POS_STANDARD);
+                message_Talk("[STS][CS:G]Kermit[CR]: [STE]Howdy partner, been a while\nsince someone\'s entered [CS:P]Froggy Forest[CR]!");
+                message_Talk("[STS][CS:G]Kermit[CR]: [STE]It\'s been real quiet these days.\nUntil you showed up, that is.[K] So here\'s what\'s\ngoing to happen, friend... *cocks shotgun*");
+                message_Talk("[STS][CS:G]Kermit[CR]: [STE]You\'re going to turn around, and head\nback to the franchise from whence you came.\n[K]Then I\'m going to teach you a little lesson.");
+                message_Talk("[STS][CS:G]Kermit[CR]: [STE]See, it\'s not easy being [CS:K]green[CR].\nIn a few short minutes, I think you\'ll\nsee what I mean.[K] Now then, get moving!");
                 // Keep going!
+                message_Close();
+                message_Mail("You quickly retreat back to [CS:P]Sharpedo Bluff[CR]\nto regroup, but suddenly...");
                 message_Close();
                 main_EnterGround(LEVEL_H02P99A, 30);
                 hold;
