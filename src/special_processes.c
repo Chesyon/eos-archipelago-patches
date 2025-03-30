@@ -253,6 +253,10 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
     else return 2; // player does not have the required amount of the needed item.
 }
 
+// Special process 109: Get rank. No parameters, returns rank as enum: https://github.com/UsernameFodder/pmdsky-debug/blob/master/headers/types/ground_mode/enums.h#L2079
+static int SpGetRank(){
+    return GetRank();
+}
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -310,6 +314,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 108:
         *return_val = SpRecycleShopStuff(arg1, arg2);
+        return true;
+    case 109:
+        *return_val = SpGetRank();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
