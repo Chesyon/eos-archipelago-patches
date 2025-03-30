@@ -108,7 +108,7 @@ apSettings = 0x23DE018;
 missionMaxes = 0x23DE01A;
 macguffinMaxes = 0x23DE01E;
 hintableItems = 0x23DE022;
-cafeMax = 0x23DE1C6; /* See my comment on SP 105. */
+cafeMaxes = 0x23DE1C6; /* See my comment on SP 105. */
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 

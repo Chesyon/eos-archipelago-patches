@@ -97,15 +97,29 @@ static int SpRegenerateMissions() {
 
 // Special process 105: Read/write Cafe check count. 1 = write, anything else = 0.
 // This is a really lazy implementation based on SP 102. Could be merged into SP 102 if I actually bothered to reorganize the structs, which... I don't feel like doing right now. This is future Chesyon's problem.
-static int SpAccessCafeStatus(short mode) {
-    if (mode == 1) { // Write mode
-        if (CUSTOM_SAVE_AREA.acquiredCafeChecks < cafeMax) {
-            CUSTOM_SAVE_AREA.acquiredCafeChecks++; // increment by one
-            return 1;
+// Future Chesyon here: Fuck you past Chesyon. (in all seriousness the way to co about merging them would to be to convert the MacguffinMaxes struct into a single Maxes struct. I still don't feel like doing this, so future future Chesyon's problem.
+// At the very least this won't require save struct adjustments. Probably. You know, *with* some save struct adjustments, I could actually merge into SP 101 as well... 101, 102, and 105 are all identical logic.
+static int SpAccessCafeStatus(short mode, short type) {
+    if (type == 0) { // Cafe Events
+        if (mode == 1) { // Write mode
+            if (CUSTOM_SAVE_AREA.acquiredCafeEventChecks < cafeMaxes.cafeEventMax) {
+                CUSTOM_SAVE_AREA.acquiredCafeEventChecks++; // increment by one
+                return 1;
+            }
+            else return 0;
         }
-        else return 0;
+        else return cafeMaxes.cafeEventMax - CUSTOM_SAVE_AREA.acquiredCafeEventChecks; // Read mode
     }
-    else return cafeMax - CUSTOM_SAVE_AREA.acquiredCafeChecks; // Read mode
+    else { // Cafe Drinks
+        if (mode == 1) { // Write mode
+            if (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks < cafeMaxes.cafeDrinkMax) {
+                CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks++; // increment by one
+                return 1;
+            }
+            else return 0;
+        }
+        else return cafeMaxes.cafeDrinkMax - CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks; // Read mode
+    }
 }
 
 // Special process 106: Check for Unown Rocks. No parameters.
@@ -286,7 +300,7 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         *return_val = SpRegenerateMissions();
         return true;
     case 105:
-        *return_val = SpAccessCafeStatus(arg1);
+        *return_val = SpAccessCafeStatus(arg1, arg2);
         return true;
     case 106:
         *return_val = SpCheckForUnownRocks();

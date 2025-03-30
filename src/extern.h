@@ -58,7 +58,13 @@ typedef struct MacguffinMax {
 } MacguffinMax;
 ASSERT_SIZE(MacguffinMax, 0x2);
 extern MacguffinMax macguffinMaxes;
-extern uint8_t cafeMax; // See my comment on SP 105.
+
+typedef struct CafeMax { // See my comment on SP 105.
+    uint8_t cafeEventMax; // 0x0
+    uint8_t cafeDrinkMax; // 0x1
+} CafeMax;
+ASSERT_SIZE(CafeMax, 0x2);
+extern CafeMax cafeMaxes;
 
 typedef struct MissionStatus {
     uint8_t completedJobs : 8;    // 0x0
@@ -96,9 +102,10 @@ typedef struct CustomSaveArea {
     DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
     bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
     DungeonTraps dungeonTraps;             // 0x2A4: wip dungeons traps
-    uint8_t acquiredCafeChecks;            // 0x2A5: How many cafe checks have been obtained. See my comment on SP 105.
-    bool mainGameUnlocked;                 // 0x2A6: Is main game unlocked?
-    undefined fields[0xE59];               // 0x2A7: Unused.
+    uint8_t acquiredCafeEventChecks;       // 0x2A5: How many cafe event checks have been obtained. See my comment on SP 105.
+    uint8_t acquiredCafeDrinkChecks;       // 0x2A6: How many cafe drink checks have been obtained.
+    bool mainGameUnlocked;                 // 0x2A7: Is main game unlocked?
+    undefined fields[0xE58];               // 0x2A8: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
