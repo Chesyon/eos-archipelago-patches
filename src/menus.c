@@ -9,8 +9,8 @@
 #if CUSTOM_SCRIPT_MENUS
 
 char* noMissionChecksString = "[S:13]"; // Probably redundant, but the base game also does this.
-char* halfMissionChecksString = "[M:R1]";
-char* fullMissionChecksString = "[M:S3]";
+char* halfMissionChecksString = "[M:R1][S:8]";
+char* fullMissionChecksString = "[M:S3][S:5]";
 
 char* TailoredDungeonMissionMenuEntryFn(char* buffer, int option_id) {
     uint8_t *dungeonIdArray = GLOBAL_MENU_INFO.extra_info_ptr;
