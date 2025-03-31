@@ -232,8 +232,19 @@ def 0 {
             }
             break;
     }
-    if ($SPECIAL_EPISODE_OPEN[0]) {
+    if ($SPECIAL_EPISODE_OPEN[0]) {      
         if($SPECIAL_EPISODE_CONQUEST[0]) {
+            if ($SCENARIO_SUB5 &<< 2) {
+            } else {
+                message_Talk(" My notes say that we completed\n[CS:G]Bidoof\'s Wish[CR], but we never got the check for\nspeaking to [CS:G]Marowak[CR] during the episode...");
+                message_SetFace(ACTOR_ATTENDANT1, FACE_ANGRY, FACE_POS_STANDARD);
+                message_Talk(" The crossroads DID tell you to\ntalk to [CS:G]Marowak[CR] before going to [CS:P]Wish Cave[CR]\nright?[K] Always trust sapient crossroads!");
+                message_SetFace(ACTOR_ATTENDANT1, FACE_SIGH, FACE_POS_STANDARD);
+                message_Talk(" What am I going to do with you,\n[hero]?[K] Luckily, we only have to start\n[CS:G]Bidoof\'s Wish[CR], not finish it.[K] Alright, let\'s go!");
+                message_Close();
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                jump @anything_else;
+            }
         } else {
             message_Talk(" My notes say that we can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
             message_Close();
@@ -272,10 +283,61 @@ def 0 {
             jump @anything_else;
         }
     }
+    if ($SUB30_SPOT_LEVEL < 3) {
+        message_Talk(" Seems like we\'re missing Project P\ndungeon checks! Let\'s do some recycling, [hero]!");
+        jump @anything_else;
+    }
+    switch(scn($SCENARIO_SUB4)[1]) {
+        case &<< 3:
+            break;
+        default:
+            message_Talk(" Seems like we\'re missing a Project P\ntreasure check! Let\'s do some recycling, [hero]!");
+            jump @anything_else;
+    }
+    switch( ProcessSpecial(105,0,1)) {
+        case > 0:
+            message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nLet\'s go relax at the cafe, [hero]!");
+            jump @anything_else;
+            break;
+        default:
+            break;
+    }
+    if (not debug) {
+        switch(ProcessSpecial(109, 0,0)) {
+            case >= 8: // MASTER
+                message_Talk("  Wow, we\'re Master Rank now?\nThat should hold us over until we obtain the\nSecret Rank. Let\'s see what else we have...");
+                break; 
+            case 7: // HYPER
+                message_Talk(" Wow, we\'re Hyper Rank now?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break; 
+            case 6: // ULTRA
+                message_Talk(" Wow, we\'re Ultra Rank now?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;                 
+            case 5: // SUPER
+                message_Talk(" Wow, we\'re Super Rank now?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;                
+            case 4: // DIAMOND
+                message_Talk(" Wow, we\'re Diamond Rank now?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;                
+            case 3: // GOLD
+                message_Talk(" Nice, we\'re already Gold Rank!\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;
+            case 2: // SILVER
+                message_Talk(" We\'re still only Silver Rank?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;
+            case 1: // BRONZE
+                message_Talk(" We\'re still only Bronze Rank?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;
+            default: // Normal Rank
+                message_Talk(" We\'re still only Normal Rank?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
+                break;
+        }
+    }
     message_Talk(" Seems like we only have\ndungeon checks left Pre-Dialga. Let me see...");
     switch(dungeon_mode(1)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Beach Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Beach Cave[CR] already...[STE]");
+            $LOCAL0 = 1;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -286,7 +348,8 @@ def 0 {
     }
     switch(dungeon_mode(3)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Drenched Bluff[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Drenched Bluff[CR] already...[STE]");
+            $LOCAL0 = 3;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -297,7 +360,8 @@ def 0 {
     }
     switch(dungeon_mode(4)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Bristle[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Mt. Bristle[CR] already...[STE]");
+            $LOCAL0 = 4;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -308,7 +372,8 @@ def 0 {
     }
     switch(dungeon_mode(6)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Waterfall Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Waterfall Cave[CR] already...[STE]");
+            $LOCAL0 = 6;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -319,7 +384,8 @@ def 0 {
     }
     switch(dungeon_mode(7)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Apple Woods[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Apple Woods[CR] already...[STE]");
+            $LOCAL0 = 7;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -330,7 +396,8 @@ def 0 {
     }
     switch(dungeon_mode(8)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Craggy Coast[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Craggy Coast[CR] already...[STE]");
+            $LOCAL0 = 8;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -341,7 +408,8 @@ def 0 {
     }
     switch(dungeon_mode(9)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Side Path[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Side Path[CR] already...[STE]");
+            $LOCAL0 = 9;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -352,7 +420,8 @@ def 0 {
     }
     switch(dungeon_mode(10)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Horn[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Mt. Horn[CR] already...[STE]");
+            $LOCAL0 = 10;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -363,7 +432,8 @@ def 0 {
     }
     switch(dungeon_mode(11)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Rock Path[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Rock Path[CR] already...[STE]");
+            $LOCAL0 = 11;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -374,7 +444,8 @@ def 0 {
     }
     switch(dungeon_mode(12)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Foggy Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Foggy Forest[CR] already...[STE]");
+            $LOCAL0 = 12;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -385,7 +456,8 @@ def 0 {
     }
     switch(dungeon_mode(13)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Forest Path[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Forest Path[CR] already...[STE]");
+            $LOCAL0 = 13;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -396,7 +468,8 @@ def 0 {
     }
     switch(dungeon_mode(14)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Steam Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Steam Cave[CR] already...[STE]");
+            $LOCAL0 = 14;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -407,7 +480,8 @@ def 0 {
     }
     switch(dungeon_mode(17)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Amp Plains[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Amp Plains[CR] already...[STE]");
+            $LOCAL0 = 17;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -418,7 +492,8 @@ def 0 {
     }
     switch(dungeon_mode(20)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Northern Desert[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Northern Desert[CR] already...[STE]");
+            $LOCAL0 = 20;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -429,7 +504,8 @@ def 0 {
     }
     switch(dungeon_mode(21)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Quicksand Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Quicksand Cave[CR] already...[STE]");
+            $LOCAL0 = 21;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -440,7 +516,8 @@ def 0 {
     }
     switch(dungeon_mode(24)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Crystal Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Crystal Cave[CR] already...[STE]");
+            $LOCAL0 = 24;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -451,7 +528,8 @@ def 0 {
     }
     switch(dungeon_mode(25)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Crystal Crossing[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Crystal Crossing[CR] already...[STE]");
+            $LOCAL0 = 25;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -462,7 +540,8 @@ def 0 {
     }
     switch(dungeon_mode(27)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Chasm Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Chasm Cave[CR] already...[STE]");
+            $LOCAL0 = 27;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -473,7 +552,8 @@ def 0 {
     }
     switch(dungeon_mode(28)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Dark Hill[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Dark Hill[CR] already...[STE]");
+            $LOCAL0 = 28;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -484,7 +564,8 @@ def 0 {
     }
     switch(dungeon_mode(29)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Sealed Ruin[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Sealed Ruin[CR] already...[STE]");
+            $LOCAL0 = 29;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -495,7 +576,8 @@ def 0 {
     }
     switch(dungeon_mode(32)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Dusk Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Dusk Forest[CR] already...[STE]");
+            $LOCAL0 = 32;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -506,7 +588,8 @@ def 0 {
     }
     switch(dungeon_mode(33)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Deep Dusk Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Deep Dusk Forest[CR] already...[STE]");
+            $LOCAL0 = 33;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -517,7 +600,8 @@ def 0 {
     }
     switch(dungeon_mode(34)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Treeshroud Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Treeshroud Forest[CR] already...[STE]");
+            $LOCAL0 = 34;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -528,7 +612,8 @@ def 0 {
     }
     switch(dungeon_mode(35)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Brine Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Brine Cave[CR] already...[STE]");
+            $LOCAL0 = 35;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -538,12 +623,86 @@ def 0 {
             break;
     }
     switch(dungeon_mode(38)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Hidden Land[CR] already...");
-            break;
         case DMODE_OPEN:
             message_Talk(" According to my notes, we still\nneed to clear [CS:P]Hidden Land[CR]! Let\'s go\ndo that now, [hero]!");
             jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(180)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Normal/Fly Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(181)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Dark/Fire Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(182)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Rock/Water Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(183)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Grass Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(184)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Elec/Steel Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(185)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Ice/Ground Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(186)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Fight/Psych Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(187)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Poison/Bug Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(188)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Dragon Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(189)) {
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear the [CS:P]Ghost Maze[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(ProcessSpecial(105,0,0)) {
+        case > 0:
+            message_Talk(" Seems like we need to make\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
+            message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else we can do...");
         default:
             break;
     }
@@ -557,7 +716,7 @@ def 0 {
         message_Close();
         jump @anything_else;
     }
-    
+
     if ($PERFORMANCE_PROGRESS_LIST[24]) {
     } else {
         if($PERFORMANCE_PROGRESS_LIST[23]) {
@@ -670,7 +829,7 @@ def 0 {
             break;
     }
 
-    switch(dungeon_mode(111)) {
+    switch(dungeon_mode(120)) {
         case DMODE_OPEN_AND_REQUEST:
             switch ( scn($SCENARIO_SUB3)[1] ) { // Shaymin Check claimed?
                 case &<< 6:
@@ -683,10 +842,31 @@ def 0 {
         default:
             break;
     }
+    if ($SUB30_SPOT_LEVEL < 5) {
+        message_Talk(" Seems like we\'re missing Project P\ndungeon checks! Let\'s do some recycling, [hero]!");
+        jump @anything_else;
+    }
+    switch(dungeon_mode(120)) {
+        case DMODE_OPEN_AND_REQUEST:
+            switch(dungeon_mode(117)) {
+                case DMODE_OPEN_AND_REQUEST:
+                    if ($SCENARIO_SUB5 &<< 1) {
+                    } else {
+                        message_Talk(" I wonder how [CS:G]Sneasel[CR] is doing?[K]\nWe should head to [CS:P]7th Station Pass[CR]\nand ask [CS:G]Ampharos[CR] about it, [hero]!");
+                        jump @anything_else; 
+                    }
+                default:
+                    break;
+            }
+        default:
+            break;
+    }
+    
     message_Talk(" Seems like we only have\ndungeon checks left before [CS:G]Darkrai[CR]. Let me see...");
     switch(dungeon_mode(44)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mystifying Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Mystifying Forest[CR] already...[STE]");
+            $LOCAL0 = 44;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -697,7 +877,8 @@ def 0 {
     }
     switch(dungeon_mode(46)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Blizzard Island[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Blizzard Island[CR] already...[STE]");
+            $LOCAL0 = 46;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -708,7 +889,8 @@ def 0 {
     }
     switch(dungeon_mode(47)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Crevice Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Crevice Cave[CR] already...[STE]");
+            $LOCAL0 = 47;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -719,7 +901,8 @@ def 0 {
     }
     switch(dungeon_mode(50)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Surrounded Sea[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Surrounded Sea[CR] already...[STE]");
+            $LOCAL0 = 50;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -730,7 +913,8 @@ def 0 {
     }
     switch(dungeon_mode(51)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Miracle Sea[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Miracle Sea[CR] already...[STE]");
+            $LOCAL0 = 51;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -741,7 +925,8 @@ def 0 {
     }
     switch(dungeon_mode(62)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Travail[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Mt. Travail[CR] already...[STE]");
+            $LOCAL0 = 62;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -752,7 +937,8 @@ def 0 {
     }
     switch(dungeon_mode(63)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]The Nightmare[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]The Nightmare[CR] already...[STE]");
+            $LOCAL0 = 63;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -763,7 +949,8 @@ def 0 {
     }
     switch(dungeon_mode(64)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Spacial Rift[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Spacial Rift[CR] already...[STE]");
+            $LOCAL0 = 64;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -774,7 +961,8 @@ def 0 {
     }
     switch(dungeon_mode(70)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Concealed Ruins[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Concealed Ruins[CR] already...[STE]");
+            $LOCAL0 = 70;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -785,7 +973,8 @@ def 0 {
     }
     switch(dungeon_mode(72)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Marine Resort[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Marine Resort[CR] already...[STE]");
+            $LOCAL0 = 72;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -796,7 +985,8 @@ def 0 {
     }
     switch(dungeon_mode(87)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Serenity River[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Serenity River[CR] already...[STE]");
+            $LOCAL0 = 87;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -807,7 +997,8 @@ def 0 {
     }
     switch(dungeon_mode(88)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Landslide Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Landslide Cave[CR] already...[STE]");
+            $LOCAL0 = 88;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -818,7 +1009,8 @@ def 0 {
     }
     switch(dungeon_mode(89)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Lush Prairie[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lush Prairie[CR] already...[STE]");
+            $LOCAL0 = 89;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -829,7 +1021,8 @@ def 0 {
     }
     switch(dungeon_mode(90)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Tiny Meadow[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Tiny Meadow[CR] already...[STE]");
+            $LOCAL0 = 90;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -840,7 +1033,8 @@ def 0 {
     }
     switch(dungeon_mode(91)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Labyrinth Cave[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Labyrinth Cave[CR] already...[STE]");
+            $LOCAL0 = 91;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -851,7 +1045,8 @@ def 0 {
     }
     switch(dungeon_mode(92)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Oran Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Oran Forest[CR] already...[STE]");
+            $LOCAL0 = 92;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -862,7 +1057,8 @@ def 0 {
     }
     switch(dungeon_mode(93)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Lake Afar[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lake Afar[CR] already...[STE]");
+            $LOCAL0 = 93;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -873,7 +1069,8 @@ def 0 {
     }
     switch(dungeon_mode(94)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Happy Outlook[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Happy Outlook[CR] already...[STE]");
+            $LOCAL0 = 94;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -884,7 +1081,8 @@ def 0 {
     }
     switch(dungeon_mode(95)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Mistral[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Mt. Mistral[CR] already...[STE]");
+            $LOCAL0 = 95;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -895,7 +1093,8 @@ def 0 {
     }
     switch(dungeon_mode(96)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Shimmer Hill[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Shimmer Hill[CR] already...[STE]");
+            $LOCAL0 = 96;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -906,7 +1105,8 @@ def 0 {
     }
     switch(dungeon_mode(97)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Lost Wilderness[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lost Wilderness[CR] already...[STE]");
+            $LOCAL0 = 97;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -917,7 +1117,8 @@ def 0 {
     }
     switch(dungeon_mode(98)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Midnight Forest[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Midnight Forest[CR] already...[STE]");
+            $LOCAL0 = 98;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -928,7 +1129,8 @@ def 0 {
     }
     switch(dungeon_mode(111)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]1st Station Pass[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]1st Station Pass[CR] already...[STE]");
+            $LOCAL0 = 111;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -937,9 +1139,118 @@ def 0 {
         default:
             break;
     }
+    switch(dungeon_mode(112)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]2nd Station Pass[CR] already...[STE]");
+            $LOCAL0 = 112;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]2nd Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(113)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]3rd Station Pass[CR] already...[STE]");
+            $LOCAL0 = 113;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]3rd Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(114)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]4th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 114;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]4th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(115)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]5th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 115;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]5th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(116)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]6th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 116;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]6th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(117)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]7th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 117;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]7th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(118)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]8th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 118;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]8th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(119)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]9th Station Pass[CR] already...[STE]");
+            $LOCAL0 = 119;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]9th Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(120)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Summit Station Pass[CR] already...[STE]");
+            $LOCAL0 = 120;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Summit Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
+            jump @anything_else;
+        default:
+            break;
+    }
     switch(dungeon_mode(174)) {
         case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Star Cave2[CR] already...");
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Star Cave2[CR] already...[STE]");
+            $LOCAL0 = 174;
             call @missions_check;
             break;
         case DMODE_OPEN:
@@ -948,155 +1259,441 @@ def 0 {
         default:
             break;
     }
+    message_Talk(" That\'s right, we have access\nto [CS:P]Aegis Cave[CR] now! Let\'s see...");
+    
+    switch(dungeon_mode(54)) {
+        case DMODE_OPEN:
+            if ($DUNGEON_CONQUEST_LIST[54]) {   
+            } else {
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Ice Aegis Cave[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            }
+            
+            $LOCAL0 = 0;
+            
+            if ($SCENARIO_MAIN_BIT_FLAG[43]) {
+                message_Talk(" Yay! We have the Ice Seal!");
+                $LOCAL0 += 4;
+            } else {
+                message_Talk("We don\'t have the Ice Seal yet...[W:30]\nIt would be dangerous, but we could go deeper in anyway...");
+            }
+            if ($DUNGEON_CONQUEST_LIST[55]) {
+                if ($SCENARIO_MAIN_BIT_FLAG[43]) { 
+                    if ($SCENARIO_SUB5 &<< 5) {
+                    } else {
+                        message_Talk(" We still need to recruit [CS:G]Regice[CR]!\nLet\'s go do that, [hero]!");
+                        jump @anything_else;
+                    }
+                }
+            } else {
+                message_Talk(" According to my notes, we still\nneed to challenge [CS:G]Regice[CR]! We could do that...");
+                if ($LOCAL0 >= 4) {
+                    jump @anything_else;
+                }
+            }
+            if ($DUNGEON_CONQUEST_LIST[56]) { 
+            } else {
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Rock Aegis Cave[CR]! We could do that...");
+                if ($SCENARIO_MAIN_BIT_FLAG[43]) {
+                } else {
+                    jump @anything_else;
+                }
+            }
+            if ($SCENARIO_MAIN_BIT_FLAG[44]) {
+                message_Talk(" Yay! We have the Rock Seal!");
+                $LOCAL0 += 2;
+            } else {
+                message_Talk("We don\'t have the Rock Seal yet...[W:30]\nIt would be dangerous, but we could go deeper in anyway...");
+            }
+            
+            if ($DUNGEON_CONQUEST_LIST[57]) {
+                if ($SCENARIO_MAIN_BIT_FLAG[44]) { 
+                    if ($SCENARIO_SUB5 &<< 6) {
+                    } else {
+                        message_Talk(" We still need to recruit [CS:G]Regirock[CR]!\nWe could do that...");
+                        if ($LOCAL0 >= 6) {
+                            jump @anything_else;
+                        }
+                    }
+                }
+            } else {
+                message_Talk(" According to my notes, we still\nneed to challenge [CS:G]Regirock[CR]! We could do that...");
+                if ($LOCAL0 >= 6) {
+                    jump @anything_else;
+                }
+            }
+            
+            if ($DUNGEON_CONQUEST_LIST[58]) {   
+            } else {
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Steel Aegis Cave[CR]! We could do that...");
+                if ($LOCAL0 >= 6) {
+                    jump @anything_else;
+                }
+            }
+            if ($SCENARIO_MAIN_BIT_FLAG[45]) {
+                message_Talk(" Yay! We have the Steel Seal!");
+                $LOCAL0 += 1;
+            } else {
+                message_Talk("We don\'t have the Steel Seal yet...[W:30]\nIt would be dangerous, but we could go deeper in anyway...");
+            }
+            
+            if ($DUNGEON_CONQUEST_LIST[59]) {
+                if ($SCENARIO_MAIN_BIT_FLAG[45]) { 
+                    if ($SCENARIO_SUB5 &<< 7) {
+                    } else {
+                        message_Talk(" We still need to recruit [CS:G]Regirock[CR]!\nWe could do that...");
+                        if ($LOCAL0 >= 7) {
+                            jump @anything_else;
+                        }
+                    }
+                }
+            } else {
+                message_Talk(" According to my notes, we still\nneed to challenge [CS:G]Registeel[CR]! We could do that...");
+                if ($LOCAL0 >= 7) {
+                    jump @anything_else;
+                }
+            }
+            
+            if ($DUNGEON_CONQUEST_LIST[60]) {   
+            } else {
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Aegis Cave Pit[CR]! We could do that...");
+                if ($LOCAL0 >= 7) {
+                    jump @anything_else;
+                }
+            }
+            if ($DUNGEON_CONQUEST_LIST[61]) {   
+                if ($LOCAL0 == 7) {
+                    switch(scn($SCENARIO_SUB5)[1]) {
+                        case &<< 0:
+                            break;
+                        default:
+                            message_Talk(" According to my notes, we still\nneed to recruit [CS:G]Regigigas[CR]! We should go do that!");
+                            jump @anything_else;
+                    }
+                }
+            } else {
+                message_Talk(" According to my notes, we still\nneed to challenge [CS:G]Regigigas[CR]! We could do that...");
+                if ($LOCAL0 >= 7) {
+                    jump @anything_else;
+                }
+            }
+        default:
+            break;
+    }
+
     if ($PERFORMANCE_PROGRESS_LIST[22]) {
-    } else {
-        jump @out_of_checks;
+        message_Talk(" We also have the\n[CS:C]Secret Rank[CR] now! Let\'s see..");
+        if ($SCENARIO_SUB4 &<< 0) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Aqua-Monica Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 1) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Terra Cymbal Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 2) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Icy Flute Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 3) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Fiery Drum Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 4) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Rock Horn Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 5) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Sky Melodica Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        if ($SCENARIO_SUB4 &<< 6) {
+        } else {
+            message_Talk(" Be sure to check the cafe each\nday for a letter from the federation![K]\nWe still need the [CS:C]Grass Cornet Mission[CR]!"); 
+            message_Talk(" Let\'s see what we can do\nin the mean time though...");
+        }
+        
+        switch(dungeon_mode(73)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Bottomless Sea[CR] already...");
+                $LOCAL0 = 73;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
+                    case &<< 7:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Kyogre[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Bottomless Sea[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(75)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Shimmer Desert[CR] already...");
+                $LOCAL0 = 75;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
+                    case &<< 1:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Groudon[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Shimmer Desert[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(77)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Avalanche[CR] already...");
+                $LOCAL0 = 77;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
+                    case &<< 3:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Articuno[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Mt. Avalanche[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(79)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Giant Volcano[CR] already...");
+                $LOCAL0 = 79;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
+                    case &<< 5:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Heatran[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Giant Volcano[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(81)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]World Abyss[CR] already...");
+                $LOCAL0 = 81;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
+                    case &<< 7:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Giratina[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]World Abyss[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(83)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Sky Stairway[CR] already...");
+                $LOCAL0 = 83;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
+                    case &<< 1:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Rayquaza[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Sky Stairway[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
+        switch(dungeon_mode(85)) {
+            case DMODE_OPEN_AND_REQUEST:
+                message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mystery Jungle[CR] already...");
+                $LOCAL0 = 85;
+                call @missions_check;
+                switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
+                    case &<< 3:
+                        break;
+                    default:
+                        message_Talk(" We do still need to recruit\n[CS:G]Mew[CR] though, let\'s go do that!");
+                        message_Close();
+                        jump @anything_else;
+                }
+                break;
+            case DMODE_OPEN:
+                message_Talk(" According to my notes, we still\nneed to clear [CS:P]Mystery Jungle[CR]! Let\'s go\ndo that now, [hero]!");
+                jump @anything_else;
+            default:
+                break;
+        }
     }
-    message_Talk(" We also have the\n[CS:C]Secret Rank[CR] now! Let\'s see..");
-    switch(dungeon_mode(73)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Bottomless Sea[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
-                case &<< 7:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Kyogre[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Bottomless Sea[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(75)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Shimmer Desert[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
-                case &<< 1:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Groudon[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Shimmer Desert[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(77)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mt. Avalanche[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
-                case &<< 3:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Articuno[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Mt. Avalanche[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(79)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Giant Volcano[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
-                case &<< 5:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Heatran[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Giant Volcano[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(81)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]World Abyss[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
-                case &<< 7:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Giratina[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]World Abyss[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(83)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Sky Stairway[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
-                case &<< 1:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Rayquaza[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Sky Stairway[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
-    switch(dungeon_mode(85)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk(" According to my notes, we\'ve\ncleared [CS:P]Mystery Jungle[CR] already...");
-            call @missions_check;
-            switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
-                case &<< 3:
-                    break;
-                default:
-                    message_Talk(" We do still need to recruit\n[CS:G]Mew[CR] though, let\'s go do that!");
-                    message_Close();
-                    jump @anything_else;
-            }
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Mystery Jungle[CR]! Let\'s go\ndo that now, [hero]!");
-            jump @anything_else;
-        default:
-            break;
-    }
+    
     message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
-    message_Talk("Wow, really slim pickings left, huh?[K]\nThe rule dungeons are non-essential, so\nthat could give you something to do, but...");
+    message_Talk(" Wow, slim pickings, huh?[K]\nI don\'t know all of your yaml settings, but\nusually the rest of these are non-essential...");
+    switch(dungeon_mode(107)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Oblivion Forest[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Oblivion Forest[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(108)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Treacherous Waters[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Treacherous Waters[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(109)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Southeastern Islands[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Southeastern Islands[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(110)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Inferno Cave[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Inferno Cave[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(191)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared the [CS:P]Final Maze[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Final Maze[CR] yet.[K] There are two checks\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(99)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Zero Isle North[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Zero Isle North[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(100)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Zero Isle East[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Zero Isle East[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(101)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Zero Isle West[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Zero Isle West[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(102)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Zero Isle South[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Zero Isle South[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(103)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Zero Isle Center[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Zero Isle Center[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    switch(dungeon_mode(104)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk(" Nope, we\'ve already\ncleared [CS:P]Destiny Tower[CR]...[W:30] Hmm...[W:30]");
+            break;
+        case DMODE_OPEN:
+            message_Talk(" Okay, so we haven\'t done\nthe [CS:P]Destiny Tower[CR] yet.[K] Yup, there\'s a check\nfor that...[W:30] Yeah let's see what else is left...");
+        default:
+            break;
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[22]) {
+        switch(scn($SCENARIO_SUB4)[1]) {
+            case &<< 2:
+                message_Talk(" Nope, we even have the check\nbehind getting to Guildmaster Rank!");
+                break;
+            case &<< 1:
+                message_Talk(" We also have the check behind\ngetting to Master [M:S3][M:S3][M:S3] Rank, but we still need\nGuildmaster if you made all checks essential...");
+                break;
+            case &<< 0:
+                message_Talk(" We also have the check behind\ngetting to Master [M:S3][M:S3] Rank, but we still need\nGuildmaster if you made all checks essential...");
+                break;
+            default:
+                switch(scn($SCENARIO_SUB4)[0]) {
+                    case &<< 7:
+                        message_Talk(" We also have the check behind\ngetting to Master [M:S3] Rank, but we still need\nGuildmaster if you made all checks essential...");
+                        break;
+                    default:
+                        message_Talk(" Okay, so we still need to obtain\nMaster [M:S3], Master [M:S3][M:S3], Master [M:S3][M:S3][M:S3], and even\nGuildmaster Rank if they\'re essential for you...");
+                        break;        
+                }
+                break;        
+        }
+    }
     jump @out_of_checks;
     §missions_check;
-    $VERSION = value($DUNGEON_ENTER_INDEX);
+    $LOCAL1 = value($DUNGEON_ENTER_INDEX);
+    $DUNGEON_ENTER_INDEX = value($LOCAL0);
     switch(ProcessSpecial(101, 0, 1)) { // Outlaws
         case > 0:
             message_Talk(" However, we have at\nleast one outlaw mission left there!");
             message_Close();
-            $DUNGEON_ENTER_INDEX = value($VERSION);
-            $VERSION = 1;
+            $DUNGEON_ENTER_INDEX = value($LOCAL1);
             jump @anything_else;
         case 0:
             break;
@@ -1105,16 +1702,14 @@ def 0 {
         case > 0:
             message_Talk(" However, we have at\nleast one regular job left there!");
             message_Close();
-            $DUNGEON_ENTER_INDEX = value($VERSION);
-            $VERSION = 1;
+            $DUNGEON_ENTER_INDEX = value($LOCAL1);
             jump @anything_else;
         case 0:
             break;
     }
     message_Talk("[STS] And we\'ve cleared all of\nour missions there! Well done, [hero]![STS]");
     message_Close();
-    $DUNGEON_ENTER_INDEX = value($VERSION);
-    $VERSION = 1;
+    $DUNGEON_ENTER_INDEX = value($LOCAL1);
     return;
     // This used to be the partner's dialogue stuff
     /*

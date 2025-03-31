@@ -91,7 +91,7 @@ typedef struct QuizData {
 void __attribute__((naked)) TypesanityCheck() {
     asm("ldr r0,=apSettings");
     asm("ldrh r0,[r0,#0x0]");
-    asm("tst r0,#0b0000000100000000");
+    asm("tst r0,#0b0000000010000000");
     asm("bxne lr");
     asm("b SameTypeUnhook");
 }
@@ -101,8 +101,8 @@ void __attribute__((naked)) TypesanityCheck() {
 void __attribute__((naked)) ForcedPlayerCheck() {
     asm("ldr r1,=apSettings");
     asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000011000000000");
-    asm("lsr r1,r1,#0x9");
+    asm("and r1,r1,#0b0000001100000000");
+    asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b11"); // STARTER_OPTION_CHOOSE
     asm("moveq r3,#9");        // If choose is picked, skip all questions
     asm("ldreq r1,[r0,#0x0]"); // except male/female.
@@ -143,8 +143,8 @@ void __attribute__((naked)) ForcedPartnerCheck() {
     asm("mov r7,#0x0"); // Original Instruction
     asm("ldr r1,=apSettings");
     asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000011000000000");
-    asm("lsr r1,r1,#0x9");
+    asm("and r1,r1,#0b0000001100000000");
+    asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("moveq r6,#0x0");
     asm("bx lr");
@@ -154,8 +154,8 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("blt QuizForcedPartnerRollUnhook"); // originalish instruction
     asm("ldr r1,=apSettings");
     asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000011000000000");
-    asm("lsr r1,r1,#0x9");
+    asm("and r1,r1,#0b0000001100000000");
+    asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("bxne lr");
     asm("stmdb sp!,{lr}");
@@ -197,8 +197,8 @@ void __attribute__((naked)) OverrideHeroCheck() {
     asm("mov r7,#0x0"); // Original Instruction
     asm("ldr r1,=apSettings");
     asm("ldr r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000011000000000");
-    asm("lsr r1,r1,#0x9");
+    asm("and r1,r1,#0b0000001100000000");
+    asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("moveq r0,#0x42");
     asm("movne r0,#0x26");
@@ -208,8 +208,8 @@ void __attribute__((naked)) OverrideHeroCheck() {
 void __attribute__((naked)) HeroTweakCheck() {
     asm("ldr r3,=apSettings");
     asm("ldr r3,[r3,#0x0]");
-    asm("and r3,r3,#0b0000011000000000");
-    asm("lsr r3,r3,#0x9");
+    asm("and r3,r3,#0b0000001100000000");
+    asm("lsr r3,r3,#0x8");
     asm("cmp r3,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("cmpne r3,#0b11"); // STARTER_OPTION_CHOOSE
     asm("ldrnesh r3,[r1,r0]"); // originalish instruction
@@ -224,8 +224,8 @@ void __attribute__((naked)) ChooseTweakCheck() {
     asm("stmdb sp!,{r0,r1}");
     asm("ldr r3,=apSettings");
     asm("ldr r3,[r3,#0x0]");
-    asm("and r3,r3,#0b0000011000000000");
-    asm("lsr r3,r3,#0x9");
+    asm("and r3,r3,#0b0000001100000000");
+    asm("lsr r3,r3,#0x8");
     asm("cmp r3,#0b11"); // STARTER_OPTION_CHOOSE
     asm("addne r2,r2,#1"); // originalish instruction
     asm("moveq r2,#0x42");
@@ -236,8 +236,8 @@ void __attribute__((naked)) ChooseTweakCheck() {
 void __attribute__((naked)) TypeHeroTweak() {
     asm("ldr r1,=apSettings");
     asm("ldr r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000011000000000");
-    asm("lsr r1,r1,#0x9");
+    asm("and r1,r1,#0b0000001100000000");
+    asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("cmpne r1,#0b11"); // STARTER_OPTION_CHOOSE
     asm("bne GetPersonality");

@@ -1611,6 +1611,58 @@ coro EVENT_DIVIDE_RESUME {
     ProcessSpecial(23,0,0); // Randomize Demo Actors
     if ( $SPECIAL_EPISODE_TYPE == -1) {
         debug_Print("Main Episode Detected!");
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+            $DUNGEON_CONQUEST_LIST[123] = 1;
+            $DUNGEON_CONQUEST_LIST[124] = 1;
+            $DUNGEON_CONQUEST_LIST[125] = 1;
+            $DUNGEON_CONQUEST_LIST[126] = 1;
+            $DUNGEON_CONQUEST_LIST[127] = 1;
+        }
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+            $DUNGEON_CONQUEST_LIST[128] = 1;
+            $DUNGEON_CONQUEST_LIST[129] = 1;
+            $DUNGEON_CONQUEST_LIST[130] = 1;
+            $DUNGEON_CONQUEST_LIST[131] = 1;
+            $DUNGEON_CONQUEST_LIST[132] = 1;
+        }
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+            $DUNGEON_CONQUEST_LIST[158] = 1;
+            $DUNGEON_CONQUEST_LIST[159] = 1;
+            $DUNGEON_CONQUEST_LIST[160] = 1;
+            $DUNGEON_CONQUEST_LIST[161] = 1;
+            $DUNGEON_CONQUEST_LIST[162] = 1;
+            $DUNGEON_CONQUEST_LIST[163] = 1;
+            $DUNGEON_CONQUEST_LIST[164] = 1;
+        }
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+            $DUNGEON_CONQUEST_LIST[149] = 1;
+            $DUNGEON_CONQUEST_LIST[150] = 1;
+            $DUNGEON_CONQUEST_LIST[151] = 1;
+            $DUNGEON_CONQUEST_LIST[152] = 1;
+            $DUNGEON_CONQUEST_LIST[153] = 1;
+            $DUNGEON_CONQUEST_LIST[154] = 1;
+            $DUNGEON_CONQUEST_LIST[155] = 1;
+            $DUNGEON_CONQUEST_LIST[156] = 1;
+            $DUNGEON_CONQUEST_LIST[157] = 1;
+        }
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+            $DUNGEON_CONQUEST_LIST[133] = 1;
+            $DUNGEON_CONQUEST_LIST[134] = 1;
+            $DUNGEON_CONQUEST_LIST[135] = 1;
+            $DUNGEON_CONQUEST_LIST[136] = 1;
+            $DUNGEON_CONQUEST_LIST[137] = 1;
+            $DUNGEON_CONQUEST_LIST[138] = 1;
+            $DUNGEON_CONQUEST_LIST[139] = 1;
+            $DUNGEON_CONQUEST_LIST[140] = 1;
+            $DUNGEON_CONQUEST_LIST[141] = 1;
+            $DUNGEON_CONQUEST_LIST[142] = 1;
+            $DUNGEON_CONQUEST_LIST[143] = 1;
+            $DUNGEON_CONQUEST_LIST[144] = 1;
+            $DUNGEON_CONQUEST_LIST[145] = 1;
+            $DUNGEON_CONQUEST_LIST[146] = 1;
+            $DUNGEON_CONQUEST_LIST[147] = 1;
+            $DUNGEON_CONQUEST_LIST[148] = 1;
+        }
         if ($SCENARIO_MAIN == 30) { // Main game not entered!
             switch (ProcessSpecial(107,0,0)) {
                 case 1:
@@ -2242,6 +2294,7 @@ coro DEBUG_SCENE {
 }
 
 coro DEMO_CANCEL {
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
     hold;
 }
 
@@ -8735,6 +8788,24 @@ coro GETOUT_NORMAL {
                 main_EnterGround(LEVEL_P02P01A, 30);
                 hold;
                 end;
+            case 2:
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                main_EnterDungeon(171,30);
+                main_EnterDungeon(-1,30);
+                hold;
+            case 5:
+                screen_FadeOut(0,30);
+                bgm_FadeOut(30);
+                screen2_FadeOut(1,30);
+                message_Mail("You were suddenly attacked from behind\nby a Pokémon you\'ve never seen before!");
+                // TODO: Somehow get a Tentacool portrait here!
+                message_SetFace(ACTOR_TALK_MAIN,FACE_ANGRY,FACE_POS_STANDARD);
+                message_Mail("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+                message_Close();
+                JumpCommon(CORO_EVENT_HA_SAMEX);
+                hold;
             case 71:
                 ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_ONLY,0,0);
                 jump @label_667;
@@ -8811,11 +8882,6 @@ coro GETOUT_NORMAL {
                 screen_FadeOut(0,30);
                 bgm_FadeOut(30);
                 screen2_FadeOut(1,30);
-                message_Mail("Wait a minute, this isn\'t [CS:P]Spacial Rift[CR]![K]\nIt\'s actually [CS:P]Special Rift[CR]!");
-                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
-                message_Talk(" [CS:P]Special[CR]?");
-                message_Mail("Yes, [CS:P]Special[CR].");
-                message_Close();
                 main_EnterDungeon(173,30);
                 main_EnterDungeon(-1,30);
                 hold;
@@ -8823,11 +8889,13 @@ coro GETOUT_NORMAL {
                 screen_FadeOut(0,30);
                 bgm_FadeOut(30);
                 screen2_FadeOut(1,30);
+                /*
                 message_Mail("Wait a minute, this isn\'t [CS:P]Labyrinth Cave[CR]![K]\nIt\'s actually [CS:P]Labyrinth Cove[CR]!");
                 message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
                 message_Talk(" [CS:P]Cove[CR]?");
                 message_Mail("Yes, [CS:P]Cove[CR].");
                 message_Close();
+                */
                 main_EnterDungeon(172,30);
                 main_EnterDungeon(-1,30);
                 hold;
@@ -10489,6 +10557,28 @@ coro GETOUT_REQUEST_DUNGEON {
                             clear $EVENT_LOCAL;
                             §label_1025;
                             ~crass(LEVEL_G01P03A, 'REQUEST', 0,LEVEL_G01P03A, 'REQUEST:1', 0);
+                            if (not debug) {
+                                switch(ProcessSpecial(109, 0,0)) {
+                                    case >= 8: // MASTER
+                                        ~AssignCheck(80);
+                                    case 7: // HYPER
+                                        ~AssignCheck(79);
+                                    case 6: // ULTRA
+                                        ~AssignCheck(78);
+                                    case 5: // SUPER
+                                        ~AssignCheck(77);
+                                    case 4: // DIAMOND
+                                        ~AssignCheck(76);
+                                    case 3: // GOLD
+                                        ~AssignCheck(75);
+                                    case 2: // SILVER
+                                        ~AssignCheck(74);
+                                    case 1: // BRONZE
+                                        ~AssignCheck(73);
+                                    default:
+                                        break;
+                                }
+                            }
                             §label_1023;
                             forever {
                                 switch ( message_Menu(76) ) {

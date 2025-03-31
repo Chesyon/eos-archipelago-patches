@@ -105,6 +105,10 @@
     .org IsValidPortraitCallsite
         bl ShouldShowScriptEnginePortrait
     .endif
+
+    ; EXP scaling
+    .org GetExpReturn
+        bl ExpScaling
 .close
 
 .open "overlay11.bin", overlay11_start
