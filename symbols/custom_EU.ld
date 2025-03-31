@@ -28,6 +28,7 @@ CreateDefaultScriptEngineBox = 0x2035420;
 ShowStringInDialogueBoxCallsite1 = 0x2035560;
 IsValidPortraitCallsite = 0x2035814;
 GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
+GetExpReturn = 0x2052DE0;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
