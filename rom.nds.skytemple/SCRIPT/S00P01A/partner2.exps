@@ -237,7 +237,12 @@ def 0 {
             if ($SCENARIO_SUB5 &<< 2) {
             } else {
                 message_Talk(" My notes say that we completed\n[CS:G]Bidoof\'s Wish[CR], but we never got the check for\nspeaking to [CS:G]Marowak[CR] during the episode...");
+                message_SetFace(ACTOR_ATTENDANT1, FACE_ANGRY, FACE_POS_STANDARD);
+                message_Talk(" The crossroads DID tell you to\ntalk to [CS:G]Marowak[CR] before going to [CS:P]Wish Cave[CR]\nright?[K] Always trust sapient crossroads!");
+                message_SetFace(ACTOR_ATTENDANT1, FACE_SIGH, FACE_POS_STANDARD);
+                message_Talk(" What am I going to do with you,\n[hero]?[K] Luckily, we only have to start\n[CS:G]Bidoof\'s Wish[CR], not finish it.[K] Alright, let\'s go!");
                 message_Close();
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
                 jump @anything_else;
             }
         } else {
