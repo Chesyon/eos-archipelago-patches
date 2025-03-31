@@ -2242,6 +2242,7 @@ coro DEBUG_SCENE {
 }
 
 coro DEMO_CANCEL {
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
     hold;
 }
 
@@ -10489,6 +10490,28 @@ coro GETOUT_REQUEST_DUNGEON {
                             clear $EVENT_LOCAL;
                             §label_1025;
                             ~crass(LEVEL_G01P03A, 'REQUEST', 0,LEVEL_G01P03A, 'REQUEST:1', 0);
+                            if (not debug) {
+                                switch(ProcessSpecial(109, 0,0)) {
+                                    case >= 8: // MASTER
+                                        ~AssignCheck(80);
+                                    case 7: // HYPER
+                                        ~AssignCheck(79);
+                                    case 6: // ULTRA
+                                        ~AssignCheck(78);
+                                    case 5: // SUPER
+                                        ~AssignCheck(77);
+                                    case 4: // DIAMOND
+                                        ~AssignCheck(76);
+                                    case 3: // GOLD
+                                        ~AssignCheck(75);
+                                    case 2: // SILVER
+                                        ~AssignCheck(74);
+                                    case 1: // BRONZE
+                                        ~AssignCheck(73);
+                                    default:
+                                        break;
+                                }
+                            }
                             §label_1023;
                             forever {
                                 switch ( message_Menu(76) ) {
