@@ -176,8 +176,8 @@ endif
 symbols/generated_$(REGION).ld:
 	$(PYTHON) scripts/generate_linkerscript.py $(REGION)
 
-.PHONY: patch
-patch: build
+.PHONY: out
+out: build
 	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT)
 
 .PHONY: asmdump
@@ -188,17 +188,14 @@ asmdump: build
 headers:
 	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --deprecate-aliases --docstrings
 	
-.PHONY: apply-xdelta
-apply-xdelta:
+.PHONY: rom
+rom:
 	xdelta patch unpatched-base.xdelta vanilla.nds rom.nds
-	
-.PHONY: apply-cot
-apply-cot: patch
 
-.PHONY: build-xdelta
-build-xdelta:
+.PHONY: xdelta
+xdelta:
 	xdelta delta vanilla.nds rom.nds unpatched-base.xdelta
 	
-.PHONY: build-bsdiff
-build-bsdiff:
+.PHONY: bsdiff
+bsdiff:
 	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
