@@ -12,7 +12,7 @@ You can install c-of-time on Linux using the following methods. Instructions var
 You can install eos-archipelago-patches on Ubuntu or Debian using the following methods. The steps detailed in this guide were tested on Ubuntu 22.04.
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta3`. You will need to enter your password during the installation.
 3. Install Python dependencies: `pip3 install pyyaml ndspy bsdiff`
     - **Note:** If this does not work, try `pip3 install pyyaml ndspy bsdiff --break-system-packages`.
 4. Compile `armips`:
@@ -30,13 +30,13 @@ You can install eos-archipelago-patches on Ubuntu or Debian using the following 
 ## Fedora
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs xdelta`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo dnf install @development-tools gcc-c++ cmake python3-pip arm-none-eabi-binutils-cs arm-none-eabi-gcc-cs xdelta3`. You will need to enter your password during the installation.
 3. You can now continue with the steps 3-10 of the Ubuntu/Debian method above.
 
 ## Arch Linux
 
 1. Open the Terminal app. The exact steps vary based on your desktop environment.
-2. Run the following command to install the required tools: `sudo pacman -Syu base-devel git python python-pip arm-none-eabi-gcc arm-none-eabi-binutils xdelta`. You will need to enter your password during the installation.
+2. Run the following command to install the required tools: `sudo pacman -Syu base-devel git python python-pip arm-none-eabi-gcc arm-none-eabi-binutils xdelta3`. You will need to enter your password during the installation.
 3. Install Python dependencies: `pip3 install pyyaml ndspy bsdiff`
 4. Install the [armips package](https://aur.archlinux.org/packages/armips) via the Arch User Repository (AUR). Please refer to the [Arch Wiki](https://wiki.archlinux.org/title/Arch_User_Repository) for instructions.
 5. You can now continue with the steps 5-10 of the Ubuntu/Debian method above.

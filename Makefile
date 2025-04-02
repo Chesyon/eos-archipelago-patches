@@ -150,8 +150,8 @@ buildobjs:
 #---------------------------------------------------------------------------------
 .PHONY: clean
 clean:
-	@echo clean ...
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
+	@echo Clean!
  
 #---------------------------------------------------------------------------------
 else
@@ -190,12 +190,48 @@ headers:
 	
 .PHONY: rom
 rom:
-	xdelta patch unpatched-base.xdelta vanilla.nds rom.nds
+	xdelta3 -d -f -s vanilla.nds unpatched-base.xdelta rom.nds
 
 .PHONY: xdelta
 xdelta:
-	xdelta delta vanilla.nds rom.nds unpatched-base.xdelta
+	xdelta3 -e -f -s vanilla.nds rom.nds unpatched-base.xdelta
 	
 .PHONY: bsdiff
 bsdiff:
+	@echo "\e[1;33mThis part takes a while, please be patient! \e[0m"
 	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
+	@echo "\e[1;32mDone! \e[0m"
+
+.PHONY: out+c
+out+c:
+	make clean && make out
+
+# Apply the xdelta and apply CoT code.
+.PHONY: everything
+everything:
+	make rom && make out+c
+
+# Make an xdelta and apply CoT code.
+.PHONY: everything+x
+everything+x:
+	make xdelta && make out+c
+
+# Don't apply or make an xdelta, and apply CoT code. (same as out-c)
+.PHONY: everything-x
+everything-x:
+	make out+c
+
+# Apply the xdelta, apply CoT code, and make a bsdiff.
+.PHONY: everything+b
+everything+b:
+	make rom && make out+c && make bsdiff
+
+# Make an xdelta, apply CoT code, and make a bsdiff.
+.PHONY: everything+x+b
+everything+x+b:
+	make xdelta && make out+c && make bsdiff
+
+# Don't apply or make an xdelta, apply CoT code, and make a bsdiff.
+.PHONY: everything-x+b 
+everything-x+b:
+	make out+c && make bsdiff
