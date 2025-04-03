@@ -12,6 +12,22 @@ bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf
         CUSTOM_SAVE_AREA.hintedItems[index] = true;
         return true;
     }
+    if(StrcmpTag(tag_string, "qho"))
+    {
+        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.who);
+        return true;
+    }
+    if(StrcmpTag(tag_string, "qhat"))
+    {
+        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.what);
+        return true;
+    }
+    if(StrcmpTag(tag_string, "qhere"))
+    {
+        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.where);
+        CUSTOM_SAVE_AREA.dimensionalScreamInfo.recieved = true;
+        return true;
+    }
     return false;
 }
 

@@ -22,6 +22,16 @@ ASSERT_SIZE(PreviewableItems, 0x1A4);
 
 extern PreviewableItems hintableItems;
 
+typedef struct DimensionalScreamInfo{
+    char who[16];
+    char what[32];
+    char where[32];
+    bool recieved;
+} DimensionalScreamInfo;
+ASSERT_SIZE(DimensionalScreamInfo, 0x51);
+
+extern DimensionalScreamInfo dimensionalScreamInfo;
+
 typedef struct ArchipelagoSettings { // size: 2 bytes
     uint8_t iqMultiplier : 4;    // 0 (0x0)
     bool earlyMissionFloors : 1; // 4 (0x4)
@@ -92,17 +102,18 @@ typedef struct DungeonTraps { // size: 1 byte
 ASSERT_SIZE(DungeonTraps, 0x1);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;                     // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192];       // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards;   // 0x184: How many relic fragment shards the player has collected.
-    uint8_t acquiredInstruments;           // 0x185: How many instruments the player has collected.
-    DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
-    bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;             // 0x2A4: wip dungeons traps
-    uint8_t acquiredCafeEventChecks;       // 0x2A5: How many cafe event checks have been obtained. See my comment on SP 105.
-    uint8_t acquiredCafeDrinkChecks;       // 0x2A6: How many cafe drink checks have been obtained.
-    bool mainGameUnlocked;                 // 0x2A7: Is main game unlocked?
-    undefined fields[0xE58];               // 0x2A8: Unused.
+    uint32_t checksum;                           // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];             // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards;         // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;                 // 0x185: How many instruments the player has collected.
+    DeathLinkTracker deathLinkTracker;           // 0x186: Stores information for deathlink.
+    bool hintedItems[HINTABLE_ITEM_COUNT];       // 0x29A: list of which items have been hinted.
+    DungeonTraps dungeonTraps;                   // 0x2A4: wip dungeons traps
+    uint8_t acquiredCafeEventChecks;             // 0x2A5: How many cafe event checks have been obtained. See my comment on SP 105.
+    uint8_t acquiredCafeDrinkChecks;             // 0x2A6: How many cafe drink checks have been obtained.
+    bool mainGameUnlocked;                       // 0x2A7: Is main game unlocked?
+    DimensionalScreamInfo dimensionalScreamInfo; // 0x2A8: info for dimensional scream hints.
+    undefined fields[0xE07];                     // 0x2F9: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
