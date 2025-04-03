@@ -257,6 +257,14 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
 static int SpGetRank(){
     return GetRank();
 }
+
+// Special process 110: Set portrait monster and emotion. First parameter: Monster ID, second parameter: emotion.
+static int SpSetPortraitMonster(int monsterId, int emotion){
+    struct portrait_params* scriptPortrait = 0x023259E4;
+    scriptPortrait->monster_id.val = monsterId;
+    SetPortraitEmotion(scriptPortrait, emotion);
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -318,6 +326,8 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 109:
         *return_val = SpGetRank();
         return true;
+    case 110:
+        *return_val = SpSetPortraitMonster(arg1, arg2);
     case 255:
         *return_val = SpGetCrassKind();
         return true;
