@@ -265,6 +265,18 @@ static int SpSetPortraitMonster(int monsterId, int emotion){
     SetPortraitEmotion(scriptPortrait, emotion);
 }
 
+// Special Process 111: Assign check. Parameter 1: Check ID. Currently unused as I need to test the hell out of it to make sure it has the same behavior as Lappy's macro.
+static int SpAssignCheck(int checkId){
+    int subXVar = 5;
+    int num = checkId >> 4;
+    subXVar += num;
+    checkId -= num << 4;
+    uint16_t val = 0;
+    LoadScriptVariableValueBytes(subXVar, val, 2);
+    val = val | (1 << checkId);
+    SaveScriptVariableValueBytes(subXVar, val, 2);
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -328,6 +340,10 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 110:
         *return_val = SpSetPortraitMonster(arg1, arg2);
+        return true;
+    case 111:
+        *return_val = SpAssignCheck(arg1);
+        return true;
     case 255:
         *return_val = SpGetCrassKind();
         return true;
