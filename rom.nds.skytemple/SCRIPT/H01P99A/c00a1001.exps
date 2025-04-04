@@ -23,26 +23,26 @@ def 0 {
         case 1:
             {
                 english="[FT:0] I\'m beat! It was a long day!",
-                french=" Je suis vanné! Rude journée!",
-                german=" Ich bin platt! Das war ein langer\nTag!",
-                italian=" Sono sfinito! È stata una lunga\ngiornata!",
-                spanish=" ¡Me duele todo el cuerpo!\n¡Vaya día que hemos tenido!",
+                french="[FT:0] Je suis vanné! Rude journée!",
+                german="[FT:0] Ich bin platt! Das war ein langer\nTag!",
+                italian="[FT:0] Sono sfinito! È stata una lunga\ngiornata!",
+                spanish="[FT:0] ¡Me duele todo el cuerpo!\n¡Vaya día que hemos tenido!",
             }
         case 2:
             {
                 english="[FT:0] We put in a full day today.\nI\'m exhausted.",
-                french=" Je suis vanné! Rude journée!",
-                german=" Wir haben heute den ganzen Tag\nlang Einsatz gezeigt. Ich bin erschöpft.",
-                italian=" Oggi abbiamo dato tutto. Sono\nesausto.",
-                spanish=" Ha sido un día duro, estoy que\nno me puedo mover.",
+                french="[FT:0] Je suis vanné! Rude journée!",
+                german="[FT:0] Wir haben heute den ganzen Tag\nlang Einsatz gezeigt. Ich bin erschöpft.",
+                italian="[FT:0] Oggi abbiamo dato tutto. Sono\nesausto.",
+                spanish="[FT:0] Ha sido un día duro, estoy que\nno me puedo mover.",
             }
         default:
             {
                 english="[FT:0] We worked hard all day long.\nI\'m tired!",
-                french=" Je suis vannée! Rude journée!",
-                german=" Wir haben den ganzen Tag lang\nhart gearbeitet. Ich bin müde!",
-                italian=" Oggi abbiamo dato tutto. Sono\nstanca.",
-                spanish=" Ha sido un día muy largo.\n¡Estoy molida!",
+                french="[FT:0] Je suis vannée! Rude journée!",
+                german="[FT:0] Wir haben den ganzen Tag lang\nhart gearbeitet. Ich bin müde!",
+                italian="[FT:0] Oggi abbiamo dato tutto. Sono\nstanca.",
+                spanish="[FT:0] Ha sido un día muy largo.\n¡Estoy molida!",
             }
     }
     message_SwitchTalk ($PARTNER_TALK_KIND) {
@@ -261,86 +261,86 @@ def 0 {
                             default:
                                 message_Mail("The Pokemon went away...");
                                 message_Close();
-                                with (actor ACTOR_NPC_REJIROKKU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_PARUKIA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_PARUKIA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_GURAADON) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_REJIAISU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_REJISUCHIRU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_REJIGIGASU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_YUKUSHII) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_EMURITTO) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_AGUNOMU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_DIARUGA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_GIRATYINA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_SEREBII) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_FURIIZAA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_HIIDORAN) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_DARK_DIARUGA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_MYUU) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_MANAFI) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_FIONE1) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_KURESERIA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_REKKUUZA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_KAIOOGA) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                with (actor ACTOR_NPC_SHEIMI_FC) {
-                                    MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
-                                }
-                                Wait(60);
-                                se_Play(7170);
-                                WaitSe(7170);
-                                Wait(30);
-                                se_Play(7947);
-                                Wait(60);
                                 switch(ProcessSpecial(103,0,0)) {
                                     case 1:
-                                         message_ResetActor();
-                                         message_Talk(" Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
-                                         message_Close();
+                                        with (actor ACTOR_NPC_REJIROKKU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_PARUKIA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_PARUKIA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_GURAADON) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_REJIAISU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_REJISUCHIRU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_REJIGIGASU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_YUKUSHII) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_EMURITTO) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_AGUNOMU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_DIARUGA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_GIRATYINA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_SEREBII) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_FURIIZAA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_HIIDORAN) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_DARK_DIARUGA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_MYUU) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_MANAFI) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_FIONE1) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_KURESERIA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_REKKUUZA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_KAIOOGA) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        with (actor ACTOR_NPC_SHEIMI_FC) {
+                                            MovePositionMark(2, Position<'m1', 39.5, 27.5>, Position<'m2', 39.5, 44.5>);
+                                        }
+                                        Wait(60);
+                                        se_Play(7170);
+                                        WaitSe(7170);
+                                        Wait(30);
+                                        se_Play(7947);
+                                        Wait(60);
+                                        message_ResetActor();
+                                        message_Talk(" Nice going [CS:G]HandBrain[CR], you\'re\nreally [CS:C]killing[CR] it out there!"); 
+                                        message_Close();
                                     default:
                                         break;
                                 }

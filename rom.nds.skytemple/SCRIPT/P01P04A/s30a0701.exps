@@ -664,6 +664,7 @@ def 0 {
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
             break;
         default:
+            message_Mail("[STS]Out of drink checks![STE]");
             break;
     }
     return;

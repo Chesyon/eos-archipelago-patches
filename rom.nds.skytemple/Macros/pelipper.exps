@@ -1,7 +1,7 @@
 
     macro PelipperTransition() {
-        if ($PERFORMANCE_PROGRESS_LIST[37]) { // Pelipper Transitions Disabled?  
-            return; // 
+        if ($SCENARIO_TALK_BIT_FLAG[215]) { // Express Mail Suspended?  
+            return;
         } else {
             if ($PERFORMANCE_PROGRESS_LIST[35]) {
                 // Continue!
@@ -64,7 +64,7 @@
                 message_Close();
                 message_Talk(" You don\'t want them right now? I\'ll\ndisable [CS:C]Express Mail[CR] then.[K] When you\'re ready\nto receive it, talk to me in your base, okay?");
                 message_Close();
-                $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                $SCENARIO_TALK_BIT_FLAG[215] = 1; // No more Pelipper transitions
                 return;
         }
         ~PelipperDeliverAll();
@@ -128,7 +128,7 @@
                 case menu("Never Mind"):
                 default:
                     message_Close();
-                    $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                    $SCENARIO_TALK_BIT_FLAG[215] = 1; // No more Pelipper transitions
                     message_Talk(" Very well, I can hold onto your\nitems for a bit longer. Best of luck today!");
                     message_Close();
                     JumpCommon(CORO_EVENT_END_FREE);
@@ -195,7 +195,7 @@
                 message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" Looks like you have no room for\nthis delivery! I\'ll hold onto it and any others\nfor you to retrieve in your base later, okay?");
                 message_Close();
-                $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                $SCENARIO_TALK_BIT_FLAG[215] = 1; // No more Pelipper transitions
                 JumpCommon(CORO_EVENT_END_FREE);
                 break;
             case 4: // Review each one...
@@ -244,7 +244,7 @@
                         message_Close();
                         Wait(60);
                         $SCENARIO_TALK_BIT_FLAG[250] = 0;
-                        $PERFORMANCE_PROGRESS_LIST[37] = 1; // No more Pelipper transitions
+                        $SCENARIO_TALK_BIT_FLAG[215] = 1; // No more Pelipper transitions
                         message_Talk(" Understood. I\'ll be in your base with\nyour delivery when you\'re ready to receive it.\nTalk to me when the client is connected, okay?");
                         message_Close();
                         jump @box_lost;

@@ -2748,6 +2748,7 @@ coro EVENT_HA_YU_SHU_DOX {
 }
 
 coro EVENT_HA_SAME {
+    // $PERFORMANCE_PROGRESS_LIST[37] Legendary Recruitment!
     CallCommon(CORO_SUBSCREEN_INIT);
     switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
     CallCommon(CORO_BUBBLE_TEST);
@@ -8800,9 +8801,12 @@ coro GETOUT_NORMAL {
                 bgm_FadeOut(30);
                 screen2_FadeOut(1,30);
                 message_Mail("You were suddenly attacked from behind\nby a Pokémon you\'ve never seen before!");
-                // TODO: Somehow get a Tentacool portrait here!
-                message_SetFace(ACTOR_TALK_MAIN,FACE_ANGRY,FACE_POS_STANDARD);
-                message_Mail("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+                if (debug) {
+                    message_ResetActor();
+                } else {
+                    ProcessSpecial(110,72,FACE_ANGRY);
+                }
+                message_Talk("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
                 message_Close();
                 JumpCommon(CORO_EVENT_HA_SAMEX);
                 hold;
@@ -9642,6 +9646,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         dungeon_mode(52) = DMODE_REQUEST;
                         dungeon_mode(53) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S03_17_20);
+                        hold;
+                        $SCENARIO_TALK_BIT_FLAG[215] = 1; // Unused here, but Pelipper uses it!
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 58] ) {
@@ -12825,6 +12831,7 @@ coro BUBBLE_TEST {
         message_Close();
         return;
     }
+    // $PERFORMANCE_PROGRESS_LIST[35]
     ~PelipperTransition();
     if ($PERFORMANCE_PROGRESS_LIST[38]) {
         Wait(30);
@@ -12853,7 +12860,9 @@ coro BUBBLE_TEST {
         screen_FlushIn(1, 0, 1, 0, 0, 0);
         Wait(30);    
         ~crass(LEVEL_S04P01A, 'C00A0701', 0,LEVEL_S04P01A, 'C00A0701:1', 0);
-        message_Explanation("(Insert Hint Here)");
+        message_Explanation("That took forever to find![K] Here you are\n[qho], I know it was important!");
+        message_Explanation("One [qhat] for you![K] Use it well, okay?\nLet me tell you, that wasn\'t easy to find!");
+        message_Explanation("I had to travel all the way to\n[qhere] to find it![K]\nIt took me ages, I tell you!");
         message_Close();
         se_Play(5139);
         ~crass(LEVEL_S04P01A, 'C00A1701', 0,LEVEL_S04P01A, 'C00A1701:1', 0);
