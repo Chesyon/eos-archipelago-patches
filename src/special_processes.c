@@ -191,20 +191,15 @@ void __attribute__((naked)) DecreaseQuantityOfStorageItem(int index, int amountT
 
 // Special process 108: Recycle shop stuff. 
 static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
-    struct bulk_item* itemToRemove;
-    ItemAtTableIdx(itemSetId1, itemToRemove);
-    int idRequired = itemToRemove->id.val;
-    int nbItemsInBag = CountItemTypeInBag(idRequired);
-    int nbItemsInStorage = CountItemTypeInStorage(idRequired);
-    if(nbItemsInBag + nbItemsInStorage >= itemToRemove->quantity){
+    struct bulk_item itemToRemove;
+    ItemAtTableIdx(itemSetId1, &itemToRemove);
+    int idRequired = itemToRemove.id.val;
+    if(CountItemTypeInBag(idRequired) + CountItemTypeInStorage(&itemToRemove) >= itemToRemove.quantity){
         bool bagIsFull = IsBagFull();
-        bool storageIsFull = IsStorageFull();
-        if (bagIsFull && storageIsFull) return 3; // player does not have the needed space to recieve the output item.
-        struct bulk_item* itemToAdd;
-        ItemAtTableIdx(itemSetId2, itemToAdd);
-        int idToAdd = itemToAdd->id.val;
-        int amountToRemove = itemToRemove->quantity;
-        // TODO: remove items.
+        if (bagIsFull && IsStorageFull()) return 3; // player does not have the needed space to recieve the output item.
+        struct bulk_item itemToAdd;
+        ItemAtTableIdx(itemSetId2, &itemToAdd);
+        int amountToRemove = itemToRemove.quantity;
         int bagSize = GetCurrentBagCapacity();
         for (int i = 0; i < bagSize; i++){
             if(amountToRemove <= 0) break;
@@ -242,11 +237,11 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
             }
         }
         if(bagIsFull){
-            AddBulkItemToStorage(itemToAdd);
+            AddBulkItemToStorage(&itemToAdd);
             return 1; // item is added to storage.
         }
         else{
-            SpecialProcAddItemToBag(itemToAdd);
+            SpecialProcAddItemToBag(&itemToAdd);
             return 0; // item is added to bag.
         }
     }
@@ -260,9 +255,9 @@ static int SpGetRank(){
 
 // Special process 110: Set portrait monster and emotion. First parameter: Monster ID, second parameter: emotion.
 static int SpSetPortraitMonster(int monsterId, int emotion){
-    struct portrait_params* scriptPortrait = 0x023259E4;
-    scriptPortrait->monster_id.val = monsterId;
-    SetPortraitEmotion(scriptPortrait, emotion);
+    SCRIPT_PORTRAIT_PARAMS.monster_id.val = monsterId;
+    SetPortraitEmotion(&SCRIPT_PORTRAIT_PARAMS, emotion);
+    return 0;
 }
 
 // Special Process 111: Assign check. Parameter 1: Check ID. Currently unused as I need to test the hell out of it to make sure it has the same behavior as Lappy's macro.
@@ -272,9 +267,11 @@ static int SpAssignCheck(int checkId){
     subXVar += num;
     checkId -= num << 4;
     uint16_t val = 0;
-    LoadScriptVariableValueBytes(subXVar, val, 2);
+    enum script_var_id var_id = subXVar;
+    LoadScriptVariableValueBytes(var_id, &val, 2);
     val = val | (1 << checkId);
-    SaveScriptVariableValueBytes(subXVar, val, 2);
+    SaveScriptVariableValueBytes(var_id, &val, 2);
+    return 0;
 }
 
 // Special process Read/write DeathLink

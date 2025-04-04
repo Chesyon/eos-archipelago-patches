@@ -125,6 +125,8 @@ extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 extern int MESSAGE_SET_WAIT_MODE_PARAMS[2];
 extern void* UNIONALL_RAM_ADDRESS;
 
+extern struct portrait_params SCRIPT_PORTRAIT_PARAMS;
+
 extern uint32_t TAILORED_MISSION_DUNGEON;
 
 void PlayEffectAnimationEntityWrapper(struct entity* entity, int effect_id);

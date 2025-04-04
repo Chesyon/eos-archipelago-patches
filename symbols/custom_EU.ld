@@ -128,6 +128,7 @@ SomeDeathMsgCheckFun = 0x200C63C;
 
 /* !file ram */
 MESSAGE_SET_WAIT_MODE_PARAMS = 0x23259CC;
+SCRIPT_PORTRAIT_PARAMS = 0x23259E4;
 
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DE714;
