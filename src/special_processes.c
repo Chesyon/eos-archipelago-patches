@@ -274,6 +274,11 @@ static int SpAssignCheck(int checkId){
     return 0;
 }
 
+// Special process 112: Get current bag capacity. No parameters, returns current bag capacity.
+static int SpGetCurrentBagCapacity(){
+    return GetCurrentBagCapacity();
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -340,6 +345,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 111:
         *return_val = SpAssignCheck(arg1);
+        return true;
+    case 112:
+        *return_val = SpGetCurrentBagCapacity();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
