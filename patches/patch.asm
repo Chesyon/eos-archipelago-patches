@@ -111,6 +111,11 @@
         bl ExpScaling
 .close
 
+.open "overlay1.bin", overlay1_start
+    .org ClearMarkHook
+        bl ClearMarkCheck
+.close
+
 .open "overlay11.bin", overlay11_start
     .org NameAutofillHook
         bl AutofillName
