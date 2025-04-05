@@ -809,7 +809,9 @@ coro EFFECT_MOVE_WAVE {
 coro EVENT_DIVIDE {
     debug_Print('EVENT_DIVIDE');
     if ($SCENARIO_MAIN == 30) {
-        JumpCommon(CORO_EVENT_DIVIDE_RESUME);
+        if ($SPECIAL_EPISODE_TYPE == -1) {
+            JumpCommon(CORO_EVENT_DIVIDE_RESUME);
+        }
     }
     CallCommon(CORO_BUBBLE_TEST);
     if ( variation ) {
@@ -2038,6 +2040,12 @@ coro EVENT_DIVIDE_RESUME {
 }
 
 coro EVENT_DIVIDE_SPECIAL_EPISODE {
+    if ($SCENARIO_MAIN == 0) {
+        message_Mail("Please create a save file before\nchoosing a special episode!");
+        message_Close();
+        ProcessSpecial(PROCESS_SPECIAL_RETURN_TO_TITLE_SCREEN,0,0);
+        hold;
+    }
     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
         case 0:
             debug_Print('SP_BIPPA');
@@ -2440,6 +2448,8 @@ coro EVENT_M00A_01 {
     $SUB30_PROJECTP = 1;
     $SCENARIO_MAIN = scn[30, 99]; // If 30, main game not entered yet!
     if (debug) {
+//        $SPECIAL_EPISODE_OPEN[0] = 1;
+//        jump @no_main;
         $SCENARIO_MAIN = scn[29, 99];
         main_EnterGround(LEVEL_H02P99A,30);
         hold;
@@ -2451,6 +2461,7 @@ coro EVENT_M00A_01 {
             main_EnterGround(LEVEL_H02P99A,30);
             hold;
         default:
+            §no_main;
             Wait(90);
             $SCENARIO_MAIN_BIT_FLAG[6] = 1;
             switch ( message_Menu(MENU_SAVE_MENU) ) { }
