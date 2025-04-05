@@ -138,7 +138,7 @@ static int SpCheckForUnownRocks(){
 
 // Special process 107: Is the main game unlocked? No parameters.
 static bool SpIsMainGameUnlocked(){
-    return CUSTOM_SAVE_AREA.mainGameUnlocked;
+    return CUSTOM_SAVE_AREA.mainGameUnlocked | startWithMainGameUnlocked;
 }
 
 
