@@ -1,4 +1,5 @@
 /* ! For Arm9 */
+GetCurrentBagCapacityHook = 0x200EE54;
 GenerateKecleonItems1Hook = 0x2010B20;
 GenerateKecleonItems2Hook = 0x2010E30;
 IqScalingGroundHook = 0x20119FC;
