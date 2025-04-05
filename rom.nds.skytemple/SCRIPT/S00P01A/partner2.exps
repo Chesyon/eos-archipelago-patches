@@ -4,7 +4,6 @@ def 0 {
         jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,72,0);
         dungeon_mode(54) = DMODE_OPEN;                                                                                                        
     }
     §decision_tree;
@@ -5093,7 +5092,7 @@ def 0 {
     §debug_menu;
     message_Notice("[M:D2][CS:C]Choose Debug Setting[CR]");        
     switch ( message_SwitchMenu(0, 1) ) {
-        case menu("Bag Size"):
+        case menu("Bag Size (Old)"):
             message_Close();
             message_Notice("[M:D2][CS:C]Pick a bag size:[CR]");  
             switch ( message_SwitchMenu(0, 1) ) {

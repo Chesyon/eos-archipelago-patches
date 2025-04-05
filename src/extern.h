@@ -113,7 +113,8 @@ typedef struct CustomSaveArea {
     uint8_t acquiredCafeDrinkChecks;             // 0x2A6: How many cafe drink checks have been obtained.
     bool mainGameUnlocked;                       // 0x2A7: Is main game unlocked?
     DimensionalScreamInfo dimensionalScreamInfo; // 0x2A8: info for dimensional scream hints.
-    undefined fields[0xE07];                     // 0x2F9: Unused.
+    uint8_t bagSize;                             // 0x2F9: Current bag size. Follows the same logic as vanilla: https://wiki.skytemple.org/index.php/List_of_Script_Variables#Bag_size
+    undefined fields[0xE06];                     // 0x2FA: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
