@@ -201,6 +201,12 @@ bsdiff:
 	@echo "\e[1;33mThis part takes a while, please be patient! \e[0m"
 	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
 	@echo "\e[1;32mDone! \e[0m"
+	
+.PHONY: overlay36-location
+.SILENT: overlay36-location
+overlay36-location:
+	echo "Position of Overlay36:"
+	LANG=C grep -a -b -P -U -o "\x0d\xf0\xad\xba" out.nds | cut -d ":" -f1
 
 .PHONY: out+c
 out+c:
@@ -208,30 +214,24 @@ out+c:
 
 # Apply the xdelta and apply CoT code.
 .PHONY: everything
-everything:
-	make rom && make out+c
+everything: rom out+c overlay36-location
 
 # Make an xdelta and apply CoT code.
 .PHONY: everything+x
-everything+x:
-	make xdelta && make out+c
+everything+x: xdelta out+c overlay36-location
 
 # Don't apply or make an xdelta, and apply CoT code. (same as out-c)
 .PHONY: everything-x
-everything-x:
-	make out+c
+everything-x: out+c overlay36-location
 
 # Apply the xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything+b
-everything+b:
-	make rom && make out+c && make bsdiff
+everything+b: rom out+c bsdiff overlay36-location
 
 # Make an xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything+x+b
-everything+x+b:
-	make xdelta && make out+c && make bsdiff
+everything+x+b: xdelta out+c bsdiff overlay36-location
 
 # Don't apply or make an xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything-x+b 
-everything-x+b:
-	make out+c && make bsdiff
+everything-x+b: out+c bsdiff overlay36-location
