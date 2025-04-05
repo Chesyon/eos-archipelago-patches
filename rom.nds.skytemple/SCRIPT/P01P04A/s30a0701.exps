@@ -1,14 +1,15 @@
-
 def 0 {
     supervision_Acting(0);
     switch ( message_Menu(MENU_JUICE_BAR) ) { }
     §label_35;
     switch ( message_Menu(MENU_JUICE_BAR_PICK_ITEM) ) {
         case 1:
+            debug_Print("Spinda Case 1");
             §switch1_466;
             §label_34;
             JumpCommon(CORO_END_TALK);
         case 2:
+            debug_Print("Spinda Case 2");
             §label_1;
             message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
             message_Talk("[STS] Spiiiiiiiiiin! ♪[STE]");
@@ -32,6 +33,7 @@ def 0 {
             call @spinda_drink;
             jump @label_35;
         case 5:
+            debug_Print("Spinda Case 5");
             screen_FadeOut(1, 30);
             supervision_RemoveActing(3);
             supervision_RemoveCommon(10);
@@ -63,11 +65,14 @@ def 0 {
             Wait(10);
             jump @label_35;
         case 6:
+            debug_Print("Spinda Case 6");
             jump @switch1_466;
         case 7:
+            debug_Print("Spinda Case 7");
             §switch1_467;
             jump @label_35;
         case 10:
+            debug_Print("Spinda Case 10");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetEffect(EFFECT_NONE, 0);
             }
@@ -103,6 +108,7 @@ def 0 {
             Wait(10);
             jump @label_1;
         case 14:
+            debug_Print("Spinda Case 14");
             screen_FadeOut(1, 30);
             with (actor ACTOR_PLAYER) {
                 SetPositionMark(Position<'m21', 33, 22.5>);
@@ -128,6 +134,7 @@ def 0 {
             screen_FadeIn(1, 30);
             jump @label_35;
         case 15:
+            debug_Print("Spinda Case 15");
             with (actor ACTOR_PLAYER) {
                 MovePositionMark(1, Position<'m23', 33, 22.5>);
             }
@@ -150,6 +157,7 @@ def 0 {
             Wait(10);
             jump @label_1;
         case 16:
+            debug_Print("Spinda Case 16");
             with (actor ACTOR_PLAYER) {
                 MovePositionMark(1, Position<'m25', 33, 22.5>);
             }
@@ -171,10 +179,14 @@ def 0 {
             Wait(10);
             jump @label_1;
         case 17:
+            debug_Print("Spinda Case 17");
         case 18:
+            debug_Print("Spinda Case 18");
         case 19:
+            debug_Print("Spinda Case 19");
             jump @switch1_467;
         case 20:
+            debug_Print("Spinda Case 20");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -219,6 +231,7 @@ def 0 {
             screen_FadeIn(1, 15);
             jump @label_35;
         case 22:
+            debug_Print("Spinda Case 22");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -239,6 +252,7 @@ def 0 {
             message_Close();
             jump @label_36;
         case 27:
+            debug_Print("Spinda Case 27");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -259,6 +273,7 @@ def 0 {
             message_Close();
             jump @label_36;
         case 28:
+            debug_Print("Spinda Case 28");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -279,6 +294,7 @@ def 0 {
             message_Close();
             jump @label_36;
         case 30:
+            debug_Print("Spinda Case 30");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -299,6 +315,7 @@ def 0 {
             message_Close();
             jump @label_36;
         case 32:
+            debug_Print("Spinda Case 32");
             screen_FadeOut(0, 15);
             worldmap_SetMode(4);
             back2_SetMode(3);
@@ -319,6 +336,7 @@ def 0 {
             message_Close();
             jump @label_36;
         case 40:
+            debug_Print("Spinda Case 40");
             supervision_Acting(2);
             se_Play(8978);
             with (actor ACTOR_PLAYER) {
@@ -370,6 +388,7 @@ def 0 {
             call @gib_check;
             jump @label_35;
         case 41:
+            debug_Print("Spinda Case 41");
             supervision_Acting(2);
             se_Play(8978);
             with (actor ACTOR_PLAYER) {
@@ -432,6 +451,7 @@ def 0 {
             call @gib_check;
             jump @label_35;
         case 45:
+            debug_Print("Spinda Case 45");
             supervision_Acting(3);
             camera_MoveDefault(1);
             with (performer 0) {
@@ -473,6 +493,7 @@ def 0 {
             call @gib_check;
             jump @label_35;
         case 46:
+            debug_Print("Spinda Case 46");
             supervision_Acting(3);
             camera_MoveDefault(1);
             with (performer 0) {
@@ -521,6 +542,7 @@ def 0 {
             call @gib_check;
             jump @label_35;
         case 50:
+            debug_Print("Spinda Case 50");
             se_Play(531);
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_STATS_UP_EFFECT, 3);
@@ -531,6 +553,7 @@ def 0 {
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
             jump @label_35;
         case 51:
+            debug_Print("Spinda Case 51");
             se_Play(534);
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_STATS_DOWN_EFFECT, 3);
@@ -541,6 +564,7 @@ def 0 {
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
             jump @label_35;
         case 60:
+            debug_Print("Spinda Case 60");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetDirection(DIR_DOWN);
             }
@@ -556,6 +580,8 @@ def 0 {
             }
             jump @label_35;
         case 61:
+            debug_Print("Spinda Case 61: Good Feeling");
+            call @gib_check_lite;
             Wait(22);
             se_Play(8978);
             with (actor ACTOR_NPC_PATCHIIRU) {
@@ -563,29 +589,35 @@ def 0 {
             }
             jump @label_35;
         case 62:
+            debug_Print("Spinda Case 62");
             se_Play(8968);
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetEffect(EFFECT_SHOCKED, 0);
             }
             jump @label_35;
         case 63:
+            debug_Print("Spinda Case 63");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetAnimation(26);
             }
             jump @label_35;
         case 64:
+            debug_Print("Spinda Case 64");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetAnimation(2);
             }
             jump @label_35;
         case 65:
+            debug_Print("Spinda Case 65");
             se_Play(8968);
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_SHOCKED, 0);
             }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
+            call @gib_check_lite;
             jump @label_35;
         case 66:
+            debug_Print("Spinda Case 66");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetDirection(DIR_DOWNRIGHT);
             }
@@ -594,6 +626,7 @@ def 0 {
             }
             jump @label_35;
         case 67:
+            debug_Print("Spinda Case 67");
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetDirection(DIR_DOWN);
             }
@@ -602,6 +635,7 @@ def 0 {
             }
             jump @label_35;
         case 68:
+            debug_Print("Spinda Case 68: Secret Spot");
             se_Play(8967);
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_EXCLAMATION_MARK, 3);
@@ -612,6 +646,7 @@ def 0 {
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
             jump @label_35;
         case 69:
+            debug_Print("Spinda Case 69");
             se_Play(8969);
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_SHOCKED, 0);
@@ -621,12 +656,31 @@ def 0 {
         default:
             jump @label_34;
     }
-    §gib_check; // Gives an incremental Cafe Event check up to a limit
+    §gib_check_lite;
+    debug_Print("Called Spinda Event Lite");
     if (debug) {
         return;
     }
     switch( ProcessSpecial(105,0,0)) {
         case > 0:
+            debug_Print("Spinda Case  > 0");
+            ProcessSpecial(105,1,0);
+            message_Mail("[CN]Defying all explanation...\n[CN]You got a check!");
+            $SCENARIO_TALK_BIT_FLAG[247] = 1;
+            message_KeyWait();
+            break;
+        default:
+            break;
+    }
+    return;
+    §gib_check; // Gives an incremental Cafe Event check up to a limit
+    debug_Print("Called Spinda Event");
+    if (debug) {
+        return;
+    }
+    switch( ProcessSpecial(105,0,0)) {
+        case > 0:
+            debug_Print("Spinda Case  > 0");
             ProcessSpecial(105,1,0);
             message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
@@ -634,31 +688,35 @@ def 0 {
         default:
             switch(random(100)) {
                 case < 40:
+            debug_Print("Spinda Case  < 40");
                     item_Set(0,169,0);
                     break;
                 case < 70:
+            debug_Print("Spinda Case  < 70");
                     item_Set(0,170,0);
                     break;
                 case < 90:
+            debug_Print("Spinda Case  < 90");
                     item_Set(0,171,0);
                     break;
                 default:
                     item_Set(0,172,0);
                     break;
             }
-            message_Mail("You got a [s_item:0]!");
+            message_Mail("You\'ve obtained all drink events!\nInstead of a check...\nYou got a [s_item:0]!");
             message_KeyWait();
             switch(message_Menu(MENU_GIVE_ITEM)) {}
             break;
     }
-
     return;
     §spinda_drink; // Gives an incremental Cafe drink check up to a limit
+    debug_Print("Called Spinda Drink");
     if (debug) {
-        return;
+        return;    
     }
     switch( ProcessSpecial(105,0,1)) {
         case > 0:
+            debug_Print("Spinda Case  > 0");
             ProcessSpecial(105,1,1);
             message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
