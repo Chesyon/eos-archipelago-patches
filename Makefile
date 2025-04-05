@@ -205,7 +205,7 @@ bsdiff:
 .PHONY: overlay36-location
 .SILENT: overlay36-location
 overlay36-location:
-	echo "Position of Overlay36:"
+	echo "Position of Overlay36 (Decimal):"
 	LANG=C grep -a -b -P -U -o "\x0d\xf0\xad\xba" out.nds | cut -d ":" -f1
 
 .PHONY: out+c
