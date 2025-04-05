@@ -30,6 +30,9 @@ IsValidPortraitCallsite = 0x2035814;
 GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 GetExpReturn = 0x2052DE0;
 
+/* ! For Overlay1 */
+ClearMarkHook = 0x2333D68;
+
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
 GroundMainLoopStuff = 0x22E98D4;
