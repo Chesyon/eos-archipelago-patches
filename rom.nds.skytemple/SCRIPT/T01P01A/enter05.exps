@@ -1,4 +1,4 @@
-
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
     if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] ) {
         with (actor ACTOR_TALK_MAIN) {
@@ -16,7 +16,67 @@ def 0 {
         if ( $SCENARIO_TALK_BIT_FLAG[118] ) {
             §label_131;
             switch ( message_Menu(MENU_DUSKULL_BANK) ) { }
-//            switch($
+            if (debug) {
+                $EVENT_LOCAL = value($BANK_GOLD);
+                debug_PrintFlag($EVENT_LOCAL,"Bank");
+                if ($EVENT_LOCAL >= 100) {
+                    if not ($SCENARIO_SUB6 &<< 1) {
+                        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" One moment, please!");
+                        message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]100[CR][M:S0], I have this gift for you!");
+                        ~AssignCheck(81);
+                    }
+                }
+                if ($EVENT_LOCAL >= 5000) {
+                    if not ($SCENARIO_SUB6 &<< 2) {
+                        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]5000[CR][M:S0], I have this gift for you!");
+                        ~AssignCheck(82);
+                    }
+                }
+                if ($EVENT_LOCAL >= 10000) {
+                    if not ($SCENARIO_SUB6 &<< 3) {
+                        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]10000[CR][M:S0], I have this gift for you!");
+                        ~AssignCheck(83);
+                    }
+                }
+                if ($EVENT_LOCAL >= 20000) {
+                    if not ($SCENARIO_SUB6 &<< 4) {
+                        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]20000[CR][M:S0], I have this gift for you!");
+                        ~AssignCheck(84);
+                    }
+                }
+                if ($EVENT_LOCAL >= 50000) {
+                    if not ($SCENARIO_SUB6 &<< 5) {
+                        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]50000[CR][M:S0], I have this gift for you!");
+                        ~AssignCheck(85);
+                    }
+                }
+                if ($EVENT_LOCAL > 65535) {
+                    $EVENT_LOCAL = value($BANK_GOLD);
+                    $EVENT_LOCAL -= 60000;
+                    if ($EVENT_LOCAL >= 40000) {
+                        if not ($SCENARIO_SUB6 &<< 6) {
+                            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]100000[CR][M:S0], I have this gift for you!");
+                            ~AssignCheck(81);
+                        }
+                    }
+                    $EVENT_LOCAL += 60000;
+                    $EVENT_LOCAL /= 111;
+                    
+                    if ($EVENT_LOCAL >= 9009) {
+                        if not ($SCENARIO_SUB6 &<< 7) {
+                            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing grand\ntotal of [CS:G]999999[CR][M:S0], I have this gift for you!");
+                            ~AssignCheck(86);
+                        }
+                    }
+                }
+            }
             §label_130;
             JumpCommon(CORO_END_TALK);
         } else {
