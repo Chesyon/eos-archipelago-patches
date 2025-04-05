@@ -2,7 +2,8 @@
 .include "symbols.asm"
 
 .open "arm9.bin", arm9_start
-
+    .org GetCurrentBagCapacityHook
+        bl GetCurrentBagCapacityTweak
     ; AP Shop Items
     .org GenerateKecleonItems1Hook
         b  GenerateShop1Tweak
