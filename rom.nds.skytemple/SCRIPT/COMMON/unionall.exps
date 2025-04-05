@@ -2420,6 +2420,7 @@ coro EVENT_M00A_01 {
     §done_name_check;
     ProcessSpecial(23,0,0); // Randomize Demo Actors
     dungeon_mode(1) = DMODE_OPEN;
+    $SCENARIO_BALANCE_FLAG = 7; // All the things are allowed!
     $SCENARIO_MAIN_BIT_FLAG[95] = 1; // Ursaring you liar, we can't evolve!!!
     $SCENARIO_MAIN_BIT_FLAG[96] = 1; // Yes Krabby, we know bottles exist!!!
     $SCENARIO_MAIN_BIT_FLAG[97] = 1; // Chimecho Go Awayyyyyyyyyyyyyyyy
