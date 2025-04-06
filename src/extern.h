@@ -50,6 +50,8 @@ extern char slot_name[16];
 
 extern int seed; // 64 bits = 8 bytes
 
+extern bool startWithMainGameUnlocked;
+
 typedef struct MissionMax {
     uint8_t totalJobsEarly;    // 0x0
     uint8_t totalOutlawsEarly; // 0x1
