@@ -122,6 +122,8 @@ coro TALK_PARTNER_MESSAGE {
                 case 2:
                 case 4:
                 case 3:
+                    supervision_ExecuteExport('PARTNER');
+                    JumpCommon(CORO_END_TALK);
                     §label_4;
                     supervision_Suspend(-2);
                     end;
@@ -7182,10 +7184,10 @@ coro EVENT_N02_09_10 {
     CallCommon(CORO_DEBUG_FLAG_SETTING_PUPURIN);
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D43P31A, 'N02A0901', 0);
+    $SCENARIO_SIDE = scn[42, 0];
     supervision_ExecuteActingSub(LEVEL_P19P01A, 'N02A1001', 0);
     supervision_ExecuteActingSub(LEVEL_P19P02A, 'N02A1002', 0);
     supervision_ExecuteActingSub(LEVEL_P17P02A, 'N02A1003', 0);
-    $SCENARIO_SIDE = scn[42, 0];
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_P17P02A);
     supervision_ExecuteStationCommon(LEVEL_P17P02A, 1);
@@ -7253,8 +7255,8 @@ coro EVENT_N03_06_07 {
         supervision_ExecuteActingSub(LEVEL_P20P02A, 'N03A0704', 0);
         supervision_ExecuteActingSub(LEVEL_P20P03A, 'N03A0705', 0);
         supervision_ExecuteActingSub(LEVEL_P21P02A, 'N03A0706', 0);
-        supervision_ExecuteActingSub(LEVEL_P17P02A, 'N03A0707', 0);
         switch ( ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_ONLY, 0, 0) ) { }
+        supervision_ExecuteActingSub(LEVEL_P17P02A, 'N03A0707', 0);
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_P17P02A);
         supervision_ExecuteStationCommon(LEVEL_P17P02A, 1);
