@@ -41,13 +41,17 @@ def 0 {
         spanish="[CN]Aquí hay algo escrito...",
     });
     §label_56;
-    message_Notice({
-        english="[CN]This is [CS:N]Sunflora[CR]\'s diary.\n[CN]Should we sneak a peek?",
-        french="[CN]C\'est le journal d\'[CS:N]Héliatronc[CR].\n[CN]On jette un coup d\'œil?",
-        german="[CN]Dies ist das Tagebuch von [CS:N]Sonnflora[CR].\n[CN]Sollen wir einen Blick riskieren?",
-        italian="[CN]È il diario di [CS:N]Sunflora[CR].\n[CN]Gli diamo un\'occhiata veloce?",
-        spanish="[CN]Se trata del diario de [CS:N]Sunflora[CR].\n[CN]¿Quieres echarle un vistazo?",
-    });
+    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) { // Sunflora
+        message_Notice("[CN]Oh my gosh! It\'s your diary!\n[CN]Would you like to read it?");
+    } else {
+        message_Notice({
+            english="[CN]This is [CS:N]Sunflora[CR]\'s diary.\n[CN]Should we sneak a peek?",
+            french="[CN]C\'est le journal d\'[CS:N]Héliatronc[CR].\n[CN]On jette un coup d\'œil?",
+            german="[CN]Dies ist das Tagebuch von [CS:N]Sonnflora[CR].\n[CN]Sollen wir einen Blick riskieren?",
+            italian="[CN]È il diario di [CS:N]Sunflora[CR].\n[CN]Gli diamo un\'occhiata veloce?",
+            spanish="[CN]Se trata del diario de [CS:N]Sunflora[CR].\n[CN]¿Quieres echarle un vistazo?",
+        });
+    }
     switch ( message_SwitchMenu(0, 1) ) {
         case menu({
             english="Read",
@@ -64,13 +68,11 @@ def 0 {
                     break;
                 default:
                     screen_FadeOut(1,30);
-                    message_Explanation({
-                        english="[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Sunflora[CR]\'s diary!",
-                        french="[CN]Tiens...[K]\n[CN]Il y a un autre message.",
-                        german="[CN]Augenblick...[K]\n[CN]Da ist noch eine Nachricht.",
-                        italian="[CN]Un momento...[K]\n[CN]C\'è un altro messaggio.",
-                        spanish="[CN]Espera...[K]\n[CN]Hay un mensaje más.",
-                    });
+                    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) { // Sunflora
+                        message_Explanation("[CN]Hold on...[W:30] Oh my gosh![K]\n[CN]You found a note in your diary!\n[CN]When did that get there?");
+                    } else {
+                        message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Sunflora[CR]\'s diary!");
+                    }
                     message_Close();                 
                     ~AssignCheck(7); // Sunflora SE Unlocked!
                     Wait(30);

@@ -1,0 +1,140 @@
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+            jump @bidoof_se;
+        case 2:
+            jump @sunflora_se;
+        default:
+            JumpCommon(CORO_END_TALK);
+    }
+    §bidoof_se;
+    if ($SCENARIO_SUB1 &<< 6) {
+        message_Talk(" Can\'t you see I\'m busy right now,\nsquirt?[K] Play somewhere else, why don\'t you!");
+        JumpCommon(CORO_END_TALK);           
+    } else {
+        message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" What\'s this now?[K] You want to be\na great explorer like me, pipsqueak?[K] Now\nisn\'t that be something! I like you, pipsqueak!");
+        message_Talk(" How about an inspiring story while\nI wait for my drink, junior? I\'ll tell you all\nabout the vicious [CS:G]Armaldo[CR] I hunted down!");
+        switch(message_SwitchMenu(0,1)) {
+            case menu("Yes"):
+                message_Close();
+                bgm_FadeOut(30);
+                screen_FadeOut(1,30);
+                break;
+            case menu("No"):
+                message_Close();
+                message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_SURPRISED,FACE_POS_BOTTOM_L_FACEINW);
+                message_Talk(" Huh?");
+                message_Close();
+                message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+                message_Talk(" That kind of attitude is why you\'re\nnot going anywhere in life, kid! Beat it!\nand only come back if you change your mind!");
+                message_Close();
+                JumpCommon(CORO_END_TALK);
+        }
+        message_Close();
+        bgm_FadeOut(30);
+        screen_FadeOut(1,30);
+        Wait(30);
+        me_Play(5);
+        message_Mail({
+            english="[CN]The Special Episode\n[CN]\"Igglybuff the Prodigy\"\n[CN]may have been unlocked![W:90]",
+            french="[CN]L\'Episode Spécial\n[CN]\"Toudoudou le Surdoué\"\n[CN]est maintenant disponible![W:90]",
+            german="[CN]Die Bonusepisode\n[CN][F:S2]Wundersamer Fluffeluff[F:E2]\n[CN]wurde freigeschaltet![W:90]",
+            italian="[CN]L\'episodio speciale\n[CN]\"Igglybuff il genio\"\n[CN]è ora disponibile![W:90]",
+            spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"Igglybuff es un prodigio\".[W:90]",
+        });
+        message_Mail({
+            english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+            french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+            german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+            italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+            spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+        });
+        message_Mail({
+            english="[CN]If you would like to play the Special Episode,\n[CN]save your adventure progress, and\n[CN]return to the Top Menu.",
+            french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
+            german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
+            italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
+            spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
+        });
+        message_Close();
+        Wait(90);
+        ~AssignCheck(6); // Assign Igglybuff SE
+        screen_FadeIn(1,30);
+        bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
+        message_Mail("[CN]You feel as if [CS:G]Nidoking[CR]\n[CN]left out a lot of important context...");
+        message_Talk(" And that\'s the whole of it, kid! I\nsaved that young [CS:G]Igglybuff[CR] from the clutches\nof that vile outlaw, and brought him to justice!");
+        message_Talk(" Now shoo![K] It looks like [CS:G]Spinda[CR] is\nmaking my drink right now, and I need to\nmake sure he doesn\'t flub it up like usual!");
+        message_Close();
+        JumpCommon(CORO_END_TALK);
+    }
+    §sunflora_se;
+    if ($SCENARIO_SUB1 &<< 6) {
+        message_Talk(" Can\'t you see I\'m busy right now?[K]\nYou\'ve got an outlaw to hunt, get to it!");
+        JumpCommon(CORO_END_TALK);
+    } else {
+        message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" What\'s this now?[K] You\'re looking for\nadvice on taking down an invincible outlaw?[K]\nWell, I might be able to help you out, sweetie!");
+        message_Talk(" How about an inspiring story while\nI wait for my drink, doll? I\'ll tell you all\nabout the elusive [CS:G]Armaldo[CR] I hunted down!");
+        switch(message_SwitchMenu(0,1)) {
+            case menu("Yes"):
+                message_Close();
+                bgm_FadeOut(30);
+                screen_FadeOut(1,30);
+                break;
+            case menu("No"):
+                message_Close();
+                message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_SURPRISED,FACE_POS_BOTTOM_L_FACEINW);
+                message_Talk(" Huh?");
+                message_Close();
+                message_SetFace(ACTOR_NPC_NIDOKINGU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+                message_Talk(" That kind of attitude is why you\'re\nnot going anywhere in life! Beat it!\nand only come back if you change your mind!");
+                message_Close();
+                JumpCommon(CORO_END_TALK);
+        }
+        message_Close();
+        bgm_FadeOut(30);
+        screen_FadeOut(1,30);
+        Wait(30);
+        me_Play(5);
+        message_Mail({
+            english="[CN]The Special Episode\n[CN]\"Igglybuff the Prodigy\"\n[CN]may have been unlocked![W:90]",
+            french="[CN]L\'Episode Spécial\n[CN]\"Toudoudou le Surdoué\"\n[CN]est maintenant disponible![W:90]",
+            german="[CN]Die Bonusepisode\n[CN][F:S2]Wundersamer Fluffeluff[F:E2]\n[CN]wurde freigeschaltet![W:90]",
+            italian="[CN]L\'episodio speciale\n[CN]\"Igglybuff il genio\"\n[CN]è ora disponibile![W:90]",
+            spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"Igglybuff es un prodigio\".[W:90]",
+        });
+        message_Mail({
+            english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+            french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+            german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+            italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+            spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+        });
+        message_Mail({
+            english="[CN]If you would like to play the Special Episode,\n[CN]save your adventure progress, and\n[CN]return to the Top Menu.",
+            french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
+            german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
+            italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
+            spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
+        });
+        message_Close();
+        Wait(90);
+        ~AssignCheck(6); // Assign Igglybuff SE
+        screen_FadeIn(1,30);
+        bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
+        message_Mail("[CN]You feel as if [CS:G]Nidoking[CR]\n[CN]left out a lot of important context...");
+        message_Talk(" And that\'s the whole of it, kid! I\nsaved that young [CS:G]Igglybuff[CR] from the clutches\nof that vile outlaw, and brought him to justice!");
+        message_Talk(" Now shoo![K] It looks like [CS:G]Spinda[CR] is\nmaking my drink right now, and I need to\nmake sure he doesn\'t flub it up like usual!");
+        message_Close();
+        JumpCommon(CORO_END_TALK);
+    }
+}

@@ -8,10 +8,13 @@ def 0 {
             if ( scn($SCENARIO_MAIN) == [8, 5] || scn($SCENARIO_MAIN) == [8, 6] || scn($SCENARIO_MAIN) == [29, 8] || scn($SCENARIO_MAIN) == [29, 9] ) {
                 §label_1;
                 if ( $SCENARIO_MAIN_BIT_FLAG[93] ) {
+                    §label_3;
                     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                         case 0:
                         case 2:
-                            §label_3;
+                            supervision_StationCommon(23);
+                            jump @label_27;
+                            §label_1127;
                             supervision_StationCommon(10);
                             supervision_StationCommon(11);
                             supervision_StationCommon(12);
@@ -24,7 +27,17 @@ def 0 {
                                         case 1:
                                             end;
                                         default:
-                                            supervision_StationCommon(1);
+                                            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                                case 0: 
+                                                    supervision_StationCommon(21);
+                                                    break;
+                                                case 2:
+                                                    supervision_StationCommon(22);
+                                                    break;
+                                                default:
+                                                    supervision_StationCommon(1);
+                                                    break;
+                                            }
                                             debug_Print('SET_BGM');
                                             bgm_PlayFadeIn(BGM_SPINDAS_CAFE, 0, 256);
                                             JumpCommon(CORO_COMMON_ENTER);
@@ -132,14 +145,15 @@ def 0 {
                             break;
                         default:
                             if ( scn($SCENARIO_MAIN) < [7, 4] || scn($SCENARIO_MAIN) == [8, 4] || scn($SCENARIO_MAIN) == [8, 5] || scn($SCENARIO_MAIN) == [8, 6] || scn($SCENARIO_MAIN) == [29, 7] || scn($SCENARIO_MAIN) == [29, 8] || scn($SCENARIO_MAIN) == [29, 9] || scn($SCENARIO_MAIN) == [29, 46] || scn($SCENARIO_MAIN) == [29, 47] || scn($SCENARIO_MAIN) == [29, 48] ) {
-                                jump @label_3;
+                                jump @label_1127;
                             } else {
                                 supervision_StationCommon(5);
-                                jump @label_3;
+                                jump @label_1127;
                             }
                             break;
                     }
                 } else {
+                
                     jump @label_3;
                 }
             } else {

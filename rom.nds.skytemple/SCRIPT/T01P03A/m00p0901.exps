@@ -2,7 +2,7 @@ import "checks.exps"; // Leave this for me, I don't want to rename this later lo
 def 0 {
     sound_Stop();
     back_SetGround(LEVEL_T01P03A);
-    if ( scn($SCENARIO_MAIN) < [29, 5] ) {
+    if ( $EXECUTE_SPECIAL_EPISODE_TYPE == 0 ) {
         §label_0;
         supervision_StationCommon(5);
         supervision_StationCommon(0);
@@ -227,7 +227,7 @@ def 0 {
                                     spanish=" ¡Estupendo![K]\n¡Habéis superado el dojo!",
                                 });
                                 message_Talk({
-                                    english=" That\'s good work, you two!",
+                                    english=" That\'s good work! Really good!",
                                     french=" Bon travail, vous deux!",
                                     german=" Das war gute Arbeit, ihr beide!",
                                     italian=" Ottimo lavoro!",

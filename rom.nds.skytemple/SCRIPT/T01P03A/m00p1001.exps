@@ -1,0 +1,593 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_T01P03A);
+    if ( $EXECUTE_SPECIAL_EPISODE_TYPE == 0 ) {
+        §label_0;
+        supervision_StationCommon(6);
+        supervision_StationCommon(0);
+        supervision_Acting(0);
+        with (performer 0) {
+            camera_SetMyself();
+        }
+        if ( not debug ) {
+            §label_1;
+            message_Close();
+            switch ( $GROUND_START_MODE ) {
+                case 8:
+                default:
+                    switch ( $DUNGEON_ENTER_INDEX ) {
+                        case 191:
+                        case 192:
+                        case 193:
+                            if ( $SCENARIO_MAIN_BIT_FLAG[28] ) {
+                                §label_6;
+                                message_Close();
+                                screen_FadeIn(1, 30);
+                                Wait(30);
+                                se_Play(8968);
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    SetEffect(EFFECT_SHOCKED, 3);
+                                }
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    WaitEffect();
+                                }
+                                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                message_Talk({
+                                    english=" Oh my![K] It\'s you again!",
+                                    french=" Oh![K] Vous revoilà!",
+                                    german=" Ach![K] Da seid ihr ja\nwieder!",
+                                    italian=" Oh guarda![K] Siete voi!",
+                                    spanish=" ¡Vaya![K] ¡Aquí estáis de nuevo!",
+                                });
+                                message_Talk({
+                                    english=" You\'ve made it through that\nterrible place again!",
+                                    french=" Vous avez réussi à sortir\nde cet endroit horrible!",
+                                    german=" Ihr habt es durch diesen\nentsetzlichen Ort geschafft!",
+                                    italian=" Avete superato quel posto\nspaventoso!",
+                                    spanish=" ¡Habéis atravesado ese terrible\nlugar!",
+                                });
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                                }
+                                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                message_KeyWait();
+                                bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                                message_Talk({
+                                    english=" Frankly, what you\'ve managed to\ndo defies belief.[K] You\'re something else.",
+                                    french=" Ce que vous avez fait défie\nl\'imagination.[K] Vous êtes extraordinaires.",
+                                    german=" Was ihr geleistet habt, ist\nwahrhaftig kaum zu glauben.[K] Ihr spottet jedem\nVergleich!",
+                                    italian=" Francamente, quello che avete \nfatto è incredibile.[K] Siete inimitabili.\n",
+                                    spanish=" Francamente, lo que habéis hecho\nes increíble.[K] Sois de lo que no hay.",
+                                });
+                                message_Talk({
+                                    english=" You\'re so exceptional that I...[K]\nI am inspired to be braver in all things![K]\nIt\'s all thanks to you!",
+                                    french=" Vous êtes si admirables que...[K]\nvous m\'inspirez! J\'ai plus de courage dans\ntout ce que je fais![K] Tout ça grâce à vous!",
+                                    german=" Eure außerordentliche\nTapferkeit ist so...[K] so inspirierend und\nmutspendend für mich![K] Ich danke euch!",
+                                    italian=" Siete così eccezionali che...[K]\nanch\'io mi sento più coraggioso![K]\nEd è tutto grazie a voi!",
+                                    spanish=" Sois tan excepcionales que yo...[K]\n¡Yo me siento inspirado a ser más valiente\nen mi vida![K] ¡Sois un ejemplo a seguir!",
+                                });
+                                message_Talk({
+                                    english=" I\'ll try harder![K] I expect you to\ndo the same.[K] We\'ll all try harder!",
+                                    french=" Je redoublerai d\'efforts![K] Et\nj\'attends de vous la même chose.[K] Nous devons\ntous redoubler d\'efforts!",
+                                    german=" Ich arbeite an mir![K] Dasselbe\nerwarte ich von euch.[K] Jeder muss an sich\narbeiten!",
+                                    italian=" Mi impegnerò di più![K] \nMi aspetto che lo facciate anche voi.[K] \nCi impegneremo tutti di più!",
+                                    spanish=" ¡Me voy a esforzar más![K]\nY espero que hagáis lo mismo.[K]\n¡Todos nos vamos a esforzar más!",
+                                });
+                                message_Close();
+                                end;
+                            } else {
+                                switch ( $DUNGEON_ENTER_INDEX ) {
+                                    case 191:
+                                    default:
+                                        break;
+                                }
+                                §label_23;
+                                $SCENARIO_MAIN_BIT_FLAG[25] = 0;
+                                if ( $SCENARIO_MAIN_BIT_FLAG[25] ) {
+                                    jump @label_6;
+                                } else {
+                                    §label_7;
+                                    message_Close();
+                                    $SCENARIO_MAIN_BIT_FLAG[28] = 1;
+                                    screen_FadeIn(1, 30);
+                                    Wait(30);
+                                    se_Play(8968);
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        SetEffect(EFFECT_SHOCKED, 3);
+                                    }
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        WaitEffect();
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                    message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                    message_Talk({
+                                        english=" Oh my![K] It\'s you!",
+                                        french=" Oh![K] C\'est vous!",
+                                        german=" Ach![K] Da seid ihr ja\nwieder!",
+                                        italian=" Oh guarda![K] Siete voi!",
+                                        spanish=" ¡Vaya![K] ¡Habéis vuelto!",
+                                    });
+                                    message_Talk({
+                                        english=" Finally...[K] Finally...[K] You finally\nconquered that awful place!",
+                                        french=" Enfin...[K] enfin...[K] vous avez enfin\nconquis cet horrible endroit!",
+                                        german=" Endlich![K] Oh, endlich![K] Endlich habt\nihr diesen schrecklichen Ort bezwungen!",
+                                        italian=" Finalmente...[K] Finalmente...[K]\nAvete finalmente finito di esplorare quel\nposto terrificante!",
+                                        spanish=" Finalmente...[K] Al fin...[K] ¡Al fin\nhabéis conquistado ese espantoso lugar!",
+                                    });
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                    bgm_PlayFadeIn(BGM_PERFECT_SENTRY_DUTY, 0, 256);
+                                    WaitBgm(BGM_PERFECT_SENTRY_DUTY);
+                                    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                                    message_Talk({
+                                        english=" It\'s incredible![K] It\'s incredibly\nincredible!",
+                                        french=" C\'est incroyable![K] C\'est\nincroyablement incroyable!",
+                                        german=" Es ist unfassbar![K] Es ist\nso unglaublich unfassbar!",
+                                        italian=" È incredibile![K] È incredibilmente\nincredibile!",
+                                        spanish=" ¡Es increíble![K]\n¡Es increíblemente increíble!",
+                                    });
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        SetEffect(EFFECT_SHOCKED, 3);
+                                    }
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                    se_Play(8972);
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+                                    }
+                                    with (actor ACTOR_NPC_GARAGARA) {
+                                        WaitEffect();
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                    message_Talk({
+                                        english=" Sniffle...[K] I\'m getting all\nemotional over this...",
+                                        french=" Snif...[K] Je suis très ému...",
+                                        german=" Schnief...[K] Das geht mir wirklich\nnahe...",
+                                        italian=" Sniff...[K] Mi sto commuovendo...",
+                                        spanish=" Snif...[K] Me estoy poniendo\nsentimental con esto...",
+                                    });
+                                    message_Talk({
+                                        english=" You\'ve managed to inspire\nsomeone like me...[K] Thank you so very much...",
+                                        french=" Vous m\'avez redonné la foi...[K]\nJe vous en suis tellement reconnaissant...",
+                                        german=" Ihr habt es geschafft, jemandem\nwie mir neue Inspiration zu schenken...[K] Vielen,\nvielen Dank...",
+                                        italian=" Siete una fonte d\'ispirazione per\nme.[K] Vi sono davvero grato...",
+                                        spanish=" Habéis conseguido inspirar a\nalguien como yo...[K] ¡Os estoy tan agradecido!",
+                                    });
+                                    message_Talk({
+                                        english=" And this is my thanks...[K] It\'s my\nshow of gratitude!",
+                                        french=" Voici pour vous remercier...[K]\nC\'est ma façon de vous montrer ma gratitude!",
+                                        german=" Zum Dank gebe ich euch das...[K]\nNehmt es als Zeichen meiner Dankbarkeit!",
+                                        italian=" Ed ecco il mio ringraziamento.[K]\nÈ la dimostrazione di quanto vi sono grato!",
+                                        spanish=" Y esta es mi forma de daros\nlas gracias.[K] Aquí tenéis una muestra\nde mi gratitud.",
+                                    });
+                                    message_Talk({
+                                        english=" It\'s my grandpa\'s treasure![K]\nTreat it with care!",
+                                        french=" C\'est le trésor de mon cher\ngrand-père![K] Prenez-en grand soin!",
+                                        german=" Es ist der Schatz meines Opas![K]\nBehandelt ihn mit Sorgfalt!",
+                                        italian=" È il tesoro di mio nonno![K]\nAbbiatene cura!",
+                                        spanish=" Este es el tesoro de mi abuelo.[K]\n¡Tratadlo con cuidado!",
+                                    });
+                                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                    me_Play(9);
+                                    message_Mail("[CN] Fantastic! [hero] obtained a\n[CN][CS:I]Golden Seed[CR]!\n[CN][W:30]...and a check!");
+                                    WaitMe(9);
+                                    ~AssignCheck(68);
+                                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                    item_Set(0, 93, 0);
+                                    switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                                    Wait(10);
+                                    message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                    message_Talk({
+                                        english=" If he were around to hear that\nan exploration team conquered that\nawful place...",
+                                        french=" S\'il était là avec nous et qu\'il\napprenait qu\'une équipe d\'exploration est\nparvenue à conquérir cet horrible endroit...",
+                                        german=" Wenn er hören würde, dass ein\nErkundungsteam diesen schrecklichen Ort\nbezwungen hat...",
+                                        italian=" Se fosse stato qui a sentire che\nuna squadra d\'esplorazione ha attraversato\nquel posto tremendo...",
+                                        spanish=" ¡Ojalá estuviera aquí para ver\nque un equipo explorador ha conquistado\nese espantoso lugar!",
+                                    });
+                                    message_Talk({
+                                        english=" Grandpa would have been\noverjoyed, that\'s for certain!",
+                                        french=" Grand-père serait fou de joie,\nc\'est certain!",
+                                        german=" Opa wäre außer sich vor\nFreude, so viel ist sicher!",
+                                        italian=" ... il nonno avrebbe fatto i salti\ndi gioia, poco ma sicuro!",
+                                        spanish=" ¡Estoy seguro de que a mi abuelo\nle habría encantado!",
+                                    });
+                                    message_Close();
+                                    end;
+                                }
+                            }
+                            break;
+                        default:
+                            if ( $SCENARIO_MAIN_BIT_FLAG[24] ) {
+                                §label_3;
+                                message_Close();
+                                screen_FadeIn(1, 30);
+                                Wait(30);
+                                se_Play(8967);
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                                }
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    WaitEffect();
+                                }
+                                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                message_Talk({
+                                    english=" Oh![K] You\'ve completed it!",
+                                    french=" Oh![K] Vous l\'avez terminé!",
+                                    german=" Oh![K] Ihr habt es geschafft!",
+                                    italian=" Oh![K] Ce l\'avete fatta!",
+                                    spanish=" ¡Estupendo![K]\n¡Habéis superado el dojo!",
+                                });
+                                message_Talk({
+                                    english=" That\'s good work! Really good!",
+                                    french=" Bon travail, vous deux!",
+                                    german=" Das war gute Arbeit, ihr beide!",
+                                    italian=" Ottimo lavoro!",
+                                    spanish=" ¡Buen trabajo!",
+                                });
+                                with (actor ACTOR_NPC_GARAGARA) {
+                                    ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                                }
+                                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                message_KeyWait();
+                                bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                                message_Talk({
+                                    english=" But don\'t get too comfortable!\nTrain more! Become more powerful!",
+                                    french=" Mais ne vous endormez pas sur\nvos lauriers! Continuez à vous entraîner!\nEt devenez plus puissants!",
+                                    german=" Aber ruht euch nicht auf euren\nLorbeeren aus! Trainiert mehr! Werdet noch\nstärker!",
+                                    italian=" Ma non dovete adagiarvi sugli \nallori! Allenatevi di più! Diventate più forti!",
+                                    spanish=" ¡Pero no os durmáis en los\nlaureles! ¡Entrenad más! ¡Sed más fuertes!",
+                                });
+                                message_Talk({
+                                    english=" I\'ll try harder![K] I expect you to\ndo the same.[K] We\'ll all try harder!",
+                                    french=" Je redoublerai d\'efforts![K] Et\nj\'attends de vous la même chose.[K] Nous devons\ntous redoubler d\'efforts!",
+                                    german=" Ich arbeite an mir![K] Dasselbe\nerwarte ich von euch.[K] Jeder muss an sich\narbeiten!",
+                                    italian=" Mi impegnerò di più![K] \nMi aspetto che lo facciate anche voi.[K] \nCi impegneremo tutti di più!",
+                                    spanish=" ¡Yo me voy a esforzar más![K]\nY espero que hagáis lo mismo.[K]\n¡Todos nos esforzaremos más!",
+                                });
+                                message_Close();
+                                end;
+                            } else {
+                                switch ( $DUNGEON_ENTER_INDEX ) {
+                                    case 180:
+                                        $SCENARIO_MAIN_BIT_FLAG[14] = 0;
+                                        §label_22;
+                                        if ( $SCENARIO_MAIN_BIT_FLAG[14] || $SCENARIO_MAIN_BIT_FLAG[15] || $SCENARIO_MAIN_BIT_FLAG[16] || $SCENARIO_MAIN_BIT_FLAG[17] || $SCENARIO_MAIN_BIT_FLAG[18] || $SCENARIO_MAIN_BIT_FLAG[19] || $SCENARIO_MAIN_BIT_FLAG[20] || $SCENARIO_MAIN_BIT_FLAG[21] || $SCENARIO_MAIN_BIT_FLAG[22] || $SCENARIO_MAIN_BIT_FLAG[23] ) {
+                                            jump @label_3;
+                                        } else {
+                                            §label_4;
+                                            message_Close();
+                                            $SCENARIO_MAIN_BIT_FLAG[24] = 1;
+                                            $PERFORMANCE_PROGRESS_LIST[11] = 1;
+                                            adventure_log = 7;
+                                            screen_FadeIn(1, 30);
+                                            Wait(30);
+                                            se_Play(8967);
+                                            with (actor ACTOR_NPC_GARAGARA) {
+                                                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+                                            }
+                                            with (actor ACTOR_NPC_GARAGARA) {
+                                                WaitEffect();
+                                            }
+                                            WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                            message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                            message_Talk({
+                                                english=" Oh![K] You\'ve completed it, then!",
+                                                french=" Oh![K] Vous avez réussi!",
+                                                german=" Oh![K] Ihr habt es also geschafft!",
+                                                italian=" Oh![K] Allora l\'avete completato!",
+                                                spanish=" ¡Estupendo![K]\n¡Habéis vencido una vez más!",
+                                            });
+                                            message_Talk({
+                                                english=" Not just that...",
+                                                french=" Et ce n\'est pas tout...",
+                                                german=" Und nicht nur das!",
+                                                italian=" Non solo...",
+                                                spanish=" Y no solo eso...",
+                                            });
+                                            message_Talk({
+                                                english=" You\'ve cleared all the training\nmazes![K] I\'m blazed and amazed!",
+                                                french=" Vous avez terminé tous les\ndédales d\'entraînement![K] Je suis vraiment\nimpressionné!",
+                                                german=" Ihr habt alle Trainings-Dojos\ngemeistert![K] Ich bin schwer beeindruckt!",
+                                                italian=" Avete superato tutti i labirinti\nd\'allenamento![K] Non credo ai miei occhi!",
+                                                spanish=" ¡Habéis superado todos los\ndojos de entrenamiento![K] ¡Me habéis\ndejado de una pieza!",
+                                            });
+                                            se_Play(8968);
+                                            with (actor ACTOR_NPC_GARAGARA) {
+                                                SetEffect(EFFECT_SHOCKED, 3);
+                                            }
+                                            with (actor ACTOR_NPC_GARAGARA) {
+                                                ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+                                            }
+                                            WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                            bgm_PlayFadeIn(BGM_PERFECT_SENTRY_DUTY, 0, 256);
+                                            WaitBgm(BGM_PERFECT_SENTRY_DUTY);
+                                            bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                                            message_Talk({
+                                                english=" Wow...[K] You\'ve stomped all over\nmy dojo!",
+                                                french=" Waouh...[K] Vous avez traversé\nl\'ensemble de mon dojo!",
+                                                german=" Wow...[K] Ihr habt das ganze Dojo\nleer gefegt!",
+                                                italian=" Wow...[K] Avete oltrepassato\nogni ostacolo del dojo!",
+                                                spanish=" Vaya...[K] ¡Prácticamente\nhabéis arrasado con mi dojo!",
+                                            });
+                                            message_Talk({
+                                                english=" For such a thorough stomping,\nyou deserve a trophy of sorts...[K] Take the\ndojo\'s sign...[K] No, that wouldn\'t do.",
+                                                french=" En récompense d\'un tel exploit,\nvous méritez un trophée digne de vous...[K]\nVoici l\'insigne du dojo...[K] Non, ça ne va pas.",
+                                                german=" Für so gründliche Arbeit solltet\nihr eine Art Trophäe bekommen.[K] Nehmt das\nZeichen des Dojos![K] Oder nein, das reicht nicht!",
+                                                italian=" Per un successo del genere, vi\nmeritate un trofeo adeguato...[K] Prendete\nl\'insegna del dojo...[K] No, ma che dico!?",
+                                                spanish=" Semejante esfuerzo merece\nalgún trofeo.[K] Lo tradicional sería ofreceros el\nemblema de mi dojo...[K] Pero no es buena idea.",
+                                            });
+                                            message_Talk({
+                                                english=" To begin with, the dojo doesn\'t\nhave a sign. Instead, I\'ll give you this!",
+                                                french=" Déjà, le dojo n\'a même pas\nd\'insigne! Alors laissez-moi vous remettre\nceci!",
+                                                german=" Zumal das Dojo gar kein Zeichen\nhat. Ich gebe euch stattdessen das hier!",
+                                                italian=" Il dojo non ce l\'ha nemmeno,\nl\'insegna... vi darò questo!",
+                                                spanish=" Sobre todo porque mi dojo\nni siquiera tiene emblema. No... ¡Creo que\nserá mejor que os ofrezca esto!",
+                                            });
+                                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                            me_Play(4);
+                                            message_Mail({
+                                                english="[CN] Excellent! [hero] obtained a\n[CN][CS:I]Joy Seed[CR]!\n[W:30]...and a check!",
+                                                french="[CN]Excellent! [hero] obtient\n[CN]une [CS:I]Allégraine[CR]!",
+                                                german="[CN] Ausgezeichnet! [hero] erhält einen\n[CN][CS:I]Lv.+ Samen[CR]!",
+                                                italian="[CN]Eccellente! [hero] ottiene un\n[CN][CS:I]Gaudioseme[CR]!",
+                                                spanish="[CN]¡Excelente! ¡[hero] obtuvo una\n[CN][CS:I]Sem. Júbilo[CR]!",
+                                            });
+                                            WaitMe(4);
+                                            ~AssignCheck(67);
+                                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                            item_Set(0, 89, 0);
+                                            switch ( message_Menu(MENU_GIVE_ITEM2) ) { }
+                                            Wait(10);
+                                            message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                                            message_Talk({
+                                                english=" That\'s my personal treasure![K]\nYou\'re more than welcome to it!",
+                                                french=" C\'est mon trésor personnel![K]\nJe vous en prie, acceptez-le, c\'est un immense\nhonneur pour moi!",
+                                                german=" Das ist mein Schatz![K]\nIch überlasse ihn euch gerne!",
+                                                italian=" È il mio tesoro personale![K]\nVe lo do volentieri!",
+                                                spanish=" ¡Ese es mi tesoro![K]\n¡Creo que os lo merecéis!",
+                                            });
+                                            message_Talk({
+                                                english=" But don\'t let this be the end!\nYou\'ll keep training here, won\'t you?",
+                                                french=" J\'espère que ce n\'est pas\nterminé! Vous allez continuer à vous\nentraîner ici, pas vrai?",
+                                                german=" Ich hoffe doch, dies ist kein\nLebewohl! Ihr werdet hier weiterhin\ntrainieren, nicht wahr?",
+                                                italian=" Ma non dovete smettere!\nContinuerete ad allenarvi qui, vero?",
+                                                spanish=" ¡Pero esto no tiene por qué\nacabar aquí! Seguiréis entrenando en\nmi dojo, ¿verdad?",
+                                            });
+                                            message_Close();
+                                            end;
+                                        }
+                                        break;
+                                    case 181:
+                                        $SCENARIO_MAIN_BIT_FLAG[15] = 0;
+                                        jump @label_22;
+                                    case 182:
+                                        $SCENARIO_MAIN_BIT_FLAG[16] = 0;
+                                        jump @label_22;
+                                    case 183:
+                                        $SCENARIO_MAIN_BIT_FLAG[17] = 0;
+                                        jump @label_22;
+                                    case 184:
+                                        $SCENARIO_MAIN_BIT_FLAG[18] = 0;
+                                        jump @label_22;
+                                    case 185:
+                                        $SCENARIO_MAIN_BIT_FLAG[19] = 0;
+                                        jump @label_22;
+                                    case 186:
+                                        $SCENARIO_MAIN_BIT_FLAG[20] = 0;
+                                        jump @label_22;
+                                    case 187:
+                                        $SCENARIO_MAIN_BIT_FLAG[21] = 0;
+                                        jump @label_22;
+                                    case 188:
+                                        $SCENARIO_MAIN_BIT_FLAG[22] = 0;
+                                        jump @label_22;
+                                    case 189:
+                                        $SCENARIO_MAIN_BIT_FLAG[23] = 0;
+                                        jump @label_22;
+                                    default:
+                                        jump @label_22;
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                case 9:
+                case 10:
+                case 11:
+                    switch ( $DUNGEON_ENTER_INDEX ) {
+                        case 191:
+                        case 192:
+                        case 193:
+                            §label_8;
+                            message_Close();
+                            screen_FadeIn(1, 30);
+                            Wait(30);
+                            se_Play(8972);
+                            with (actor ACTOR_NPC_GARAGARA) {
+                                SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+                            }
+                            with (actor ACTOR_NPC_GARAGARA) {
+                                WaitEffect();
+                            }
+                            WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                            message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                            message_Talk({
+                                english=" Ack![K] Couldn\'t get through...",
+                                french=" Argh![K] Vous n\'avez pas réussi...",
+                                german=" Ach![K] Das war wohl nichts...",
+                                italian=" Ah![K] Non ce l\'avete fatta...",
+                                spanish=" ¡Vaya![K] No habéis podido llegar\nhasta el final...",
+                            });
+                            message_Talk({
+                                english=" Well, didn\'t I say?[K] You can only\nblame yourself for going to a place that awful.",
+                                french=" Je vous l\'avais bien dit![K]\nC\'est un endroit horrible, vous ne pouvez vous\nen prendre qu\'à vous.",
+                                german=" Tja, was habe ich gesagt?[K] An\neinen so entsetzlichen Ort hättet ihr gar nicht\nerst gehen sollen.",
+                                italian=" Beh, cosa vi avevo detto?[K] La \ncolpa è solo vostra. Vi avevo detto che quel \nposto è davvero tremendo.",
+                                spanish=" ¿Qué os había dicho?[K] Os lo\nhabéis buscado por ir a un lugar tan espantoso.",
+                            });
+                            message_Talk({
+                                english=" You should learn from that and\nnever go back there!",
+                                french=" Vous devriez en tirer des leçons\net ne plus jamais y retourner!",
+                                german=" Lernt daraus und geht nie wieder\ndorthin!",
+                                italian=" Dovreste imparare la lezione e \nnon tornarci mai più!",
+                                spanish=" ¡Espero que aprendáis la lección\ny no volváis a pisar ese lugar!",
+                            });
+                            message_Close();
+                            bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                            end;
+                        default:
+                            §label_5;
+                            message_Close();
+                            screen_FadeIn(1, 30);
+                            Wait(30);
+                            se_Play(8972);
+                            with (actor ACTOR_NPC_GARAGARA) {
+                                SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+                            }
+                            with (actor ACTOR_NPC_GARAGARA) {
+                                WaitEffect();
+                            }
+                            WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                            message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                            message_Talk({
+                                english=" Ack![K] You couldn\'t get through...",
+                                french=" Argh![K] Vous n\'avez pas réussi...",
+                                german=" Ach![K] Das war wohl nichts...",
+                                italian=" Ah![K] Non ce l\'avete fatta...",
+                                spanish=" ¡Vaya![K] No habéis podido llegar\nhasta el final...",
+                            });
+                            message_Talk({
+                                english=" But one must try and try again\nin the face of failure...",
+                                french=" Mais quand on échoue, il faut\nessayer et réessayer...",
+                                german=" Aber wer scheitert, muss es\nwieder versuchen. Und wieder...",
+                                italian=" Ma bisogna provare e riprovare\nprima di riuscire in qualcosa...",
+                                spanish=" Pero no hay que rendirse ante\nel fracaso. Hay que intentarlo una y otra vez...",
+                            });
+                            message_Talk({
+                                english=" That\'s how everyone grows up!",
+                                french=" C\'est comme ça qu\'on s\'améliore!",
+                                german=" Nur so kann man wachsen!",
+                                italian=" È così che si cresce!",
+                                spanish=" ¡Así es como se madura!",
+                            });
+                            message_Talk({
+                                english=" I\'ll try harder![K] I expect you to\ndo the same.[K] We\'ll all try harder!",
+                                french=" Je redoublerai d\'efforts![K] Et\nj\'attends de vous la même chose.[K] Nous devons\ntous redoubler d\'efforts!",
+                                german=" Ich arbeite an mir![K] Dasselbe\nerwarte ich von euch.[K] Jeder muss an sich\narbeiten!",
+                                italian=" Mi impegnerò di più![K] \nMi aspetto che lo facciate anche voi.[K] \nCi impegneremo tutti di più!",
+                                spanish=" ¡Yo pienso esforzarme más![K]\nEspero que me imitéis.[K]\n¡Todos debemos esforzarnos más!",
+                            });
+                            with (actor ACTOR_NPC_GARAGARA) {
+                                ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+                            }
+                            WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                            message_Close();
+                            bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                            end;
+                    }
+                    break;
+            }
+        } else {
+            message_Notice({
+                english="[M:D2][CS:C]Debug: What would\nyou like to do?[CR]",
+                french="[M:D2][CS:C]Debug: What would\nyou like to do?[CR]",
+                german="[M:D2][CS:C]Debug: What would\nyou like to do?[CR]",
+                italian="[M:D2][CS:C]Debug: What would\nyou like to do?[CR]",
+                spanish="[M:D2][CS:C]Debug: What would\nyou like to do?[CR]",
+            });
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu({
+                    english="Trust your own luck.",
+                    french="Trust your own luck.",
+                    german="Trust your own luck.",
+                    italian="Trust your own luck.",
+                    spanish="¡Veamos si la suerte me acompaña!",
+                }):
+                    jump @label_1;
+                case menu({
+                    english="Cheat.",
+                    french="Cheat.",
+                    german="Cheat.",
+                    italian="Cheat.",
+                    spanish="¡Prefiero hacer trampas!",
+                }):
+                default:
+                    message_Close();
+                    message_Notice({
+                        english="[M:D2][CS:C]Debug: What\'s your\nchoice?[CR]",
+                        french="[M:D2][CS:C]Debug: What\'s your\nchoice?[CR]",
+                        german="[M:D2][CS:C]Debug: What\'s your\nchoice?[CR]",
+                        italian="[M:D2][CS:C]Debug: What\'s your\nchoice?[CR]",
+                        spanish="[M:D2][CS:C]Debug: What\'s your\nchoice?[CR]",
+                    });
+                    switch ( message_SwitchMenu(0, 1) ) {
+                        case menu({
+                            english="Success.",
+                            french="Success.",
+                            german="Success.",
+                            italian="Success.",
+                            spanish="Éxito",
+                        }):
+                            jump @label_3;
+                        case menu({
+                            english="All success.",
+                            french="All success.",
+                            german="All success.",
+                            italian="All success.",
+                            spanish="Éxito en todo",
+                        }):
+                            jump @label_4;
+                        case menu({
+                            english="Failure.",
+                            french="Failure.",
+                            german="Failure.",
+                            italian="Failure.",
+                            spanish="Fracaso",
+                        }):
+                            jump @label_5;
+                        case menu({
+                            english="Success on legend.",
+                            french="Success on legend.",
+                            german="Success on legend.",
+                            italian="Success on legend.",
+                            spanish="Éxito en leyenda",
+                        }):
+                            jump @label_6;
+                        case menu({
+                            english="Success on all legends.",
+                            french="Success on all legends.",
+                            german="Success on all legends.",
+                            italian="Success on all legends.",
+                            spanish="Éxito en todas las leyendas",
+                        }):
+                            jump @label_7;
+                        case menu({
+                            english="Failure on legend.",
+                            french="Failure on legend.",
+                            german="Failure on legend.",
+                            italian="Failure on legend.",
+                            spanish="Fracaso en leyenda",
+                        }):
+                            jump @label_8;
+                        default:
+                            jump @label_1;
+                    }
+                    break;
+            }
+        }
+    } else {
+        back_ChangeGround(LEVEL_T01P03A2);
+        supervision_StationCommon(3);
+        jump @label_0;
+    }
+}

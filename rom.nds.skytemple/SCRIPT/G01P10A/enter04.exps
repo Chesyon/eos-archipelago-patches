@@ -41,13 +41,17 @@ def 0 {
         spanish="[CN]Aquí hay algo escrito...",
     });
     §label_57;
-    message_Notice({
-        english="[CN]This is [CS:N]Bidoof[CR]\'s diary.\n[CN]Should we sneak a peek?",
-        french="[CN]C\'est le journal de [CS:N]Keunotor[CR].\n[CN]On y jette un coup d\'œil?",
-        german="[CN]Dies ist das Tagebuch von [CS:N]Bidiza[CR].\n[CN]Sollen wir einen Blick riskieren?",
-        italian="[CN]È il diario di [CS:N]Bidoof[CR].\n[CN]Gli diamo una sbirciatina furtiva?",
-        spanish="[CN]Se trata del diario de [CS:N]Bidoof[CR].\n[CN]¿Quieres echarle un vistazo?",
-    });
+    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 0) { // Bidoof
+        message_Notice("[CN]It\'s your diary, yup yup!\n[CN]Would you like to read it?");
+    } else {
+        message_Notice({
+            english="[CN]This is [CS:N]Bidoof[CR]\'s diary.\n[CN]Should we sneak a peek?",
+            french="[CN]C\'est le journal de [CS:N]Keunotor[CR].\n[CN]On y jette un coup d\'œil?",
+            german="[CN]Dies ist das Tagebuch von [CS:N]Bidiza[CR].\n[CN]Sollen wir einen Blick riskieren?",
+            italian="[CN]È il diario di [CS:N]Bidoof[CR].\n[CN]Gli diamo una sbirciatina furtiva?",
+            spanish="[CN]Se trata del diario de [CS:N]Bidoof[CR].\n[CN]¿Quieres echarle un vistazo?",
+        });
+    }
     switch ( message_SwitchMenu(0, 1) ) {
         case menu({
             english="Read",
@@ -62,13 +66,11 @@ def 0 {
                 debug_Print("Check already obtained");
             } else {
                 screen_FadeOut(1,30);
-                message_Explanation({
-                    english="[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Bidoof[CR]\'s diary!",
-                    french="[CN]Tiens...[K]\n[CN]Il y a un autre message.",
-                    german="[CN]Augenblick...[K]\n[CN]Da ist noch eine Nachricht.",
-                    italian="[CN]Un momento...[K]\n[CN]C\'è un altro messaggio.",
-                    spanish="[CN]Espera...[K]\n[CN]Hay un mensaje más.",
-                });
+                if ($EXECUTE_SPECIAL_EPISODE_TYPE == 0) { // Bidoof
+                    message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in your diary!\n[CN]When did that get there?");
+                } else {
+                    message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Bidoof[CR]\'s diary!");
+                }
                 message_Close();
                 ~AssignCheck(5); // Bidoof SE Unlocked!
                 Wait(30);

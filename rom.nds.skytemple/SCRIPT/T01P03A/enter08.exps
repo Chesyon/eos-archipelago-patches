@@ -1,9 +1,6 @@
 import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
-    if ( scn($SCENARIO_SIDE) >= [40, 7] || scn($SCENARIO_SIDE) >= [40, 3] || scn($SCENARIO_SIDE) >= [40, 2] ) {
-        §label_4;
-        JumpCommon(CORO_END_TALK);
-    } elseif ( $SCENARIO_TALK_BIT_FLAG[126] ) {
+    if ( $SCENARIO_TALK_BIT_FLAG[126] ) {
         with (actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -26,7 +23,8 @@ def 0 {
             spanish=" ¡¡Volverá!!",
         });
         message_Close();
-        jump @label_4;
+        §label_4;
+        JumpCommon(CORO_END_TALK);
     } else {
         $SCENARIO_TALK_BIT_FLAG[126] = 1;
         with (actor ACTOR_TALK_MAIN) {
@@ -51,14 +49,14 @@ def 0 {
             spanish=" Has venido...[K] Has venido hasta aquí,\npero...",
         });
         message_Talk({
-            english=" [CS:K]Marowak[CR] Dojo has collapsed as\nof today...",
+            english=" [CS:K]Marowak[CR] Dojo is on the verge of collapse...",
             french=" ... le [CS:K]Dojo Ossatueur[CR]\nn\'est plus en service...",
             german=" Im [CS:K]Knogga-Dojo[CR] ist ab heute\nerst mal kein Training mehr möglich...",
             italian=" ... i dedali del Dojo [CS:K]Marowak[CR]\nnon sono accessibili. Chiudo il dojo.",
             spanish=" El [CS:K]Dojo Marowak[CR] está\nfuera de servicio...",
         });
         message_Talk({
-            english=" However!",
+            english=" You may use it if you wish, however!",
             french=" Cependant!",
             german=" Wie auch immer!",
             italian=" Però...",
@@ -93,14 +91,14 @@ def 0 {
             spanish=" Arf, arf...",
         });
         message_Talk({
-            english=" ...[K]This dojo will be closed\nbeginning tomorrow...",
+            english=" ...[K]This dojo will be closed\nfor repairs in a few days...",
             french=" ...[K] Ce dojo sera fermé\ndès demain...",
             german=" ...[K]Dieses Dojo wird ab morgen\ngeschlossen bleiben...",
             italian=" ...[K] Questo dojo rimarrà chiuso\na partire da domani...",
             spanish=" Pues...[K] Este dojo estará cerrado\na partir de mañana...",
         });
         message_Talk({
-            english=" Definitely be revived!",
+            english=" But it will definitely be revived!",
             french=" Je le rouvrirai, c\'est sûr!",
             german=" Aber zweifellos wiedereröffnet\nwerden!",
             italian=" Ma lo riaprirò sicuramente!",
@@ -122,7 +120,7 @@ def 0 {
         });
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
         message_Mail({
-            english="[CN]In remembrance of the failed [CS:K]Marowak[CR] Dojo,\n[CN][CS:Y]Bidoof[CR]...",
+            english="[CN]In remembrance of the closing [CS:K]Marowak[CR] Dojo,\n[CN][CS:Y]Bidoof[CR]...",
             french="[CN]En souvenir du [CS:K]Dojo Ossatueur[CR],\n[CN]condamné à une faillite inexorable,\n[CN][CS:Y]Keunotor[CR]...",
             german="[CN]In Erinnerung an das gescheiterte\n[CN][CS:K]Knogga-Dojo[CR] erhält [CS:Y]Bidiza[CR]",
             italian="[CN]Per non essere riuscito ad accedere\nal Dojo [CS:K]Marowak[CR], [CN][CS:Y]Bidoof[CR]...",

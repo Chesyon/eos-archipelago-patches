@@ -1,0 +1,91 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+        case 2:
+            jump @se_cafe;
+            §label_0;
+            with (actor ACTOR_PLAYER) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_APPOINT) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetAnimation(2);
+            }
+            message_Mail({
+                english="[CN]The door is still closed, so you can\'t get in.\n[CN]It seems like they\'re still getting ready.",
+                french="[CN]La porte est encore fermée,\n[CN]vous ne pouvez pas entrer.\n[CN]On dirait qu\'ils sont en plein préparatifs.",
+                german="[CN]Die Tür ist noch geschlossen, daher kannst\n[CN]du nicht hinein. Anscheinend sind die\n[CN]Vorbereitungen noch nicht abgeschlossen.",
+                italian="[CN]La porta è ancora chiusa e non puoi entrare.\n[CN]Forse stanno ultimando i preparativi.",
+                spanish="[CN]La puerta sigue cerrada, no puedes entrar.\n[CN]Parece que aún se están preparando.",
+            });
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+        default:
+            if ( scn($SCENARIO_MAIN) == [29, 46] ) {
+                with (actor ACTOR_PLAYER) {
+                    SetAnimation(2);
+                }
+                with (actor ACTOR_ATTENDANT1) {
+                    SetAnimation(2);
+                }
+                with (actor ACTOR_ATTENDANT2) {
+                    SetAnimation(2);
+                }
+                with (actor ACTOR_ATTENDANT1) {
+                    Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                }
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_SwitchTalk ($PARTNER_TALK_KIND) {
+                    case 1:
+                        {
+                            english=" Let\'s take [CS:N]Manaphy[CR] to the beach.",
+                            french=" Amenons [CS:N]Manaphy[CR] à la plage.",
+                            german=" Lass uns [CS:N]Manaphy[CR] zum Strand\nbringen.",
+                            italian=" Portiamo [CS:N]Manaphy[CR] alla spiaggia.",
+                            spanish=" Llevemos a [CS:N]Manaphy[CR] a la playa.",
+                        }
+                    case 2:
+                        {
+                            english=" Let\'s take [CS:N]Manaphy[CR] to the beach.",
+                            french=" Amenons [CS:N]Manaphy[CR] à la plage.",
+                            german=" Lass uns [CS:N]Manaphy[CR] zum Strand\nbringen.",
+                            italian=" Portiamo [CS:N]Manaphy[CR] alla spiaggia.",
+                            spanish=" Llevemos a [CS:N]Manaphy[CR] a la playa.",
+                        }
+                    default:
+                        {
+                            english=" Let\'s take [CS:N]Manaphy[CR] to the beach.",
+                            french=" Amenons [CS:N]Manaphy[CR] à la plage.",
+                            german=" Lass uns [CS:N]Manaphy[CR] zum Strand\nbringen.",
+                            italian=" Portiamo [CS:N]Manaphy[CR] alla spiaggia.",
+                            spanish=" Llevemos a [CS:N]Manaphy[CR] a la playa.",
+                        }
+                }
+                message_Close();
+                supervision_Suspend(-2);
+                end;
+            } elseif ( scn($SCENARIO_MAIN) >= [7, 3] ) {
+                §se_cafe;
+                debug_Print('LABEL_PACCHIIRU_OPEN');
+                debug_Print('BGM_FADEOUT');
+                bgm_FadeOut(60);
+                main_EnterGround(LEVEL_P01P04A, 30);
+                hold;
+                end;
+            } else {
+                jump @label_0;
+            }
+            break;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

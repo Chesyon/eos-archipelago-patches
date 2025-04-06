@@ -3118,7 +3118,18 @@ coro EVENT_M00_08 {
 
 coro EVENT_M00_09 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P0901', 0);
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+            supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P1001', 0);
+            break;        
+        case 2:
+            supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P1201', 0);
+            break;        
+        default:
+            supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P0901', 0);
+            break;    
+    }
+    
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_T01P03A);
     supervision_ExecuteStationCommon(LEVEL_T01P03A, 1);
@@ -9669,6 +9680,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_S03_17_20);
                         hold;
                         $SCENARIO_TALK_BIT_FLAG[215] = 1; // Unused here, but Pelipper uses it!
+                        $SCENARIO_TALK_BIT_FLAG[216] = 1; // Unused here, but Sunflora Marowak uses it!
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 58] ) {

@@ -8,6 +8,7 @@ def 0 {
             supervision_StationCommon(11);
             switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                 case 0:
+                    supervision_StationCommon(10);
                     supervision_ExecuteStationSub(LEVEL_P01P01A, 'UN01', 0);
                     §label_6;
                     if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
@@ -88,8 +89,17 @@ def 0 {
                                         }
                                         break;
                                     case 227:
-                                        supervision_StationCommon(9);
-                                        jump @label_46;
+                                        switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                            case 0:
+                                                supervision_StationCommon(26);
+                                                jump @label_46;
+                                            case 2:
+                                                supervision_StationCommon(46);
+                                                jump @label_46;
+                                            default:
+                                                supervision_StationCommon(9);
+                                                jump @label_46;
+                                        }
                                     default:
                                         switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                                             case 0:
@@ -260,6 +270,7 @@ def 0 {
             screen_FadeOutAll(1, 0);
             switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                 case 0:
+                    jump @label_2;
                     §label_1;
                     back_SetGround(LEVEL_P01P01A);
                     jump @label_0;

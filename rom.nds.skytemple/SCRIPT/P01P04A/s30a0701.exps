@@ -85,10 +85,26 @@ def 0 {
             with (actor ACTOR_ATTENDANT1) {
                 SetPositionMark(Position<'m19', 27.5, 22.5>);
             }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetPositionMark(Position<'m20', 31.5, 22.5>);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetPositionMark(Position<'m20', 31.5, 22.5>);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetPositionMark(Position<'m20', 31.5, 22.5>);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 SetAnimation(2);
             }
             with (actor ACTOR_NPC_PATCHIIRU) {
@@ -100,7 +116,15 @@ def 0 {
             with (actor ACTOR_ATTENDANT1) {
                 SetDirection(DIR_UP);
             }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                SetDirection(DIR_UP);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetDirection(DIR_UP);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 SetDirection(DIR_UP);
             }
             Wait(15);
@@ -405,10 +429,26 @@ def 0 {
                 Turn2Direction(4, 10, DIR_RIGHT);
             }
             Wait(4);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 Turn2Direction(4, 10, DIR_RIGHT);
             }
             Wait(4);
@@ -443,7 +483,15 @@ def 0 {
                 Turn2Direction(4, 10, DIR_UP);
             }
             Wait(4);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                Turn2Direction(4, 10, DIR_UP);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                Turn2Direction(4, 10, DIR_UP);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 Turn2Direction(4, 10, DIR_UP);
             }
             supervision_RemoveActing(2);
@@ -514,10 +562,26 @@ def 0 {
                 Turn2Direction(4, 10, DIR_RIGHT);
             }
             Wait(4);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_RIGHT, 3);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                Turn2Direction(4, 10, DIR_RIGHT);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 Turn2Direction(4, 10, DIR_RIGHT);
             }
             Wait(4);
@@ -544,10 +608,26 @@ def 0 {
         case 50:
             debug_Print("Spinda Case 50");
             se_Play(531);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_STATS_UP_EFFECT, 3);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_STATS_UP_EFFECT, 3);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_STATS_UP_EFFECT, 3);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 WaitEffect();
             }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
@@ -555,10 +635,26 @@ def 0 {
         case 51:
             debug_Print("Spinda Case 51");
             se_Play(534);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_STATS_DOWN_EFFECT, 3);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_STATS_DOWN_EFFECT, 3);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_STATS_DOWN_EFFECT, 3);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 WaitEffect();
             }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
@@ -580,13 +676,13 @@ def 0 {
             }
             jump @label_35;
         case 61:
-            debug_Print("Spinda Case 61: Good Feeling");
-            call @gib_check_lite;
+            debug_Print("Spinda Case 61");
             Wait(22);
             se_Play(8978);
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetEffect(EFFECT_EXCLAMATION_MARK, 0);
             }
+            call @gib_check_lite;
             jump @label_35;
         case 62:
             debug_Print("Spinda Case 62");
@@ -610,11 +706,18 @@ def 0 {
         case 65:
             debug_Print("Spinda Case 65");
             se_Play(8968);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_SHOCKED, 0);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_SHOCKED, 0);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_SHOCKED, 0);
+            }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
-            call @gib_check_lite;
             jump @label_35;
         case 66:
             debug_Print("Spinda Case 66");
@@ -635,12 +738,28 @@ def 0 {
             }
             jump @label_35;
         case 68:
-            debug_Print("Spinda Case 68: Secret Spot");
+            debug_Print("Spinda Case 68");
             se_Play(8967);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
                 SetEffect(EFFECT_EXCLAMATION_MARK, 3);
             }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                WaitEffect();
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 WaitEffect();
             }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
@@ -648,7 +767,15 @@ def 0 {
         case 69:
             debug_Print("Spinda Case 69");
             se_Play(8969);
+
+
             with (actor ACTOR_EVENT_NPC_MAIN) {
+                SetEffect(EFFECT_SHOCKED, 0);
+            }
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetEffect(EFFECT_SHOCKED, 0);
+            }
+            with (actor ACTOR_PLAYER_KIMAWARI) {
                 SetEffect(EFFECT_SHOCKED, 0);
             }
             WaitExecuteLives(ACTOR_EVENT_NPC_MAIN);
@@ -656,8 +783,8 @@ def 0 {
         default:
             jump @label_34;
     }
-    §gib_check_lite;
-    debug_Print("Called Spinda Event Lite");
+    §gib_check_lite; // Gives an incremental Cafe Event check up to a limit
+    debug_Print("Spinda Event LITE");
     if (debug) {
         return;
     }
@@ -665,16 +792,15 @@ def 0 {
         case > 0:
             debug_Print("Spinda Case  > 0");
             ProcessSpecial(105,1,0);
-            message_Mail("[CN]Defying all explanation...\n[CN]You got a check!");
+            message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
-            message_KeyWait();
             break;
         default:
             break;
     }
     return;
     §gib_check; // Gives an incremental Cafe Event check up to a limit
-    debug_Print("Called Spinda Event");
+    debug_Print("Spinda Event FULL");
     if (debug) {
         return;
     }
@@ -710,7 +836,7 @@ def 0 {
     }
     return;
     §spinda_drink; // Gives an incremental Cafe drink check up to a limit
-    debug_Print("Called Spinda Drink");
+    debug_Print("Spinda Drink");
     if (debug) {
         return;    
     }

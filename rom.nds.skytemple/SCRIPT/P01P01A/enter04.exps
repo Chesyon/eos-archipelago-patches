@@ -2,12 +2,32 @@
 def 0 {
     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
         case 0:
-            §label_0;
             if ($SCENARIO_TALK_BIT_FLAG[126]) {
             } else {
-                message_Mail("[CN]You think it may be wise to speak\n[CN]with [CS:G]Marowak[CR] before you depart...");
-                message_Close();
+                message_Mail("[CN]You think it may be wise to speak\n[CN]with [CS:G]Marowak[CR] before you depart...\n[CN]Will you proceed forward anyway?");
+                switch ( message_SwitchMenu(1, 2) ) {
+                    case menu({
+                        english="Yes",
+                        french="Oui",
+                        german="Ja",
+                        italian="Sì",
+                        spanish="Sí",
+                    }):
+                        message_Close();
+                        break;
+                    case menu({
+                        english="No",
+                        french="Non",
+                        german="Nein",
+                        italian="No",
+                        spanish="No",
+                    }):
+                    default:
+                        message_Close();
+                        jump @label_5;
+                }
             }
+            §label_0;
             with (actor ACTOR_PLAYER_BIPPA) {
                 SetAnimation(2);
             }

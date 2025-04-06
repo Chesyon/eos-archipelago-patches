@@ -1,0 +1,80 @@
+
+def 0 {
+    if ( scn($SCENARIO_SIDE) >= [40, 7] || scn($SCENARIO_SIDE) >= [40, 3] ) {
+        §label_4;
+        switch ( message_Menu(MENU_DUSKULL_BANK) ) { }
+        §label_3;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_SIDE) >= [40, 2] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[128] ) {
+            jump @label_4;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[128] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Oh? [CS:Y]Bidoof[CR]...",
+                french=" Oh? [CS:Y]Keunotor[CR]...",
+                german=" Oh? [CS:Y]Bidiza[CR]...",
+                italian=" Oh? [CS:Y]Bidoof[CR]...",
+                spanish=" Ah, [CS:Y]Bidoof[CR]...",
+            });
+            message_Talk({
+                english=" You sure have a cheerful\nexpression today.",
+                french=" Tu as vraiment une mine\nréjouie aujourd\'hui.",
+                german=" Du siehst heute aber ganz schön\nfröhlich aus.",
+                italian=" Hai proprio un\'aria allegra oggi.",
+                spanish=" Hoy se te ve radiante de felicidad.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(8978);
+            with (actor ACTOR_NPC_YOMAWARU) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with (actor ACTOR_NPC_YOMAWARU) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_NPC_YOMAWARU);
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I know! [K]Something good is\nhappening! Hee-hee.",
+                french=" Je sais! [K]Quelque chose\nde bien t\'est arrivé! Gni hi hiii...",
+                german=" Ich weiß![K] Etwas Gutes\ngeschieht! Huhuhu.",
+                italian=" Ci sono! [K]È successo qualcosa\ndi bello! Hii-hii.",
+                spanish=" ¡Ya sé![K] Eso es que pasa\nalgo bueno. Ji, ji.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_4;
+        }
+    } else {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh! [CS:Y]Bidoof[CR]![K]\nGreetings! Hee-hee.",
+            french=" Oh! [CS:Y]Keunotor[CR]![K]\nBienvenue! Gni hi hiii...",
+            german=" Oh! [CS:Y]Bidiza[CR]![K]\nSei gegrüßt! Huhuhu.",
+            italian=" Oh! [CS:Y]Bidoof[CR]![K]\nSalve! Hii-hii.",
+            spanish=" ¡Ah, hola, [CS:Y]Bidoof[CR]![K]\n¿Qué tal? Ji, ji.",
+        });
+        message_Talk({
+            english=" Today\'s such a nice day, isn\'t it?[K]\nGood luck with your work!",
+            french=" Quelle belle journée aujourd\'hui,\nn\'est-ce pas?[K]\nBonne chance avec ton travail!",
+            german=" Heute ist ein so schöner Tag,\nnicht wahr?[K] Viel Glück bei deiner Arbeit!",
+            italian=" È una bellissima giornata oggi,\nnon è vero?[K] Buona fortuna per il tuo lavoro!",
+            spanish=" Hace un día precioso, ¿verdad?[K]\n¡Buena suerte con tus misiones!",
+        });
+        message_Close();
+        message_Mail("[CN][CS:G]Bidoof[CR] cannot access the bank\n[CN]until later in the episode!");
+        jump @label_3;
+    }
+}

@@ -1,0 +1,83 @@
+// import "internal_checks.exps";
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+            jump @bidoof_se;
+        case 2:
+            jump @sunflora_se;
+        default:
+            JumpCommon(CORO_END_TALK);
+    }
+    §bidoof_se;
+    §sunflora_se;
+    switch(scn($SCENARIO_SUB1)[1]) {
+        case &<< 0:
+            message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" PLACEHOLDER");
+            message_Close();
+            JumpCommon(CORO_END_TALK);
+        default:
+            message_SetFace(ACTOR_NPC_MIMIROPPU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" PLACEHOLDER");
+            switch(message_SwitchMenu(0,1)) {
+                case menu("Yes"):
+                    message_Close();
+                    bgm_FadeOut(30);
+                    screen_FadeOut(1,30);
+                    break;
+                case menu("No"):
+                    message_Close();
+                    message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" PLACEHOLDER");
+                    message_Close();
+                    JumpCommon(CORO_END_TALK);
+            }
+        message_Close();
+        bgm_FadeOut(30);
+        screen_FadeOut(1,30);
+        Wait(30);
+        me_Play(5);
+        message_Mail({
+            english="[CN]Special Episode\n[CN]\"Here Comes Team Charm!\"\n[CN]may have been unlocked![W:90]",
+            french="[CN]L\'Episode Spécial\n[CN]\"Voilà l\'Equipe Charme!\"\n[CN]est maintenant disponible![W:90]",
+            german="[CN]Die Bonusepisode\n[CN][F:S2]Platz für Team Charme![F:E2]\n[CN]wurde freigeschaltet![W:90]",
+            italian="[CN]L\'episodio speciale\n[CN]\"Arriva il Team Malia!\"\n[CN]è ora disponibile![W:90]",
+            spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"¡Llega el Equipo Carisma!\".[W:90]",
+        });
+        message_Mail({
+            english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+            french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+            german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+            italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+            spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+        });
+        message_Mail({
+            english="[CN]If you would like to play the Special Episode,\n[CN]save your adventure progress, and\n[CN]return to the Top Menu.",
+            french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
+            german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
+            italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
+            spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
+        });
+        message_Close();
+        Wait(90);
+        ~AssignCheck(8);
+        screen_FadeIn(1, 30);
+        bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
+        message_Mail("[CN]You feel as if [CS:G]Team Charm[CR]\n[CN]left out a lot of important context...");
+        message_SetFace(ACTOR_NPC_MIMIROPPU,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" PLACEHOLDER");
+        message_SetFace(ACTOR_NPC_SAANAITO,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" PLACEHOLDER");
+        message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Talk(" PLACEHOLDER");
+        message_Close();
+        JumpCommon(CORO_END_TALK);
+    }
+}
