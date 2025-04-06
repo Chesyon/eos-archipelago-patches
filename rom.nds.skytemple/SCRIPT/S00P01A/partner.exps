@@ -1,41 +1,97 @@
-
 def 0 {
     if (debug) {
-        // jump @debug_menu;
+        jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
         dungeon_mode(54) = DMODE_OPEN;                                                                                                        
     }
-    §decision_tree;
-    message_Mail("SE partner menu on the way!");
-    jump @shut_up;
+    §master_tree;
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+            with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(2);
+            }
+            jump @bidoof_tree;
+        case 1:
+            with (actor ACTOR_PLAYER_PUPURIN) {
+                SetAnimation(2);
+            }
+            jump @iggly_tree;
+        case 2:
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetAnimation(2);
+            }
+            jump @sunflora_tree;
+        case 3:
+            with (actor ACTOR_PLAYER_CHARMS) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_NPC_CHAAREMU) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_CHARMS) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SAANAITO);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                Turn2DirectionLives(4, 10, ACTOR_PLAYER_CHARMS);
+            }
+            with (actor ACTOR_NPC_CHAAREMU) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SAANAITO);
+            }
+            WaitExecuteLives(ACTOR_PLAYER_CHARMS);
+            WaitExecuteLives(ACTOR_NPC_SAANAITO);
+            jump @charm_tree;
+        case 4:
+            with (actor ACTOR_PLAYER_FUTURE) {
+                SetAnimation(2);
+            }
+            jump @grovyle_tree;
+        default:
+            message_Mail("This should never happen!\nMessage happylappy if it does!\n(Not in a SE)");
+            jump @shut_up;
+    }
     
+    
+    §bidoof_tree;
+    message_Close();
+    se_Play(276);
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetAnimation(11);
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetAnimation(2);
+    }
+    Wait(60);
+    se_Play(8961);
+    with (actor ACTOR_PLAYER_BIPPA) {
+	SetEffect(EFFECT_SWEAT_DROP, 3);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+	WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Doh, I dropped my notebook again!\nMaybe I should check it real quick...");
     switch(message_SwitchMenu(4,6)) {
-        case menu("Add To Team"):
-            message_Close();
-            message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
-            message_Talk(" Sure![K] I\'d love to explore\nwith you today!");
-            message_Close();
-            ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY,0,0);
-//            jump @bidoof_else;
         case menu("Variable Check"):
             message_Close();
-            message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
-            message_Talk(" Did something break again?[K] I\nhope it\'s an easy fix...[W:30] No worries![K] Just send\nthis list of variables + values to [CS:C]happylappy[CR]!");
+            message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Uh-oh, did something break?[K] Golly, I\nhope it wasn\'t my fault this time... Just pass\nthis along to [CS:G]happylappy[CR] for me, alright?");
             message_Close();
-//            call @variable_checkup;
-//            jump @anything_else;
+            call @variable_checkup;
+            jump @bidoof_else;
         case menu("What to do"):
             message_Close();
-            message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
-            message_Talk(" Sure! I\'d be happy to give you\na recap on what our goals are, [hero]!\nLet\'s see, according to my notes...");
-//            call @current_goals;
-//            jump @anything_else;
+            message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I\'m always spacing out, I should\nprobably refresh myself on what I\'m\nmeant to be doing, yup yup! Let\'s see...");
+            call @bidoof_goals;
+            jump @bidoof_else;
         case menu("Any ideas"):
-//            jump @any_ideas;
-        case menu("Just Chatting"):
-            message_Close();
-//            jump @just_chatting;
+            jump @bidoof_ideas;
         case menu("Never Mind"):
         default:
             §shut_up;
@@ -45,14 +101,1888 @@ def 0 {
             hold;
     }
 
-    §anything_else;
-    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
-    message_Talk(" Anything else, [hero]?");
+    §bidoof_else;
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Golly, am I forgetting anything else?");
     switch(message_SwitchMenu(0,1)) {
         case menu("Yes"):
-            jump @decision_tree;
+            jump @bidoof_tree;
         case menu("No"):
         default:
             jump @shut_up;
     }
+
+
+
+    
+    
+
+
+    §bidoof_goals;
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" Looks like my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty sure I\'ve already played\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Looks like you can access the\n[CS:C]Main Episode[CR] right now, yup yup! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards clobbering that\nwicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Is that enough?");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Golly, it seems like you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating the\nAPWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need, yup yup! I\nwonder what they\'re waiting for?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Golly, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Golly, I hope I can find\nthe last one for them! I\'d be a hero!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" They\'re still missing quite a few,\nyup yup! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing good, yup yup!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Golly, I hope I can find\nthe last one for them! I\'d be a hero!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" They\'re still missing quite a few,\nyup yup! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Golly, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? Golly, that sure would be nice!");
+                break;
+        }
+        
+    }
+    return;
+    
+    §bidoof_ideas;
+    if ($SCENARIO_SUB5 &<< 2) {
+    } else {
+        message_Talk(" Golly, I should go visit\n[CS:G]Marowak[CR] at his dojo! I bet he has some\nsage advice for me in these trying times...");
+        jump @bidoof_else;
+    }
+    
+    if ($SCENARIO_SUB1 &<< 5) {
+    } else {
+        message_Talk(" I should check up on my diary\nin my guild room. I always seem to get nasty\nnotes in there when I\'m not around...");
+        message_Close();
+        jump @bidoof_else;
+    }
+    if ($SCENARIO_SUB1 &<< 6) {
+    } else {
+        message_Talk(" I bet [CS:G]Nidoking[CR] has a\nfun story for me to listen to at the cafe!\nI should go see what he has to say!");
+        message_Close();
+        jump @bidoof_else;
+    }
+    if ($SCENARIO_SUB1 &<< 7) {
+    } else {
+        message_Talk(" I hear [CS:G]Sunflora[CR] keeps a diary\nin her guild room. I should go\nsee if there\'s anything juicy in there!");
+        message_Close();
+        jump @bidoof_else;
+    }
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case &<< 0:
+            break;
+        default:
+            message_Talk(" Did I see [CS:X]Team Charm[CR]\n in the cafe? I should go get an autograph\nwhile I have the opportunity!");
+            message_Close();
+            jump @bidoof_else;
+    }
+    
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case > 4: // At least one shop item bought!
+            break;
+        default:
+            switch (scn($SCENARIO_SUB2)[0]) {
+                case &<< 0:
+                case &<< 1:
+                case &<< 2:
+                case &<< 3:
+                    break;
+                default:
+                    message_Talk(" I should check our shop items...\nSeems like I haven\'t purchased any yet, so\nI should try to buy anything important!");
+                    message_Close();
+                    message_Mail(" Have you checked the shop items yet?");
+                    switch(message_SwitchMenu(1,2)) {
+                        case menu("Yes"):
+                            message_Close();
+                            message_Talk(" Okay, let me see...");
+                            break;
+                        case menu("No"):
+                            message_Close();
+                            jump @bidoof_else;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    switch( ProcessSpecial(105,0,1)) {
+        case > 0:
+            message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nI should go relax at the cafe, yup yup!");
+            jump @bidoof_else;
+            break;
+        default:
+            break;
+    }
+
+    switch(dungeon_mode(180)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Normal/Fly Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(181)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dark/Fire Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(182)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Rock/Water Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(183)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Grass Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(184)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Elec/Steel Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(185)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ice/Ground Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(186)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Fight/Psych Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(187)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Poison/Bug Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(188)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dragon Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(189)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ghost Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @bidoof_else;
+        default:
+            break;
+    }
+    
+    if($DUNGEON_CONQUEST_LIST[127]) {
+        message_Talk(" Golly, have I already cleared all of\n[CS:P]Star Cave[CR]? I must have forgotten, yup yup!");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk(" Golly, it seems like I just have\nto take on [CS:G]Jirachi[CR]\n to get a check. *gulp*");
+        jump @bidoof_else;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk(" Golly, that battle against [CS:G]Snover[CR]\nwas tough! But I can still head deeper into [CS:P]Star Cave[CR],\nso let\'s go do that!");
+        jump @bidoof_else;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk(" Golly, [CS:G]Snover[CR] has been a big\nhelp getting this far.\nI wonder what we\'ll find if we keep\non exploring [CS:P]Star Cave[CR]?");
+        jump @bidoof_else;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk(" Golly, have I already cleared all of\n[CS:P]Star Cave[CR]? I must have forgotten, yup yup!");
+        jump @bidoof_else;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk(" I bet [CS:P]Star Cave[CR] will be full\nof checks! I should head there once I\'m ready...");
+        jump @bidoof_else;
+    } else {
+        message_Talk(" [CS:G]Chatot[CR] wanted me to do something\nat the [CS:G]Kecleon[CR] Market, right?\nI bet things open up a lot after I do that...");
+        jump @bidoof_else;
+    }
+    switch(ProcessSpecial(105,0,0)) {
+        case > 0:
+            message_Talk(" Seems like I can do a few\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
+            message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else I can do...");
+        default:
+            break;
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+ //  Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!
+            message_Close();
+            jump @bidoof_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            jump @bidoof_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            jump @bidoof_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @bidoof_else;
+        }
+    }
+    
+    if ($SUB30_SPOT_LEVEL < 5) {
+        message_Talk(" Seems like they\'re missing Project P\ndungeon checks! I can recycle some stuff,\nif it helps out [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]!");
+        jump @bidoof_else;
+    }
+
+    message_SetFace(ACTOR_PLAYER_BIPPA,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" Wuh-oh, I\'m all out of stuff to\ndo, I think! Let me know if I\'m wrong\nabout that, but this isn\'t good, yup yup!");
+    message_SetFace(ACTOR_PLAYER_BIPPA,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    jump @bidoof_else;
+        
+    §iggly_tree;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Oh yeah![K] Papa got me this pretty\njournal for collecting my thoughts recently!\nI wonder what I\'ve written in it so far?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh no, did something break?[K] I\'m\nsure it\'s an easy fix![K] Mama always says to\nsend this to [CS:G]happylappy[CR] if something breaks!");
+            message_Close();
+            call @variable_checkup;
+            jump @iggly_else;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Papa says I should always keep\nmoving forward, and remember my goals!\nLet\'s see what I have in here right now...");
+            call @iggly_goals;
+            jump @iggly_else;
+        case menu("Any ideas"):
+            jump @iggly_ideas;
+        case menu("Never Mind"):
+        default:
+            §shut_up;
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+            hold;
+    }
+
+    §iggly_else;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Am I done with my journal?\nOr is there more I need to read?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @iggly_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
+
+
+    
+    
+
+
+    §iggly_goals;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" I bet my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty sure I\'ve already done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Looks like you can access the\n[CS:C]Main Episode[CR] right now, yay! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards helping that\ntroubled [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Math is soooo hard!");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Yay, it seems like you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating the\nAPWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need... I think! I\nwonder who they\'re waiting on?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Huh, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! I hope Master and I can find\nthe last one for them! It\'d be so much fun!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" They\'re still missing quite a few,\nI think! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\nhaving a lot of fun!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Hee-hee, sounds like\n[CS:G]Cryptic[CR] really goofed this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! I hope Master and I can find\nthe last one for them! It\'d be so much fun!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" They\'re still missing quite a few,\nI think! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Right, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? That would be fun!");
+                break;
+        }
+        
+    }
+    return;
+    
+    §iggly_ideas;
+    
+    if($DUNGEON_CONQUEST_LIST[127]) {
+        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    } else {
+        message_Talk("PLACEHOLDER");
+        jump @iggly_else;
+    }
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @iggly_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            jump @iggly_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            jump @iggly_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @iggly_else;
+        }
+    }
+
+    message_SetFace(ACTOR_PLAYER_PUPURIN,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nI have access to... I know it isn\'t many\nbut let me know if I missed one!");
+    message_SetFace(ACTOR_PLAYER_PUPURIN,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    jump @iggly_else;
+        
+    §sunflora_tree;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Eek! I should be checking\nthe planner [CS:G]Chatot[CR] gave me more often!\nLet\'s see, what did I put in here so far?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh my gosh, did something break?[K]\nEek! I hope it\'s an easy fix! You should\nprobably send this to [CS:G]happylappy[CR] right away!");
+            message_Close();
+            call @variable_checkup;
+            jump @sunflora_else;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Oh my gosh, that\'s right! I need to\nstay focused on my goals! I can\'t let the\nguild down now! Okay, let\'s see here...");
+            call @sunflora_goals;
+            jump @sunflora_else;
+        case menu("Any ideas"):
+            jump @sunflora_ideas;
+        case menu("Never Mind"):
+        default:
+            §shut_up;
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+            hold;
+    }
+
+    §sunflora_else;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Oh my gosh! I hope I\'m not wasting\ntoo much time! Was there anything else?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @sunflora_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
+
+
+    
+    
+
+
+    §sunflora_goals;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" I think my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty confident I\'ve done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Eek! It looks like you can access the\n[CS:C]Main Episode[CR] right now! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards slapping that\n[CS:G]Darkrai[CR] senseless in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. What did they need?");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Oh my gosh, it seems like you\'ve already\ntaken down [CS:G]Darkrai[CR]! Congratulations on beating\nthe APWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need, right? I\nwonder what\'s keeping them?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Eek, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Eek, I hope I can find\nthe last one for them! I\'d be a hero!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few.\nI hope I can help them with it somehow...\nOh my gosh! Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Eek!\nI\'m so excited for them!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Eek, sounds like\n[CS:G]Cryptic[CR] really missed on this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Eek, I hope I can find\nthe last one for them! I\'d be a hero!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few.\nI hope I can help them with it somehow...\nOh my gosh! Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Oh my gosh, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? Eek! That sure would be nice!");
+                break;
+        }
+        
+    }
+    return;
+    
+    §sunflora_ideas;
+
+    if ($SCENARIO_SUB1 &<< 5) {
+    } else {
+        message_Talk(" I hear [CS:G]Bidoof[CR] keeps a diary\nin his guild room. I should go\nsee if there\'s anything juicy in there!");
+        message_Close();
+        jump @sunflora_else;
+    }
+    if ($SCENARIO_SUB1 &<< 6) {
+    } else {
+        message_Talk(" I bet [CS:G]Nidoking[CR] has a\nfun story for me to listen to at the cafe!\nI should go see what he has to say!");
+        message_Close();
+        jump @sunflora_else;
+    }
+    if ($SCENARIO_SUB1 &<< 7) {
+    } else {
+        message_Talk(" I should check up on my diary\nin my guild room. Oh my gosh, what if\nsomeone is reading it right now? Eek!");
+        message_Close();
+        jump @sunflora_else;
+    }
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case &<< 0:
+            break;
+        default:
+            message_Talk(" Did I see [CS:X]Team Charm[CR]\n in the cafe? I should go get an autograph\nwhile I have the opportunity!");
+            message_Close();
+            jump @sunflora_else;
+    }
+    
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case > 4: // At least one shop item bought!
+            break;
+        default:
+            switch (scn($SCENARIO_SUB2)[0]) {
+                case &<< 0:
+                case &<< 1:
+                case &<< 2:
+                case &<< 3:
+                    break;
+                default:
+                    message_Talk(" I should check our shop items...\nSeems like I haven\'t purchased any yet, so\nI should try to buy anything important!");
+                    message_Close();
+                    message_Mail(" Have you checked the shop items yet?");
+                    switch(message_SwitchMenu(1,2)) {
+                        case menu("Yes"):
+                            message_Close();
+                            message_Talk("");
+                            break;
+                        case menu("No"):
+                            message_Close();
+                            jump @sunflora_else;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    switch( ProcessSpecial(105,0,1)) {
+        case > 0:
+            message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nOh my gosh, I should go relax at the cafe!");
+            jump @sunflora_else;
+            break;
+        default:
+            break;
+    }
+
+    switch(dungeon_mode(180)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Normal/Fly Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(181)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dark/Fire Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(182)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Rock/Water Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(183)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Grass Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(184)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Elec/Steel Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(185)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ice/Ground Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(186)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Fight/Psych Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(187)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Poison/Bug Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(188)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dragon Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    switch(dungeon_mode(189)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ghost Maze[CR] whenever I like!\nSome training sounds good right now...");
+            jump @sunflora_else;
+        default:
+            break;
+    }
+    
+    if($DUNGEON_CONQUEST_LIST[127]) {
+        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    } else {
+        message_Talk("PLACEHOLDER");
+        jump @sunflora_else;
+    }
+    switch(ProcessSpecial(105,0,0)) {
+        case > 0:
+            message_Talk(" Seems like I can do a few\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
+            message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else I can do...");
+        default:
+            break;
+    }
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @sunflora_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @sunflora_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            jump @sunflora_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @sunflora_else;
+        }
+    }
+    
+    if ($SUB30_SPOT_LEVEL < 5) {
+        message_Talk(" Seems like they\'re missing Project P\ndungeon checks! I can recycle some stuff,\nif it helps out [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]!");
+        jump @sunflora_else;
+    }
+
+    message_SetFace(ACTOR_PLAYER_KIMAWARI,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" Oh my gosh! I\'m all out of stuff to\ndo, I think! Let me know if I\'m wrong\nabout that, but this isn\'t good, Eek!");
+    message_SetFace(ACTOR_PLAYER_KIMAWARI,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    jump @sunflora_else;
+        
+    §charm_tree;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Is something the matter, [CS:Q]Lopunny[CR]?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh no! Did something break?[K]\nI hope it\'s an easy enough fix! Send this to\n[CS:G]happylappy[CR] as soon as possible, alright?");
+            message_Close();
+            call @variable_checkup;
+            jump @charm_else;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" That\'s right, [CS:X]Team Charm[CR]\nneeds to always remain laser-focused\non our targets! Let me check my notes...");
+            call @charm_goals;
+            jump @charm_else;
+        case menu("Any ideas"):
+            jump @charm_ideas;
+        case menu("Never Mind"):
+        default:
+            §shut_up;
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+            hold;
+    }
+
+    §charm_else;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Will that be all, [CS:Q]Lopunny[CR]?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @shut_up;
+        case menu("No"):
+        default:
+            jump @charm_tree;
+    }
+
+
+
+    
+    
+
+
+    §charm_goals;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" As I recall, our current target is\nthe elusive [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" My records suggest that we\'ve done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk("Darling, it looks like you can access\nthe [CS:C]Main Episode[CR] right now! We should finish\nup here, and do that right away! [M:H3]");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards dealing with that\nwicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let me check...");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Well done! It seems like you\'ve already\ntaken down [CS:G]Darkrai[CR]!\nCongratulations on beating the APWorld!\n...But why are you still here?");
+                        break; // I think all of us know the answer\nto that question, isn\'t that right girls? [M:H3]
+                    case DMODE_OPEN:             // Lopunny: That\'s right, you\'re a fan! Isn\'t that\njust adorable! [M:H3]
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD); // Medicham: Unfortunately for you, darling,\nwe don\'t do fan-service. But we don\'t mind\nyou watching us explore! [M:H3]
+                        message_Talk(" Seems like they have all the\ntreasures they need! [M:H3]  I\nwonder what they\'re waiting for?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" They have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Alright girls, let\'s go save the day!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few...\nAlright girls, we have work to do! Let\'s help them out!");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing quite well for themselves.");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Seems like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Alright girls, let\'s go save the day!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few...\nAlright girls, we have work to do! Let\'s help them out!");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Right! I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. Alright girls, let\'s go save the day!");
+                break;
+        }
+        
+    }
+    return;
+    
+    §charm_ideas;
+    
+    
+    if($DUNGEON_CONQUEST_LIST[127]) {
+        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    } else {
+        message_Talk("PLACEHOLDER");
+        jump @charm_else;
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @charm_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @charm_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            jump @charm_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @charm_else;
+        }
+    }
+
+    message_SetFace(ACTOR_NPC_SAANAITO,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nwe have access to... I know it isn\'t many,\nbut let me know if I missed one!");
+    message_SetFace(ACTOR_NPC_SAANAITO,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    jump @charm_else;
+        
+    §grovyle_tree;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk("Now might be a good time to\nreview my notes. Where to start?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Ugh, did something break again?[K] I\nbet it was [CS:G]Dusknoir[CR]\'s fault, as usual! Well,\nyou know what to do, send this to [CS:G]happylappy[CR]!");
+            message_Close();
+            call @variable_checkup;
+            jump @grovyle_else;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I should probably review my goals\nand objectives, to maintain my momentum.\nLet\'s see, what did I put down in here...");
+            call @grovyle_goals;
+            jump @grovyle_else;
+        case menu("Any ideas"):
+            jump @grovyle_ideas;
+        case menu("Never Mind"):
+        default:
+            §shut_up;
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+            hold;
+    }
+
+    §grovyle_else;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" I should keep moving, but moments\nlike these aren\'t common. Is there anything\nelse I needed to refresh my memory on?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @grovyle_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
+
+
+    
+    
+
+
+    §grovyle_goals;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" My current objective is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" My records suggest that I\'ve done\nthis dance with [CS:G]Dusknoir[CR] from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Hold on! It looks like you can access the\n[CS:C]Main Episode[CR] right now! We should\nfinish up here, and do that yesterday!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards stopping\nthat wicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let\'s see...");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk("Impressive! It seems you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating\nthe APWorld![W:60] ...but why are you still here?");
+                        break; //  Now hold on a minute! Don\'t get any\ntwisted fantasies here! [CS:G]Dusknoir[CR] and I...\nWe\'re not like that, okay!
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need! So\nwhy haven\'t they beaten [CS:G]Darkrai[CR] yet?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" What? They have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!"); // ([CS:G]Cryptic[CR] I swear if this is your fault...)
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! I bet I could find the last one\nin no time, even with [CS:GDusknoir[CR] slowing me down!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few...\nI will see what I can do to help...");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a lot of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Hmm...");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing quite well in their mission.");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! Excellent!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Come on, [CS:G]Cryptic[CR]!\nYou\'re better than this!");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! I bet I could find the last one\nin no time, even with [CS:GDusknoir[CR] slowing me down!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few...\nI will see what I can do to help...");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" But there\'s more![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" What? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. What ameteurs!");
+                break;
+        }
+        
+    }
+    return;
+    
+    §grovyle_ideas;
+    
+    if($DUNGEON_CONQUEST_LIST[127]) {
+        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    } else {
+        message_Talk("PLACEHOLDER");
+        jump @grovyle_else;
+    }
+
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @grovyle_else;
+        }
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            jump @grovyle_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            jump @grovyle_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            jump @grovyle_else;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk("Bidoof");
+            message_Close();
+            jump @grovyle_else;
+        }
+    }
+
+    message_SetFace(ACTOR_NPC_JUPUTORU,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nI have access to in this decrepit place.\nI know it isn\'t many, but let me know if I missed one!");
+    message_SetFace(ACTOR_NPC_JUPUTORU,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    jump @grovyle_else;
+        
+    §debug_menu;
+    message_Notice("[M:D2][CS:C]Choose Debug Setting[CR]");        
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu("Bag Size (Old)"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Pick a bag size:[CR]");
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu("Size 7"):
+                    $SCENARIO_BALANCE_FLAG = 7;
+                    break;
+                case menu("Size 6"):
+                    $SCENARIO_BALANCE_FLAG = 6;
+                    break;
+                case menu("Size 5"):
+                    $SCENARIO_BALANCE_FLAG = 5;
+                    break;
+                case menu("Size 4"):
+                    $SCENARIO_BALANCE_FLAG = 4;
+                    break;
+                case menu("Size 3"):
+                    $SCENARIO_BALANCE_FLAG = 3;
+                    break;
+                case menu("Size 2"):
+                    $SCENARIO_BALANCE_FLAG = 2;
+                    break;
+                case menu("Size 1"):
+                    $SCENARIO_BALANCE_FLAG = 1;
+                    break;
+                case menu("Size 0"):
+                    $SCENARIO_BALANCE_FLAG = 0;
+                    break;
+
+            }
+            jump @debug_menu;
+        case menu("Enable Performance Flags"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Pick a flag:[CR]");
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu('0: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[0] = 1;
+                    break;
+                case menu('1: Team name'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[1] = 1;
+                    break;
+                case menu('2: Treasure Bag'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[2] = 1;
+                    break;
+                case menu('3: Random Mission'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[3] = 1;
+                    break;
+                case menu('4: Friend Rescue'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[4] = 1;
+                    break;
+                case menu('5: Friends'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+                    break;
+                case menu('6: Recruit Evolution'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[6] = 1;
+                    break;
+                case menu('7: Formation Change'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[7] = 1;
+                    break;
+                case menu('8: Move Alone / Training'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[8] = 1;
+                    break;
+                case menu('9: Post ending'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[9] = 1;
+                    break;
+                case menu('10: Hero + Partner Evo.'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[10] = 1;
+                    break;
+                case menu('11: Dojo clear'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[11] = 1;
+                    break;
+                case menu('12: Defeat Drowzee'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[12] = 1;
+                    break;
+                case menu('13: Defeat fake Groudon'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[13] = 1;
+                    break;
+                case menu('14: Defeat Luxray (Electrike lol)'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[14] = 1;
+                    break;
+                case menu('15: Cleared Future World'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[15] = 1;
+                    break;
+                case menu('16: Defeat Dusknoir'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[16] = 1;
+                    break;
+                case menu('17: Defeat Dialga (Post-Dialga)'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[17] = 1;
+                    break;
+                case menu('18: Defeat Darkrai'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[18] = 1;
+                    break;
+                case menu('19: Defeat Regigigas'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[19] = 1;
+                    break;
+                case menu('20: Guild Graduation'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[20] = 1;
+                    break;
+                case menu('21: Collect 7 Treasures'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[21] = 1;
+                    break;
+                case menu('22: Secret Rank'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[22] = 1;
+                    break;
+                case menu('23: Get Manaphy'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[23] = 1;
+                    break;
+                case menu('24: Manaphy ev. clear'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[24] = 1;
+                    break;
+                case menu('25: Chatot Repellant'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[25] = 1;
+                    break;
+                case menu('26: Jukebox'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[26] = 1;
+                    break;
+                case menu('27: Identify Waterfall'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[27] = 1;
+                    break;
+                case menu('28: Identify Quicksand'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[28] = 1;
+                    break;
+                case menu('29: Recruit Sensor'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[29] = 1;
+                    break;
+                case menu('30: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[30] = 1;
+                    break;
+                case menu('31: ???'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[31] = 1;
+                    break;
+                case menu('32: Team Name Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[32] = 1;
+                    break;
+                case menu('33: Unown Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                    break;
+                case menu('34: Sentry Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                    break;
+                case menu('35: Pelipper Package'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[35] = 1;
+                    break;
+                case menu('36: Touch Grass Trap'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[36] = 1;
+                    break;
+                case menu('37: Pelipper Base Only'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[37] = 1;
+                    break;
+                case menu('38: Dimensional Scream'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[38] = 1;
+                    break;
+                case menu('39: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[39] = 1;
+                    break;
+                case menu('40: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[40] = 1;
+                    break;
+                case menu('41: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[41] = 1;
+                    break;
+                case menu('42: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[42] = 1;
+                    break;
+                case menu('43: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[43] = 1;
+                    break;
+                case menu('44: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[44] = 1;
+                    break;
+                case menu('45: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[45] = 1;
+                    break;
+                case menu('46: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[46] = 1;
+                    break;
+                case menu('47: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[47] = 1;
+                    break;
+                case menu('48: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[48] = 1;
+                    break;
+                case menu('49: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[49] = 1;
+                    break;
+                case menu('50: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[50] = 1;
+                    break;
+                case menu('51: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[51] = 1;
+                    break;
+                case menu('52: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[52] = 1;
+                    break;
+                case menu('53: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[53] = 1;
+                    break;
+                case menu('54: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[54] = 1;
+                    break;
+                case menu('55: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[55] = 1;
+                    break;
+                case menu('56: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[56] = 1;
+                    break;
+                case menu('57: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[57] = 1;
+                    break;
+                case menu('58: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[58] = 1;
+                    break;
+                case menu('59: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[59] = 1;
+                    break;
+                case menu('60: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[60] = 1;
+                    break;
+                case menu('61: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[61] = 1;
+                    break;
+                case menu('62: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[62] = 1;
+                    break;
+                case menu('63: Unused?'):
+                    message_Close();
+                    $PERFORMANCE_PROGRESS_LIST[63] = 1;
+                    break;
+            }
+            jump @debug_menu;
+        case menu("Gib Money"):
+            message_Close();
+            $BANK_GOLD = 9999;
+            $CARRY_GOLD = 9999;
+            jump @debug_menu;
+        case menu("Gib All Dungeons"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Test Dungeon Opened[CR]");
+            message_Close();
+            dungeon_mode(0)  = DMODE_OPEN;
+            jump @debug_menu;
+        case menu("Gib Items"):
+            message_Close();
+            message_Notice("[M:D2][CS:C]Select How:[CR]");
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu("1 Of Each"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 1400) {
+                        $ITEM_BACKUP = value($EVENT_LOCAL);
+                        $ITEM_BACKUP[1] = 99;
+                        item_SetVariable(0,$ITEM_BACKUP);
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+                                break;
+                            default:
+                                switch(ProcessSpecial(57,0,0)) {
+                                    case 0:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                    default:
+                                        message_Mail("Storage Full!");
+                                        message_Close();
+                                        jump @debug_menu;
+                                }
+                                break;
+                        }
+                        $EVENT_LOCAL += 1;    
+                    }
+                    break;
+                case menu("Good Stuff"):
+                    message_Close();
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,24,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,33,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,99,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,115,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,182,0);
+                    
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,319,0);
+                    break;
+                case menu("Golden Seeds (x40)"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 40) {
+                        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,93,0);
+                        $EVENT_LOCAL += 1;
+                    }
+                    break;
+                case menu("Sticks & Stones"):
+                    message_Close();
+                    $EVENT_LOCAL = 0;
+                    while ($EVENT_LOCAL < 11) {
+                        $ITEM_BACKUP = value($EVENT_LOCAL);
+                        $ITEM_BACKUP[1] = 99;
+                        item_SetVariable(0,$ITEM_BACKUP);
+                        switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+                            case 0:
+                                ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+                                break;
+                            default:
+                                switch(ProcessSpecial(57,0,0)) {
+                                    case 0:
+                                        ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                    default:
+                                        message_Mail("Storage Full!");
+                                        message_Close();
+                                        jump @debug_menu;
+                                }
+                                break;
+                        }
+                        $EVENT_LOCAL += 1;    
+                    }
+                    break;
+            }
+            jump @debug_menu;
+        case menu("Cancel"):
+            message_Close();
+            break;
+    }
+    jump @master_tree;
+    §variable_checkup;
+    message_Mail("[CS:S]$VERSION[CR]: [var:0:0]\n[CS:S]$CONDITION[CR]: [var:1:0]\n[CS:S]$SCENARIO_SELECT[CR]: ~5b[var:2:0], [var:2:1]~5d");
+    message_Mail("[CS:S]$SCENARIO_MAIN[CR]: ~5b[var:3:0], [var:3:1]~5d\n[CS:S]$SCENARIO_SIDE[CR]: ~5b[var:4:0], [var:4:1]~5d\n[CS:S]$SCENARIO_SUB1[CR]: ~5b[var:5:0], [var:5:1]~5d");
+    message_Mail("[CS:S]$SCENARIO_SUB2[CR]: ~5b[var:6:0], [var:6:1]~5d\n[CS:S]$SCENARIO_SUB3[CR]: ~5b[var:7:0], [var:7:1]~5d\n[CS:S]$SCENARIO_SUB4[CR]: ~5b[var:8:0], [var:8:1]~5d");
+    message_Mail("[CS:S]$SCENARIO_SUB5[CR]: ~5b[var:9:0], [var:9:1]~5d\n[CS:S]$SCENARIO_SUB6[CR]: ~5b[var:10:0], [var:10:1]~5d\n[CS:S]$SCENARIO_SUB7[CR]: ~5b[var:11:0], [var:11:1]~5d");
+    message_Mail("[CS:S]$SCENARIO_SUB8[CR]: ~5b[var:12:0], [var:12:1]~5d\n[CS:S]$SIDE02_TALK[CR]: [var:13:0][var:13:1][var:13:2][var:13:3][var:13:4][var:13:5][var:13:6][var:13:7]\n[CS:S]$SIDE06_ROOM[CR]: [var:14:0][var:14:1][var:14:2][var:14:3][var:14:4][var:14:5][var:14:6][var:14:7]");
+    message_Mail("[CS:S]$SIDE08_BOSS2ND[CR]: [var:15:0][var:15:1][var:15:2][var:15:3][var:15:4][var:15:5][var:15:6][var:15:7]\n[CS:S]$SIDE01_BOSS2ND[CR]: [var:16:0][var:16:1][var:16:2][var:16:3][var:16:4][var:16:5][var:16:6][var:16:7]");
+    message_Mail("[CS:S]$SCENARIO_MAIN_BIT_FLAG[CR]\n[var:17:0][var:17:1][var:17:2][var:17:3][var:17:4][var:17:5][var:17:6][var:17:7][var:17:8][var:17:9][var:17:10][var:17:11][var:17:12][var:17:13][var:17:14][var:17:15][var:17:16][var:17:17][var:17:18][var:17:19][var:17:20][var:17:21][var:17:22][var:17:23][var:17:24][var:17:25][var:17:26][var:17:27][var:17:28][var:17:29][var:17:30][var:17:31]\n[var:17:32][var:17:33][var:17:34][var:17:35][var:17:36][var:17:37][var:17:38][var:17:39][var:17:40][var:17:41][var:17:42][var:17:43][var:17:44][var:17:45][var:17:46][var:17:47][var:17:48][var:17:49][var:17:50][var:17:51][var:17:52][var:17:53][var:17:54][var:17:55][var:17:56][var:17:57][var:17:58][var:17:59][var:17:60][var:17:61][var:17:62][var:17:63]");
+    message_Mail("[var:17:64][var:17:65][var:17:66][var:17:67][var:17:68][var:17:69][var:17:70][var:17:71][var:17:72][var:17:73][var:17:74][var:17:75][var:17:76][var:17:77][var:17:78][var:17:79][var:17:80][var:17:81][var:17:82][var:17:83][var:17:84][var:17:85][var:17:86][var:17:87][var:17:88][var:17:89][var:17:90][var:17:91][var:17:92][var:17:93][var:17:94][var:17:95]\n[var:17:96][var:17:97][var:17:98][var:17:99][var:17:100][var:17:101][var:17:102][var:17:103][var:17:104][var:17:105][var:17:106][var:17:107][var:17:108][var:17:109][var:17:110][var:17:111][var:17:112][var:17:113][var:17:114][var:17:115][var:17:116][var:17:117][var:17:118][var:17:119][var:17:120][var:17:121][var:17:122][var:17:123][var:17:124][var:17:125][var:17:126][var:17:127]\n");
+    message_Mail("[CS:S]$SCENARIO_TALK_BIT_FLAG[CR]\n[var:18:0][var:18:1][var:18:2][var:18:3][var:18:4][var:18:5][var:18:6][var:18:7][var:18:8][var:18:9][var:18:10][var:18:11][var:18:12][var:18:13][var:18:14][var:18:15][var:18:16][var:18:17][var:18:18][var:18:19][var:18:20][var:18:21][var:18:22][var:18:23][var:18:24][var:18:25][var:18:26][var:18:27][var:18:28][var:18:29][var:18:30][var:18:31]\n[var:18:32][var:18:33][var:18:34][var:18:35][var:18:36][var:18:37][var:18:38][var:18:39][var:18:40][var:18:41][var:18:42][var:18:43][var:18:44][var:18:45][var:18:46][var:18:47][var:18:48][var:18:49][var:18:50][var:18:51][var:18:52][var:18:53][var:18:54][var:18:55][var:18:56][var:18:57][var:18:58][var:18:59][var:18:60][var:18:61][var:18:62][var:18:63]");
+/*
+    message_Mail("[var:18:64][var:18:65][var:18:66][var:18:67][var:18:68][var:18:69][var:18:70][var:18:71][var:18:72][var:18:73][var:18:74][var:18:75][var:18:76][var:18:77][var:18:78][var:18:79][var:18:80][var:18:81][var:18:82][var:18:83][var:18:84][var:18:85][var:18:86][var:18:87][var:18:88][var:18:89][var:18:90][var:18:91][var:18:92][var:18:93][var:18:94][var:18:95]\n[var:18:96][var:18:97][var:18:98][var:18:99][var:18:100][var:18:101][var:18:102][var:18:103][var:18:104][var:18:105][var:18:106][var:18:107][var:18:108][var:18:109][var:18:110][var:18:111][var:18:112][var:18:113][var:18:114][var:18:115][var:18:116][var:18:117][var:18:118][var:18:119][var:18:120][var:18:121][var:18:122][var:18:123][var:18:124][var:18:125][var:18:126][var:18:127]\n[var:18:128][var:18:129][var:18:130][var:18:131][var:18:132][var:18:133][var:18:134][var:18:135][var:18:136][var:18:137][var:18:138][var:18:139][var:18:140][var:18:141][var:18:142][var:18:143][var:18:144][var:18:145][var:18:146][var:18:147][var:18:148][var:18:149][var:18:150][var:18:151][var:18:152][var:18:153][var:18:154][var:18:155][var:18:156][var:18:157][var:18:158][var:18:159]");
+    message_Mail("[var:18:160][var:18:161][var:18:162][var:18:163][var:18:164][var:18:165][var:18:166][var:18:167][var:18:168][var:18:169][var:18:170][var:18:171][var:18:172][var:18:173][var:18:174][var:18:175][var:18:176][var:18:177][var:18:178][var:18:179][var:18:180][var:18:181][var:18:182][var:18:183][var:18:184][var:18:185][var:18:186][var:18:187][var:18:188][var:18:189][var:18:190][var:18:191]\n[var:18:192][var:18:193][var:18:194][var:18:195][var:18:196][var:18:197][var:18:198][var:18:199][var:18:200][var:18:201][var:18:202][var:18:203][var:18:204][var:18:205][var:18:206][var:18:207][var:18:208][var:18:209][var:18:210][var:18:211][var:18:212][var:18:213][var:18:214][var:18:215][var:18:216][var:18:217][var:18:218][var:18:219][var:18:220][var:18:221][var:18:222][var:18:223]\n[var:18:224][var:18:225][var:18:226][var:18:227][var:18:228][var:18:229][var:18:230][var:18:231][var:18:232][var:18:233][var:18:234][var:18:235][var:18:236][var:18:237][var:18:238][var:18:239][var:18:240][var:18:241][var:18:242][var:18:243][var:18:244][var:18:245][var:18:246][var:18:247][var:18:248][var:18:249][var:18:250][var:18:251][var:18:252][var:18:253][var:18:254][var:18:255]");
+*/
+    message_Close();
+    message_Mail("[CS:S]$SCENARIO_BALANCE_FLAG[CR]: [var:19:0][var:19:1][var:19:2][var:19:3][var:19:4][var:19:5][var:19:6][var:19:7]\n[CS:S]$SCENARIO_BALANCE_DEBUG[CR]: [var:20:0][var:20:1][var:20:2][var:20:3][var:20:4][var:20:5][var:20:6][var:20:7]\n[CS:S]$CRYSTAL_COLOR_01[CR]: [var:21:0]");
+    message_Mail("[CS:S]$CRYSTAL_COLOR_02[CR]: [var:22:0]\n[CS:S]$CRYSTAL_COLOR_03[CR]: [var:23:0]\n[CS:S]$COMPULSORY_SAVE_POINT[CR]: [var:24:0]");
+    message_Mail("[CS:S]$COMPULSORY_SAVE_POINT_SIDE[CR]: [var:25:0]\n[CS:S]$SCENARIO_SELECT_BACKUP[CR]\n[var:26:0][var:26:1][var:26:2][var:26:3][var:26:4][var:26:5][var:26:6][var:26:7]");
+/*
+    message_Mail("[CS:S]$SCENARIO_MAIN_BIT_FLAG_BACKUP[CR]\n[var:27:0][var:27:1][var:27:2][var:27:3][var:27:4][var:27:5][var:27:6][var:27:7][var:27:8][var:27:9][var:27:10][var:27:11][var:27:12][var:27:13][var:27:14][var:27:15][var:27:16][var:27:17][var:27:18][var:27:19][var:27:20][var:27:21][var:27:22][var:27:23][var:27:24][var:27:25][var:27:26][var:27:27][var:27:28][var:27:29][var:27:30][var:27:31]\n[var:27:32][var:27:33][var:27:34][var:27:35][var:27:36][var:27:37][var:27:38][var:27:39][var:27:40][var:27:41][var:27:42][var:27:43][var:27:44][var:27:45][var:27:46][var:27:47][var:27:48][var:27:49][var:27:50][var:27:51][var:27:52][var:27:53][var:27:54][var:27:55][var:27:56][var:27:57][var:27:58][var:27:59][var:27:60][var:27:61][var:27:62][var:27:63]");
+    message_Mail("[var:27:64][var:27:65][var:27:66][var:27:67][var:27:68][var:27:69][var:27:70][var:27:71][var:27:72][var:27:73][var:27:74][var:27:75][var:27:76][var:27:77][var:27:78][var:27:79][var:27:80][var:27:81][var:27:82][var:27:83][var:27:84][var:27:85][var:27:86][var:27:87][var:27:88][var:27:89][var:27:90][var:27:91][var:27:92][var:27:93][var:27:94][var:27:95]\n[var:27:96][var:27:97][var:27:98][var:27:99][var:27:100][var:27:101][var:27:102][var:27:103][var:27:104][var:27:105][var:27:106][var:27:107][var:27:108][var:27:109][var:27:110][var:27:111][var:27:112][var:27:113][var:27:114][var:27:115][var:27:116][var:27:117][var:27:118][var:27:119][var:27:120][var:27:121][var:27:122][var:27:123][var:27:124][var:27:125][var:27:126][var:27:127]\n[var:27:128][var:27:129][var:27:130][var:27:131][var:27:132][var:27:133][var:27:134][var:27:135][var:27:136][var:27:137][var:27:138][var:27:139][var:27:140][var:27:141][var:27:142][var:27:143][var:27:144][var:27:145][var:27:146][var:27:147][var:27:148][var:27:149][var:27:150][var:27:151][var:27:152][var:27:153][var:27:154][var:27:155][var:27:156][var:27:157][var:27:158][var:27:159]");
+    message_Mail("[var:27:160][var:27:161][var:27:162][var:27:163][var:27:164][var:27:165][var:27:166][var:27:167][var:27:168][var:27:169][var:27:170][var:27:171][var:27:172][var:27:173][var:27:174][var:27:175][var:27:176][var:27:177][var:27:178][var:27:179][var:27:180][var:27:181][var:27:182][var:27:183][var:27:184][var:27:185][var:27:186][var:27:187][var:27:188][var:27:189][var:27:190][var:27:191]\n[var:27:192][var:27:193][var:27:194][var:27:195][var:27:196][var:27:197][var:27:198][var:27:199][var:27:200][var:27:201][var:27:202][var:27:203][var:27:204][var:27:205][var:27:206][var:27:207][var:27:208][var:27:209][var:27:210][var:27:211][var:27:212][var:27:213][var:27:214][var:27:215][var:27:216][var:27:217][var:27:218][var:27:219][var:27:220][var:27:221][var:27:222][var:27:223]\n[var:27:224][var:27:225][var:27:226][var:27:227][var:27:228][var:27:229][var:27:230][var:27:231][var:27:232][var:27:233][var:27:234][var:27:235][var:27:236][var:27:237][var:27:238][var:27:239][var:27:240][var:27:241][var:27:242][var:27:243][var:27:244][var:27:245][var:27:246][var:27:247][var:27:248][var:27:249][var:27:250][var:27:251][var:27:252][var:27:253][var:27:254][var:27:255]");
+    message_Mail("[var:27:256][var:27:257][var:27:258][var:27:259][var:27:260][var:27:261][var:27:262][var:27:263][var:27:264][var:27:265][var:27:266][var:27:267][var:27:268][var:27:269][var:27:270][var:27:271][var:27:272][var:27:273][var:27:274][var:27:275][var:27:276][var:27:277][var:27:278][var:27:279][var:27:280][var:27:281][var:27:282][var:27:283][var:27:284][var:27:285][var:27:286][var:27:287]\n[var:27:288][var:27:289][var:27:290][var:27:291][var:27:292][var:27:293][var:27:294][var:27:295][var:27:296][var:27:297][var:27:298][var:27:299][var:27:300][var:27:301][var:27:302][var:27:303][var:27:304][var:27:305][var:27:306][var:27:307][var:27:308][var:27:309][var:27:310][var:27:311][var:27:312][var:27:313][var:27:314][var:27:315][var:27:316][var:27:317][var:27:318][var:27:319]\n[var:27:320][var:27:321][var:27:322][var:27:323][var:27:324][var:27:325][var:27:326][var:27:327][var:27:328][var:27:329][var:27:330][var:27:331][var:27:332][var:27:333][var:27:334][var:27:335][var:27:336][var:27:337][var:27:338][var:27:339][var:27:340][var:27:341][var:27:342][var:27:343][var:27:344][var:27:345][var:27:346][var:27:347][var:27:348][var:27:349][var:27:350][var:27:351]");
+    message_Mail("[var:27:352][var:27:353][var:27:354][var:27:355][var:27:356][var:27:357][var:27:358][var:27:359][var:27:360][var:27:361][var:27:362][var:27:363][var:27:364][var:27:365][var:27:366][var:27:367][var:27:368][var:27:369][var:27:370][var:27:371][var:27:372][var:27:373][var:27:374][var:27:375][var:27:376][var:27:377][var:27:378][var:27:379][var:27:380][var:27:381][var:27:382][var:27:383]\n[var:27:384][var:27:385][var:27:386][var:27:387][var:27:388][var:27:389][var:27:390][var:27:391][var:27:392][var:27:393][var:27:394][var:27:395][var:27:396][var:27:397][var:27:398][var:27:399][var:27:400][var:27:401][var:27:402][var:27:403][var:27:404][var:27:405][var:27:406][var:27:407][var:27:408][var:27:409][var:27:410][var:27:411][var:27:412][var:27:413][var:27:414][var:27:415]\n[var:27:416][var:27:417][var:27:418][var:27:419][var:27:420][var:27:421][var:27:422][var:27:423][var:27:424][var:27:425][var:27:426][var:27:427][var:27:428][var:27:429][var:27:430][var:27:431][var:27:432][var:27:433][var:27:434][var:27:435][var:27:436][var:27:437][var:27:438][var:27:439][var:27:440][var:27:441][var:27:442][var:27:443][var:27:444][var:27:445][var:27:446][var:27:447]");
+    message_Mail("[var:27:448][var:27:449][var:27:450][var:27:451][var:27:452][var:27:453][var:27:454][var:27:455][var:27:456][var:27:457][var:27:458][var:27:459][var:27:460][var:27:461][var:27:462][var:27:463][var:27:464][var:27:465][var:27:466][var:27:467][var:27:468][var:27:469][var:27:470][var:27:471][var:27:472][var:27:473][var:27:474][var:27:475][var:27:476][var:27:477][var:27:478][var:27:479]\n[var:27:480][var:27:481][var:27:482][var:27:483][var:27:484][var:27:485][var:27:486][var:27:487][var:27:488][var:27:489][var:27:490][var:27:491][var:27:492][var:27:493][var:27:494][var:27:495][var:27:496][var:27:497][var:27:498][var:27:499][var:27:500][var:27:501][var:27:502][var:27:503][var:27:504][var:27:505][var:27:506][var:27:507][var:27:508][var:27:509][var:27:510][var:27:511]");
+*/
+    message_Mail("[CS:S]$GROUND_ENTER[CR]: [var:28:0]\n[CS:S]$GROUND_ENTER_BACKUP[CR]\n~5b[var:33:0], [var:33:1], [var:33:2], [var:33:3], [var:33:4]~5d");
+    message_Mail("[CS:S]$GROUND_ENTER_LINK[CR]: [var:29:0]\n[CS:S]$GROUND_ENTER_LINK_BACKUP[CR]\n~5b[var:34:0], [var:34:1], [var:34:2], [var:34:3], [var:34:4]~5d");
+    message_Mail("[CS:S]$GROUND_GETOUT[CR]: [var:30:0]\n[CS:S]$GROUND_GETOUT_BACKUP[CR]\n~5b[var:35:0], [var:35:1], [var:35:2], [var:35:3], [var:35:4]~5d");
+    message_Mail("[CS:S]$GROUND_MAP[CR]: [var:31:0]\n[CS:S]$GROUND_MAP_BACKUP[CR]\n~5b[var:36:0], [var:36:1], [var:36:2], [var:36:3], [var:36:4]~5d");
+    message_Mail("[CS:S]$GROUND_PLACE[CR]: [var:32:0]\n[CS:S]$GROUND_PLACE_BACKUP[CR]\n~5b[var:37:0], [var:37:1], [var:37:2], [var:37:3], [var:37:4]~5d");
+    message_Mail("[CS:S]$DUNGEON_SELECT[CR]: [var:38:0]\n[CS:S]$REQUEST_CLEAR_COUNT[CR]: [var:51:0]\n[CS:S]$FRIEND_SUM[CR]: [var:58:0]");
+    message_Mail("[CS:S]$DUNGEON_ENTER[CR]: [var:39:0]\n[CS:S]$DUNGEON_ENTER_BACKUP[CR]\n~5b[var:45:0], [var:45:1], [var:45:2], [var:45:3], [var:45:4]~5d");
+    message_Mail("[CS:S]$DUNGEON_ENTER_MODE[CR]: [var:40:0]\n[CS:S]$DUNGEON_ENTER_MODE_BACKUP[CR]\n~5b[var:46:0], [var:46:1], [var:46:2], [var:46:3], [var:46:4]~5d");
+    message_Mail("[CS:S]$DUNGEON_ENTER_INDEX[CR]: [var:41:0]\n[CS:S]$DUNGEON_ENTER_INDEX_BACKUP[CR]\n~5b[var:47:0], [var:47:1], [var:47:2], [var:47:3], [var:47:4]~5d");
+    message_Mail("[CS:S]$DUNGEON_ENTER_FREQUENCY[CR]: [var:42:0]\n[CS:S]$DUNGEON_ENTER_FREQUENCY_BACKUP[CR]\n~5b[var:48:0], [var:48:1], [var:48:2], [var:48:3], [var:48:4]~5d");
+    message_Mail("[CS:S]$DUNGEON_RESULT[CR]: [var:43:0]\n[CS:S]$DUNGEON_RESULT_BACKUP[CR]\n~5b[var:49:0], [var:49:1], [var:49:2], [var:49:3], [var:49:4]~5d");
+    message_Mail("[CS:S]$GROUND_START_MODE[CR]: [var:44:0]\n[CS:S]$GROUND_START_MODE_BACKUP[CR]\n~5b[var:50:0], [var:50:1], [var:50:2], [var:50:3], [var:50:4]~5d");
+    message_Mail("[CS:S]$PLAYER_KIND[CR]: [var:52:0]\n[CS:S]$PLAYER_KIND_BACKUP[CR]\n~5b[var:55:0], [var:55:1], [var:55:2], [var:55:3], [var:55:4]~5d");
+    message_Mail("[CS:S]$ATTENDANT1_KIND[CR]: [var:53:0]\n[CS:S]$ATTENDANT1_KIND_BACKUP[CR]\n~5b[var:56:0], [var:56:1], [var:56:2], [var:56:3], [var:56:4]~5d");
+    message_Mail("[CS:S]$ATTENDANT2_KIND[CR]: [var:54:0]\n[CS:S]$ATTENDANT2_KIND_BACKUP[CR]\n~5b[var:57:0], [var:57:1], [var:57:2], [var:57:3], [var:57:4]~5d");
+    message_Mail("[CS:S]$UNIT_SUM[CR]: [var:59:0]\n[CS:S]$CARRY_GOLD[CR]: [var:60:0]\n[CS:S]$BANK_GOLD[CR]: [var:61:0]");
+    message_Mail("[CS:S]$HERO_FIRST_KIND[CR]: [var:62:0]\n[CS:S]$HERO_FIRST_NAME[CR]\n[var:63:0] [var:63:1] [var:63:2] [var:63:3] [var:63:4] [var:63:5] [var:63:6] [var:63:7] [var:63:8] [var:63:9]");
+    message_Mail("[CS:S]$PARTNER_FIRST_KIND[CR]: [var:64:0]\n[CS:S]$PARTNER_FIRST_NAME[CR]\n[var:65:0] [var:65:1] [var:65:2] [var:65:3] [var:65:4] [var:65:5] [var:65:6] [var:65:7] [var:65:8] [var:65:9]");
+    message_Mail("[CS:S]$HERO_TALK_KIND[CR]: [var:66:0][var:66:1][var:66:2][var:66:3][var:66:4][var:66:5][var:66:6][var:66:7]\n[CS:S]$PARTNER_TALK_KIND[CR]: [var:67:0][var:67:1][var:67:2][var:67:3][var:67:4][var:67:5][var:67:6][var:67:7]\n[CS:S]$RANDOM_REQUEST_NPC03_KIND[CR]: [var:68:0]");
+    message_Mail("[CS:S]$CONFIG_COLOR_KIND[CR]: [var:69:0][var:69:1][var:69:2][var:69:3][var:69:4][var:69:5][var:69:6][var:69:7]\n[CS:S]$ROM_VARIATION[CR]: [var:70:0][var:70:1][var:70:2][var:70:3][var:70:4][var:70:5][var:70:6][var:70:7]\n[CS:S]$LANGUAGE_TYPE[CR]: [var:71:0]");
+    message_Mail("[CS:S]$GAME_MODE[CR]: [var:72:0]\n[CS:S]$EXECUTE_SPECIAL_EPISODE_TYPE[CR]: [var:73:0]\n[CS:S]$SPECIAL_EPISODE_TYPE[CR]: [var:74:0][var:74:1][var:74:2][var:74:3][var:74:4][var:74:5][var:74:6][var:74:7]");
+    message_Mail("[CS:S]$SPECIAL_EPISODE_OPEN[CR]: [var:75:0][var:75:1][var:75:2][var:75:3][var:75:4][var:75:5][var:75:6][var:75:7]\n[CS:S]$SPECIAL_EPISODE_OPEN_OLD[CR]: [var:76:0][var:76:1][var:76:2][var:76:3][var:76:4][var:76:5][var:76:6][var:76:7]\n[CS:S]$SPECIAL_EPISODE_CONQUEST[CR]: [var:77:0][var:77:1][var:77:2][var:77:3][var:77:4][var:77:5][var:77:6][var:77:7]");
+    message_Mail("[CS:S]$PERFORMANCE_PROGRESS_LIST[CR]\n[var:78:0][var:78:1][var:78:2][var:78:3][var:78:4][var:78:5][var:78:6][var:78:7][var:78:8][var:78:9][var:78:10][var:78:11][var:78:12][var:78:13][var:78:14][var:78:15][var:78:16][var:78:17][var:78:18][var:78:19][var:78:20][var:78:21][var:78:22][var:78:23][var:78:24][var:78:25][var:78:26][var:78:27][var:78:28][var:78:29][var:78:30][var:78:31]\n[var:78:32][var:78:33][var:78:34][var:78:35][var:78:36][var:78:37][var:78:38][var:78:39][var:78:40][var:78:41][var:78:42][var:78:43][var:78:44][var:78:45][var:78:46][var:78:47][var:78:48][var:78:49][var:78:50][var:78:51][var:78:52][var:78:53][var:78:54][var:78:55][var:78:56][var:78:57][var:78:58][var:78:59][var:78:60][var:78:61][var:78:62][var:78:63]");
+/*
+    message_Mail("[CS:S]$DUNGEON_OPEN_LIST[CR]\n[var:79:0][var:79:1][var:79:2][var:79:3][var:79:4][var:79:5][var:79:6][var:79:7][var:79:8][var:79:9][var:79:10][var:79:11][var:79:12][var:79:13][var:79:14][var:79:15][var:79:16][var:79:17][var:79:18][var:79:19][var:79:20][var:79:21][var:79:22][var:79:23][var:79:24][var:79:25][var:79:26][var:79:27][var:79:28][var:79:29][var:79:30][var:79:31]\n[var:79:32][var:79:33][var:79:34][var:79:35][var:79:36][var:79:37][var:79:38][var:79:39][var:79:40][var:79:41][var:79:42][var:79:43][var:79:44][var:79:45][var:79:46][var:79:47][var:79:48][var:79:49][var:79:50][var:79:51][var:79:52][var:79:53][var:79:54][var:79:55][var:79:56][var:79:57][var:79:58][var:79:59][var:79:60][var:79:61][var:79:62][var:79:63]");
+    message_Mail("[var:79:64][var:79:65][var:79:66][var:79:67][var:79:68][var:79:69][var:79:70][var:79:71][var:79:72][var:79:73][var:79:74][var:79:75][var:79:76][var:79:77][var:79:78][var:79:79][var:79:80][var:79:81][var:79:82][var:79:83][var:79:84][var:79:85][var:79:86][var:79:87][var:79:88][var:79:89][var:79:90][var:79:91][var:79:92][var:79:93][var:79:94][var:79:95]\n[var:79:96][var:79:97][var:79:98][var:79:99][var:79:100][var:79:101][var:79:102][var:79:103][var:79:104][var:79:105][var:79:106][var:79:107][var:79:108][var:79:109][var:79:110][var:79:111][var:79:112][var:79:113][var:79:114][var:79:115][var:79:116][var:79:117][var:79:118][var:79:119][var:79:120][var:79:121][var:79:122][var:79:123][var:79:124][var:79:125][var:79:126][var:79:127]\n[var:79:128][var:79:129][var:79:130][var:79:131][var:79:132][var:79:133][var:79:134][var:79:135][var:79:136][var:79:137][var:79:138][var:79:139][var:79:140][var:79:141][var:79:142][var:79:143][var:79:144][var:79:145][var:79:146][var:79:147][var:79:148][var:79:149][var:79:150][var:79:151][var:79:152][var:79:153][var:79:154][var:79:155][var:79:156][var:79:157][var:79:158][var:79:159]");
+    message_Mail("[var:79:160][var:79:161][var:79:162][var:79:163][var:79:164][var:79:165][var:79:166][var:79:167][var:79:168][var:79:169][var:79:170][var:79:171][var:79:172][var:79:173][var:79:174][var:79:175][var:79:176][var:79:177][var:79:178][var:79:179][var:79:180][var:79:181][var:79:182][var:79:183][var:79:184][var:79:185][var:79:186][var:79:187][var:79:188][var:79:189][var:79:190][var:79:191]\n[var:79:192][var:79:193][var:79:194][var:79:195][var:79:196][var:79:197][var:79:198][var:79:199][var:79:200][var:79:201][var:79:202][var:79:203][var:79:204][var:79:205][var:79:206][var:79:207][var:79:208][var:79:209][var:79:210][var:79:211][var:79:212][var:79:213][var:79:214][var:79:215][var:79:216][var:79:217][var:79:218][var:79:219][var:79:220][var:79:221][var:79:222][var:79:223]\n[var:79:224][var:79:225][var:79:226][var:79:227][var:79:228][var:79:229][var:79:230][var:79:231][var:79:232][var:79:233][var:79:234][var:79:235][var:79:236][var:79:237][var:79:238][var:79:239][var:79:240][var:79:241][var:79:242][var:79:243][var:79:244][var:79:245][var:79:246][var:79:247][var:79:248][var:79:249][var:79:250][var:79:251][var:79:252][var:79:253][var:79:254][var:79:255]");
+    message_Mail("[CS:S]$DUNGEON_ENTER_LIST[CR]\n[var:80:0][var:80:1][var:80:2][var:80:3][var:80:4][var:80:5][var:80:6][var:80:7][var:80:8][var:80:9][var:80:10][var:80:11][var:80:12][var:80:13][var:80:14][var:80:15][var:80:16][var:80:17][var:80:18][var:80:19][var:80:20][var:80:21][var:80:22][var:80:23][var:80:24][var:80:25][var:80:26][var:80:27][var:80:28][var:80:29][var:80:30][var:80:31]\n[var:80:32][var:80:33][var:80:34][var:80:35][var:80:36][var:80:37][var:80:38][var:80:39][var:80:40][var:80:41][var:80:42][var:80:43][var:80:44][var:80:45][var:80:46][var:80:47][var:80:48][var:80:49][var:80:50][var:80:51][var:80:52][var:80:53][var:80:54][var:80:55][var:80:56][var:80:57][var:80:58][var:80:59][var:80:60][var:80:61][var:80:62][var:80:63]");
+    message_Mail("[var:80:64][var:80:65][var:80:66][var:80:67][var:80:68][var:80:69][var:80:70][var:80:71][var:80:72][var:80:73][var:80:74][var:80:75][var:80:76][var:80:77][var:80:78][var:80:79][var:80:80][var:80:81][var:80:82][var:80:83][var:80:84][var:80:85][var:80:86][var:80:87][var:80:88][var:80:89][var:80:90][var:80:91][var:80:92][var:80:93][var:80:94][var:80:95]\n[var:80:96][var:80:97][var:80:98][var:80:99][var:80:100][var:80:101][var:80:102][var:80:103][var:80:104][var:80:105][var:80:106][var:80:107][var:80:108][var:80:109][var:80:110][var:80:111][var:80:112][var:80:113][var:80:114][var:80:115][var:80:116][var:80:117][var:80:118][var:80:119][var:80:120][var:80:121][var:80:122][var:80:123][var:80:124][var:80:125][var:80:126][var:80:127]\n[var:80:128][var:80:129][var:80:130][var:80:131][var:80:132][var:80:133][var:80:134][var:80:135][var:80:136][var:80:137][var:80:138][var:80:139][var:80:140][var:80:141][var:80:142][var:80:143][var:80:144][var:80:145][var:80:146][var:80:147][var:80:148][var:80:149][var:80:150][var:80:151][var:80:152][var:80:153][var:80:154][var:80:155][var:80:156][var:80:157][var:80:158][var:80:159]");
+    message_Mail("[var:80:160][var:80:161][var:80:162][var:80:163][var:80:164][var:80:165][var:80:166][var:80:167][var:80:168][var:80:169][var:80:170][var:80:171][var:80:172][var:80:173][var:80:174][var:80:175][var:80:176][var:80:177][var:80:178][var:80:179][var:80:180][var:80:181][var:80:182][var:80:183][var:80:184][var:80:185][var:80:186][var:80:187][var:80:188][var:80:189][var:80:190][var:80:191]\n[var:80:192][var:80:193][var:80:194][var:80:195][var:80:196][var:80:197][var:80:198][var:80:199][var:80:200][var:80:201][var:80:202][var:80:203][var:80:204][var:80:205][var:80:206][var:80:207][var:80:208][var:80:209][var:80:210][var:80:211][var:80:212][var:80:213][var:80:214][var:80:215][var:80:216][var:80:217][var:80:218][var:80:219][var:80:220][var:80:221][var:80:222][var:80:223]\n[var:80:224][var:80:225][var:80:226][var:80:227][var:80:228][var:80:229][var:80:230][var:80:231][var:80:232][var:80:233][var:80:234][var:80:235][var:80:236][var:80:237][var:80:238][var:80:239][var:80:240][var:80:241][var:80:242][var:80:243][var:80:244][var:80:245][var:80:246][var:80:247][var:80:248][var:80:249][var:80:250][var:80:251][var:80:252][var:80:253][var:80:254][var:80:255]");
+    message_Mail("[CS:S]$DUNGEON_ARRIVE_LIST[CR]\n[var:81:0][var:81:1][var:81:2][var:81:3][var:81:4][var:81:5][var:81:6][var:81:7][var:81:8][var:81:9][var:81:10][var:81:11][var:81:12][var:81:13][var:81:14][var:81:15][var:81:16][var:81:17][var:81:18][var:81:19][var:81:20][var:81:21][var:81:22][var:81:23][var:81:24][var:81:25][var:81:26][var:81:27][var:81:28][var:81:29][var:81:30][var:81:31]\n[var:81:32][var:81:33][var:81:34][var:81:35][var:81:36][var:81:37][var:81:38][var:81:39][var:81:40][var:81:41][var:81:42][var:81:43][var:81:44][var:81:45][var:81:46][var:81:47][var:81:48][var:81:49][var:81:50][var:81:51][var:81:52][var:81:53][var:81:54][var:81:55][var:81:56][var:81:57][var:81:58][var:81:59][var:81:60][var:81:61][var:81:62][var:81:63]");
+    message_Mail("[var:81:64][var:81:65][var:81:66][var:81:67][var:81:68][var:81:69][var:81:70][var:81:71][var:81:72][var:81:73][var:81:74][var:81:75][var:81:76][var:81:77][var:81:78][var:81:79][var:81:80][var:81:81][var:81:82][var:81:83][var:81:84][var:81:85][var:81:86][var:81:87][var:81:88][var:81:89][var:81:90][var:81:91][var:81:92][var:81:93][var:81:94][var:81:95]\n[var:81:96][var:81:97][var:81:98][var:81:99][var:81:100][var:81:101][var:81:102][var:81:103][var:81:104][var:81:105][var:81:106][var:81:107][var:81:108][var:81:109][var:81:110][var:81:111][var:81:112][var:81:113][var:81:114][var:81:115][var:81:116][var:81:117][var:81:118][var:81:119][var:81:120][var:81:121][var:81:122][var:81:123][var:81:124][var:81:125][var:81:126][var:81:127]\n[var:81:128][var:81:129][var:81:130][var:81:131][var:81:132][var:81:133][var:81:134][var:81:135][var:81:136][var:81:137][var:81:138][var:81:139][var:81:140][var:81:141][var:81:142][var:81:143][var:81:144][var:81:145][var:81:146][var:81:147][var:81:148][var:81:149][var:81:150][var:81:151][var:81:152][var:81:153][var:81:154][var:81:155][var:81:156][var:81:157][var:81:158][var:81:159]");
+    message_Mail("[var:81:160][var:81:161][var:81:162][var:81:163][var:81:164][var:81:165][var:81:166][var:81:167][var:81:168][var:81:169][var:81:170][var:81:171][var:81:172][var:81:173][var:81:174][var:81:175][var:81:176][var:81:177][var:81:178][var:81:179][var:81:180][var:81:181][var:81:182][var:81:183][var:81:184][var:81:185][var:81:186][var:81:187][var:81:188][var:81:189][var:81:190][var:81:191]\n[var:81:192][var:81:193][var:81:194][var:81:195][var:81:196][var:81:197][var:81:198][var:81:199][var:81:200][var:81:201][var:81:202][var:81:203][var:81:204][var:81:205][var:81:206][var:81:207][var:81:208][var:81:209][var:81:210][var:81:211][var:81:212][var:81:213][var:81:214][var:81:215][var:81:216][var:81:217][var:81:218][var:81:219][var:81:220][var:81:221][var:81:222][var:81:223]\n[var:81:224][var:81:225][var:81:226][var:81:227][var:81:228][var:81:229][var:81:230][var:81:231][var:81:232][var:81:233][var:81:234][var:81:235][var:81:236][var:81:237][var:81:238][var:81:239][var:81:240][var:81:241][var:81:242][var:81:243][var:81:244][var:81:245][var:81:246][var:81:247][var:81:248][var:81:249][var:81:250][var:81:251][var:81:252][var:81:253][var:81:254][var:81:255]");
+    message_Mail("[CS:S]$DUNGEON_CONQUEST_LIST[CR]\n[var:82:0][var:82:1][var:82:2][var:82:3][var:82:4][var:82:5][var:82:6][var:82:7][var:82:8][var:82:9][var:82:10][var:82:11][var:82:12][var:82:13][var:82:14][var:82:15][var:82:16][var:82:17][var:82:18][var:82:19][var:82:20][var:82:21][var:82:22][var:82:23][var:82:24][var:82:25][var:82:26][var:82:27][var:82:28][var:82:29][var:82:30][var:82:31]\n[var:82:32][var:82:33][var:82:34][var:82:35][var:82:36][var:82:37][var:82:38][var:82:39][var:82:40][var:82:41][var:82:42][var:82:43][var:82:44][var:82:45][var:82:46][var:82:47][var:82:48][var:82:49][var:82:50][var:82:51][var:82:52][var:82:53][var:82:54][var:82:55][var:82:56][var:82:57][var:82:58][var:82:59][var:82:60][var:82:61][var:82:62][var:82:63]");
+    message_Mail("[var:82:64][var:82:65][var:82:66][var:82:67][var:82:68][var:82:69][var:82:70][var:82:71][var:82:72][var:82:73][var:82:74][var:82:75][var:82:76][var:82:77][var:82:78][var:82:79][var:82:80][var:82:81][var:82:82][var:82:83][var:82:84][var:82:85][var:82:86][var:82:87][var:82:88][var:82:89][var:82:90][var:82:91][var:82:92][var:82:93][var:82:94][var:82:95]\n[var:82:96][var:82:97][var:82:98][var:82:99][var:82:100][var:82:101][var:82:102][var:82:103][var:82:104][var:82:105][var:82:106][var:82:107][var:82:108][var:82:109][var:82:110][var:82:111][var:82:112][var:82:113][var:82:114][var:82:115][var:82:116][var:82:117][var:82:118][var:82:119][var:82:120][var:82:121][var:82:122][var:82:123][var:82:124][var:82:125][var:82:126][var:82:127]\n[var:82:128][var:82:129][var:82:130][var:82:131][var:82:132][var:82:133][var:82:134][var:82:135][var:82:136][var:82:137][var:82:138][var:82:139][var:82:140][var:82:141][var:82:142][var:82:143][var:82:144][var:82:145][var:82:146][var:82:147][var:82:148][var:82:149][var:82:150][var:82:151][var:82:152][var:82:153][var:82:154][var:82:155][var:82:156][var:82:157][var:82:158][var:82:159]");
+    message_Mail("[var:82:160][var:82:161][var:82:162][var:82:163][var:82:164][var:82:165][var:82:166][var:82:167][var:82:168][var:82:169][var:82:170][var:82:171][var:82:172][var:82:173][var:82:174][var:82:175][var:82:176][var:82:177][var:82:178][var:82:179][var:82:180][var:82:181][var:82:182][var:82:183][var:82:184][var:82:185][var:82:186][var:82:187][var:82:188][var:82:189][var:82:190][var:82:191]\n[var:82:192][var:82:193][var:82:194][var:82:195][var:82:196][var:82:197][var:82:198][var:82:199][var:82:200][var:82:201][var:82:202][var:82:203][var:82:204][var:82:205][var:82:206][var:82:207][var:82:208][var:82:209][var:82:210][var:82:211][var:82:212][var:82:213][var:82:214][var:82:215][var:82:216][var:82:217][var:82:218][var:82:219][var:82:220][var:82:221][var:82:222][var:82:223]\n[var:82:224][var:82:225][var:82:226][var:82:227][var:82:228][var:82:229][var:82:230][var:82:231][var:82:232][var:82:233][var:82:234][var:82:235][var:82:236][var:82:237][var:82:238][var:82:239][var:82:240][var:82:241][var:82:242][var:82:243][var:82:244][var:82:245][var:82:246][var:82:247][var:82:248][var:82:249][var:82:250][var:82:251][var:82:252][var:82:253][var:82:254][var:82:255]");
+    message_Mail("[CS:S]$DUNGEON_PRESENT_LIST[CR]\n[var:83:0][var:83:1][var:83:2][var:83:3][var:83:4][var:83:5][var:83:6][var:83:7][var:83:8][var:83:9][var:83:10][var:83:11][var:83:12][var:83:13][var:83:14][var:83:15][var:83:16][var:83:17][var:83:18][var:83:19][var:83:20][var:83:21][var:83:22][var:83:23][var:83:24][var:83:25][var:83:26][var:83:27][var:83:28][var:83:29][var:83:30][var:83:31]\n[var:83:32][var:83:33][var:83:34][var:83:35][var:83:36][var:83:37][var:83:38][var:83:39][var:83:40][var:83:41][var:83:42][var:83:43][var:83:44][var:83:45][var:83:46][var:83:47][var:83:48][var:83:49][var:83:50][var:83:51][var:83:52][var:83:53][var:83:54][var:83:55][var:83:56][var:83:57][var:83:58][var:83:59][var:83:60][var:83:61][var:83:62][var:83:63]");
+    message_Mail("[var:83:64][var:83:65][var:83:66][var:83:67][var:83:68][var:83:69][var:83:70][var:83:71][var:83:72][var:83:73][var:83:74][var:83:75][var:83:76][var:83:77][var:83:78][var:83:79][var:83:80][var:83:81][var:83:82][var:83:83][var:83:84][var:83:85][var:83:86][var:83:87][var:83:88][var:83:89][var:83:90][var:83:91][var:83:92][var:83:93][var:83:94][var:83:95]\n[var:83:96][var:83:97][var:83:98][var:83:99][var:83:100][var:83:101][var:83:102][var:83:103][var:83:104][var:83:105][var:83:106][var:83:107][var:83:108][var:83:109][var:83:110][var:83:111][var:83:112][var:83:113][var:83:114][var:83:115][var:83:116][var:83:117][var:83:118][var:83:119][var:83:120][var:83:121][var:83:122][var:83:123][var:83:124][var:83:125][var:83:126][var:83:127]\n[var:83:128][var:83:129][var:83:130][var:83:131][var:83:132][var:83:133][var:83:134][var:83:135][var:83:136][var:83:137][var:83:138][var:83:139][var:83:140][var:83:141][var:83:142][var:83:143][var:83:144][var:83:145][var:83:146][var:83:147][var:83:148][var:83:149][var:83:150][var:83:151][var:83:152][var:83:153][var:83:154][var:83:155][var:83:156][var:83:157][var:83:158][var:83:159]");
+    message_Mail("[var:83:160][var:83:161][var:83:162][var:83:163][var:83:164][var:83:165][var:83:166][var:83:167][var:83:168][var:83:169][var:83:170][var:83:171][var:83:172][var:83:173][var:83:174][var:83:175][var:83:176][var:83:177][var:83:178][var:83:179][var:83:180][var:83:181][var:83:182][var:83:183][var:83:184][var:83:185][var:83:186][var:83:187][var:83:188][var:83:189][var:83:190][var:83:191]\n[var:83:192][var:83:193][var:83:194][var:83:195][var:83:196][var:83:197][var:83:198][var:83:199][var:83:200][var:83:201][var:83:202][var:83:203][var:83:204][var:83:205][var:83:206][var:83:207][var:83:208][var:83:209][var:83:210][var:83:211][var:83:212][var:83:213][var:83:214][var:83:215][var:83:216][var:83:217][var:83:218][var:83:219][var:83:220][var:83:221][var:83:222][var:83:223]\n[var:83:224][var:83:225][var:83:226][var:83:227][var:83:228][var:83:229][var:83:230][var:83:231][var:83:232][var:83:233][var:83:234][var:83:235][var:83:236][var:83:237][var:83:238][var:83:239][var:83:240][var:83:241][var:83:242][var:83:243][var:83:244][var:83:245][var:83:246][var:83:247][var:83:248][var:83:249][var:83:250][var:83:251][var:83:252][var:83:253][var:83:254][var:83:255]");
+    message_Mail("[CS:S]$DUNGEON_REQUEST_LIST[CR]\n[var:84:0][var:84:1][var:84:2][var:84:3][var:84:4][var:84:5][var:84:6][var:84:7][var:84:8][var:84:9][var:84:10][var:84:11][var:84:12][var:84:13][var:84:14][var:84:15][var:84:16][var:84:17][var:84:18][var:84:19][var:84:20][var:84:21][var:84:22][var:84:23][var:84:24][var:84:25][var:84:26][var:84:27][var:84:28][var:84:29][var:84:30][var:84:31]\n[var:84:32][var:84:33][var:84:34][var:84:35][var:84:36][var:84:37][var:84:38][var:84:39][var:84:40][var:84:41][var:84:42][var:84:43][var:84:44][var:84:45][var:84:46][var:84:47][var:84:48][var:84:49][var:84:50][var:84:51][var:84:52][var:84:53][var:84:54][var:84:55][var:84:56][var:84:57][var:84:58][var:84:59][var:84:60][var:84:61][var:84:62][var:84:63]");
+    message_Mail("[var:84:64][var:84:65][var:84:66][var:84:67][var:84:68][var:84:69][var:84:70][var:84:71][var:84:72][var:84:73][var:84:74][var:84:75][var:84:76][var:84:77][var:84:78][var:84:79][var:84:80][var:84:81][var:84:82][var:84:83][var:84:84][var:84:85][var:84:86][var:84:87][var:84:88][var:84:89][var:84:90][var:84:91][var:84:92][var:84:93][var:84:94][var:84:95]\n[var:84:96][var:84:97][var:84:98][var:84:99][var:84:100][var:84:101][var:84:102][var:84:103][var:84:104][var:84:105][var:84:106][var:84:107][var:84:108][var:84:109][var:84:110][var:84:111][var:84:112][var:84:113][var:84:114][var:84:115][var:84:116][var:84:117][var:84:118][var:84:119][var:84:120][var:84:121][var:84:122][var:84:123][var:84:124][var:84:125][var:84:126][var:84:127]\n[var:84:128][var:84:129][var:84:130][var:84:131][var:84:132][var:84:133][var:84:134][var:84:135][var:84:136][var:84:137][var:84:138][var:84:139][var:84:140][var:84:141][var:84:142][var:84:143][var:84:144][var:84:145][var:84:146][var:84:147][var:84:148][var:84:149][var:84:150][var:84:151][var:84:152][var:84:153][var:84:154][var:84:155][var:84:156][var:84:157][var:84:158][var:84:159]");
+    message_Mail("[var:84:160][var:84:161][var:84:162][var:84:163][var:84:164][var:84:165][var:84:166][var:84:167][var:84:168][var:84:169][var:84:170][var:84:171][var:84:172][var:84:173][var:84:174][var:84:175][var:84:176][var:84:177][var:84:178][var:84:179][var:84:180][var:84:181][var:84:182][var:84:183][var:84:184][var:84:185][var:84:186][var:84:187][var:84:188][var:84:189][var:84:190][var:84:191]\n[var:84:192][var:84:193][var:84:194][var:84:195][var:84:196][var:84:197][var:84:198][var:84:199][var:84:200][var:84:201][var:84:202][var:84:203][var:84:204][var:84:205][var:84:206][var:84:207][var:84:208][var:84:209][var:84:210][var:84:211][var:84:212][var:84:213][var:84:214][var:84:215][var:84:216][var:84:217][var:84:218][var:84:219][var:84:220][var:84:221][var:84:222][var:84:223]\n[var:84:224][var:84:225][var:84:226][var:84:227][var:84:228][var:84:229][var:84:230][var:84:231][var:84:232][var:84:233][var:84:234][var:84:235][var:84:236][var:84:237][var:84:238][var:84:239][var:84:240][var:84:241][var:84:242][var:84:243][var:84:244][var:84:245][var:84:246][var:84:247][var:84:248][var:84:249][var:84:250][var:84:251][var:84:252][var:84:253][var:84:254][var:84:255]");
+    message_Mail("[CS:S]$WORLD_MAP_MARK_LIST_NORMAL[CR]\n[var:85:0][var:85:1][var:85:2][var:85:3][var:85:4][var:85:5][var:85:6][var:85:7][var:85:8][var:85:9][var:85:10][var:85:11][var:85:12][var:85:13][var:85:14][var:85:15][var:85:16][var:85:17][var:85:18][var:85:19][var:85:20][var:85:21][var:85:22][var:85:23][var:85:24][var:85:25][var:85:26][var:85:27][var:85:28][var:85:29][var:85:30][var:85:31]\n[var:85:32][var:85:33][var:85:34][var:85:35][var:85:36][var:85:37][var:85:38][var:85:39][var:85:40][var:85:41][var:85:42][var:85:43][var:85:44][var:85:45][var:85:46][var:85:47][var:85:48][var:85:49][var:85:50][var:85:51][var:85:52][var:85:53][var:85:54][var:85:55][var:85:56][var:85:57][var:85:58][var:85:59][var:85:60][var:85:61][var:85:62][var:85:63]");
+    message_Mail("[var:85:64][var:85:65][var:85:66][var:85:67][var:85:68][var:85:69][var:85:70][var:85:71][var:85:72][var:85:73][var:85:74][var:85:75][var:85:76][var:85:77][var:85:78][var:85:79][var:85:80][var:85:81][var:85:82][var:85:83][var:85:84][var:85:85][var:85:86][var:85:87][var:85:88][var:85:89][var:85:90][var:85:91][var:85:92][var:85:93][var:85:94][var:85:95]\n[var:85:96][var:85:97][var:85:98][var:85:99][var:85:100][var:85:101][var:85:102][var:85:103][var:85:104][var:85:105][var:85:106][var:85:107][var:85:108][var:85:109][var:85:110][var:85:111][var:85:112][var:85:113][var:85:114][var:85:115][var:85:116][var:85:117][var:85:118][var:85:119][var:85:120][var:85:121][var:85:122][var:85:123][var:85:124][var:85:125][var:85:126][var:85:127]\n[var:85:128][var:85:129][var:85:130][var:85:131][var:85:132][var:85:133][var:85:134][var:85:135][var:85:136][var:85:137][var:85:138][var:85:139][var:85:140][var:85:141][var:85:142][var:85:143][var:85:144][var:85:145][var:85:146][var:85:147][var:85:148][var:85:149][var:85:150][var:85:151][var:85:152][var:85:153][var:85:154][var:85:155][var:85:156][var:85:157][var:85:158][var:85:159]");
+    message_Mail("[var:85:160][var:85:161][var:85:162][var:85:163][var:85:164][var:85:165][var:85:166][var:85:167][var:85:168][var:85:169][var:85:170][var:85:171][var:85:172][var:85:173][var:85:174][var:85:175][var:85:176][var:85:177][var:85:178][var:85:179][var:85:180][var:85:181][var:85:182][var:85:183][var:85:184][var:85:185][var:85:186][var:85:187][var:85:188][var:85:189][var:85:190][var:85:191]\n[var:85:192][var:85:193][var:85:194][var:85:195][var:85:196][var:85:197][var:85:198][var:85:199][var:85:200][var:85:201][var:85:202][var:85:203][var:85:204][var:85:205][var:85:206][var:85:207][var:85:208][var:85:209][var:85:210][var:85:211][var:85:212][var:85:213][var:85:214][var:85:215][var:85:216][var:85:217][var:85:218][var:85:219][var:85:220][var:85:221][var:85:222][var:85:223]\n[var:85:224][var:85:225][var:85:226][var:85:227][var:85:228][var:85:229][var:85:230][var:85:231][var:85:232][var:85:233][var:85:234][var:85:235][var:85:236][var:85:237][var:85:238][var:85:239][var:85:240][var:85:241][var:85:242][var:85:243][var:85:244][var:85:245][var:85:246][var:85:247][var:85:248][var:85:249][var:85:250][var:85:251][var:85:252][var:85:253][var:85:254][var:85:255]");
+    message_Mail("[var:85:256][var:85:257][var:85:258][var:85:259][var:85:260][var:85:261][var:85:262][var:85:263][var:85:264][var:85:265][var:85:266][var:85:267][var:85:268][var:85:269][var:85:270][var:85:271][var:85:272][var:85:273][var:85:274][var:85:275][var:85:276][var:85:277][var:85:278][var:85:279][var:85:280][var:85:281][var:85:282][var:85:283][var:85:284][var:85:285][var:85:286][var:85:287]\n[var:85:288][var:85:289][var:85:290][var:85:291][var:85:292][var:85:293][var:85:294][var:85:295][var:85:296][var:85:297][var:85:298][var:85:299][var:85:300][var:85:301][var:85:302][var:85:303][var:85:304][var:85:305][var:85:306][var:85:307][var:85:308][var:85:309][var:85:310][var:85:311][var:85:312][var:85:313][var:85:314][var:85:315][var:85:316][var:85:317][var:85:318][var:85:319]\n");
+    message_Mail("[CS:S]$WORLD_MAP_MARK_LIST_SPECIAL[CR]\n[var:86:0][var:86:1][var:86:2][var:86:3][var:86:4][var:86:5][var:86:6][var:86:7][var:86:8][var:86:9][var:86:10][var:86:11][var:86:12][var:86:13][var:86:14][var:86:15][var:86:16][var:86:17][var:86:18][var:86:19][var:86:20][var:86:21][var:86:22][var:86:23][var:86:24][var:86:25][var:86:26][var:86:27][var:86:28][var:86:29][var:86:30][var:86:31]\n[var:86:32][var:86:33][var:86:34][var:86:35][var:86:36][var:86:37][var:86:38][var:86:39][var:86:40][var:86:41][var:86:42][var:86:43][var:86:44][var:86:45][var:86:46][var:86:47][var:86:48][var:86:49][var:86:50][var:86:51][var:86:52][var:86:53][var:86:54][var:86:55][var:86:56][var:86:57][var:86:58][var:86:59][var:86:60][var:86:61][var:86:62][var:86:63]");
+    message_Mail("[var:86:64][var:86:65][var:86:66][var:86:67][var:86:68][var:86:69][var:86:70][var:86:71][var:86:72][var:86:73][var:86:74][var:86:75][var:86:76][var:86:77][var:86:78][var:86:79][var:86:80][var:86:81][var:86:82][var:86:83][var:86:84][var:86:85][var:86:86][var:86:87][var:86:88][var:86:89][var:86:90][var:86:91][var:86:92][var:86:93][var:86:94][var:86:95]\n[var:86:96][var:86:97][var:86:98][var:86:99][var:86:100][var:86:101][var:86:102][var:86:103][var:86:104][var:86:105][var:86:106][var:86:107][var:86:108][var:86:109][var:86:110][var:86:111][var:86:112][var:86:113][var:86:114][var:86:115][var:86:116][var:86:117][var:86:118][var:86:119][var:86:120][var:86:121][var:86:122][var:86:123][var:86:124][var:86:125][var:86:126][var:86:127]\n[var:86:128][var:86:129][var:86:130][var:86:131][var:86:132][var:86:133][var:86:134][var:86:135][var:86:136][var:86:137][var:86:138][var:86:139][var:86:140][var:86:141][var:86:142][var:86:143][var:86:144][var:86:145][var:86:146][var:86:147][var:86:148][var:86:149][var:86:150][var:86:151][var:86:152][var:86:153][var:86:154][var:86:155][var:86:156][var:86:157][var:86:158][var:86:159]");
+    message_Mail("[var:86:160][var:86:161][var:86:162][var:86:163][var:86:164][var:86:165][var:86:166][var:86:167][var:86:168][var:86:169][var:86:170][var:86:171][var:86:172][var:86:173][var:86:174][var:86:175][var:86:176][var:86:177][var:86:178][var:86:179][var:86:180][var:86:181][var:86:182][var:86:183][var:86:184][var:86:185][var:86:186][var:86:187][var:86:188][var:86:189][var:86:190][var:86:191]\n[var:86:192][var:86:193][var:86:194][var:86:195][var:86:196][var:86:197][var:86:198][var:86:199][var:86:200][var:86:201][var:86:202][var:86:203][var:86:204][var:86:205][var:86:206][var:86:207][var:86:208][var:86:209][var:86:210][var:86:211][var:86:212][var:86:213][var:86:214][var:86:215][var:86:216][var:86:217][var:86:218][var:86:219][var:86:220][var:86:221][var:86:222][var:86:223]\n[var:86:224][var:86:225][var:86:226][var:86:227][var:86:228][var:86:229][var:86:230][var:86:231][var:86:232][var:86:233][var:86:234][var:86:235][var:86:236][var:86:237][var:86:238][var:86:239][var:86:240][var:86:241][var:86:242][var:86:243][var:86:244][var:86:245][var:86:246][var:86:247][var:86:248][var:86:249][var:86:250][var:86:251][var:86:252][var:86:253][var:86:254][var:86:255]");
+    message_Mail("[var:86:256][var:86:257][var:86:258][var:86:259][var:86:260][var:86:261][var:86:262][var:86:263][var:86:264][var:86:265][var:86:266][var:86:267][var:86:268][var:86:269][var:86:270][var:86:271][var:86:272][var:86:273][var:86:274][var:86:275][var:86:276][var:86:277][var:86:278][var:86:279][var:86:280][var:86:281][var:86:282][var:86:283][var:86:284][var:86:285][var:86:286][var:86:287]\n[var:86:288][var:86:289][var:86:290][var:86:291][var:86:292][var:86:293][var:86:294][var:86:295][var:86:296][var:86:297][var:86:298][var:86:299][var:86:300][var:86:301][var:86:302][var:86:303][var:86:304][var:86:305][var:86:306][var:86:307][var:86:308][var:86:309][var:86:310][var:86:311][var:86:312][var:86:313][var:86:314][var:86:315][var:86:316][var:86:317][var:86:318][var:86:319]\n");
+*/
+    message_Mail("[CS:S]$WORLD_MAP_LEVEL[CR]: [var:87:0]\n[CS:S]$POSITION_X[CR]\n~5b[var:88:0], [var:88:1], [var:88:2]~5d");
+    message_Mail("[CS:S]$POSITION_Y[CR]\n~5b[var:89:0], [var:89:1], [var:89:2]~5d");
+    message_Mail("[CS:S]$POSITION_HEIGHT[CR]\n~5b[var:90:0], [var:90:1], [var:90:2]~5d");
+    message_Mail("[CS:S]$POSITION_DIRECTION[CR]\n[var:91:0][var:91:1][var:91:2][var:91:3][var:91:4][var:91:5][var:91:6][var:91:7][var:91:8][var:91:9][var:91:10][var:91:11][var:91:12][var:91:13][var:91:14][var:91:15][var:91:16][var:91:17][var:91:18][var:91:19][var:91:20][var:91:21][var:91:22][var:91:23]\n[CS:S]$EVENT_LOCAL[CR]: [var:92:0]");
+    message_Mail("[CS:S]$DUNGEON_EVENT_LOCAL[CR]: [var:93:0]\n[CS:S]$STATION_ITEM_STATIC[CR]\n[var:94:0][var:94:1][var:94:2][var:94:3][var:94:4][var:94:5][var:94:6][var:94:7][var:94:8][var:94:9][var:94:10][var:94:11][var:94:12][var:94:13][var:94:14][var:94:15][var:94:16][var:94:17][var:94:18][var:94:19][var:94:20][var:94:21][var:94:22][var:94:23][var:94:24][var:94:25][var:94:26][var:94:27][var:94:28][var:94:29][var:94:30][var:94:31]\n");
+    message_Mail("[CS:S]$STATION_ITEM_TEMP[CR]\n[var:95:0][var:95:1][var:95:2][var:95:3][var:95:4][var:95:5][var:95:6][var:95:7][var:95:8][var:95:9][var:95:10][var:95:11][var:95:12][var:95:13][var:95:14][var:95:15][var:95:16][var:95:17][var:95:18][var:95:19][var:95:20][var:95:21][var:95:22][var:95:23][var:95:24][var:95:25][var:95:26][var:95:27][var:95:28][var:95:29][var:95:30][var:95:31]\n");
+    message_Mail("[CS:S]$DELIVER_ITEM_STATIC[CR]\n[var:96:0][var:96:1][var:96:2][var:96:3][var:96:4][var:96:5][var:96:6][var:96:7][var:96:8][var:96:9][var:96:10][var:96:11][var:96:12][var:96:13][var:96:14][var:96:15]");
+    message_Mail("[CS:S]$DELIVER_ITEM_TEMP[CR]\n[var:97:0][var:97:1][var:97:2][var:97:3][var:97:4][var:97:5][var:97:6][var:97:7][var:97:8][var:97:9][var:97:10][var:97:11][var:97:12][var:97:13][var:97:14][var:97:15]\n[CS:S]$BIT_FUWARANTE_LOCAL[CR]: [var:98:0][var:98:1][var:98:2][var:98:3][var:98:4][var:98:5][var:98:6][var:98:7]");
+    message_Mail("[CS:S]$LOTTERY_RESULT[CR]: [var:99:0]\n[CS:S]$ITEM_BACKUP[CR]: ~5b[var:100:0], [var:100:1]~5d\n[CS:S]$ITEM_BACKUP_KUREKURE[CR]: ~5b[var:101:0], [var:101:1]~5d");
+    message_Mail("[CS:S]$ITEM_BACKUP_TAKE[CR]: ~5b[var:102:0], [var:102:1]~5d\n[CS:S]$ITEM_BACKUP_GET[CR]: ~5b[var:103:0], [var:103:1]~5d\n[CS:S]$REQUEST_THANKS_RESULT_KIND[CR]: [var:104:0]");
+    message_Mail("[CS:S]$REQUEST_THANKS_RESULT_VARIATION[CR]\n[var:105:0]\n[CS:S]$SUB30_TREASURE_DISCOVER[CR]: [var:106:0][var:106:1][var:106:2][var:106:3][var:106:4][var:106:5][var:106:6][var:106:7]");
+    message_Mail("[CS:S]$SUB30_SPOT_DISCOVER[CR]: [var:107:0][var:107:1][var:107:2][var:107:3][var:107:4][var:107:5][var:107:6][var:107:7]\n[CS:S]$RECYCLE_COUNT[CR]: [var:108:0]\n[CS:S]$SUB30_SPOT_LEVEL[CR]: [var:109:0]");
+    message_Mail("[CS:S]$TEAM_RANK_EVENT_LEVEL[CR]: [var:110:0]\n[CS:S]$PLAY_OLD_GAME[CR]: [var:111:0]\n[CS:S]$NOTE_MODIFY_FLAG[CR]: [var:112:0]");
+    message_Mail("[CS:S]$SUB30_PROJECTP[CR]: [var:113:0][var:113:1][var:113:2][var:113:3][var:113:4][var:113:5][var:113:6][var:113:7]\n[CS:S]$SUM[CR]: [var:114:0]");
+    message_Close();
+    switch(ProcessSpecial(112,0,0)) {
+        case 1:
+            message_Mail("Bag Size: 1 item!");
+            break;
+        case 16:
+            message_Mail("Bag Size: 16 items!");
+            break;
+        case 24:
+            message_Mail("Bag Size: 24 items!");
+            break;
+        case 32:
+            message_Mail("Bag Size: 32 items!");
+            break;
+        case 40:
+            message_Mail("Bag Size: 40 items!");
+            break;
+        case 48:
+            message_Mail("Bag Size: 48 items!");
+            break;
+        default:
+            message_Mail("Bag Size: Invalid!\nReport this bug to [CS:G]Chesyon[CR] immediately!");
+            break;
+    }
+    message_Talk(" Finally, scroll through these\ndungeons please![K] Your choice does not matter,\nthis is NOT the crossroads.[K] Here we go!");
+    message_Close();
+    main_EnterAdventure(32767, 30);
+    message_Close();
+    return;
 }

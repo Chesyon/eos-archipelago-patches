@@ -60,7 +60,7 @@ def 0 {
         // Dialga Dead
         message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk(" Our current goal is to defeat\nthat wicked [CS:G]Darkrai[CR] in [CS:P]Dark Crater[CR].[K] To open\nthe way, we need the [CS:C]Legendary Treasures[CR]!");
-        message_Talk(" We have [quag:1] instruments\nright now! Let me see how that stacks up against\nwhat we need to face [CS:G]Darkrai[CR]...");
+        message_Talk(" We have [quag:1] Treasures\nright now! Let me see how that stacks up against\nwhat we need to face [CS:G]Darkrai[CR]...");
         switch(ProcessSpecial(102,0,1)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
