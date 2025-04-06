@@ -186,7 +186,7 @@ void __attribute__((naked)) HeroTweakCheck() {
     asm("lsr r3,r3,#0x8");
     asm("cmp r3,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("cmpne r3,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("cmpne r3,#0b11"); // STARTER_OPTION_RANDOM
+    asm("cmpne r3,#0b01"); // STARTER_OPTION_RANDOM
     asm("ldrnesh r3,[r1,r0]"); // originalish instruction
     asm("bxne lr");
     asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
