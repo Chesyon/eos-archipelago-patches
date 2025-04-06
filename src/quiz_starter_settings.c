@@ -103,38 +103,12 @@ void __attribute__((naked)) ForcedPlayerCheck() {
     asm("ldrh r1,[r1,#0x0]");
     asm("and r1,r1,#0b0000001100000000");
     asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("moveq r3,#9");        // If choose is picked, skip all questions
-    asm("ldreq r1,[r0,#0x0]"); // except male/female.
-    asm("streq r3,[r1,#0x24]");
-    asm("beq QuizForcedPlayerUnhook");
-    asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM 
+    asm("cmp r1,#0b11");   // STARTER_OPTION_CHOOSE
+    asm("cmpne r1,#0b01"); // STARTER_OPTION_RANDOM
+    asm("moveq r3,#9"); // Only ask gender question.
+    asm("movne r3,#0"); // Ask all questions.
     asm("ldr r1,[r0,#0x0]");
-    asm("movne r3,#0"); // 0 if normal
-    asm("moveq r3,#9"); // Initalize to 9 questions if forced player.
     asm("str r3,[r1,#0x24]");
-    asm("bne QuizForcedPlayerUnhook");
-    asm("stmdb sp!,{r0,r1,r2,r3,r4,r5,r12}");
-    asm("ldr r2,=apSlotName");
-    asm("ldr r3,=apSeed");
-    asm("ldr r4,[r2,#0x0]");
-    asm("ldr r5,[r2,#0x4]");
-    asm("eor r4,r4,r5");
-    asm("lsl r4,r4,#0x2");
-    asm("ldr r5,[r2,#0x8]");
-    asm("eor r4,r4,r5");
-    asm("ldr r5,[r2,#0xC]");
-    asm("eor r4,r4,r5");
-    asm("ldr r5,[r3,#0x0]");
-    asm("add r4,r4,r5");
-    asm("ldr r5,[r3,#0x4]");
-    asm("eor r4,r4,r5");
-    asm("and r4,r4,#0b1111"); // Personality 0-15
-    asm("ldr r1,[r0,#0x0]");
-    asm("add r1,r1,r4");
-    asm("mov r3,#99"); // Set score for personality to be 99.
-    asm("strb r3,[r1,#0x34]");
-    asm("ldmia sp!,{r0,r1,r2,r3,r4,r5,r12}");
     asm("b QuizForcedPlayerUnhook");
 }
 
@@ -227,6 +201,7 @@ void __attribute__((naked)) ChooseTweakCheck() {
     asm("and r3,r3,#0b0000001100000000");
     asm("lsr r3,r3,#0x8");
     asm("cmp r3,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("cmpne r3,#0b01"); // STARTER_OPTION_RANDOM
     asm("addne r2,r2,#1"); // originalish instruction
     asm("moveq r2,#0x42");
     asm("ldmia sp!,{r0,r1}");
@@ -240,6 +215,7 @@ void __attribute__((naked)) TypeHeroTweak() {
     asm("lsr r1,r1,#0x8");
     asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
     asm("cmpne r1,#0b11"); // STARTER_OPTION_CHOOSE
+    asm("cmpne r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("bne GetPersonality");
     asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r3,[r3,#0x0]");
@@ -306,7 +282,7 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                     currMonId.val = STARTERS_HERO_IDS[i].val;
                 }
                 bool notDuplicate = true;
-                for(j = i; j >= 0; j--) {
+                for(j = selectable; j >= 0; j--) {
                     if (currMonId.val == quizData->partners[j].val) {
                         notDuplicate = false;
                         break;
@@ -325,7 +301,30 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             } else if (apSettings.starterOptions == STARTER_OPTION_CHOOSE) {
                 quizData->portraitBoxId = CreatePortraitBox(0, 3, 1);
                 quizData->state = 0x46;
-            } // uhhhh breaks if we get to this state in vanilla or random by accident w/o else
+            } else if (apSettings.starterOptions == STARTER_OPTION_RANDOM) {
+                quizData->portraitBoxId = CreatePortraitBox(0, 3, 1); // Gets closed right after but that's okay.
+                uint32_t randomizedHeroNum = apSeed[0] ^ apSeed[1];
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[0]));
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[1]) << 1);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[2]) << 2);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[3]) << 3);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[4]) << 4);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[5]) << 5);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[6]) << 6);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[7]) << 7);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[8]) << 8);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[9]) << 9);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[10]) << 10);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[11]) << 11);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[12]) << 12);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[13]) << 13);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[14]) << 14);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[15]) << 15);
+                randomizedHeroNum = _u32_div_f(randomizedHeroNum, selectable);
+                register int finalHeroNum asm("r1"); // This gets modulo. Yes, it is cursed!
+                quizData->currentQuestion = quizData->partners[finalHeroNum].val;
+                quizData->state = 0x26;
+            } // Breaks if we get here in Vanilla.
             break;
         case 0x43:; // Override Check Message
             struct preprocessor_args preArgs;

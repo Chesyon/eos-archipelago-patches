@@ -46,9 +46,9 @@ ASSERT_SIZE(ArchipelagoSettings, 0x2);
 
 extern ArchipelagoSettings apSettings;
 
-extern char slot_name[16];
+extern char apSlotName[16];
 
-extern int seed; // 64 bits = 8 bytes
+extern uint32_t apSeed[2]; // 64 bits = 8 bytes
 
 extern bool startWithMainGameUnlocked;
 

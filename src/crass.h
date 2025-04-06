@@ -8,7 +8,7 @@
  *  Cancel Recover Acting Skip System  *
  ***************************************/
 
-#define CANCEL_RECOVER_ACTING_SKIP_SYSTEM 0
+#define CANCEL_RECOVER_ACTING_SKIP_SYSTEM 1
 
 #if CANCEL_RECOVER_ACTING_SKIP_SYSTEM
 
