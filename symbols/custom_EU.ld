@@ -131,7 +131,20 @@ DetermineTileAppearence = 0x2337264;
 DungeonModeSetupAndShowKeyboard = 0x234FC14;
 SomeDeathMsgCheckFun = 0x200C63C;
 
-/* !file ram */
+/* Ap Tracker Top Screen Stuff */
+UnkTopScreenFun1 = 0x230EA74;
+UnkTopScreenFun2 = 0x22EB938;
+UnkTopScreenFun3 = 0x22F50D4;
+UnkTopScreenFun4 = 0x22EA5F0;
+UnkTopScreenFun5 = 0x22EFE7C;
+UnkTopScreenFun6 = 0x2314770;
+LoadTopScreenBGPart1 = 0x22EC558; /* Might be actually for putting it on the top screen. */
+LoadTopScreenBGPart2 = 0x22EE7A4; /* Might be more generic background load. */
+FreeTopScreenBG = 0x22EC7EC; /* Might be more generic background free. */
+SomethingTopScreenBG = 0x22F004C;
+
+
+
 MESSAGE_SET_WAIT_MODE_PARAMS = 0x23259CC;
 SCRIPT_PORTRAIT_PARAMS = 0x23259E4;
 

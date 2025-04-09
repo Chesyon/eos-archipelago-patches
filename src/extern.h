@@ -116,7 +116,8 @@ typedef struct CustomSaveArea {
     bool mainGameUnlocked;                       // 0x2A7: Is main game unlocked?
     DimensionalScreamInfo dimensionalScreamInfo; // 0x2A8: info for dimensional scream hints.
     uint8_t bagSize;                             // 0x2F9: Current bag size. Follows the same logic as vanilla: https://wiki.skytemple.org/index.php/List_of_Script_Variables#Bag_size
-    undefined fields[0xE06];                     // 0x2FA: Unused.
+    uint8_t trackerPage;                         // 0x2FA: Tracks which tab was last open in the tracker.
+    undefined fields[0xE05];                     // 0x2FB: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
@@ -140,12 +141,15 @@ void MessageSetWaitMode(int speed1, int speed2);
 void InitScriptRoutineFromCoroutineInfo(struct script_routine* routine, undefined4 param_2, struct coroutine_info* coroutine_info, int status);
 void GetSceneName(char* dst, const char* src);
 
-static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }
+void UnkTopScreenFun1(uint32_t num);
+void UnkTopScreenFun2(uint32_t num);
+void UnkTopScreenFun3(uint32_t num);
+void UnkTopScreenFun4(uint32_t num);
+void UnkTopScreenFun5(uint32_t num);
+void UnkTopScreenFun6(uint32_t num);
+void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a pointer, but lazy
+void LoadTopScreenBGPart2(void* thing, char* bg_string, uint32_t num);
+void FreeTopScreenBG(void* thing);
+void SomethingTopScreenBG(void* thing);
 
-/*typedef struct SomeTeamSetupThing {
-    struct monster_id_16 hero_id;
-    struct monster_id_16 partner_id;
-    uint8_t unk_0x4[0x14]; // maybe like hero name idk
-    char partnerName[0x14]; // maybe only 11 long idk
-    int auraColor;
-} SomeTeamSetupThing;*/
+static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }
