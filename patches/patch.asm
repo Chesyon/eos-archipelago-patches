@@ -110,6 +110,19 @@
     ; EXP scaling
     .org GetExpReturn
         bl ExpScaling
+
+    ; Make $VERSION validity check always return true
+    .org BlockVersionCorruption
+    .area 0x20
+        mov r0,#0x1
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+        nop
+    .endarea
 .close
 
 .open "overlay1.bin", overlay1_start
