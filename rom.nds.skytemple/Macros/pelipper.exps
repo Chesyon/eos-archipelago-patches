@@ -220,6 +220,7 @@
         }
         message_Close();
         §box_halt;
+        $CONDITION += 1;
         if ($LOCAL0 == 0) {
             message_Mail("[STS]\n[CN]Searching for packages...[STE]");
         }

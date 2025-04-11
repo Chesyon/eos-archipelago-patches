@@ -3405,13 +3405,14 @@ coro EVENT_M03_10_13 {
         supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03A1001', 0);
         debug_Print("Awards Bag Size Up and tells the player that Bidoof's Wish isn\'t here anymore"); 
         supervision_ExecuteActingSub(LEVEL_D03P11A, 'M03A1002', 0);
+        debug_Print("This is the first bag upgrade in the game. And was bidoof SE");
+        ~AssignCheck(1);
         supervision_ExecuteActingSub(LEVEL_G01P03A, 'M03A1201', 0);
         supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03D0812', 0);
         supervision_ExecuteActingSub(LEVEL_G01P03A, 'M03A1203', 0);
         supervision_ExecuteActingSub(LEVEL_V03P05C, 'M03A1303', 0);
         supervision_ExecuteActingSub(LEVEL_V03P12A, 'M03A1314', 0);
-        debug_Print("This is the first bag upgrade in the game. And was bidoof SE");
-        ~AssignCheck(1);
+
         // $SCENARIO_BALANCE_FLAG = 1;
         JumpCommon(CORO_EVENT_HA_SAME);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'C00A0501', 0);
@@ -5169,7 +5170,10 @@ coro EVENT_M25_01_05 {
         switch(dungeon_mode(41)) {
             case DMODE_OPEN:
             case DMODE_OPEN_AND_REQUEST:
-                jump @enter_da_towah;
+                main_SetGround(LEVEL_D29P11A);
+                supervision_ExecuteStationCommon(LEVEL_D29P11A, 0);
+                hold;
+                // jump @enter_da_towah;
             default:
                 switch(random(10)) {
                     case 0:
@@ -11416,9 +11420,18 @@ coro GETOUT_REQUEST_CONQUEST {
                             english="Yes", french="Oui", german="Ja", italian="Sì", spanish="Sí",
                         }):
                             message_Close();
-                            main_EnterDungeon(41, 30);
-                            switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
-                            main_EnterDungeon(-1, 30);
+                            switch(dungeon_mode(41)) {
+                                case DMODE_OPEN_AND_REQUEST:
+                                    main_EnterDungeon(41, 30);
+                                    switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
+                                    main_EnterDungeon(-1, 30);
+                                    hold;
+                                case DMODE_OPEN:
+                                    //Mario
+                                    hold;
+                                default:
+                                    jump @label_1175;
+                            }
                         case menu({
                             english="No", french="Non", german="Nein", italian="No", spanish="No",
                         }):
