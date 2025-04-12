@@ -1,0 +1,104 @@
+def 0 {
+    
+    message_Mail("[STS]Where will you go?[STE]");
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Sharpedo Bluff"):
+            message_Close();
+            call @teleport_nao;
+            $GROUND_ENTER = 999; // Special code for teleport
+            main_EnterGround(LEVEL_H01P99A, 30);
+            hold;
+        case menu("Crossroads"):
+            message_Close();
+            call @teleport_nao;
+            $GROUND_ENTER = 999; // Special code for teleport
+            main_EnterGround(LEVEL_P01P01A, 30);
+            hold;
+        case menu("Spinda Cafe"):
+            message_Close();
+            call @teleport_nao;
+            $GROUND_ENTER = 999; // Special code for teleport
+            main_EnterGround(LEVEL_P01P04A, 30);
+            hold;
+        case menu("Wigglytuff\'s Guild"):
+            message_Close();
+            call @teleport_nao;
+            $GROUND_ENTER = 999; // Special code for teleport
+            main_EnterGround(LEVEL_G01P04A, 30);
+            hold;
+        case menu("The Beach"):
+            message_Close();
+            call @teleport_nao;
+            $GROUND_ENTER = 999; // Special code for teleport
+            main_EnterGround(LEVEL_D01P11A, 30);
+            hold;
+        case menu("Cancel"):
+        default:
+            message_Close();
+            JumpCommon(CORO_END_TALK);
+    }
+    
+    
+    §teleport_nao;
+    bgm_FadeOut(60);
+    bgm2_FadeOut(60);
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(2, Position<'m0', 42.5, 23>);
+    }
+    with (actor ACTOR_ATTENDANT_PARTNER) {
+        MovePositionMark(2, Position<'m0', 45, 23>);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+        MovePositionMark(2, Position<'m0', 43.5, 23>);
+    }
+    with (actor ACTOR_PLAYER_KIMAWARI) {
+        MovePositionMark(2, Position<'m0', 43.5, 23>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    WaitExecuteLives(ACTOR_ATTENDANT_PARTNER);
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    WaitExecuteLives(ACTOR_PLAYER_KIMAWARI);
+    se_Play(7183);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT_PARTNER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER_KIMAWARI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(2,10,DIR_DOWN);
+    }
+    with (actor ACTOR_ATTENDANT_PARTNER) {
+        Turn2Direction(2,10,DIR_DOWN);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+        Turn2Direction(2,10,DIR_DOWN);
+    }
+    with (actor ACTOR_PLAYER_KIMAWARI) {
+        Turn2Direction(2,10,DIR_DOWN);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetOutputAttribute(2);
+    }
+    with (actor ACTOR_ATTENDANT_PARTNER) {
+        SetOutputAttribute(2);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetOutputAttribute(2);
+    }
+    with (actor ACTOR_PLAYER_KIMAWARI) {
+        SetOutputAttribute(2);
+    }
+    Wait(30);
+    supervision_StationCommon(14);
+    Wait(10);
+    screen_FadeOutAll(0, 15);
+    screen_FadeOut(1, 0);
+    return;
+}

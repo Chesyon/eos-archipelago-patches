@@ -1,3 +1,4 @@
+import "version.exps"; // Handles game version stuff
 
 def 0 {
     if (debug) {
@@ -17,13 +18,6 @@ def 0 {
             message_Close();
             ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY,0,0);
             jump @anything_else;
-        case menu("Variable Check"):
-            message_Close();
-            message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
-            message_Talk(" Did something break again?[K] I\nhope it\'s an easy fix...[W:30] No worries![K] Just send\nthis list of variables + values to [CS:C]happylappy[CR]!");
-            message_Close();
-            call @variable_checkup;
-            jump @anything_else;
         case menu("What to do"):
             message_Close();
             message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
@@ -35,6 +29,26 @@ def 0 {
         case menu("Just Chatting"):
             message_Close();
             jump @just_chatting;
+        case menu("Technical"):
+            message_Close();
+            §technical_tree;
+            message_Talk(" Alright, what do you need?"); 
+            switch(message_SwitchMenu(4,6)) {
+                case menu("Version"):
+                    message_Close();
+                    ~GetVersion();
+                    jump @technical_tree;
+                case menu("Variable Check"):   
+                    message_Close();         
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Did something break again?[K] I\nhope it\'s an easy fix...[W:30] No worries![K] Just send\nthis list of variables + values to [CS:C]happylappy[CR]!");
+                    message_Close();
+                    call @variable_checkup;
+                    jump @technical_tree;
+                case menu("Cancel"):
+                    message_Close();
+                    jump @anything_else;
+            }
         case menu("Never Mind"):
         default:
             §shut_up;
@@ -160,15 +174,12 @@ def 0 {
 
     §just_chatting;
     debug_Print('PARTNER_MESSAGE_TYPE2');
-    if ($PERFORMANCE_PROGRESS_LIST[23]) {
-        if($SCENARIO_SUB2 &<< 5) {
-        } else {
-            if (debug) {
-                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,121,0);
-            }
-            // call @blue_gummi;
-        }
-    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+    message_Talk(" Oh uhh... so about that...");
+    message_Talk(" In order to give me all of this\nuseful functionality, [CS:G]happylappy[CR] had to gut\nall of my area-specific dialogue...");
+    message_Talk(" Sorry about that, but I\'ve been\nprogrammed to not like idle chatter.[K]\nAlthough...");
+    message_Mail(" In 0.4.0, you will be able to play\nRock-Paper-Scissors with [partner]!");
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     jump @anything_else;
     
     §any_ideas;

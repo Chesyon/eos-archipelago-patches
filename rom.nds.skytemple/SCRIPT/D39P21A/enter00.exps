@@ -1,0 +1,169 @@
+
+def 0 {
+    debug_Print('START');
+    if ( scn($SCENARIO_MAIN) >= [29, 92] ) {
+        §label_0;
+        debug_Print('LABEL_CONDITION_SET_LEADER');
+        $EVENT_LOCAL = 1;
+        §label_1;
+        debug_Print('LABEL_CONDITION_SET_END');
+        switch ( sector() ) {
+            case 1:
+                §label_2;
+                supervision_StationCommon(0);
+                switch ( scn($SCENARIO_MAIN)[0] ) {
+                    case == 29:
+                        if ( scn($SCENARIO_MAIN) >= [29, 77] ) {
+                            supervision_ExecuteStationSub(LEVEL_D39P21A, 'US21', 0);
+                            §label_4;
+                            supervision_StationCommon(7);
+                            debug_Print('LABEL_TEAM_SET');
+                            if ( $EVENT_LOCAL == 1 ) {
+                                supervision_StationCommon(9);
+                                §label_7;
+                                switch ( sector() ) {
+                                    case 1:
+                                        §label_8;
+                                        debug_Print('LABEL_END');
+                                        JumpCommon(CORO_COMMON_ENTER);
+                                    default:
+                                        debug_Print('LABEL_PLAYER_SET');
+                                        if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                                            debug_Print('LABEL_REBIRTH');
+                                            if ( $EVENT_LOCAL == 1 ) {
+                                                debug_Print('LABEL_LEADER_REBIRTH');
+                                                supervision_StationCommon(6);
+                                                §label_12;
+                                                debug_Print('SET_BGM');
+                                                bgm_PlayFadeIn(BGM_SEALED_RUIN, 0, 256);
+                                                debug_Print('LABEL_ENTER_END');
+                                                if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                                                    if ( $EVENT_LOCAL == 1 ) {
+                                                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                                        jump @label_8;
+                                                    } else {
+                                                        debug_Print('LABEL_REBIRTH_START');
+                                                        WaitLockLives(0, ACTOR_PLAYER);
+                                                        camera_SetPositionMark(Position<'m0', 28.5, 35.5>);
+                                                        screen_FadeIn(1, 30);
+                                                        screen_FadeInAll(1, 30);
+                                                        Unlock(0);
+                                                        Wait(15);
+                                                        Unlock(10);
+                                                        Lock(3);
+                                                        Wait(15);
+                                                        with (actor ACTOR_PLAYER) {
+                                                            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+                                                        }
+                                                        with (actor ACTOR_ATTENDANT1) {
+                                                            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                                                        }
+                                                        Wait(15);
+                                                        Unlock(0);
+                                                        Unlock(10);
+                                                        camera_Move2Default(33152);
+                                                        supervision_Suspend(-2);
+                                                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                                        end;
+                                                    }
+                                                } else {
+                                                    JumpCommon(CORO_COMMON_ENTER);
+                                                }
+                                            } else {
+                                                supervision_StationCommon(5);
+                                                jump @label_12;
+                                            }
+                                        } else {
+                                            debug_Print('LABEL_PLAYER_SET_RESUME');
+                                            if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                                                debug_Print('LABEL_RESUME');
+                                                $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                                                if ( $EVENT_LOCAL == 1 ) {
+                                                    debug_Print('LABEL_LEADER_RESUME');
+                                                    supervision_StationCommon(4);
+                                                    jump @label_12;
+                                                } else {
+                                                    supervision_StationCommon(3);
+                                                    jump @label_12;
+                                                }
+                                            } else {
+                                                debug_Print('LABEL_PLAYER_SET_NORMAL');
+                                                if ( $EVENT_LOCAL == 1 ) {
+                                                    debug_Print('LABEL_LEADER_SET');
+                                                    supervision_StationCommon(2);
+                                                    jump @label_12;
+                                                } else {
+                                                    supervision_StationCommon(1);
+                                                    jump @label_12;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+                            } else {
+                                supervision_StationCommon(8);
+                                jump @label_7;
+                            }
+                        } else {
+                            jump @label_4;
+                        }
+                        break;
+                    default:
+                        jump @label_4;
+                }
+                break;
+            default:
+                screen_FadeOutAll(1, 0);
+                debug_Print('LABEL_BACK_SET');
+                back_SetGround(LEVEL_D39P21A);
+                jump @label_2;
+        }
+    } else {
+        $EVENT_LOCAL = 0;
+        jump @label_1;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+        debug_Print('LABEL_REBIRTH_PLAYER_START');
+        SetDirection(DIR_RIGHT);
+        SetAnimation(76);
+        Lock(0);
+        CallCommon(CORO_WAKEUP_FUNC);
+        CallCommon(CORO_LOOK_AROUND_DOWN_FUNC);
+        Lock(0);
+        end;
+    } else {
+        SetAnimation(2);
+        WaitScreenFade();
+        WaitScreenFadeAll();
+        end;
+    }
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+        debug_Print('LABEL_REBIRTH_ATTENDANT1_START');
+        SetDirection(DIR_LEFT);
+        SetAnimation(76);
+        Lock(10);
+        CallCommon(CORO_WAKEUP_FUNC);
+        CallCommon(CORO_LOOK_AROUND_FUNC);
+        Unlock(3);
+        Lock(10);
+        end;
+    } else {
+        SetAnimation(2);
+        WaitScreenFade();
+        WaitScreenFadeAll();
+        end;
+    }
+}
+
+def 3 for_actor(ACTOR_PLAYER_APPOINT) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

@@ -1,3 +1,4 @@
+import "fade_in.exps";
 
 def 0 {
     debug_Print('CAFE');
@@ -9,6 +10,7 @@ def 0 {
                 §label_1;
                 if ( $SCENARIO_MAIN_BIT_FLAG[93] ) {
                     §label_3;
+                    supervision_StationCommon(6);
                     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                         case 0:
                         case 2:
@@ -27,6 +29,52 @@ def 0 {
                                         case 1:
                                             end;
                                         default:
+                                            if ($GROUND_GETOUT == 999) {
+                                                supervision_StationCommon(14);
+                                                Wait(60);
+                                                switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                                    case 0:
+                                                        supervision_StationCommon(3);
+                                                        break;
+                                                    case 2:
+                                                        supervision_StationCommon(4);
+                                                        break;
+                                                    default:
+                                                        supervision_StationCommon(2);
+                                                        break;
+                                                }
+                                                se_Play(7183);
+                                                screen_FadeInAll(0, 30);
+                                                screen_FadeIn(1, 0);
+                                                ~FadeIn();
+                                                with (actor ACTOR_PLAYER) {
+                                                    SetOutputAttribute(2);
+                                                }
+                                                with (actor ACTOR_ATTENDANT_PARTNER) {
+                                                    SetOutputAttribute(2);
+                                                }
+                                                with (object OBJECT_D39P41A1_90) {
+                                                    SetAnimation(18);
+                                                }
+                                                with (object OBJECT_D39P41A1_90) {
+                                                    WaitAnimation();
+                                                }
+                                                WaitExecuteObject(OBJECT_D39P41A1_90);
+                                                with (object OBJECT_D39P41A1_90) {
+                                                    Destroy();
+                                                }
+                                                Wait(60);
+                                                with (actor ACTOR_PLAYER) {
+                                                    ResetOutputAttribute(2);
+                                                }
+                                                with (actor ACTOR_ATTENDANT_PARTNER) {
+                                                    ResetOutputAttribute(2);
+                                                }
+                                                bgm_PlayFadeIn(BGM_SPINDAS_CAFE, 0, 256);
+                                                JumpCommon(CORO_END_TALK);
+                                                end;
+                                            }
+                                            
                                             switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                                                 case 0: 
                                                     supervision_StationCommon(21);
@@ -180,4 +228,45 @@ def 2 for_actor(ACTOR_ATTENDANT1) {
     WaitScreenFade();
     WaitScreenFadeAll();
     end;
+}
+
+def 3 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
+    SetHeight(10);
+    $LOCAL0 = 0;
+    forever {
+        if ($SCENARIO_TALK_BIT_FLAG[217]) {
+            if ($SCENARIO_TALK_BIT_FLAG[218]) {
+                Turn2DirectionTurn(3,1,1);
+                continue;
+            } else {
+                if ($LOCAL0 == 0) {
+                    MoveHeight(1,35);
+                    MovePositionMark(2, Position<'m1', 43.5, 25>);
+                    $LOCAL0 = 1;
+                }
+                Wait(1);
+                continue;
+            }
+        } elseif ($SCENARIO_TALK_BIT_FLAG[218]) {
+            Turn2Direction(10,1,DIR_DOWN);
+            Wait(1);
+            continue;
+        } else {
+            if ($LOCAL0 > 0) {
+                MovePositionMark(2, Position<'m2', 43, 19>);
+                Turn2Direction(10,1,DIR_DOWN);
+                MoveHeight(1,10);
+                $LOCAL0 = 0;
+            }
+            MoveHeight(1,11);
+            Wait(30);
+            MoveHeight(1,10);
+            Wait(30);
+            MoveHeight(1,9);
+            Wait(30);
+            MoveHeight(1,10);
+            Wait(30);
+            continue;
+        }
+    }
 }

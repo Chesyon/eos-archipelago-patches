@@ -4,6 +4,8 @@ import "pelipper.exps"; // Pelipper has been exported to a macro for convenience
 import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
 import "CRASS.exps"; // This is to prevent CRASS-related crashes pre-patch
 import "traps.exps"; // This handles traps like the unown trap! 
+import "fade_in.exps"; // Handles fading the screen in, and any effects related to that process
+import "version.exps"; // Handles game version stuff
 
 coro END_TALK {
     message_Close();
@@ -2415,7 +2417,7 @@ coro DEMO_06 {
 
 coro EVENT_M00A_01 {
     bgm_Stop();
-    
+    ~SetVersion();
     if (debug) {
         ProcessSpecial(PROCESS_SPECIAL_INIT_MAIN_TEAM_AFTER_QUIZ,0,0);
     } else {
@@ -8670,40 +8672,7 @@ coro COMMON_ENTER {
     debug_Print('COMMON_ENTER');
     screen_FadeInAll(0, 30);
     screen_FadeIn(1, 0);
-    if ($SCENARIO_TALK_BIT_FLAG[248]) {
-        screen2_FlushOut(0,1,4,0,255,30);
-        screen_FlushOut(1,1,4,0,255,30);
-    } else {
-        if (debug) {
-        } else {
-            switch(ProcessSpecial(103,0,0)){
-                case 5:
-                    switch(random(1000)) {
-                        case 0:
-                            message_Mail("... and everything turned blue\nfor the next 3 minutes!");
-                            screen2_FlushOut(0,30,4,0,30,255);
-                            screen_FlushOut(1,30,4,0,30,255);
-                            message_Close();
-                            Wait(90);
-                            screen2_FlushIn(0,10000,4,0,30,255);
-                            screen_FlushIn(0,10000,4,0,30,255);
-                            
-                            break;
-                        default:            
-                            if ($SCENARIO_TALK_BIT_FLAG[251]) {
-                                screen_FadeChange(1, 0, 0, 128);
-                                screen2_FadeChange(1, 0, 0, 128);
-                            } else {
-                                screen_FadeChange(1, 0, 0, 255);
-                                screen2_FadeChange(1, 0, 0, 255);
-                            }
-                            break;
-                    }
-                default:
-                    break;
-            }
-        }
-    }
+    ~FadeIn();
     end;
 }
 
@@ -9687,6 +9656,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         hold;
                         $SCENARIO_TALK_BIT_FLAG[215] = 1; // Unused here, but Pelipper uses it!
                         $SCENARIO_TALK_BIT_FLAG[216] = 1; // Unused here, but Sunflora Marowak uses it!
+                        $SCENARIO_TALK_BIT_FLAG[217] = 1; // Unused here, but Cafe Bronzong Ludicolo uses it!
+                        $SCENARIO_TALK_BIT_FLAG[218] = 1; // Unused here, but Cafe Bronzong Ludicolo uses it!
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 58] ) {
@@ -10653,6 +10624,41 @@ coro GETOUT_REQUEST_DUNGEON {
                                 jump @label_1025;
                             } elseif ( scn($SCENARIO_MAIN) >= [29, 5] ) {
                                 §label_1026;
+                                switch($DUNGEON_ENTER_INDEX) {
+                                    case 1:
+                                    case 9:
+                                    case 11:
+                                    case 13:
+                                    case 111:
+                                    case 112:
+                                    case 113:
+                                    case 114:
+                                    case 115:
+                                    case 116:
+                                    case 117:
+                                    case 118:
+                                    case 119:
+                                    case 120:
+                                        message_SetFace(ACTOR_ATTENDANT1,FACE_POS_BOTTOM_L_FACEINW,FACE_NORMAL);
+                                        message_Talk(" It's not even noon yet [hero]![K]\nWould you like to do another round of missions\nbefore we call it a day?");
+                                        switch(message_SwitchMenu(0,1)) {
+                                            case menu("Keep Going"):
+                                                message_Close();
+                                                message_Talk(" Yeah! That\'s the spirit![K]\nLet\'s see what else we can find\non the job board for today...");
+                                                message_Close();
+                                                $GROUND_ENTER = 999;
+                                                $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                                main_EnterGround(LEVEL_G01P03A,30);
+                                                hold;
+                                                break;
+                                            case menu("Call It A Day"):
+                                                message_Close();
+                                                message_Talk(" I completely understand, we could use a break![K]\nLet\'s take the rest of the day off then...");
+                                                break;
+                                        }
+                                    default:
+                                        break;
+                                }
                                 screen_FadeOut(1, 30);
                                 JumpCommon(CORO_EVENT_HA_SAME);
                             } else {

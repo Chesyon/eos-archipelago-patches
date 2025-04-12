@@ -1,0 +1,37 @@
+
+    macro FadeIn() {
+        if ($SCENARIO_TALK_BIT_FLAG[248]) {
+            screen2_FlushOut(0,1,4,0,255,30);
+            screen_FlushOut(1,1,4,0,255,30);
+        } else {
+            if (debug) {
+            } else {
+                switch(ProcessSpecial(103,0,0)){
+                    case 5:
+                        switch(random(1000)) {
+                            case 0:
+                                message_Mail("... and everything turned blue\nfor the next 3 minutes!");
+                                screen2_FlushOut(0,30,4,0,30,255);
+                                screen_FlushOut(1,30,4,0,30,255);
+                                message_Close();
+                                Wait(90);
+                                screen2_FlushIn(0,10000,4,0,30,255);
+                                screen_FlushIn(0,10000,4,0,30,255);
+                                
+                                break;
+                            default:            
+                                if ($SCENARIO_TALK_BIT_FLAG[251]) {
+                                    screen_FadeChange(1, 0, 0, 128);
+                                    screen2_FadeChange(1, 0, 0, 128);
+                                } else {
+                                    screen_FadeChange(1, 0, 0, 255);
+                                    screen2_FadeChange(1, 0, 0, 255);
+                                }
+                                break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+    }

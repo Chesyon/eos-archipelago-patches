@@ -1,0 +1,26 @@
+
+
+
+// TODO: Update me everytime a new version is made!
+macro SetVersion() {
+    $VERSION = 2;
+}
+
+//TODO: Add new dialogue each time a new version is made!
+macro GetVersion() {
+    switch($VERSION) {
+        case >= 4:
+            message_Talk(" We are currently on 0.3.1![K]\nPLACEHOLDER");
+            break;
+        case 3:
+            message_Talk(" We are currently on 0.3.0![K]\nI hope you\'re enjoying CRASS and the mission dungeon select!");
+            break;        
+        case 2:
+            message_Talk(" We are currently on a dev build\nof 0.3.0![K] If you aren\'t a playtester\nor a dev, you should not be playing this version!");
+            break;
+        case 1:
+        default:
+            message_Talk(" I don\'t actually know what\nversion we\'re on...[W:30] which is weird!\nYou should tell [CS:G]happylappy[CR] if you see this!");
+            break;
+    }
+}
