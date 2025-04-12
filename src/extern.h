@@ -148,6 +148,7 @@ void UnkTopScreenFun4(uint32_t num);
 void UnkTopScreenFun5(uint32_t num);
 void UnkTopScreenFun6(uint32_t num);
 void UnkTopScreenFun7(uint32_t num);
+void UnkTopScreenFun8(uint32_t num);
 void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a pointer, but lazy
 void LoadTopScreenBGPart2(void* thing, char* bg_string, uint32_t num);
 void FreeTopScreenBG(void* thing);

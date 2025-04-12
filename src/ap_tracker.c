@@ -349,10 +349,11 @@ uint32_t TrackerTopScreenFun7() {
 }
 
 void TrackerTopScreenFun8() {
-    if (apTrackerWindowPtr->field_0x0 == 0) {
+    if (apTrackerWindowPtr->field_0x0 == 0 || apTrackerTopScreenBG == 0) {
         return;
     }
     
+    UnkTopScreenFun8(apTrackerTopScreenBG);
     apTrackerWindowPtr->field_0x0 = 0;
     UnkTopScreenFun6(0x10);
 }
