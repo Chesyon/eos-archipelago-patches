@@ -6,6 +6,11 @@ def 0 {
             §label_0;
             supervision_StationCommon(0);
             supervision_StationCommon(7);
+            if ($PERFORMANCE_PROGRESS_LIST[5]) {
+                supervision_StationCommon(8);
+            } else {
+                supervision_StationCommon(9);
+            }
             switch ( scn($SCENARIO_SUB3)[1] ) { // Check already claimed?
                 case &<< 6:
                 supervision_ExecuteStationSub(LEVEL_D73P11A, 'US23', 0);

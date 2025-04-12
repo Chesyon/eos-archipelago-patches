@@ -13,6 +13,67 @@ def 0 {
         if ( not debug ) {
             §label_1;
             message_Close();
+            if ($DUNGEON_ENTER_INDEX == 190) {
+                screen_FadeIn(1, 30);
+                Wait(30);
+                se_Play(8968);
+                with (actor ACTOR_NPC_GARAGARA) {
+                    SetEffect(EFFECT_SHOCKED, 3);
+                }
+                with (actor ACTOR_NPC_GARAGARA) {
+                    WaitEffect();
+                }
+                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                message_Talk({
+                    english=" Oh my![K] It\'s you again!",
+                    french=" Oh![K] Vous revoilà!",
+                    german=" Ach![K] Da seid ihr ja\nwieder!",
+                    italian=" Oh guarda![K] Siete voi!",
+                    spanish=" ¡Vaya![K] ¡Aquí estáis de nuevo!",
+                });
+                bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                message_Talk(" I saw you take a wrong turn\non the way to the [CS:P]Ghost Maze[CR], and I feared\nfor the worst! Those [CS:K]Ghasts[CR] are brutal foes!");
+                switch ( $GROUND_START_MODE ) {
+                    case 8:
+                    default:
+                        message_Talk("PLACEHOLDER WIN BIDOOF");
+
+                        end;
+                    case 9:
+                    case 10:
+                    case 11:
+                        // Lost against the Ghasts
+                        message_Talk("PLACEHOLDER LOSE BIDOOF");
+                        break;
+                }
+                message_Close();
+                end;
+            } elseif ($DUNGEON_ENTER_INDEX == 99) {
+                screen_FadeIn(1, 30);
+                Wait(30);
+                se_Play(8968);
+                with (actor ACTOR_NPC_GARAGARA) {
+                    SetEffect(EFFECT_SHOCKED, 3);
+                }
+                with (actor ACTOR_NPC_GARAGARA) {
+                    WaitEffect();
+                }
+                WaitExecuteLives(ACTOR_NPC_GARAGARA);
+                message_SetFace(ACTOR_NPC_GARAGARA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+                message_Talk({
+                    english=" Oh my![K] It\'s you again!",
+                    french=" Oh![K] Vous revoilà!",
+                    german=" Ach![K] Da seid ihr ja\nwieder!",
+                    italian=" Oh guarda![K] Siete voi!",
+                    spanish=" ¡Vaya![K] ¡Aquí estáis de nuevo!",
+                });
+                bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
+                message_Talk(" I saw you take a wrong turn\non the way to the [CS:P]Ghost Maze[CR], and I feared\nfor the worst! Those [CS:K]Ghasts[CR] are brutal foes!");
+                message_Talk("PLACEHOLDER APPEASE BIDOOF");
+                message_Close();
+                end;
+            }
             switch ( $GROUND_START_MODE ) {
                 case 8:
                 default:

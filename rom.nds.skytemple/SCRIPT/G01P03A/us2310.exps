@@ -1,0 +1,12 @@
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_Mail("Out gathering ingredients for dinner, since\nnobody else at the guild can actually cook!\nBe back soon!                     - [CS:G]Chimecho[CR]");
+    message_Mail("P.S: If you and your partner get separated,\nremember, you can always ask them to join\nyour explorations by simply pressing [M:B7]. ");
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+}

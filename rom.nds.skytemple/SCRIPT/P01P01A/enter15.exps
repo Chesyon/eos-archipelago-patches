@@ -1,7 +1,7 @@
 def 0 {
     message_SetFace(ACTOR_NPC_DEMO_PARTNER,FACE_DIZZY,FACE_POS_STANDARD);
     switch (ProcessSpecial(103,0,0)) {
-        case 1:
+        case > 0:
             switch(random(5)) {
                 case 0:
                     message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
@@ -21,7 +21,7 @@ def 0 {
             }    
             break;
         default:
-            switch(random(100)) {
+            switch(random(1000)) {
                 case 0:
                     message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
                     break;

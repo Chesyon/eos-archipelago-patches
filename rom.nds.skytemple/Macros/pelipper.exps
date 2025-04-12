@@ -173,7 +173,14 @@
                     default: // Item not put in bag!
                         break;
                 }
-                if ($LOCAL1 == 2 || $LOCAL1 == 3) {  
+                switch (ProcessSpecial(57,0,0)) { // Is storage full?
+                    case 1: // Storage full!
+                        jump @no_room;
+                        break;
+                    default:
+                        break;
+                }
+                if ($LOCAL1 == 2) {
                     jump @no_room;
                 }
             case 1: // Storage Only
@@ -184,6 +191,12 @@
                         switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
                         jump @box_halt;
                     default: // Storage full!
+                        break;
+                }
+                switch(ProcessSpecial(56,0,0)) { // Is bag full?
+                    case 1:
+                        jump @no_room;
+                    default:
                         break;
                 }
                 if ($LOCAL1 == 3 || $LOCAL1 == 4) {

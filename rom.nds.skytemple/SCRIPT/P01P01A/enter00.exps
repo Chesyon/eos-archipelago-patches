@@ -9,6 +9,11 @@ def 0 {
             supervision_StationCommon(11);
             switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
                 case 0:
+                    if ($PERFORMANCE_PROGRESS_LIST[5]) {
+                        supervision_StationCommon(7);
+                    } else {
+                        supervision_StationCommon(13);
+                    }
                     supervision_StationCommon(10);
                     supervision_ExecuteStationSub(LEVEL_P01P01A, 'UN01', 0);
                     §label_6;
@@ -165,7 +170,11 @@ def 0 {
                     break;
                 case 2:
                     supervision_ExecuteStationSub(LEVEL_P01P01A, 'UN04', 0);
-                    supervision_StationCommon(13);
+                    if ($PERFORMANCE_PROGRESS_LIST[5]) {
+                        supervision_StationCommon(7);
+                    } else {
+                        supervision_StationCommon(13);
+                    }
                     supervision_StationCommon(10);
                     jump @label_6;
                 default:
@@ -301,7 +310,11 @@ def 0 {
                                 jump @label_9;
                             }
                         } else {
-                            supervision_StationCommon(7);
+                            if ($PERFORMANCE_PROGRESS_LIST[5]) {
+                                supervision_StationCommon(7);
+                            } else {
+                                supervision_StationCommon(13);
+                            }
                             jump @label_8;
                         }
                     } else {

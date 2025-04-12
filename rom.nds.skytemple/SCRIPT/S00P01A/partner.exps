@@ -1783,6 +1783,7 @@ def 0 {
                                 switch(ProcessSpecial(57,0,0)) {
                                     case 0:
                                         ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                        break;
                                     default:
                                         message_Mail("Storage Full!");
                                         message_Close();
@@ -1850,6 +1851,7 @@ def 0 {
                                 switch(ProcessSpecial(57,0,0)) {
                                     case 0:
                                         ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                        break;
                                     default:
                                         message_Mail("Storage Full!");
                                         message_Close();

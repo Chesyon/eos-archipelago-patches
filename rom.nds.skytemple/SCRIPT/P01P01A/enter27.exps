@@ -1,0 +1,69 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[5]) {
+    } else {
+        message_Mail("Out gathering ingredients for dinner, since\nnobody else at the guild can actually cook!\nBe back soon!                     - [CS:G]Chimecho[CR]");
+        message_Mail("P.S: If you and your partner get separated,\nremember, you can always ask them to join\nyour explorations by simply pressing [M:B7]. ");
+        message_Close();
+        JumpCommon(CORO_END_TALK);
+    }
+    message_Notice({
+        english="[CN]- Assembly Post -\n[CN]For service, please ring bell!\n[CN]            -[CS:N]Chimecho[CR]",
+        french="[CN]- Point de Rassemblement -\n[CN]Prière d\'utiliser la cloche!\n[CN]            - [CS:N]Eoko[CR]",
+        german="[CN]- Versammlungsort -\n[CN]Bitte Glocke läuten!\n[CN]  -[CS:N]Palimpalim[CR]",
+        italian="[CN]- Raduno Squadra -\n[CN]Per assistenza, suonare la campana!\n[CN]            - [CS:N]Chimecho[CR] -",
+        spanish="[CN]Punto de reunión\n[CN]¡Toca la campana y acudiré!\n[CN]            -[CS:N]Chimecho[CR]",
+    });
+    message_Notice({
+        english="[CN]Ring the bell and\n[CN]summon [CS:N]Chimecho[CR]?",
+        french="[CN]Voulez-vous faire sonner la cloche\n[CN]pour appeler [CS:N]Eoko[CR]?",
+        german="[CN]Glocke läuten und\n[CN][CS:N]Palimpalim[CR] herbeirufen?",
+        italian="[CN]Vuoi suonare la campana per\n[CN]chiamare [CS:N]Chimecho[CR]?",
+        spanish="[CN]¿Tocar la campana y\n[CN]llamar a [CS:N]Chimecho[CR]?",
+    });
+    switch ( message_SwitchMenu(1, 1) ) {
+        case menu({
+            english="Yes",
+            french="Oui",
+            german="Ja",
+            italian="Sì",
+            spanish="Sí",
+        }):
+            §label_0;
+            message_Close();
+            supervision_RemoveCommon(7);
+            supervision_StationCommon(8);
+            se_Play(5123);
+            switch ( $GROUND_ENTER ) {
+                case 224:
+                default:
+                    supervision_ExecuteActing(LEVEL_P01P01A, 'M00P1001', 0);
+                    end;
+                case 156:
+                    supervision_ExecuteCommon(CORO_EVENT_S31_40);
+                    end;
+            }
+            break;
+        case menu({
+            english="No",
+            french="Non",
+            german="Nein",
+            italian="No",
+            spanish="No",
+        }):
+            §label_1;
+            JumpCommon(CORO_END_TALK);
+        default:
+            jump @label_1;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

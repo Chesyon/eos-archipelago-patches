@@ -16,7 +16,7 @@ macro GetVersion() {
             message_Talk(" We are currently on 0.3.0![K]\nI hope you\'re enjoying CRASS and the mission dungeon select!");
             break;        
         case 2:
-            message_Talk(" We are currently on a dev build\nof 0.3.0![K] If you aren\'t a playtester\nor a dev, you should not be playing this version!");
+            message_Talk(" We are currently on a dev build\nof 0.3.0![K] If you aren\'t a playtester or a\ndev, you should not be playing this version!");
             break;
         case 1:
         default:

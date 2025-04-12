@@ -2,12 +2,24 @@ def 0 {
     
     message_Mail("[STS]Where will you go?[STE]");
     switch(message_SwitchMenu(1,1)) {
-        case menu("Sharpedo Bluff"):
+        case menu("Your Base"):
             message_Close();
             call @teleport_nao;
             $GROUND_ENTER = 999; // Special code for teleport
-            main_EnterGround(LEVEL_H01P99A, 30);
-            hold;
+            switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {
+                case 0:
+                    message_Mail("[STS][CN][CS:G]Bidoof[CR] doesn\'t have a base![STE]");
+                case 2:
+                    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) {
+                        message_Mail("[STS][CN][CS:G]Sunflora[CR] doesn\'t have a base![STE]");
+                    }
+                    message_Close();
+                    main_EnterGround(LEVEL_H01P99A, 30);
+                    hold;
+                default:
+                    main_EnterGround(LEVEL_H02P99A, 30);
+                    hold;
+            }
         case menu("Crossroads"):
             message_Close();
             call @teleport_nao;
@@ -43,16 +55,16 @@ def 0 {
     bgm_FadeOut(60);
     bgm2_FadeOut(60);
     with (actor ACTOR_PLAYER) {
-        MovePositionMark(2, Position<'m0', 86.5, 26.5>);
+        MovePositionMark(2, Position<'m0', 73.5, 26.5>);
     }
     with (actor ACTOR_ATTENDANT_PARTNER) {
-        MovePositionMark(2, Position<'m0', 88.5, 26.5>);
+        MovePositionMark(2, Position<'m0', 75.5, 26.5>);
     }
     with (actor ACTOR_PLAYER_BIPPA) {
-        MovePositionMark(2, Position<'m0', 87.5, 26.5>);
+        MovePositionMark(2, Position<'m0', 74.5, 26.5>);
     }
     with (actor ACTOR_PLAYER_KIMAWARI) {
-        MovePositionMark(2, Position<'m0', 87.5, 26.5>);
+        MovePositionMark(2, Position<'m0', 74.5, 26.5>);
     }
     WaitExecuteLives(ACTOR_PLAYER);
     WaitExecuteLives(ACTOR_ATTENDANT_PARTNER);
@@ -98,7 +110,7 @@ def 0 {
     Wait(30);
     supervision_StationCommon(6);
     Wait(10);
-    screen_FadeOutAll(0, 15);
+    screen_FadeOutAll(1, 15);
     screen_FadeOut(1, 0);
     return;
 }

@@ -5619,6 +5619,7 @@ dungeon_mode(191)  = DMODE_CLOSED;
                                 switch(ProcessSpecial(57,0,0)) {
                                     case 0:
                                         ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                        break;
                                     default:
                                         message_Mail("Storage Full!");
                                         message_Close();
@@ -5686,6 +5687,7 @@ dungeon_mode(191)  = DMODE_CLOSED;
                                 switch(ProcessSpecial(57,0,0)) {
                                     case 0:
                                         ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_STORAGE,0,0);
+                                        break;
                                     default:
                                         message_Mail("Storage Full!");
                                         message_Close();
