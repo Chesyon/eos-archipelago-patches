@@ -1,3 +1,5 @@
+import "version.exps"; // Handles game version stuff
+
 def 0 {
     if (debug) {
         jump @debug_menu;
@@ -1984,5 +1986,8 @@ def 0 {
     message_Close();
     main_EnterAdventure(32767, 30);
     message_Close();
+    message_SetFace(ACTOR_NPC_PARTNER_FIRST,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I heard we\'re doing a variable\ncheck! Sorry for ruining SE immersion, but\nnobody else has APWorld version dialogue...");
+    ~GetVersion();
     return;
 }

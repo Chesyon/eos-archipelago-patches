@@ -1,3 +1,4 @@
+import "fade_in.exps";
 
 def 0 {
     debug_Print("Hi");
@@ -34,6 +35,50 @@ def 0 {
                                 end;
                             default:
                                 switch ( $GROUND_GETOUT ) {
+                                    case 999:
+                                        supervision_StationCommon(16);
+                                        Wait(60);
+                                        switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                            case 0:
+                                                supervision_StationCommon(27);
+                                                break;
+                                            case 2:
+                                                supervision_StationCommon(47);
+                                                break;
+                                            default:
+                                                supervision_StationCommon(17);
+                                                break;
+                                        }
+                                        se_Play(7183);
+                                        screen_FadeInAll(0, 30);
+                                        screen_FadeIn(1, 0);
+                                        ~FadeIn();
+                                        with (actor ACTOR_PLAYER) {
+                                            SetOutputAttribute(2);
+                                        }
+                                        with (actor ACTOR_ATTENDANT_PARTNER) {
+                                            SetOutputAttribute(2);
+                                        }
+                                        with (object OBJECT_D39P41A1_90) {
+                                            SetAnimation(18);
+                                        }
+                                        with (object OBJECT_D39P41A1_90) {
+                                            WaitAnimation();
+                                        }
+                                        WaitExecuteObject(OBJECT_D39P41A1_90);
+                                        with (object OBJECT_D39P41A1_90) {
+                                            Destroy();
+                                        }
+                                        Wait(60);
+                                        with (actor ACTOR_PLAYER) {
+                                            ResetOutputAttribute(2);
+                                        }
+                                        with (actor ACTOR_ATTENDANT_PARTNER) {
+                                            ResetOutputAttribute(2);
+                                        }
+                                        bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+                                        JumpCommon(CORO_END_TALK);
+                                        end;
                                     case 195:
                                         debug_Print('ENTRANCE');
                                         switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
@@ -332,5 +377,21 @@ def 6 for_actor(ACTOR_NPC_DEMO_PARTNER) {
     SetAnimation(76);
     WaitScreenFade();
     WaitScreenFadeAll();
+    end;
+}
+
+def 7 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
+    SetHeight(10);
+    forever {
+        MoveHeight(1,11);
+        Wait(30);
+        MoveHeight(1,10);
+        Wait(30);
+        MoveHeight(1,9);
+        Wait(30);
+        MoveHeight(1,10);
+        Wait(30);
+        continue;
+    }
     end;
 }

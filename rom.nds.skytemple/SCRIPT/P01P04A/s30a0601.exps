@@ -1067,8 +1067,6 @@ def 0 {
                                                         with (actor ACTOR_UNIT_NPC4) {
                                                             Move2PositionMark(33152, Position<'m3', 47, 26.5>);
                                                         }
-
-
                                                         with (actor ACTOR_PLAYER) {
                                                             Move2PositionMark(1, Position<'m4', 53.5, 22.5>);
                                                         }
@@ -1083,8 +1081,8 @@ def 0 {
                                                             Move2PositionMark(33152, Position<'m5', 53.5, 24.5>);
                                                         }
                                                         WaitExecuteLives(ACTOR_PLAYER);
-
-
+                                                        $SCENARIO_TALK_BIT_FLAG[217] = 1; // Cafe Bronzong goes up high!
+                                                        Wait(15);
                                                         with (actor ACTOR_PLAYER) {
                                                             Turn2Direction(4, 10, DIR_UP);
                                                         }
@@ -1186,6 +1184,7 @@ def 0 {
                                                                     spanish=" Oye...\n¿Por qué no te calmas?",
                                                                 });
                                                                 message_Close();
+                                                                $SCENARIO_TALK_BIT_FLAG[217] = 0; // Bring Bronzong back down to earth!
                                                                 with (actor ACTOR_UNIT_NPC1) {
                                                                     SetAnimation(2);
                                                                 }
@@ -1443,8 +1442,8 @@ def 0 {
                                                                 with (performer 0) {
                                                                     MovePositionMark(33408, Position<'m10', 43.5, 22.5>, Position<'m11', 43.5, 19.5>);
                                                                 }
-
-
+                                                                
+                                                                
                                                                 with (actor ACTOR_PLAYER) {
                                                                     Turn2Direction(4, 10, DIR_UPLEFT);
                                                                 }
@@ -1560,6 +1559,7 @@ def 0 {
                                                                 }
                                                                 WaitSe(11275);
                                                                 message_CloseEnforce();
+                                                                $SCENARIO_TALK_BIT_FLAG[218] = 1; // Cafe Bronzong Starts Spinning!
                                                                 with (actor ACTOR_NPC_SOONANSU) {
                                                                     SetAnimation(2);
                                                                 }
@@ -1943,6 +1943,7 @@ def 0 {
                                                                     SetAnimation(2);
                                                                 }
                                                                 Wait(10);
+                                                                $SCENARIO_TALK_BIT_FLAG[217] = 0; // Cafe Bronzong Stops Spinning
                                                                 with (actor ACTOR_NPC_SOONANSU) {
                                                                     SetAnimation(22);
                                                                 }
@@ -2016,6 +2017,7 @@ def 0 {
                                                                 }
                                                                 screen_FadeInAll(1, 60);
                                                                 Wait(30);
+                                                                $SCENARIO_TALK_BIT_FLAG[218] = 0; // Cafe Bronzong Return to normal height!
                                                                 with (performer 0) {
                                                                     MovePositionLives(33152, 0);
                                                                 }
