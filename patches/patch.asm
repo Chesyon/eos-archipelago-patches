@@ -133,6 +133,15 @@
 .open "overlay11.bin", overlay11_start
     .org NameAutofillHook
         bl AutofillName
+    ;.org 0x2324880
+    ;    .word TrackerTopScreenCreate
+    ;    .word TrackerTopScreenDelete
+    ;    .word TrackerTopScreenFun3
+    ;    .word TrackerTopScreenFun4
+    ;    .word TrackerTopScreenFun5
+    ;    .word TrackerTopScreenFun6
+    ;    .word TrackerTopScreenFun7
+    ;    .word TrackerTopScreenFun8
     
     ; More cutscene skip shenanigans
     .ifdef TryCutsceneSkipScan

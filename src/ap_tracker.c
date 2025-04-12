@@ -8,7 +8,7 @@ typedef struct TopScreenApTrackerWindow {
     uint8_t padding1; // ?
     uint8_t padding2; // ?
     uint8_t padding3; // ?
-    uint32_t state; // Init to 1 for Team Stat, 1 for Message Log?
+    uint32_t state; // Init to 1 for Team Stat, 0 for Message Log?
     uint8_t field_0x8; // Init to 0?
     uint8_t field_0x9; // Init to 1?
     uint8_t field_0xA; // Init to 0?
@@ -189,18 +189,29 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, &ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 6);
 } */
 
+// Handles deeleting the top screen background probably.
+void ApTrackerTopScreenUtil() {
+    apTrackerWindowPtr->field_0x0 = 0;
+    apTrackerWindowPtr->state = 1; // maybe try 0???
+    apTrackerWindowPtr->field_0x9 = 1;
+    UnkTopScreenFun3(0xFFFFFFFF);
+    UnkTopScreenFun2(1);
+    if(apTrackerTopScreenBG != NULL) {
+        UnkTopScreenFun1(apTrackerTopScreenBG);
+        MemFree(apTrackerTopScreenBG);
+        apTrackerTopScreenBG = NULL;
+    }
+    apTrackerWindowPtr->field_0xA = 0;
+}
+
 uint32_t TrackerTopScreenCreate() {
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
-    apTrackerWindowPtr->field_0x0 = 0;
-    apTrackerWindowPtr->state = 1;
-    apTrackerWindowPtr->field_0x9 = 1;
-    UnkTopScreenFun1(0xFFFFFFFF);
-    UnkTopScreenFun2(1);
-    apTrackerWindowPtr->field_0xA = 0;
-    apTrackerWindowPtr->field_0x8 = 1;
+    ApTrackerTopScreenUtil();
+    UnkTopScreenFun7(0x10);
+    apTrackerWindowPtr->field_0x8 = 0;
     apTrackerWindowPtr->field_0xA = 1;
     apTrackerWindowPtr->field_0xB = 0;
-    apTrackerWindowPtr->field_0x0 = 1;
+    apTrackerWindowPtr->state = 0;
     return 1;
 }
 
@@ -213,17 +224,10 @@ uint32_t TrackerTopScreenDelete(uint32_t num) {
         }
     }
     
-    apTrackerWindowPtr->state = 1;
-    apTrackerWindowPtr->field_0x9 = 1;
-    UnkTopScreenFun3(0xFFFFFFFF);
-    UnkTopScreenFun2(1);
-    if(apTrackerTopScreenBG != NULL) {
-        FreeTopScreenBG(apTrackerTopScreenBG);
-    }
-    apTrackerWindowPtr->field_0xA = 0;
+    ApTrackerTopScreenUtil();
     apTrackerWindowPtr->state = 7;
     if(apTrackerWindowPtr->field_0x8 != 0) {
-        // TODO: Something goes here? Related to deleting the menu?
+        // TODO: Something goes here? Related to freeing windows.
     }
     
     MemFree((void*)apTrackerWindowPtr);
@@ -265,7 +269,7 @@ uint32_t TrackerTopScreenFun5() {
                         apTrackerWindowPtr->field_0x9 = 0;
                     } else {
                         apTrackerWindowPtr->field_0x9 = 1;
-                        apTrackerWindowPtr->state = 4;
+                        apTrackerWindowPtr->state = 2;
                         apTrackerWindowPtr->field_0xA = 0;
                     }
                 } else {
@@ -322,6 +326,7 @@ void TrackerTopScreenFun6() {
     }
     
     apTrackerWindowPtr->field_0x9 = 1;
+    ApTrackerTopScreenUtil();
     apTrackerTopScreenBG = MemAlloc(0x2F4, 0xF);
     LoadTopScreenBGPart1(apTrackerTopScreenBG, 0x2323D98);
     LoadTopScreenBGPart2(apTrackerTopScreenBG, "BACK/expback.bgp", 0);

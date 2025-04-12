@@ -133,12 +133,13 @@ DungeonModeSetupAndShowKeyboard = 0x234FC14;
 SomeDeathMsgCheckFun = 0x200C63C;
 
 /* Ap Tracker Top Screen Stuff */
-UnkTopScreenFun1 = 0x230EA74;
+UnkTopScreenFun1 = 0x22EC7EC;
 UnkTopScreenFun2 = 0x22EB938;
 UnkTopScreenFun3 = 0x22F50D4;
 UnkTopScreenFun4 = 0x22EA5F0;
 UnkTopScreenFun5 = 0x22EFE7C;
-UnkTopScreenFun6 = 0x2314770;
+UnkTopScreenFun6 = 0x22EA5D8;
+UnkTopScreenFun7 = 0x22EA650;
 LoadTopScreenBGPart1 = 0x22EC558; /* Might be actually for putting it on the top screen. */
 LoadTopScreenBGPart2 = 0x22EE7A4; /* Might be more generic background load. */
 FreeTopScreenBG = 0x22EC7EC; /* Might be more generic background free. */
