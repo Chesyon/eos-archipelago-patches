@@ -4,19 +4,25 @@
 #include "extern.h"
 
 typedef struct TopScreenApTrackerWindow {
-    uint8_t field_0x0;
-    uint8_t padding1; // ?
-    uint8_t padding2; // ?
-    uint8_t padding3; // ?
-    uint32_t state; // Init to 1 for Team Stat, 0 for Message Log?
-    uint8_t field_0x8; // Init to 0?
-    uint8_t field_0x9; // Init to 1?
-    uint8_t field_0xA; // Init to 0?
-    uint8_t field_0xB; // Init to 0?
+    uint8_t field_0x0; // 0x0: Maybe related to if the background is loaded?
+    uint8_t padding1;
+    uint8_t padding2;
+    uint8_t padding3;
+    uint32_t state; // 0x4: Controls top screen has an extra state? Seems redundant.
+    // 0x8: varies among top screens? We will use it to store the window id.
+    // Some other top screens may use it as a boolean instead for if the top
+    // screen is like ready.
+    int8_t window_id;
+    uint8_t faded;       // 0x9: Guess
+    uint8_t displayable; // 0xA: Guess.
+    // 0xB: In some way communicates this top screen option should begin
+    // closing/ending?
+    uint8_t closing;
 } TopScreenApTrackerWindow;
 
 TopScreenApTrackerWindow *apTrackerWindowPtr = NULL;
 void* apTrackerTopScreenBG = NULL;
+uint8_t displayedOption = 255;
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
@@ -189,11 +195,19 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, &ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 6);
 } */
 
-// Handles deeleting the top screen background probably.
-void ApTrackerTopScreenUtil() {
+struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
+void ApTrackerTopScreenWindowCallback(int idx) {
+    if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
+        DrawTextInWindow(apTrackerWindowPtr->window_id, 8, 8, "This was a test!");
+        UpdateWindow(apTrackerWindowPtr->window_id);
+    }
+}
+
+// Handles deeleting the top screen background.
+void ApTrackerFreeTopScreenBG() {
     apTrackerWindowPtr->field_0x0 = 0;
     apTrackerWindowPtr->state = 1; // maybe try 0???
-    apTrackerWindowPtr->field_0x9 = 1;
+    apTrackerWindowPtr->faded = 1;
     UnkTopScreenFun3(0xFFFFFFFF);
     UnkTopScreenFun2(1);
     if(apTrackerTopScreenBG != NULL) {
@@ -201,33 +215,34 @@ void ApTrackerTopScreenUtil() {
         MemFree(apTrackerTopScreenBG);
         apTrackerTopScreenBG = NULL;
     }
-    apTrackerWindowPtr->field_0xA = 0;
+    apTrackerWindowPtr->displayable = 0;
 }
 
-uint32_t TrackerTopScreenCreate() {
+uint32_t CreateTrackerTopScreen() {
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
-    ApTrackerTopScreenUtil();
+    ApTrackerFreeTopScreenBG();
     UnkTopScreenFun7(0x10);
-    apTrackerWindowPtr->field_0x8 = 0;
-    apTrackerWindowPtr->field_0xA = 1;
-    apTrackerWindowPtr->field_0xB = 0;
+    displayedOption = 255;
+    apTrackerWindowPtr->window_id = -2;
+    apTrackerWindowPtr->displayable = 1;
+    apTrackerWindowPtr->closing = 0;
     apTrackerWindowPtr->state = 0;
     return 1;
 }
 
-uint32_t TrackerTopScreenDelete(uint32_t num) {
+uint32_t CloseTrackerTopScreen(uint32_t num) {
     if (num == 0) {
-        num = apTrackerWindowPtr->state;
-        if(num != 7) {
-            apTrackerWindowPtr->field_0xB = 1;
+        if(apTrackerWindowPtr->state!= 7) {
+            apTrackerWindowPtr->closing = 1;
             return 0;
         }
     }
     
-    ApTrackerTopScreenUtil();
+    ApTrackerFreeTopScreenBG();
     apTrackerWindowPtr->state = 7;
-    if(apTrackerWindowPtr->field_0x8 != 0) {
-        // TODO: Something goes here? Related to freeing windows.
+    if(apTrackerWindowPtr->window_id != -2) {
+        CloseTextBox(apTrackerWindowPtr->window_id);
+        apTrackerWindowPtr->window_id = -2;
     }
     
     MemFree((void*)apTrackerWindowPtr);
@@ -235,46 +250,47 @@ uint32_t TrackerTopScreenDelete(uint32_t num) {
     return 1;
 }
 
-uint32_t TrackerTopScreenFun3() {
+// Name is a guess to actual purpose.
+uint32_t IsReadyTrackerTopScreen() {
     if(apTrackerWindowPtr->field_0x0 == 0) {
-        return apTrackerWindowPtr->field_0x9;
+        return apTrackerWindowPtr->faded;
     }
     
     return 1;
 }
 
 // Leftover debug function for top screen stuff maybe? All variants are just abort
-// bx lr.
-void TrackerTopScreenFun4() {
+// "bx lr" if not NULL.
+void DebugTrackerTopScreen() {
     return;
 }
 
 // This looks like it gets run every frame. It updates the menu if need be.
 // Seems to check for fades to avoid changing the top screen during a fade.
-uint32_t TrackerTopScreenFun5() {
+uint32_t StateManagerTrackerTopScreen() {
     switch(apTrackerWindowPtr->state) {
         case 0:;
             if (IsScreenFadeInProgress()) {
-                apTrackerWindowPtr->field_0x9 = 1;
+                apTrackerWindowPtr->faded = 1;
                 return 0;
             }
             apTrackerWindowPtr->state = 1;
             // No break is intentional here. It should fall into case 1.
         case 1:;
             if (IsScreenFadeInProgress()) {
-                apTrackerWindowPtr->field_0x9 = 1;
+                apTrackerWindowPtr->faded = 1;
             } else {
-                if(apTrackerWindowPtr->field_0xB == 0) {
-                    if(apTrackerWindowPtr->field_0xA == 0) {
-                        apTrackerWindowPtr->field_0x9 = 0;
+                if(apTrackerWindowPtr->closing == 0) {
+                    if(apTrackerWindowPtr->displayable == 0) {
+                        apTrackerWindowPtr->faded = 0;
                     } else {
-                        apTrackerWindowPtr->field_0x9 = 1;
+                        apTrackerWindowPtr->faded = 1;
                         apTrackerWindowPtr->state = 2;
-                        apTrackerWindowPtr->field_0xA = 0;
+                        apTrackerWindowPtr->displayable = 0;
                     }
                 } else {
                     UnkTopScreenFun4(0x10);
-                    apTrackerWindowPtr->field_0x9 = 1;
+                    apTrackerWindowPtr->faded = 1;
                     apTrackerWindowPtr->state = 6;
                 }
             }
@@ -285,20 +301,20 @@ uint32_t TrackerTopScreenFun5() {
             break;
         case 4:;
             if(IsScreenFadeInProgress()) {
-                apTrackerWindowPtr->field_0x9 = 1;
+                apTrackerWindowPtr->faded = 1;
                 return 0;
             }
             apTrackerWindowPtr->state = 5;
             // No break is intentional here. It should fall into case 5.
         case 5:;
-            if(apTrackerWindowPtr->field_0xB == 0 && apTrackerWindowPtr->field_0xA == 0) {
+            if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 // TODO: Something to update the team stats goes here. However,
                 // for message log nothing is here/
-                apTrackerWindowPtr->field_0x9 = 0;
+                apTrackerWindowPtr->faded = 0;
             } else {
                 UnkTopScreenFun4(0x10);
                 apTrackerWindowPtr->state = 0;
-                apTrackerWindowPtr->field_0x9 = 1;
+                apTrackerWindowPtr->faded = 1;
             }
             break;
         case 6:;
@@ -306,34 +322,33 @@ uint32_t TrackerTopScreenFun5() {
                 return 0;
             }
             
-            if(apTrackerWindowPtr->field_0x8 != 0) {
-                // TODO: Add something here to delete our windows.
-                apTrackerWindowPtr->field_0x8 = 0;
+            if(apTrackerWindowPtr->window_id != -2) {
+                CloseTextBox(apTrackerWindowPtr->window_id);
+                apTrackerWindowPtr->window_id = -2;
             }
             apTrackerWindowPtr->state = 7;
             // No break is intentional here. It should fall into case 7.
         case 7:;
-            apTrackerWindowPtr->field_0x9 = 0;
+            apTrackerWindowPtr->faded = 0;
             break;
     }
     
     return 0;
 }
 
-void TrackerTopScreenFun6() {
+void InitializeTrackerTopScreen() {
     if(apTrackerWindowPtr->state != 2) {
         return;
     }
     
-    apTrackerWindowPtr->field_0x9 = 1;
-    ApTrackerTopScreenUtil();
+    apTrackerWindowPtr->faded = 1;
+    ApTrackerFreeTopScreenBG();
     apTrackerTopScreenBG = MemAlloc(0x2F4, 0xF);
     LoadTopScreenBGPart1(apTrackerTopScreenBG, 0x2323D98);
     LoadTopScreenBGPart2(apTrackerTopScreenBG, "BACK/expback.bgp", 0);
-    if(apTrackerWindowPtr->field_0x8 == 0) {
-        // TODO: Create the window and do initial update if applicable.
-        apTrackerWindowPtr->field_0x8 = 1;
-    } // TeamStatMenu has an else here to update stats every frame??
+    if(apTrackerWindowPtr->window_id == -2) {
+        apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, ApTrackerTopScreenWindowCallback);
+    }
     apTrackerWindowPtr->state = 3;
 }
 
@@ -345,10 +360,12 @@ uint32_t TrackerTopScreenFun7() {
         apTrackerWindowPtr->state = 4;
     }
     
+    // In every state, team stats appears to update the monster animations?
+    
     return 0;
 }
 
-void TrackerTopScreenFun8() {
+void EndTrackerTopScreen() {
     if (apTrackerWindowPtr->field_0x0 == 0 || apTrackerTopScreenBG == 0) {
         return;
     }
