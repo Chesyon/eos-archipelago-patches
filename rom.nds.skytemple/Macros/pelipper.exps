@@ -152,7 +152,6 @@
         message_Close();
         item_SetVariable(0,$ITEM_BACKUP);
         message_EmptyActor();
-        $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item 
         $LOCAL0 = 0; // Reset the counter!
         if ($LOCAL1 < 4) {
             me_Play(4);
@@ -172,6 +171,7 @@
                         }
                         switch ( message_Menu(MENU_GIVE_ITEM) ) { } // Put it in their bag
                         $CONDITION += 1;
+                        $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item 
                         jump @box_halt;
                     default: // Item not put in bag!
                         break;
@@ -193,6 +193,7 @@
                     case 0: // Storage NOT full!
                         switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
                         $CONDITION += 1;
+                        $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item 
                         jump @box_halt;
                     default: // Storage full!
                         break;
@@ -233,6 +234,7 @@
             case 5: // Discard All
                 message_Mail("[STS][CN][s_item:0] was thrown away!\n[CN]What a waste![STE]");
                 $CONDITION += 1;
+                $SCENARIO_TALK_BIT_FLAG[250] = 1; // Turn this on, so Cryptic knows to send the next item 
                 message_Close();
                 break;
         }
