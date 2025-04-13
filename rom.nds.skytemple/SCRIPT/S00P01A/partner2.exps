@@ -2,6 +2,7 @@ import "version.exps"; // Handles game version stuff
 
 def 0 {
     if (debug) {
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,500,0);
         jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
@@ -5818,6 +5819,39 @@ dungeon_mode(191)  = DMODE_CLOSED;
             break;
         default:
             message_Mail("Bag Size: Invalid!\nReport this bug to [CS:G]Chesyon[CR] immediately!");
+            break;
+    }
+    
+    switch(ProcessSpecial(109, 0,0)) {
+        case >= 8: // MASTER
+            message_Mail("Guild Rank: Master or Above");
+            break;
+        case 7: // HYPER
+            message_Mail("Guild Rank: Hyper");
+            break;
+        case 6: // ULTRA
+            message_Mail("Guild Rank: Ultra");
+            break;
+        case 5: // SUPER
+            message_Mail("Guild Rank: Super");
+            break;
+        case 4: // DIAMOND
+            message_Mail("Guild Rank: Diamond");
+            break;
+        case 3: // GOLD
+            message_Mail("Guild Rank: Gold");
+            break;
+        case 2: // SILVER
+            message_Mail("Guild Rank: Silver");
+            break;
+        case 1: // BRONZE
+            message_Mail("Guild Rank: Bronze");
+            break;
+        case 0:
+            message_Mail("Guild Rank: Normal");
+            break;
+        default:
+            message_Mail("Guild Rank: Unknown");
             break;
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
