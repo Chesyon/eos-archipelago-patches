@@ -1958,7 +1958,7 @@ coro EVENT_DIVIDE_RESUME {
     } elseif ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
         if ( $GAME_MODE == 3 ) {
             debug_Print('COMPULSORY_SIDE_RESUME');
-            switch ( $COMPULSORY_SAVE_POINT_SIDE ) {
+            switch ($COMPULSORY_SAVE_POINT_SIDE ) {
                 case 0:
                     JumpCommon(CORO_EVENT_N01_05_07);
                 case 4:
