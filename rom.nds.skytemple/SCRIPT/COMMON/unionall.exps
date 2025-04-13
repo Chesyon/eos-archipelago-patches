@@ -10640,7 +10640,7 @@ coro GETOUT_REQUEST_DUNGEON {
                                     case 119:
                                     case 120:
                                         message_SetFace(ACTOR_ATTENDANT1,FACE_POS_BOTTOM_L_FACEINW,FACE_NORMAL);
-                                        message_Talk(" It's not even noon yet [hero]![K]\nWould you like to do another round of missions\nbefore we call it a day?");
+                                        message_Talk(" It's not even noon yet, [hero]![K]\nWould you like to do another round of missions\nbefore we call it a day?");
                                         switch(message_SwitchMenu(0,1)) {
                                             case menu("Keep Going"):
                                                 message_Close();

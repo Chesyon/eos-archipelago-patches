@@ -169,6 +169,7 @@
                             message_Close();
                         }
                         switch ( message_Menu(MENU_GIVE_ITEM) ) { } // Put it in their bag
+                        $CONDITION += 1;
                         jump @box_halt;
                     default: // Item not put in bag!
                         break;
@@ -189,6 +190,7 @@
                 switch (ProcessSpecial(57,0,0)) { // Is storage full?
                     case 0: // Storage NOT full!
                         switch ( message_Menu(MENU_GIVE_ITEM2) ) { } // Put it in storage
+                        $CONDITION += 1;
                         jump @box_halt;
                     default: // Storage full!
                         break;
@@ -228,12 +230,12 @@
                 }
             case 5: // Discard All
                 message_Mail("[STS][CN][s_item:0] was thrown away!\n[CN]What a waste![STE]");
+                $CONDITION += 1;
                 message_Close();
                 break;
         }
         message_Close();
         §box_halt;
-        $CONDITION += 1;
         if ($LOCAL0 == 0) {
             message_Mail("[STS]\n[CN]Searching for packages...[STE]");
         }
