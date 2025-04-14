@@ -12,7 +12,7 @@ typedef struct TopScreenApTrackerWindow {
     // 0x8: varies among top screens? We will use it to store the window id.
     // Some other top screens may use it as a boolean instead for if the top
     // screen is like ready.
-    int8_t window_id;
+    signed char window_id;
     uint8_t faded;       // 0x9: Guess
     uint8_t displayable; // 0xA: Guess.
     // 0xB: In some way communicates this top screen option should begin
@@ -144,6 +144,7 @@ char* lockedSymbol = "[M:S4]";
 char* completeSymbol = "[M:S3]";
 char* unlockedSymbol = "[M:R7]";
 char* remainingChecksSymbol = "[M:R4]";
+char* checkSymbol = "[M:S2]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -195,11 +196,95 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, &ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 6);
 } */
 
+uint8_t circlePoints20[] = {60, 120,
+                            79, 117,
+                            95, 109,
+                            109, 95,
+                            117, 79,
+                            120, 60,
+                            117, 41,
+                            109, 25,
+                            95, 11,
+                            79, 3,
+                            60, 0,
+                            41, 3,
+                            25, 11,
+                            11, 25,
+                            3, 41,
+                            0, 60,
+                            3, 79,
+                            11, 95,
+                            25, 109,
+                            41, 117};
+
+char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:60][string:0]"
+                       "[CLUM_SET:15]Jobs: [CLUM_SET:60][value:0:2]/[value:1:2]"
+                       "[CLUM_SET:15]Outlaws: [CLUM_SET:60][value:3:2]/[value:4:2]";
+char* shopItemString1 = "[CLUM_SET:128]Shop Item 1: [CLUM_SET:199][string:0]\n"
+                        "[CLUM_SET:128]Shop Item 2: [CLUM_SET:199][string:1]\n"
+                        "[CLUM_SET:128]Shop Item 3: [CLUM_SET:199][string:2]\n"
+                        "[CLUM_SET:128]Shop Item 4: [CLUM_SET:199][string:3]\n"
+                        "[CLUM_SET:128]Shop Item 5: [CLUM_SET:199][string:4]\n";
+char* shopItemString2 = "[CLUM_SET:128]Shop Item 6: [CLUM_SET:199][string:0]\n"
+                        "[CLUM_SET:128]Shop Item 7: [CLUM_SET:199][string:1]\n"
+                        "[CLUM_SET:128]Shop Item 8: [CLUM_SET:199][string:2]\n"
+                        "[CLUM_SET:128]Shop Item 9: [CLUM_SET:199][string:3]\n"
+                        "[CLUM_SET:128]Shop Item 10: [CLUM_SET:199][string:4]";
+char* specialEpisodeString = "[CLUM_SET:15]Bidood SE: [string:0]\n"
+                             "[CLUM_SET:15]Bunflora SE: [string:1]\n"
+                             "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
+                             "[CLUM_SET:15]Team Charm SE: [string:3]";
+char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CS:G]Beach Cave[CS:C]:[CR]\n"
+                   "[CLUM_SET:15]Bag Check: [string:0]\n"
+                   "[CLUM_SET:15]Team Name Check: [string:0]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowCallback(int idx) {
-    if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
-        DrawTextInWindow(apTrackerWindowPtr->window_id, 8, 8, "This was a test!");
-        UpdateWindow(apTrackerWindowPtr->window_id);
+    uint8_t location = trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage];
+    char temp[400];
+    struct preprocessor_args preArgs = {.id_vals[0] = location};
+    struct preprocessor_flags preFlags = {};
+    PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
+    DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
+    
+    if(displayedOption == CUSTOM_SAVE_AREA.trackerPage) {
+        return;
+    }
+    
+    displayedOption = CUSTOM_SAVE_AREA.trackerPage;
+    if (location == 247) { // Treasure Town
+        preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
+        PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 16, temp);
+        preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
+        PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 81, temp);
+        preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
+        PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 16, temp);
+        preArgs.strings[0] = (GetSubXBit(0)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
+        PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 81, temp);
+    } else if(location == 41) { // Temporal Tower
+        int startX = 48;
+        int startY = 24;
+        for(int i = 0; i < 20; i++) {
+            DrawTextInWindow(idx, startX + circlePoints20[i * 2], startY + circlePoints20[i * 2 + 1] , lockedSymbol);
+        }
+        
+    } else if(location == 67) { // Dark Crater
+
     }
 }
 

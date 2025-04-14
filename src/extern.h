@@ -140,6 +140,7 @@ int SomeDeathMsgCheckFun(union damage_source damage_source_or_result);
 void MessageSetWaitMode(int speed1, int speed2);
 void InitScriptRoutineFromCoroutineInfo(struct script_routine* routine, undefined4 param_2, struct coroutine_info* coroutine_info, int status);
 void GetSceneName(char* dst, const char* src);
+uint32_t GetStringWidth(char* str);
 
 void UnkTopScreenFun1(uint32_t num);
 void UnkTopScreenFun2(uint32_t num);

@@ -131,6 +131,7 @@ PlayEffectAnimationEntityWrapper = 0x22E4C98;
 DetermineTileAppearence = 0x2337264;
 DungeonModeSetupAndShowKeyboard = 0x234FC14;
 SomeDeathMsgCheckFun = 0x200C63C;
+GetStringWidth = 0x202688C;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;
