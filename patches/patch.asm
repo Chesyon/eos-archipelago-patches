@@ -123,6 +123,13 @@
         nop
         nop
     .endarea
+    
+    ; AP Tracker
+    .org OptionsMenuItemListPtr
+    .area 0x4
+        .pool
+            .word newTopScreenOptionsList
+    .endarea
 .close
 
 .open "overlay1.bin", overlay1_start
@@ -133,15 +140,19 @@
 .open "overlay11.bin", overlay11_start
     .org NameAutofillHook
         bl AutofillName
-    ;.org 0x2324880
-        ;.word CreateTrackerTopScreen
-        ;.word CloseTrackerTopScreen
-        ;.word IsReadyTrackerTopScreen
-        ;.word DebugTrackerTopScreen
-        ;.word StateManagerTrackerTopScreen
-        ;.word InitializeTrackerTopScreen
-        ;.word TrackerTopScreenFun7
-        ;.word EndTrackerTopScreen
+    
+    ; Overworld AP Tracker
+    .org ApTrackerSetupMenuHook
+        b ApTrackerSetupMenuCheck
+    .org ApTrackerTopScreenHook
+        b ApTrackerTopScreenCheck
+    .org ApTrackerTopScreenHook2
+        b ApTrackerTopScreenCheck2
+    .org GroundMenuItemListPtr
+    .area 0x4
+        .pool
+            .word newTopGroundMenuList
+    .endarea
     
     ; More cutscene skip shenanigans
     .ifdef TryCutsceneSkipScan

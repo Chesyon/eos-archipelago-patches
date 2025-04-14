@@ -31,12 +31,15 @@ ShowStringInDialogueBoxCallsite1 = 0x2035560;
 IsValidPortraitCallsite = 0x2035814;
 GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 GetExpReturn = 0x2052DE0;
+OptionsMenuItemListPtr = 0x209B684;
 
 /* ! For Overlay1 */
 ClearMarkHook = 0x2333D68;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
+
+/* Overlay 11: CRASS */
 GroundMainLoopStuff = 0x22E98D4;
 CancelRecoverStart = 0x22E981C;
 GroundSupervisionExecuteRequestCancel = 0x22F7AE0;
@@ -66,6 +69,14 @@ OpcodeSetWaitModeStuff = 0x22E0234;
 TurnOpcodeSwitchStatementSetup = 0x22E1228;
 ShowStringInDialogueBoxCallsite2 = 0x230129C;
 ShowStringInDialogueBoxCallsite3 = 0x2301624;
+
+/* Overlay 11: Ap Tracker */
+ApTrackerSetupMenuHook = 0x2301A7C;
+ApTrackerTopScreenHook = 0x230DA34;
+ApTrackerTopScreenUnhook = 0x230DA90;
+ApTrackerTopScreenHook2 = 0x230D9BC;
+ApTrackerTopScreenUnhook2 = 0x230DA18;
+GroundMenuItemListPtr = 0x2301878;
 
 /* ! For Overlay13 */
 SameTypeHook = 0x238C48C;
@@ -132,6 +143,10 @@ DetermineTileAppearence = 0x2337264;
 DungeonModeSetupAndShowKeyboard = 0x234FC14;
 SomeDeathMsgCheckFun = 0x200C63C;
 GetStringWidth = 0x202688C;
+SetupTopGroundMenuNext = 0x23016F8;
+SetupMenuNext = 0x2034BD8;
+ApTrackerSetupGroundTopScreenFunctions = 0x230DC0C;
+ApTrackerSetupGroundTopScreenFunctions2 = 0x230DB18;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;

@@ -154,5 +154,7 @@ void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a p
 void LoadTopScreenBGPart2(void* thing, char* bg_string, uint32_t num);
 void FreeTopScreenBG(void* thing);
 void SomethingTopScreenBG(void* thing);
+void SetupTopGroundMenuNext();
+void SetupMenuNext(void* menu_thing);
 
 static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }

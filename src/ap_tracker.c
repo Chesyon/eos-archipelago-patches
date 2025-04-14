@@ -20,9 +20,37 @@ typedef struct TopScreenApTrackerWindow {
     uint8_t closing;
 } TopScreenApTrackerWindow;
 
+// Some times the functions have returns. Sometimes they don't make them all
+// void* because they have differing signatures.
+typedef struct TopScreenMode {
+    uint32_t thing;
+    void* createFunction;
+    void* closeFunction;
+    void* function3;
+    void* function4;
+    void* function5;
+    void* function6;
+    void* function7;
+    void* function8;
+} TopScreenMode;
+
+typedef struct ApTrackerTracker {
+    int displayWindowId;
+    int pickWindowId;
+    int optionState;
+} ApTrackerTracker;
+
+typedef struct SomeMenuStruct {
+    uint32_t something; // For submenus this is 0xD?
+    void (*createMenuFunction)(void); // is null for some menus and actual init is handled in update.
+    void (*closeMenuFunction)(void);
+    uint32_t (*updateMenuFunction)(void);
+} SomeMenuStruct;
+
 TopScreenApTrackerWindow *apTrackerWindowPtr = NULL;
 void* apTrackerTopScreenBG = NULL;
 uint8_t displayedOption = 255;
+ApTrackerTracker menuTracker = {.displayWindowId = -2, .pickWindowId = -2};
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
@@ -150,7 +178,7 @@ char* checkSymbol = "[M:S2]";
 // allow them to alter the top screen.
 char* ApTrackerEntryFn(char* buffer, int option_id) {
     struct preprocessor_args preArgs;
-    uint8_t location = trackerLocationDungeonIds[0];
+    uint8_t location = trackerLocationDungeonIds[option_id];
     char* locationSymbol;
     if (location == 247) {
         locationSymbol = townSymbol;
@@ -178,23 +206,37 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
                 break;
         }
     }
-    preArgs.id_vals[0] = trackerLocationDungeonIds[0];
+    preArgs.id_vals[0] = trackerLocationDungeonIds[option_id];
     preArgs.strings[0] = locationSymbol;
     
-    // Flags = 0xD5
     struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
     PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
     
     return buffer;
 }
 
-/*void CreateTrackerMenu() {
-    struct window_params pickWinParams = {.x_offset = 2, .y_offset = 20, .width = 28,
-        .height = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
+void CreateTrackerMenu() {
+    struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
     struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
-    struct window_extra_info winExInfo = {.set_choice_id = tracker.optionState, .title_string_id = 527};
-    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, &ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 6);
-} */
+    struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
+    menuTracker.pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
+}
+
+void CloseTrackerMenu() {
+    CloseTextBox(menuTracker.pickWindowId);
+    return;
+}
+
+uint32_t UpdateTrackerMenu() {
+    if(IsAdvancedMenuActive(menuTracker.pickWindowId) == true) {
+        CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+        return 1;
+    }
+    
+    CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+    SetupTopGroundMenuNext();
+    return 4;
+}
 
 uint8_t circlePoints20[] = {60, 120,
                             79, 117,
@@ -217,6 +259,246 @@ uint8_t circlePoints20[] = {60, 120,
                             25, 109,
                             41, 117};
 
+uint8_t circlePoints19[] = {60, 120,
+                            79, 117,
+                            97, 107,
+                            110, 93,
+                            118, 75,
+                            120, 55,
+                            115, 36,
+                            104, 19,
+                            89, 7,
+                            70, 1,
+                            50, 1,
+                            31, 7,
+                            16, 19,
+                            5, 36,
+                            0, 55,
+                            2, 75,
+                            10, 93,
+                            23, 107,
+                            41, 117};
+
+uint8_t circlePoints18[] = {60, 120,
+                            81, 116,
+                            99, 106,
+                            112, 90,
+                            119, 70,
+                            112, 30,
+                            99, 14,
+                            81, 4,
+                            60, 0,
+                            39, 4,
+                            21, 14,
+                            8, 30,
+                            1, 50,
+                            1, 70,
+                            8, 90,
+                            21, 106,
+                            39, 116};
+
+uint8_t circlePoints17[] = {60, 120,
+                            82, 116,
+                            100, 104,
+                            114, 87,
+                            120, 66,
+                            118, 44,
+                            108, 24,
+                            92, 9,
+                            71, 1,
+                            49, 1,
+                            28, 9,
+                            12, 24,
+                            2, 44,
+                            0, 66,
+                            6, 87,
+                            20, 104,
+                            38, 116};
+
+uint8_t circlePoints16[] = {60, 120,
+                            83, 115,
+                            102, 102,
+                            115, 83,
+                            120, 60,
+                            115, 37,
+                            102, 18,
+                            83, 5,
+                            60, 0,
+                            37, 5,
+                            18, 18,
+                            5, 37,
+                            0, 60,
+                            5, 83,
+                            18, 102,
+                            37, 115};
+
+uint8_t circlePoints15[] = {60, 120,
+                            84, 115,
+                            105, 100,
+                            117, 79,
+                            120, 54,
+                            112, 30,
+                            95, 11,
+                            72, 1,
+                            48, 1,
+                            25, 11,
+                            8, 30,
+                            0, 54,
+                            3, 79,
+                            15, 100,
+                            36, 115};
+
+uint8_t circlePoints14[] = {60, 120,
+                            86, 114,
+                            107, 97,
+                            118, 73,
+                            118, 47,
+                            107, 23,
+                            86, 6,
+                            60, 0,
+                            34, 6,
+                            13, 23,
+                            2, 47,
+                            2, 73,
+                            13, 97,
+                            34, 114};
+
+uint8_t circlePoints13[] = {60, 120,
+                            88, 113,
+                            109, 94,
+                            120, 67,
+                            116, 39,
+                            100, 15,
+                            74, 2,
+                            46, 2,
+                            20, 15,
+                            4, 39,
+                            0, 67,
+                            11, 94,
+                            32, 113};
+
+uint8_t circlePoints12[] = {60, 120,
+                            90, 112,
+                            112, 90,
+                            120, 60,
+                            112, 30,
+                            90, 8,
+                            60, 0,
+                            30, 8,
+                            8, 30,
+                            0, 60,
+                            8, 90,
+                            30, 112};
+
+uint8_t circlePoints11[] = {60, 120,
+                            92, 110,
+                            115, 85,
+                            119, 51,
+                            105, 21,
+                            77, 2,
+                            43, 2,
+                            15, 21,
+                            1, 51,
+                            5, 85,
+                            28, 110};
+
+void DrawMacguffinCircle(signed char idx, char* strLock, char* strUnlocked, int toGet, int gotten) {
+    int startX = 48;
+    int startY = 24;
+    int iter = 0;
+    uint8_t *list = NULL;
+    
+    switch(toGet) {
+        default:
+        case 1:
+            return;
+        case 2:
+            iter = 10;
+            list = circlePoints20;
+            break;
+        case 3:
+            iter = 6;
+            list = circlePoints18;
+            break;
+        case 4:
+            iter = 5;
+            list = circlePoints20;
+            break;
+        case 5:
+            iter = 4;
+            list = circlePoints20;
+            break;
+        case 6:
+            iter = 3;
+            list = circlePoints18;
+            break;
+        case 7:
+            iter = 2;
+            list = circlePoints14;
+            break;
+        case 8:
+            iter = 2;
+            list = circlePoints16;
+            break;
+        case 9:
+            iter = 2;
+            list = circlePoints18;
+            break;
+        case 10:
+            iter = 4;
+            list = circlePoints20;
+            break;
+        case 11:
+            iter = 1;
+            list = circlePoints11;
+            break;
+        case 12:
+            iter = 1;
+            list = circlePoints12;
+            break;
+        case 13:
+            iter = 1;
+            list = circlePoints13;
+            break;
+        case 14:
+            iter = 1;
+            list = circlePoints14;
+            break;
+        case 15:
+            iter = 1;
+            list = circlePoints15;
+            break;
+        case 16:
+            iter = 1;
+            list = circlePoints16;
+            break;
+        case 17:
+            iter = 1;
+            list = circlePoints17;
+            break;
+        case 18:
+            iter = 1;
+            list = circlePoints18;
+            break;
+        case 19:
+            iter = 1;
+            list = circlePoints19;
+            break;
+        case 20:
+            iter = 1;
+            list = circlePoints20;
+            break;
+    }
+    
+    for(int i = 0; i < toGet; i++) {
+        if(i < gotten) {
+            DrawTextInWindow(idx, startX + list[i * iter * 2], startY + list[i * iter * 2 + 1] , strLock);
+        } else {
+            DrawTextInWindow(idx, startX + list[i * iter * 2], startY + list[i * iter * 2 + 1] , strUnlocked);
+        }
+    }
+}
+
 char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:60][string:0]"
                        "[CLUM_SET:15]Jobs: [CLUM_SET:60][value:0:2]/[value:1:2]"
                        "[CLUM_SET:15]Outlaws: [CLUM_SET:60][value:3:2]/[value:4:2]";
@@ -230,26 +512,22 @@ char* shopItemString2 = "[CLUM_SET:128]Shop Item 6: [CLUM_SET:199][string:0]\n"
                         "[CLUM_SET:128]Shop Item 8: [CLUM_SET:199][string:2]\n"
                         "[CLUM_SET:128]Shop Item 9: [CLUM_SET:199][string:3]\n"
                         "[CLUM_SET:128]Shop Item 10: [CLUM_SET:199][string:4]";
-char* specialEpisodeString = "[CLUM_SET:15]Bidood SE: [string:0]\n"
-                             "[CLUM_SET:15]Bunflora SE: [string:1]\n"
+char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
+                             "[CLUM_SET:15]Sunflora SE: [string:1]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
-char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CS:G]Beach Cave[CS:C]:[CR]\n"
+char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C]:[CR]\n"
                    "[CLUM_SET:15]Bag Check: [string:0]\n"
                    "[CLUM_SET:15]Team Name Check: [string:0]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
-void ApTrackerTopScreenWindowCallback(int idx) {
+void ApTrackerTopScreenWindowUpdate(int idx) {
+    ClearWindow(idx);
     uint8_t location = trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage];
-    char temp[400];
+    char temp[300];
     struct preprocessor_args preArgs = {.id_vals[0] = location};
     struct preprocessor_flags preFlags = {};
     PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
-    
-    if(displayedOption == CUSTOM_SAVE_AREA.trackerPage) {
-        return;
-    }
-    
     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
     if (location == 247) { // Treasure Town
         preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
@@ -277,15 +555,13 @@ void ApTrackerTopScreenWindowCallback(int idx) {
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
     } else if(location == 41) { // Temporal Tower
-        int startX = 48;
-        int startY = 24;
-        for(int i = 0; i < 20; i++) {
-            DrawTextInWindow(idx, startX + circlePoints20[i * 2], startY + circlePoints20[i * 2 + 1] , lockedSymbol);
-        }
+        DrawMacguffinCircle(idx, lockedSymbol, checkSymbol, 14, 7);
         
     } else if(location == 67) { // Dark Crater
 
+    } else {
     }
+    UpdateWindow(idx);
 }
 
 // Handles deeleting the top screen background.
@@ -393,8 +669,9 @@ uint32_t StateManagerTrackerTopScreen() {
             // No break is intentional here. It should fall into case 5.
         case 5:;
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
-                // TODO: Something to update the team stats goes here. However,
-                // for message log nothing is here/
+                if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
+                }
                 apTrackerWindowPtr->faded = 0;
             } else {
                 UnkTopScreenFun4(0x10);
@@ -432,7 +709,7 @@ void InitializeTrackerTopScreen() {
     LoadTopScreenBGPart1(apTrackerTopScreenBG, 0x2323D98);
     LoadTopScreenBGPart2(apTrackerTopScreenBG, "BACK/expback.bgp", 0);
     if(apTrackerWindowPtr->window_id == -2) {
-        apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, ApTrackerTopScreenWindowCallback);
+        apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
     }
     apTrackerWindowPtr->state = 3;
 }
@@ -458,4 +735,56 @@ void EndTrackerTopScreen() {
     UnkTopScreenFun8(apTrackerTopScreenBG);
     apTrackerWindowPtr->field_0x0 = 0;
     UnkTopScreenFun6(0x10);
+}
+
+SomeMenuStruct apTrackerMenu = {
+    .something = 0xD,
+    .createMenuFunction = CreateTrackerMenu,
+    .closeMenuFunction = CloseTrackerMenu,
+    .updateMenuFunction = UpdateTrackerMenu
+};
+
+TopScreenMode apTrackerMode = {
+    .thing = 0xD,
+    .createFunction = CreateTrackerTopScreen,
+    .closeFunction = CloseTrackerTopScreen,
+    .function3 = IsReadyTrackerTopScreen,
+    .function4 = DebugTrackerTopScreen,
+    .function5 = StateManagerTrackerTopScreen,
+    .function6 = InitializeTrackerTopScreen,
+    .function7 = TrackerTopScreenFun7,
+    .function8 = EndTrackerTopScreen
+};
+
+struct simple_menu_id_item newTopGroundMenuList[] = {{.string_id = 0x218, .result_value = 2},
+                                 {.string_id = 0x219, .result_value = 3},
+                                 {.string_id = 0x21B, .result_value = 4},
+                                 {.string_id = 0x21C, .result_value = 5},
+                                 {.string_id = 0x21D, .result_value = 6},
+                                 {.string_id = 0x21E, .result_value = 7},
+                                 {.string_id = 0x0, .result_value = 1}};
+
+uint16_t newTopScreenOptionsList[] = {0x18A, 0x18B, 0x18C, 0x18D, 0x18E, 0x21D, 0x0};
+
+void __attribute((naked)) ApTrackerSetupMenuCheck (void) {
+    asm("ldr r0,=apTrackerMenu");
+    asm("bl SetupMenuNext");
+    asm("mov r0,#0x4");
+    asm("ldmia sp!,{r3,pc}");
+}
+
+void __attribute((naked)) ApTrackerTopScreenCheck (void) {
+    asm("cmp r0,#0x5");
+    asm("bne ApTrackerTopScreenUnhook");
+    asm("ldr r0,=apTrackerMode");
+    asm("bl ApTrackerSetupGroundTopScreenFunctions");
+    asm("ldmia sp!,{r3,pc}");
+}
+
+void __attribute((naked)) ApTrackerTopScreenCheck2 (void) {
+    asm("cmp r0,#0x5");
+    asm("bne ApTrackerTopScreenUnhook2");
+    asm("ldr r0,=apTrackerMode");
+    asm("bl ApTrackerSetupGroundTopScreenFunctions2");
+    asm("ldmia sp!,{r3,pc}");
 }
