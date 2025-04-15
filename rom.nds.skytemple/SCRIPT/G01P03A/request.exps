@@ -1,9 +1,30 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 // 101 is mission stuff. Written by Chesyon, untested, but assumed working!
 def 0 {
     debug_Print('Codeglitchmurphy requested to be inside the code');
     switch ( message_Menu(MENU_JOB_REWARD_TYPE) ) {
         case 32767:
             §label_0;
+            switch(ProcessSpecial(109, 0,0)) {
+                case >= 8: // MASTER
+                    ~AssignCheck(80);
+                case 7: // HYPER
+                    ~AssignCheck(79);
+                case 6: // ULTRA
+                    ~AssignCheck(78);
+                case 5: // SUPER
+                    ~AssignCheck(77);
+                case 4: // DIAMOND
+                    ~AssignCheck(76);
+                case 3: // GOLD
+                    ~AssignCheck(75);
+                case 2: // SILVER
+                    ~AssignCheck(74);
+                case 1: // BRONZE
+                    ~AssignCheck(73);
+                default:
+                    break;
+            }
             end;
         case 9: // Outlaw
             back_SetGround(LEVEL_G01P03A);
