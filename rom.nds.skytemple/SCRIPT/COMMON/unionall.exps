@@ -3228,6 +3228,7 @@ coro EVENT_M02_01_02 {
     ~AssignCheck(127); // Team Name
     $GROUND_GETOUT = 207; // Puts the player in front of the door!
     main_EnterGround(LEVEL_G01P04A, 30);
+    hold;
     JumpCommon(CORO_EVENT_DIVIDE);
 /*
     CallCommon(CORO_SUBSCREEN_INIT);
