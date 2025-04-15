@@ -135,11 +135,6 @@ uint8_t trackerLocationDungeonIds[] = {
 
 bool IsLocationBonusChecksComplete(enum dungeon_id location) {
     switch (location) {
-        case DUNGEON_BEACH_CAVE:;
-            if(!GetSubXBit(0)) { // Bag Upgrade 0
-                return false;
-            }
-            break;
         case DUNGEON_MT_BRISTLE:;
             if(!GetSubXBit(1)) { // Bag Upgrade 1
                 return false;
@@ -150,8 +145,13 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
                 return false;
             }
             break;
+        case DUNGEON_STEAM_CAVE:;
+            if(!GetSubXBit(3)) { // Bag Upgrade 3
+                return false;
+            }
+            break;
         case DUNGEON_MYSTIFYING_FOREST:; 
-            if(!GetSubXBit(2)) { // Bag Upgrade 3
+            if(!GetSubXBit(4)) { // Bag Upgrade 4
                 return false;
             }
             break;
@@ -160,6 +160,12 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
                 return false;
             }
             break;
+        case DUNGEON_HIDDEN_LAND:; 
+            if(!GetSubXBit(9)) { // SE5
+                return false;
+            }
+            break;
+        
         default:
             break;
     }
