@@ -121,6 +121,20 @@ typedef struct CustomSaveArea {
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
+// Some times the functions have returns. Sometimes they don't make them all
+// void* because they have differing signatures.
+typedef struct TopScreenMode {
+    uint32_t thing;
+    void* createFunction;
+    void* closeFunction;
+    void* function3;
+    void* function4;
+    void* function5;
+    void* function6;
+    void* function7;
+    void* function8;
+} TopScreenMode;
+
 extern CustomSaveArea CUSTOM_SAVE_AREA;
 
 extern int PARTNER_SELECT_MENU_OPTION_TRACKER;
@@ -156,5 +170,8 @@ void FreeTopScreenBG(void* thing);
 void SomethingTopScreenBG(void* thing);
 void SetupTopGroundMenuNext();
 void SetupMenuNext(void* menu_thing);
+void SetupGroundTopScreenFunctions(TopScreenMode* mode);
+void SetupGroundTopScreenFunctions2(TopScreenMode* mode);
+uint32_t GetTopScreenOptionType();
 
 static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }

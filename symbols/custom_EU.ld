@@ -145,8 +145,9 @@ SomeDeathMsgCheckFun = 0x200C63C;
 GetStringWidth = 0x202688C;
 SetupTopGroundMenuNext = 0x23016F8;
 SetupMenuNext = 0x2034BD8;
-ApTrackerSetupGroundTopScreenFunctions = 0x230DC0C;
-ApTrackerSetupGroundTopScreenFunctions2 = 0x230DB18;
+SetupGroundTopScreenFunctions = 0x230DC0C;
+SetupGroundTopScreenFunctions2 = 0x230DB18;
+GetTopScreenOptionType = 0x204B1D8; /* Gets the number of the option selected for the top screen. */
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;
@@ -161,8 +162,6 @@ LoadTopScreenBGPart1 = 0x22EC558; /* Might be actually for putting it on the top
 LoadTopScreenBGPart2 = 0x22EE7A4; /* Might be more generic background load. */
 FreeTopScreenBG = 0x22EC7EC; /* Might be more generic background free. */
 SomethingTopScreenBG = 0x22F004C;
-
-
 
 MESSAGE_SET_WAIT_MODE_PARAMS = 0x23259CC;
 SCRIPT_PORTRAIT_PARAMS = 0x23259E4;

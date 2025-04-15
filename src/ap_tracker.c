@@ -20,20 +20,6 @@ typedef struct TopScreenApTrackerWindow {
     uint8_t closing;
 } TopScreenApTrackerWindow;
 
-// Some times the functions have returns. Sometimes they don't make them all
-// void* because they have differing signatures.
-typedef struct TopScreenMode {
-    uint32_t thing;
-    void* createFunction;
-    void* closeFunction;
-    void* function3;
-    void* function4;
-    void* function5;
-    void* function6;
-    void* function7;
-    void* function8;
-} TopScreenMode;
-
 typedef struct ApTrackerTracker {
     int displayWindowId;
     int pickWindowId;
@@ -219,29 +205,6 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
     
     return buffer;
-}
-
-void CreateTrackerMenu() {
-    struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
-    struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
-    struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
-    menuTracker.pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
-}
-
-void CloseTrackerMenu() {
-    CloseTextBox(menuTracker.pickWindowId);
-    return;
-}
-
-uint32_t UpdateTrackerMenu() {
-    if(IsAdvancedMenuActive(menuTracker.pickWindowId) == true) {
-        CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
-        return 1;
-    }
-    
-    CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
-    SetupTopGroundMenuNext();
-    return 4;
 }
 
 uint8_t circlePoints20[] = {60, 120,
@@ -565,7 +528,7 @@ void ApTrackerTopScreenWindowUpdate(int idx) {
         
     } else if(location == 67) { // Dark Crater
 
-    } else {
+    } else { // Most Normal Dungeons
     }
     UpdateWindow(idx);
 }
@@ -743,13 +706,6 @@ void EndTrackerTopScreen() {
     UnkTopScreenFun6(0x10);
 }
 
-SomeMenuStruct apTrackerMenu = {
-    .something = 0xD,
-    .createMenuFunction = CreateTrackerMenu,
-    .closeMenuFunction = CloseTrackerMenu,
-    .updateMenuFunction = UpdateTrackerMenu
-};
-
 TopScreenMode apTrackerMode = {
     .thing = 0xD,
     .createFunction = CreateTrackerTopScreen,
@@ -760,6 +716,39 @@ TopScreenMode apTrackerMode = {
     .function6 = InitializeTrackerTopScreen,
     .function7 = TrackerTopScreenFun7,
     .function8 = EndTrackerTopScreen
+};
+
+void CreateTrackerMenu() {
+    struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
+    struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
+    struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
+    menuTracker.pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
+    if(GetTopScreenOptionType() != 5) {
+        SetupGroundTopScreenFunctions(&apTrackerMode);
+    }
+}
+
+void CloseTrackerMenu() {
+    CloseTextBox(menuTracker.pickWindowId);
+    return;
+}
+
+uint32_t UpdateTrackerMenu() {
+    if(IsAdvancedMenuActive(menuTracker.pickWindowId) == true) {
+        CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+        return 1;
+    }
+    
+    CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+    SetupTopGroundMenuNext();
+    return 4;
+}
+
+SomeMenuStruct apTrackerMenu = {
+    .something = 0xD,
+    .createMenuFunction = CreateTrackerMenu,
+    .closeMenuFunction = CloseTrackerMenu,
+    .updateMenuFunction = UpdateTrackerMenu
 };
 
 struct simple_menu_id_item newTopGroundMenuList[] = {{.string_id = 0x218, .result_value = 2},
@@ -783,7 +772,7 @@ void __attribute((naked)) ApTrackerTopScreenCheck (void) {
     asm("cmp r0,#0x5");
     asm("bne ApTrackerTopScreenUnhook");
     asm("ldr r0,=apTrackerMode");
-    asm("bl ApTrackerSetupGroundTopScreenFunctions");
+    asm("bl SetupGroundTopScreenFunctions");
     asm("ldmia sp!,{r3,pc}");
 }
 
@@ -791,6 +780,6 @@ void __attribute((naked)) ApTrackerTopScreenCheck2 (void) {
     asm("cmp r0,#0x5");
     asm("bne ApTrackerTopScreenUnhook2");
     asm("ldr r0,=apTrackerMode");
-    asm("bl ApTrackerSetupGroundTopScreenFunctions2");
+    asm("bl SetupGroundTopScreenFunctions2");
     asm("ldmia sp!,{r3,pc}");
 }
