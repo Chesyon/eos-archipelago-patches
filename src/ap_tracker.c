@@ -211,6 +211,10 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
 }
 
 void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int centerY, int toGet, int gotten, char* strLock, char* strUnlocked, int rotation) {
+    if (toGet == 0) {
+        return;
+    }
+    
     uint32_t step = _u32_div_f(4096, toGet);
     
     for(int i = 0; i < toGet; i++) {
@@ -244,6 +248,7 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
 char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C]:[CR]\n"
                    "[CLUM_SET:15]Bag Check: [string:0]\n"
                    "[CLUM_SET:15]Team Name Check: [string:0]";
+char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx) {
     ClearWindow(idx);
@@ -280,9 +285,17 @@ void ApTrackerTopScreenWindowUpdate(int idx) {
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
     } else if(location == 41) { // Temporal Tower
-        DrawCircleBarInTextBox(idx, 60, 112, 84, 14, 7, lockedSymbol, relicSymbol, trackerRotate);
+        DrawCircleBarInTextBox(idx, 60, 112, 84, macguffinMaxes.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
+        preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+        preArgs.number_vals[1] = macguffinMaxes.requiredRelicFragmentShards;
+        PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+        DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
     } else if(location == 67) { // Dark Crater
-        DrawCircleBarInTextBox(idx, 60, 112, 84, 13, 11, lockedSymbol, instrumentSymbol, trackerRotate);
+        DrawCircleBarInTextBox(idx, 60, 109, 84, macguffinMaxes.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
+        preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
+        preArgs.number_vals[1] = macguffinMaxes.requiredInstruments;
+        PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+        DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
     } else { // Most Normal Dungeons
     }
     UpdateWindow(idx);
@@ -520,6 +533,12 @@ struct simple_menu_id_item newTopGroundMenuList[] = {{.string_id = 0x218, .resul
                                  {.string_id = 0x0, .result_value = 1}};
 
 uint16_t newTopScreenOptionsList[] = {0x18A, 0x18B, 0x18C, 0x18D, 0x18E, 0x21D, 0x0};
+
+void CreateTrackerTopScreenDungeon() {
+    /*uint32_t regionStuff[5];
+    InitBackgroundRegionDungeon(regionStuff)
+    InitBackgroundRegionDungeon(TOP_SCREEN_STATUS_PTR->field107_0x80,)*/
+}
 
 void __attribute((naked)) ApTrackerSetupMenuCheck (void) {
     asm("ldr r0,=apTrackerMenu");

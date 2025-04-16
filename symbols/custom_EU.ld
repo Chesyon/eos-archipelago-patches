@@ -162,6 +162,8 @@ LoadTopScreenBGPart1 = 0x22EC558; /* Might be actually for putting it on the top
 LoadTopScreenBGPart2 = 0x22EE7A4; /* Might be more generic background load. */
 FreeTopScreenBG = 0x22EC7EC; /* Might be more generic background free. */
 SomethingTopScreenBG = 0x22F004C;
+InitBackgroundRegionDungeon = 0x22C2BF8;
+LoadBackgroundDungeon = 0x22C27D8;
 
 MESSAGE_SET_WAIT_MODE_PARAMS = 0x23259CC;
 SCRIPT_PORTRAIT_PARAMS = 0x23259E4;
