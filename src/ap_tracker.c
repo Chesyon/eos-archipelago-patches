@@ -165,6 +165,8 @@ char* completeSymbol = "[M:S3]";
 char* unlockedSymbol = "[M:R7]";
 char* remainingChecksSymbol = "[M:R4]";
 char* checkSymbol = "[M:S2]";
+char* instrumentSymbol = "[M:R9]";
+char* relicSymbol = "[M:T4]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -524,10 +526,9 @@ void ApTrackerTopScreenWindowUpdate(int idx) {
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
     } else if(location == 41) { // Temporal Tower
-        DrawMacguffinCircle(idx, lockedSymbol, checkSymbol, 14, 7);
-        
+        DrawMacguffinCircle(idx, lockedSymbol, relicSymbol, 14, 7);
     } else if(location == 67) { // Dark Crater
-
+        DrawMacguffinCircle(idx, lockedSymbol, instrumentSymbol, 14, 7);
     } else { // Most Normal Dungeons
     }
     UpdateWindow(idx);
