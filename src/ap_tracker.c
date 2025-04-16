@@ -37,6 +37,7 @@ TopScreenApTrackerWindow *apTrackerWindowPtr = NULL;
 void* apTrackerTopScreenBG = NULL;
 uint8_t displayedOption = 255;
 ApTrackerTracker menuTracker = {.displayWindowId = -2, .pickWindowId = -2};
+uint32_t trackerRotate = 0;
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
@@ -159,14 +160,14 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
     return true;
 }
 
-char* townSymbol = "[M:S7]";
-char* lockedSymbol = "[M:S4]";
-char* completeSymbol = "[M:S3]";
-char* unlockedSymbol = "[M:R7]";
-char* remainingChecksSymbol = "[M:R4]";
-char* checkSymbol = "[M:S2]";
-char* instrumentSymbol = "[M:R9]";
-char* relicSymbol = "[M:T4]";
+char* townSymbol = "[M:S7][S:8]";
+char* lockedSymbol = "[M:S4][S:8]";
+char* completeSymbol = "[M:S3][S:8]";
+char* unlockedSymbol = "[M:R7][S:8]";
+char* remainingChecksSymbol = "[M:R4][S:8]";
+char* checkSymbol = "[M:S2][S:8]";
+char* instrumentSymbol = "[M:R9][S:8]";
+char* relicSymbol = "[M:T4][S:8]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -209,263 +210,16 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     return buffer;
 }
 
-uint8_t circlePoints20[] = {60, 120,
-                            79, 117,
-                            95, 109,
-                            109, 95,
-                            117, 79,
-                            120, 60,
-                            117, 41,
-                            109, 25,
-                            95, 11,
-                            79, 3,
-                            60, 0,
-                            41, 3,
-                            25, 11,
-                            11, 25,
-                            3, 41,
-                            0, 60,
-                            3, 79,
-                            11, 95,
-                            25, 109,
-                            41, 117};
-
-uint8_t circlePoints19[] = {60, 120,
-                            79, 117,
-                            97, 107,
-                            110, 93,
-                            118, 75,
-                            120, 55,
-                            115, 36,
-                            104, 19,
-                            89, 7,
-                            70, 1,
-                            50, 1,
-                            31, 7,
-                            16, 19,
-                            5, 36,
-                            0, 55,
-                            2, 75,
-                            10, 93,
-                            23, 107,
-                            41, 117};
-
-uint8_t circlePoints18[] = {60, 120,
-                            81, 116,
-                            99, 106,
-                            112, 90,
-                            119, 70,
-                            112, 30,
-                            99, 14,
-                            81, 4,
-                            60, 0,
-                            39, 4,
-                            21, 14,
-                            8, 30,
-                            1, 50,
-                            1, 70,
-                            8, 90,
-                            21, 106,
-                            39, 116};
-
-uint8_t circlePoints17[] = {60, 120,
-                            82, 116,
-                            100, 104,
-                            114, 87,
-                            120, 66,
-                            118, 44,
-                            108, 24,
-                            92, 9,
-                            71, 1,
-                            49, 1,
-                            28, 9,
-                            12, 24,
-                            2, 44,
-                            0, 66,
-                            6, 87,
-                            20, 104,
-                            38, 116};
-
-uint8_t circlePoints16[] = {60, 120,
-                            83, 115,
-                            102, 102,
-                            115, 83,
-                            120, 60,
-                            115, 37,
-                            102, 18,
-                            83, 5,
-                            60, 0,
-                            37, 5,
-                            18, 18,
-                            5, 37,
-                            0, 60,
-                            5, 83,
-                            18, 102,
-                            37, 115};
-
-uint8_t circlePoints15[] = {60, 120,
-                            84, 115,
-                            105, 100,
-                            117, 79,
-                            120, 54,
-                            112, 30,
-                            95, 11,
-                            72, 1,
-                            48, 1,
-                            25, 11,
-                            8, 30,
-                            0, 54,
-                            3, 79,
-                            15, 100,
-                            36, 115};
-
-uint8_t circlePoints14[] = {60, 120,
-                            86, 114,
-                            107, 97,
-                            118, 73,
-                            118, 47,
-                            107, 23,
-                            86, 6,
-                            60, 0,
-                            34, 6,
-                            13, 23,
-                            2, 47,
-                            2, 73,
-                            13, 97,
-                            34, 114};
-
-uint8_t circlePoints13[] = {60, 120,
-                            88, 113,
-                            109, 94,
-                            120, 67,
-                            116, 39,
-                            100, 15,
-                            74, 2,
-                            46, 2,
-                            20, 15,
-                            4, 39,
-                            0, 67,
-                            11, 94,
-                            32, 113};
-
-uint8_t circlePoints12[] = {60, 120,
-                            90, 112,
-                            112, 90,
-                            120, 60,
-                            112, 30,
-                            90, 8,
-                            60, 0,
-                            30, 8,
-                            8, 30,
-                            0, 60,
-                            8, 90,
-                            30, 112};
-
-uint8_t circlePoints11[] = {60, 120,
-                            92, 110,
-                            115, 85,
-                            119, 51,
-                            105, 21,
-                            77, 2,
-                            43, 2,
-                            15, 21,
-                            1, 51,
-                            5, 85,
-                            28, 110};
-
-void DrawMacguffinCircle(signed char idx, char* strLock, char* strUnlocked, int toGet, int gotten) {
-    int startX = 48;
-    int startY = 24;
-    int iter = 0;
-    uint8_t *list = NULL;
-    
-    switch(toGet) {
-        default:
-        case 1:
-            return;
-        case 2:
-            iter = 10;
-            list = circlePoints20;
-            break;
-        case 3:
-            iter = 6;
-            list = circlePoints18;
-            break;
-        case 4:
-            iter = 5;
-            list = circlePoints20;
-            break;
-        case 5:
-            iter = 4;
-            list = circlePoints20;
-            break;
-        case 6:
-            iter = 3;
-            list = circlePoints18;
-            break;
-        case 7:
-            iter = 2;
-            list = circlePoints14;
-            break;
-        case 8:
-            iter = 2;
-            list = circlePoints16;
-            break;
-        case 9:
-            iter = 2;
-            list = circlePoints18;
-            break;
-        case 10:
-            iter = 4;
-            list = circlePoints20;
-            break;
-        case 11:
-            iter = 1;
-            list = circlePoints11;
-            break;
-        case 12:
-            iter = 1;
-            list = circlePoints12;
-            break;
-        case 13:
-            iter = 1;
-            list = circlePoints13;
-            break;
-        case 14:
-            iter = 1;
-            list = circlePoints14;
-            break;
-        case 15:
-            iter = 1;
-            list = circlePoints15;
-            break;
-        case 16:
-            iter = 1;
-            list = circlePoints16;
-            break;
-        case 17:
-            iter = 1;
-            list = circlePoints17;
-            break;
-        case 18:
-            iter = 1;
-            list = circlePoints18;
-            break;
-        case 19:
-            iter = 1;
-            list = circlePoints19;
-            break;
-        case 20:
-            iter = 1;
-            list = circlePoints20;
-            break;
-    }
+void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int centerY, int toGet, int gotten, char* strLock, char* strUnlocked, int rotation) {
+    uint32_t step = _u32_div_f(4096, toGet);
     
     for(int i = 0; i < toGet; i++) {
+        int x = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].cos * radius) >> 12;
+        int y = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].sin * radius) >> 12;
         if(i < gotten) {
-            DrawTextInWindow(idx, startX + list[i * iter * 2], startY + list[i * iter * 2 + 1] , strLock);
+            DrawTextInWindow(idx, centerX + x, centerY + y, strLock);
         } else {
-            DrawTextInWindow(idx, startX + list[i * iter * 2], startY + list[i * iter * 2 + 1] , strUnlocked);
+            DrawTextInWindow(idx, centerX + x, centerY + y, strUnlocked);
         }
     }
 }
@@ -526,9 +280,9 @@ void ApTrackerTopScreenWindowUpdate(int idx) {
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
     } else if(location == 41) { // Temporal Tower
-        DrawMacguffinCircle(idx, lockedSymbol, relicSymbol, 14, 7);
+        DrawCircleBarInTextBox(idx, 60, 112, 84, 14, 7, lockedSymbol, relicSymbol, trackerRotate);
     } else if(location == 67) { // Dark Crater
-        DrawMacguffinCircle(idx, lockedSymbol, instrumentSymbol, 14, 7);
+        DrawCircleBarInTextBox(idx, 60, 112, 84, 13, 11, lockedSymbol, instrumentSymbol, trackerRotate);
     } else { // Most Normal Dungeons
     }
     UpdateWindow(idx);
@@ -550,6 +304,7 @@ void ApTrackerFreeTopScreenBG() {
 }
 
 uint32_t CreateTrackerTopScreen() {
+    trackerRotate = 1;
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
     ApTrackerFreeTopScreenBG();
     UnkTopScreenFun7(0x10);
@@ -641,6 +396,9 @@ uint32_t StateManagerTrackerTopScreen() {
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
+                } else if (trackerLocationDungeonIds[displayedOption] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[displayedOption] == DUNGEON_DARK_CRATER) {
+                    trackerRotate += 1;
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
                 }
                 apTrackerWindowPtr->faded = 0;
             } else {
@@ -680,6 +438,7 @@ void InitializeTrackerTopScreen() {
     LoadTopScreenBGPart2(apTrackerTopScreenBG, "BACK/expback.bgp", 0);
     if(apTrackerWindowPtr->window_id == -2) {
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
+        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
     }
     apTrackerWindowPtr->state = 3;
 }
