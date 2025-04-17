@@ -280,14 +280,14 @@
         bl WindCounterCheck
     
     
-    ;.org TopScreenDungeonModeMode5Hook
-    ;    mov r0,#6
-    ;.org TopScreenDungeonModeTrackerHook
-    ;.area 0xC
-    ;    cmp r0,#0x4
-    ;    addls pc,pc,r0,lsl #0x2 ; untouched instruction
-    ;    b TopScreenDungeonModeTrackerCheck
-    ;.org SetTopScreenTypeGroundHook
-    ;    bne SetTopScreenTypeGroundCheck
-    ;.endarea
+    .org TopScreenDungeonModeMode5Hook
+        mov r0,#6
+    .org TopScreenDungeonModeTrackerHook
+    .area 0xC
+        cmp r0,#0x4
+        addls pc,pc,r0,lsl #0x2 ; untouched instruction
+        b TopScreenDungeonModeTrackerCheck
+    .org SetTopScreenTypeGroundHook
+        bne SetTopScreenTypeGroundCheck
+    .endarea
 .close

@@ -576,7 +576,7 @@ uint16_t newTopScreenOptionsList[] = {0x18A, 0x18B, 0x18C, 0x18D, 0x18E, 0x21D, 
 void CreateTrackerTopScreenDungeon() {
     uint32_t regionStuff[5];
     InitBackgroundRegionDungeon(regionStuff);
-    LoadBackgroundDungeon(TOP_SCREEN_STATUS_PTR->field107_0x80, regionStuff, 0, 1);
+    LoadBackgroundDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80), regionStuff, 0, 1);
     enum dungeon_group_id dunGroup = GetDungeonGroup(DUNGEON_PTR->id.val);
     enum dungeon_id dunId = DUNGEON_PTR->id.val;
     for(int i = 0; i < 255; i++) {
