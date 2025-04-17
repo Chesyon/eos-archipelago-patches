@@ -1,0 +1,156 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+import "version.exps"; // Leave this for me, I don't want to rename this later lol
+    macro CheckBankRewards() {
+        debug_PrintFlag($BANK_GOLD,"Bank Gold:");
+        switch($BANK_GOLD) {
+            case < 100:
+                debug_Print("<100");
+                break;
+            case < 5000:
+                debug_Print("<5000");
+                $LOCAL1 = 1;
+                break;
+            case < 10000:
+                debug_Print("<10000");
+                $LOCAL1 = 2;
+                break;
+            case <= 16383:
+                debug_Print("<=16383");
+                §ten_k;
+                $LOCAL1 = 3;
+                break;
+            default:
+                $VERSION = value($BANK_GOLD);
+                $LOCAL0 = 0;
+                debug_PrintFlag($VERSION,"Bank Gold:");
+                while ($VERSION > 16383) {
+                    $VERSION -= 8192;
+                    $VERSION -= 8192; // -16384
+                    $LOCAL0 += 1;
+                }
+                debug_PrintFlag($VERSION,"Bank Gold:");
+                switch($LOCAL0) {
+                    case 0:
+                    default:
+                        debug_Print("Uh-oh!");
+                        break;
+                    case 1: // 16384 to 32767 (20000: 3616)
+                        if ($VERSION < 3616) {
+                            debug_Print("<20000");
+                            jump @ten_k;
+                        }
+                        §twenty_k;
+                    case 2: // 32768 to 49151
+                        debug_Print("<50000");
+                        $LOCAL1 = 4;
+                        break;
+                    case 3: // 49152 to 65535 (50000: 848)
+                        if ($VERSION < 848) {
+                            jump @twenty_k;
+                        }
+                        §fifty_k;
+                    case 5: // 81920 to 98303
+                        debug_Print("<100000");
+                        $LOCAL1 = 5;
+                        break;
+                    case 6: // 98304 to 114687 (100000: 1696)
+                        if ($VERSION < 1696) {
+                            jump @fifty_k;
+                        }
+                        §hundred_k;
+                    case < 610: // 983040 to 999423
+                        debug_Print("<9999999");
+                        $LOCAL1 = 6;
+                        break;
+                    case >= 610: // 9994240 to 10010623 (9999999: 5759)
+                        if ($VERSION < 5758) {
+                            jump @hundred_k;
+                        }
+                        $LOCAL1 = 7;
+                        break;
+                }
+                break;
+        }
+        ~SetVersion();
+        
+        if ($LOCAL1 == 7) {
+            if ($SCENARIO_SUB6 &<< 7) {
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Holy shit, that\'s a lot of money![K] Oops,\nyou didn\'t hear that![K] As thanks for depositing a\ntotal of [CS:G]9,999,999[CR][M:S0], I have a gift for you!");
+                message_KeyWait();
+                ~AssignCheck(87);
+                jump @check_6;
+            }
+        }
+        if ($LOCAL1 == 6) {
+            if ($SCENARIO_SUB6 &<< 6) {
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]100000[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_6;
+                ~AssignCheck(86);
+                jump @check_5;
+            }
+        }
+        if ($LOCAL1 == 5) {
+            if ($SCENARIO_SUB6 &<< 5) { 
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]50000[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_5;
+                ~AssignCheck(85);
+                jump @check_4;
+            }
+        }
+        if ($LOCAL1 == 4) {
+            if ($SCENARIO_SUB6 &<< 4) {
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]20000[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_4;
+                ~AssignCheck(84);
+                jump @check_3;
+            }
+        }
+        if ($LOCAL1 == 3) {
+            if ($SCENARIO_SUB6 &<< 3) {
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]10000[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_3;
+                ~AssignCheck(83);
+                jump @check_2;
+            }
+        }
+        if ($LOCAL1 == 2) {
+            if ($SCENARIO_SUB6 &<< 2) { 
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]5000[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_2;
+                ~AssignCheck(82);
+                jump @check_1;
+            }
+        }
+        if ($LOCAL1 == 1) {
+            if ($SCENARIO_SUB6 &<< 1) {
+            } else {
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" One moment, please!");
+                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]100[CR][M:S0], I have this gift for you!");
+                message_KeyWait();
+                §check_1;
+                ~AssignCheck(81);
+                me_Play(4);
+                message_Mail("You got a check!");
+                WaitMe(4);
+                message_Close();
+            }
+        }
+    }

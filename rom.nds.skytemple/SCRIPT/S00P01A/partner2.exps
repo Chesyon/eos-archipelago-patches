@@ -1,12 +1,12 @@
 import "version.exps"; // Handles game version stuff
-
+import "checks.exps"; 
 def 0 {
     if (debug) {
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,500,0);
         jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
-        dungeon_mode(54) = DMODE_OPEN;                                                                                                        
+        dungeon_mode(54) = DMODE_OPEN;                                                                                                       
     }
     §decision_tree;
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);

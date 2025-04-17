@@ -1,3 +1,4 @@
+import "version.exps"; // Leave this for me, I don't want to rename this later lol
 
 macro RunSP($variable_id,$value) {
     ProcessSpecial(65,$variable_id,$value);
@@ -12,6 +13,7 @@ macro AssignCheck($bit) {
         return;
     }
     $LOCAL0 /= 8;
+    
     if ($LOCAL0 &<< 0) {
         $VERSION = 1;
     } else {
@@ -52,7 +54,7 @@ macro AssignCheck($bit) {
         default:
             break;
     }
-    $VERSION = 1; // Revert to 1, otherwise 
+    ~SetVersion();
 }
 
 
@@ -70,13 +72,13 @@ macro InternalCheckMacro($value) {
         case < 8:
             ~RunSP(8,$value);
             break;
-        case < 2:
+        case < 10:
             ~RunSP(9,$value);
             break;
-        case < 4:
+        case < 12:
             ~RunSP(10,$value);
             break;
-        case < 6:
+        case < 14:
             ~RunSP(11,$value);
             break;
         default:

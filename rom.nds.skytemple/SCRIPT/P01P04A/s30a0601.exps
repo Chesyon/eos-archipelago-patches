@@ -1,3 +1,5 @@
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+
 def 0 {
     supervision_Acting(0);
     with (actor ACTOR_NPC_SOONANSU) {
@@ -2118,13 +2120,14 @@ def 0 {
                                                                         §label_86;
                                                                         me_Play(9);
                                                                         message_Mail({
-                                                                            english="[CN][hero] received the\n[CN][s_item:0]!",
-                                                                            french="[CN][hero] reçoit\n[CN]l\'objet [s_item:0]!",
-                                                                            german="[CN][hero] erhält\n[CN]das Item [s_item:0]!",
-                                                                            italian="[CN][hero] ha ricevuto lo strumento\n[CN][s_item:0]!",
-                                                                            spanish="[CN]¡[hero] ha obtenido\n[CN]el objeto [s_item:0]!",
+                                                                            english="[CN][hero] received the\n[CN][s_item:0]!\n[W:30]...and a check!",
+                                                                            french="[CN][hero] reçoit\n[CN]l\'objet [s_item:0]!\n[W:30](...and a check!)",
+                                                                            german="[CN][hero] erhält\n[CN]das Item [s_item:0]!\n[W:30](...and a check!)",
+                                                                            italian="[CN][hero] ha ricevuto lo strumento\n[CN][s_item:0]!\n[W:30](...and a check!)",
+                                                                            spanish="[CN]¡[hero] ha obtenido\n[CN]el objeto [s_item:0]!\n[W:30](...and a check!)",
                                                                         });
                                                                         WaitMe(9);
+                                                                        ~AssignCheck(88);
                                                                         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                                                                         jump @label_67;
                                                                     case 2:

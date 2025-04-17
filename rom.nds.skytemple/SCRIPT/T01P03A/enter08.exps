@@ -56,7 +56,7 @@ def 0 {
             spanish=" El [CS:K]Dojo Marowak[CR] está\nfuera de servicio...",
         });
         message_Talk({
-            english=" You may use it if you wish, however!",
+            english=" You may use it if you wish,\nhowever!",
             french=" Cependant!",
             german=" Wie auch immer!",
             italian=" Però...",
