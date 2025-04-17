@@ -255,9 +255,9 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
     }
 }
 
-char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:60][string:0]"
-                       "[CLUM_SET:15]Jobs: [CLUM_SET:60][value:0:2]/[value:1:2]"
-                       "[CLUM_SET:15]Outlaws: [CLUM_SET:60][value:3:2]/[value:4:2]";
+char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
+                       "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
+                       "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
 char* shopItemString1 = "[CLUM_SET:128]Shop Item 1: [CLUM_SET:199][string:0]\n"
                         "[CLUM_SET:128]Shop Item 2: [CLUM_SET:199][string:1]\n"
                         "[CLUM_SET:128]Shop Item 3: [CLUM_SET:199][string:2]\n"
@@ -272,7 +272,8 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Sunflora SE: [string:1]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
-char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C]:[CR]\n"
+char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C] &[CR]\n"
+                   "[CLUM_SET:15][CS:C]Talk To Wigglytuff[CR]\n"
                    "[CLUM_SET:15]Bag Check: [string:0]\n"
                    "[CLUM_SET:15]Team Name Check: [string:0]";
 char* fractionString = "[value:0:1]/[value:1:1]";
@@ -312,7 +313,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         DrawTextInWindow(idx, 1, 81, temp);
         UpdateWindow(idx);
         return;
-    } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) { // Temporal Tower
+    } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         if(GetDungeonMode(location) != DMODE_OPEN_AND_REQUEST) {
             DrawCircleBarInTextBox(idx, 60, 112, 84, macguffinMaxes.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
             preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
@@ -322,7 +323,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             UpdateWindow(idx);
             return;
         }
-    } else if(location == 67) { // Dark Crater
+    } else if(location == DUNGEON_DARK_CRATER) {
         DrawCircleBarInTextBox(idx, 60, 109, 84, macguffinMaxes.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
         preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
         preArgs.number_vals[1] = macguffinMaxes.requiredInstruments;
@@ -331,6 +332,25 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         UpdateWindow(idx);
         return;
     }
+    
+    // For regular dungeons.
+    if (GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) {
+        preArgs.strings[0] = checkSymbol;
+    } else {
+        preArgs.strings[0] = lockedSymbol;
+    }
+    preArgs.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[location].completedJobs;
+    preArgs.number_vals[2] = CUSTOM_SAVE_AREA.missionStats[location].completedOutlaws;
+    if(IsDungeonLateGame(location)) {
+        preArgs.number_vals[1] = missionMaxes.totalJobsLate;
+        preArgs.number_vals[4] = missionMaxes.totalOutlawsLate;
+    } else {
+        preArgs.number_vals[1] = missionMaxes.totalJobsEarly;
+        preArgs.number_vals[4] = missionMaxes.totalOutlawsEarly;
+    }
+    PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
+    DrawTextInWindow(idx, 1, 16, temp);
+    
     UpdateWindow(idx);
 }
 
