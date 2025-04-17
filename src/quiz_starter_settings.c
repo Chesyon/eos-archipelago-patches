@@ -316,14 +316,8 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[8]) << 8);
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[9]) << 9);
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[10]) << 10);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[11]) << 11);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[12]) << 12);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[13]) << 13);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[14]) << 14);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[15]) << 15);
-                randomizedHeroNum = _u32_div_f(randomizedHeroNum, selectable);
-                register int finalHeroNum asm("r1"); // This gets modulo. Yes, it is cursed!
-                quizData->currentQuestion = quizData->partners[finalHeroNum].val;
+                unsigned long long finalHeroNum = _u32_div_f(randomizedHeroNum, selectable);
+                quizData->currentQuestion = quizData->partners[(uint32_t)(finalHeroNum >> 32)].val;
                 quizData->state = 0x26;
             } // Breaks if we get here in Vanilla.
             break;

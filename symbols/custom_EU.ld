@@ -116,6 +116,13 @@ DungeonTurnUnhook = 0x22E0454;
 DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/
 DeathLinkSendHook = 0x22ED8E0;
 WindCounterCheckHook = 0x22ED53C;
+/* Mode 5 represents the controls for keyboards in dungeon mode. Move it to 6. */
+TopScreenDungeonModeMode5Hook = 0x22E911C;
+TopScreenDungeonModeTrackerHook = 0x22E92AC;
+TopScreenDungeonModeTrackerUnhook = 0x22E938C;
+SetTopScreenTypeGroundHook = 0x22E9100;
+SetTopScreenTypeGroundUnhook = 0x22E9110;
+
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
@@ -148,6 +155,11 @@ SetupMenuNext = 0x2034BD8;
 SetupGroundTopScreenFunctions = 0x230DC0C;
 SetupGroundTopScreenFunctions2 = 0x230DB18;
 GetTopScreenOptionType = 0x204B1D8; /* Gets the number of the option selected for the top screen. */
+CreateMode5TopScreenDungeon = 0x22E9000;
+UpdateMode5TopScreenDungeon = 0x22E904C;
+UnkMode5TopScreenDungeon = 0x22E9054;
+CloseMode5TopScreenDungeon = 0x22E9058;
+TopScreenModeSetDungeonMode = 0x22E9658;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;

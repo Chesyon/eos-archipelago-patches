@@ -21,7 +21,6 @@ typedef struct TopScreenApTrackerWindow {
 } TopScreenApTrackerWindow;
 
 typedef struct ApTrackerTracker {
-    int displayWindowId;
     int pickWindowId;
     int optionState;
 } ApTrackerTracker;
@@ -36,8 +35,11 @@ typedef struct SomeMenuStruct {
 TopScreenApTrackerWindow *apTrackerWindowPtr = NULL;
 void* apTrackerTopScreenBG = NULL;
 uint8_t displayedOption = 255;
-ApTrackerTracker menuTracker = {.displayWindowId = -2, .pickWindowId = -2};
+signed char pickWindowId = -2;
+signed char dungeonTopScreenId = -2;
+uint8_t dungeonModeDisplayed = 255;
 uint32_t trackerRotate = 0;
+uint32_t trackerVelocity = 0;
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
@@ -73,6 +75,8 @@ uint8_t trackerLocationDungeonIds[] = {
     90,  // Tiny Meadow
     91,  // Labyrinth Cave
     92,  // Oran Forest
+    38,  // Hidden Land
+    41,  // Temporal Tower
     // Late
     44,  // Mystifying Forest
     46,  // Blizzard Island
@@ -116,7 +120,6 @@ uint8_t trackerLocationDungeonIds[] = {
     // HERE COMES TEAM CHARM
     // IN THE FUTURE OF DARKNESS
     // Goals (TT)
-    41,  // Temporal Tower
     67   // Dark Crater
 };
 
@@ -177,18 +180,42 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     char* locationSymbol;
     if (location == 247) {
         locationSymbol = townSymbol;
+    } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
+        enum dungeon_mode dmode = GetDungeonMode(location);
+        switch(dmode) {
+            default:
+            case DMODE_CLOSED:;
+            case DMODE_REQUEST:;
+                    locationSymbol = relicSymbol;
+                    break;
+            case DMODE_OPEN:;
+                    locationSymbol = remainingChecksSymbol;
+                    break;
+            case DMODE_OPEN_AND_REQUEST:;
+                if (GetRemainingDungeonMissionChecks(location, false) != 0) {
+                    locationSymbol = remainingChecksSymbol;
+                } else if (GetRemainingDungeonMissionChecks(location, true) != 0) {
+                    locationSymbol = remainingChecksSymbol;
+                } else if (IsLocationBonusChecksComplete(location) == false) {
+                    locationSymbol = remainingChecksSymbol;
+                } else {
+                    locationSymbol = completeSymbol;
+                }
+        }
+    } else if (location == DUNGEON_DARK_CRATER) {
+        locationSymbol = instrumentSymbol;
     } else {
-        enum dungeon_mode dmode = GetDungeonMode(location) ;
+        enum dungeon_mode dmode = GetDungeonMode(location);
         switch (dmode) {
             default:
-            case DMODE_CLOSED:
-            case DMODE_REQUEST:
+            case DMODE_CLOSED:;
+            case DMODE_REQUEST:;
                 locationSymbol = lockedSymbol;
                 break;
-            case DMODE_OPEN:
+            case DMODE_OPEN:;
                 locationSymbol = unlockedSymbol;
                 break;
-            case DMODE_OPEN_AND_REQUEST:
+            case DMODE_OPEN_AND_REQUEST:;
                 if (GetRemainingDungeonMissionChecks(location, false) != 0) {
                     locationSymbol = remainingChecksSymbol;
                 } else if (GetRemainingDungeonMissionChecks(location, true) != 0) {
@@ -250,9 +277,8 @@ char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C]:
                    "[CLUM_SET:15]Team Name Check: [string:0]";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
-void ApTrackerTopScreenWindowUpdate(int idx) {
+void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     ClearWindow(idx);
-    uint8_t location = trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage];
     char temp[300];
     struct preprocessor_args preArgs = {.id_vals[0] = location};
     struct preprocessor_flags preFlags = {};
@@ -284,19 +310,26 @@ void ApTrackerTopScreenWindowUpdate(int idx) {
         preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
-    } else if(location == 41) { // Temporal Tower
-        DrawCircleBarInTextBox(idx, 60, 112, 84, macguffinMaxes.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
-        preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
-        preArgs.number_vals[1] = macguffinMaxes.requiredRelicFragmentShards;
-        PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
-        DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
+        UpdateWindow(idx);
+        return;
+    } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) { // Temporal Tower
+        if(GetDungeonMode(location) != DMODE_OPEN_AND_REQUEST) {
+            DrawCircleBarInTextBox(idx, 60, 112, 84, macguffinMaxes.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
+            preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+            preArgs.number_vals[1] = macguffinMaxes.requiredRelicFragmentShards;
+            PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+            DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
+            UpdateWindow(idx);
+            return;
+        }
     } else if(location == 67) { // Dark Crater
         DrawCircleBarInTextBox(idx, 60, 109, 84, macguffinMaxes.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
         preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
         preArgs.number_vals[1] = macguffinMaxes.requiredInstruments;
         PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
         DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
-    } else { // Most Normal Dungeons
+        UpdateWindow(idx);
+        return;
     }
     UpdateWindow(idx);
 }
@@ -317,7 +350,8 @@ void ApTrackerFreeTopScreenBG() {
 }
 
 uint32_t CreateTrackerTopScreen() {
-    trackerRotate = 1;
+    trackerRotate = 0;
+    trackerVelocity = 10;
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
     ApTrackerFreeTopScreenBG();
     UnkTopScreenFun7(0x10);
@@ -408,10 +442,14 @@ uint32_t StateManagerTrackerTopScreen() {
         case 5:;
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
+                    trackerVelocity = 10;
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, displayedOption);
                 } else if (trackerLocationDungeonIds[displayedOption] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[displayedOption] == DUNGEON_DARK_CRATER) {
-                    trackerRotate += 1;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
+                    trackerRotate += 1 + (trackerVelocity >> 5);
+                    if (trackerVelocity > 0) {
+                        trackerVelocity--;
+                    }
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
                 }
                 apTrackerWindowPtr->faded = 0;
             } else {
@@ -450,8 +488,9 @@ void InitializeTrackerTopScreen() {
     LoadTopScreenBGPart1(apTrackerTopScreenBG, 0x2323D98);
     LoadTopScreenBGPart2(apTrackerTopScreenBG, "BACK/expback.bgp", 0);
     if(apTrackerWindowPtr->window_id == -2) {
+        displayedOption = CUSTOM_SAVE_AREA.trackerPage;
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
-        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id);
+        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
     }
     apTrackerWindowPtr->state = 3;
 }
@@ -495,24 +534,24 @@ void CreateTrackerMenu() {
     struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
     struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
     struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
-    menuTracker.pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
+    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
     if(GetTopScreenOptionType() != 5) {
         SetupGroundTopScreenFunctions(&apTrackerMode);
     }
 }
 
 void CloseTrackerMenu() {
-    CloseTextBox(menuTracker.pickWindowId);
+    CloseTextBox(pickWindowId);
     return;
 }
 
 uint32_t UpdateTrackerMenu() {
-    if(IsAdvancedMenuActive(menuTracker.pickWindowId) == true) {
-        CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+    if(IsAdvancedMenuActive(pickWindowId) == true) {
+        CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(pickWindowId);
         return 1;
     }
     
-    CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(menuTracker.pickWindowId);
+    CUSTOM_SAVE_AREA.trackerPage = GetAdvancedMenuCurrentOption(pickWindowId);
     SetupTopGroundMenuNext();
     return 4;
 }
@@ -535,9 +574,76 @@ struct simple_menu_id_item newTopGroundMenuList[] = {{.string_id = 0x218, .resul
 uint16_t newTopScreenOptionsList[] = {0x18A, 0x18B, 0x18C, 0x18D, 0x18E, 0x21D, 0x0};
 
 void CreateTrackerTopScreenDungeon() {
-    /*uint32_t regionStuff[5];
-    InitBackgroundRegionDungeon(regionStuff)
-    InitBackgroundRegionDungeon(TOP_SCREEN_STATUS_PTR->field107_0x80,)*/
+    uint32_t regionStuff[5];
+    InitBackgroundRegionDungeon(regionStuff);
+    LoadBackgroundDungeon(TOP_SCREEN_STATUS_PTR->field107_0x80, regionStuff, 0, 1);
+    enum dungeon_group_id dunGroup = GetDungeonGroup(DUNGEON_PTR->id.val);
+    enum dungeon_id dunId = DUNGEON_PTR->id.val;
+    for(int i = 0; i < 255; i++) {
+        if(GetDungeonGroup(i) == dunGroup) {
+            dunId = i;
+            break;
+        }
+    }
+    trackerVelocity = 10;
+    dungeonModeDisplayed = dunId;
+    dungeonTopScreenId = CreateTextBox(&trackerTopScreenWinParams, NULL);
+    ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dunId);
+}
+
+uint32_t UpdateTrackerTopScreenDungeon() {
+    if(dungeonModeDisplayed == DUNGEON_DARK_CRATER || dungeonModeDisplayed == DUNGEON_HIDDEN_LAND) {
+        trackerRotate += 1 + (trackerVelocity >> 5);
+        if (trackerVelocity > 0) {
+            trackerVelocity--;
+        }
+        ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dungeonModeDisplayed);
+    }
+    
+    return 1;
+}
+
+void UnkTrackerTopScreenDungeon(uint32_t* param_1) {
+    if (param_1[4] == 0) {
+        return;
+    }
+    
+    param_1[4] = 0;
+}
+
+void CloseTrackerTopScreenDungeon() {
+    if(dungeonTopScreenId == -2) {
+        return;
+    }
+    
+    CloseTextBox(dungeonTopScreenId);
+    dungeonTopScreenId = -2;
+}
+
+void __attribute((naked)) TopScreenDungeonModeTrackerCheck(void) {
+    asm("cmp r0,#5");
+    asm("ldreq r1,=CreateTrackerTopScreenDungeon");
+    asm("ldreq r2,=UpdateTrackerTopScreenDungeon");
+    asm("ldreq r3,=UnkTrackerTopScreenDungeon");
+    asm("ldreq r12,=CloseTrackerTopScreenDungeon");
+    asm("streq r12,[sp,#0x0]");
+    asm("addeq r0,r4,#0x14");
+    asm("bleq  AssignTopScreenHandlers");
+    asm("cmp r0,#6");
+    asm("ldreq r1,=CreateMode5TopScreenDungeon");
+    asm("ldreq r2,=UpdateMode5TopScreenDungeon");
+    asm("ldreq r3,=UnkMode5TopScreenDungeon");
+    asm("ldreq r12,=CloseMode5TopScreenDungeon");
+    asm("streq r12,[sp,#0x0]");
+    asm("addeq r0,r4,#0x14");
+    asm("bleq  AssignTopScreenHandlers");
+    asm("b TopScreenDungeonModeTrackerUnhook");
+}
+
+void __attribute((naked)) SetTopScreenTypeGroundCheck(void) {
+    asm("cmp r0,#5");
+    asm("bleq TopScreenModeSetDungeonMode");
+    asm("b SetTopScreenTypeGroundUnhook");
 }
 
 void __attribute((naked)) ApTrackerSetupMenuCheck (void) {
