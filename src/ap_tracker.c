@@ -232,7 +232,11 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     preArgs.strings[0] = locationSymbol;
     
     struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-    PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
+    if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) {
+        PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
+    } else {
+        PreprocessString(buffer, 0x400, "[string0][CS:B][CLUM_SET:26][dungeon:0][CR]", preFlags, &preArgs);
+    }
     
     return buffer;
 }
@@ -276,6 +280,8 @@ char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C] 
                    "[CLUM_SET:15][CS:C]Talk To Wigglytuff[CR]\n"
                    "[CLUM_SET:15]Bag Check: [string:0]\n"
                    "[CLUM_SET:15]Team Name Check: [string:0]";
+char* beachCaveExtraInfo = "Unlocked from the start."
+char* nonEssentialExtraInfo = "Non-essential for Completion."
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -463,7 +469,7 @@ uint32_t StateManagerTrackerTopScreen() {
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     trackerVelocity = 10;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, displayedOption);
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
                 } else if (trackerLocationDungeonIds[displayedOption] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[displayedOption] == DUNGEON_DARK_CRATER) {
                     trackerRotate += 1 + (trackerVelocity >> 5);
                     if (trackerVelocity > 0) {
