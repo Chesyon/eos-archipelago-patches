@@ -276,12 +276,12 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Sunflora SE: [string:1]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
-char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR][CS:C] &[CR]\n"
-                   "[CLUM_SET:15][CS:C]Talk To Wigglytuff[CR]\n"
+char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR]\n"
+                   "[CLUM_SET:15][CS:C]& Talk To Wigglytuff[CR]\n"
                    "[CLUM_SET:15]Bag Check: [string:0]\n"
                    "[CLUM_SET:15]Team Name Check: [string:0]";
-char* beachCaveExtraInfo = "Unlocked from the start."
-char* nonEssentialExtraInfo = "Non-essential for Completion."
+char* beachCaveExtraInfo = "Unlocked from the start.";
+char* nonEssentialExtraInfo = "Non-essential for Completion.";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -603,6 +603,7 @@ void CreateTrackerTopScreenDungeon() {
     uint32_t regionStuff[5];
     InitBackgroundRegionDungeon(regionStuff);
     LoadBackgroundDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80), regionStuff, 0, 1);
+    SetupBackgroundDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80));
     enum dungeon_group_id dunGroup = GetDungeonGroup(DUNGEON_PTR->id.val);
     enum dungeon_id dunId = DUNGEON_PTR->id.val;
     for(int i = 0; i < 255; i++) {
