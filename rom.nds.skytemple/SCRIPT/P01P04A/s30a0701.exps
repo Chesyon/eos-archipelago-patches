@@ -690,6 +690,7 @@ def 0 {
             with (actor ACTOR_NPC_PATCHIIRU) {
                 SetEffect(EFFECT_SHOCKED, 0);
             }
+            call @gib_check_lite;
             jump @label_35;
         case 63:
             debug_Print("Spinda Case 63");

@@ -77,7 +77,9 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 7) {
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" Holy shit, that\'s a lot of money![K] Oops,\nyou didn\'t hear that![K] As thanks for depositing a\ntotal of [CS:G]9,999,999[CR][M:S0], I have a gift for you!");
+                message_Talk(" Holy sh-[W:90]");
+                message_CloseEnforce();
+                message_Talk("[STS] Holy sn[STE]ot, that\'s a lot of money![K] In\nrecognition of your overflowing coffers at a\ntotal of [CS:G]9,999,999[CR][M:S0], I have a gift for you!");
                 message_KeyWait();
                 ~AssignCheck(87);
                 jump @check_6;
