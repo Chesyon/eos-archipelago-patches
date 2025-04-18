@@ -31,8 +31,8 @@ bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf
     if(StrcmpTag(tag_string, "quag"))
     {
         int num;
-        if(AtoiTag(tag_string_param) == 1) num = macguffinMaxes.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments;
-        else num = macguffinMaxes.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+        if(AtoiTag(tag_string_param) == 1) num = CUSTOM_SAVE_AREA.acquiredInstruments;
+        else num = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
         sprintf(buf, "%d", num);
         return true;
     }
