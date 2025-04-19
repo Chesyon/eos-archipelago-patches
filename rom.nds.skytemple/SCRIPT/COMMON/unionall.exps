@@ -7861,15 +7861,18 @@ coro EVENT_N06_27 {
     CallCommon(CORO_SUBSCREEN_INIT);
     if ( $SIDE06_ROOM[0] ) {
         §label_657;
-        supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2702', 0);
+        ~crass(LEVEL_D56P11A, 'N06A2702', 0,LEVEL_D56P11A, 'N06A2702:2', 0);
+        // supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2702', 0);
         §label_659;
-        supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2703', 0);
+        ~crass(LEVEL_D56P11A, 'N06A2703', 0,LEVEL_D56P11A, 'N06A2703:2', 0);
+        // supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2703', 0);
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_D56P11A);
         supervision_ExecuteStationCommon(LEVEL_D56P11A, 1);
         end;
     } elseif ( $SIDE06_ROOM[1] ) {
-        supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2701', 0);
+        ~crass(LEVEL_D56P11A, 'N06A2701', 0,LEVEL_D56P11A, 'N06A2701:2', 0);
+        //supervision_ExecuteActingSub(LEVEL_D56P11A, 'N06A2701', 0);
         jump @label_659;
     } else {
         jump @label_657;
