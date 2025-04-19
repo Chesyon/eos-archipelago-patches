@@ -177,6 +177,8 @@ SomethingTopScreenBG = 0x22F004C;
 InitBackgroundRegionDungeon = 0x22C2BF8;
 LoadBackgroundDungeon = 0x22C27D8;
 SetupBackgroundDungeon = 0x22C2B30;
+DungeonTopScreenAdvanceUntilModeAddr = 0x23521F4;
+
 
 MESSAGE_SET_WAIT_MODE_PARAMS = 0x23259CC;
 SCRIPT_PORTRAIT_PARAMS = 0x23259E4;

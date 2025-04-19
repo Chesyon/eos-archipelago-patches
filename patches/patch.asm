@@ -287,7 +287,17 @@
         cmp r0,#0x4
         addls pc,pc,r0,lsl #0x2 ; untouched instruction
         b TopScreenDungeonModeTrackerCheck
+    .endarea
     .org SetTopScreenTypeGroundHook
         bne SetTopScreenTypeGroundCheck
+    .org DungeonTopScreenAdvanceUntilModeAddr
+    .area 0xC
+        .pool
+        .halfword 0x2
+        .halfword 0x1
+        .halfword 0x0
+        .halfword 0x3
+        .halfword 0x4
+        .halfword 0x5
     .endarea
 .close
