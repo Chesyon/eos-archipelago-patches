@@ -512,9 +512,9 @@ def 0 {
             message_Close();
             jump @item_select;
     }
+    §item_transfer;
     item_SetVariable(3,$ITEM_BACKUP_TAKE);
     item_SetVariable(2,$ITEM_BACKUP_GET);
-    §item_transfer;
     message_Mail("[STS][CN]You hand [CS:G]Wobbuffet[CR] the [s_item:3]...\n[CN][CS:G]Wobbuffet[CR] gave you the [s_item:2]![STE]");
     message_Close();
     switch(ProcessSpecial(108,3,2)) {
@@ -540,7 +540,9 @@ def 0 {
             break;
     
     }
-    
+    if ($LOCAL1 < 10) {
+        $LOCAL1 += 1;
+    }
     call @tally_item;       
     if ($LOCAL0 <= value($EVENT_LOCAL)) {
         message_Mail("[CS:G]Wobbuffet[CR] stares intently at the remaining\n[s_item:3] you have...");
