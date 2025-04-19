@@ -5410,8 +5410,7 @@ coro EVENT_S01_09_10 {
         supervision_ExecuteActingSub(LEVEL_P14P01A, 'S01P1005', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'S01P1101', 0);
         supervision_ExecuteActingSub(LEVEL_V21P01A, 'S01P1102', 0);
-        supervision_ExecuteActingSub(LEVEL_H02P99A, 'S01P1103', 0);
-        if ( debug ) {    
+        if ( debug ) {   
             $PERFORMANCE_PROGRESS_LIST[6] = 1;
             $PERFORMANCE_PROGRESS_LIST[7] = 1;
             $PERFORMANCE_PROGRESS_LIST[20] = 1;
@@ -5419,6 +5418,7 @@ coro EVENT_S01_09_10 {
         }
         ~AssignCheck(4);
         adventure_log = 4;
+        supervision_ExecuteActingSub(LEVEL_H02P99A, 'S01P1103', 0);
         // $PERFORMANCE_PROGRESS_LIST[5] = 1;
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_H02P99A);
