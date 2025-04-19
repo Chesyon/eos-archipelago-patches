@@ -171,6 +171,7 @@ char* remainingChecksSymbol = "[M:R4][S:8]";
 char* checkSymbol = "[M:S2][S:8]";
 char* instrumentSymbol = "[M:R9][S:8]";
 char* relicSymbol = "[M:T4][S:8]";
+char* bagSymbol = "[M:S6]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -235,7 +236,7 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) {
         PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
     } else {
-        PreprocessString(buffer, 0x400, "[string0][CS:B][CLUM_SET:26][dungeon:0][CR]", preFlags, &preArgs);
+        PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][CS:B][dungeon:0][CR]", preFlags, &preArgs);
     }
     
     return buffer;
@@ -278,10 +279,13 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
 char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR]\n"
                    "[CLUM_SET:15][CS:C]& Talk To Wigglytuff[CR]\n"
-                   "[CLUM_SET:15]Bag Check: [string:0]\n"
-                   "[CLUM_SET:15]Team Name Check: [string:0]";
-char* beachCaveExtraInfo = "Unlocked from the start.";
-char* nonEssentialExtraInfo = "Non-essential for Completion.";
+                   "[CLUM_SET:15]Bag Upgrade 0: [string:0]\n"
+                   "[CLUM_SET:15]Team Name Check: [string:1]";
+char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
+char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
+char* steamCaveBoss = "[CLUM_SET:128]Boss: [CS:N]Uxie[CR]\n"
+                      "[CLUM_SET:128]Recruited: [string:0]";
+char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -291,7 +295,6 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     struct preprocessor_flags preFlags = {};
     PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
-    displayedOption = CUSTOM_SAVE_AREA.trackerPage;
     if (location == 247) { // Treasure Town
         preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
         preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
@@ -313,7 +316,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
         PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 16, temp);
-        preArgs.strings[0] = (GetSubXBit(0)) ? checkSymbol : lockedSymbol;
+        preArgs.strings[0] = (GetSubXBit(0)) ? bagSymbol : lockedSymbol;
         preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
         PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
         DrawTextInWindow(idx, 1, 81, temp);
@@ -338,6 +341,14 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         UpdateWindow(idx);
         return;
     } else if(location == DUNGEON_BEACH_CAVE) {
+        DrawTextInWindow(idx, 1, 148, beachCaveExtraInfo);
+    } else if(location == DUNGEON_STEAM_CAVE) {
+        preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
+        PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 81, temp);
+        preArgs.strings[0] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
+        PreprocessString(temp, 300, steamCaveBoss, preFlags, &preArgs);
+        DrawTextInWindow(idx, 1, 16, temp);
     }
     
     // For regular dungeons.
@@ -469,14 +480,15 @@ uint32_t StateManagerTrackerTopScreen() {
         case 5:;
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
+                    displayedOption = CUSTOM_SAVE_AREA.trackerPage;
                     trackerVelocity = 10;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
-                } else if (trackerLocationDungeonIds[displayedOption] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[displayedOption] == DUNGEON_DARK_CRATER) {
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                } else if (trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_DARK_CRATER) {
                     trackerRotate += 1 + (trackerVelocity >> 5);
                     if (trackerVelocity > 0) {
                         trackerVelocity--;
                     }
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                 }
                 apTrackerWindowPtr->faded = 0;
             } else {
