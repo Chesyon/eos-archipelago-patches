@@ -174,7 +174,8 @@ void SetupGroundTopScreenFunctions(TopScreenMode* mode);
 void SetupGroundTopScreenFunctions2(TopScreenMode* mode);
 uint32_t GetTopScreenOptionType();
 void InitBackgroundRegionDungeon(uint32_t* regionInfo);
-void LoadBackgroundDungeon(uint32_t thing, uint32_t* regionInfo, uint32_t num1, uint32_t num2);
-void SetupBackgroundDungeon(uint32_t thing);
+void LoadBackgroundDungeon(void* thing, uint32_t* regionInfo, uint32_t num1, uint32_t num2);
+void SetupBackgroundDungeon(void* thing);
+void FreeTopScreenBGDungeon(void* thing);
 
 static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }

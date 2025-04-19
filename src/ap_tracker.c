@@ -337,6 +337,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
         UpdateWindow(idx);
         return;
+    } else if(location == DUNGEON_BEACH_CAVE) {
     }
     
     // For regular dungeons.
@@ -635,6 +636,7 @@ void UnkTrackerTopScreenDungeon(uint32_t* param_1) {
         return;
     }
     
+    SetupBackgroundDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80));
     param_1[4] = 0;
 }
 
@@ -643,6 +645,7 @@ void CloseTrackerTopScreenDungeon() {
         return;
     }
     
+    FreeTopScreenBGDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80));
     CloseTextBox(dungeonTopScreenId);
     dungeonTopScreenId = -2;
 }
