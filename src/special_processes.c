@@ -171,6 +171,122 @@ int __attribute__((naked)) GetItemQuantityAtStorageIdx(int index)
     asm(".pool");
 }
 
+/* void __attribute__((naked)) SetQuantityOfStorageItem(int index, int amountToRemoveBy)
+{
+    // get BAG_ITEMS to r1
+    asm("ldr r2,=BAG_ITEMS_PTR_MIRROR");
+    asm("ldr r2,[r2]");
+    // get the location in BAG_ITEMS to r0 by multiplying the index by 2 and adding 0x38A.
+    asm("ldr r3,=0xB5A");
+    asm("add r0,r3,r0,lsl #1");
+    // save the new quantity back to BAG_ITEMS.
+    asm("strh r1,[r2,r0]");
+    asm("bx lr");
+    asm(".pool");
+}
+
+// Special process 108: Recycle shop stuff. 
+static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
+    bool bagIsFull = IsBagFull();
+    
+    if(IsBagFull() && IsStorageFull()) {
+        return 3; // the player does not have the needed space to recieve the output item.
+    }
+    
+    struct bulk_item itemToRemove;
+    ItemAtTableIdx(itemSetId1, &itemToRemove);
+    int idRequired = itemToRemove.id.val;
+    int amountToRemove = itemToRemove.quantity;
+    
+    int numItemInBag = CountItemTypeInBag(idRequired);
+    if (numItemInBag + CountItemTypeInStorage(&itemToRemove) < itemToRemove.quantity) {
+        return 2; // player does not have the required amount of the needed item.
+    }
+    
+    struct bulk_item itemToAdd;
+    ItemAtTableIdx(itemSetId2, &itemToAdd);
+    int bagSize = GetCurrentBagCapacity();
+    
+    // Amount to remove is assumed to be more than 0 at the start.
+    if(numItemInBag >= 0) {
+        for(int i = 0; i < bagSize; i++) {
+            struct item* thisItem = GetItemAtIdx(i);
+            if(thisItem->id.val == idRequired) {
+                if(thisItem->quantity <= amountToRemove) {
+                    amountToRemove -+ thisItem->quantity;
+                    ItemZInit(thisItem);
+                } else {
+                    thisItem->quantity -= amountToRemove;
+                    amountToRemove = 0;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if(amountToRemove > 0) {
+        int storageSize = GetRankStorageSize();
+        for(int i = 0; i < storageSize; i++) {
+            if (GetItemIdAtStorageIdx(i) == idRequired){
+                int itemQuantity = GetItemQuantityAtStorageIdx(i);
+                if(itemQuantity > amountToRemove) {
+                    SetQuantityOfStorageItem(i, itemQuantity - amountToRemove);
+                    // we don't need amountToRemove past this point so we can just break without updating it.
+                    break;
+                }
+                else {
+                    amountToRemove -= itemQuantity;
+                    RemoveItemAtIdxInStorage(i);
+                    // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
+                }
+            }
+        }
+    }
+    
+    RemoveEmptyItemsInBag();
+    // Technically, deleting the previous item could have opened a slot...
+    int amountToAdd = itemToAdd.quantity;
+    if (IsBagFull() == FALSE) {
+        for(int i = 0; i < bagSize; i++) {
+            struct item* thisItem = GetItemAtIdx(i);
+            if(thisItem->id.val == itemToAdd.id.val) {
+                uint16_t newQuantity = thisItem->quantity + amountToAdd;
+                if(quantity > 99 {
+                    thisItem->quantity = 99;
+                    amountToAdd = newQuantity - 99;
+                } else {
+                    thisItem->quantity = newQuantity;
+                    break;
+                }
+            } else if (thisItem->id.val == ITEM_NOTHING) {
+                thisItem->id.val = itemToAdd.id.val;
+                thisItem->quantity = amountToAdd;
+                return 0; // Item succesfully added to bag.
+            }
+        }
+    }
+    
+    // Hunt down spaces in storage now.
+    if (amountToAdd > 0) {
+        int storageSize = GetRankStorageSize();
+        for(int i = 0; i < storageSize; i++) {
+            if (GetItemIdAtStorageIdx(i) == itemToAdd.id.val){
+                uint16_t newQuantity = GetItemQuantityAtStorageIdx(i) + amountToAdd;
+                if(quantity > 99 {
+                    SetQuantityOfStorageItem(i, 99);
+                    amountToAdd = newQuantity - 99;
+                } else {
+                    SetQuantityOfStorageItem(i, 99);
+                    return 1;
+                }
+            }
+        }
+    }
+    
+    // Panic. This should never happen. Begin to cry.
+    return 99;
+} */
+
 void __attribute__((naked)) DecreaseQuantityOfStorageItem(int index, int amountToRemoveBy)
 {
     // get BAG_ITEMS to r1
