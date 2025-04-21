@@ -389,7 +389,7 @@ void ApTrackerFreeTopScreenBG() {
 
 uint32_t CreateTrackerTopScreen() {
     trackerRotate = 0;
-    trackerVelocity = 10;
+    trackerVelocity = 160;
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
     ApTrackerFreeTopScreenBG();
     UnkTopScreenFun7(0x10);
@@ -481,15 +481,14 @@ uint32_t StateManagerTrackerTopScreen() {
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
-                    trackerVelocity = 10;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                    trackerVelocity = 160;
                 } else if (trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_DARK_CRATER) {
                     trackerRotate += 1 + (trackerVelocity >> 5);
                     if (trackerVelocity > 0) {
                         trackerVelocity--;
                     }
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                 }
+                ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                 apTrackerWindowPtr->faded = 0;
             } else {
                 UnkTopScreenFun4(0x10);
@@ -625,7 +624,7 @@ void CreateTrackerTopScreenDungeon() {
             break;
         }
     }
-    trackerVelocity = 10;
+    trackerVelocity = 160;
     dungeonModeDisplayed = dunId;
     dungeonTopScreenId = CreateTextBox(&trackerTopScreenWinParams, NULL);
     ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dunId);

@@ -171,7 +171,7 @@ int __attribute__((naked)) GetItemQuantityAtStorageIdx(int index)
     asm(".pool");
 }
 
-/* void __attribute__((naked)) SetQuantityOfStorageItem(int index, int amountToRemoveBy)
+void __attribute__((naked)) SetQuantityOfStorageItem(int index, int amountToSet)
 {
     // get BAG_ITEMS to r1
     asm("ldr r2,=BAG_ITEMS_PTR_MIRROR");
@@ -189,7 +189,7 @@ int __attribute__((naked)) GetItemQuantityAtStorageIdx(int index)
 static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
     bool bagIsFull = IsBagFull();
     
-    if(IsBagFull() && IsStorageFull()) {
+    if(bagIsFull && IsStorageFull()) {
         return 3; // the player does not have the needed space to recieve the output item.
     }
     
@@ -213,7 +213,7 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
             struct item* thisItem = GetItemAtIdx(i);
             if(thisItem->id.val == idRequired) {
                 if(thisItem->quantity <= amountToRemove) {
-                    amountToRemove -+ thisItem->quantity;
+                    amountToRemove -= thisItem->quantity;
                     ItemZInit(thisItem);
                 } else {
                     thisItem->quantity -= amountToRemove;
@@ -243,125 +243,49 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
         }
     }
     
+    // Double check for places to stack in the inventory first.
     RemoveEmptyItemsInBag();
-    // Technically, deleting the previous item could have opened a slot...
     int amountToAdd = itemToAdd.quantity;
-    if (IsBagFull() == FALSE) {
-        for(int i = 0; i < bagSize; i++) {
-            struct item* thisItem = GetItemAtIdx(i);
-            if(thisItem->id.val == itemToAdd.id.val) {
-                uint16_t newQuantity = thisItem->quantity + amountToAdd;
-                if(quantity > 99 {
-                    thisItem->quantity = 99;
-                    amountToAdd = newQuantity - 99;
-                } else {
-                    thisItem->quantity = newQuantity;
-                    break;
-                }
-            } else if (thisItem->id.val == ITEM_NOTHING) {
-                thisItem->id.val = itemToAdd.id.val;
-                thisItem->quantity = amountToAdd;
-                return 0; // Item succesfully added to bag.
+    for(int i = 0; i < bagSize; i++) {
+        struct item* thisItem = GetItemAtIdx(i);
+        if(thisItem->id.val == itemToAdd.id.val) {
+            uint16_t newQuantity = thisItem->quantity + amountToAdd;
+            if(newQuantity > 99) {
+                thisItem->quantity = 99;
+                amountToAdd = newQuantity - 99;
+            } else {
+                thisItem->quantity = newQuantity;
+                break;
             }
+        } else if (thisItem->id.val == ITEM_NOTHING) {
+            thisItem->f_exists = true;
+            thisItem->id.val = itemToAdd.id.val;
+            thisItem->quantity = amountToAdd;
+            return 0; // Item succesfully added to bag.
         }
     }
     
-    // Hunt down spaces in storage now.
+    // Hunt down spaces in storage to stack the item.
     if (amountToAdd > 0) {
         int storageSize = GetRankStorageSize();
         for(int i = 0; i < storageSize; i++) {
             if (GetItemIdAtStorageIdx(i) == itemToAdd.id.val){
                 uint16_t newQuantity = GetItemQuantityAtStorageIdx(i) + amountToAdd;
-                if(quantity > 99 {
+                if(newQuantity > 99) {
                     SetQuantityOfStorageItem(i, 99);
                     amountToAdd = newQuantity - 99;
                 } else {
-                    SetQuantityOfStorageItem(i, 99);
+                    SetQuantityOfStorageItem(i, newQuantity);
                     return 1;
                 }
             }
         }
     }
     
-    // Panic. This should never happen. Begin to cry.
-    return 99;
-} */
-
-void __attribute__((naked)) DecreaseQuantityOfStorageItem(int index, int amountToRemoveBy)
-{
-    // get BAG_ITEMS to r1
-    asm("ldr r2,=BAG_ITEMS_PTR_MIRROR");
-    asm("ldr r2,[r2]");
-    // get the location in BAG_ITEMS to r0 by multiplying the index by 2 and adding 0x38A.
-    asm("ldr r3,=0xB5A");
-    asm("add r0,r3,r0,lsl #1");
-    // access the quantity and save it to r3.
-    asm("ldrsh r3,[r2,r0]");
-    // decrease the quantity by amountToRemoveBy.
-    asm("sub r3,r3,r1");
-    // save the lowered quantity back to BAG_ITEMS.
-    asm("strh r3,[r2,r0]");
-    asm("bx lr");
-    asm(".pool");
-}
-
-// Special process 108: Recycle shop stuff. 
-static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
-    struct bulk_item itemToRemove;
-    ItemAtTableIdx(itemSetId1, &itemToRemove);
-    int idRequired = itemToRemove.id.val;
-    if(CountItemTypeInBag(idRequired) + CountItemTypeInStorage(&itemToRemove) >= itemToRemove.quantity){
-        bool bagIsFull = IsBagFull();
-        if (bagIsFull && IsStorageFull()) return 3; // player does not have the needed space to recieve the output item.
-        struct bulk_item itemToAdd;
-        ItemAtTableIdx(itemSetId2, &itemToAdd);
-        int amountToRemove = itemToRemove.quantity;
-        int bagSize = GetCurrentBagCapacity();
-        for (int i = 0; i < bagSize; i++){
-            if(amountToRemove <= 0) break;
-            struct item* thisItem = GetItemAtIdx(i);
-            if(thisItem->id.val == idRequired){
-                if(thisItem->quantity > amountToRemove){ // if there's more than enough in this one slot to finish removing, then just lower the quantity and move on.
-                    thisItem->quantity -= amountToRemove;
-                    amountToRemove = 0;
-                    break;
-                }
-                else { // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
-                    amountToRemove -= thisItem->quantity;
-                    RemoveItem(i);
-                }
-            }
-        }
-        if (amountToRemove > 0){ // if there's still more items to remove, repeat the process with storage!
-            // remove from storage
-            int storageSize = GetRankStorageSize();
-            for(int i = 0; i < storageSize; i++){
-                if (amountToRemove <= 0) break;
-                if (GetItemIdAtStorageIdx(i) == idRequired){
-                    int itemQuantity = GetItemQuantityAtStorageIdx(i);
-                    if(itemQuantity > amountToRemove) { // if there's more than enough in this one slot to finish removing, then just lower the quantity and move on.
-                        DecreaseQuantityOfStorageItem(i, amountToRemove);
-                        // we don't need amountToRemove past this point so we can just break without updating it.
-                        break;
-                    }
-                    else {
-                        amountToRemove -= itemQuantity;
-                        RemoveItemAtIdxInStorage(i);
-                        // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
-                    }
-                }
-            }
-        }
-        if(bagIsFull){
-            AddBulkItemToStorage(&itemToAdd);
-            return 1; // item is added to storage.
-        }
-        else{
-            SpecialProcAddItemToBag(&itemToAdd);
-            return 0; // item is added to bag.
-        }
-    }
-    else return 2; // player does not have the required amount of the needed item.
+    // If any remain add it as a new stack to storage.
+    itemToAdd.quantity = amountToAdd;
+    AddBulkItemToStorage(&itemToAdd);
+    return 1; // Add item to storage as a new item.
 }
 
 // Special process 109: Get rank. No parameters, returns rank as enum: https://github.com/UsernameFodder/pmdsky-debug/blob/master/headers/types/ground_mode/enums.h#L2079

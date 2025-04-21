@@ -8,7 +8,8 @@
 
 #if CUSTOM_SCRIPT_MENUS
 
-char* noMissionChecksString = "[S:13]"; // Probably redundant, but the base game also does this.
+// This is not redundant. The length of the line is calculated wrong if not done.
+char* noMissionChecksString = "[S:13]";
 char* halfMissionChecksString = "[M:R1][S:8]";
 char* fullMissionChecksString = "[M:S3][S:5]";
 
