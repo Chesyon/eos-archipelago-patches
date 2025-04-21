@@ -19,26 +19,26 @@ char* TailoredDungeonMissionMenuEntryFn(char* buffer, int option_id) {
     int completedHalves = 0;
     char* dungeonSymbol = noMissionChecksString;
     if(IsDungeonLateGame(dungeonId)) {
-        uint32_t regularJobMax = missionMaxes.totalJobsLate;
+        uint32_t regularJobMax = apSettings.totalJobsLate;
         if(regularJobMax > 0) {
             if(regularJobMax <= CUSTOM_SAVE_AREA.missionStats[dungeonId].completedJobs) {
                 completedHalves++;
             }
         }
-        uint32_t outlawJobMax = missionMaxes.totalOutlawsLate;
+        uint32_t outlawJobMax = apSettings.totalOutlawsLate;
         if(outlawJobMax > 0) {
             if(outlawJobMax <= CUSTOM_SAVE_AREA.missionStats[dungeonId].completedOutlaws) {
                 completedHalves++;
             }
         }
     } else {
-        uint32_t regularJobMax = missionMaxes.totalJobsEarly;
+        uint32_t regularJobMax = apSettings.totalJobsEarly;
         if(regularJobMax > 0) {
             if(regularJobMax <= CUSTOM_SAVE_AREA.missionStats[dungeonId].completedJobs) {
                 completedHalves++;
             }
         }
-        uint32_t outlawJobMax = missionMaxes.totalOutlawsEarly;
+        uint32_t outlawJobMax = apSettings.totalOutlawsEarly;
         if(outlawJobMax > 0) {
             if(outlawJobMax <= CUSTOM_SAVE_AREA.missionStats[dungeonId].completedOutlaws) {
                 completedHalves++;

@@ -133,8 +133,8 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("bxne lr");
     asm("stmdb sp!,{lr}");
-    asm("ldr r0,=apSlotName");
-    asm("ldr r1,=apSeed");
+    asm("ldr r0,=slotData");
+    asm("ldr r1,=slotData+16");
     asm("ldr r2,[r1,#0x0]");
     asm("ror r2,r2,#0x7");
     asm("ldr r3,[r0,#0x0]");
@@ -304,18 +304,18 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                 quizData->state = 0x46;
             } else if (apSettings.starterOptions == STARTER_OPTION_RANDOM) {
                 quizData->portraitBoxId = CreatePortraitBox(0, 3, 1); // Gets closed right after but that's okay.
-                uint32_t randomizedHeroNum = apSeed[0] ^ apSeed[1];
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[0]));
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[1]) << 1);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[2]) << 2);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[3]) << 3);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[4]) << 4);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[5]) << 5);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[6]) << 6);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[7]) << 7);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[8]) << 8);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[9]) << 9);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)apSlotName[10]) << 10);
+                uint32_t randomizedHeroNum = slotData.apTrimmedSeed[0] ^ slotData.apTrimmedSeed[1];
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[0]));
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[1]) << 1);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[2]) << 2);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[3]) << 3);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[4]) << 4);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[5]) << 5);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[6]) << 6);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[7]) << 7);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[8]) << 8);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[9]) << 9);
+                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[10]) << 10);
                 unsigned long long finalHeroNum = _u32_div_f(randomizedHeroNum, selectable);
                 quizData->currentQuestion = quizData->partners[(uint32_t)(finalHeroNum >> 32)].val;
                 quizData->state = 0x26;
