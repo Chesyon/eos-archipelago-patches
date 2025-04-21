@@ -27,16 +27,16 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
     if (outlaw) {
         completed = CUSTOM_SAVE_AREA.missionStats[dungeon].completedOutlaws;
         if (IsDungeonLateGame(dungeon)) {
-            expected = missionMaxes.totalOutlawsLate;
+            expected = apSettings.totalOutlawsLate;
         } else {
-            expected = missionMaxes.totalOutlawsEarly;
+            expected = apSettings.totalOutlawsEarly;
         }
     } else {
         completed = CUSTOM_SAVE_AREA.missionStats[dungeon].completedJobs;
         if (IsDungeonLateGame(dungeon)) {
-            expected = missionMaxes.totalJobsLate;
+            expected = apSettings.totalJobsLate;
         } else {
-            expected = missionMaxes.totalJobsEarly;
+            expected = apSettings.totalJobsEarly;
         }
     }
     

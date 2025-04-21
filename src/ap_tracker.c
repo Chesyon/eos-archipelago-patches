@@ -324,18 +324,18 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         return;
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         if(GetDungeonMode(location) != DMODE_OPEN_AND_REQUEST) {
-            DrawCircleBarInTextBox(idx, 60, 112, 84, macguffinMaxes.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
+            DrawCircleBarInTextBox(idx, 60, 112, 84, apSettings.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
             preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
-            preArgs.number_vals[1] = macguffinMaxes.requiredRelicFragmentShards;
+            preArgs.number_vals[1] = apSettings.requiredRelicFragmentShards;
             PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
             DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
             UpdateWindow(idx);
             return;
         }
     } else if(location == DUNGEON_DARK_CRATER) {
-        DrawCircleBarInTextBox(idx, 60, 109, 84, macguffinMaxes.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
+        DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
         preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
-        preArgs.number_vals[1] = macguffinMaxes.requiredInstruments;
+        preArgs.number_vals[1] = apSettings.requiredInstruments;
         PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
         DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
         UpdateWindow(idx);
@@ -360,11 +360,11 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[location].completedJobs;
     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.missionStats[location].completedOutlaws;
     if(IsDungeonLateGame(location)) {
-        preArgs.number_vals[1] = missionMaxes.totalJobsLate;
-        preArgs.number_vals[4] = missionMaxes.totalOutlawsLate;
+        preArgs.number_vals[1] = apSettings.totalJobsLate;
+        preArgs.number_vals[4] = apSettings.totalOutlawsLate;
     } else {
-        preArgs.number_vals[1] = missionMaxes.totalJobsEarly;
-        preArgs.number_vals[4] = missionMaxes.totalOutlawsEarly;
+        preArgs.number_vals[1] = apSettings.totalJobsEarly;
+        preArgs.number_vals[4] = apSettings.totalOutlawsEarly;
     }
     PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
     DrawTextInWindow(idx, 1, 16, temp);

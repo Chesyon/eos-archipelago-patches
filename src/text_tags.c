@@ -1,39 +1,28 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "hints.h"
 
 bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf, int tag_param_count, const char* tag_string_param)
 {
     int index;
-    if(StrcmpTag(tag_string, "qwoop"))
-    {
-        index = AtoiTag(tag_string_param);
-        strcpy(buf, hintableItems.names[index]);
-        CUSTOM_SAVE_AREA.hintedItems[index] = true;
-        return true;
-    }
     if(StrcmpTag(tag_string, "qho"))
     {
-        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.who);
+        index = AtoiTag(tag_string_param);
+        hintcpy((int)who, index, buf);
         return true;
     }
     if(StrcmpTag(tag_string, "qhat"))
     {
-        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.what);
+        index = AtoiTag(tag_string_param);
+        hintcpy((int)what, index, buf);
+        CUSTOM_SAVE_AREA.hintedItems[index] = true;
         return true;
     }
     if(StrcmpTag(tag_string, "qhere"))
     {
-        strcpy(buf, CUSTOM_SAVE_AREA.dimensionalScreamInfo.where);
-        CUSTOM_SAVE_AREA.dimensionalScreamInfo.recieved = true;
-        return true;
-    }
-    if(StrcmpTag(tag_string, "quag"))
-    {
-        int num;
-        if(AtoiTag(tag_string_param) == 1) num = CUSTOM_SAVE_AREA.acquiredInstruments;
-        else num = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
-        sprintf(buf, "%d", num);
+        index = AtoiTag(tag_string_param);
+        hintcpy((int)where, index, buf);
         return true;
     }
     return false;

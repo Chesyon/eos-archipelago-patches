@@ -18,8 +18,8 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (missionType == 1) { // outlaws
-        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalOutlawsLate;
-        else totalNumber = missionMaxes.totalOutlawsEarly;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = apSettings.totalOutlawsLate;
+        else totalNumber = apSettings.totalOutlawsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
                 missionStats->completedOutlaws++; // increment by one
@@ -30,8 +30,8 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
         else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
-        if(IsDungeonLateGame(dungeonId)) totalNumber = missionMaxes.totalJobsLate;
-        else totalNumber = missionMaxes.totalJobsEarly;
+        if(IsDungeonLateGame(dungeonId)) totalNumber = apSettings.totalJobsLate;
+        else totalNumber = apSettings.totalJobsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {
                 missionStats->completedJobs++; // increment by one
@@ -48,23 +48,23 @@ static int SpAccessMacguffinStatus(short mode, short macguffin) {
     short numberToReturn;
     if(macguffin == 1) { // instruments
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredInstruments < macguffinMaxes.requiredInstruments) {
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < apSettings.requiredInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
                 numberToReturn = 1;
             }
             else numberToReturn = 0;
         }
-        else numberToReturn = macguffinMaxes.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+        else numberToReturn = apSettings.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < macguffinMaxes.requiredRelicFragmentShards) {
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < apSettings.requiredRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
                 numberToReturn = 1;
             }
             else numberToReturn = 0;
         }
-        else numberToReturn = macguffinMaxes.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+        else numberToReturn = apSettings.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
     }
     if (numberToReturn < 0) return 0;
     else return numberToReturn;
@@ -102,23 +102,23 @@ static int SpRegenerateMissions() {
 static int SpAccessCafeStatus(short mode, short type) {
     if (type == 0) { // Cafe Events
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredCafeEventChecks < cafeMaxes.cafeEventMax) {
+            if (CUSTOM_SAVE_AREA.acquiredCafeEventChecks < apSettings.cafeEventMax) {
                 CUSTOM_SAVE_AREA.acquiredCafeEventChecks++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return cafeMaxes.cafeEventMax - CUSTOM_SAVE_AREA.acquiredCafeEventChecks; // Read mode
+        else return apSettings.cafeEventMax - CUSTOM_SAVE_AREA.acquiredCafeEventChecks; // Read mode
     }
     else { // Cafe Drinks
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks < cafeMaxes.cafeDrinkMax) {
+            if (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks < apSettings.cafeDrinkMax) {
                 CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return cafeMaxes.cafeDrinkMax - CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks; // Read mode
+        else return apSettings.cafeDrinkMax - CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks; // Read mode
     }
 }
 
@@ -138,7 +138,7 @@ static int SpCheckForUnownRocks(){
 
 // Special process 107: Is the main game unlocked? No parameters.
 static bool SpIsMainGameUnlocked(){
-    return CUSTOM_SAVE_AREA.mainGameUnlocked | startWithMainGameUnlocked;
+    return CUSTOM_SAVE_AREA.mainGameUnlocked | apSettings.startWithMainGameUnlocked;
 }
 
 
