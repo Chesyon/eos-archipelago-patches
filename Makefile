@@ -207,6 +207,12 @@ bsdiff:
 overlay36-location:
 	echo "Position of Overlay36 (Decimal):"
 	LANG=C grep -a -b -P -U -o "\x0d\xf0\xad\xba" out.nds | cut -d ":" -f1
+	
+.PHONY: hintables-location
+.SILENT: hintables-location
+hintables-location:
+	echo "Position of Hintables (Decimal):"
+	LANG=C grep -a -b -P -U -o "\xe0\x51\x5b\xad" out.nds | cut -d ":" -f1
 
 .PHONY: out+c
 out+c:
@@ -214,24 +220,24 @@ out+c:
 
 # Apply the xdelta and apply CoT code.
 .PHONY: everything
-everything: rom out+c overlay36-location
+everything: rom out+c overlay36-location hintables-location
 
 # Make an xdelta and apply CoT code.
 .PHONY: everything+x
-everything+x: xdelta out+c overlay36-location
+everything+x: xdelta out+c overlay36-location hintables-location
 
 # Don't apply or make an xdelta, and apply CoT code. (same as out-c)
 .PHONY: everything-x
-everything-x: out+c overlay36-location
+everything-x: out+c overlay36-location hintables-location
 
 # Apply the xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything+b
-everything+b: rom out+c bsdiff overlay36-location
+everything+b: rom out+c bsdiff overlay36-location hintables-location
 
 # Make an xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything+x+b
-everything+x+b: xdelta out+c bsdiff overlay36-location
+everything+x+b: xdelta out+c bsdiff overlay36-location hintables-location
 
 # Don't apply or make an xdelta, apply CoT code, and make a bsdiff.
 .PHONY: everything-x+b 
-everything-x+b: out+c bsdiff overlay36-location
+everything-x+b: out+c bsdiff overlay36-location hintables-location
