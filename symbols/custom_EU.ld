@@ -128,7 +128,6 @@ SetTopScreenTypeGroundUnhook = 0x22E9110;
 archipelagoAreaStart = 0x23DE000;
 slotData = 0x23DE000;
 apSettings = 0x23DE018;
-hintableItems = 0x23DE022;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 
