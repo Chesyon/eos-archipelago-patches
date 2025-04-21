@@ -3,19 +3,6 @@
 #include "extern.h"
 #include "hints.h"
 
-#define NUM_SHOP_ITEMS 10
-#define NUM_DIMENSIONAL_SCREAMS 30
-#define NUM_HINTABLES NUM_SHOP_ITEMS + NUM_DIMENSIONAL_SCREAMS
-#define BYTES_PER_WHO_STRING 17
-#define BYTES_PER_WHAT_STRING 33
-#define BYTES_PER_WHERE_STRING 33
-#define WHO_START 0x4
-#define WHAT_START (WHO_START + (BYTES_PER_WHO_STRING * NUM_HINTABLES))
-#define WHERE_START (WHAT_START + (BYTES_PER_WHAT_STRING * NUM_HINTABLES))
-
-#define SEEK_SET 0
-#define SEEK_CUR 1
-#define SEEK_END 2
 void CopyFromHintables(void* buf, int offset, int length){
     struct file_stream file;
     DataTransferInit();

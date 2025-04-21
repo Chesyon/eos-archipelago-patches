@@ -12,7 +12,11 @@
 #define DEATHLINK_REVIVER 0b01
 #define DEATHLINK_TRUE_DEATH 0b10
 
-#define HINTABLE_ITEM_COUNT 30
+#define NUM_HINTABLES 30
+
+#define SEEK_SET 0
+#define SEEK_CUR 1
+#define SEEK_END 2
 
 typedef struct ArchipelagoSlotData {
     char apSlotName[16];
@@ -82,19 +86,19 @@ typedef struct DungeonTraps { // size: 1 byte
 ASSERT_SIZE(DungeonTraps, 0x1);
 
 typedef struct CustomSaveArea {
-    uint32_t checksum;                     // 0x0: Something something validity, ask Adex. The value of this should not change!!
-    MissionStatus missionStats[192];       // 0x4: Status of missions for each dungeon in the game.
-    uint8_t acquiredRelicFragmentShards;   // 0x184: How many relic fragment shards the player has collected.
-    uint8_t acquiredInstruments;           // 0x185: How many instruments the player has collected.
-    DeathLinkTracker deathLinkTracker;     // 0x186: Stores information for deathlink.
-    bool hintedItems[HINTABLE_ITEM_COUNT]; // 0x29A: list of which items have been hinted.
-    DungeonTraps dungeonTraps;             // 0x2B8: wip dungeons traps
-    uint8_t acquiredCafeEventChecks;       // 0x2B9: How many cafe event checks have been obtained. See my comment on SP 105.
-    uint8_t acquiredCafeDrinkChecks;       // 0x2BA: How many cafe drink checks have been obtained.
-    bool mainGameUnlocked;                 // 0x2BB: Is main game unlocked?
-    uint8_t bagSize;                       // 0x2BC: Current bag size. Follows the same logic as vanilla: https://wiki.skytemple.org/index.php/List_of_Script_Variables#Bag_size
-    uint8_t trackerPage;                   // 0x2BD: Tracks which tab was last open in the tracker.
-    undefined fields[0xE42];               // 0x2BE: Unused.
+    uint32_t checksum;                   // 0x0: Something something validity, ask Adex. The value of this should not change!!
+    MissionStatus missionStats[192];     // 0x4: Status of missions for each dungeon in the game.
+    uint8_t acquiredRelicFragmentShards; // 0x184: How many relic fragment shards the player has collected.
+    uint8_t acquiredInstruments;         // 0x185: How many instruments the player has collected.
+    DeathLinkTracker deathLinkTracker;   // 0x186: Stores information for deathlink.
+    bool hintedItems[NUM_HINTABLES];     // 0x29A: list of which items have been hinted.
+    DungeonTraps dungeonTraps;           // 0x2B8: wip dungeons traps
+    uint8_t acquiredCafeEventChecks;     // 0x2B9: How many cafe event checks have been obtained. See my comment on SP 105.
+    uint8_t acquiredCafeDrinkChecks;     // 0x2BA: How many cafe drink checks have been obtained.
+    bool mainGameUnlocked;               // 0x2BB: Is main game unlocked?
+    uint8_t bagSize;                     // 0x2BC: Current bag size. Follows the same logic as vanilla: https://wiki.skytemple.org/index.php/List_of_Script_Variables#Bag_size
+    uint8_t trackerPage;                 // 0x2BD: Tracks which tab was last open in the tracker.
+    undefined fields[0xE42];             // 0x2BE: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
