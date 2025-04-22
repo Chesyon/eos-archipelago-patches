@@ -9662,6 +9662,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         $SCENARIO_TALK_BIT_FLAG[216] = 1; // Unused here, but Sunflora Marowak uses it!
                         $SCENARIO_TALK_BIT_FLAG[217] = 1; // Unused here, but Cafe Bronzong Ludicolo uses it!
                         $SCENARIO_TALK_BIT_FLAG[218] = 1; // Unused here, but Cafe Bronzong Ludicolo uses it!
+                        $SCENARIO_TALK_BIT_FLAG[219] = 1; // Unused here, but Wynaut Wobbuffet uses it!
                     case 54:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         if ( scn($SCENARIO_MAIN) >= [29, 58] ) {

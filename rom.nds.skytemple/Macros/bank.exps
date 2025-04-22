@@ -77,9 +77,8 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 7) {
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" Holy sh-[W:90]");
-                message_CloseEnforce();
-                message_Talk("[STS] Holy sn[STE]ot, that\'s a lot of money![K] In\nrecognition of your overflowing coffers at a\ntotal of [CS:G]9,999,999[CR][M:S0], I have a gift for you!");
+                message_Talk(" Eh? There's no way that's right...\n[CS:G]9999999[CR][M:S0]?![K] You know, I could just\ntake all this money and run away...");
+                message_Talk(" Hee-hee! Just kidding!\nI have one final gift, from one hoarder\nto another.[K] Please accept it!");
                 message_KeyWait();
                 ~AssignCheck(87);
                 jump @check_6;
@@ -89,7 +88,8 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 6) {
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]100000[CR][M:S0], I have this gift for you!");
+                message_Talk(" [CS:G]100000[CR][M:S0]! Never in my\nafterlife did I expect to see one\nperson leave this much just for me!");
+                message_Talk(" How thrilling! Hee-hee...\nPlease accept this gift as thanks\nfor your continued business!");
                 message_KeyWait();
                 §check_6;
                 ~AssignCheck(86);
@@ -100,7 +100,7 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 5) { 
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]50000[CR][M:S0], I have this gift for you!");
+                message_Talk(" You know, [CS:G]50000[CR][M:S0] is no amount\nto scoff at![K] I have another gift as thanks\nfor your continued loyalty to [CS:K]Duskull[CR] Bank!");
                 message_KeyWait();
                 §check_5;
                 ~AssignCheck(85);
@@ -122,7 +122,7 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 3) {
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]10000[CR][M:S0], I have this gift for you!");
+                message_Talk(" How hauntingly exciting, hee-hee!\n[CS:G]10000[CR][M:S0], all for me to hold![K] In exchange for\nyour generosity, I have another gift for you!");
                 message_KeyWait();
                 §check_3;
                 ~AssignCheck(83);
@@ -133,7 +133,7 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             if ($SCENARIO_SUB6 &<< 2) { 
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]5000[CR][M:S0], I have this gift for you!");
+                message_Talk(" You've reached a new milestone\nof [CS:G]5000[CR][M:S0]![K] Accept my gift, and continue\nto leave your money with me, yes?");
                 message_KeyWait();
                 §check_2;
                 ~AssignCheck(82);
@@ -145,12 +145,12 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
             } else {
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" One moment, please!");
-                message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]100[CR][M:S0], I have this gift for you!");
+                message_Talk(" [CS:G]100[CR][M:S0]? A good start, but surely\nyou can do more![K] Please take this gift and\ncontinue to allow me to hoard your money!");
                 message_KeyWait();
                 §check_1;
                 ~AssignCheck(81);
                 me_Play(4);
-                message_Mail("You got a check!");
+                message_Mail("\n[CN]You got a check!");
                 WaitMe(4);
                 message_Close();
             }

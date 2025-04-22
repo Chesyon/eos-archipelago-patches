@@ -3,6 +3,7 @@ import "checks.exps";
 def 0 {
     if (debug) {
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,500,0);
+        //TODO: Here is safe!
         jump @debug_menu;
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
@@ -34,7 +35,7 @@ def 0 {
             message_Close();
             §technical_tree;
             message_Talk(" Alright, what do you need?"); 
-            switch(message_SwitchMenu(4,6)) {
+            switch(message_SwitchMenu(4,1)) {
                 case menu("Version"):
                     message_Close();
                     ~GetVersion();
@@ -46,6 +47,7 @@ def 0 {
                     message_Close();
                     call @variable_checkup;
                     jump @technical_tree;
+                default:
                 case menu("Cancel"):
                     message_Close();
                     jump @anything_else;

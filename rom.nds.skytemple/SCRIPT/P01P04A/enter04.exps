@@ -1,7 +1,29 @@
 
 def 0 {
+    §top_of_thingy;
     if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] ) {
-        if ( $SUB30_TREASURE_DISCOVER[0] ) {
+        if not ($SCENARIO_TALK_BIT_FLAG[219]) {
+            $SCENARIO_TALK_BIT_FLAG[219] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+            }
+            message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Oh! Hello there, team [team]!\nHere to use the recycle shop?[K] Just so you\nknow, [CS:G]Wobbuffet[CR] just opened a special shop...");
+            message_Talk(" I bet you get a lot of [CS:I]Sticks[CR] and [CS:I]Geo\nPebbles[CR] going through dungeons, don\'t you?\nExcept Project P can\'t recycle them![K] But...");
+            message_Talk(" [CS:G]Wobbuffet[CR] has started collecting\n[CS:C]stackable items[CR], and we\'ve started a shop to\nexchange them for other stackable items!");
+            message_Talk(" Isn\'t that exciting? I\'m so proud of\n[CS:G]Wobbuffet[CR] for coming up with this![K] Simply\ntalk to [CS:G]Wobbuffet[CR] to learn more, okay?");
+            message_Close();
+            jump @top_of_thingy;
+        } elseif ( $SUB30_TREASURE_DISCOVER[0] ) {
             §label_133;
             with (actor ACTOR_TALK_MAIN) {
                 ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

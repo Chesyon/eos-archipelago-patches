@@ -1,0 +1,98 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Just a little farther to the\nsummit! You can do it!",
+            french=" Encore un petit effort jusqu\'au\nsommet. Vous pouvez le faire!",
+            german=" Nur noch ein bisschen weiter bis\nzum Gipfel! Das schaffst du!",
+            italian=" Manca poco alla cima!\nCe la potete fare!",
+            spanish=" ¡Solo falta un poquito más para\nllegar a la cima! ¡Tú puedes!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey! Is it true that you flew\ndown from the summit on [CS:N]Shaymin[CR]\'s back?",
+            french=" Hé! C\'est vrai que vous avez\nredescendu la montagne en volant, sur le\ndos de [CS:N]Shaymin[CR]?",
+            german=" Hey! Stimmt es, dass ihr vom\nGipfel aus auf dem Rücken von [CS:N]Shaymin[CR]\ngeflogen seid?",
+            italian=" Ehi! È vero che [CS:N]Shaymin[CR] vi ha\ndato un passaggio sul suo dorso volando giù\ndalla cima della montagna?",
+            spanish=" ¡Oye! ¿Es cierto que bajasteis\nvolando a lomos de [CS:N]Shaymin[CR] desde la cima?",
+        });
+        message_Talk({
+            english=" We\'d love to fly sometime...",
+            french=" Nous adorerions voler un jour...",
+            german=" Ich würde auch gerne\neinmal fliegen...",
+            italian=" Anche a noi piacerebbe volare\nun giorno...",
+            spanish=" Nos encantaría volar alguna vez.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" If things get too rough, don\'t\npush yourself too hard. Just head back to the\nvillage and prepare yourself.",
+            french=" Si la progression devient trop\ndure, ne forcez pas trop. Vous n\'avez qu\'à\nrevenir au village pour mieux vous préparer.",
+            german=" Wird es zu rau, ist es besser,\nsich nicht zu sehr zu quälen. Dann lieber\numkehren und sich gründlicher vorbereiten.",
+            italian=" Se le cose dovessero peggiorare,\nnon siate imprudenti. Tornate al villaggio e\npreparatevi come si deve.",
+            spanish=" Si las cosas se ponen feas, no te\narriesgues demasiado. Mejor vuelve a la aldea\na prepararte.",
+        });
+        message_Talk({
+            english=" Then you can take [CS:K]Drifblim[CR]\'s\nGondola directly to the 6th Station Clearing.",
+            french=" Puis, il vous suffit de prendre\nla [CS:K]Navette Grodrive[CR], directement jusqu\'à\nla trouée du 6[F:E] Relais.",
+            german=" Die [CS:K]Drifzepeli-Seilbahn[CR] bringt\neinen direkt zur 6. Zwischenlagerlichtung.",
+            italian=" Poi potete usare l\'Agenzia Viaggi\n[CS:K]Drifblim[CR] per raggiungere direttamente\nil Bivacco 6.",
+            spanish=" Después podrás subirte a la\n[CS:K]Góndola de Drifblim[CR] para ascender\ndirectamente a la Base del Sexto Puerto.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" From here on, there\'s snow.",
+            french=" Le reste du chemin est\nrecouvert de neige.",
+            german=" Von hier an liegt Schnee.",
+            italian=" Da questo punto in poi\nil sentiero è coperto di neve.",
+            spanish=" A partir de aquí hay nieve.",
+        });
+        message_Talk({
+            english=" It can be dangerous if you don\'t\nprepare yourself properly.",
+            french=" Le danger vous guette si vous\nne vous préparez pas comme il faut.",
+            german=" Das kann gefährlich sein, wenn\nman nicht richtig vorbereitet ist.",
+            italian=" Se non vi preparate\nadeguatamente, potreste trovarvi nei guai.",
+            spanish=" Puede resultar peligroso si no\nte preparas a conciencia.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] || scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

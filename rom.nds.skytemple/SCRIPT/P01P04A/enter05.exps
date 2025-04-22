@@ -1,21 +1,7 @@
 
 def 0 {
+    $SCENARIO_TALK_BIT_FLAG[219] = 1;
     $LOCAL1 = 0;
-    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
-        case 0:
-            break;
-        default:
-            switch(ProcessSpecial(57,0,0)) {
-                case 0:
-                    break;
-                default:
-                    message_Mail("You have too many items in storage!\n[CS:G]Wobbuffet[CR] can\'t trade with you right now...");
-                    message_Close();
-                    jump @label_131;
-                    break;
-            }
-            break;
-    }
     §label_118;
     with (actor ACTOR_TALK_MAIN) {
         ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -37,11 +23,66 @@ def 0 {
     }
     WaitExecuteLives(ACTOR_NPC_SOONANSU);
     Wait(15);
+    §main_menu;
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" [CS:G]Wobbuffet[CR], that\'s right!\n(I\'m [CS:G]Wobbuffet[CR], what would you like to do?)");
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Recycle"):
+            message_Close();
+            jump @item_select;
+        case menu("Info"):
+            with (actor ACTOR_NPC_SOONANO) {
+                Turn2Direction(4,10,DIR_DOWNRIGHT);
+            }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" [CS:G]Wobbuffet[CR] will trade your [CS:C]stackable\nitems[CR] for other stackable items![K] For example,\n[CS:I]Sticks[CR] can be exchanged for [CS:I]Iron Thorns[CR].");
+            message_Talk(" The more potent the item, the more\nvalue it has here in the shop. You can turn a\n[CS:I]Rare Fossil[CR] into a LOT of [CS:I]Geo Pebbles[CR].");
+            message_Talk(" Generally, [CS:G]Wobbuffet[CR] prefers to keep\nStick/Thorn and Rock/Pebble trades separate,\nso you can\'t turn [CS:I]Sticks[CR] into [CS:I]Geo Pebbles[CR]...");
+            message_Talk(" That said, there are a handful of\n[CS:C]rare stackable[CR] items, such as the fabled\n[CS:I]Sharp Icicle[CR], that [CS:G]Wobbuffet[CR] is eager to find.");
+            message_Talk(" If you happen to come across any of\nthose, be sure to bring them here![K] I imagine\n[CS:G]Wobbuffet[CR] will make a generous offer, right?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_SOONANSU,FACE_HAPPY,FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" That\'s right!");
+            message_Close();
+            jump @main_menu;
+        default:
+        case menu("Never Mind"):
+            message_Close();
+            message_Mail("[CS:G]Wobbuffet[CR] waves goodbye!");
+            message_Close();
+            JumpCommon(CORO_END_TALK);    
+    }
     §item_select;
+    switch(ProcessSpecial(PROCESS_SPECIAL_IS_BAG_FULL,0,0)) {
+        case 0:
+            break;
+        default:
+            switch(ProcessSpecial(57,0,0)) {
+                case 0:
+                    break;
+                default:
+                    message_Mail("You have too many items in storage!\n[CS:G]Wobbuffet[CR] can\'t trade with you right now...");
+                    message_Close();
+                    jump @label_131;
+                    break;
+            }
+            break;
+    }
     call @reset_bitfield;
+    call @validate_items;
+    if ($DUNGEON_EVENT_LOCAL == 0) {
+        message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15]\nWob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15]\nWob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15] Wob![W:15]");
+        message_CloseEnforce();
+        Wait(60);
+        message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" What [CS:G]Wobbuffet[CR] is trying to say,\nis that you don\'t have any stackable items in\nyour bag or storage...[W:30] Come back when you do!");
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @main_menu;
+    }
     message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
     message_Talk(" Wobble Wobble?\n(Exchange which item?)");
-    call @validate_items;
     switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
         case menu("[CS:A]Sticks[CR]"):
             message_Close();
@@ -160,7 +201,7 @@ def 0 {
             with (actor ACTOR_NPC_SOONANO) {
                 Turn2Direction(4,10,DIR_DOWN);
             }
-            JumpCommon(CORO_END_TALK);
+            jump @main_menu;
     }
     // Is a "Special" Item. Wobbuffet excited, Wynaut explains...
     // Shock!
@@ -283,7 +324,7 @@ def 0 {
             break;
     }
     $DUNGEON_ARRIVE_LIST[4] = 1;
-    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_HAPPY,FACE_POS_BOTTOM_L_FACEINW);
     message_Talk(" Wobble Wobbuffet?\n(Receive which item?)");
     switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
         case menu("[CS:A]Sticks[CR]"):
@@ -441,7 +482,7 @@ def 0 {
     }
 
     $DUNGEON_ARRIVE_LIST[3] = 1;
-    message_SetFace(ACTOR_NPC_SOONANSU,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
+    message_SetFace(ACTOR_NPC_SOONANSU,FACE_HAPPY,FACE_POS_BOTTOM_L_FACEINW);
     message_Talk(" Wobbuffet Wobble?\n(Receive which item?)");
     switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
         case menu("[CS:A]Geo Pebbles[CR]"):
@@ -576,6 +617,7 @@ def 0 {
     return;
     §validate_items;
     $EVENT_LOCAL = 0;
+    $DUNGEON_EVENT_LOCAL = 0;
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,1,0)) {
         case >= 4:
             $EVENT_LOCAL += 4;
@@ -604,60 +646,74 @@ def 0 {
     }
     if ($EVENT_LOCAL >= 4) {
         $DUNGEON_ARRIVE_LIST[0] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(2,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[1] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(3,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[2] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     $EVENT_LOCAL = 0;
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,8,0)) {
         case >= 2:
             $EVENT_LOCAL += 2;
+            $DUNGEON_EVENT_LOCAL += 1;
             break;
         case 1:
             $EVENT_LOCAL += 1;
+            $DUNGEON_EVENT_LOCAL += 1;
         case 0:
             break;
     }
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,8,0)) {
         case >= 4:
             $EVENT_LOCAL += 2;
+            $DUNGEON_EVENT_LOCAL += 1;
             break;
         case 1:
             $EVENT_LOCAL += 1;
+            $DUNGEON_EVENT_LOCAL += 1;
         case 0:
             break;
     }
     if ($EVENT_LOCAL >= 2) {
         $DUNGEON_ARRIVE_LIST[3] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(7,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[4] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(9,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[5] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(10,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[6] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(4,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[7] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(5,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[8] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     ~OwnsItemID(6,$EVENT_LOCAL);
     if ($EVENT_LOCAL > 0) {
         $DUNGEON_ARRIVE_LIST[9] = 1;
+        $DUNGEON_EVENT_LOCAL += 1;
     }
     $DUNGEON_ARRIVE_LIST[10] = 1;
     $EVENT_LOCAL = 0;
