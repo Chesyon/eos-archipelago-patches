@@ -40,10 +40,12 @@ signed char dungeonTopScreenId = -2;
 uint8_t dungeonModeDisplayed = 255;
 uint32_t trackerRotate = 0;
 uint32_t trackerVelocity = 0;
+uint32_t updaterDelay = 0;
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
     247, // Town
+    // TODO: Rank
     // Early
     1,   // Beach Cave
     3,   // Drenched Bluff
@@ -125,6 +127,10 @@ uint8_t trackerLocationDungeonIds[] = {
 
 bool IsLocationBonusChecksComplete(enum dungeon_id location) {
     switch (location) {
+        case DUNGEON_BEACH_CAVE:;
+            if(!GetSubXBit(0) || !GetSubXBit(127)) { // Bag Upgrade 0, Team Name
+                return false;
+            }
         case DUNGEON_MT_BRISTLE:;
             if(!GetSubXBit(1)) { // Bag Upgrade 1
                 return false;
@@ -155,7 +161,6 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
                 return false;
             }
             break;
-        
         default:
             break;
     }
@@ -172,6 +177,7 @@ char* checkSymbol = "[M:S2][S:8]";
 char* instrumentSymbol = "[M:R9][S:8]";
 char* relicSymbol = "[M:T4][S:8]";
 char* bagSymbol = "[M:S6]";
+char* moneySymbol = "[M:S0][M:S8]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -233,11 +239,8 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     preArgs.strings[0] = locationSymbol;
     
     struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-    if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) {
-        PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
-    } else {
-        PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][CS:B][dungeon:0][CR]", preFlags, &preArgs);
-    }
+    PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
+
     
     return buffer;
 }
@@ -277,15 +280,16 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Sunflora SE: [string:1]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
-char* townExtras = "[CLUM_SET:15][CS:C]Must beat [CR][CS:G]Beach Cave[CR]\n"
-                   "[CLUM_SET:15][CS:C]& Talk To Wigglytuff[CR]\n"
-                   "[CLUM_SET:15]Bag Upgrade 0: [string:0]\n"
-                   "[CLUM_SET:15]Team Name Check: [string:1]";
+char* townBankChecks = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
+                   "[CLUM_SET:15][string:0][string:1][string:2][string:3][string:4][string:5]";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
-char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
-char* steamCaveBoss = "[CLUM_SET:128]Boss: [CS:N]Uxie[CR]\n"
-                      "[CLUM_SET:128]Recruited: [string:0]";
 char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
+char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
+char* bossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
+                 "[CLUM_SET:128][string:0]'s Gift: [string:1]";
+char* treasureBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
+                 "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
+                 "[CLUM_SET:128][string:2]: [string:3]";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -295,35 +299,50 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     struct preprocessor_flags preFlags = {};
     PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
-    if (location == 247) { // Treasure Town
-        preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
-        PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 16, temp);
-        preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
-        PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 81, temp);
-        preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
-        preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
-        PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 16, temp);
-        preArgs.strings[0] = (GetSubXBit(0)) ? bagSymbol : lockedSymbol;
-        preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
-        PreprocessString(temp, 300, townExtras, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 81, temp);
-        UpdateWindow(idx);
-        return;
-    } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
-        if(GetDungeonMode(location) != DMODE_OPEN_AND_REQUEST) {
+    
+    switch(location) {
+        case 247:; // Treasure Town
+            preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            strncpy(temp, townBankChecks, 300);
+            strncat(temp, GetSubXBit(86) ? moneySymbol : lockedSymbol, 300);
+            strncat(temp, GetSubXBit(87) ? moneySymbol : lockedSymbol, 300);
+            preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            PreprocessString(temp, 300, temp, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            UpdateWindow(idx);
+            return;
+        case DUNGEON_HIDDEN_LAND:
+        case DUNGEON_TEMPORAL_TOWER:
+            if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
+                preArgs.strings[0] = "Dialga";
+                preArgs.strings[1] = (GetSubXBit(28)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+                break;
+            }
             DrawCircleBarInTextBox(idx, 60, 112, 84, apSettings.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
             preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
             preArgs.number_vals[1] = apSettings.requiredRelicFragmentShards;
@@ -331,32 +350,139 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
             UpdateWindow(idx);
             return;
-        }
-    } else if(location == DUNGEON_DARK_CRATER) {
-        DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
-        preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
-        preArgs.number_vals[1] = apSettings.requiredInstruments;
-        PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
-        DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
-        UpdateWindow(idx);
-        return;
-    } else if(location == DUNGEON_BEACH_CAVE) {
-        DrawTextInWindow(idx, 1, 148, beachCaveExtraInfo);
-    } else if(location == DUNGEON_STEAM_CAVE) {
-        preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
-        PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 81, temp);
-        preArgs.strings[0] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
-        PreprocessString(temp, 300, steamCaveBoss, preFlags, &preArgs);
-        DrawTextInWindow(idx, 1, 16, temp);
+        case DUNGEON_DARK_CRATER:
+            if(IsDarkraiGoal()) {
+                DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
+                preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
+                preArgs.number_vals[1] = apSettings.requiredInstruments;
+                PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+                DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
+                UpdateWindow(idx);
+                return;
+            }
+            break;
+        case DUNGEON_BEACH_CAVE:
+            DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
+            break;
+        case DUNGEON_STEAM_CAVE:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
+                PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 81, temp);
+                preArgs.strings[0] = "Uxie";
+                preArgs.strings[1] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_QUICKSAND_CAVE:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Mesprit";
+                preArgs.strings[1] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_CRYSTAL_CROSSING:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Azelf";
+                preArgs.strings[1] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_MIRACLE_SEA:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Phione";
+                preArgs.strings[1] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_SPACIAL_RIFT:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Palkia";
+                preArgs.strings[1] = (GetSubXBit(30)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_BOTTOMLESS_SEA:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Kyogre";
+                preArgs.strings[1] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Aqua-Monica";
+                preArgs.strings[3] = (GetSubXBit(31)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_SHIMMER_DESERT:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Groudon";
+                preArgs.strings[1] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Terra Cymbal";
+                preArgs.strings[3] = (GetSubXBit(33)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_MT_AVALANCHE:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Articuno";
+                preArgs.strings[1] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Icy Flute";
+                preArgs.strings[3] = (GetSubXBit(35)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_GIANT_VOLCANO:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Heatran";
+                preArgs.strings[1] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Fiery Drum";
+                preArgs.strings[3] = (GetSubXBit(37)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_WORLD_ABYSS:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Giratina";
+                preArgs.strings[1] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Rock Horn";
+                preArgs.strings[3] = (GetSubXBit(40)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_SKY_STAIRWAY:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Rayquaza";
+                preArgs.strings[1] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Sky Melodica";
+                preArgs.strings[3] = (GetSubXBit(42)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_MYSTERY_JUNGLE:
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Mew";
+                preArgs.strings[1] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Grass Cornet";
+                preArgs.strings[3] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        default:
+            break;
     }
     
     // For regular dungeons.
-    if (GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) {
-        preArgs.strings[0] = checkSymbol;
-    } else {
-        preArgs.strings[0] = lockedSymbol;
-    }
+    preArgs.strings[0] = (GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[location].completedJobs;
     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.missionStats[location].completedOutlaws;
     if(IsDungeonLateGame(location)) {
@@ -388,6 +514,7 @@ void ApTrackerFreeTopScreenBG() {
 }
 
 uint32_t CreateTrackerTopScreen() {
+    updaterDelay = 0;
     trackerRotate = 0;
     trackerVelocity = 160;
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
@@ -482,13 +609,23 @@ uint32_t StateManagerTrackerTopScreen() {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
                     trackerVelocity = 160;
-                } else if (trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_TEMPORAL_TOWER || trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == DUNGEON_DARK_CRATER) {
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                    updaterDelay = 0;
+                } else {
                     trackerRotate += 1 + (trackerVelocity >> 5);
                     if (trackerVelocity > 0) {
                         trackerVelocity--;
                     }
+                    // Without this check, the Treasure Town option on the top
+                    // screen definitely lags the overworld when updating every
+                    // frame. About 70-100% CPU usage.
+                    if(updaterDelay == 15) {
+                        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                        updaterDelay = 0;
+                    } else {
+                        updaterDelay++;
+                    }
                 }
-                ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                 apTrackerWindowPtr->faded = 0;
             } else {
                 UnkTopScreenFun4(0x10);

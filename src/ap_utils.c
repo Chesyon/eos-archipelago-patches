@@ -46,3 +46,13 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
     
     return expected - completed;
 }
+
+// TODO: Implement after getting added.
+bool IsDarkraiGoal() {
+    return true;
+}
+
+// TODO: Implement after getting added.
+bool IsRuleDungeonChecksEnabled() {
+    return true;
+}

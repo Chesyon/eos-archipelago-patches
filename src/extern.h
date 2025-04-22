@@ -38,7 +38,8 @@ typedef struct ArchipelagoSettings { // size: 5 bytes
     uint8_t deathLinkType : 2;               // bits 11 and 12
     uint8_t expMultiplier : 4;               // bits 13 through 16
     bool startWithMainGameUnlocked : 1;      // bit 17
-    uint8_t unused_0 : 2;                    // bits 18 and 19
+    bool dialgaIsGoal : 1;                   // bit 18
+    uint8_t ruleDungeonChecks : 1;           // bit 19
     uint8_t totalJobsEarly : 5;              // bits 20 through 24
     uint8_t unused_1 : 3;                    // bits 25 through 27
     uint8_t totalOutlawsEarly : 5;           // bits 28 through 32
