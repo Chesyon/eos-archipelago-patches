@@ -138,14 +138,14 @@ void InitScriptRoutineFromCoroutineInfo(struct script_routine* routine, undefine
 void GetSceneName(char* dst, const char* src);
 uint32_t GetStringWidth(char* str);
 
-void UnkTopScreenFun1(uint32_t num);
+void UnkTopScreenFun1(void* num);
 void UnkTopScreenFun2(uint32_t num);
 void UnkTopScreenFun3(uint32_t num);
 void UnkTopScreenFun4(uint32_t num);
 void UnkTopScreenFun5(uint32_t num);
 void UnkTopScreenFun6(uint32_t num);
 void UnkTopScreenFun7(uint32_t num);
-void UnkTopScreenFun8(uint32_t num);
+void UnkTopScreenFun8(void* num);
 void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a pointer, but lazy
 void LoadTopScreenBGPart2(void* thing, char* bg_string, uint32_t num);
 void FreeTopScreenBG(void* thing);
