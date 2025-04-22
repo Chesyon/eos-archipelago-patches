@@ -20,7 +20,6 @@ void DungeonModeTrapCheck() {
         SaveScriptVariableValueAtIndex(NULL, VAR_PERFORMANCE_PROGRESS_LIST, 1, 1);
     }
     
-    /* Work In Progress For New Traps
     if (CUSTOM_SAVE_AREA.dungeonTraps.yawn == true) {
         for (int i = 0; i < 4; i++) {
             struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
@@ -36,7 +35,10 @@ void DungeonModeTrapCheck() {
     }
     
     if (CUSTOM_SAVE_AREA.dungeonTraps.dropItems == true) {
-        // TODO
+        for (int i = 0; i < 4; i++) {
+            struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
+            ApplyTripTrapEffect(monsterEntity, monsterEntity);
+        }
     }
     
     if (CUSTOM_SAVE_AREA.dungeonTraps.warp == true) {
@@ -49,11 +51,23 @@ void DungeonModeTrapCheck() {
     }
     
     if (CUSTOM_SAVE_AREA.dungeonTraps.weather == true) {
-        // TODO
+        switch(DungeonRandInt(3)) {
+            case 0:
+                DUNGEON_PTR->weather_turns[2] = 3000; // Sandstorm
+                break;
+            case 1:
+                DUNGEON_PTR->weather_turns[3] = 3000; // Cloudy
+                break;
+            case 2:
+            default:
+                DUNGEON_PTR->weather_turns[5] = 3000; // Hail
+                break;
+        }
+        TryActivateWeather(true, false);
     }
     
     if (CUSTOM_SAVE_AREA.dungeonTraps.pitfall == true) {
-        // TODO
+        DUNGEON_PTR->end_floor_flag = 2;
     }
     
     if (CUSTOM_SAVE_AREA.dungeonTraps.embargo == true) {
@@ -62,5 +76,12 @@ void DungeonModeTrapCheck() {
             TryInflictEmbargoStatus(monsterEntity, monsterEntity, true, false);
         }
     }
-    */
+    
+    CUSTOM_SAVE_AREA.dungeonTraps.yawn = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.whiffer = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.dropItems = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.weather = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.warp = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.pitfall = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.embargo = false;
 }
