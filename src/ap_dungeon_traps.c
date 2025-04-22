@@ -6,6 +6,42 @@
 #include "extern.h"
 #include "dungeon_generation.h"
 
+void __attribute__((naked)) GenerateFloorCustomLayouts() {
+    asm("cmp r0,#15");
+    asm("ldr lr,=GeneateFloorUnhook1");
+    asm("beq GenerateMazeBacktrackingFloor");
+    asm("b   GenerateSidewinderFloor");
+}
+
+uint8_t GetMazeTrapCheck() {
+    if(CUSTOM_SAVE_AREA.dungeonTraps.maze) {
+        CUSTOM_SAVE_AREA.dungeonTraps.maze = false;
+        return DungeonRandInt(2) + 14;
+    } else {
+        return 0;
+    }
+}
+
+void __attribute__((naked)) ApMazeTrapCheck() {
+    asm("stmdb sp!,{r1,r2,r3,lr}");
+    asm("bl GetMazeTrapCheck");
+    asm("cmp r0,#0");
+    asm("movne r10,r0");
+    asm("and r0,r10,#0xF");
+    asm("ldmia sp!,{r1,r2,r3,pc}");
+}
+
+void DungeonModeInitApTrap() {
+    CUSTOM_SAVE_AREA.dungeonTraps.yawn = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.whiffer = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.dropItems = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.weather = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.warp = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.pitfall = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.embargo = false;
+    CUSTOM_SAVE_AREA.dungeonTraps.maze = false;
+}
+
 void DungeonModeTrapCheck() {
     if(LoadScriptVariableValueAtIndex(NULL, VAR_PERFORMANCE_PROGRESS_LIST, 32) == 1) {
         SaveScriptVariableValueAtIndex(NULL, VAR_PERFORMANCE_PROGRESS_LIST, 32, 0);

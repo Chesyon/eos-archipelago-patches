@@ -14,6 +14,13 @@
     DeathLinkSenderTrampoline:
         bl DeathLinkSenderCheck
         ldmia sp!,{r3,r4,r5,r6,r7,r8,r9,pc}
+
+.align 4 // Hook for init.
+    ArchipelagoInitDungeon:
+        stmdb sp!,{r3,lr}
+        bl DeathLinkInitDungeon
+        bl DungeonModeInitApTrap
+        ldmia sp!,{r3,pc}
         
 
 .align 4

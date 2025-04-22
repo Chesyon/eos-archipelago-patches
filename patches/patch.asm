@@ -272,7 +272,7 @@
         beq DungeonTurnEndChecksTrampoline
     
     .org DeathLinkDungeonInitHook
-        bl DeathLinkInitDungeon
+        bl ArchipelagoInitDungeon
     .org DeathLinkSendHook
         b DeathLinkSenderTrampoline
 
@@ -288,8 +288,8 @@
         addls pc,pc,r0,lsl #0x2 ; untouched instruction
         b TopScreenDungeonModeTrackerCheck
     .endarea
-    .org SetTopScreenTypeGroundHook
-        bne SetTopScreenTypeGroundCheck
+    .org SetTopScreenTypeDungeonHook
+        bne SetTopScreenTypeDungeonCheck
     .org DungeonTopScreenAdvanceUntilModeAddr
     .area 0xC
         .pool
@@ -300,4 +300,8 @@
         .halfword 0x4
         .halfword 0x5
     .endarea
+    .org GeneateFloorHook1
+        b GenerateFloorCustomLayouts
+    .org GeneateFloorHook2
+        bl ApMazeTrapCheck
 .close

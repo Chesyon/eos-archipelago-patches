@@ -818,10 +818,10 @@ void __attribute((naked)) TopScreenDungeonModeTrackerCheck(void) {
     asm("b TopScreenDungeonModeTrackerUnhook");
 }
 
-void __attribute((naked)) SetTopScreenTypeGroundCheck(void) {
+void __attribute((naked)) SetTopScreenTypeDungeonCheck(void) {
     asm("cmp r0,#5");
     asm("bleq TopScreenModeSetDungeonMode");
-    asm("b SetTopScreenTypeGroundUnhook");
+    asm("b SetTopScreenTypeDungeonUnhook");
 }
 
 void __attribute((naked)) ApTrackerSetupMenuCheck (void) {

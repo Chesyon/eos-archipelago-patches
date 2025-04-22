@@ -120,8 +120,11 @@ WindCounterCheckHook = 0x22ED53C;
 TopScreenDungeonModeMode5Hook = 0x22E911C;
 TopScreenDungeonModeTrackerHook = 0x22E92AC;
 TopScreenDungeonModeTrackerUnhook = 0x22E938C;
-SetTopScreenTypeGroundHook = 0x22E9100;
-SetTopScreenTypeGroundUnhook = 0x22E9110;
+SetTopScreenTypeDungeonHook = 0x22E9100;
+SetTopScreenTypeDungeonUnhook = 0x22E9110;
+GeneateFloorHook1 = 0x233B62C;
+GeneateFloorUnhook1 = 0x233B75C;
+GeneateFloorHook2 = 0x233B61C;
 
 
 /* ! New Archipelago Values For Overlay36 */
