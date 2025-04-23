@@ -33,18 +33,19 @@ def 0 {
                     spanish=" ¡Vaya![K] ¡Aquí estáis de nuevo!",
                 });
                 bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
-                message_Talk(" I saw you take a wrong turn\non the way to the [CS:P]Ghost Maze[CR], and I feared\nfor the worst! Those [CS:K]Ghasts[CR] are brutal foes!");
                 switch ( $GROUND_START_MODE ) {
                     case 8:
                     default:
-                        message_Talk("PLACEHOLDER WIN");
-
-                        end;
+                        message_Talk(" Explorers! A successful training\nsession, I assume? [K]...Why do you look so\ntraumatized?[K] ...Ah. The [CS:P]Ghast Maze[CR].");
+                        message_Talk(" I don't know how that got there,\nbut surely it was no issue for pupils of mine![K]\nThough, er-[W:30] maybe don't go back in there.");
+                        message_Talk(" I don't know what would\nhappen if they managed to break free.");
+                        break;
                     case 9:
                     case 10:
                     case 11:
                         // Lost against the Ghasts
-                        message_Talk("PLACEHOLDER LOSE");
+                        message_Talk(" Explorers! Ah. Well, things won't\nalways go your way![K] Though... you might be\nbetter off just saying \"Yes!\" in the future.");
+                        message_Talk(" I'm speaking from experience!");
                         break;
                 }
                 message_Close();
@@ -69,9 +70,11 @@ def 0 {
                     spanish=" ¡Vaya![K] ¡Aquí estáis de nuevo!",
                 });
                 bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD_REMIX, 0, 256);
-                message_Talk(" I saw you take a wrong turn\non the way to the [CS:P]Ghost Maze[CR], and I feared\nfor the worst! Those [CS:K]Ghasts[CR] are brutal foes!");
-                message_Talk("PLACEHOLDER APPEASE");
-                message_Close();
+                message_Talk(" Explorers! You look flustered...[K]\nSurely you didn't go somewhere you\nweren't supposed to, right?");
+                message_KeyWait();
+                Wait(180);
+                message_Talk(" [CS:K]Marowak[CR] Dojo takes no\nresponsibility for any Ghast-smooching\nrelated accidents.");
+                message_CloseEnforce();
                 end;
             }
             switch ( $GROUND_START_MODE ) {

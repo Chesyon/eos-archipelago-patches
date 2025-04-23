@@ -1,8 +1,9 @@
-
+import "bank.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
     if ( scn($SCENARIO_SIDE) >= [40, 7] || scn($SCENARIO_SIDE) >= [40, 3] ) {
         §label_4;
         switch ( message_Menu(MENU_DUSKULL_BANK) ) { }
+        ~CheckBankRewards();
         §label_3;
         JumpCommon(CORO_END_TALK);
     } elseif ( scn($SCENARIO_SIDE) >= [40, 2] ) {

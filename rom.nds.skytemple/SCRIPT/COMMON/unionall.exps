@@ -12458,12 +12458,12 @@ coro RESCUE_SET {
             $SCENARIO_MAIN_BIT_FLAG[92] = 0;
             $SCENARIO_MAIN_BIT_FLAG[93] = 0;
             switch ( random(100) ) {
-                case < 10:
+                case < 50:
                     debug_Print('KOBIN SET');
                     $SCENARIO_MAIN_BIT_FLAG[92] = 1;
                     §label_1253;
                     switch ( random(100) ) {
-                        case < 80:
+                        case < 90:
                             debug_Print('IRAININ SET');
                             $SCENARIO_MAIN_BIT_FLAG[93] = 1;
                             jump @label_1247;

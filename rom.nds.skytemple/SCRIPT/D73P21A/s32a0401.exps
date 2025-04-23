@@ -1,4 +1,5 @@
-
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+import "version.exps"; // Handles game version stuff
 def 0 {
     supervision_Acting(0);
     item_Set(0, 70, 0);
@@ -61,6 +62,7 @@ def 0 {
                     switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 70, 0) ) { }
                     switch ( ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG, 1, 0) ) { }
                     $SCENARIO_MAIN_BIT_FLAG[91] = 1;
+                    ~IsOdot4dotO($EVENT_LOCAL);
                     se_Play(8710);
                     WaitSe(8710);
                     message_Mail({
@@ -131,15 +133,25 @@ def 0 {
                         italian=" Oh, giusto...! Ecco qua!",
                         spanish=" Ah, ya sé... Toma.",
                     });
+                    if (debug || $EVENT_LOCAL == 1) { 
+                        message_Talk({
+                            english=" These are the best items I have\nwith me right now.[K] The [s_item:1]\nand... [W:30]something called an [M:T5]\"Archipelago\" check?",
+                            french=" C\'est le meilleur objet que je\npossède en ce moment:[K] [s_item:1]!",
+                            german=" Es ist das beste Item, das ich\nbesitze.[K] Das Item [s_item:1]!",
+                            italian=" Questo è il massimo che ti posso\ndare adesso.[K] È lo strumento [s_item:1]!",
+                            spanish=" Es lo mejorcito que llevo encima\nen este momento.[K] ¡Un objeto [s_item:1]!",
+                        });
+                    } else {
+                        message_Talk({
+                            english=" This is the best item I have\nwith me right now.[K] The [s_item:1]!",
+                            french=" C\'est le meilleur objet que je\npossède en ce moment:[K] [s_item:1]!",
+                            german=" Es ist das beste Item, das ich\nbesitze.[K] Das Item [s_item:1]!",
+                            italian=" Questo è il massimo che ti posso\ndare adesso.[K] È lo strumento [s_item:1]!",
+                            spanish=" Es lo mejorcito que llevo encima\nen este momento.[K] ¡Un objeto [s_item:1]!",
+                        });
+                    }
                     message_Talk({
-                        english=" This is the best item I have\nwith me right now.[K] The [s_item:1]!",
-                        french=" C\'est le meilleur objet que je\npossède en ce moment:[K] [s_item:1]!",
-                        german=" Es ist das beste Item, das ich\nbesitze.[K] Das Item [s_item:1]!",
-                        italian=" Questo è il massimo che ti posso\ndare adesso.[K] È lo strumento [s_item:1]!",
-                        spanish=" Es lo mejorcito que llevo encima\nen este momento.[K] ¡Un objeto [s_item:1]!",
-                    });
-                    message_Talk({
-                        english=" Please take this as a token of\nmy gratitude!",
+                        english=" Please take them as a token of\nmy gratitude!",
                         french=" S\'il te plaît, accepte ce cadeau\nen signe de gratitude!",
                         german=" Bitte nimm es als Zeichen\nmeiner Dankbarkeit!",
                         italian=" È il mio modo di ringraziarti.\nPer favore, accettalo!",
@@ -147,13 +159,24 @@ def 0 {
                     });
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     me_Play(4);
-                    message_Mail({
-                        english="[CN][player] received the\n[CN][s_item:1] as thanks!",
-                        french="[CN][player] reçoit l\'objet\n[CN][s_item:1] en gage de remerciement!",
-                        german="[CN][player] erhält zum Dank\n[CN]das Item [s_item:1]!",
-                        italian="[CN][player] ha ricevuto lo strumento\n[CN][s_item:1] come ringraziamento!",
-                        spanish="[CN]¡[player] ha obtenido el objeto\n[CN][s_item:1] como agradecimiento!",
-                    });
+                    if (debug || $EVENT_LOCAL == 1) { 
+                        message_Mail({
+                            english="[CN][player] received the\n[CN][s_item:1] and a check as thanks!",
+                            french="[CN][player] reçoit l\'objet\n[CN][s_item:1] en gage de remerciement!",
+                            german="[CN][player] erhält zum Dank\n[CN]das Item [s_item:1]!",
+                            italian="[CN][player] ha ricevuto lo strumento\n[CN][s_item:1] come ringraziamento!",
+                            spanish="[CN]¡[player] ha obtenido el objeto\n[CN][s_item:1] como agradecimiento!",
+                        });
+                        ~AssignCheck(103);
+                    } else {
+                        message_Mail({
+                            english="[CN][player] received the\n[CN][s_item:1] as thanks!",
+                            french="[CN][player] reçoit l\'objet\n[CN][s_item:1] en gage de remerciement!",
+                            german="[CN][player] erhält zum Dank\n[CN]das Item [s_item:1]!",
+                            italian="[CN][player] ha ricevuto lo strumento\n[CN][s_item:1] come ringraziamento!",
+                            spanish="[CN]¡[player] ha obtenido el objeto\n[CN][s_item:1] como agradecimiento!",
+                        });
+                    }
                     WaitMe(4);
                     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                     with (actor ACTOR_NPC_HERAKUROSU) {

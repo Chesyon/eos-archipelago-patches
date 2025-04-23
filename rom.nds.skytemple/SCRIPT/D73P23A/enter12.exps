@@ -1,0 +1,143 @@
+import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] || scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] || scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        if ( $SCENARIO_MAIN_BIT_FLAG[61] ) {
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_PINPUKU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I won\'t forget this kindness!",
+                french=" Je n\'oublierai jamais\nun acte si généreux!",
+                german=" Diese Freundlichkeit werde ich\nniemals vergessen!",
+                italian=" Non mi dimenticherò\ndella tua generosità!",
+                spanish=" ¡Nunca olvidaré tal amabilidad!",
+            });
+            message_Close();
+            §label_130;
+            JumpCommon(CORO_END_TALK);
+        } else {
+            item_SetVariable(0, $ITEM_BACKUP_KUREKURE);
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_PINPUKU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Um... Excuse me.",
+                french=" Heu... Excuse-moi.",
+                german=" Äh... Entschuldige.",
+                italian=" Ehm... Scusa.",
+                spanish=" Esto... Disculpa.",
+            });
+            message_Talk({
+                english=" Um... On the way up, while I\nwas climbing...I seem to have dropped my\n[s_item:0]...",
+                french=" Heu... En chemin, pendant mon\nascension... je crois que j\'ai perdu mon\nobjet [s_item:0]...",
+                german=" Äh... Auf dem Weg nach oben,\nwährend des Kletterns, habe ich anscheinend\ndas Item [s_item:0] fallengelassen...",
+                italian=" Ehm... Mentre salivo verso\nla cima... credo di aver perduto il mio\nstrumento [s_item:0]...",
+                spanish=" Resulta que... mientras subía...\nno sé cómo, pero por lo visto he perdido mi\nobjeto [s_item:0] y no sé qué hacer...",
+            });
+            message_Talk({
+                english=" It\'s probably too much trouble...",
+                french=" C\'est sûrement trop demander...",
+                german=" Möglicherweise bereitet das\nzu viel Ärger...",
+                italian=" Mi dispiace disturbarti così...",
+                spanish=" No querría importunarte...",
+            });
+            message_Talk({
+                english=" But if you\'ve got an extra\n[s_item:0], do you think I could possibly\nhave it? If it\'s OK with you?",
+                french=" ... mais si tu en as assez,\ntu accepterais de me donner un\nobjet [s_item:0]?",
+                german=" Aber denkst du, du hast\nvielleicht ein Item [s_item:0] für mich\nübrig? Wäre das für dich in Ordnung?",
+                italian=" ... ma se avessi uno strumento\n[s_item:0] in più, potresti darmelo?\nSarebbe un problema per te?",
+                spanish=" Pero, si por casualidad no te\nimportara darme algún objeto [s_item:0]\nque te sobre... si no es mucha molestia...",
+            });
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu({
+                    english="Here you go!",
+                    french="Tiens, c\'est pour toi!",
+                    german="Hier hast du es!",
+                    italian="Ecco qua!",
+                    spanish="¡Aquí tienes!",
+                }):
+                default:
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_COUNT_TABLE_ITEM_TYPE_IN_BAG, 0, 0) ) {
+                        case >= 1:
+                            $SCENARIO_MAIN_BIT_FLAG[61] = 1;
+                            message_SetFace(ACTOR_NPC_PINPUKU, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk({
+                                english=" Really?",
+                                french=" Vraiment?",
+                                german=" Im Ernst?",
+                                italian=" Davvero?",
+                                spanish=" ¿En serio?",
+                            });
+                            message_Talk({
+                                english=" Oh, thank you! Thank you ever so\nmuch! I really appreciate it!",
+                                french=" Oh, merci! Merci infiniment!\nÇa me touche vraiment!",
+                                german=" Oh, danke schön! Das ist so\nnett von dir! Das macht mich wirklich froh!",
+                                italian=" Oh, grazie! Grazie mille!\nLo apprezzo molto!",
+                                spanish=" ¡Anda, muchas gracias! ¡No \nsabes cuantísimo te lo agradezco!",
+                            });
+                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                            switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_TABLE_ITEMS_TYPE_IN_BAG, 0, 0) ) { }
+                            se_Play(8710);
+                            message_Mail({
+                                english="[CN][player] handed over\n[CN]the [s_item:0].",
+                                french="[CN][player] donne l\'objet\n[CN][s_item:0].",
+                                german="[CN][player] übergibt das\n[CN]Item [s_item:0].",
+                                italian="[CN][player] ha consegnato\n[CN]lo strumento [s_item:0].",
+                                spanish="[CN]¡[player] ha entregado\n[CN]su objeto [s_item:0]!",
+                            });
+                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                            message_SetFace(ACTOR_NPC_PINPUKU, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk({
+                                english=" I won\'t forget this kindness!",
+                                french=" Je n\'oublierai jamais\nun acte si généreux!",
+                                german=" Diese Freundlichkeit werde ich\nniemals vergessen!",
+                                italian=" Non mi dimenticherò\ndella tua generosità!",
+                                spanish=" ¡Nunca olvidaré tal amabilidad!",
+                            });
+                            message_Close();
+                            ~Happiny(3);
+                            jump @label_130;
+                        default:
+                            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                            message_Mail({
+                                english="[CN][player] doesn\'t have\n[CN]any [s_item:0]...",
+                                french="[CN][player] n\'a pas d\'objet\n[CN][s_item:0]...",
+                                german="[CN][player] hat kein\n[CN]Item [s_item:0]...",
+                                italian="[CN][player] non ha nessuno strumento\n[CN][s_item:0]...",
+                                spanish="[CN]¡[player] no tiene\n[CN][s_item:0]!",
+                            });
+                            message_Close();
+                            jump @label_130;
+                    }
+                    break;
+                case menu({
+                    english="I can\'t do that...",
+                    french="Je ne peux pas...",
+                    german="Leider nicht...",
+                    italian="Non posso...",
+                    spanish="No puedo hacerlo...",
+                }):
+                    message_SetFace(ACTOR_NPC_PINPUKU, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" I see... Makes sense, really...",
+                        french=" Je vois...\nPas grave, je comprends...",
+                        german=" Ach so... Kann ich verstehen,\nwirklich...",
+                        italian=" Capisco... non ti preoccupare,\ndavvero...",
+                        spanish=" Entiendo... Pues tiene sentido...",
+                    });
+                    message_Close();
+                    jump @label_130;
+            }
+        }
+    } else {
+        jump @label_130;
+    }
+}

@@ -1,0 +1,34 @@
+import "bank.exps"; // Leave this for me, I don't want to rename this later lol
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    if ( scn($SCENARIO_SIDE) >= [43, 2] || $SCENARIO_TALK_BIT_FLAG[140] ) {
+        §label_0;
+        switch ( message_Menu(MENU_DUSKULL_BANK) ) { }
+        ~CheckBankRewards();
+        JumpCommon(CORO_END_TALK);
+    } else {
+        $SCENARIO_TALK_BIT_FLAG[140] = 1;
+        message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh! Hello, [CS:Y]Sunflora[CR]!",
+            french=" Oh! Salut, [CS:Y]Héliatronc[CR]!",
+            german=" Oh! Hallo, [CS:Y]Sonnflora[CR]!",
+            italian=" Oh! Ciao, [CS:Y]Sunflora[CR]!",
+            spanish=" ¡Anda, hola, [CS:Y]Sunflora[CR]!",
+        });
+        message_Talk({
+            english=" I see you\'re working hard,\nas always!",
+            french=" Je vois que tu travailles dur,\ncomme d\'habitude!",
+            german=" Wie ich sehe, bist du fleißig,\nwie immer!",
+            italian=" Noto che stai lavorando sodo,\ncome sempre!",
+            spanish=" Veo que trabajas duro,\ncomo siempre.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_0;
+    }
+}

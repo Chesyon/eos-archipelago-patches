@@ -24,3 +24,14 @@ macro GetVersion() {
             break;
     }
 }
+
+
+macro IsOdot4dotO($var) {
+    if ($VERSION >= 5) {
+        $var = 1;
+    } else {
+        $var = 0;
+    }
+}
+
+// TODO: $VERSION = 5 assumed 0.4.0 for s32a0401 (Heracross!)

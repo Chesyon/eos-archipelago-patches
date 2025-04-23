@@ -272,7 +272,22 @@ def 0 {
 */
             §rewind_12;
             switch(ProcessSpecial(101, 0, 0)) {
-                case > 0:
+                case >= 3:
+                    ProcessSpecial(101, 1, 0);
+                    ProcessSpecial(101, 1, 0);
+                    ProcessSpecial(101, 1, 0);
+                    message_Mail("[CN]You got 3 checks for this regular mission!\n[CN]Expect them to arrive soon!");
+                    message_Close();
+                    $SCENARIO_TALK_BIT_FLAG[253] = 1;
+                    break;
+                case 2:
+                    ProcessSpecial(101, 1, 0);
+                    ProcessSpecial(101, 1, 0);
+                    message_Mail("[CN]You got 2 checks for this regular mission!\n[CN]Expect them to arrive soon!");
+                    message_Close();
+                    $SCENARIO_TALK_BIT_FLAG[253] = 1;
+                    break;
+                case 1:
                     ProcessSpecial(101, 1, 0);
                     message_Mail("[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
                     message_Close();

@@ -1,0 +1,58 @@
+
+def 0 {
+    supervision_Station(0);
+    if ( scn($SCENARIO_MAIN) >= [29, 53] ) {
+        §label_0;
+        supervision_Station(13);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 52] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 50] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 49] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 48] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 47] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 46] ) {
+        supervision_Station(19);
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 45] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 44] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 43] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 42] ) {
+        supervision_Station(18);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 41] ) {
+        supervision_Station(17);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
+        supervision_Station(17);
+        end;
+    } else {
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 17:
+            SetMoveRange(Position<'m0', 41, 30>, 6, 10);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

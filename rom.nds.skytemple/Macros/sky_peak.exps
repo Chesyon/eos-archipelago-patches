@@ -1,3 +1,245 @@
+import "version.exps"; // Handles game version stuff
+import "checks.exps"; // Leave this for me, I don't want to rename this later lol
+
+
+macro Jumpluff($num) {
+    if (debug) {
+    } else {
+        ~IsOdot4dotO($LOCAL0);
+        if ($LOCAL0 == 0) {
+            jump @getout;
+        }
+    }
+    $LOCAL0 = $num;
+    switch($LOCAL0) {
+        case 1:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 1:
+                    jump @getout;
+                default:
+                    ~AssignCheck(89);
+                    break;
+            }
+            break;
+        case 3:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 2:
+                    jump @getout;
+                default:
+                    ~AssignCheck(90);
+                    break;
+            }
+            break;
+        case 5:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 3:
+                    jump @getout;
+                default:
+                    ~AssignCheck(91);
+                    break;
+            }
+            break;
+        case 7:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 4:
+                    jump @getout;
+                default:
+                    ~AssignCheck(92);
+                    break;
+            }
+            break;
+        case 10:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 5:
+                    jump @getout;
+                default:
+                    ~AssignCheck(93);
+                    break;
+            }
+            break;
+        default:
+            jump @getout;
+    }
+    message_Talk(" Hold on, is this the first time\nthe wind has blown you here?[K] It is, isn't it?[K]\nIn that case, let me give you this!");
+    
+    §getout;
+}
+
+macro Delibird($num) {
+    if (debug) {
+    } else {
+        ~IsOdot4dotO($LOCAL0);
+        if ($LOCAL0 == 0) {
+            jump @getout;
+        }
+    }
+    switch (scn($SCENARIO_SUB6)[1]) {
+        case &<< 6:
+            jump @getout;
+        default:
+            break;
+    }
+    message_Talk(" It\'s so lonely up here... I\'m glad we\nmanaged to cross paths![K] Here, this is a\nmemento of our chance meeting way up here...");
+    message_KeyWait();
+    me_Play(4);
+    message_Mail("\n[CN]You got a check!");
+    ~AssignCheck(94);
+    WaitMe(4);
+    message_Close();
+    §getout;
+}
+
+
+macro Happiny($num) {
+    if (debug) {
+    } else {
+        ~IsOdot4dotO($LOCAL0);
+        if ($LOCAL0 == 0) {
+            jump @getout;
+        }
+    }
+    $LOCAL0 = $num;
+    switch($LOCAL0) {
+        case 1:
+            switch (scn($SCENARIO_SUB6)[1]) {
+                case &<< 7:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 95;
+                    break;
+            }
+            break;
+        case 3:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 0:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 96;
+                    break;
+            }
+            break;
+        case 5:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 1:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 97;
+                    break;
+            }
+            break;
+        case 7:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 2:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 98;
+                    break;
+            }
+            break;
+        default:
+            jump @getout;
+    }
+    message_Talk(" Here. I want you to have this!");
+    message_KeyWait();
+    me_Play(4);
+    message_Mail("\n[CN]You got a check!");
+    switch($LOCAL0) {
+        case 95:
+            ~AssignCheck(95);
+            break;
+        case 96:
+            ~AssignCheck(96);
+            break;
+        case 97:
+            ~AssignCheck(97);
+            break;
+        case 98:
+            ~AssignCheck(96);
+            break;
+    }
+    WaitMe(4);
+    message_Close();
+    §getout;
+}
+
+
+
+macro Numel($num) {
+    if (debug) {
+    } else {
+        ~IsOdot4dotO($LOCAL0);
+        if ($LOCAL0 == 0) {
+            jump @getout;
+        }
+    }
+    $LOCAL0 = $num;
+    switch($LOCAL0) {
+        case 1:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 3:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 99;
+                    break;
+            }
+            break;
+        case 3:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 4:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 100;
+                    break;
+            }
+            break;
+        case 5:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 5:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 101;
+                    break;
+            }
+            break;
+        case 7:
+            switch (scn($SCENARIO_SUB7)[0]) {
+                case &<< 6:
+                    jump @getout;
+                default:
+                    $LOCAL0 = 102;
+                    break;
+            }
+            break;
+        default:
+            jump @getout;
+    }
+    
+    message_Talk(" Nobody stops to trade with me,\nso I really appreciate you taking the time\nfor it![K] Here, I want you to have this!");
+    message_KeyWait();
+    me_Play(4);
+    message_Mail("\n[CN]You got a check!");
+    switch($LOCAL0) {
+        case 99:
+            ~AssignCheck(99);
+            break;
+        case 100:
+            ~AssignCheck(100);
+            break;
+        case 101:
+            ~AssignCheck(101);
+            break;
+        case 102:
+            ~AssignCheck(102);
+            break;
+    }
+    WaitMe(4);
+    message_Close();
+    §getout;
+}
+
+
+
+
 
 macro PeakBlock() {
     if ($EVENT_LOCAL == 1) {
