@@ -6,9 +6,9 @@
 
 #if CUSTOM_SPECIAL_PROCESSES
 
-// Special process 100: Get level scaling status
+// Special process 100: Returns if guest party members could cause problems for the player.
 static int SpGetLevelScalingStatus() {
-  return apSettings.levelScaling;
+  return apSettings.levelScalingMode != LEVEL_SCALING_OFF && !apSettings.levelScaleGuests;
 }
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
@@ -99,6 +99,7 @@ static int SpRegenerateMissions() {
 // This is a really lazy implementation based on SP 102. Could be merged into SP 102 if I actually bothered to reorganize the structs, which... I don't feel like doing right now. This is future Chesyon's problem.
 // Future Chesyon here: Fuck you past Chesyon. (in all seriousness the way to co about merging them would to be to convert the MacguffinMaxes struct into a single Maxes struct. I still don't feel like doing this, so future future Chesyon's problem.
 // At the very least this won't require save struct adjustments. Probably. You know, *with* some save struct adjustments, I could actually merge into SP 101 as well... 101, 102, and 105 are all identical logic.
+// Future future Chesyon here: Yeah merging these is definitely feasible now. I need to make sure Lappy won't kill me for doing it though.
 static int SpAccessCafeStatus(short mode, short type) {
     if (type == 0) { // Cafe Events
         if (mode == 1) { // Write mode

@@ -12,6 +12,10 @@
 #define DEATHLINK_REVIVER 0b01
 #define DEATHLINK_TRUE_DEATH 0b10
 
+#define LEVEL_SCALING_OFF 0b00
+#define LEVEL_SCALING_EASY 0b01
+#define LEVEL_SCALING_DIFFICULT 0b10
+
 #define NUM_HINTABLES 30
 
 #define SEEK_SET 0
@@ -32,7 +36,7 @@ typedef struct ArchipelagoSettings { // size: 5 bytes
     uint8_t iqMultiplier : 4;                // bits 1 through 4
     bool earlyMissionFloors : 1;             // bit 5
     bool moveShortcuts : 1;                  // bit 6
-    bool levelScaling : 1;                   // bit 7
+    undefined unused_1 : 1;                  // bit 7
     bool typesanity : 1;                     // bit 8
     uint8_t starterOptions : 2;              // bits 9 and 10
     uint8_t deathLinkType : 2;               // bits 11 and 12
@@ -41,18 +45,19 @@ typedef struct ArchipelagoSettings { // size: 5 bytes
     bool dialgaIsGoal : 1;                   // bit 18
     uint8_t ruleDungeonChecks : 1;           // bit 19
     uint8_t totalJobsEarly : 5;              // bits 20 through 24
-    uint8_t unused_1 : 3;                    // bits 25 through 27
+    uint8_t levelScalingMode : 2;            // bits 25 and 26
+    bool levelScaleGuests : 1;               // bit 27
     uint8_t totalOutlawsEarly : 5;           // bits 28 through 32
-    uint8_t unused_2 : 3;                    // bits 33 through 35
+    undefined unused_2 : 3;                  // bits 33 through 35
     uint8_t totalJobsLate : 5;               // bits 36 through 40
-    uint8_t unused_3 : 3;                    // bits 41 through 43
+    undefined unused_3 : 3;                  // bits 41 through 43
     uint8_t totalOutlawsLate : 5;            // bits 44 through 48
     uint8_t requiredRelicFragmentShards : 4; // bits 49 through 52
     uint8_t requiredInstruments : 4;         // bits 53 through 56
     uint8_t cafeEventMax : 5;                // bits 57 through 61
-    uint8_t unused_4 : 3;                    // bits 62 through 64
+    undefined unused_4 : 3;                  // bits 62 through 64
     uint8_t cafeDrinkMax : 5;                // bits 65 through 69
-    uint8_t unused_5 : 3;                    // bits 70 through 72
+    undefined unused_5 : 3;                  // bits 70 through 72
 } ArchipelagoSettings;
 ASSERT_SIZE(struct ArchipelagoSettings, 0x9);
 

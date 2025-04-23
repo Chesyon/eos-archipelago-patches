@@ -23,7 +23,7 @@ uint8_t GetHighestLevelTeamMember(void) {
   TODO: Use a proper condition for the check and possibly rethink how moves are generated.
 */
 __attribute((used)) void CustomGuestMonsterToGroundMonster(struct ground_monster* ground_monster, struct guest_monster* guest_monster) {
-    if(false) { // TODO: Replace with an actual condition
+    if(apSettings.levelScaleGuests && apSettings.levelScalingMode != LEVEL_SCALING_OFF) {
         ground_monster->is_valid = true;
         ground_monster->id = guest_monster->id;
         ground_monster->tactic.val = TACTIC_LETS_GO_TOGETHER;
@@ -40,4 +40,27 @@ __attribute((used)) void CustomGuestMonsterToGroundMonster(struct ground_monster
     }
     else
         GuestMonsterToGroundMonster(ground_monster, guest_monster);
+}
+
+__attribute((naked)) void DoLevelScalingWrapper(){ // just so we don't fuck up the registers...
+  asm("stmdb sp!,{r0-r8, lr}");
+  asm("bl DoLevelScaling");
+  asm("ldmia sp!,{r0-r8, lr}");
+  asm("b IsFullFloorFixedRoom"); // original instruction
+}
+
+void DoLevelScaling(){
+  uint8_t dungeonId = DUNGEON_PTR->id.val;
+  if((dungeonId >= 123 && dungeonId <= 164) || apSettings.levelScalingMode != LEVEL_SCALING_OFF) return; // block level scaling if we're in an SE dungeon or if level scaling is disabled.
+  int maxLevel_mult_512 = GetHighestLevelTeamMember() << 9; // for some reason in the struct, the spawn level is stored as level << 9... so we bitshift it now.
+  for (int i = 0; i < 16; i++){ // iterate through spawn_entries_master
+    uint16_t enemyLevel_mult_512 = DUNGEON_PTR->spawn_entries_master[i].level_mult_512;
+    // there are three conditions for scaling, detailed below. i *could* cram it all into one line but i figured this would be better for readability.
+    bool shouldScale = enemyLevel_mult_512 > maxLevel_mult_512; // only scale if the enemy is ABOVE that the party
+    shouldScale |= apSettings.levelScalingMode == LEVEL_SCALING_DIFFICULT; // UNLESS on difficult mode, in which case we should scale regardless of the enemy level.
+    shouldScale &= enemyLevel_mult_512 > 512; // and lastly, we should NEVER scale an enemy if they're level 1 or 0.
+    if(shouldScale) {
+      DUNGEON_PTR->spawn_entries_master[i].level_mult_512 = maxLevel_mult_512;
+    }
+  }
 }

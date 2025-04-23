@@ -254,7 +254,7 @@
 
 .open "overlay29.bin", overlay29_start
     .org LevelScalingHook
-        bl BranchLevel
+        bl DoLevelScalingWrapper
 
     .org IqScalingDungeonHook
         bl IqScalingDungeon
