@@ -14,11 +14,16 @@ static int SpGetLevelScalingStatus() {
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
 static int SpAccessMissionStatuses(short mode, short missionType) {
     int dungeonId = LoadScriptVariableValue(0, 41);
+    enum dungeon_check_type dungeonCt = GetDungeonCheckType(dungeonId);
+    if(dungeonCt == DCT_OTHER || dungeonCt == DCT_RULE) {
+        return -2;
+    }
+    
     int totalNumber;
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (missionType == 1) { // outlaws
-        if(IsDungeonLateGame(dungeonId)) totalNumber = apSettings.totalOutlawsLate;
+        if(dungeonCt == DCT_LATE) totalNumber = apSettings.totalOutlawsLate;
         else totalNumber = apSettings.totalOutlawsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
@@ -30,7 +35,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
         else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
-        if(IsDungeonLateGame(dungeonId)) totalNumber = apSettings.totalJobsLate;
+        if(dungeonCt == DCT_LATE) totalNumber = apSettings.totalJobsLate;
         else totalNumber = apSettings.totalJobsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {

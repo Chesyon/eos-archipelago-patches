@@ -122,7 +122,18 @@ uint8_t trackerLocationDungeonIds[] = {
     // HERE COMES TEAM CHARM
     // IN THE FUTURE OF DARKNESS
     // Goals (TT)
-    67   // Dark Crater
+    67,  // Dark Crater
+    // RULE
+    99,  // Zero Isle North
+    100, // Zero Isle East
+    101, // Zero Isle West
+    102, // Zero Isle South
+    103, // Zero Isle Center
+    104, // Destiny Tower
+    107, // Oblivion Forest
+    108, // Treacherous Waters
+    109, // Southeastern Islands
+    110, // Inferno Cave
 };
 
 bool IsLocationBonusChecksComplete(enum dungeon_id location) {
@@ -290,6 +301,8 @@ char* bossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
 char* treasureBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
                  "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
                  "[CLUM_SET:128][string:2]: [string:3]";
+char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
+char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -485,15 +498,38 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     preArgs.strings[0] = (GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[location].completedJobs;
     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.missionStats[location].completedOutlaws;
-    if(IsDungeonLateGame(location)) {
-        preArgs.number_vals[1] = apSettings.totalJobsLate;
-        preArgs.number_vals[4] = apSettings.totalOutlawsLate;
-    } else {
-        preArgs.number_vals[1] = apSettings.totalJobsEarly;
-        preArgs.number_vals[4] = apSettings.totalOutlawsEarly;
+    switch(GetDungeonCheckType(location)) {
+        case DCT_LATE:;
+            preArgs.number_vals[1] = apSettings.totalJobsLate;
+            preArgs.number_vals[4] = apSettings.totalOutlawsLate;
+            PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            if(!IsDarkraiGoal()) {
+                PreprocessString(temp, 300, nonEssentialExtraInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 138, temp);
+            }
+            break;
+        case DCT_EARLY:;
+            preArgs.number_vals[1] = apSettings.totalJobsEarly;
+            preArgs.number_vals[4] = apSettings.totalOutlawsEarly;
+            PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            break;
+        case DCT_RULE:;
+            if(IsRuleDungeonChecksEnabled()) {
+                PreprocessString(temp, 300, ruleDungeonInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+                PreprocessString(temp, 300, nonEssentialExtraInfo, preFlags, &preArgs);
+            } else {
+                PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+            }
+            DrawTextInWindow(idx, 1, 138, temp);
+            break;
+        case DCT_OTHER:;
+            PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 138, temp);
+            break;
     }
-    PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
-    DrawTextInWindow(idx, 1, 16, temp);
     
     UpdateWindow(idx);
 }
@@ -709,7 +745,8 @@ void CreateTrackerMenu() {
     struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
     struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
     struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
-    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0]), 8);
+    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn,
+        (sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0])) - (IsRuleDungeonChecksEnabled() ? 0 : 10), 8);
     if(GetTopScreenOptionType() != 5) {
         SetupGroundTopScreenFunctions(&apTrackerMode);
     }

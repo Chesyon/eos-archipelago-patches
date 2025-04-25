@@ -1,7 +1,14 @@
 #include <pmdsky.h>
 #include <cot.h>
 
-bool IsDungeonLateGame(short dunId);
+enum dungeon_check_type {
+    DCT_OTHER = 0,
+    DCT_EARLY = 1,
+    DCT_LATE = 2,
+    DCT_RULE = 3
+};
+
+enum dungeon_check_type GetDungeonCheckType(short dunId);
 
 bool GetSubXBit(int bit);
 
