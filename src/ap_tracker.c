@@ -45,7 +45,7 @@ uint32_t updaterDelay = 0;
 uint8_t trackerLocationDungeonIds[] = {
     // General
     247, // Town
-    // TODO: Rank
+    255, // Cafe
     // Early
     1,   // Beach Cave
     3,   // Drenched Bluff
@@ -188,7 +188,7 @@ char* checkSymbol = "[M:S2][S:8]";
 char* instrumentSymbol = "[M:R9][S:8]";
 char* relicSymbol = "[M:T4][S:8]";
 char* bagSymbol = "[M:S6]";
-char* moneySymbol = "[M:S0][M:S8]";
+char* moneySymbol = "[M:S0]";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -198,6 +198,12 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     char* locationSymbol;
     if (location == 247) {
         locationSymbol = townSymbol;
+    } else if(location == 255) {
+        preArgs.strings[1] = "[CS:P]Spinda's Cafe[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         enum dungeon_mode dmode = GetDungeonMode(location);
         switch(dmode) {
@@ -252,7 +258,6 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
     PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
 
-    
     return buffer;
 }
 
@@ -292,7 +297,7 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
 char* townBankChecks = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
-                   "[CLUM_SET:15][string:0][string:1][string:2][string:3][string:4][string:5]";
+                   "[CLUM_SET:15][string:0][string:1][string:2][string:3][string:4]";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
 char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
 char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
@@ -310,11 +315,16 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     char temp[300];
     struct preprocessor_args preArgs = {.id_vals[0] = location};
     struct preprocessor_flags preFlags = {};
-    PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
+    if(location == 255) {
+        strncpy(temp, "Tracker: [CS:P]Spinda's Cafe[CR]", 300);
+    } else {
+        PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
+    }
     DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
     
     switch(location) {
         case 247:; // Treasure Town
+            char* lockedSymbolBankPadding = "[M:S4][S:4]";
             preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
@@ -336,15 +346,17 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             strncpy(temp, townBankChecks, 300);
-            strncat(temp, GetSubXBit(86) ? moneySymbol : lockedSymbol, 300);
-            strncat(temp, GetSubXBit(87) ? moneySymbol : lockedSymbol, 300);
-            preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
-            preArgs.strings[1] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
-            preArgs.strings[2] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
-            preArgs.strings[3] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
-            preArgs.strings[4] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
-            PreprocessString(temp, 300, temp, preFlags, &preArgs);
+            strncat(temp, GetSubXBit(81) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(82) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(83) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(84) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(85) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(86) ? moneySymbol : lockedSymbolBankPadding, 300);
+            strncat(temp, GetSubXBit(87) ? moneySymbol : lockedSymbolBankPadding, 300);
             DrawTextInWindow(idx, 1, 81, temp);
+            UpdateWindow(idx);
+            return;
+        case 255:;
             UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
