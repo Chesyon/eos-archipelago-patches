@@ -272,9 +272,9 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
         int x = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].cos * radius) >> 12;
         int y = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].sin * radius) >> 12;
         if(i < gotten) {
-            DrawTextInWindow(idx, centerX + x, centerY + y, strLock);
-        } else {
             DrawTextInWindow(idx, centerX + x, centerY + y, strUnlocked);
+        } else {
+            DrawTextInWindow(idx, centerX + x, centerY + y, strLock);
         }
     }
 }
@@ -356,7 +356,15 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
-        case 255:;
+        case 255:; // Cafe
+            DrawCircleBarInTextBox(idx, 8, 25, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 53, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 81, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 109, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 25, 53, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 53, 53, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 81, 53, 4, 2, lockedSymbol, checkSymbol, trackerRotate*32);
+            DrawCircleBarInTextBox(idx, 8, 109, 53, 4, 0, lockedSymbol, checkSymbol, trackerRotate*32);
             UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
@@ -517,8 +525,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             if(!IsDarkraiGoal()) {
-                PreprocessString(temp, 300, nonEssentialExtraInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 138, temp);
+                DrawTextInWindow(idx, 1, 138, nonEssentialExtraInfo);
             }
             break;
         case DCT_EARLY:;
@@ -656,22 +663,42 @@ uint32_t StateManagerTrackerTopScreen() {
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
-                    trackerVelocity = 160;
+                    trackerVelocity = 200;
                     ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                    if(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == 255) {
+                        trackerRotate = 16;
+                    }                        
                     updaterDelay = 0;
                 } else {
-                    trackerRotate += 1 + (trackerVelocity >> 5);
-                    if (trackerVelocity > 0) {
-                        trackerVelocity--;
-                    }
-                    // Without this check, the Treasure Town option on the top
-                    // screen definitely lags the overworld when updating every
-                    // frame. About 70-100% CPU usage.
-                    if(updaterDelay == 15) {
+                    uint8_t location = trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage];
+                    if(location == DUNGEON_DARK_CRATER || location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
+                        trackerRotate += 1 + (trackerVelocity >> 5);
+                        if (trackerVelocity > 0) {
+                            trackerVelocity--;
+                        }
                         ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
-                        updaterDelay = 0;
-                    } else {
-                        updaterDelay++;
+                    } else if(location == 247) {
+                        if(updaterDelay >= 30) {
+                            // There's so much on the top menu for treasure town that updating every frame causes noticeable lag :(
+                            // There could be a better solution? However, the base game does use this method to delay stuff some
+                            // number of frames in some places so it's probably okay.
+                            ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                            updaterDelay = 0;
+                        } else {
+                            updaterDelay++;
+                        }
+                    } else if(location == 255) {
+                        if(updaterDelay >= 512) {
+                            updaterDelay = 0;
+                            trackerRotate = 16;
+                        }
+                        else {
+                            if(updaterDelay < 128) {
+                                trackerRotate++;
+                                ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                            }
+                            updaterDelay++;
+                        }
                     }
                 }
                 apTrackerWindowPtr->faded = 0;
@@ -714,6 +741,9 @@ void InitializeTrackerTopScreen() {
         displayedOption = CUSTOM_SAVE_AREA.trackerPage;
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
         ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
+        if(trackerLocationDungeonIds[displayedOption] == 255) {
+            trackerRotate = 16;
+        }
     }
     apTrackerWindowPtr->state = 3;
 }
