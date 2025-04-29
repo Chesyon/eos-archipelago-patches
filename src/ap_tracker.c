@@ -41,6 +41,8 @@ uint8_t dungeonModeDisplayed = 255;
 uint32_t trackerRotate = 0;
 uint32_t trackerVelocity = 0;
 uint32_t updaterDelay = 0;
+uint8_t drinksDisplayed = 0;
+uint8_t drinkEventsDisplayed = 0;
 
 uint8_t trackerLocationDungeonIds[] = {
     // General
@@ -297,7 +299,7 @@ char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
                              "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
                              "[CLUM_SET:15]Team Charm SE: [string:3]";
 char* townBankChecks = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
-                   "[CLUM_SET:15][string:0][string:1][string:2][string:3][string:4]";
+                   "[CLUM_SET:15]";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
 char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
 char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
@@ -308,6 +310,17 @@ char* treasureBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
                  "[CLUM_SET:128][string:2]: [string:3]";
 char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
 char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
+char* cafeInfo1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
+                  "[CLUM_SET:15]Terra Cymbal Mission: [string:1]\n"
+                  "[CLUM_SET:15]Icy Flute Mission: [string:2]\n"
+                  "[CLUM_SET:15]Fiery Drum Mission: [string:3]\n"
+                  "[CLUM_SET:15]Rock Horn Mission: [string:4]\n";
+char* cafeInfo2 = "[CLUM_SET:15]Sky Melodica Mission: [string:0]\n"
+                  "[CLUM_SET:15]Grass Cornet Mission: [string:1]\n"
+                  "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
+                  "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
+                  "[CLUM_SET:15]Recycle Shop Dungeons:\n"
+                  "[CLUM_SET:15]";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -316,7 +329,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     struct preprocessor_args preArgs = {.id_vals[0] = location};
     struct preprocessor_flags preFlags = {};
     if(location == 255) {
-        strncpy(temp, "Tracker: [CS:P]Spinda's Cafe[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", 300);
     } else {
         PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     }
@@ -357,15 +370,23 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             UpdateWindow(idx);
             return;
         case 255:; // Cafe
-            DrawCircleBarInTextBox(idx, 8, 25, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 53, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 81, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 109, 28, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 25, 53, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 53, 53, 4, 4, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 81, 53, 4, 2, lockedSymbol, checkSymbol, trackerRotate*32);
-            DrawCircleBarInTextBox(idx, 8, 109, 53, 4, 0, lockedSymbol, checkSymbol, trackerRotate*32);
-            UpdateWindow(idx);
+            DrawTextInWindow(idx, 1, 16, "[CLUM_SET:142]Caf~E9 Drinks");
+            DrawTextInWindow(idx, 1, 79, "[CLUM_SET:125]Caf~E9 Drink Events");
+            preArgs.strings[0] = (GetSubXBit(48)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(49)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(50)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(51)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(52)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, cafeInfo1, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.strings[0] = (GetSubXBit(53)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(54)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, cafeInfo2, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            trackerVelocity = 0;
+        UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
         case DUNGEON_TEMPORAL_TOWER:
@@ -569,9 +590,11 @@ void ApTrackerFreeTopScreenBG() {
 }
 
 uint32_t CreateTrackerTopScreen() {
+    drinksDisplayed = 0;
+    drinkEventsDisplayed = 0;
     updaterDelay = 0;
     trackerRotate = 0;
-    trackerVelocity = 160;
+    trackerVelocity = 200;
     apTrackerWindowPtr = MemAlloc(sizeof(TopScreenApTrackerWindow), 0xF);
     ApTrackerFreeTopScreenBG();
     UnkTopScreenFun7(0x10);
@@ -666,7 +689,8 @@ uint32_t StateManagerTrackerTopScreen() {
                     trackerVelocity = 200;
                     ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                     if(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == 255) {
-                        trackerRotate = 16;
+                        drinksDisplayed = 0;
+                        drinkEventsDisplayed = 0;
                     }                        
                     updaterDelay = 0;
                 } else {
@@ -688,17 +712,19 @@ uint32_t StateManagerTrackerTopScreen() {
                             updaterDelay++;
                         }
                     } else if(location == 255) {
-                        if(updaterDelay >= 512) {
+                        if(updaterDelay >= 4) {
                             updaterDelay = 0;
-                            trackerRotate = 16;
-                        }
-                        else {
-                            if(updaterDelay < 128) {
-                                trackerRotate++;
-                                ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                            apSettings.cafeDrinkMax = 31;
+                            apSettings.cafeEventMax = 31;
+                            if(drinksDisplayed != apSettings.cafeDrinkMax || drinkEventsDisplayed != apSettings.cafeEventMax) {
+                                DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 26 + 10*(drinkEventsDisplayed / 8),
+                                    lockedSymbol);
+                                drinkEventsDisplayed++;
+                                drinksDisplayed++;
+                                UpdateWindow(apTrackerWindowPtr->window_id);
                             }
-                            updaterDelay++;
                         }
+                        updaterDelay++;
                     }
                 }
                 apTrackerWindowPtr->faded = 0;
@@ -741,9 +767,6 @@ void InitializeTrackerTopScreen() {
         displayedOption = CUSTOM_SAVE_AREA.trackerPage;
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
         ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
-        if(trackerLocationDungeonIds[displayedOption] == 255) {
-            trackerRotate = 16;
-        }
     }
     apTrackerWindowPtr->state = 3;
 }
@@ -840,7 +863,7 @@ void CreateTrackerTopScreenDungeon() {
             break;
         }
     }
-    trackerVelocity = 160;
+    trackerVelocity = 200;
     dungeonModeDisplayed = dunId;
     dungeonTopScreenId = CreateTextBox(&trackerTopScreenWinParams, NULL);
     ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dunId);
