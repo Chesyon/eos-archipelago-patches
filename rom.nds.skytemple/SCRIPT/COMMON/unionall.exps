@@ -6604,7 +6604,7 @@ coro EVENT_S31_19 {
 
 coro EVENT_S31_20 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_D73P25A, 'S31A2001', 0);
+    ~crass(LEVEL_D73P25A, 'S31A2001', 0,LEVEL_D73P25A, 'S31A2001:2', 0);
     dungeon_mode(115) = DMODE_OPEN_AND_REQUEST;
     switch(dungeon_mode(116)) {
         case DMODE_CLOSED:
@@ -9771,12 +9771,11 @@ coro GETOUT_SCENARIO_DUNGEON {
                         dungeon_mode(68) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_S22_14_15);
                     case 70:
+                        dungeon_mode(70) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+
                     case 71:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        debug_Print("Missions Congealed Ruins");
-                        dungeon_mode(70) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(71) = DMODE_REQUEST;
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 72:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 

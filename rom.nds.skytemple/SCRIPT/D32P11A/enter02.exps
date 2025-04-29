@@ -34,6 +34,7 @@ def 0 {
                     end;
                 default:
                     supervision_ExecuteCommon(CORO_EVENT_S04_05);
+                    hold;
                     jump @label_2;
             }
             break;
