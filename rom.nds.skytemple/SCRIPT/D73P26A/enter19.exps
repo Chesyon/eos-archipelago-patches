@@ -1,23 +1,31 @@
 
 def 0 {
+    $BIT_FUWARANTE_LOCAL[0] = 0;
+    $BIT_FUWARANTE_LOCAL[1] = 0;
+    $BIT_FUWARANTE_LOCAL[2] = 0;
+    $BIT_FUWARANTE_LOCAL[3] = 0;
+    $BIT_FUWARANTE_LOCAL[4] = 1;
     if ($DUNGEON_CONQUEST_LIST[112]) {
-        $BIT_FUWARANTE_LOCAL[1] = 1;
+        if ($DUNGEON_OPEN_LIST[113]) {
+            $BIT_FUWARANTE_LOCAL[1] = 1;
+        }
     }
     if ($DUNGEON_CONQUEST_LIST[114]) {
-        $BIT_FUWARANTE_LOCAL[2] = 1;
+        if ($DUNGEON_OPEN_LIST[115]) {
+            $BIT_FUWARANTE_LOCAL[2] = 1;
+        }
     }
     if ($DUNGEON_CONQUEST_LIST[116]) {
-        $BIT_FUWARANTE_LOCAL[3] = 1;
+        if ($DUNGEON_OPEN_LIST[117]) {
+            // $BIT_FUWARANTE_LOCAL[3] = 1;
+        }
     }
-    
     if ($DUNGEON_OPEN_LIST[175]) {
-       $BIT_FUWARANTE_LOCAL[0] = 0;
+       $BIT_FUWARANTE_LOCAL[0] = 1;
     }
-    $BIT_FUWARANTE_LOCAL[4] = 1;
     switch ( $GROUND_ENTER ) {
         case 156:
             §label_0;
-            $BIT_FUWARANTE_LOCAL[0] = 0;
             §label_4;
             if ( scn($SCENARIO_MAIN) < [29, 18] ) {
                 §label_7;
@@ -268,13 +276,10 @@ def 0 {
             }
             break;
         case 158:
-            $BIT_FUWARANTE_LOCAL[1] = 0;
             jump @label_4;
         case 160:
-            $BIT_FUWARANTE_LOCAL[2] = 0;
             jump @label_4;
         case 162:
-            $BIT_FUWARANTE_LOCAL[3] = 0;
             jump @label_4;
         default:
             jump @label_4;
