@@ -1,28 +1,6 @@
-
+import "sky_peak.exps"; // 0.3.0 Sky peak blocks are in a macro for convenience!
 def 0 {
-    $BIT_FUWARANTE_LOCAL[0] = 0;
-    $BIT_FUWARANTE_LOCAL[1] = 0;
-    $BIT_FUWARANTE_LOCAL[2] = 0;
-    $BIT_FUWARANTE_LOCAL[3] = 0;
-    $BIT_FUWARANTE_LOCAL[4] = 1;
-    if ($DUNGEON_CONQUEST_LIST[112]) {
-        if ($DUNGEON_OPEN_LIST[113]) {
-            $BIT_FUWARANTE_LOCAL[1] = 1;
-        }
-    }
-    if ($DUNGEON_CONQUEST_LIST[114]) {
-        if ($DUNGEON_OPEN_LIST[115]) {
-            $BIT_FUWARANTE_LOCAL[2] = 1;
-        }
-    }
-    if ($DUNGEON_CONQUEST_LIST[116]) {
-        if ($DUNGEON_OPEN_LIST[117]) {
-            // $BIT_FUWARANTE_LOCAL[3] = 1;
-        }
-    }
-    if ($DUNGEON_OPEN_LIST[175]) {
-       $BIT_FUWARANTE_LOCAL[0] = 1;
-    }
+    ~FuwaranteSet(6);
     switch ( $GROUND_ENTER ) {
         case 156:
             §label_0;
