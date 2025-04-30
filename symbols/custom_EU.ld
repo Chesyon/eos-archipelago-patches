@@ -158,6 +158,7 @@ UnkMode5TopScreenDungeon = 0x22E9054;
 CloseMode5TopScreenDungeon = 0x22E9058;
 TopScreenModeSetDungeonMode = 0x22E9658;
 FreeTopScreenBGDungeon = 0x22C2BD0;
+RemoveEmptyItemsInStorage = 0x2010124;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;

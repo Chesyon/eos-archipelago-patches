@@ -289,6 +289,7 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
     }
     
     // If any remain add it as a new stack to storage.
+    RemoveEmptyItemsInStorage();
     itemToAdd.quantity = amountToAdd;
     AddBulkItemToStorage(&itemToAdd);
     return 1; // Add item to storage as a new item.

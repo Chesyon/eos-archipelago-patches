@@ -164,5 +164,6 @@ void InitBackgroundRegionDungeon(uint32_t* regionInfo);
 void LoadBackgroundDungeon(void* thing, uint32_t* regionInfo, uint32_t num1, uint32_t num2);
 void SetupBackgroundDungeon(void* thing);
 void FreeTopScreenBGDungeon(void* thing);
+void RemoveEmptyItemsInStorage();
 
 static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }
