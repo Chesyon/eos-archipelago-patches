@@ -1,7 +1,9 @@
 import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 import "version.exps"; // Leave this for me, I don't want to rename this later lol
+
     macro CheckBankRewards() {
         debug_PrintFlag($BANK_GOLD,"Bank Gold:");
+        value($DUNGEON_EVENT_LOCAL) = value($LOCAL1);
         switch($BANK_GOLD) {
             case < 100:
                 debug_Print("<100");
@@ -11,7 +13,7 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 $LOCAL1 = 1;
                 break;
             case < 10000:
-                debug_Print("<10000");
+                debug_Print("<10000");      
                 $LOCAL1 = 2;
                 break;
             case <= 16383:

@@ -1,5 +1,6 @@
 
 def 0 {
+    debug_Print("If this doesn't print, you do not have the updated version of this script! - Lappy");
     $SCENARIO_TALK_BIT_FLAG[219] = 1;
     $LOCAL1 = 0;
     §label_118;
