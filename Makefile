@@ -188,8 +188,10 @@ asmdump: build
 headers:
 	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --deprecate-aliases --docstrings
 	
+# I don't think we should need rm rom.nds, but...
 .PHONY: rom
 rom:
+	rm rom.nds
 	xdelta3 -d -f -s vanilla.nds unpatched-base.xdelta rom.nds
 
 .PHONY: xdelta
@@ -215,8 +217,7 @@ hintables-location:
 	LANG=C grep -a -b -P -U -o "\xe0\x51\x5b\xad" out.nds | cut -d ":" -f1
 
 .PHONY: out+c
-out+c:
-	make clean && make out
+out+c: clean out
 
 # Apply the xdelta and apply CoT code.
 .PHONY: everything

@@ -263,14 +263,14 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     return buffer;
 }
 
-void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int centerY, int toGet, int gotten, char* strLock, char* strUnlocked, int rotation) {
+void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int centerY, uint32_t toGet, uint32_t gotten, char* strLock, char* strUnlocked, int rotation) {
     if (toGet == 0) {
         return;
     }
     
     uint32_t step = _u32_div_f(4096, toGet);
     
-    for(int i = 0; i < toGet; i++) {
+    for(uint32_t i = 0; i < toGet; i++) {
         int x = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].cos * radius) >> 12;
         int y = ((int)TRIG_TABLE[0xFFF & (step * i + rotation)].sin * radius) >> 12;
         if(i < gotten) {
@@ -371,7 +371,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             return;
         case 255:; // Cafe
             DrawTextInWindow(idx, 1, 16, "[CLUM_SET:142]Caf~E9 Drinks");
-            DrawTextInWindow(idx, 1, 79, "[CLUM_SET:125]Caf~E9 Drink Events");
+            DrawTextInWindow(idx, 1, 79, "[CLUM_SET:142]Caf~E9 Events");
             preArgs.strings[0] = (GetSubXBit(48)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(49)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(50)) ? checkSymbol : lockedSymbol;
@@ -386,7 +386,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, 300, cafeInfo2, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             trackerVelocity = 0;
-        UpdateWindow(idx);
+            UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
         case DUNGEON_TEMPORAL_TOWER:
@@ -714,13 +714,16 @@ uint32_t StateManagerTrackerTopScreen() {
                     } else if(location == 255) {
                         if(updaterDelay >= 4) {
                             updaterDelay = 0;
-                            apSettings.cafeDrinkMax = 31;
-                            apSettings.cafeEventMax = 31;
-                            if(drinksDisplayed != apSettings.cafeDrinkMax || drinkEventsDisplayed != apSettings.cafeEventMax) {
+                            if(drinksDisplayed != apSettings.cafeDrinkMax) {
                                 DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 26 + 10*(drinkEventsDisplayed / 8),
-                                    lockedSymbol);
-                                drinkEventsDisplayed++;
+                                    (drinksDisplayed >= CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks) ? lockedSymbol : checkSymbol);
                                 drinksDisplayed++;
+                                UpdateWindow(apTrackerWindowPtr->window_id);
+                            }
+                            if(drinkEventsDisplayed != apSettings.cafeEventMax) {
+                                DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 89 + 10*(drinkEventsDisplayed / 8),
+                                    (drinksDisplayed >= CUSTOM_SAVE_AREA.acquiredCafeEventChecks) ? lockedSymbol : checkSymbol);
+                                drinkEventsDisplayed++;
                                 UpdateWindow(apTrackerWindowPtr->window_id);
                             }
                         }
