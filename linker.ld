@@ -5,6 +5,7 @@ MEMORY {
                 see https://docs.google.com/document/d/1Rs4icdYtiM6KYnWxMkdlw7jpWrH7qw5v6LOfDWIiYho
         */
         main    : ORIGIN = 0x23D7FF0, LENGTH = 0x6010
+        reserved : ORIGIN = 0x23B1186, LENGTH = 0x2CE70
         /* Change/Add memory locations here */
         /* NEW    : ORIGIN = 0x2000000, LENGTH = 0x800 */
 }
@@ -26,6 +27,21 @@ SECTIONS {
                 Main Section (Default section, in ARM9 overlay 36)
                 Note that you should add your special sections before that
         */
+        .text.ov.36.reserved : {
+                *(.init)
+                *(.text)
+                *(.text.*)
+                *(.fini)
+                *(.ctors)
+                *(.dtors)
+                *(.rodata)
+                *(.rodata.*)
+                *(.data)
+                *(.data.*)
+                *(COMMON)
+                . = ALIGN(4);
+                *(.bss)
+        } >reserved = 0xff
         .text.ov.36.main : {
                 *(.init)
                 *(.text)
