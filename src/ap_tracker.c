@@ -47,6 +47,8 @@ uint8_t drinkEventsDisplayed = 0;
 uint8_t trackerLocationDungeonIds[] = {
     // General
     247, // Town
+    254, // Guild
+    253, // Dojo
     255, // Cafe
     // Early
     1,   // Beach Cave
@@ -206,6 +208,18 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
+    } else if(location == 254) {
+        preArgs.strings[1] = "[CS:P]Wigglytuff Guild[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
+    } else if(location == 253) {
+        preArgs.strings[1] = "[CS:P]Marowak Dojo[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         enum dungeon_mode dmode = GetDungeonMode(location);
         switch(dmode) {
@@ -258,7 +272,7 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     preArgs.strings[0] = locationSymbol;
     
     struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-    PreprocessString(buffer, 0x400, "[string0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
+    PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
 
     return buffer;
 }
@@ -294,12 +308,38 @@ char* shopItemString2 = "[CLUM_SET:128]Shop Item 6: [CLUM_SET:199][string:0]\n"
                         "[CLUM_SET:128]Shop Item 8: [CLUM_SET:199][string:2]\n"
                         "[CLUM_SET:128]Shop Item 9: [CLUM_SET:199][string:3]\n"
                         "[CLUM_SET:128]Shop Item 10: [CLUM_SET:199][string:4]";
-char* specialEpisodeString = "[CLUM_SET:15]Bidoof SE: [string:0]\n"
-                             "[CLUM_SET:15]Sunflora SE: [string:1]\n"
-                             "[CLUM_SET:15]Wigglytuff SE: [string:2]\n"
-                             "[CLUM_SET:15]Team Charm SE: [string:3]";
-char* townBankChecks = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
-                   "[CLUM_SET:15]";
+char* specialEpisodeString = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
+                             "[CLUM_SET:95]Sunflora's SE Location: [string:1]\n"
+                             "[CLUM_SET:95]Igglybuff's SE Location: [string:2]\n"
+                             "[CLUM_SET:95]Team Charm SE Location: [string:3]";
+char* rankChecks1 = "[CLUM_SET:15]Bronze Rank: [string:0]\n"
+                    "[CLUM_SET:15]Silver Rank: [string:1]\n"
+                    "[CLUM_SET:15]Gold Rank: [string:2]\n"
+                    "[CLUM_SET:15]Diamond Rank: [string:3]\n"
+                    "[CLUM_SET:15]Super Rank: [string:4]\n";
+char* rankChecks2 = "[CLUM_SET:15]Ultra Rank: [string:0]\n"
+                    "[CLUM_SET:15]Hyper Rank: [string:1]\n"
+                    "[CLUM_SET:15]Master Rank: [string:2]\n"
+                    "[CLUM_SET:15]Master[M:S3] Rank: [string:3]\n"
+                    "[CLUM_SET:15]Master[M:S3][M:S3] Rank: [string:4]\n";
+char* rankChecks3 = "[CLUM_SET:110]Master[M:S3][M:S3][M:S3] Rank: [string:0]\n"
+                    "[CLUM_SET:110]Guildmaster Rank: [string:1]\n";
+char* guildExtraInfo = "[CLUM_SET:110]Ranks Above Master\n"
+                       "[CLUM_SET:110]Are Non-Essential";
+char* townBankChecks1 = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
+                        "[CLUM_SET:13]100G: [string:0]\n"
+                        "[CLUM_SET:15]5000G: [string:1]\n"
+                        "[CLUM_SET:13]10000G: [string:2]\n"
+                        "[CLUM_SET:15]20000G: [string:3]\n";
+char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
+                        "[CLUM_SET:13]100000G: [string:1]\n"
+                        "[CLUM_SET:15]9999999G: [string:2]\n"
+                        "[CLUM_SET:15]Checks Above 20000G\n"
+                        "[CLUM_SET:15]Are Non-Essential.";
+char* beachCaveExtras = "[CLUM_SET:128][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
+                        "[CLUM_SET:128][CS:C]After Completing[CR]:\n"
+                        "[CLUM_SET:128]Bag Upgrade 0: [string:0]\n"
+                        "[CLUM_SET:15]Team Name: [string:1]\n";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
 char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
 char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
@@ -321,6 +361,18 @@ char* cafeInfo2 = "[CLUM_SET:15]Sky Melodica Mission: [string:0]\n"
                   "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
                   "[CLUM_SET:15]Recycle Shop Dungeons:\n"
                   "[CLUM_SET:15]";
+char* dojoInfo1 = "[CLUM_SET:15][CS:P]Normal/Fly Maze[CR]: [string:0]\n"
+                  "[CLUM_SET:15][CS:P]Dark/Fire Maze[CR]: [string:1]\n"
+                  "[CLUM_SET:15][CS:P]Rock/Water Maze[CR]: [string:2]\n"
+                  "[CLUM_SET:15][CS:P]Grass Maze[CR]: [string:3]\n"
+                  "[CLUM_SET:15][CS:P]Elec/Steel Maze[CR]: [string:4]\n";
+char* dojoInfo2 = "[CLUM_SET:15][CS:P]Ice/Ground Maze[CR]: [string:0]\n"
+                  "[CLUM_SET:15][CS:P]Fight/Psych Maze[CR]: [string:1]\n"
+                  "[CLUM_SET:15][CS:P]Poison/Bug Maze[CR]: [string:2]\n"
+                  "[CLUM_SET:15][CS:P]Dragon Maze[CR]: [string:3]\n"
+                  "[CLUM_SET:15][CS:P]Ghost Maze[CR]: [string:4]\n"
+                  "[CLUM_SET:15][CS:P]Final Maze[CR]: ";
+
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -330,6 +382,10 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     struct preprocessor_flags preFlags = {};
     if(location == 255) {
         strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", 300);
+    } else if (location == 254) {
+        strncpy(temp, "Tracker: [CS:P]Wigglytuff Guild[CR]", 300);
+    } else if (location == 253) {
+        strncpy(temp, "Tracker: [CS:P]Marowak Dojo[CR]", 300);
     } else {
         PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     }
@@ -337,7 +393,6 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     
     switch(location) {
         case 247:; // Treasure Town
-            char* lockedSymbolBankPadding = "[M:S4][S:4]";
             preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
@@ -352,20 +407,63 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
+            
+            preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
+            PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
+            PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            UpdateWindow(idx);
+            return;
+        case 254:; // Guild
+            preArgs.strings[0] = (GetSubXBit(73)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(74)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(75)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(76)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(77)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, rankChecks1, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.strings[0] = (GetSubXBit(78)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(79)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetSubXBit(80)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetSubXBit(55)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetSubXBit(56)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, rankChecks2, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            preArgs.strings[0] = (GetSubXBit(57)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(58)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, rankChecks3, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 68, temp);
+            DrawTextInWindow(idx, 1, 133, guildExtraInfo);
+            UpdateWindow(idx);
+            return;
+        case 253:; // Dojo
+            preArgs.strings[0] = (GetDungeonMode(180) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetDungeonMode(181) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetDungeonMode(182) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetDungeonMode(183) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetDungeonMode(184) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, dojoInfo1, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            strncpy(temp, townBankChecks, 300);
-            strncat(temp, GetSubXBit(81) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(82) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(83) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(84) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(85) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(86) ? moneySymbol : lockedSymbolBankPadding, 300);
-            strncat(temp, GetSubXBit(87) ? moneySymbol : lockedSymbolBankPadding, 300);
+            preArgs.strings[0] = (GetDungeonMode(185) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetDungeonMode(186) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (GetDungeonMode(187) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (GetDungeonMode(188) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (GetDungeonMode(189) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, dojoInfo2, preFlags, &preArgs);
+            strncat(temp, (GetDungeonMode(191) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol, 300);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
@@ -384,8 +482,14 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, cafeInfo2, preFlags, &preArgs);
+            strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
+            strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
+            strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+            if (IsDarkraiGoal()) {
+                strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
+                strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+            }
             DrawTextInWindow(idx, 1, 81, temp);
-            trackerVelocity = 0;
             UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
@@ -416,6 +520,10 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             break;
         case DUNGEON_BEACH_CAVE:
+            preArgs.strings[0] = (GetSubXBit(0)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, beachCaveExtras, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
             DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
             break;
         case DUNGEON_STEAM_CAVE:
@@ -701,7 +809,7 @@ uint32_t StateManagerTrackerTopScreen() {
                             trackerVelocity--;
                         }
                         ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
-                    } else if(location == 247) {
+                    } else if(location == 247 || 254) {
                         if(updaterDelay >= 30) {
                             // There's so much on the top menu for treasure town that updating every frame causes noticeable lag :(
                             // There could be a better solution? However, the base game does use this method to delay stuff some

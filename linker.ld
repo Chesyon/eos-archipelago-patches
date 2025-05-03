@@ -38,7 +38,6 @@ SECTIONS {
                 *(.rodata.*)
                 *(.data)
                 *(.data.*)
-                *(COMMON)
                 . = ALIGN(4);
                 *(.bss)
         } >reserved = 0xff
