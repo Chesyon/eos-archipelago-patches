@@ -188,10 +188,12 @@ asmdump: build
 headers:
 	cd pmdsky-debug/headers && $(PYTHON) augment_headers.py --aliases --deprecate-aliases --docstrings
 	
-# I don't think we should need rm rom.nds, but...
+.PHONY: backup
+backup: 
+	cp rom.nds backup-"`date +"%s"`".nds
+	
 .PHONY: rom
-rom:
-	rm rom.nds
+rom: backup
 	xdelta3 -d -f -s vanilla.nds unpatched-base.xdelta rom.nds
 
 .PHONY: xdelta
@@ -225,7 +227,7 @@ everything: rom out+c overlay36-location hintables-location
 
 # Make an xdelta and apply CoT code.
 .PHONY: everything+x
-everything+x: xdelta out+c overlay36-location hintables-location
+everything+x: backup xdelta out+c overlay36-location hintables-location
 
 # Don't apply or make an xdelta, and apply CoT code. (same as out-c)
 .PHONY: everything-x
