@@ -326,6 +326,12 @@ static int SpGetCurrentBagCapacity(){
     return GetCurrentBagCapacity();
 }
 
+// Special Process 113: Get if a hint has been checked or not. Takes hint idx as input, returns 0 if unchecked, 1 if checked, 2 if idx is invalid.
+static int SpIsHintChecked(short idx){
+    if(idx >= NUM_HINTABLES) return 2;
+    else return (int)CUSTOM_SAVE_AREA.hintedItems[idx];
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
