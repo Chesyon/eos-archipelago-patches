@@ -227,7 +227,7 @@ everything: rom out+c overlay36-location hintables-location
 
 # Make an xdelta and apply CoT code.
 .PHONY: everything+x
-everything+x: backup xdelta out+c overlay36-location hintables-location
+everything+x: xdelta out+c overlay36-location hintables-location
 
 # Don't apply or make an xdelta, and apply CoT code. (same as out-c)
 .PHONY: everything-x
