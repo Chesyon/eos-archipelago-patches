@@ -237,7 +237,7 @@ def 0 {
                                         spanish="\n[CN]¡Atención!",
                                     });
                                     message_Mail("[CN][CS:P]Miracle Sea[CR] is intended to be cleared only\n[CN]once [CS:G]Manaphy[CR] falls ill.[K] You can still obtain\n[CN]normal dungeon checks and complete missions.");
-                                    message_Mail("[CN]However, you will not fight [CS:G]Gyarados[CR],\n[CN]cannot obtain the Phione Dew, nor recruit\n[CS:G]Phione[CR] until [CN][CS:G]Manaphy[CR] is sick. Is that OK?");
+                                    message_Mail("[CN]However, you will not fight [CS:G]Gyarados[CR],\n[CN]cannot obtain the Phione Dew, nor recruit\n[CN][CS:G]Phione[CR] until [CS:G]Manaphy[CR] is sick. Is that OK?");
                                     jump @label_32;
                                 }
                                 break;
