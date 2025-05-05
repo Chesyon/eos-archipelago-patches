@@ -119,14 +119,13 @@ uint8_t trackerLocationDungeonIds[] = {
     120, // Sky Peak Summit Pass
     122, // Sky Peak Summit
     174, // Star Cave
-    // Special Episodes TODO
-    // WISH
-    // PRODIGY
-    // OH MY GOSH
-    // HERE COMES TEAM CHARM
-    // IN THE FUTURE OF DARKNESS
-    // Goals (TT)
+    // Special Episodes
     67,  // Dark Crater
+    252, // Bidoof SE
+    251, // Igglybuff SE
+    250, // Sunflora SE
+    249, // Charm SE
+    248, // Future SE
     // RULE
     99,  // Zero Isle North
     100, // Zero Isle East
@@ -220,6 +219,36 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
+    } else if(location == 252) {
+        preArgs.strings[1] = "[CS:P]Bidoof's SE[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
+    } else if(location == 251) {
+        preArgs.strings[1] = "[CS:P]Igglybuff's SE[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
+    } else if(location == 250) {
+        preArgs.strings[1] = "[CS:P]Sunflora's SE[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
+    } else if(location == 249) {
+        preArgs.strings[1] = "[CS:P]Team Charm SE[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
+    } else if(location == 248) {
+        preArgs.strings[1] = "[CS:P]Future SE[CR]";
+        preArgs.strings[0] = townSymbol;
+        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        return buffer;
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         enum dungeon_mode dmode = GetDungeonMode(location);
         switch(dmode) {
@@ -295,6 +324,7 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
     }
 }
 
+// TODO: Move into a text file or the text strings file.
 char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
                        "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
                        "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
@@ -372,7 +402,41 @@ char* dojoInfo2 = "[CLUM_SET:15][CS:P]Ice/Ground Maze[CR]: [string:0]\n"
                   "[CLUM_SET:15][CS:P]Dragon Maze[CR]: [string:3]\n"
                   "[CLUM_SET:15][CS:P]Ghost Maze[CR]: [string:4]\n"
                   "[CLUM_SET:15][CS:P]Final Maze[CR]: ";
-
+char* bidoofDungeonChecks = "[CLUM_SET:15][CS:P]SE Marowak Dojo's Revival[CR]: [string:0]\n"
+                            "[CLUM_SET:15][CS:P]SE Deep Star Cave[CR]: [string:1]\n"
+                            "[CLUM_SET:15][CS:P]SE Star Cave Pit[CR]: [string:2]";
+char* iggybuffDungeonChecks = "[CLUM_SET:15][CS:P]SE Murky Forest[CR]: [string:0]\n"
+                            "[CLUM_SET:15][CS:P]SE Eastern Cave[CR]: [string:1]\n"
+                            "[CLUM_SET:15][CS:P]SE Fortune Ravine[CR]: [string:2]";
+char* sunfloraDungeonChecks = "[CLUM_SET:15][CS:P]SE Upper Spring Cave[CR]: [string:0]\n"
+                              "[CLUM_SET:15][CS:P]SE Middle Spring Cave[CR]: [string:1]\n"
+                              "[CLUM_SET:15][CS:P]SE Spring Cave Pit[CR]: [string:2]";
+char* charmDungeonChecks = "[CLUM_SET:15][CS:P]SE Southern Jungle[CR]: [string:0]\n"
+                           "[CLUM_SET:15][CS:P]SE Boulder Quarry[CR]: [string:1]\n"
+                           "[CLUM_SET:15][CS:P]SE Right Cave Path[CR]: [string:2]\n"
+                           "[CLUM_SET:15][CS:P]SE Left Cave Path[CR]: [string:3]\n"
+                           "[CLUM_SET:15][CS:P]SE Limestone Cavern[CR]: [string:4]";
+char* susknoirDungeonChecks1 = "[CLUM_SET:15][CS:P]SE Barren Valley[CR]: [string:0]\n"
+                               "[CLUM_SET:15][CS:P]SE Dark Wasteland[CR]: [string:1]\n"
+                               "[CLUM_SET:15][CS:P]SE Temporal Tower[CR]: [string:2]\n"
+                               "[CLUM_SET:15][CS:P]SE Dusk Forest[CR]: [string:3]\n"
+                               "[CLUM_SET:15][CS:P]SE Spacial Cliffs[CR]: [string:4]";
+char* susknoirDungeonChecks2 = "[CLUM_SET:15][CS:P]SE Dark Ice Mountain[CR]: [string:0]\n"
+                               "[CLUM_SET:15][CS:P]SE Icicle Forest[CR]: [string:1]\n"
+                               "[CLUM_SET:15][CS:P]SE Vast Ice Mountain[CR]: [string:2]";
+char* bidoSunfCafeChecks = "[CLUM_SET:15]Igglybuff's SE Location: [string:0]\n"
+                           "[CLUM_SET:15]Team Charm SE Location: [string:1]\n"
+                           "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
+                           "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
+                           "[CLUM_SET:15]Caf~E9 Drinks: [value:0:1]/[value:1:1]"
+                           "[CLUM_SET:15]Caf~E9 Events: [value:2:1]/[value:3:1]"
+                           "[CLUM_SET:15]Recycle Shop Dungeons:\n"
+                           "[CLUM_SET:15]";
+char* bidoSunfGuildChecks = "[CLUM_SET:15]Bidoof's SE Location: [string:0]\n"
+                            "[CLUM_SET:15]Sunflora's SE Location: [string:1]\n"
+                            "[CLUM_SET:15]Note: the Igglybuff and Team Charm\n"
+                            "[CLUM_SET:15]SE locations are in Spinda\'s Cafe\n"
+                            "[CLUM_SET:15]during this Special Episode!";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -386,6 +450,16 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         strncpy(temp, "Tracker: [CS:P]Wigglytuff Guild[CR]", 300);
     } else if (location == 253) {
         strncpy(temp, "Tracker: [CS:P]Marowak Dojo[CR]", 300);
+    } else if (location == 252) {
+        strncpy(temp, "Tracker: [CS:P]Bidoof's Wish[CR]", 300);
+    } else if (location == 251) {
+        strncpy(temp, "Tracker: [CS:P]Igglybuff The Prodigy[CR]", 300);
+    } else if (location == 250) {
+        strncpy(temp, "Tracker: [CS:P]Today's \"Oh My Gosh\"[CR]", 300);
+    } else if (location == 249) {
+        strncpy(temp, "Tracker: [CS:P]Here Comes Team Charm[CR]", 300);
+    } else if (location == 248) {
+        strncpy(temp, "Tracker: [CS:P]In The Future of Darkness[CR]", 300);
     } else {
         PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
     }
@@ -492,6 +566,84 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
+        case 252: // Bidoof SE
+            preArgs.strings[0] = GetSubXBit(66) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(DUNGEON_DEEP_STAR_CAVE) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(DUNGEON_STAR_CAVE_PIT) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, bidoofDungeonChecks, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
+                case LEVEL_T01P01A:;
+                case LEVEL_T01P02A:;
+                    preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 16, temp);
+                    preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 81, temp);
+                    preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
+                    PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 49, temp);
+                    preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
+                    PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 114, temp);
+                    break;
+                case LEVEL_P01P04A:;
+                    preArgs.strings[0] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
+                    preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
+                    preArgs.number_vals[1] = apSettings.cafeDrinkMax;
+                    preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
+                    preArgs.number_vals[3] = apSettings.cafeEventMax;
+                    PreprocessString(temp, 300, bidoSunfCafeChecks, preFlags, &preArgs);
+                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
+                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
+                    strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+                    if (IsDarkraiGoal()) {
+                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
+                        strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+                    }
+                    DrawTextInWindow(idx, 1, 49, temp);
+                    break;
+                case LEVEL_G01P01A:;
+                case LEVEL_G01P02A:;
+                case LEVEL_G01P03A:;
+                case LEVEL_G01P04A:;
+                case LEVEL_G01P05A:;
+                case LEVEL_G01P06A:;
+                case LEVEL_G01P07A:;
+                case LEVEL_G01P08A:;
+                case LEVEL_G01P09A:;
+                case LEVEL_G01P10A:;
+                    preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, bidoSunfCafeChecks, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 62, temp);
+                    break;
+                default:
+                    break;
+            }
+            UpdateWindow(idx);
+            return;
+        case 251: // Igglybuff SE
+        case 250: // Sunflora SE
+        case 249: // Team Charm SE
+        case 248: // Future SE
         case DUNGEON_HIDDEN_LAND:
         case DUNGEON_TEMPORAL_TOWER:
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
@@ -819,7 +971,7 @@ uint32_t StateManagerTrackerTopScreen() {
                         } else {
                             updaterDelay++;
                         }
-                    } else if(location == 255) {
+                    } else if(location == 255 || location == 252 || location == 250) {
                         if(updaterDelay >= 4) {
                             updaterDelay = 0;
                             if(drinksDisplayed != apSettings.cafeDrinkMax) {
