@@ -309,8 +309,8 @@ char* shopItemString2 = "[CLUM_SET:128]Shop Item 6: [CLUM_SET:199][string:0]\n"
                         "[CLUM_SET:128]Shop Item 9: [CLUM_SET:199][string:3]\n"
                         "[CLUM_SET:128]Shop Item 10: [CLUM_SET:199][string:4]";
 char* specialEpisodeString = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
-                             "[CLUM_SET:95]Sunflora's SE Location: [string:1]\n"
-                             "[CLUM_SET:95]Igglybuff's SE Location: [string:2]\n"
+                             "[CLUM_SET:95]Igglybuff's SE Location: [string:1]\n"
+                             "[CLUM_SET:95]Sunflora's SE Location: [string:2]\n"
                              "[CLUM_SET:95]Team Charm SE Location: [string:3]";
 char* rankChecks1 = "[CLUM_SET:15]Bronze Rank: [string:0]\n"
                     "[CLUM_SET:15]Silver Rank: [string:1]\n"
