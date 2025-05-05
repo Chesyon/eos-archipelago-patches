@@ -402,6 +402,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 112:
         *return_val = SpGetCurrentBagCapacity();
         return true;
+    case 113:
+        *return_val = SpIsHintChecked(arg1);
+        return true;
     case 255:
         *return_val = SpGetCrassKind();
         return true;
