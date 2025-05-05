@@ -10,13 +10,13 @@ bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf
     {
         index = AtoiTag(tag_string_param);
         hintcpy((int)who, index, buf);
+        CUSTOM_SAVE_AREA.hintedItems[index] = true;
         return true;
     }
     if(StrcmpTag(tag_string, "qhat"))
     {
         index = AtoiTag(tag_string_param);
         hintcpy((int)what, index, buf);
-        CUSTOM_SAVE_AREA.hintedItems[index] = true;
         return true;
     }
     if(StrcmpTag(tag_string, "qhere"))
