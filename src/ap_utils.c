@@ -83,3 +83,11 @@ bool IsDarkraiGoal() {
 bool IsRuleDungeonChecksEnabled() {
     return true;
 }
+
+enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id) {
+    if(DUNGEON_BOTTOMLESS_SEA <= dungeon_id && dungeon_id <= DUNGEON_DEEP_MYSTERY_JUNGLE) {
+        return GetSubXBit((dungeon_id - DUNGEON_BOTTOMLESS_SEA)/2 + 48) ? DMODE_OPEN_AND_REQUEST : DMODE_CLOSED;
+    }
+    
+    return GetDungeonMode(dungeon_id);
+}
