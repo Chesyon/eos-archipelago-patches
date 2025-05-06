@@ -1,0 +1,255 @@
+def 0 {
+    switch(ProcessSpecial(113,13,0)) { // Non-Torkoal Hint 1
+        case 2: // Hint 13 failed?
+        case 1: // Hint 13 read
+            break;
+        case 0: // Hint not read
+            jump @apple_hint;
+    }
+    switch(ProcessSpecial(113,14,0)) { // Non-Torkoal Hint 2
+        case 2: // Hint 14 failed?
+        case 1: // Hint 14 read
+            supervision_RemoveCommon(18);
+            JumpCommon(CORO_END_TALK);
+        case 0: // Hint 14 not read
+            jump @drowzee_hint;
+            break;
+    }
+    §drowzee_hint;
+    Wait(15);
+    bgm_Stop();
+    se_Play(6414);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(11);
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        SetAnimation(11);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2DirectionLives(4,10,ACTOR_PLAYER);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4,10,ACTOR_NPC_SURIIPU);
+    }
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk({
+        english=" Whoops![K] Excuse me.",
+        french=" Oh![K] Pardon.",
+        german=" Hoppla![K] Entschuldigung.",
+        italian=" Ops![K] Scusa.",
+        spanish=" ¡Vaya![K] Perdón.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2Direction(4,10,DIR_LEFT);
+    }
+    Wait(30);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_L_FACEOUTW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Urk...[K] Wh-what is this...?)",
+                french="(Argh...[K] Mais qu\'est-ce que...?)",
+                german="(Urks...[K] W-was ist das?)",
+                italian="(Urk...[K] C-C-Cosa...?)",
+                spanish="(¡Ay!...[K] ¿Qué... qué está pasando?)",
+            }
+        default:
+            {
+                english="(Urk...[K] Wh-what is this...?)",
+                french="(Argh...[K] Mais qu\'est-ce que...?)",
+                german="(Urks...[K] W-was ist das?)",
+                italian="(Urk...[K] C-C-Cosa...?)",
+                spanish="(¡Ay!...[K] ¿Qué... qué está pasando?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2DirectionLives(4,10,ACTOR_PLAYER);
+    }
+    message_Talk(" Are...[W:30] you alright [hero]?");
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_L_FACEOUTW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(It\'s happening again...)",
+                french="(Ça recommence...)",
+                german="(Es passiert schon wieder.)",
+                italian="(Sta succedendo di nuovo...)",
+                spanish="(Me está volviendo a pasar...)",
+            }
+        default:
+            {
+                english="(It\'s happening again...)",
+                french="(Ça recommence...)",
+                german="(Es passiert schon wieder.)",
+                italian="(Sta succedendo di nuovo...)",
+                spanish="(Me está volviendo a pasar...)",
+            }
+    }
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk(" Look...[W:30] I\'m sorry I\nbumped into you, okay?[K]\nEarth to [hero]...");
+    message_Close();
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_L_FACEOUTW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Another dizzy spell...)",
+                french="(Mes vertiges recommencent...)",
+                german="(Noch ein Schwindelanfall...)",
+                italian="(Un altro capogiro...)",
+                spanish="(Otra vez ese mareo...)",
+            }
+        default:
+            {
+                english="(Another dizzy spell...)",
+                french="(Mes vertiges recommencent...)",
+                german="(Noch ein Schwindelanfall...)",
+                italian="(Un altro capogiro...)",
+                spanish="(Otra vez ese mareo...)",
+            }
+    }
+    message_Close();
+    message_SetFace(ACTOR_NPC_PARTNER, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk(" Another scream, [c_stammer:PLAYER]-[W:10]");
+    message_CloseEnforce();
+    screen_FadeOutAll(1, 5);
+    CallCommon(CORO_FADE_OUT_ALL_AFTER);
+    with(actor ACTOR_PLAYER) {
+        SavePosition(0);
+    }
+    with(actor ACTOR_ATTENDANT_PARTNER) {
+        SavePosition(1);
+    }
+    supervision_ExecuteCommon(CORO_EVENT_M03_04);
+    hold;
+    
+    
+    §apple_hint;
+    bgm_FadeOut(10);
+    Wait(15);
+    bgm_Stop();
+    se_Play(6414);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(11);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    message_Mail("[CN][hero] bumped into the apple!");    
+    message_Mail({
+        english="\n[CN]But then suddenly...",
+        french="\n[CN]C\'est à cet instant précis que...",
+        german="\n[CN]Doch auf einmal...",
+        italian="\n[CN]Ma poi, improvvisamente...",
+        spanish="\n[CN]Pero de pronto...",
+    });
+    message_Close();
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SetFace(ACTOR_PLAYER, FACE_PAIN, FACE_POS_BOTTOM_L_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(Huh? What was that?)",
+                french="(Quoi? Qu\'est-ce que c\'était?)",
+                german="(Äh? Was war das?)",
+                italian="(Eh? Cosa è stato?)",
+                spanish="(¿Eh? ¿Qué ha sido eso?)",
+            }
+        default:
+            {
+                english="(Huh? What was that?)",
+                french="(Quoi? Qu\'est-ce que c\'était?)",
+                german="(Äh? Was war das?)",
+                italian="(Eh? Cosa è stato?)",
+                spanish="(¿Eh? ¿Qué ha sido eso?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    Wait(30);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(D-dizzy? Or am I...?)",
+                french="(J\'ai des vertiges? Ou alors...?)",
+                german="(Sch-schwindelig? Wirklich?)",
+                italian="(U-Un capogiro? O sono...?)",
+                spanish="(¿Es un mareo? ¿O qué me está...?)",
+            }
+        default:
+            {
+                english="(D-dizzy? Or am I...?)",
+                french="(J\'ai des vertiges? Ou alors...?)",
+                german="(Sch-schwindelig? Wirklich?)",
+                italian="(U-Un capogiro? O sono...?)",
+                spanish="(¿Es un mareo? ¿O qué me está...?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(5133);
+    screen_FlushOut(1, 4, 4, 128, 96, 64);
+    screen_FlushIn(1, 8, 4, 128, 96, 64);
+    screen_FlushOut(1, 8, 4, 128, 96, 64);
+    screen_FlushIn(1, 12, 4, 128, 96, 64);
+    screen_FlushIn(1, 0, 1, 0, 0, 0);
+    screen_FadeOutAll(1, 5);
+    CallCommon(CORO_FADE_OUT_ALL_AFTER);
+    with(actor ACTOR_PLAYER) {
+        SavePosition(0);
+    }
+    with(actor ACTOR_ATTENDANT_PARTNER) {
+        SavePosition(1);
+    }
+    supervision_ExecuteCommon(CORO_EVENT_M03_03);  
+    hold;
+}

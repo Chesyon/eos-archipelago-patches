@@ -40,6 +40,19 @@ def 0 {
                                 end;
                             default:
                                 switch ( $GROUND_GETOUT ) {
+                                    case 1001:
+                                    case 1000:
+                                        supervision_StationCommon(1);
+                                        with (actor ACTOR_PLAYER) {
+                                            LoadPosition(0);
+                                        }
+                                        with (actor ACTOR_ATTENDANT_PARTNER) {
+                                            LoadPosition(0);
+                                        }
+                                        with (actor ACTOR_ATTENDANT_PARTNER) {
+                                            SetPositionOffset(48, 0);
+                                        }
+                                        jump @scream_return;
                                     case 999:
                                         supervision_StationCommon(16);
                                         Wait(60);
@@ -182,19 +195,48 @@ def 0 {
                         debug_Print('RESUME');
                         ProcessSpecial(23,0,0); // Randomize Demo Actors
                     }
+                    supervision_StationCommon(20);
                     switch (dungeon_mode(4)) {
                         case DMODE_OPEN_AND_REQUEST:
                             switch (dungeon_mode(63)) {
                                 case DMODE_OPEN:
                                 case DMODE_OPEN_AND_REQUEST:
-                                    supervision_StationCommon(14);
                                     supervision_StationCommon(15);
+                                    switch(ProcessSpecial(113,13,0)) { // Non-Torkoal Hint 1
+                                        case 2: // Hint 13 failed?
+                                        case 1: // Hint 13 read
+                                            switch(ProcessSpecial(113,14,0)) { // Non-Torkoal Hint 2
+                                                case 2: // Hint 14 failed?
+                                                case 1: // Hint 14 read
+                                                    break;
+                                                case 0: // Hint 14 not read
+                                                    supervision_StationCommon(18);
+                                                    break;
+                                            }
+                                            break;
+                                        case 0: // Hint not read
+                                            supervision_StationCommon(18);
+                                            break;
+                                    }
+                                    break;
                                 default:
+                                    jump @azurill;
+                            }
+                            jump @no_azurill;
+                        default:
+                            §azurill;
+                            supervision_StationCommon(14);
+                            switch(ProcessSpecial(113,13,0)) { // Non-Torkoal Hint 1
+                                case 2: // Hint failed?
+                                case 1: // Hint read
+                                    break;
+                                case 0: // Hint not read
+                                    supervision_StationCommon(18);
                                     break;
                             }
-                        default:
                             break;
                     }
+                    §no_azurill;
                     if ( scn($SCENARIO_MAIN) >= [7, 3] ) {
                         §label_7;
                         if ( scn($SCENARIO_MAIN) < [6, 3] ) {
@@ -346,6 +388,241 @@ def 0 {
             }
             break;
     }
+    §scream_return;
+    screen_FadeInAll(0, 30);
+    screen_FadeIn(1, 0);
+    if ($GROUND_GETOUT == 1001) {
+        with (actor ACTOR_NPC_SURIIPU) {
+            SetDirectionLives(10,ACTOR_ATTENDANT1);
+        }
+        message_SetFace(ACTOR_NPC_SURIIPU, FACE_WORRIED, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" So does this happen often, or...[W:60]");
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT_PARTNER) {
+        SetAnimation(2);
+    }
+    if ($GROUND_GETOUT == 1001) {
+        with (actor ACTOR_NPC_SURIIPU) {
+            SetAnimation(2);
+        }
+    }
+    Wait(30);
+    se_Play(8973);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    if ($GROUND_GETOUT == 1001) {
+        with (actor ACTOR_NPC_SURIIPU) {
+            Turn2DirectionLives(4,10,ACTOR_PLAYER);
+        }
+        with (actor ACTOR_NPC_SURIIPU) {
+            SetEffect(EFFECT_SHOCKED, 3);
+        }
+        message_CloseEnforce();
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(5);
+    }
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(32972, 8, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    message_SetFace(ACTOR_PLAYER, FACE_SURPRISED, FACE_POS_BOTTOM_L_FACEINW);
+    message_SwitchMonologue ($HERO_TALK_KIND) {
+        case 4:
+            {
+                english="(What was that?)",
+                french="(C\'était quoi?)",
+                german="(Was war das?)",
+                italian="(Cosa è stato?)",
+                spanish="(¿Qué ha sido eso?)",
+            }
+        default:
+            {
+                english="(What was that?)",
+                french="(C\'était quoi?)",
+                german="(Was war das?)",
+                italian="(Cosa è stato?)",
+                spanish="(¿Qué ha sido eso?)",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionTurn(4, 2, 4);
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionTurn(4, 1, 5);
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionTurn(4, 2, 4);
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    Wait(30);
+    bgm_FadeOut(120);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(20);
+    se_Play(8978);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    if ($GROUND_GETOUT == 1000) {
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Huh?[K] What\'s wrong,\n[hero]?",
+                    french=" Hein?[K] Qu\'est-ce qu\'il y a,\n[hero]?",
+                    german=" Äh?[K] Was ist los,\n[hero]?",
+                    italian=" Eh?[K] Cosa c\'è che non va,\n[hero]?",
+                    spanish=" ¿Eh?[K] ¿Qué te pasa,\n[hero]?",
+                }
+            case 2:
+                {
+                    english=" Oh?[K] What\'s the matter,\n[hero]?",
+                    french=" Hein?[K] Qu\'est-ce qu\'il y a,\n[hero]?",
+                    german=" Oh![K] Was ist mit dir,\n[hero]?",
+                    italian=" Eh?[K] Cosa c\'è che non va,\n[hero]?",
+                    spanish=" ¿Eh?[K] ¿Qué te ocurre,\n[hero]?",
+                }
+            default:
+                {
+                    english=" Huh?[K] What\'s the matter,\n[hero]?",
+                    french=" Hein?[K] Qu\'est-ce qu\'il y a,\n[hero]?",
+                    german=" Häh?[K] Was ist mit dir,\n[hero]?",
+                    italian=" Eh?[K] Cosa c\'è che non va,\n[hero]?",
+                    spanish=" ¿Eh?[K] ¿Qué te ocurre,\n[hero]?",
+                }
+        }
+        message_Close();
+    } else {
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
+        }
+        message_SetFace(ACTOR_NPC_SURIIPU, FACE_HAPPY, FACE_POS_BOTTOM_L_FACEINW);
+        message_Talk(" So...[W:30] what\'d ya see, space cadet?");
+        message_Close();
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(2, 10, ACTOR_ATTENDANT1);
+        }
+        message_SetFace(ACTOR_ATTENDANT_PARTNER,FACE_ANGRY,FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk(" [CS:G]Drowzee[CR]!");
+        
+        message_SetFace(ACTOR_ATTENDANT_PARTNER,FACE_HAPPY,FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk(" I\'m glad you\'re safe, [hero]![K]\nDid you see anything interesting?\nYou\'ve been out for about 5 minutes...");
+        message_Close();
+    }
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+        }
+        WaitExecuteLives(ACTOR_PLAYER);
+        Wait(30);
+        with (actor ACTOR_PLAYER) {
+            ExecuteCommon(CORO_EXPLANATION_FUNC_SERIES, 0);
+        }
+        WaitExecuteLives(ACTOR_PLAYER);
+    if ($GROUND_GETOUT == 1000) {
+        se_Play(8962);
+        with (actor ACTOR_ATTENDANT1) {
+            SetEffect(EFFECT_QUESTION_MARK, 3);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Huh? Did I hear anything strange\njust then?",
+                    french=" Quoi? Si j\'ai entendu\nun appel au secours à l\'instant?",
+                    german=" Äh? Ob ich vorhin einen\nHilfeschrei gehört habe?",
+                    italian=" Eh? Se ho sentito qualcuno \nchiedere aiuto poco fa?",
+                    spanish=" ¿Cómo? ¿Que si he oído\nun grito de socorro?",
+                }
+            case 2:
+                {
+                    english=" Huh? Did I hear anything strange\njust then?",
+                    french=" Quoi? Si j\'ai entendu\nun appel au secours à l\'instant?",
+                    german=" Äh? Ob ich vorhin einen\nHilfeschrei gehört habe?",
+                    italian=" Eh? Se ho sentito qualcuno \nchiedere aiuto poco fa?",
+                    spanish=" ¿Qué dices? ¿Que si he oído\nun grito de socorro?",
+                }
+            default:
+                {
+                    english=" Pardon? Did I hear anything\nstrange just then?",
+                    french=" Quoi? Si j\'ai entendu\nun appel au secours à l\'instant?",
+                    german=" Äh? Ob ich vorhin einen\nHilfeschrei gehört habe?",
+                    italian=" Eh? Se ho sentito qualcuno \nchiedere aiuto poco fa?",
+                    spanish=" ¿Qué? ¿Que si he oído\nun grito de socorro?",
+                }
+        }
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Uh, no... I didn\'t hear anything\nlike that!",
+                    french=" Euh, non... je n\'ai rien entendu\nde ce genre!",
+                    german=" Äh, nein... Ich habe niemanden\nschreien gehört!",
+                    italian=" Ehm, no... Non ho sentito \nniente del genere!",
+                    spanish=" No... Yo no he oído nada.",
+                }
+            case 2:
+                {
+                    english=" Uh, no... I didn\'t hear anything\nlike that!",
+                    french=" Euh, non... je n\'ai rien entendu\nde ce genre!",
+                    german=" Äh, nein... Ich habe niemanden\nschreien gehört!",
+                    italian=" Ehm, no... Non ho sentito \nniente del genere!",
+                    spanish=" No... Yo no he oído nada.",
+                }
+            default:
+                {
+                    english=" Uh, no... I didn\'t hear anything\nlike that!",
+                    french=" Euh, non... je n\'ai rien entendu\nde ce genre!",
+                    german=" Äh, nein... Ich habe niemanden\nschreien gehört!",
+                    italian=" Ehm, no... Non ho sentito \nniente del genere!",
+                    spanish=" No... Yo no he oído nada.",
+                }
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        if (debug) {
+            message_Talk(" You say you heard something about a\n[hero] in [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]?\nI wonder what it means?");
+        } else {
+            message_Talk(" You say you heard something about a\n[qhat:13] in [qho:13]\'s [qhere:13]?\nI wonder what it means?");
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    } else {
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        if (debug) {
+            message_Talk(" You say you heard something about a\n[hero] in [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]?\nI wonder what it means?");
+            message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" Right! I completely forgot about\nthat...[W:30] I heard about the [hero] from\n[CS:G]Torkoal[CR], he might know more.");
+        } else {
+            message_Talk(" You say you heard something about a\n[qhat:14] in [qho:14]\'s [qhere:14]?\nI wonder what it means?");    
+            message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" Right! I completely forgot about\nthat...[W:30] I heard about the [qhat:14] from\n[CS:G]Torkoal[CR], he might know more.");
+        }
+        message_Close();
+    }
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    JumpCommon(CORO_END_TALK);
+    return;
+    
 }
 
 def 1 for_actor(ACTOR_PLAYER) {
@@ -372,6 +649,7 @@ def 3 for_object(OBJECT_P01P01A1_122) {
     }
 }
 
+
 def 4 for_actor(ACTOR_PLAYER_BIPPA) {
     SetAnimation(2);
     WaitScreenFade();
@@ -393,7 +671,21 @@ def 6 for_actor(ACTOR_NPC_DEMO_PARTNER) {
     end;
 }
 
-def 7 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
+def 7 for_actor(ACTOR_NPC_RURIRI) {
+    SetAnimation(6);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 8 for_object(OBJECT_P03P02A1_128) {
+    SetAnimation(18);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 9 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
     SetHeight(10);
     forever {
         MoveHeight(1,11);

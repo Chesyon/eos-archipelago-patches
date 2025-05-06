@@ -3335,27 +3335,28 @@ coro EVENT_M03_02 {
 
 coro EVENT_M03_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03A0301', 0);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-    supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03D0313', 0);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
-    supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03D0314', 0);
-    CallCommon(CORO_EVENT_END_MAPIN);
-    main_SetGround(LEVEL_T01P02A);
-    supervision_ExecuteStationCommon(LEVEL_T01P02A, 1);
+    //supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03A0301', 0);
+    ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+    ~crass(LEVEL_T01P02A, 'M03D0313', 0, LEVEL_T01P02A, 'M03D0313:2', 0);
+    ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
+    // supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03D0314', 0);
+    main_SetGround(LEVEL_P01P01A);
+    $GROUND_GETOUT = 1000;
+    supervision_ExecuteStationCommon(LEVEL_P01P01A, 0);
+    hold;
     end;
 }
 
 coro EVENT_M03_04 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0401', 0);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-    supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03D0812', 1);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
-    supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0403', 0);
-    CallCommon(CORO_EVENT_END_MAPIN);
-    main_SetGround(LEVEL_T01P01A);
-    supervision_ExecuteStationCommon(LEVEL_T01P01A, 1);
+    // supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0401', 0);
+    ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+    ~crass(LEVEL_D03P41A, 'M03D0812', 1, LEVEL_D03P41A, 'M03D0812:2', 1);
+    ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
+    // supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0403', 0);
+    main_SetGround(LEVEL_P01P01A);
+    $GROUND_GETOUT = 1001;
+    supervision_ExecuteStationCommon(LEVEL_P01P01A, 0);
     end;
 }
 
@@ -3389,7 +3390,7 @@ coro EVENT_M03_07B {
 coro EVENT_M03_08 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03A0801', 0);
-    supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03D0812', 0);
+    ~crass(LEVEL_D03P41A, 'M03D0812', 0, LEVEL_D03P41A, 'M03D0812:2', 0);
     supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03D0813', 0);
     end;
 }
@@ -8774,10 +8775,6 @@ coro GETOUT_NORMAL {
                     jump @label_689;
                 }
                 break;
-            case 177:
-                dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
-                supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
-                hold;
             case 16:
                 screen_FadeOut(0,30);
                 bgm_FadeOut(30);
@@ -8815,11 +8812,6 @@ coro GETOUT_NORMAL {
             case 71:
                 ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_ONLY,0,0);
                 jump @label_667;
-            case 178:
-                dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
-                main_EnterGround(LEVEL_P02P01A, 30);
-                hold;
-                end;
             case 179:
                 $SCENARIO_MAIN_BIT_FLAG[3] = 0;
                 dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
@@ -8895,13 +8887,6 @@ coro GETOUT_NORMAL {
                 screen_FadeOut(0,30);
                 bgm_FadeOut(30);
                 screen2_FadeOut(1,30);
-                /*
-                message_Mail("Wait a minute, this isn\'t [CS:P]Labyrinth Cave[CR]![K]\nIt\'s actually [CS:P]Labyrinth Cove[CR]!");
-                message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
-                message_Talk(" [CS:P]Cove[CR]?");
-                message_Mail("Yes, [CS:P]Cove[CR].");
-                message_Close();
-                */
                 main_EnterDungeon(172,30);
                 main_EnterDungeon(-1,30);
                 hold;
@@ -9036,6 +9021,19 @@ coro ENTER_SCENARIO_DUNGEON {
             debug_Print('ENTER_CHARMS');
             jump @label_710;
         default:
+            switch($DUNGEON_ENTER_INDEX) {
+                case 178:
+                    dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
+                    main_EnterGround(LEVEL_P02P01A, 30);
+                    hold;
+                    end;
+                case 177:
+                    dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
+                    supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
+                    hold;
+                default:
+                    break;
+            }
             if ( scn($SCENARIO_MAIN) == [6, 4] ) {
                 screen_FadeOut(1, 30);
                 supervision_ExecuteCommon(CORO_EVENT_M05_03);

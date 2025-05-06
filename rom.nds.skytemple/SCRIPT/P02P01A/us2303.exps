@@ -12,7 +12,7 @@ def 0 {
     with (actor ACTOR_ATTENDANT1) {
         Turn2DirectionLives(4, 10, ACTOR_NPC_KOOTASU);
     }
-    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
     call @wipe_hints;
     if ( $DUNGEON_CONQUEST_LIST[69] ) { // Darkrai defeated!
         message_Talk({
@@ -37,7 +37,11 @@ def 0 {
             spanish=" Y por eso puedo quedarme aquí\nen las rocas de relax... ¡Jo, jo, jo!",
         });
         message_Close();
-        call @unlock_all_hints;
+        if (debug) {
+            call @wipe_hints;
+        } else {
+            call @unlock_all_hints;
+        }
     } elseif ( $PERFORMANCE_PROGRESS_LIST[17] ) { // Dialga defeated
         message_Talk({
             english=" I can\'t soak in the Hot Spring\nmyself...",
@@ -54,9 +58,13 @@ def 0 {
             spanish=" Pero me quedo aquí en las rocas\ncalientes, relajándome. ¡Jo, jo, jo!",
         });
         message_Close();
-        call @hint_3_check;
-        call @hint_2_check;
-        call @hint_1_check;
+        if (debug) {
+            call @wipe_hints;
+        } else {
+            call @hint_3_check;
+            call @hint_2_check;
+            call @hint_1_check;
+        }
     } elseif ( $DUNGEON_CONQUEST_LIST[40] ) { // Old Ruin Conquered
         message_Talk({
             english=" Oh, my goodness gracious![K]\nYou say you made it to the [CS:P]Hidden Land[CR]?!",
@@ -80,8 +88,12 @@ def 0 {
             spanish=" Debo admitir que sois una pareja\nde grandes exploradores. ¡Jo, jo, jo!",
         });
         message_Close();
-        call @hint_2_check;
-        call @hint_1_check;
+        if (debug) {
+            call @wipe_hints;
+        } else {
+            call @hint_2_check;
+            call @hint_1_check;
+        }
     } else {
         message_Talk({
             english=" I can\'t soak in the Hot Spring\nmyself...",
@@ -98,7 +110,11 @@ def 0 {
             spanish=" Pero me quedo aquí en las rocas\ncalientes, relajándome. ¡Jo, jo, jo!",
         });
         message_Close();
-        call @hint_1_check;
+        if (debug) {
+            call @wipe_hints;
+        } else {
+            call @hint_1_check;
+        }
     }
     message_Talk({
         english=" Hm? Ah, my young friends![W:30]\nCome to wash away your exhaustion?",
@@ -134,244 +150,384 @@ def 0 {
     switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
         case menu("[CS:B]Torkoal Hidden Land[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:10]?");
+            call @huh_0;
             jump @i_forgor;
         case menu("[M:R7]Torkoal Hidden Land"):
             $DUNGEON_ARRIVE_LIST[1] = 0;
             $DUNGEON_ARRIVE_LIST[2] = 1;
         case menu("Torkoal Hidden Land"):
             message_Close();
-            message_Talk(" You want to know about [qhat:10]?");
+            call @huh_0;
             call @hint_0;
             jump @keep_going;
+            §huh_0;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:10]?");
+            }
+            return;
         case menu("[CS:B]Torkoal Pre-Dialga[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:11]?");
+            call @huh_1;
             jump @i_forgor;
         case menu("[M:R7]Torkoal Pre-Dialga"):
             $DUNGEON_ARRIVE_LIST[4] = 0;
             $DUNGEON_ARRIVE_LIST[5] = 1;
         case menu("Torkoal Pre-Dialga"):
             message_Close();
-            message_Talk(" You want to know about [qhat:11]?");
+            call @huh_1;
             call @hint_1;
             jump @keep_going;
+            §huh_1;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:11]?");
+            }
+            return;
         case menu("[CS:B]Torkoal Post-Dialga[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:12]?");
+            call @huh_2;
             jump @i_forgor;
         case menu("[M:R7]Torkoal Post-Dialga"):
             $DUNGEON_ARRIVE_LIST[7] = 0;
             $DUNGEON_ARRIVE_LIST[8] = 1;
         case menu("Torkoal Post-Dialga"):
             message_Close();
-            message_Talk(" You want to know about [qhat:12]?");
+            call @huh_2;
             call @hint_2;
             jump @keep_going;
-        case menu("[CS:B]Non-Torkoal Hint 1[CR]"):
+            §huh_2;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:12]?");
+            }
+            return;
+        case menu("[CS:B]Azumarill Apple[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:13]?");
+            call @huh_3;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 1"):
+        case menu("[M:R7]Azumarill Apple"):
             $DUNGEON_ARRIVE_LIST[10] = 0;
             $DUNGEON_ARRIVE_LIST[11] = 1;
-        case menu("Non-Torkoal Hint 1"):
+        case menu("Azumarill Apple"):
             message_Close();
-            message_Talk(" You want to know about [qhat:13]?");
+            call @huh_3;
             call @hint_3;
             jump @keep_going;
-        case menu("[CS:B]Non-Torkoal Hint 2[CR]"):
+            §huh_3;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:13]?");
+            }
+            return;
+        case menu("[CS:B]Drowzee Bump[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:14]?");
+            call @huh_4;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 2"):
+        case menu("[M:R7]Drowzee Bump"):
             $DUNGEON_ARRIVE_LIST[13] = 0;
             $DUNGEON_ARRIVE_LIST[14] = 1;
-        case menu("Non-Torkoal Hint 2"):
+        case menu("Drowzee Bump"):
             message_Close();
-            message_Talk(" You want to know about [qhat:14]?");
+            call @huh_4;
             call @hint_4;
             jump @keep_going;
+            §huh_4;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:14]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 3[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:15]?");
+            call @huh_5;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 3"):
             $DUNGEON_ARRIVE_LIST[16] = 0;
             $DUNGEON_ARRIVE_LIST[17] = 1;
         case menu("Non-Torkoal Hint 3"):
             message_Close();
-            message_Talk(" You want to know about [qhat:15]?");
+            call @huh_5;
             call @hint_5;
             jump @keep_going;
+            §huh_5;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:15]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 4[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:16]?");
+            call @huh_6;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 4"):
             $DUNGEON_ARRIVE_LIST[19] = 0;
             $DUNGEON_ARRIVE_LIST[20] = 1;
         case menu("Non-Torkoal Hint 4"):
             message_Close();
-            message_Talk(" You want to know about [qhat:16]?");
+            call @huh_6;
             call @hint_6;
             jump @keep_going;
+            §huh_6;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:16]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 5[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:17]?");
+            call @huh_7;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 5"):
             $DUNGEON_ARRIVE_LIST[22] = 0;
             $DUNGEON_ARRIVE_LIST[23] = 1;
         case menu("Non-Torkoal Hint 5"):
             message_Close();
-            message_Talk(" You want to know about [qhat:17]?");
+            call @huh_7;
             call @hint_7;
             jump @keep_going;
+            §huh_7;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:17]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 6[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:18]?");
+            call @huh_8;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 6"):
             $DUNGEON_ARRIVE_LIST[25] = 0;
             $DUNGEON_ARRIVE_LIST[26] = 1;
         case menu("Non-Torkoal Hint 6"):
             message_Close();
-            message_Talk(" You want to know about [qhat:18]?");
+            call @huh_8;
             call @hint_8;
             jump @keep_going;
+            §huh_8;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:18]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 7[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:19]?");
+            call @huh_9;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 7"):
             $DUNGEON_ARRIVE_LIST[28] = 0;
             $DUNGEON_ARRIVE_LIST[29] = 1;
         case menu("Non-Torkoal Hint 7"):
             message_Close();
-            message_Talk(" You want to know about [qhat:19]?");
+            call @huh_9;
             call @hint_9;
             jump @keep_going;
+            §huh_9;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:19]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 8[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:20]?");
+            call @huh_10;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 8"):
             $DUNGEON_ARRIVE_LIST[31] = 0;
             $DUNGEON_ARRIVE_LIST[32] = 1;
         case menu("Non-Torkoal Hint 8"):
             message_Close();
-            message_Talk(" You want to know about [qhat:20]?");
+            call @huh_10;
             call @hint_10;
             jump @keep_going;
+            §huh_10;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:20]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 9[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:21]?");
+            call @huh_11;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 9"):
             $DUNGEON_ARRIVE_LIST[34] = 0;
             $DUNGEON_ARRIVE_LIST[35] = 1;
         case menu("Non-Torkoal Hint 9"):
             message_Close();
-            message_Talk(" You want to know about [qhat:21]?");
+            call @huh_11;
             call @hint_11;
             jump @keep_going;
+            §huh_11;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:21]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 10[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:22]?");
+            call @huh_12;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 10"):
             $DUNGEON_ARRIVE_LIST[37] = 0;
             $DUNGEON_ARRIVE_LIST[38] = 1;
         case menu("Non-Torkoal Hint 10"):
             message_Close();
-            message_Talk(" You want to know about [qhat:22]?");
+            call @huh_12;
             call @hint_12;
             jump @keep_going;
+            §huh_12;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:22]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 11[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:23]?");
+            call @huh_13;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 11"):
             $DUNGEON_ARRIVE_LIST[40] = 0;
             $DUNGEON_ARRIVE_LIST[41] = 1;
         case menu("Non-Torkoal Hint 11"):
             message_Close();
-            message_Talk(" You want to know about [qhat:23]?");
+            call @huh_13;
             call @hint_13;
             jump @keep_going;
+            §huh_13;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:23]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 12[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:24]?");
+            call @huh_14;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 12"):
             $DUNGEON_ARRIVE_LIST[43] = 0;
             $DUNGEON_ARRIVE_LIST[44] = 1;
         case menu("Non-Torkoal Hint 12"):
             message_Close();
-            message_Talk(" You want to know about [qhat:24]?");
+            call @huh_14;
             call @hint_14;
             jump @keep_going;
+            §huh_14;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:24]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 13[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:25]?");
+            call @huh_15;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 13"):
             $DUNGEON_ARRIVE_LIST[46] = 0;
             $DUNGEON_ARRIVE_LIST[47] = 1;
         case menu("Non-Torkoal Hint 13"):
             message_Close();
-            message_Talk(" You want to know about [qhat:25]?");
+            call @huh_15;
             call @hint_15;
             jump @keep_going;
+            §huh_15;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:25]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 14[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:26]?");
+            call @huh_16;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 14"):
             $DUNGEON_ARRIVE_LIST[49] = 0;
             $DUNGEON_ARRIVE_LIST[50] = 1;
         case menu("Non-Torkoal Hint 14"):
             message_Close();
-            message_Talk(" You want to know about [qhat:26]?");
+            call @huh_16;
             call @hint_16;
             jump @keep_going;
+            §huh_16;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:26]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 15[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:27]?");
+            call @huh_17;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 15"):
             $DUNGEON_ARRIVE_LIST[52] = 0;
             $DUNGEON_ARRIVE_LIST[53] = 1;
         case menu("Non-Torkoal Hint 15"):
             message_Close();
-            message_Talk(" You want to know about [qhat:27]?");
+            call @huh_17;
             call @hint_17;
             jump @keep_going;
+            §huh_17;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:27]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 16[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:28]?");
+            call @huh_18;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 16"):
             $DUNGEON_ARRIVE_LIST[55] = 0;
             $DUNGEON_ARRIVE_LIST[56] = 1;
         case menu("Non-Torkoal Hint 16"):
             message_Close();
-            message_Talk(" You want to know about [qhat:28]?");
+            call @huh_18;
             call @hint_18;
             jump @keep_going;
+            §huh_18;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:28]?");
+            }
+            return;
         case menu("[CS:B]Non-Torkoal Hint 17[CR]"):
             message_Close();
-            message_Talk(" You want to know about [qhat:29]?");
+            call @huh_19;
             jump @i_forgor;
         case menu("[M:R7]Non-Torkoal Hint 17"):
             $DUNGEON_ARRIVE_LIST[58] = 0;
             $DUNGEON_ARRIVE_LIST[59] = 1;
         case menu("Non-Torkoal Hint 17"):
             message_Close();
-            message_Talk(" You want to know about [qhat:29]?");
+            call @huh_19;
             call @hint_19;
             jump @keep_going;
+            §huh_19;
+            if (debug) {
+               message_Talk(" You want to know about [partner]?");
+            } else {
+               message_Talk(" You want to know about [qhat:29]?");
+            }
+            return;
         case menu("Never Mind"):
         default:
             message_Close();
@@ -394,7 +550,7 @@ def 0 {
     }
     WaitExecuteLives(ACTOR_NPC_KOOTASU);
     Wait(30);
-    message_SetFace(ACTOR_NPC_KOOTASU, FACE_SIGH, FACE_POS_TOP_C_FACEL);
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_SIGH, FACE_POS_TOP_LC_FACEOUTW);
     message_Talk({
         english=" Er...[K] Er...[K] Now what were they?",
         french=" Euh...[K] euh...[K] qu\'est-ce\nque c\'était déjà?",
@@ -416,7 +572,7 @@ def 0 {
         Turn2Direction(8, 10, DIR_DOWN);
     }
     WaitExecuteLives(ACTOR_NPC_KOOTASU);
-    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_LC_FACEOUTW);
     message_Talk({
         english=" I\'m sorry.[K] It\'s slipped my mind.",
         french=" Ça m\'est sorti de la tête.[K]\nDésolé.",
@@ -427,105 +583,185 @@ def 0 {
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     jump @keep_going;
     §hint_0;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:10]\'s [qhat:10] is fabled to be found in\nthe depths of [qhere:10]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:10] is fabled to be found in\nthe depths of [qho:10]\'s [qhere:10]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_1;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:11]\'s [qhat:11] is fabled to be found in\nthe depths of [qhere:11]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:11] is fabled to be found in\nthe depths of [qho:11]\'s [qhere:11]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_2;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:12]\'s [qhat:12] is fabled to be found in\nthe depths of [qhere:12]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:12] is fabled to be found in\nthe depths of [qho:12]\'s [qhere:12]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_3;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:13]\'s [qhat:13] is fabled to be found in\nthe depths of [qhere:13]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:13] is fabled to be found in\nthe depths of [qho:13]\'s [qhere:13]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_4;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:14]\'s [qhat:14] is fabled to be found in\nthe depths of [qhere:14]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:14] is fabled to be found in\nthe depths of [qho:14]\'s [qhere:14]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_5;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:15]\'s [qhat:15] is fabled to be found in\nthe depths of [qhere:15]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:15] is fabled to be found in\nthe depths of [qho:15]\'s [qhere:15]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_6;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:16]\'s [qhat:16] is fabled to be found in\nthe depths of [qhere:16]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:16] is fabled to be found in\nthe depths of [qho:16]\'s [qhere:16]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_7;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:17]\'s [qhat:17] is fabled to be found in\nthe depths of [qhere:17]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:17] is fabled to be found in\nthe depths of [qho:17]\'s [qhere:17]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_8;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:18]\'s [qhat:18] is fabled to be found in\nthe depths of [qhere:18]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:18] is fabled to be found in\nthe depths of [qho:18]\'s [qhere:18]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_9;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:19]\'s [qhat:19] is fabled to be found in\nthe depths of [qhere:19]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:19] is fabled to be found in\nthe depths of [qho:19]\'s [qhere:19]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_10;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:20]\'s [qhat:20] is fabled to be found in\nthe depths of [qhere:20]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:20] is fabled to be found in\nthe depths of [qho:20]\'s [qhere:20]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_11;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:21]\'s [qhat:21] is fabled to be found in\nthe depths of [qhere:21]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:21] is fabled to be found in\nthe depths of [qho:21]\'s [qhere:21]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_12;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:22]\'s [qhat:22] is fabled to be found in\nthe depths of [qhere:22]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:22] is fabled to be found in\nthe depths of [qho:22]\'s [qhere:22]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_13;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:23]\'s [qhat:23] is fabled to be found in\nthe depths of [qhere:23]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:23] is fabled to be found in\nthe depths of [qho:23]\'s [qhere:23]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_14;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:24]\'s [qhat:24] is fabled to be found in\nthe depths of [qhere:24]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:24] is fabled to be found in\nthe depths of [qho:24]\'s [qhere:24]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_15;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:25]\'s [qhat:25] is fabled to be found in\nthe depths of [qhere:25]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:25] is fabled to be found in\nthe depths of [qho:25]\'s [qhere:25]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_16;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:26]\'s [qhat:26] is fabled to be found in\nthe depths of [qhere:26]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:26] is fabled to be found in\nthe depths of [qho:26]\'s [qhere:26]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_17;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:27]\'s [qhat:27] is fabled to be found in\nthe depths of [qhere:27]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:27] is fabled to be found in\nthe depths of [qho:27]\'s [qhere:27]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_18;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:28]\'s [qhat:28] is fabled to be found in\nthe depths of [qhere:28]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:28] is fabled to be found in\nthe depths of [qho:28]\'s [qhere:28]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
     return;
     §hint_19;
-    message_Talk(" Ah yes, I remember it clearly!\n[qho:29]\'s [qhat:29] is fabled to be found in\nthe depths of [qhere:29]!");
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:29] is fabled to be found in\nthe depths of [qho:29]\'s [qhere:29]!");
+    }
     message_Talk(" Was that helpful?");
     message_Close();
-    return;    
+    return;
     hold;
     §hint_3_check;
     switch(ProcessSpecial(113,12,0)) { // Torkoal Hint 3
@@ -935,7 +1171,8 @@ def 0 {
     $DUNGEON_ARRIVE_LIST[60] = 1;
     return;
     §keep_going;
-    message_Talk(" Was there anything else you wanted to ask?");
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk(" Was there anything else\nyou wanted to ask me?");
     jump @menu_2;
     
     
