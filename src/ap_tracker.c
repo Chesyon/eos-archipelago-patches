@@ -328,16 +328,16 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
 char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
                        "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
                        "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
-char* shopItemString1 = "[CLUM_SET:128]Shop Item 1: [CLUM_SET:199][string:0]\n"
-                        "[CLUM_SET:128]Shop Item 2: [CLUM_SET:199][string:1]\n"
-                        "[CLUM_SET:128]Shop Item 3: [CLUM_SET:199][string:2]\n"
-                        "[CLUM_SET:128]Shop Item 4: [CLUM_SET:199][string:3]\n"
-                        "[CLUM_SET:128]Shop Item 5: [CLUM_SET:199][string:4]\n";
-char* shopItemString2 = "[CLUM_SET:128]Shop Item 6: [CLUM_SET:199][string:0]\n"
-                        "[CLUM_SET:128]Shop Item 7: [CLUM_SET:199][string:1]\n"
-                        "[CLUM_SET:128]Shop Item 8: [CLUM_SET:199][string:2]\n"
-                        "[CLUM_SET:128]Shop Item 9: [CLUM_SET:199][string:3]\n"
-                        "[CLUM_SET:128]Shop Item 10: [CLUM_SET:199][string:4]";
+char* shopItemString1 = "[CLUM_SET:132]Shop Item 1: [CLUM_SET:202][string:0]\n"
+                        "[CLUM_SET:132]Shop Item 2: [CLUM_SET:202][string:1]\n"
+                        "[CLUM_SET:132]Shop Item 3: [CLUM_SET:202][string:2]\n"
+                        "[CLUM_SET:132]Shop Item 4: [CLUM_SET:202][string:3]\n"
+                        "[CLUM_SET:132]Shop Item 5: [CLUM_SET:202][string:4]\n";
+char* shopItemString2 = "[CLUM_SET:132]Shop Item 6: [CLUM_SET:202][string:0]\n"
+                        "[CLUM_SET:132]Shop Item 7: [CLUM_SET:202][string:1]\n"
+                        "[CLUM_SET:132]Shop Item 8: [CLUM_SET:202][string:2]\n"
+                        "[CLUM_SET:132]Shop Item 9: [CLUM_SET:202][string:3]\n"
+                        "[CLUM_SET:132]Shop Item 10: [CLUM_SET:199][string:4]";
 char* specialEpisodeString = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
                              "[CLUM_SET:95]Igglybuff's SE Location: [string:1]\n"
                              "[CLUM_SET:95]Sunflora's SE Location: [string:2]\n"
@@ -408,8 +408,8 @@ char* bidoofDungeonChecks = "[CLUM_SET:15][CS:P]SE Marowak Dojo's Revival[CR]: [
 char* iggybuffDungeonChecks = "[CLUM_SET:15][CS:P]SE Murky Forest[CR]: [string:0]\n"
                             "[CLUM_SET:15][CS:P]SE Eastern Cave[CR]: [string:1]\n"
                             "[CLUM_SET:15][CS:P]SE Fortune Ravine[CR]: [string:2]";
-char* sunfloraDungeonChecks = "[CLUM_SET:15][CS:P]SE Upper Spring Cave[CR]: [string:0]\n"
-                              "[CLUM_SET:15][CS:P]SE Middle Spring Cave[CR]: [string:1]\n"
+char* sunfloraDungeonChecks = "[CLUM_SET:15][CS:P]SE Middle Spring Cave[CR]: [string:1]\n"
+                              "[CLUM_SET:15][CS:P]SE Upper Spring Cave[CR]: [string:0]\n"
                               "[CLUM_SET:15][CS:P]SE Spring Cave Pit[CR]: [string:2]";
 char* charmDungeonChecks = "[CLUM_SET:15][CS:P]SE Southern Jungle[CR]: [string:0]\n"
                            "[CLUM_SET:15][CS:P]SE Boulder Quarry[CR]: [string:1]\n"
@@ -424,14 +424,14 @@ char* susknoirDungeonChecks1 = "[CLUM_SET:15][CS:P]SE Barren Valley[CR]: [string
 char* susknoirDungeonChecks2 = "[CLUM_SET:15][CS:P]SE Dark Ice Mountain[CR]: [string:0]\n"
                                "[CLUM_SET:15][CS:P]SE Icicle Forest[CR]: [string:1]\n"
                                "[CLUM_SET:15][CS:P]SE Vast Ice Mountain[CR]: [string:2]";
-char* bidoSunfCafeChecks = "[CLUM_SET:15]Igglybuff's SE Location: [string:0]\n"
-                           "[CLUM_SET:15]Team Charm SE Location: [string:1]\n"
-                           "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
-                           "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
-                           "[CLUM_SET:15]Caf~E9 Drinks: [value:0:1]/[value:1:1]"
-                           "[CLUM_SET:15]Caf~E9 Events: [value:2:1]/[value:3:1]"
-                           "[CLUM_SET:15]Recycle Shop Dungeons:\n"
-                           "[CLUM_SET:15]";
+char* bidoSunfCafeChecks1 = "[CLUM_SET:15]Igglybuff's SE Location: [string:0]\n"
+                            "[CLUM_SET:15]Team Charm SE Location: [string:1]\n"
+                            "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
+                            "[CLUM_SET:15]Ludicolo Dance: [string:3]";
+char* bidoSunfCafeChecks2= "[CLUM_SET:15]Caf~E9 Drinks: [value:0:1]/[value:1:1]\n"
+                            "[CLUM_SET:15]Caf~E9 Events: [value:2:1]/[value:3:1]\n"
+                            "[CLUM_SET:15]Recycle Shop Dungeons:\n"
+                            "[CLUM_SET:15]";
 char* bidoSunfGuildChecks = "[CLUM_SET:15]Bidoof's SE Location: [string:0]\n"
                             "[CLUM_SET:15]Sunflora's SE Location: [string:1]\n"
                             "[CLUM_SET:15]Note: the Igglybuff and Team Charm\n"
@@ -573,44 +573,46 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, 300, bidoofDungeonChecks, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
-                case LEVEL_T01P01A:;
-                case LEVEL_T01P02A:;
+                case 323:; // Likely because our pmdsky-debug is outdated. The value for T01P01A/T01P02A
+                case 324:; // is different between EU/NA/JP. So, need to use raw non-enum value.
                     preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
                     PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
-                    DrawTextInWindow(idx, 1, 16, temp);
+                    DrawTextInWindow(idx, 1, 29, temp);
                     preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
                     PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
-                    DrawTextInWindow(idx, 1, 81, temp);
+                    DrawTextInWindow(idx, 1, 94, temp);
                     preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
                     PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
-                    DrawTextInWindow(idx, 1, 49, temp);
+                    DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
                     PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
-                    DrawTextInWindow(idx, 1, 114, temp);
+                    DrawTextInWindow(idx, 1, 120, temp);
                     break;
                 case LEVEL_P01P04A:;
                     preArgs.strings[0] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, bidoSunfCafeChecks1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
                     preArgs.number_vals[1] = apSettings.cafeDrinkMax;
                     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
                     preArgs.number_vals[3] = apSettings.cafeEventMax;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks, preFlags, &preArgs);
+                    PreprocessString(temp, 300, bidoSunfCafeChecks2, preFlags, &preArgs);
                     strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
                     strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
                     strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
@@ -618,7 +620,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                         strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
                         strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
                     }
-                    DrawTextInWindow(idx, 1, 49, temp);
+                    DrawTextInWindow(idx, 1, 107, temp);
                     break;
                 case LEVEL_G01P01A:;
                 case LEVEL_G01P02A:;
@@ -632,19 +634,124 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 case LEVEL_G01P10A:;
                     preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks, preFlags, &preArgs);
-                    DrawTextInWindow(idx, 1, 62, temp);
+                    PreprocessString(temp, 300, bidoSunfGuildChecks, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 64, temp);
                     break;
-                default:
+                default:;
                     break;
             }
             UpdateWindow(idx);
             return;
         case 251: // Igglybuff SE
+            preArgs.strings[0] = GetDungeonMode(128) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(129) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(130) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, iggybuffDungeonChecks, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            return;
         case 250: // Sunflora SE
+            preArgs.strings[0] = GetDungeonMode(159) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(161) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(164) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, sunfloraDungeonChecks, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
+                case 323:; // Likely because our pmdsky-debug is outdated. The value for T01P01A/T01P02A
+                case 324:; // is different between EU/NA/JP. So, need to use raw non-enum value.
+                    preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 29, temp);
+                    preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 94, temp);
+                    preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
+                    PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 55, temp);
+                    preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
+                    PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 120, temp);
+                    break;
+                case LEVEL_P01P04A:;
+                    preArgs.strings[0] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, bidoSunfCafeChecks1, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 55, temp);
+                    preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
+                    preArgs.number_vals[1] = apSettings.cafeDrinkMax;
+                    preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
+                    preArgs.number_vals[3] = apSettings.cafeEventMax;
+                    PreprocessString(temp, 300, bidoSunfCafeChecks2, preFlags, &preArgs);
+                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
+                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
+                    strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+                    if (IsDarkraiGoal()) {
+                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
+                        strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+                    }
+                    DrawTextInWindow(idx, 1, 107, temp);
+                    break;
+                case LEVEL_G01P01A:;
+                case LEVEL_G01P02A:;
+                case LEVEL_G01P03A:;
+                case LEVEL_G01P04A:;
+                case LEVEL_G01P05A:;
+                case LEVEL_G01P06A:;
+                case LEVEL_G01P07A:;
+                case LEVEL_G01P08A:;
+                case LEVEL_G01P09A:;
+                case LEVEL_G01P10A:;
+                    preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
+                    preArgs.strings[1] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
+                    PreprocessString(temp, 300, bidoSunfGuildChecks, preFlags, &preArgs);
+                    DrawTextInWindow(idx, 1, 64, temp);
+                    break;
+                default:;
+                    break;
+            }
+            UpdateWindow(idx);
+            return;
         case 249: // Team Charm SE
+            preArgs.strings[0] = GetDungeonMode(149) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(150) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(153) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = GetDungeonMode(154) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(155) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, charmDungeonChecks, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            return;
         case 248: // Future SE
+            preArgs.strings[0] = GetDungeonMode(133) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(136) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(137) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = GetDungeonMode(139) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(141) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, susknoirDungeonChecks1, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.strings[0] = GetDungeonMode(142) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = GetDungeonMode(145) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = GetDungeonMode(146) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, 300, susknoirDungeonChecks2, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            return;
         case DUNGEON_HIDDEN_LAND:
+            if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
+                break;
+            }
         case DUNGEON_TEMPORAL_TOWER:
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
                 preArgs.strings[0] = "Dialga";

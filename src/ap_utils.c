@@ -74,14 +74,12 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
     return expected - completed;
 }
 
-// TODO: Implement after getting added.
 bool IsDarkraiGoal() {
-    return true;
+    return !apSettings.dialgaIsGoal;
 }
 
-// TODO: Implement after getting added.
 bool IsRuleDungeonChecksEnabled() {
-    return true;
+    return apSettings.ruleDungeonChecks;
 }
 
 enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id) {
