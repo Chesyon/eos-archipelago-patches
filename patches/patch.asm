@@ -38,9 +38,6 @@
         movne r0,#0x0
         moveq r0,#0x1
         ldmia sp!,{r3,r4,r5,pc}
-    .endarea
-    .org MissionMultipurposeCheckAreaEnd
-    .area 0x4
         .pool
             tailor:
              .word 0x0
@@ -132,6 +129,11 @@
         .pool
             .word newTopScreenOptionsList
     .endarea
+.close
+
+.open "overlay31.bin", overlay31_start
+    .org DungeonXMenuNameAddr
+        orr r0,r0,#0x10000
 .close
 
 .open "overlay1.bin", overlay1_start

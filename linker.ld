@@ -5,7 +5,7 @@ MEMORY {
                 see https://docs.google.com/document/d/1Rs4icdYtiM6KYnWxMkdlw7jpWrH7qw5v6LOfDWIiYho
         */
         main    : ORIGIN = 0x23D7FF0, LENGTH = 0x6010
-        reserved : ORIGIN = 0x23B1200, LENGTH = 0x2CE00
+        reserved : ORIGIN = 0x23B1200, LENGTH = 0x26000
         /* Change/Add memory locations here */
         /* NEW    : ORIGIN = 0x2000000, LENGTH = 0x800 */
 }

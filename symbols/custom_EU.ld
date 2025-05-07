@@ -127,6 +127,9 @@ GeneateFloorHook1 = 0x233B62C;
 GeneateFloorUnhook1 = 0x233B75C;
 GeneateFloorHook2 = 0x233B61C;
 
+/* ! For Overlay 31 */
+DungeonXMenuNameAddr = 0x23836D8;
+
 
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
