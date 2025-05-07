@@ -139,6 +139,23 @@ uint8_t trackerLocationDungeonIds[] = {
     110, // Inferno Cave
 };
 
+uint8_t CheckLocationOverrides (uint8_t location) {
+    switch(LoadScriptVariableValue(NULL, VAR_EXECUTE_SPECIAL_EPISODE_TYPE)) {
+        case 0:;
+            return 252;
+        case 1:;
+            return 251;
+        case 2:;
+            return 250;
+        case 3:;
+            return 249;
+        case 4:;
+            return 249;
+        default:;
+            return location;
+    }
+}
+
 bool IsLocationBonusChecksComplete(enum dungeon_id location) {
     switch (location) {
         case DUNGEON_BEACH_CAVE:;
@@ -648,6 +665,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = GetDungeonMode(130) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, iggybuffDungeonChecks, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
+            UpdateWindow(idx);
             return;
         case 250: // Sunflora SE
             preArgs.strings[0] = GetDungeonMode(159) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -733,6 +751,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = GetDungeonMode(155) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, charmDungeonChecks, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
+            UpdateWindow(idx);
             return;
         case 248: // Future SE
             preArgs.strings[0] = GetDungeonMode(133) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -747,6 +766,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = GetDungeonMode(146) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, susknoirDungeonChecks2, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
+            UpdateWindow(idx);
             return;
         case DUNGEON_HIDDEN_LAND:
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
@@ -1054,21 +1074,21 @@ uint32_t StateManagerTrackerTopScreen() {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
                     trackerVelocity = 200;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]));
                     if(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == 255) {
                         drinksDisplayed = 0;
                         drinkEventsDisplayed = 0;
                     }                        
                     updaterDelay = 0;
                 } else {
-                    uint8_t location = trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage];
+                    uint8_t location = CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                     if(location == DUNGEON_DARK_CRATER || location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
                         trackerRotate += 1 + (trackerVelocity >> 5);
                         if (trackerVelocity > 0) {
                             trackerVelocity--;
                         }
                         ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
-                    } else if(location == 247 || 254) {
+                    } else if(location == 247 || location == 254 || location == 252 || location == 250) {
                         if(updaterDelay >= 30) {
                             // There's so much on the top menu for treasure town that updating every frame causes noticeable lag :(
                             // There could be a better solution? However, the base game does use this method to delay stuff some
@@ -1078,7 +1098,7 @@ uint32_t StateManagerTrackerTopScreen() {
                         } else {
                             updaterDelay++;
                         }
-                    } else if(location == 255 || location == 252 || location == 250) {
+                    } else if(location == 255) {
                         if(updaterDelay >= 4) {
                             updaterDelay = 0;
                             if(drinksDisplayed != apSettings.cafeDrinkMax) {
@@ -1136,7 +1156,7 @@ void InitializeTrackerTopScreen() {
     if(apTrackerWindowPtr->window_id == -2) {
         displayedOption = CUSTOM_SAVE_AREA.trackerPage;
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
-        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[displayedOption]);
+        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, CheckLocationOverrides(trackerLocationDungeonIds[displayedOption]));
     }
     apTrackerWindowPtr->state = 3;
 }
@@ -1236,7 +1256,7 @@ void CreateTrackerTopScreenDungeon() {
     trackerVelocity = 200;
     dungeonModeDisplayed = dunId;
     dungeonTopScreenId = CreateTextBox(&trackerTopScreenWinParams, NULL);
-    ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dunId);
+    ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, CheckLocationOverrides(dunId));
 }
 
 uint32_t UpdateTrackerTopScreenDungeon() {
@@ -1245,7 +1265,7 @@ uint32_t UpdateTrackerTopScreenDungeon() {
         if (trackerVelocity > 0) {
             trackerVelocity--;
         }
-        ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, dungeonModeDisplayed);
+        ApTrackerTopScreenWindowUpdate(dungeonTopScreenId, CheckLocationOverrides(dungeonModeDisplayed));
     }
     
     return 1;
