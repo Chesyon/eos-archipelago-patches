@@ -30,7 +30,7 @@
     .org MissionTryOpenDungeon
         add r0,r0,#0x0 ; nop, the ds does not have a nop operator do this in case
     .org MissionMultipurposeCheckAreaStart
-    .area MissionMultipurposeCheckAreaEnd - MissionMultipurposeCheckAreaStart ; 8 instruction size
+    .area TAILORED_MISSION_DUNGEON - MissionMultipurposeCheckAreaStart ; 7 instruction size
         ldr r1,[tailor] ; This overwrites the crystal cave/crossing checks with
         cmp r1,#0x0     ; a check for tailored missions.
         beq MissionMultipurposeCheckAreaEnd
@@ -38,9 +38,12 @@
         movne r0,#0x0
         moveq r0,#0x1
         ldmia sp!,{r3,r4,r5,pc}
+    .endarea
+    .org TAILORED_MISSION_DUNGEON
+    .area 0x4
         .pool
             tailor:
-             .word 0x0
+            .word 0x0
     .endarea
     .org TailoredMissionOverlapFloorsHook
         blne TailoredMissionBoardCheck
