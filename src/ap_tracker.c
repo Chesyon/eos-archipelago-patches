@@ -89,6 +89,7 @@ uint8_t trackerLocationDungeonIds[] = {
     47,  // Crevice Cave
     50,  // Surrounded Sea
     51,  // Miracle Sea
+    54,  // Ice Aegis Cave
     62,  // Mt. Travail
     63,  // The Nightmare
     64,  // Spacial Rift
@@ -196,6 +197,95 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
             break;
     }
     
+    if(!IsDarkraiGoal()) {
+        return true;
+    }
+    
+    switch (location) {
+        case DUNGEON_STEAM_CAVE:;
+            if(!GetSubXBit(25)) { // Uxie
+                return false;
+            }
+            break;
+        case DUNGEON_QUICKSAND_CAVE:;
+            if(!GetSubXBit(26)) { // Mesprit
+                return false;
+            }
+            break;
+        case DUNGEON_CRYSTAL_CROSSING:;
+            if(!GetSubXBit(27)) { // Azelf
+                return false;
+            }
+            break;
+        case DUNGEON_TEMPORAL_TOWER:;
+            if(!GetSubXBit(28)) { // Dialga
+                return false;
+            }
+            break;
+        case DUNGEON_MIRACLE_SEA:;
+            if(!GetSubXBit(29)) { // Phione
+                return false;
+            }
+            break;
+        case DUNGEON_SPACIAL_RIFT:;
+            if(!GetSubXBit(30)) { // Palkia
+                return false;
+            }
+            break;
+        case DUNGEON_BOTTOMLESS_SEA:;
+            if(!GetSubXBit(31) || !GetSubXBit(32)) { // Kyogre 7T
+                return false;
+            }
+            break;
+        case DUNGEON_SHIMMER_DESERT:;
+            if(!GetSubXBit(33) || !GetSubXBit(34)) { // Groudon 7T
+                return false;
+            }
+            break;
+        case DUNGEON_MT_AVALANCHE:;
+            if(!GetSubXBit(35) || !GetSubXBit(36)) { // Articuno 7T
+                return false;
+            }
+            break;
+        case DUNGEON_GIANT_VOLCANO:;
+            if(!GetSubXBit(37) || !GetSubXBit(38)) { // Heatran 7T
+                return false;
+            }
+            break;
+        case DUNGEON_WORLD_ABYSS:;
+            if(!GetSubXBit(39) || !GetSubXBit(40)) { // Giratina 7T
+                return false;
+            }
+            break;
+        case DUNGEON_SKY_STAIRWAY:;
+            if(!GetSubXBit(41) || !GetSubXBit(42)) { // Rayquaza 7T
+                return false;
+            }
+            break;
+        case DUNGEON_MYSTERY_JUNGLE:;
+            if(!GetSubXBit(43) || !GetSubXBit(44)) { // Mew 7T
+                return false;
+            }
+            break;
+        case DUNGEON_8TH_STATION_PASS:;
+            if(!GetSubXBit(65)) { // Sneasel's Gratitude
+                return false;
+            }
+            break;
+        case DUNGEON_ICE_AEGIS_CAVE:;
+            if(!GetSubXBit(69) || !GetSubXBit(70) || !GetSubXBit(71) || !GetSubXBit(72)) { // Regis
+                return false;
+            }
+            break;
+        case DUNGEON_SKY_PEAK_SUMMIT:;
+            if(!GetSubXBit(46)) { // Shaymin
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+    
     return true;
 }
 
@@ -238,31 +328,36 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
         return buffer;
     } else if(location == 252) {
         preArgs.strings[1] = "[CS:P]Bidoof's SE[CR]";
-        preArgs.strings[0] = townSymbol;
+        preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 0) ? completeSymbol : 
+                             LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 0) ? unlockedSymbol : lockedSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
     } else if(location == 251) {
         preArgs.strings[1] = "[CS:P]Igglybuff's SE[CR]";
-        preArgs.strings[0] = townSymbol;
+        preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 1) ? completeSymbol : 
+                             LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 1) ? unlockedSymbol : lockedSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
     } else if(location == 250) {
         preArgs.strings[1] = "[CS:P]Sunflora's SE[CR]";
-        preArgs.strings[0] = townSymbol;
+        preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 2) ? completeSymbol : 
+                             LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 2) ? unlockedSymbol : lockedSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
     } else if(location == 249) {
         preArgs.strings[1] = "[CS:P]Team Charm SE[CR]";
-        preArgs.strings[0] = townSymbol;
+        preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 3) ? completeSymbol : 
+                             LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 3) ? unlockedSymbol : lockedSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
     } else if(location == 248) {
         preArgs.strings[1] = "[CS:P]Future SE[CR]";
-        preArgs.strings[0] = townSymbol;
+        preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 4) ? completeSymbol : 
+                             LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 4) ? unlockedSymbol : lockedSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
@@ -383,18 +478,23 @@ char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
                         "[CLUM_SET:15]9999999G: [string:2]\n"
                         "[CLUM_SET:15]Checks Above 20000G\n"
                         "[CLUM_SET:15]Are Non-Essential.";
-char* beachCaveExtras = "[CLUM_SET:128][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
-                        "[CLUM_SET:128][CS:C]After Completing[CR]:\n"
-                        "[CLUM_SET:128]Bag Upgrade 0: [string:0]\n"
+char* beachCaveExtras = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
+                        "[CLUM_SET:15][CS:C]After Completing[CR]:\n"
+                        "[CLUM_SET:15]Bag Upgrade 0: [string:0]\n"
                         "[CLUM_SET:15]Team Name: [string:1]\n";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
 char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
+char* skyPeakEightExtra = "[CLUM_SET:128]Sneasel's Gratitude: [string:0]";
 char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
 char* bossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
                  "[CLUM_SET:128][string:0]'s Gift: [string:1]";
 char* treasureBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
-                 "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
-                 "[CLUM_SET:128][string:2]: [string:3]";
+                         "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
+                         "[CLUM_SET:128][string:2]: [string:3]";
+char* aegisBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
+                      "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
+                      "[CLUM_SET:128]Boss: [CS:N][string:2][CR]\n"
+                      "[CLUM_SET:128][string:2]'s Gift: [string:3]";
 char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
 char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
 char* cafeInfo1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
@@ -583,7 +683,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
-        case 252: // Bidoof SE
+        case 252:; // Bidoof SE
             preArgs.strings[0] = GetSubXBit(66) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(DUNGEON_DEEP_STAR_CAVE) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(DUNGEON_STAR_CAVE_PIT) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -659,7 +759,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             UpdateWindow(idx);
             return;
-        case 251: // Igglybuff SE
+        case 251:; // Igglybuff SE
             preArgs.strings[0] = GetDungeonMode(128) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(129) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(130) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -667,7 +767,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
-        case 250: // Sunflora SE
+        case 250:; // Sunflora SE
             preArgs.strings[0] = GetDungeonMode(159) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(161) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(164) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -743,7 +843,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             UpdateWindow(idx);
             return;
-        case 249: // Team Charm SE
+        case 249:; // Team Charm SE
             preArgs.strings[0] = GetDungeonMode(149) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(150) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(153) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -753,7 +853,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
-        case 248: // Future SE
+        case 248:; // Future SE
             preArgs.strings[0] = GetDungeonMode(133) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(136) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(137) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
@@ -768,11 +868,11 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
-        case DUNGEON_HIDDEN_LAND:
+        case DUNGEON_HIDDEN_LAND:;
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
                 break;
             }
-        case DUNGEON_TEMPORAL_TOWER:
+        case DUNGEON_TEMPORAL_TOWER:;
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
                 preArgs.strings[0] = "Dialga";
                 preArgs.strings[1] = (GetSubXBit(28)) ? completeSymbol : lockedSymbol;
@@ -787,7 +887,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
             UpdateWindow(idx);
             return;
-        case DUNGEON_DARK_CRATER:
+        case DUNGEON_DARK_CRATER:;
             if(IsDarkraiGoal()) {
                 DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
                 preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
@@ -798,14 +898,14 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 return;
             }
             break;
-        case DUNGEON_BEACH_CAVE:
+        case DUNGEON_BEACH_CAVE:;
             preArgs.strings[0] = (GetSubXBit(0)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, beachCaveExtras, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
             break;
-        case DUNGEON_STEAM_CAVE:
+        case DUNGEON_STEAM_CAVE:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
                 PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
@@ -816,7 +916,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_QUICKSAND_CAVE:
+        case DUNGEON_QUICKSAND_CAVE:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Mesprit";
                 preArgs.strings[1] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
@@ -824,7 +924,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_CRYSTAL_CROSSING:
+        case DUNGEON_CRYSTAL_CROSSING:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Azelf";
                 preArgs.strings[1] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
@@ -832,7 +932,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_MIRACLE_SEA:
+        case DUNGEON_MIRACLE_SEA:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Phione";
                 preArgs.strings[1] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
@@ -840,7 +940,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_SPACIAL_RIFT:
+        case DUNGEON_SPACIAL_RIFT:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Palkia";
                 preArgs.strings[1] = (GetSubXBit(30)) ? completeSymbol : lockedSymbol;
@@ -848,7 +948,23 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_BOTTOMLESS_SEA:
+        case DUNGEON_SKY_PEAK_SUMMIT:;
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Shaymin";
+                preArgs.strings[1] = (GetSubXBit(46)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_CREVICE_CAVE:;
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Scizor";
+                preArgs.strings[1] = (GetSubXBit(47)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_BOTTOMLESS_SEA:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Kyogre";
                 preArgs.strings[1] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
@@ -858,7 +974,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_SHIMMER_DESERT:
+        case DUNGEON_SHIMMER_DESERT:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Groudon";
                 preArgs.strings[1] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
@@ -868,7 +984,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_MT_AVALANCHE:
+        case DUNGEON_MT_AVALANCHE:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Articuno";
                 preArgs.strings[1] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
@@ -878,7 +994,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_GIANT_VOLCANO:
+        case DUNGEON_GIANT_VOLCANO:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Heatran";
                 preArgs.strings[1] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
@@ -888,7 +1004,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_WORLD_ABYSS:
+        case DUNGEON_WORLD_ABYSS:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Giratina";
                 preArgs.strings[1] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
@@ -898,7 +1014,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_SKY_STAIRWAY:
+        case DUNGEON_SKY_STAIRWAY:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Rayquaza";
                 preArgs.strings[1] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
@@ -908,7 +1024,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case DUNGEON_MYSTERY_JUNGLE:
+        case DUNGEON_MYSTERY_JUNGLE:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = "Mew";
                 preArgs.strings[1] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
@@ -916,6 +1032,25 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[3] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
+            }
+            break;
+        case DUNGEON_ICE_AEGIS_CAVE:;
+            if(IsDarkraiGoal()) {
+                preArgs.strings[0] = "Regice";
+                preArgs.strings[1] = (GetSubXBit(69)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Regirock";
+                preArgs.strings[3] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, aegisBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 16, temp);
+                preArgs.strings[0] = "Registeel";
+                preArgs.strings[1] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[2] = "Regigigas";
+                preArgs.strings[3] = (GetSubXBit(71)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, aegisBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 68, temp);
+            } else {
+                PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 138, temp);
             }
             break;
         default:
@@ -929,7 +1064,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     switch(GetDungeonCheckType(location)) {
         case DCT_LATE:;
             preArgs.number_vals[1] = apSettings.totalJobsLate;
-            preArgs.number_vals[4] = apSettings.totalOutlawsLate;
+            preArgs.number_vals[3] = apSettings.totalOutlawsLate;
             PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             if(!IsDarkraiGoal()) {
@@ -938,7 +1073,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             break;
         case DCT_EARLY:;
             preArgs.number_vals[1] = apSettings.totalJobsEarly;
-            preArgs.number_vals[4] = apSettings.totalOutlawsEarly;
+            preArgs.number_vals[3] = apSettings.totalOutlawsEarly;
             PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             break;
@@ -1087,7 +1222,7 @@ uint32_t StateManagerTrackerTopScreen() {
                         if (trackerVelocity > 0) {
                             trackerVelocity--;
                         }
-                        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, location);
                     } else if(location == 247 || location == 254 || location == 252 || location == 250) {
                         if(updaterDelay >= 30) {
                             // There's so much on the top menu for treasure town that updating every frame causes noticeable lag :(
