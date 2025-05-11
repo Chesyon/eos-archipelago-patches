@@ -14,7 +14,7 @@ def 0 {
     if (debug) {
         message_Explanation("[CN]Oh, [CS:G]Azurill[CR]...[W:60] you\'re all alone!\n[CN][partner] is busy finding [hero]\n[CN]in [c_kind:PLAYER][c_kind:ATTENDANT1], after all!");        
     } else {
-        message_Explanation("[CN]Oh, [CS:G]Azurill[CR]...[W:60] you\'re all alone!\n[CN][qho:13] is busy finding [qhat:13]\n in[CN][qhere:13], after all!");
+        message_Explanation("[CN]Oh, [CS:G]Azurill[CR]...[W:60] you\'re all alone!\n[CN][qho:13] is busy finding [qhat:13]\n[CN]in [qhere:13], after all!");
     }
     message_Close();
     se_Play(5139);

@@ -1,0 +1,46 @@
+def 0 {
+    message_SetFace(ACTOR_NPC_RURIRI,FACE_DIZZY,FACE_POS_STANDARD);
+    switch (ProcessSpecial(103,0,0)) {
+        case > 0:
+            switch(random(5)) {
+                case 0:
+                    message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
+                    break;
+                case 1:
+                    message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
+                    break;
+                case 2:
+                    message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
+                    break;
+                case 3:
+                    message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");
+                    break;
+                default:
+                    message_Talk(" Zzz...[W:60] [CS:C]Zelulo[CR]-zzzz");
+                    break;
+            }    
+            break;
+        default:
+            switch(random(1000)) {
+                case 0:
+                    message_Talk(" Zzz...[W:60] [CS:G]Dro[CR]-zzzz");
+                    break;
+                case 1:
+                    message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
+                    break;
+                case 2:
+                    message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
+                    break;
+                case 3:
+                    message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");
+                    break;
+                default:
+                    message_Talk(" ...");
+                    break;
+            }
+            break;
+    }
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+    hold;   
+}

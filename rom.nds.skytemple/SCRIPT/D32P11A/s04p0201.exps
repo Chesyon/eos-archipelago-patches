@@ -1,0 +1,402 @@
+
+def 0 {
+    sound_Stop();
+    screen_WhiteIn(29, 57);
+    back_SetGround(LEVEL_D32P11A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_AEGIS_CAVE, 0, 256);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        MovePositionMark(1, Position<'m0', 28.5, 36.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m1', 31.5, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m2', 25.5, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m3', 28.5, 39.5>);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    Wait(15);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" There you are![K] Well, this is\n[CS:P]Aegis Cave[CR].",
+        french=" Vous voilà![K] Eh bien, voici\nla [CS:P]Grotte Egide[CR].",
+        german=" Und da sind wir![K] Das hier ist\ndie [CS:P]Ägishöhle[CR].",
+        italian=" Eccovi qui![K] Beh, questa è la\n[CS:P]Grotta Egida[CR].",
+        spanish=" ¡Ya está![K] Bueno, esto es la\n[CS:P]Cueva Regia[CR].",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_Talk({
+        english=" Beyond this point is unknown\nterritory. No one has ever been inside.",
+        french=" A partir d\'ici, nous entrons\ndans un territoire bizarre. Personne n\'a\njamais pénétré à l\'intérieur.",
+        german=" Hinter diesem Punkt liegt\nunbekanntes Territorium. Niemand hat es je\nbetreten.",
+        italian=" Oltre questo punto si trova una\nzona inesplorata. Nessuno è mai entrato.",
+        spanish=" A partir de aquí es territorio\ndesconocido. Nadie se ha adentrado nunca.",
+    });
+    message_Talk({
+        english=" Just imagine what mysteries\nawait us inside. Isn\'t it exciting, darlings?",
+        french=" Songez aux mystères qui\nattendent d\'être dévoilés. N\'est-ce pas\npalpitant, mes mignons?",
+        german=" Stellt euch vor, was für\nGeheimnisse uns da drin erwarten. Ist das\nnicht aufregend, ihr Lieben?",
+        italian=" Pensate ai misteri che ci\nattendono all\'interno. Non è eccitante, tesori?",
+        spanish=" Imaginaos los misterios que nos\nesperan. ¿Emocionante, verdad?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_HEIGANI) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    with (actor ACTOR_NPC_HEIGANI) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    message_SetFace(ACTOR_NPC_HEIGANI, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(3, 0);
+    message_Talk({
+        english=" Hey, hey, hey! This thing looks\nimportant somehow!",
+        french=" Eh dis donc! Ce truc a l\'air\nimportant, vous ne trouvez pas?",
+        german=" Hey, hey, hey! Das Ding sieht\nirgendwie wichtig aus!",
+        italian=" Ehi, ehi, ehi! Questa cosa sembra\nabbastanza importante!",
+        spanish=" ¡Oye, oye, oye! ¡Esto parece\nalgo importante!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    with (actor ACTOR_NPC_SAANAITO) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_BIPPA);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
+    message_FacePositionOffset(1, 0);
+    message_Talk({
+        english=" Yup yup. It\'s got these\nodd-shaped grooves gouged out, by golly.",
+        french=" Ouaip ouaip! Regardez, y\'a des\ndrôles de symboles gravés dedans, sapristi!",
+        german=" Jawollja. Hier sind so\nmerkwürdig geformte Rillen eingemeißelt,\nMenschenskind.",
+        italian=" Già, già. Che strane incisioni\nci sono, ohibò.",
+        spanish=" Sí, señor. Hay unas ranuras\nmuy extrañas.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_CHAAREMU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_FacePositionOffset(-3, -1);
+    message_Talk({
+        english=" It\'s got a trick to it, I\'m sure.\nThere has to be!",
+        french=" Il doit y avoir une astuce,\nj\'en suis sûre. Il y a forcément un truc!",
+        german=" Es muss einen Trick hierbei\ngeben, da bin ich sicher. Es muss so sein!",
+        italian=" Sono sicura che c\'è qualche \ntrucco. Ci deve essere!",
+        spanish=" Esto tiene truco, ¡seguro!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_SetFace(ACTOR_NPC_CHAAREMU, FACE_ANGRY, FACE_POS_TOP_L_CENTER);
+    message_FacePositionOffset(-3, -1);
+    message_Talk({
+        english=" I\'ll solve that mystery!\nYou watch me now!",
+        french=" Je résoudrai ce mystère!\nSoyez-en certains!",
+        german=" Ich löse dieses Geheimnis jetzt!\nPasst nur auf!",
+        italian=" Risolverò questo mistero!\nState a vedere!",
+        spanish=" ¡Resolveré este misterio!\n¡Atención!",
+    });
+    se_Play(8971);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        SetAnimation(17);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_NPC_CHAAREMU);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        SetAnimation(2);
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    WaitSe(8970);
+    se_Play(8978);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" Oh, yes.[K] We\'ve asked everyone\nelse already, but what\'s your team\'s name?",
+        french=" Oh.[K] Nous connaissons\nles noms de toutes les équipes, sauf le vôtre.\nVous vous appelez...?",
+        german=" Oh ja.[K] Wir haben schon alle\nanderen gefragt, aber wie heißt euer Team\nnoch mal?",
+        italian=" Oh, sì.[K] Lo abbiamo già\nchiesto a tutti gli altri, ma come si chiama la\nvostra squadra?",
+        spanish=" Ah, por cierto.[K] Ya hemos\npreguntado a los demás pero, ¿cómo se llama\nvuestro equipo?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        Turn2Direction(4, 10, DIR_DOWNLEFT);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SAANAITO);
+    with (actor ACTOR_PLAYER_APPOINT) {
+        ExecuteCommon(CORO_EXPLANATION_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    message_Talk({
+        english=" Ah, you\'re Team [team:].",
+        french=" Ah, vous êtes l\'Equipe\n[team:].",
+        german=" Ah, ihr seid Team [team:].",
+        italian=" Ah, siete il Team [team:].",
+        spanish=" Ah, sois el [CS:X]Equipo[CR] [team:].",
+    });
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_HAPPY, FACE_POS_STANDARD);
+    message_Talk({
+        english=" That\'s quite a good name.",
+        french=" C\'est joli tout plein comme nom.",
+        german=" Das ist ein echt guter Name.",
+        italian=" È proprio un bel nome.",
+        spanish=" Es un buen nombre.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MIMIROPPU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" I think we should be on our way.",
+        french=" Je pense que nous devrions\ny aller.",
+        german=" Wir sollten uns auf den Weg\nmachen, denke ich.",
+        italian=" Penso che dovremmo muoverci.",
+        spanish=" Bueno, arranquemos.",
+    });
+    message_Talk({
+        english=" Let\'s see who can find the big\ntreasure, or treasures, of this place.",
+        french=" Voyons qui découvrira le ou les\nplus gros trésors de cet endroit!",
+        german=" Sehen wir mal, wer den großen\nSchatz - oder die Schätze - hier herausholen\nkann.",
+        italian=" Vediamo chi riesce a trovare il\ngrande tesoro, o i tesori, di questo posto.",
+        spanish=" A ver quién encuentra los\ntesoros de este lugar.",
+    });
+    message_Talk({
+        english=" Of course, we\'d be disappointed\nin ourselves if we weren\'t first! Tee-hee!",
+        french=" Bien évidemment, nous serions\nextrêêêmement déçues de ne pas être les\ngrandes gagnantes! Hi hi!",
+        german=" Natürlich wären wir sehr\nenttäuscht von uns selbst, wenn wir nicht die\nErsten wären! Hihi!",
+        italian=" Naturalmente ci rimarremmo\nmale se non fossimo noi le prime! Eeh-eeh!",
+        spanish=" ¡Espero que seamos nosotras!\n¡Ji, ji, ji!",
+    });
+    message_Talk({
+        english=" But let\'s wish each other the\nbest of luck!",
+        french=" Mais je vous souhaite bonne\nchance quand même!",
+        german=" Aber wünschen wir uns\ngegenseitig Glück.",
+        italian=" Ma auguriamoci buona \nfortuna a vicenda!",
+        spanish=" ¡Pero deseémonos buena suerte!",
+    });
+    message_Talk({
+        english=" OK, sweeties, we\'re off!",
+        french=" C\'est parti, mes chéris!",
+        german=" Okay, ihr Süßen, wir sind weg!",
+        italian=" Ok, dolcezze, noi andiamo!",
+        spanish=" De acuerdo, encantos,\n¡vamos allá!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m4', 28.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m5', 28.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m6', 23.5, 28.5>);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        Turn2Direction(8, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        Turn2Direction(8, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        Turn2Direction(8, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    Wait(5);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_PLAYER_APPOINT);
+    with (actor ACTOR_NPC_MIMIROPPU) {
+        MovePositionMark(1, Position<'m7', 28.5, 15.5>);
+    }
+    with (actor ACTOR_NPC_CHAAREMU) {
+        MovePositionMark(1, Position<'m8', 28.5, 15.5>);
+    }
+    with (actor ACTOR_NPC_SAANAITO) {
+        MovePositionMark(1, Position<'m9', 28.5, 15.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_MIMIROPPU);
+    se_Play(8971);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_DOGOOMU);
+    message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(3, -1);
+    message_Talk({
+        english=" YEAH! I\'ll be the first to find\nthe treasure!",
+        french=" OUAIS! Je serai le premier\nà trouver le trésor!",
+        german=" Jaaa! Ich werde den Schatz\nzuerst finden!",
+        italian=" SÌ! Sarò il primo a trovare\nil tesoro!",
+        spanish=" ¡Seré el primero en encontrar el\ntesoro! ¡Sí!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        MovePositionMark(33152, Position<'m10', 28.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        MovePositionMark(33152, Position<'m11', 28.5, 15.5>);
+    }
+    se_Play(8975);
+    with (actor ACTOR_NPC_BIPPA) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_BIPPA);
+    message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
+    message_FacePositionOffset(1, 0);
+    message_Talk({
+        english=" Yup yup, we\'ll have to step it\nup, by golly!",
+        french=" Ouaip ouaip, il faut qu\'on\ns\'secoue les puces, pour sûr!",
+        german=" Jawollja, wir müssen eine\nSchippe drauflegen, Menschenskind!",
+        italian=" Già, già. Dovremo mettercela\ntutta, ohibò!",
+        spanish=" Habrá que darse prisa. Sí, señor.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_BIPPA) {
+        MovePositionOffset(33152, 0, -16);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        MovePositionMark(33152, Position<'m12', 28.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_BIPPA) {
+        MovePositionMark(33152, Position<'m13', 28.5, 15.5>);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    message_SetFace(ACTOR_NPC_HEIGANI, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_FacePositionOffset(3, 0);
+    message_Talk({
+        english=" Hey, hey, hey!",
+        french=" Eh dis donc!",
+        german=" Hey, hey, hey!",
+        italian=" Ehi, ehi, ehi!",
+        spanish=" ¡Oye, oye, oye!",
+    });
+    message_Close();
+    with (actor ACTOR_NPC_HEIGANI) {
+        MovePositionOffset(33152, 0, -16);
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    se_Play(8973);
+    with (actor ACTOR_NPC_HEIGANI) {
+        SetEffect(EFFECT_SHOCKED, 3);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        SetAnimation(24);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    Wait(60);
+    with (actor ACTOR_NPC_HEIGANI) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        MovePositionMark(33408, Position<'m14', 28.5, 23.5>);
+    }
+    with (actor ACTOR_NPC_HEIGANI) {
+        MovePositionMark(33408, Position<'m15', 28.5, 15.5>);
+    }
+    WaitExecuteLives(ACTOR_NPC_HEIGANI);
+    supervision_RemoveActing(1);
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        MovePositionMark(1, Position<'m16', 33.5, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        MovePositionMark(1, Position<'m17', 23, 38.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        MovePositionMark(1, Position<'m18', 26, 40.5>);
+    }
+    with (actor ACTOR_ADVENTURE_NPC1) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC2) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_ADVENTURE_NPC3) {
+        Turn2Direction(4, 10, DIR_UP);
+    }
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC1);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC2);
+    WaitExecuteLives(ACTOR_ADVENTURE_NPC3);
+    end;
+}

@@ -4764,6 +4764,7 @@ coro EVENT_M19_10 {
     $PERFORMANCE_PROGRESS_LIST[15] = 1;
     supervision_ExecuteActingSub(LEVEL_V16P02A, 'M19B1014', 0);
     JumpCommon(CORO_EVENT_HA_SAME);
+    hold;
 }
 
 coro EVENT_M20_01_04 {
