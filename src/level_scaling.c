@@ -51,7 +51,7 @@ __attribute((naked)) void DoLevelScalingWrapper(){ // just so we don't fuck up t
 
 void DoLevelScaling(){
   uint8_t dungeonId = DUNGEON_PTR->id.val;
-  if((dungeonId >= 123 && dungeonId <= 164) || apSettings.levelScalingMode != LEVEL_SCALING_OFF) return; // block level scaling if we're in an SE dungeon or if level scaling is disabled.
+  if((dungeonId >= 123 && dungeonId <= 164) || apSettings.levelScalingMode == LEVEL_SCALING_OFF) return; // block level scaling if we're in an SE dungeon or if level scaling is disabled.
   int maxLevel_mult_512 = GetHighestLevelTeamMember() << 9; // for some reason in the struct, the spawn level is stored as level << 9... so we bitshift it now.
   for (int i = 0; i < 16; i++){ // iterate through spawn_entries_master
     uint16_t enemyLevel_mult_512 = DUNGEON_PTR->spawn_entries_master[i].level_mult_512;
