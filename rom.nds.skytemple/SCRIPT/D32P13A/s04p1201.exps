@@ -93,6 +93,7 @@ def 0 {
             screen_WhiteOut(1, 30);
             supervision_Acting(0);
             supervision_StationCommon(3);
+            supervision_RemoveCommon(4);
             supervision_StationCommon(5);
             with (actor ACTOR_ADVENTURE_NPC1) {
                 SetAnimation(4);
@@ -102,18 +103,6 @@ def 0 {
             }
             with (actor ACTOR_ADVENTURE_NPC3) {
                 SetAnimation(4);
-            }
-            with (actor ACTOR_PLAYER_APPOINT) {
-                SetPositionOffset(432, 0);
-            }
-            with (actor ACTOR_ADVENTURE_NPC1) {
-                SetPositionOffset(432, 0);
-            }
-            with (actor ACTOR_ADVENTURE_NPC2) {
-                SetPositionOffset(432, 0);
-            }
-            with (actor ACTOR_ADVENTURE_NPC3) {
-                SetPositionOffset(432, 0);
             }
             Wait(45);
             screen_FadeIn(1, 15);

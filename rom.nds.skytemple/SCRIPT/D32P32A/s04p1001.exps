@@ -1,3 +1,4 @@
+import "traps.exps"; // This handles traps like the unown trap! 
 
 def 0 {
     sound_Stop();
@@ -29,7 +30,6 @@ def 0 {
     WaitExecuteLives(ACTOR_PLAYER_APPOINT);
     Wait(30);
     if ( $SCENARIO_MAIN_BIT_FLAG[44] ) {
-        §label_0;
         message_SetFace(ACTOR_NPC_REJIROKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
         message_Talk({
             english=" IF YOU WANT TO GO ON, SHOW\nTHAT YOU HAVE THE POWER.",
@@ -38,6 +38,7 @@ def 0 {
             italian=" SE VUOI PROSEGUIRE, \nDIMOSTRA DI AVERNE LA FORZA.",
             spanish=" SI QUIERES CONTINUAR,\nDEMUESTRA QUE ERES CAPAZ.",
         });
+        §label_0;
         message_Close();
         bgm_Stop();
         se_Play(5143);
@@ -55,8 +56,17 @@ def 0 {
         end;
     } else {
         message_SetFace(ACTOR_NPC_REJIROKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
-        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
-        message_Talk(" YOU MEDDLE IN AFFAIRS THAT DO\nNOT CONCERN YOU.[K] THIS PATH WILL TAKE\nYOU NOWHERE, [FT:1]TRESPASSER");
+        $EVENT_LOCAL = 0;
+        message_Talk(" YOU MEDDLE IN AFFAIRS THAT DO\nNOT CONCERN YOU.[K] THIS PATH WILL TAKE\nYOU NOWHERE, [FT:1]TRESPASSER[FT:0]");
+        while ($EVENT_LOCAL < 5) { 
+            ~UnownTrap();
+            if($SCENARIO_MAIN_BIT_FLAG[127]) {
+                jump @label_0;
+            }
+            $EVENT_LOCAL += 1;
+            message_Talk(" YOUR PATHETIC CHARMS CANNOT\nSAVE YOU FROM MY VENGEANCE!");
+        }
+        message_Talk(" HOW MANY ROCKS DO YOU HAVE?");
         jump @label_0;
     }
 }

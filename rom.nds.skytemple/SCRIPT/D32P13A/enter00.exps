@@ -17,11 +17,11 @@ def 0 {
                         bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
                         JumpCommon(CORO_COMMON_ENTER);
                     } elseif ( $DUNGEON_REQUEST_LIST[59] ) {
-                        supervision_StationCommon(5);
-                        jump @label_2;
-                    } else {
                         supervision_StationCommon(4);
                         jump @label_4;
+                    } else {
+                        supervision_StationCommon(5);
+                        jump @label_2;
                     }
                     break;
             }
