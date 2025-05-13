@@ -4762,7 +4762,8 @@ coro EVENT_M19_10 {
     supervision_ExecuteActingSub(LEVEL_V19P06A, 'M19B1008', 0);
     supervision_ExecuteActingSub(LEVEL_P09P01A, 'M19B1009', 0);
     $PERFORMANCE_PROGRESS_LIST[15] = 1;
-    supervision_ExecuteActingSub(LEVEL_V16P02A, 'M19B1014', 0);
+    // supervision_ExecuteActingSub(LEVEL_V16P02A, 'M19B1014', 0);
+    ~crass(LEVEL_V16P02A, 'M19B1014', 0,LEVEL_V16P02A, 'M19B1014:2', 0);
     JumpCommon(CORO_EVENT_HA_SAME);
     hold;
 }

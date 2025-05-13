@@ -51,6 +51,10 @@ def 0 {
                             case 8:
                                 switch (dungeon_mode(8)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -73,6 +77,10 @@ def 0 {
                             case 9:
                                 switch (dungeon_mode(9)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -95,6 +103,10 @@ def 0 {
                             case 10:
                                 switch (dungeon_mode(10)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -118,6 +130,10 @@ def 0 {
                             case 11:
                                 switch (dungeon_mode(11)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -140,6 +156,10 @@ def 0 {
                             case 32:
                                 switch (dungeon_mode(32)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -162,6 +182,10 @@ def 0 {
                             case 34:
                                 switch (dungeon_mode(34)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -184,6 +208,10 @@ def 0 {
                             case 33:
                                 switch (dungeon_mode(33)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -207,6 +235,10 @@ def 0 {
                             case 35:
                                 switch (dungeon_mode(35)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -244,6 +276,10 @@ def 0 {
                             case 67:
                                 switch (dungeon_mode(67)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
@@ -266,6 +302,10 @@ def 0 {
                             case 111:
                                 switch (dungeon_mode(110)) {
                                     case DMODE_OPEN:
+                                        if (debug) {
+                                            message_Mail(" Warning!");
+                                            jump @label_32;
+                                        }
                                         switch ( ProcessSpecial(100,0,0) ) {
                                             case 1:
                                                 message_Mail({
