@@ -75,21 +75,13 @@ static int SpAccessMacguffinStatus(short mode, short macguffin) {
     else return numberToReturn;
 }
 
-void GetLowercaseName(const char* src, char* dst) // Used in NameCheck
-{
-    MemZero(dst, 10);
-    for(int i = 0; i < 10 && src[i] != NULL; i++) dst[i] = src[i] >= 'A' && src[i] <= 'Z' ? src[i]+0x20 : src[i];
-}
-
-// Special process 103: Checks if HERO_FIRST_NAME matches any name in a list of dev names. Returns the index of the name plus one if there's a match, otherwise returns zero. Saves the return value to nameCheckResult in the save.
+// Special process 103: Checks if HERO_FIRST_NAME matches any name in a list of dev names. Returns the index of the name plus one if there's a match, otherwise returns zero.
 static int SpDoNameCheck() {
     #define num_of_names 7
     char name_check_names[num_of_names][10] = {"chesyon", "happylappy", "cryptic", "kattnip", "hecka", "tailsdk", "fieryblizz"};
     char name[10];
-    char lower_name[10];
     LoadScriptVariableValueBytes(VAR_HERO_FIRST_NAME, name, 10);
-    GetLowercaseName(name, lower_name);
-    // return i+1
+    for (int i = 0; i < 10 && name[i] != NULL; i++) name[i] = name[i] >= 'A' && name[i] <= 'Z' ? name[i] + 0x20 : name[i]; // Convert any uppercase characters to lowercase, so no case-sensitivity. This is done by adding 0x20 to each character value if it's between A and Z.
     for (int i = 0; i < num_of_names; i++) if (strncmp(lower_name, name_check_names[i], 10) == 0) return i+1;
     return 0;
 }
@@ -193,9 +185,7 @@ void __attribute__((naked)) SetQuantityOfStorageItem(int index, int amountToSet)
 
 // Special process 108: Recycle shop stuff. 
 static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
-    bool bagIsFull = IsBagFull();
-    
-    if(bagIsFull && IsStorageFull()) {
+    if(IsBagFull() && IsStorageFull()) {
         return 3; // the player does not have the needed space to recieve the output item.
     }
     
@@ -316,7 +306,7 @@ static int SpAssignCheck(int checkId){
     uint16_t val = 0;
     enum script_var_id var_id = subXVar;
     LoadScriptVariableValueBytes(var_id, &val, 2);
-    val = val | (1 << checkId);
+    val |= 1 << checkId;
     SaveScriptVariableValueBytes(var_id, &val, 2);
     return 0;
 }
