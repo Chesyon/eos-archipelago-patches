@@ -1,0 +1,64 @@
+
+def 0 {
+    switch ( $GROUND_ENTER ) {
+        case 249:
+            §label_0;
+            $SIDE02_TALK[0] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_UPAA, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Yay! Gummis!",
+                french=" Ouais! Des gelées!",
+                german=" Juchhu! Gummis!",
+                italian=" Evviva! Le Gomme!",
+                spanish=" ¡Bieeeen! ¡Gomis!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk({
+                english=" How are they?",
+                french=" Elles sont bonnes?",
+                german=" Wie sind sie?",
+                italian=" Come sono?",
+                spanish=" ¿Están ricas?",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_NPC_UPAA) {
+                ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+            }
+            WaitExecuteLives(ACTOR_NPC_UPAA);
+            message_SetFace(ACTOR_NPC_UPAA, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Great! Delicious![K] Thank you! ♪",
+                french=" Super! Un vrai délice![K] Merci! ♪",
+                german=" Großartig! Lecker![K]\nDanke schön! ♪",
+                italian=" Fantastiche! Deliziose![K]\nGrazie! ♪",
+                spanish=" ¡Riquísimas! ¡De rechupete![K]\n¡Gracias! ♪",
+            });
+            message_Close();
+            if ( $SIDE02_TALK[1] ) {
+                if ( $SIDE02_TALK[2] ) {
+                    message_Close();
+                    bgm_FadeOut(60);
+                    screen2_FadeOut(0, 60);
+                    screen_FadeOut(1, 60);
+                    supervision_ExecuteCommon(CORO_EVENT_N02_03);
+                    hold;
+                } else {
+                    §label_1;
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    JumpCommon(CORO_END_TALK);
+                }
+            } else {
+                jump @label_1;
+            }
+            break;
+        default:
+            jump @label_1;
+    }
+}

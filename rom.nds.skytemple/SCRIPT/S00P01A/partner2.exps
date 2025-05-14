@@ -321,7 +321,7 @@ def 0 {
     if (not debug) {
         switch(ProcessSpecial(109, 0,0)) {
             case >= 8: // MASTER
-                message_Talk("  Wow, we\'re Master Rank now?\nThat should hold us over until we obtain the\nSecret Rank. Let\'s see what else we have...");
+                message_Talk(" Wow, we\'re Master Rank+ now?\nThat should hold us over until we obtain the\nSecret Rank. Let\'s see what else we have...");
                 break; 
             case 7: // HYPER
                 message_Talk(" Wow, we\'re Hyper Rank now?\nI didn\'t write down how many rank checks are\nrequired, but we may need to be Master Rank.");
@@ -349,6 +349,28 @@ def 0 {
                 break;
         }
     }
+    switch(scn($SCENARIO_SUB6)[0]) {
+        case &<< 4:
+            // Deposit 20000G
+            message_Talk(" As of right now, we\'ve obtained\na whopping [CS:G]20,000[CR][M:S0]! We only have \"Long\"\nchecks left for [CS:G]Duskull[CR], congrats!");
+            break;
+        case &<< 3:
+            // Deposit 10000G
+            message_Talk(" As of right now, we\'ve obtained\na massive [CS:G]10,000[CR][M:S0]! We need to amass 20k\nfor our next [CS:G]Duskull[CR] check, okay [hero]?");
+            break;
+        case &<< 2:
+            // Deposit 5000G
+            message_Talk(" As of right now, we\'ve obtained\na sizable [CS:G]5,000[CR][M:S0]! We need to amass 10k\nfor our next [CS:G]Duskull[CR] check, okay [hero]?");
+            break;
+        case &<< 1:
+            // Deposit 100G
+            message_Talk(" As of right now, we\'ve obtained\na puny [CS:G]100[CR][M:S0]! We need to amass 5k\nfor our next [CS:G]Duskull[CR] check, okay [hero]?");
+            break;
+        default:
+            message_Talk(" We should put some money into\nDuskull Bank, okay [hero]?");
+            break;
+    }
+    
     message_Talk(" Seems like we only have\ndungeon checks left Pre-Dialga. Let me see...");
     switch(dungeon_mode(1)) {
         case DMODE_OPEN_AND_REQUEST:
@@ -1579,6 +1601,14 @@ def 0 {
     
     message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
     message_Talk(" Wow, slim pickings, huh?[K]\nI don\'t know all of your yaml settings, but\nusually the rest of these are non-essential...");
+    switch(scn($SCENARIO_SUB6)[1]) {
+        case &<< 1:
+            message_Talk(" Nope, we've already seen\n[CS:G]Ludicolo[CR] and the [CS:G]Bellossom[CR] dance in the cafe...");
+            break;
+        default:
+            message_Talk(" Ooh, this one doesn't sound so\nbad![K] We just need to win the grand prize from\n[CS:G]Wynaut[CR] at the Recycle Shop! To the cafe!");
+            jump @anything_else;
+    }
     switch(dungeon_mode(107)) {
         case DMODE_OPEN_AND_REQUEST:
             message_Talk(" Nope, we\'ve already\ncleared [CS:P]Oblivion Forest[CR]...[W:30] Hmm...[W:30]");
@@ -1700,6 +1730,23 @@ def 0 {
                 }
                 break;        
         }
+    }
+    switch(scn($SCENARIO_SUB6)[0]) {
+        case &<< 7:
+            // Deposit 9999999G
+            message_Talk(" Wait a minute, do we really\nhave [CS:G]9,999,999[CR][M:S0]? Okay, we're done with\n[CS:G]Duskull[CR] checks, that's incredible!");
+            break;
+        case &<< 6:
+            // Deposit 100000G
+            message_Talk(" As of right now, we\'ve obtained\na staggering [CS:G]100,000[CR][M:S0]! We still have 9 Mil\nleft for [CS:G]Duskull[CR] checks, I suppose...");
+            break;
+        case &<< 5:
+            // Deposit 50000G
+            message_Talk(" As of right now, we\'ve obtained\na nutty [CS:G]50,000[CR][M:S0]! We still have 100k\nleft for [CS:G]Duskull[CR] checks, I suppose...");
+            break;
+        default:
+            message_Talk(" Did you enable \"Long\" checks?\nIf so, we need to put [CS:G]50,000[CR][M:S0] into Duskull\nBank for a check![K] Let\'s make some dough, OK?");
+            jump @anything_else;
     }
     jump @out_of_checks;
     §missions_check;

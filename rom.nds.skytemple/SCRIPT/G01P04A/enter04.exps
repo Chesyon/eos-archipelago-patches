@@ -1,0 +1,24 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+            §label_0;
+            if ( $SCENARIO_MAIN_BIT_FLAG[1] ) {
+                $SCENARIO_MAIN_BIT_FLAG[1] = 0;
+                screen_FadeOut(0, 30);
+                supervision_ExecuteCommon(CORO_EVENT_N01_10CHOUREI);
+                return;
+            } else {
+                §label_2;
+                main_EnterGround(LEVEL_G01P08A, 30);
+                hold;
+            }
+            break;
+        default:
+            jump @label_2;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

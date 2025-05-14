@@ -1676,6 +1676,14 @@ coro EVENT_DIVIDE_RESUME {
                     main_EnterGround(LEVEL_H02P99A,30);
                     hold;
                 default:
+                    message_Mail({
+                        english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+                        french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+                        german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+                        italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+                        spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+                    });
+                    message_Close();
                     message_Mail("[STS][CN]You do not yet have the main episode!\n[CN]Booting to title screen![STE]");
                     message_Close();
                     screen2_FadeOut(0, 30);
@@ -2461,11 +2469,59 @@ coro EVENT_M00A_01 {
     
     switch (ProcessSpecial(107,0,0)) {
         case 1:
+            §yes_main;
             $SCENARIO_MAIN = scn[29, 99];
             main_EnterGround(LEVEL_H02P99A,30);
             hold;
         default:
             §no_main;
+            switch (ProcessSpecial(107,0,0)) {
+                case 0:
+                    jump @yes_main;
+                    break;
+                case 1:
+                    $SPECIAL_EPISODE_OPEN[0] = 1;
+                    $CARRY_GOLD = 7000;
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Bidoof's Wish[CR]!\n[CN](You start with [CS:G]Bidoof[CR]\'s life savings!)");
+                    message_Close();
+                    break;
+                case 2:
+                    $SPECIAL_EPISODE_OPEN[1] = 1;
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Igglybuff The Prodigy[CR]\n[CN](You start with a lot of tasty [CS:I]Gummis[CR]!)");
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,119,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,121,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,122,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,124,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,132,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,126,0);
+                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0);
+                    message_Close();
+                    break;
+                case 3:
+                    $SPECIAL_EPISODE_OPEN[2] = 1;
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Today's \"Oh My Gosh\"[CR]");
+                    //ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,
+                    message_Close();
+                    break;
+                case 4:
+                    $SPECIAL_EPISODE_OPEN[3] = 1;
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Here Comes Team Charm![CR]");
+                    message_Close();
+                    break;
+                case 5:
+                    $SPECIAL_EPISODE_OPEN[4] = 1;
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]In the Future of Darkness[CR]");
+                    message_Close();
+                    break;
+            }
+            message_Mail({
+                english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+                french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+                german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+                italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+                spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+            });
+            message_Close();
             Wait(90);
             $SCENARIO_MAIN_BIT_FLAG[6] = 1;
             switch ( message_Menu(MENU_SAVE_MENU) ) { }
@@ -10668,6 +10724,7 @@ coro GETOUT_REQUEST_DUNGEON {
                                         switch(message_SwitchMenu(0,1)) {
                                             case menu("Keep Going"):
                                                 message_Close();
+                                                message_SetFace(ACTOR_ATTENDANT1,FACE_POS_BOTTOM_L_FACEINW,FACE_HAPPY);
                                                 message_Talk(" Yeah! That\'s the spirit![K]\nLet\'s see what else we can find\non the job board for today...");
                                                 message_Close();
                                                 $GROUND_ENTER = 999;
@@ -10677,6 +10734,7 @@ coro GETOUT_REQUEST_DUNGEON {
                                                 break;
                                             case menu("Call It A Day"):
                                                 message_Close();
+                                                message_SetFace(ACTOR_ATTENDANT1,FACE_POS_BOTTOM_L_FACEINW,FACE_HAPPY);
                                                 message_Talk(" I completely understand, we could use a break![K]\nLet\'s take the rest of the day off then...");
                                                 break;
                                         }
@@ -12842,6 +12900,9 @@ coro BUBBLE_TEST {
         case 4:
             return;
         default:
+            if ( scn($SCENARIO_MAIN) == [30, 99] ) {
+                $SCENARIO_MAIN = scn[29, 99];
+            }
             break;
     }
     if ($SCENARIO_MAIN_BIT_FLAG[3]) {
