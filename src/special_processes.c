@@ -337,6 +337,11 @@ static int SpGetStartingEpisode() {
 	return apSettings.startingEpisode;
 }
 
+// Special Process 115: Gets current number of open Sky Peak passes. No parameters.
+static int SpGetSkyPeaksOpen() {
+    return CUSTOM_SAVE_AREA.openSkyPeakPasses;
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -412,6 +417,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 114:
         *return_val = SpGetStartingEpisode();
+        return true;
+    case 115:
+        *return_val = SpGetSkyPeaksOpen();
         return true;
     case 255:
         *return_val = SpGetCrassKind();

@@ -104,7 +104,8 @@ typedef struct CustomSaveArea {
     bool mainGameUnlocked;               // 0x2BB: Is main game unlocked?
     uint8_t bagSize;                     // 0x2BC: Current bag size. Follows the same logic as vanilla: https://wiki.skytemple.org/index.php/List_of_Script_Variables#Bag_size
     uint8_t trackerPage;                 // 0x2BD: Tracks which tab was last open in the tracker.
-    undefined fields[0xE42];             // 0x2BE: Unused.
+    uint8_t openSkyPeakPasses;           // 0x2BE: Tracks how many Sky Peak passes are open. I don't know what this is for but Cryptic wanted it.
+    undefined fields[0xE41];             // 0x2BF: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
