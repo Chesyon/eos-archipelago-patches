@@ -144,7 +144,7 @@ static int SpCheckForUnownRocks(){
 
 // Special process 107: Is the main game unlocked? No parameters.
 static bool SpIsMainGameUnlocked(){
-    return CUSTOM_SAVE_AREA.mainGameUnlocked | apSettings.startWithMainGameUnlocked;
+    return CUSTOM_SAVE_AREA.mainGameUnlocked | apSettings.startingEpisode == 0;
 }
 
 
@@ -332,6 +332,11 @@ static int SpIsHintChecked(short idx){
     else return (int)CUSTOM_SAVE_AREA.hintedItems[idx];
 }
 
+// Special Process 114: Get starting episode. No parameters, returns starting episode. 0 = Main Episode, 1 = Bidoof, 2 = Igglybuff, 3 = Sunflora, 4 = Team Charm, 5 = Dark Future
+static int SpGetStartingEpisode() {
+	return apSettings.startingEpisode;
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -404,6 +409,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 113:
         *return_val = SpIsHintChecked(arg1);
+        return true;
+    case 114:
+        *return_val = SpGetStartingEpisode();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
