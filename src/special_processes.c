@@ -81,8 +81,8 @@ static int SpDoNameCheck() {
     char name_check_names[num_of_names][10] = {"chesyon", "happylappy", "cryptic", "kattnip", "hecka", "tailsdk", "fieryblizz"};
     char name[10];
     LoadScriptVariableValueBytes(VAR_HERO_FIRST_NAME, name, 10);
-    for (int i = 0; i < 10 && name[i] != NULL; i++) name[i] = name[i] >= 'A' && name[i] <= 'Z' ? name[i] + 0x20 : name[i]; // Convert any uppercase characters to lowercase, so no case-sensitivity. This is done by adding 0x20 to each character value if it's between A and Z.
-    for (int i = 0; i < num_of_names; i++) if (strncmp(lower_name, name_check_names[i], 10) == 0) return i+1;
+    for (int i = 0; i < 10 && name[i] != NULL; i++) name[i] = (name[i] >= 'A' && name[i] <= 'Z' ? name[i] + 0x20 : name[i]); // Convert any uppercase characters to lowercase, so no case-sensitivity. This is done by adding 0x20 to each character value if it's between A and Z.
+    for (int i = 0; i < num_of_names; i++) if (strncmp(name, name_check_names[i], 10) == 0) return i+1;
     return 0;
 }
 
@@ -136,7 +136,7 @@ static int SpCheckForUnownRocks(){
 
 // Special process 107: Is the main game unlocked? No parameters.
 static bool SpIsMainGameUnlocked(){
-    return CUSTOM_SAVE_AREA.mainGameUnlocked | apSettings.startingEpisode == 0;
+    return (CUSTOM_SAVE_AREA.mainGameUnlocked | (apSettings.startingEpisode == 0));
 }
 
 
