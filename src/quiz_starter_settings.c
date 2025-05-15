@@ -315,7 +315,6 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[7]) << 7);
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[8]) << 8);
                 randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[9]) << 9);
-                randomizedHeroNum = randomizedHeroNum ^ (((uint32_t)slotData.apSlotName[10]) << 10);
                 unsigned long long finalHeroNum = _u32_div_f(randomizedHeroNum, selectable);
                 quizData->currentQuestion = quizData->partners[(uint32_t)(finalHeroNum >> 32)].val;
                 quizData->state = 0x26;
