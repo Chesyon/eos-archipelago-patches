@@ -294,7 +294,7 @@ __attribute((used)) void CustomInitScriptRoutineFromCoroutineInfo(struct script_
       idx = 1;
     }
     // Next opcode address is the opcode following the skipped OPCODE_SUPERVISION_EXECUTE_ACITNG_SUB...
-    routine->states[0].ssb_info[idx].next_opcode_addr = (uint32_t)(routine->states[0].ssb_info[idx].file) + CRASS_SETTINGS.return_offset;
+    routine->states[0].ssb_info[idx].next_opcode_addr = (uint16_t*)((uint32_t)(routine->states[0].ssb_info[idx].file) + CRASS_SETTINGS.return_offset);
     CRASS_SETTINGS.redirect = false;
     CRASS_SETTINGS.skip_active = false;
     CRASS_SETTINGS.coroutine_hijack = false;
