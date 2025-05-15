@@ -6,6 +6,7 @@ import "CRASS.exps"; // This is to prevent CRASS-related crashes pre-patch
 import "traps.exps"; // This handles traps like the unown trap! 
 import "fade_in.exps"; // Handles fading the screen in, and any effects related to that process
 import "version.exps"; // Handles game version stuff
+import "GiveSEItems.exps"; // Handles Episode-sanity starting items
 
 coro END_TALK {
     message_Close();
@@ -2427,6 +2428,7 @@ coro EVENT_M00A_01 {
     bgm_Stop();
     ~SetVersion();
     if (debug) {
+        $VERSION = 1;
         ProcessSpecial(PROCESS_SPECIAL_INIT_MAIN_TEAM_AFTER_QUIZ,0,0);
     } else {
         ~crass(LEVEL_S02P01A, 'M00A01A', 0,LEVEL_S02P01A, 'M00A01A:1', 0);
@@ -2458,10 +2460,17 @@ coro EVENT_M00A_01 {
     $DUNGEON_REQUEST_LIST[57] = 1; // Regirock Chamber not entered
     $DUNGEON_REQUEST_LIST[59] = 1; // Registeel Chamber not entered
     $SUB30_PROJECTP = 1;
-    $SCENARIO_MAIN = scn[30, 99]; // If 30, main game not entered yet!
+    $SCENARIO_MAIN = scn[30, 98]; // If 30, main game not entered yet!
     if (debug) {
-//        $SPECIAL_EPISODE_OPEN[0] = 1;
-//        jump @no_main;
+        Wait(1);
+        if (not debug) {
+            $SPECIAL_EPISODE_OPEN[0] = 1;
+            $SPECIAL_EPISODE_OPEN[1] = 1;
+            $SPECIAL_EPISODE_OPEN[2] = 1;
+            $SPECIAL_EPISODE_OPEN[3] = 1;
+            $SPECIAL_EPISODE_OPEN[4] = 1;
+            jump @no_main;
+        }
         $SCENARIO_MAIN = scn[29, 99];
         main_EnterGround(LEVEL_H02P99A,30);
         hold;
@@ -2474,46 +2483,39 @@ coro EVENT_M00A_01 {
             main_EnterGround(LEVEL_H02P99A,30);
             hold;
         default:
-            §no_main;
+
             switch (ProcessSpecial(107,0,0)) {
                 case 0:
                     jump @yes_main;
                     break;
                 case 1:
                     $SPECIAL_EPISODE_OPEN[0] = 1;
-                    $CARRY_GOLD = 7000;
-                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Bidoof's Wish[CR]!\n[CN](You start with [CS:G]Bidoof[CR]\'s life savings!)");
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Bidoof's Wish[CR]!\n[CN](You start with [CS:G]Bidoof[CR]\'s life savings)");
                     message_Close();
                     break;
                 case 2:
                     $SPECIAL_EPISODE_OPEN[1] = 1;
-                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Igglybuff The Prodigy[CR]\n[CN](You start with a lot of tasty [CS:I]Gummis[CR]!)");
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,119,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,121,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,122,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,124,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,132,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,126,0);
-                    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0);
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Igglybuff The Prodigy[CR]\n[CN](You start with [CS:G]Mama[CR] and [CS:G]Papa[CR]\'s tasty [CS:I]Gummis[CR])");
+
                     message_Close();
                     break;
                 case 3:
                     $SPECIAL_EPISODE_OPEN[2] = 1;
-                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Today's \"Oh My Gosh\"[CR]");
-                    //ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Today's \"Oh My Gosh\"[CR]\n[CN](You start with [CS:G]Sunflora[CR]\'s [CS:I]Seed[CR] collection)");
                     message_Close();
                     break;
                 case 4:
                     $SPECIAL_EPISODE_OPEN[3] = 1;
-                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Here Comes Team Charm![CR]");
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]Here Comes Team Charm![CR]\n[CN](You start with [CS:X]Team Charm[CR]\'s loot cache)");
                     message_Close();
                     break;
                 case 5:
                     $SPECIAL_EPISODE_OPEN[4] = 1;
-                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]In the Future of Darkness[CR]");
+                    message_Mail("[CN]Your starting episode is...[W:30]\n[CN][CS:C]In the Future of Darkness[CR]\n[CN](You start with [CS:G]Grovyle[CR]\'s emergency [M:I1][CS:I]Orbs[CR])");
                     message_Close();
                     break;
             }
+            §no_main;
             message_Mail({
                 english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
                 french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
@@ -12898,9 +12900,13 @@ coro BUBBLE_TEST {
         case 2:
         case 3:
         case 4:
+            if (scn($SCENARIO_MAIN) == [30, 98]) {
+                ~SEGiveItems();
+                $SCENARIO_MAIN = scn[30, 99];
+            }
             return;
         default:
-            if ( scn($SCENARIO_MAIN) == [30, 99] ) {
+            if ( $SCENARIO_MAIN == 30) {
                 $SCENARIO_MAIN = scn[29, 99];
             }
             break;
@@ -13250,7 +13256,6 @@ coro BUBBLE_TEST {
                 break;
         }
     }
-    return;
     return;
 }
 

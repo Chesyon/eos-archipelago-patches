@@ -1,0 +1,344 @@
+    
+    
+    macro SEGiveItems() {
+        switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {
+            case 0:
+                // Bidoof literally just gets money. :D
+                $CARRY_GOLD = 7000;
+                break;
+            case 1:
+                ~GiveIgglybuffItems();
+                break;
+            case 2:
+                ~GiveSunfloraItems();
+                break;
+            case 3:
+                ~GiveCharmItems();
+                break;
+            case 4:
+                ~GiveSusknoirItems();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    macro GiveIgglybuffItems() {
+        $EVENT_LOCAL = 7;
+        while ($EVENT_LOCAL > 0) {
+            ~GiveRandomGummi();
+            $EVENT_LOCAL -= 1;
+        }
+    }
+    
+    
+    macro GiveSunfloraItems() {
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,930,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,69,0);
+        ~GiveRandomSeeds();
+    }
+    
+    macro GiveCharmItems() {
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,112,0); // Huge Apple
+        ~GiveRandomLoot(); // 3 random loot items, 2 fixed loot items, all in chests!
+        $EVENT_LOCAL = 3;
+        while ($EVENT_LOCAL > 0) {
+            ~GiveEvoItem(); // Boxed Evo item x3
+            $EVENT_LOCAL -= 1;
+        }
+    }
+    
+    
+    macro GiveSusknoirItems() {
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,318,0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,318,0);
+        $EVENT_LOCAL = 7;
+        while ($EVENT_LOCAL > 0) {
+            item_SetTableData(0, 1);
+            ProcessSpecial(PROCESS_SPECIAL_ADD_TABLE_ITEM_TO_BAG,0,0);
+            $EVENT_LOCAL -= 1;
+        }
+    }
+    
+    
+    macro GiveEvoItem() {
+        switch(random(27)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,139); // Upgrade
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,140); // Kings Rock
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,141); // Thunderstone
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,142); // Deepseascale
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,143); // Deepseatooth
+                break;
+            case 5:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,144); // Sun Stone
+                break;
+            case 6:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,145); // Moon Stone
+                break;
+            case 7:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,146); // Fire Stone
+                break;
+            case 8:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,147); // Water Stone
+                break;
+            case 9:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,148); // Metal Coat
+                break;
+            case 10:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,149); // Leaf Stone
+                break;
+            case 11:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,150); // Dragon Scale
+                break;
+            case 12:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,151); // Link Cable
+                break;
+            case 13:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,152); // Dubious Disc
+                break;
+            case 14:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,153); // Protector
+                break;
+            case 15:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,154); // Reaper Cloth
+                break;
+            case 16:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,155); // Razor Fang
+                break;
+            case 17:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,156); // Razor Claw
+                break;
+            case 18:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,157); // Electirizer
+                break;
+            case 19:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,158); // Magmarizer
+                break;
+            case 20:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,159); // Oval Stone
+                break;
+            case 21:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,160); // Dawn Stone
+                break;
+            case 22:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,161); // Shiny Stone
+                break;
+            case 23:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,162); // Dusk Stone
+                break;
+            case 24:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,163); // Coronet Rock
+                break;
+            case 25:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,164); // Mossy Rock
+                break;
+            case 26:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,165); // Frozen Rock
+                break;
+        }
+    }
+    macro GiveRandomLoot() {
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,182); // Key
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,427); // Unown Rock ?
+        switch(random(2)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,173); // Mystery Part
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,174); // Secret Slab
+                break;
+        }
+        switch(random(5)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,186); // Lost Loot
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,180); // Sky Gift
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,58); // Amber Tear
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,67); // Wonder Chest
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,68); // IQ Booster
+                break;
+        }
+        switch(random(3)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,260); // Vacuum Cut
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,257); // Wide Slash
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,385,10); // Rare Fossil
+                break;
+        }
+    }
+
+    macro GiveRandomGummi() {
+        switch(random(19)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,119,0); // White Gummi
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,120,0); // Red Gummi
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,121,0); // Blue Gummi
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,122,0); // Grass Gummi
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,123,0); // Yellow Gummi
+                break;
+            case 5:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,124,0); // Clear Gummi
+                break;
+            case 6:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,125,0); // Orange Gummi
+                break;
+            case 7:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,126,0); // Pink Gummi
+                break;
+            case 8:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,127,0); // Brown Gummi
+                break;
+            case 9:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,128,0); // Sky Gummi
+                break;
+            case 10:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,129,0); // Gold Gummi
+                break;
+            case 11:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,130,0); // Green Gummi
+                break;
+            case 12:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,131,0); // Gray Gummi
+                break;
+            case 13:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,132,0); // Purple Gummi
+                break;
+            case 14:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,133,0); // Royal Gummi
+                break;
+            case 15:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,134,0); // Black Gummi
+                break;
+            case 16:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,135,0); // Silver Gummi
+                break;
+            case 17:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0); // Wonder Gummi
+                break;
+            case 18:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0); // Glittery Gummi
+                break;
+        }
+    }
+    
+    macro GiveRandomSeeds() {
+        switch(random(3)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,69,0); // Heal
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,72,0); // Eyedrop
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,73,0); // Reviver                        
+                break;
+        }
+        switch(random(7)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,74,0); // Blinker
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,75,0); // Doom
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,76,0); // X-Eye
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,83,0); // Totter
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,84,0); // Sleep    
+                break;
+            case 5:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,86,0); // Warp
+                break;
+            case 6:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,87,0); // Blast   
+                break;            
+        }    
+
+        switch(random(6)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,94,0); // Vile    
+                break;
+            case 1:                
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,79,0); // Hunger
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,91,0); // Stun  
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,80,0); // Quick
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,96,0); // Violent
+                break;
+            case 5:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,97,0); // Vanish
+                break;
+        }
+        
+        switch(random(5)) {
+            case 0:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,104,0); // Dropeye    
+                break;
+            case 1:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,105,0); // Reviser    
+                break;
+            case 2:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,106,0); // Slip    
+                break;
+            case 3:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,107,0); // Via    
+                break;
+            case 4:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,118,0); // Dough    
+                break;
+        }
+        
+        switch(random(100)) {
+            case < 50:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,85,0); // Plain
+                break;
+            case < 80:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,95,0); // Pure !
+                break;
+            case < 90:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,77,0); // Life !!
+                break;
+            case <= 98:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,89,0); // Joy !!
+                break;
+            case 99:
+                ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,93,0); // Golden !!!
+                break;
+        }
+    }
