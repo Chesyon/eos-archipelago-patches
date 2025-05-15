@@ -287,11 +287,14 @@ __attribute((used)) bool GetRecoverCoroutineInfo(struct coroutine_info* coroutin
 */
 __attribute((used)) void CustomInitScriptRoutineFromCoroutineInfo(struct script_routine* routine, undefined4 param_2, struct coroutine_info* coroutine_info, int status) {
   InitScriptRoutineFromCoroutineInfo(routine, param_2, coroutine_info, status);
-  if(CRASS_SETTINGS.coroutine_hijack && CRASS_SETTINGS.return_info.next_opcode_addr != NULL) {
-    if(CRASS_SETTINGS.redirect)
-      MemcpySimple(&(routine->states[0].ssb_info[1]), &(CRASS_SETTINGS.return_info), sizeof(struct ssb_runtime_info)); // Setting up fields to be used by OPCODE_RETURN
-    else
-      routine->states[0].ssb_info[0].next_opcode_addr = CRASS_SETTINGS.return_info.next_opcode_addr; // Next opcode address is the opcode following the skipped OPCODE_SUPERVISION_EXECUTE_ACITNG_SUB
+  if(CRASS_SETTINGS.coroutine_hijack && CRASS_SETTINGS.return_offset != NULL) {
+    uint8_t idx = 0;
+    if(CRASS_SETTINGS.redirect) {
+      MemcpySimple(&(routine->states[0].ssb_info[1]), &(routine->states[0].ssb_info[0]), sizeof(struct ssb_runtime_info)); // Setting up fields to be used by OPCODE_RETURN
+      idx = 1;
+    }
+    // Next opcode address is the opcode following the skipped OPCODE_SUPERVISION_EXECUTE_ACITNG_SUB...
+    routine->states[0].ssb_info[idx].next_opcode_addr = (uint16_t*)((uint32_t)(routine->states[0].ssb_info[idx].file) + CRASS_SETTINGS.return_offset);
     CRASS_SETTINGS.redirect = false;
     CRASS_SETTINGS.skip_active = false;
     CRASS_SETTINGS.coroutine_hijack = false;
@@ -370,8 +373,8 @@ __attribute((used)) void CustomGetSceneName(char* truncated_scene_name, char* fu
       else if(next_opcode_id == OPCODE_END || next_opcode_id == OPCODE_HOLD)
         CRASS_SETTINGS.end_after_cutscene = true; // Cutscene may need to be sped up, so note it for a later check in TryCutsceneSkipScan
       CRASS_SETTINGS.can_skip = true;
-      // Save the state of the script runtime info to perform a proper return after a skip
-      MemcpySimple(&(CRASS_SETTINGS.return_info), &(GROUND_STATE_PTRS.main_routine->states[0].ssb_info[0]), sizeof(struct ssb_runtime_info));
+      // Save the return offset to perform a proper return after a skip!
+      CRASS_SETTINGS.return_offset = (uint32_t)(next_opcode_addr) - (uint32_t)(GROUND_STATE_PTRS.main_routine->states[0].ssb_info[0].file);
       break;
     case CRASS_SPEEDUP:;
     skip_speedup:;
