@@ -41,10 +41,8 @@ enum crass_kind {
 };
 
 struct crass_settings {
-  struct ssb_runtime_info
-      return_info; // Used to return control flow back to either the next opcode
-                   // after OPCODE_SUPERVISION_EXECUTE_ACTING_SUB or via
-                   // OPCODE_RETURN in ROUTINE_MAP_TEST.
+  uint32_t return_offset; // The offset in Unionall (relative to
+                          // ssb_runtime_info::file) to return to.
   enum crass_kind
       crass_kind; // To indicate the kind of cutscene skip taken place. Only
                   // really intended to be used in ROUTINE_MAP_TEST, when
