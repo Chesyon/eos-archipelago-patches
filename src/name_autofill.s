@@ -1,9 +1,6 @@
 .align 4
 AutofillName:
     push  {r14}
-    ldr   r0,=NameBuffer
-    mov   r1,#11
-    bl    MemZero
     ldr   r0,=NameBuffer // We want to copy the name to the buffer
     ldr   r1,=slotData   // We want to get the name from slot data
     mov   r2,#10         // We want to copy ten characters
