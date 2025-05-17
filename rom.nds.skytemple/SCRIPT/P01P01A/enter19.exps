@@ -1,5 +1,5 @@
 def 0 {
-    message_SetFace(ACTOR_NPC_RURIRI,FACE_DIZZY,FACE_POS_STANDARD);
+    message_SetFace(ACTOR_NPC_RURIRI,FACE_PAIN,FACE_POS_STANDARD);
     switch (ProcessSpecial(103,0,0)) {
         case > 0:
             switch(random(5)) {
@@ -29,7 +29,7 @@ def 0 {
                     message_Talk(" Zzz...[W:60] [CS:C]Nandemodekiru[CR]-zzzz");
                     break;
                 case 2:
-                    message_Talk(" Zzz...[W:60] [CS:G]Rui[CR]-zzzz");
+                    message_Talk(" Zzz...[W:60] [CS:G]Ruriri[CR]-zzzz");
                     break;
                 case 3:
                     message_Talk(" Zzz...[W:60] [CS:C]DECOI[CR]-zzzz");

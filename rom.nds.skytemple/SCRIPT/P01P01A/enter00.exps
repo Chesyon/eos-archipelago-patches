@@ -208,6 +208,9 @@ def 0 {
                                             switch(ProcessSpecial(113,14,0)) { // Non-Torkoal Hint 2
                                                 case 2: // Hint 14 failed?
                                                 case 1: // Hint 14 read
+                                                    with (object OBJECT_P03P02A1_128) {
+                                                        Destroy();
+                                                    }
                                                     break;
                                                 case 0: // Hint 14 not read
                                                     supervision_StationCommon(18);
@@ -678,8 +681,8 @@ def 7 for_actor(ACTOR_NPC_RURIRI) {
     end;
 }
 
-def 8 for_object(OBJECT_P03P02A1_128) {
-    SetAnimation(18);
+def 8 for_object(OBJECT_P03P02A1_129) {
+    SetAnimation(0);
     WaitScreenFade();
     WaitScreenFadeAll();
     end;

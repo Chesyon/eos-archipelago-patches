@@ -4,6 +4,9 @@ def 0 {
         case 1: // Hint 13 read
             break;
         case 0: // Hint not read
+            with (object OBJECT_P03P02A1_129) {
+                SetAnimation(17);
+            }
             jump @apple_hint;
     }
     switch(ProcessSpecial(113,14,0)) { // Non-Torkoal Hint 2
@@ -19,6 +22,7 @@ def 0 {
     Wait(15);
     bgm_Stop();
     se_Play(6414);
+
     with (actor ACTOR_PLAYER) {
         SetAnimation(11);
     }
