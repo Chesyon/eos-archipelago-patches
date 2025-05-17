@@ -868,7 +868,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
-        case DUNGEON_HIDDEN_LAND:;
+        case DUNGEON_HIDDEN_LAND:; // Dusknoir is a boss here, iirc. 
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
                 break;
             }
@@ -904,13 +904,38 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, 300, beachCaveExtras, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
+            // Needs to show Boss Zubat & Koffing
+            break;
+        case DUNGEON_MT_BRISTLE:;
+            preArgs.strings[0] = "Drowzee";
+            preArgs.strings[1] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            // Needs the Mt. Bristle bag upgrade!
+            break;
+        case DUNGEON_APPLE_WOODS:;
+            // Needs bag upgrade!
+            break;
+        case DUNGEON_CRAGGY_COAST:;
+        case DUNGEON_SIDE_PATH:;
+        case DUNGEON_MT_HORN:;
+        case DUNGEON_ROCK_PATH:;
+            if(GetDungeonMode(location) == DMODE_OPEN) {
+                // Escort: Bidoof
+            }
             break;
         case DUNGEON_STEAM_CAVE:;
             if(IsDarkraiGoal()) {
                 preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
                 PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 81, temp);
-                preArgs.strings[0] = "Uxie";
+                // First time boss is Groudon, Uxie is only post-secret rank...
+                if(GetDungeonMode(location) == DMODE_OPEN) {
+                    preArgs.strings[0] = "Groudon"; 
+                } else {
+                    preArgs.strings[0] = "Uxie";
+                }
+                // Wrong bag upgrade apparently?
                 preArgs.strings[1] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
@@ -926,15 +951,23 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             break;
         case DUNGEON_CRYSTAL_CROSSING:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Azelf";
+                 // First time boss is Grovyle, Azelf is only post-secret rank...
+                if(GetDungeonMode(location) == DMODE_OPEN) {
+                    preArgs.strings[0] = "Grovyle"; 
+                } else {
+                    preArgs.strings[0] = "Azelf";
+                }
                 preArgs.strings[1] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
+        case SEALED_RUIN;:
+            // Boss Spiritomb
+            break;
         case DUNGEON_MIRACLE_SEA:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Phione";
+                preArgs.strings[0] = "Gyarados"; // First time boss is Gyarados, Phione doesn't actually fight you...
                 preArgs.strings[1] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
@@ -950,7 +983,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Shaymin";
+                preArgs.strings[0] = "Muk & Grimer"; // You don't ever fight Shaymin. Summit has Muk and Grimer if uncleared?
                 preArgs.strings[1] = (GetSubXBit(46)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
@@ -958,7 +991,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             break;
         case DUNGEON_CREVICE_CAVE:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Scizor";
+                preArgs.strings[0] = "Froslass"; // Froslass is the boss here. 
                 preArgs.strings[1] = (GetSubXBit(47)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
