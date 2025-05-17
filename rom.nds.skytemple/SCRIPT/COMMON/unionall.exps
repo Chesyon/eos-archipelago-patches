@@ -3395,7 +3395,7 @@ coro EVENT_M03_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
     //supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03A0301', 0);
     ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
-    ~crass(LEVEL_T01P02A, 'M03D0313', 0, LEVEL_T01P02A, 'M03D0313:2', 0);
+    ~crass(LEVEL_T01P02A, 'M03D0313', 0, LEVEL_T01P02A, 'M03D0313:1', 0);
     ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
     // supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03D0314', 0);
     main_SetGround(LEVEL_P01P01A);
@@ -3409,7 +3409,7 @@ coro EVENT_M03_04 {
     CallCommon(CORO_SUBSCREEN_INIT);
     // supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0401', 0);
     ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
-    ~crass(LEVEL_D03P41A, 'M03D0812', 1, LEVEL_D03P41A, 'M03D0812:2', 1);
+    ~crass(LEVEL_D03P41A, 'M03D0812', 1, LEVEL_D03P41A, 'M03D0812:1', 1);
     ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
     // supervision_ExecuteActingSub(LEVEL_T01P01A, 'M03A0403', 0);
     main_SetGround(LEVEL_P01P01A);
@@ -3448,7 +3448,7 @@ coro EVENT_M03_07B {
 coro EVENT_M03_08 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03A0801', 0);
-    ~crass(LEVEL_D03P41A, 'M03D0812', 0, LEVEL_D03P41A, 'M03D0812:2', 0);
+    ~crass(LEVEL_D03P41A, 'M03D0812', 0, LEVEL_D03P41A, 'M03D0812:1', 0);
     supervision_ExecuteActingSub(LEVEL_D03P41A, 'M03D0813', 0);
     end;
 }
@@ -3566,10 +3566,10 @@ coro EVENT_M05_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
     // $PERFORMANCE_PROGRESS_LIST[27] = 1;
     supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05A0301', 0);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-    supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05D0314', 1);
-    supervision_ExecuteActingSub(LEVEL_D04P12A, 'M05A0302', 1);
-    supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
+    ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+    ~crass(LEVEL_D04P11A, 'M05D0314', 1, LEVEL_D04P11A, 'M05D0314:1', 1);
+    ~crass(LEVEL_D04P12A, 'M05A0302', 1, LEVEL_D04P12A, 'M05A0302:1', 1);
+    ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
     supervision_ExecuteActingSub(LEVEL_D04P11A, 'M05A0303', 0);
     supervision_ExecuteActingSub(LEVEL_D04P12A, 'M05A0304', 0);
     end;
@@ -3616,9 +3616,9 @@ coro EVENT_M05_06_09 {
         JumpCommon(CORO_EVENT_DIVIDE);
     } else {
         supervision_ExecuteActingSub(LEVEL_D04P31A, 'M05A0601', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-        supervision_ExecuteActingSub(LEVEL_D04P31A, 'M05D0615', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+        ~crass(LEVEL_D04P31A, 'M05D0615', 1, LEVEL_D04P31A, 'M05D0615:1', 0);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
         supervision_ExecuteActingSub(LEVEL_D04P31A, 'M05D0616', 0);
         supervision_ExecuteActingSub(LEVEL_V05P03A, 'M05A0602', 0);
         supervision_ExecuteActingSub(LEVEL_P02P01A, 'M05A0603', 0);
@@ -3974,12 +3974,13 @@ coro EVENT_M09_06_07 {
         JumpCommon(CORO_EVENT_HA_SAME);
     } else {
         supervision_ExecuteActingSub(LEVEL_P03P01A, 'M09A0601', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-        supervision_ExecuteActingSub(LEVEL_P03P01A, 'M09D0612', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+        ~crass(LEVEL_P03P01A, 'M09D0612', 0, LEVEL_P03P01A, 'M09D0612:1', 0);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
         supervision_ExecuteActingSub(LEVEL_P03P01A, 'M09D0613', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-        supervision_ExecuteActingSub(LEVEL_P03P01A, 'M09D0614', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+        ~crass(LEVEL_P03P01A, 'M09D0614', 0, LEVEL_P03P01A, 'M09D0614:1', 0);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
         supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
         supervision_ExecuteActingSub(LEVEL_P03P01A, 'M09D0615', 0);
         supervision_ExecuteActingSub(LEVEL_D08P11A, 'M09D0212', 0);
@@ -4412,14 +4413,16 @@ coro EVENT_M14_08_09 {
     if ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
         §label_611;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
-        CallCommon(CORO_EVENT_HA_SAME);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M14A0901', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-        supervision_ExecuteActingSub(LEVEL_D17P34A, 'M15B0904', 1);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+        ~crass(LEVEL_D17P34A, 'M15B0904', 1, LEVEL_D17P34A, 'M15B0904:1', 1);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M14A0903', 0);
         supervision_ExecuteActingSub(LEVEL_D15P41A, 'M14D0812', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M14A0905', 0);
+        screen_FadeOut(1,30);
+        CallCommon(CORO_EVENT_HA_SAME);
+        hold;
         CallCommon(CORO_EVENT_END_MAPIN);
         main_SetGround(LEVEL_G01P04A);
         supervision_ExecuteStationCommon(LEVEL_G01P04A, 1);
@@ -4506,7 +4509,7 @@ coro EVENT_M15_09 {
     supervision_ExecuteActingSub(LEVEL_D17P31A, 'M15B0901', 0);
     supervision_ExecuteActingSub(LEVEL_V15P02A, 'M15B0902', 0);
     supervision_ExecuteActingSub(LEVEL_D17P32A, 'M15B0903', 0);
-    supervision_ExecuteActingSub(LEVEL_D17P34A, 'M15B0904', 0);
+    ~crass(LEVEL_D17P34A, 'M15B0904', 1, LEVEL_D17P34A, 'M15B0904:1', 1);
     supervision_ExecuteActingSub(LEVEL_D17P32A, 'M15B0905', 0);
     supervision_ExecuteActingSub(LEVEL_D17P34A, 'M15B0906', 0);
     supervision_ExecuteActingSub(LEVEL_D17P33A, 'M15B0907', 0);
@@ -5463,10 +5466,10 @@ coro EVENT_S01_09_10 {
         §label_629;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
         supervision_ExecuteActingSub(LEVEL_P14P01A, 'S01P1001', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A0701', 0);
-        supervision_ExecuteActingSub(LEVEL_P14P01A, 'S01P1002', 0);
-        supervision_ExecuteActingSub(LEVEL_S04P01A, 'C00A1701', 0);
-        supervision_ExecuteActingSub(LEVEL_P14P01A, 'S01P1003', 0);
+        ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
+        ~crass(LEVEL_P14P01A, 'S01P1002', 0, LEVEL_P14P01A, 'S01P1002:1', 0);
+        ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
+        ~crass(LEVEL_P14P01A, 'S01P1003', 0, LEVEL_P14P01A, 'S01P1003:1', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'S01P1004', 0);
         supervision_ExecuteActingSub(LEVEL_P14P01A, 'S01P1005', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'S01P1101', 0);
@@ -9091,6 +9094,15 @@ coro ENTER_SCENARIO_DUNGEON {
                     dungeon_mode(177) = DMODE_OPEN_AND_REQUEST;
                     supervision_ExecuteActing(LEVEL_P14P01A, 'EVOLVE', 0);
                     hold;
+                case 6:
+                    switch(ProcessSpecial(113,15,0)) {
+                        case 0:
+                            supervision_ExecuteCommon(CORO_EVENT_M05_03);
+                            hold;
+                        default:
+                            break;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -10707,10 +10719,16 @@ coro GETOUT_REQUEST_DUNGEON {
                             } elseif ( scn($SCENARIO_MAIN) >= [29, 5] ) {
                                 §label_1026;
                                 switch($DUNGEON_ENTER_INDEX) {
-                                    case 1:
                                     case 9:
                                     case 11:
                                     case 13:
+                                        if (not debug) {
+                                            JumpCommon(CORO_GETOUT_REQUEST_RETURN);
+                                        }
+                                    case 1:
+                                    case 89:
+                                    case 90:
+                                    case 92:
                                     case 111:
                                     case 112:
                                     case 113:

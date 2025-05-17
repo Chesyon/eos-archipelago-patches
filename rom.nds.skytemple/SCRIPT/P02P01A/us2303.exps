@@ -243,14 +243,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:14]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 3[CR]"):
+        case menu("[CS:B]Waterfall Jump[CR]"):
             message_Close();
             call @huh_5;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 3"):
+        case menu("[M:R7]Waterfall Jump"):
             $DUNGEON_ARRIVE_LIST[16] = 0;
             $DUNGEON_ARRIVE_LIST[17] = 1;
-        case menu("Non-Torkoal Hint 3"):
+        case menu("Waterfall Jump"):
             message_Close();
             call @huh_5;
             call @hint_5;
@@ -262,14 +262,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:15]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 4[CR]"):
+        case menu("[CS:B]Waterfall Gem[CR]"):
             message_Close();
             call @huh_6;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 4"):
+        case menu("[M:R7]Waterfall Gem"):
             $DUNGEON_ARRIVE_LIST[19] = 0;
             $DUNGEON_ARRIVE_LIST[20] = 1;
-        case menu("Non-Torkoal Hint 4"):
+        case menu("Waterfall Gem"):
             message_Close();
             call @huh_6;
             call @hint_6;
@@ -281,14 +281,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:16]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 5[CR]"):
+        case menu("[CS:B]Groudon\'s Heart[CR]"):
             message_Close();
             call @huh_7;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 5"):
+        case menu("[M:R7]Groudon\'s Heart"):
             $DUNGEON_ARRIVE_LIST[22] = 0;
             $DUNGEON_ARRIVE_LIST[23] = 1;
-        case menu("Non-Torkoal Hint 5"):
+        case menu("Groudon\'s Heart"):
             message_Close();
             call @huh_7;
             call @hint_7;
@@ -300,14 +300,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:17]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 6[CR]"):
+        case menu("[CS:B]Azelf\'s Duress[CR]"):
             message_Close();
             call @huh_8;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 6"):
+        case menu("[M:R7]Azelf\'s Duress"):
             $DUNGEON_ARRIVE_LIST[25] = 0;
             $DUNGEON_ARRIVE_LIST[26] = 1;
-        case menu("Non-Torkoal Hint 6"):
+        case menu("Azelf\'s Duress"):
             message_Close();
             call @huh_8;
             call @hint_8;
@@ -319,14 +319,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:18]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 7[CR]"):
+        case menu("[CS:B]Mysterious Box[CR]"):
             message_Close();
             call @huh_9;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 7"):
+        case menu("[M:R7]Mysterious Box"):
             $DUNGEON_ARRIVE_LIST[28] = 0;
             $DUNGEON_ARRIVE_LIST[29] = 1;
-        case menu("Non-Torkoal Hint 7"):
+        case menu("Mysterious Box"):
             message_Close();
             call @huh_9;
             call @hint_9;
@@ -338,14 +338,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:19]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 8[CR]"):
+        case menu("[CS:B]THIEF!!![CR]"):
             message_Close();
             call @huh_10;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 8"):
+        case menu("[M:R7]THIEF!!!"):
             $DUNGEON_ARRIVE_LIST[31] = 0;
             $DUNGEON_ARRIVE_LIST[32] = 1;
-        case menu("Non-Torkoal Hint 8"):
+        case menu("THIEF!!!"):
             message_Close();
             call @huh_10;
             call @hint_10;
@@ -357,14 +357,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:20]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 9[CR]"):
+        case menu("[CS:B]Treasure Memo[CR]"):
             message_Close();
             call @huh_11;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 9"):
+        case menu("[M:R7]Treasure Memo"):
             $DUNGEON_ARRIVE_LIST[34] = 0;
             $DUNGEON_ARRIVE_LIST[35] = 1;
-        case menu("Non-Torkoal Hint 9"):
+        case menu("Treasure Memo"):
             message_Close();
             call @huh_11;
             call @hint_11;
@@ -376,14 +376,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:21]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 10[CR]"):
+        case menu("[CS:B]Sick Friend...[CR]"):
             message_Close();
             call @huh_12;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 10"):
+        case menu("[M:R7]Sick Friend..."):
             $DUNGEON_ARRIVE_LIST[37] = 0;
             $DUNGEON_ARRIVE_LIST[38] = 1;
-        case menu("Non-Torkoal Hint 10"):
+        case menu("Sick Friend..."):
             message_Close();
             call @huh_12;
             call @hint_12;
@@ -395,14 +395,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:22]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 11[CR]"):
+        case menu("[CS:B]Job Board #1[CR]"):
             message_Close();
             call @huh_13;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 11"):
+        case menu("[M:R7]Job Board #1"):
             $DUNGEON_ARRIVE_LIST[40] = 0;
             $DUNGEON_ARRIVE_LIST[41] = 1;
-        case menu("Non-Torkoal Hint 11"):
+        case menu("Job Board #1"):
             message_Close();
             call @huh_13;
             call @hint_13;
@@ -414,14 +414,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:23]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 12[CR]"):
+        case menu("[CS:B]Job Board #2[CR]"):
             message_Close();
             call @huh_14;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 12"):
+        case menu("[M:R7]Job Board #2"):
             $DUNGEON_ARRIVE_LIST[43] = 0;
             $DUNGEON_ARRIVE_LIST[44] = 1;
-        case menu("Non-Torkoal Hint 12"):
+        case menu("Job Board #2"):
             message_Close();
             call @huh_14;
             call @hint_14;
@@ -433,14 +433,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:24]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 13[CR]"):
+        case menu("[CS:B]Job Board #3[CR]"):
             message_Close();
             call @huh_15;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 13"):
+        case menu("[M:R7]Job Board #3"):
             $DUNGEON_ARRIVE_LIST[46] = 0;
             $DUNGEON_ARRIVE_LIST[47] = 1;
-        case menu("Non-Torkoal Hint 13"):
+        case menu("Job Board #3"):
             message_Close();
             call @huh_15;
             call @hint_15;
@@ -452,14 +452,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:25]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 14[CR]"):
+        case menu("[CS:B]A Gourmet...[CR]"):
             message_Close();
             call @huh_16;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 14"):
+        case menu("[M:R7]A Gourmet..."):
             $DUNGEON_ARRIVE_LIST[49] = 0;
             $DUNGEON_ARRIVE_LIST[50] = 1;
-        case menu("Non-Torkoal Hint 14"):
+        case menu("A Gourmet..."):
             message_Close();
             call @huh_16;
             call @hint_16;
@@ -471,14 +471,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:26]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 15[CR]"):
+        case menu("[CS:B]They're SO slow!!![CR]"):
             message_Close();
             call @huh_17;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 15"):
+        case menu("[M:R7]They're SO slow!!!"):
             $DUNGEON_ARRIVE_LIST[52] = 0;
             $DUNGEON_ARRIVE_LIST[53] = 1;
-        case menu("Non-Torkoal Hint 15"):
+        case menu("They're SO slow!!!"):
             message_Close();
             call @huh_17;
             call @hint_17;
@@ -490,14 +490,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:27]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 16[CR]"):
+        case menu("[CS:B]Never \"Gone\"[CR]"):
             message_Close();
             call @huh_18;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 16"):
+        case menu("[M:R7]Never \"Gone\""):
             $DUNGEON_ARRIVE_LIST[55] = 0;
             $DUNGEON_ARRIVE_LIST[56] = 1;
-        case menu("Non-Torkoal Hint 16"):
+        case menu("Never \"Gone\""):
             message_Close();
             call @huh_18;
             call @hint_18;
@@ -509,14 +509,14 @@ def 0 {
                message_Talk(" You want to know about [qhat:28]?");
             }
             return;
-        case menu("[CS:B]Non-Torkoal Hint 17[CR]"):
+        case menu("[CS:B]Sentry AFK...[CR]"):
             message_Close();
             call @huh_19;
             jump @i_forgor;
-        case menu("[M:R7]Non-Torkoal Hint 17"):
+        case menu("[M:R7]Sentry AFK..."):
             $DUNGEON_ARRIVE_LIST[58] = 0;
             $DUNGEON_ARRIVE_LIST[59] = 1;
-        case menu("Non-Torkoal Hint 17"):
+        case menu("Sentry AFK..."):
             message_Close();
             call @huh_19;
             call @hint_19;
@@ -1238,6 +1238,6 @@ def 0 {
     $DUNGEON_ARRIVE_LIST[57] = 0;
     $DUNGEON_ARRIVE_LIST[58] = 0;
     $DUNGEON_ARRIVE_LIST[59] = 0;
-    $DUNGEON_ARRIVE_LIST[60] = 0;
+    $DUNGEON_ARRIVE_LIST[60] = 1;
     return;
 }

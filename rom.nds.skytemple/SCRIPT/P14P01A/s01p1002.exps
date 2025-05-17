@@ -45,6 +45,14 @@ def 0 {
         MovePositionOffset(33152, 0, 200);
     }
     Wait(90);
+    message_SetFaceEmpty(ACTOR_NPC_PUKURIN,FACE_SIGH,FACE_POS_STANDARD);
+    if (debug) {
+        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[hero] is found in ~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX\'s\n[hero][partner], don\'t forget!");        
+    } else {
+        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[qhat:19] is found in ~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX\'s\n[qhere:19], don\'t forget!");
+    }
+    message_Close();
+    Wait(90);
     se_Play(5139);
     screen_WhiteOut(1, 5);
     screen_FlushIn(1, 0, 1, 0, 0, 0);

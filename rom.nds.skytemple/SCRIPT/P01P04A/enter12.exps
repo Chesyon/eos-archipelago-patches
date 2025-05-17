@@ -17,6 +17,7 @@ def 0 {
     }
     §bidoof_se;
     if ($SCENARIO_SUB1 &<< 6) {
+        
         message_Talk(" Can\'t you see I\'m busy right now,\nsquirt?[K] Play somewhere else, why don\'t you!");
         JumpCommon(CORO_END_TALK);           
     } else {

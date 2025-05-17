@@ -4,8 +4,6 @@ def 0 {
     switch(message_SwitchMenu(1,1)) {
         case menu("Your Base"):
             message_Close();
-            call @teleport_nao;
-            $GROUND_ENTER = 999; // Special code for teleport
             switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {
                 case 0:
                     message_Mail("[STS][CN][CS:G]Bidoof[CR] doesn\'t have a base![STE]");
@@ -14,9 +12,13 @@ def 0 {
                         message_Mail("[STS][CN][CS:G]Sunflora[CR] doesn\'t have a base![STE]");
                     }
                     message_Close();
+                    call @teleport_nao;
+                    $GROUND_ENTER = 999; // Special code for teleport
                     main_EnterGround(LEVEL_H01P99A, 30);
                     hold;
                 default:
+                    call @teleport_nao;
+                    $GROUND_ENTER = 999; // Special code for teleport
                     main_EnterGround(LEVEL_H02P99A, 30);
                     hold;
             }

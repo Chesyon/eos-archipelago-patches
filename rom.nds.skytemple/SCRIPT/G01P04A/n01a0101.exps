@@ -1,0 +1,619 @@
+
+def 0 {
+    sound_Stop();
+    if ( not debug ) {
+        §label_0;
+        $SCENARIO_SIDE = scn[40, 1];
+        message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" All right! Here we go today! ♪",
+            french=" Très bien!\nUne nouvelle journée qui commence! ♪",
+            german=" Alles klar!\nLasst uns den Tag angemessen beginnen! ♪",
+            italian=" Bene! Eccoci qua! ♪",
+            spanish=" ¡De acuerdo, vamos allá! ♪",
+        });
+        message_Talk({
+            english=" Our morning cheers![K]\nAll together now! ♪",
+            french=" C\'est l\'heure de nos\nencouragements matinaux!\nAllez, tous ensemble! ♪",
+            german=" Unser morgendlicher Jubelruf![K]\nAlle zusammen! ♪",
+            italian=" E ora il nostro motto mattutino![K]\nTutti insieme! ♪",
+            spanish=" ¡Repasemos nuestras consignas![K]\n¡Todo el mundo, vamos! ♪",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_EmptyActor();
+        message_Talk({
+            english="[CS:N]Everyone[CR]: ONE![K] DON\'T SHIRK WORK!",
+            french="[CS:N]Tous[CR]: UN![K] SANS TRAVAIL, PAS DE MEDAILLE!",
+            german="[CS:N]Alle[CR]: ERSTENS![K] NICHT DEM PLAGEN ENTSAGEN!",
+            italian="[CS:N]Tutti[CR]: UNO![K] LAVORARE NON FA MALE!",
+            spanish="[CS:N]Todos[CR]: ¡UNO![K] ¡EL BUEN EXPLORADOR\nDEBE SER TRABAJADOR!",
+        });
+        message_Talk({
+            english="[CS:N]Everyone[CR]: TWO![K] RUN AWAY AND PAY!",
+            french="[CS:N]Tous[CR]: DEUX![K] LES FROUSSARDS AU PLACARD!",
+            german="[CS:N]Alle[CR]: ZWEITENS![K] WILLST DU KNEIFEN,\nMÜSSEN WIR DICH SCHLEIFEN!",
+            italian="[CS:N]Tutti[CR]: DUE![K] A CHI SCAPPA NIENTE PAPPA!",
+            spanish="[CS:N]Todos[CR]: ¡DOS![K] ¡EL QUE PREFIERE ESCAPAR\nTIENE POCO QUE GANAR!",
+        });
+        message_Close();
+        back_SetGround(LEVEL_G01P04A);
+        supervision_Acting(0);
+        supervision_Acting(1);
+        supervision_Acting(2);
+        with (performer 0) {
+            camera_SetMyself();
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetPositionInitial();
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetAnimation(2);
+        }
+        screen_FadeIn(1, 30);
+        bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+        Wait(30);
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        message_EmptyActor();
+        message_Talk({
+            english="[CS:N]Everyone[CR]: THREE![K] SMILES GO FOR MILES!",
+            french="[CS:N]Tous[CR]: TROIS![K] GARDE LE SOURIRE POUR\nREUSSIR!",
+            german="[CS:N]Alle[CR]: DRITTENS![K] MIT EINEM LACHEN\nWERDEN WIR ES MACHEN!",
+            italian="[CS:N]Tutti[CR]: TRE![K] OGNI SORRISO VA CONDIVISO!",
+            spanish="[CS:N]Todos[CR]: ¡TRES![K] ¡SONRISAS PARA TODOS\nY ENCONTRARÉIS MUCHOS TESOROS!",
+        });
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        message_Close();
+        Wait(15);
+        message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
+        message_Talk({
+            english=" OK, Pokémon! Get to work! ♪",
+            french=" Allez, mes amis Pokémon!\nAu travail! ♪",
+            german=" Gut, Pokémon! An die Arbeit! ♪",
+            italian=" Ok, Pokémon! Al lavoro! ♪",
+            spanish=" ¡De acuerdo, Pokémon!\n¡Ahora a trabajar! ♪",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetEffect(EFFECT_JOYOUS, 3);
+        }
+        Wait(1);
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetDirection(DIR_UP);
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetDirection(DIR_UP);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_NPC_HEIGANI) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(24);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetAnimation(23);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(25);
+        }
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            SetDirection(DIR_UP);
+        }
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            SetAnimation(66);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetDirection(DIR_UP);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetAnimation(66);
+        }
+        message_EmptyActor();
+        message_Talk({
+            english="[CS:N]Everyone[CR]: HOORAY!",
+            french="[CS:N]Tous[CR]: HOURRA!",
+            german="[CS:N]Alle[CR]: HURRA!",
+            italian="[CS:N]Tutti[CR]: URRÀ!",
+            spanish="[CS:N]Todos[CR]: ¡HURRA!",
+        });
+        message_Close();
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_HEIGANI) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with (performer 0) {
+            MovePositionLives(1, 66);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetDirection(DIR_DOWN);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            SetAnimation(25);
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            WaitAnimation();
+        }
+        with (actor ACTOR_NPC_DAGUTORIO) {
+            Destroy();
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetDirection(DIR_DOWN);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            SetAnimation(24);
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            WaitAnimation();
+        }
+        with (actor ACTOR_NPC_DIGUDA) {
+            Destroy();
+        }
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            Turn2Direction(8, 10, DIR_LEFT);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            Turn2Direction(8, 10, DIR_LEFT);
+        }
+        with (actor ACTOR_NPC_PUKURIN) {
+            MovePositionMark(1, Position<'m0', 52.5, 22.5>);
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            MovePositionMark(33075, Position<'m1', 28, 31.5>);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            MovePositionMark(33075, Position<'m2', 40.5, 23.5>);
+        }
+        Wait(5);
+        with (actor ACTOR_NPC_HEIGANI) {
+            MovePositionMark(33075, Position<'m3', 40.5, 23.5>);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            MovePositionMark(33075, Position<'m4', 30, 34>);
+        }
+        with (actor ACTOR_PLAYER_BIPPA) {
+            Move2PositionMark(33075, Position<'m5', 40.5, 23.5>);
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            Move2PositionOffset(33075, -32, 0);
+        }
+        with (actor ACTOR_NPC_PUKURIN) {
+            Destroy();
+        }
+        with (actor ACTOR_NPC_KIMAWARI) {
+            Move2PositionMark(33075, Position<'m6', 40.5, 23.5>);
+        }
+        with (actor ACTOR_NPC_CHIRIIN) {
+            MovePositionMark(33075, Position<'m7', 40.5, 16.5>);
+        }
+        with (actor ACTOR_NPC_HEIGANI) {
+            MovePositionMark(33075, Position<'m8', 40.5, 16.5>);
+        }
+        Wait(45);
+        supervision_RemoveActing(1);
+        with (actor ACTOR_PLAYER_BIPPA) {
+            SetDirection(DIR_DOWNRIGHT);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetPositionMark(Position<'m9', 27, 38.5>);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetDirection(DIR_DOWNLEFT);
+        }
+        with (actor ACTOR_NPC_DOGOOMU) {
+            SetAnimation(4);
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetPositionMark(Position<'m10', 28.5, 27.5>);
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetDirection(DIR_DOWN);
+        }
+        with (actor ACTOR_NPC_GUREGGURU) {
+            SetAnimation(4);
+        }
+        with (actor ACTOR_NPC_PARTNER_FIRST) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_HERO_FIRST);
+        }
+        WaitExecuteLives(ACTOR_NPC_PARTNER_FIRST);
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PARTNER_FIRST);
+        }
+        WaitExecuteLives(ACTOR_NPC_HERO_FIRST);
+        message_SetFace(ACTOR_NPC_PARTNER_FIRST, FACE_NORMAL, FACE_POS_STANDARD);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" [c_name:NPC_HERO_FIRST]![K] Let\'s do our best\non our guild assignments today!",
+                    french=" [c_name:NPC_HERO_FIRST]![K] Faisons de notre\nmieux pour remplir les tâches que la Guilde\nnous a confiées aujourd\'hui!",
+                    german=" [c_name:NPC_HERO_FIRST]![K] Lass uns heute \nunser Bestes bei den Gildenaufgaben geben!",
+                    italian=" [c_name:NPC_HERO_FIRST]![K] Facciamo\ndel nostro meglio anche oggi!",
+                    spanish=" ¡[c_name:NPC_HERO_FIRST]![K] ¡Tenemos que\nhacer nuestras tareas lo mejor posible!",
+                }
+            case 2:
+                {
+                    english=" [c_name:NPC_HERO_FIRST]![K] Let\'s do our best\non our guild assignments today!",
+                    french=" [c_name:NPC_HERO_FIRST]![K] Faisons de notre\nmieux pour remplir les tâches que la Guilde\nnous a confiées aujourd\'hui!",
+                    german=" [c_name:NPC_HERO_FIRST]![K] Lass uns heute \nunser Bestes bei den Gildenaufgaben geben!",
+                    italian=" [c_name:NPC_HERO_FIRST]![K] Facciamo\ndel nostro meglio anche oggi!",
+                    spanish=" ¡[c_name:NPC_HERO_FIRST]![K] ¡Hay que\nhacer nuestras tareas lo mejor posible!",
+                }
+            default:
+                {
+                    english=" [c_name:NPC_HERO_FIRST]![K] Let\'s do our best\non our guild assignments today!",
+                    french=" [c_name:NPC_HERO_FIRST]![K] Faisons de notre\nmieux pour remplir les tâches que la Guilde\nnous a confiées aujourd\'hui!",
+                    german=" [c_name:NPC_HERO_FIRST]![K] Lass uns heute \nunser Bestes bei den Gildenaufgaben geben!",
+                    italian=" [c_name:NPC_HERO_FIRST]![K] Facciamo\ndel nostro meglio anche oggi!",
+                    spanish=" ¡[c_name:NPC_HERO_FIRST]![K] ¡Vamos a\nhacer nuestras tareas lo mejor posible!",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            SetAnimation(71);
+        }
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            WaitAnimation();
+        }
+        WaitExecuteLives(ACTOR_NPC_HERO_FIRST);
+        with (actor ACTOR_NPC_HERO_FIRST) {
+            SetAnimation(2);
+        }
+        Wait(30);
+        with (performer 0) {
+            MovePositionMark(33152, Position<'m11', 40.5, 31.5>, Position<'m12', 40.5, 26.5>);
+        }
+        WaitExecutePerformer(0);
+        Wait(15);
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_TOP_C_FACER);
+        message_Talk({
+            english=" [c_name:NPC_HERO_FIRST]\'s team...[K]\nThey\'re so happy today, yup yup!",
+            french=" L\'Equipe de [c_name:NPC_HERO_FIRST]...[K]\nElle a l\'air si joyeuse aujourd\'hui, pardi!",
+            german=" Das Team von [c_name:NPC_HERO_FIRST]...[K]\nSie sehen heute so fröhlich aus, jawollja!",
+            italian=" Ma guarda la squadra di\n[c_name:NPC_HERO_FIRST]...[K] Sono così felici oggi, già, già!",
+            spanish=" El equipo de [c_name:NPC_HERO_FIRST]...[K]\n¡Hoy rebosa alegría, sí, señor!",
+        });
+        message_Talk({
+            english=" I\'m...[K]\nI\'m not giving up either! Yup yup!",
+            french=" Je...[K]\nFaut pas qu\'j\'me laisse aller, moi non plus!\nOuaip ouaip!",
+            german=" Ich...[K] Ich werde mich auch nicht\nunterkriegen lassen! Jawollja!",
+            italian=" Ma...[K]\nAnch\'io ce la metterò tutta! Ohibò!",
+            spanish=" Pues...[K] Yo tampoco pienso rendirme,\n¡no, señor!",
+        });
+        message_Close();
+        supervision_SpecialActing(27, 0, 0);
+        supervision_SpecialActing(28, 130, 78);
+        supervision_SpecialActing(29, 16, 0);
+        supervision_SpecialActing(30, 64, 0);
+        bgm_ChangeVolume(60, 128);
+        Wait(60);
+        Wait(30);
+        message_Mail({
+            english="[CN]My name\'s [CS:Y]Bidoof[CR].[K]\n[CN]I\'m an apprentice at the guild.",
+            french="[CN]Mon nom est [CS:Y]Keunotor[CR].[K]\n[CN]Je suis apprenti à la Guilde.",
+            german="[CN]Mein Name ist [CS:Y]Bidiza[CR].[K]\n[CN]Ich bin ein Gildenlehrling.",
+            italian="[CN]Mi chiamo [CS:Y]Bidoof[CR].[K]\n[CN]Sono un apprendista della Gilda.",
+            spanish="[CN]Me llamo [CS:Y]Bidoof[CR].[K]\n[CN]Soy un aprendiz del [CS:N]Pokégremio[CR].",
+        });
+        message_Mail({
+            english="[CN]Before [c_name:NPC_HERO_FIRST] arrived, I was the\n[CN]newest apprentice here. Yup yup!",
+            french="[CN]Avant l\'arrivée de [c_name:NPC_HERO_FIRST], j\'étais le\n[CN]p\'tit nouveau de service ici, pardi!",
+            german="[CN]Bevor [c_name:NPC_HERO_FIRST] hier ankam, war ich\n[CN]der neueste Lehrling dieser Gilde. Jawollja!",
+            italian="[CN]Prima che arrivasse [c_name:NPC_HERO_FIRST], ero\n[CN]l\'ultimo arrivato qui. Già, già!",
+            spanish="[CN]Antes de que llegara el equipo de [c_name:NPC_HERO_FIRST],\n[CN]yo era el novato. ¡Sí, señor!",
+        });
+        message_Mail({
+            english="[CN]My...[K]my dream is...[K]\n[CN]to do my best at the guild...[K]study...",
+            french="[CN]Mon...[K] mon rêve est de...[K]\n[CN]donner l\'meilleur d\'moi-même à la Guilde...[K]\n[CN]Etudier et travailler dur...",
+            german="[CN]Mein...[K] Mein Traum ist es...[K] Für die Gilde\n[CN]mein Bestes zu geben...[K] Zu lernen...",
+            italian="[CN]Il mio...[K] Il mio sogno è...[K] fare del mio\n[CN]meglio alla Gilda...[K] e studiare...",
+            spanish="[CN]Mi...[K] Mi sueño es...[K] darlo todo\n[CN]en el [CS:N]Pokégremio[CR]...[K] Estudiar...",
+        });
+        message_Mail({
+            english="[CN]And someday...",
+            french="[CN]... pour un jour...",
+            german="[CN]Und eines Tages...",
+            italian="[CN]E un giorno...",
+            spanish="[CN]Y algún día...",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        supervision_SpecialActing(31, 64, 0);
+        bgm_ChangeVolume(60, 256);
+        Wait(60);
+        Wait(30);
+        with (actor ACTOR_PLAYER_BIPPA) {
+            Turn2Direction(4, 10, DIR_RIGHT);
+        }
+        WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+        Wait(15);
+        with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(29);
+        }
+        with (actor ACTOR_PLAYER_BIPPA) {
+            WaitAnimation();
+        }
+        WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+        with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(2);
+        }
+        Wait(30);
+        with (actor ACTOR_PLAYER_BIPPA) {
+            Turn2Direction(4, 10, DIR_DOWN);
+        }
+        WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+        Wait(15);
+        message_Mail({
+            english="[CN]Someday I\'ll be the best explorer ever!\n[CN]Yup yup!",
+            french="[CN]... devenir le plus grand explorateur\n[CN]de tous les temps, pardi!",
+            german="[CN]Eines Tages werde ich der beste Erkunder\n[CN]aller Zeiten sein! Jawollja!",
+            italian="[CN]Un giorno diventerò il miglior esploratore\n[CN]che sia mai esistito! Già, già!",
+            spanish="[CN]¡Algún día seré el mejor explorador de todos!\n[CN]¡Sí, señor!",
+        });
+        message_Close();
+        bgm_FadeOut(120);
+        screen_FadeOut(1, 60);
+        supervision_SpecialActing(32, 0, 0);
+        Wait(80);
+        end;
+    } else {
+        message_Notice({
+            english="[M:D2][CS:C]Start from where?[CR]",
+            french="[M:D2][CS:C]Start from where?[CR]",
+            german="[M:D2][CS:C]Start from where?[CR]",
+            italian="[M:D2][CS:C]Start from where?[CR]",
+            spanish="[M:D2][CS:C]Start from where?[CR]",
+        });
+        switch ( message_SwitchMenu(0, 1) ) {
+            case menu({
+                english="[M:D2]Beginning",
+                french="[M:D2]Beginning",
+                german="[M:D2]Beginning",
+                italian="[M:D2]Beginning",
+                spanish="[M:D2]Beginning",
+            }):
+            default:
+                message_Close();
+                jump @label_0;
+            case menu({
+                english="[M:D2]SectionA",
+                french="[M:D2]SectionA",
+                german="[M:D2]SectionA",
+                italian="[M:D2]SectionA",
+                spanish="[M:D2]SectionA",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 0;
+                $SCENARIO_SIDE = scn[40, 1];
+                main_SetGround(LEVEL_G01P08A);
+                main_EnterGround(LEVEL_G01P03A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionB",
+                french="[M:D2]SectionB",
+                german="[M:D2]SectionB",
+                italian="[M:D2]SectionB",
+                spanish="[M:D2]SectionB",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 0;
+                $SCENARIO_SIDE = scn[40, 2];
+                main_SetGround(LEVEL_G01P01A);
+                main_EnterGround(LEVEL_P01P01A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionC",
+                french="[M:D2]SectionC",
+                german="[M:D2]SectionC",
+                italian="[M:D2]SectionC",
+                spanish="[M:D2]SectionC",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 0;
+                $SCENARIO_SIDE = scn[40, 3];
+                main_SetGround(LEVEL_G01P08A);
+                main_EnterGround(LEVEL_G01P03A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionD(w/Snover)",
+                french="[M:D2]SectionD(w/Snover)",
+                german="[M:D2]SectionD(w/Snover)",
+                italian="[M:D2]SectionD(w/Snover)",
+                spanish="[M:D2]SectionD(w/Snover)",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 0;
+                $SCENARIO_SIDE = scn[40, 4];
+                main_EnterGround(LEVEL_D42P21A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionD(w/oSnover)",
+                french="[M:D2]SectionD(w/oSnover)",
+                german="[M:D2]SectionD(w/oSnover)",
+                italian="[M:D2]SectionD(w/oSnover)",
+                spanish="[M:D2]SectionD(w/oSnover)",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 1;
+                $SCENARIO_SIDE = scn[40, 6];
+                main_EnterGround(LEVEL_D42P21A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionF",
+                french="[M:D2]SectionF",
+                german="[M:D2]SectionF",
+                italian="[M:D2]SectionF",
+                spanish="[M:D2]SectionF",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 1;
+                $SCENARIO_SIDE = scn[40, 6];
+                main_SetGround(LEVEL_G01P01A);
+                main_EnterGround(LEVEL_P01P01A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionG",
+                french="[M:D2]SectionG",
+                german="[M:D2]SectionG",
+                italian="[M:D2]SectionG",
+                spanish="[M:D2]SectionG",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 1;
+                $SCENARIO_SIDE = scn[40, 7];
+                main_SetGround(LEVEL_G01P08A);
+                main_EnterGround(LEVEL_G01P03A, 30);
+                hold;
+            case menu({
+                english="[M:D2]SectionH",
+                french="[M:D2]SectionH",
+                german="[M:D2]SectionH",
+                italian="[M:D2]SectionH",
+                spanish="[M:D2]SectionH",
+            }):
+                message_Close();
+                $SIDE01_BOSS2ND[0] = 1;
+                $SCENARIO_SIDE = scn[40, 8];
+                main_SetGround(LEVEL_G01P08A);
+                main_EnterGround(LEVEL_G01P03A, 30);
+                hold;
+            case menu({
+                english="[M:D2]TALK-N01-01",
+                french="[M:D2]TALK-N01-01",
+                german="[M:D2]TALK-N01-01",
+                italian="[M:D2]TALK-N01-01",
+                spanish="[M:D2]TALK-N01-01",
+            }):
+                $SCENARIO_SIDE = scn[40, 1];
+                §label_15;
+                message_Close();
+                main_EnterGround(LEVEL_P01P01A, 30);
+                hold;
+            case menu({
+                english="[M:D2]TALK-N01-02",
+                french="[M:D2]TALK-N01-02",
+                german="[M:D2]TALK-N01-02",
+                italian="[M:D2]TALK-N01-02",
+                spanish="[M:D2]TALK-N01-02",
+            }):
+                $SCENARIO_SIDE = scn[40, 2];
+                jump @label_15;
+            case menu({
+                english="[M:D2]TALK-N01-03",
+                french="[M:D2]TALK-N01-03",
+                german="[M:D2]TALK-N01-03",
+                italian="[M:D2]TALK-N01-03",
+                spanish="[M:D2]TALK-N01-03",
+            }):
+                $SCENARIO_SIDE = scn[40, 3];
+                jump @label_15;
+            case menu({
+                english="[M:D2]TALK-N01-035",
+                french="[M:D2]TALK-N01-035",
+                german="[M:D2]TALK-N01-035",
+                italian="[M:D2]TALK-N01-035",
+                spanish="[M:D2]TALK-N01-035",
+            }):
+                $SCENARIO_SIDE = scn[40, 6];
+                jump @label_15;
+            case menu({
+                english="[M:D2]TALK-N01-04",
+                french="[M:D2]TALK-N01-04",
+                german="[M:D2]TALK-N01-04",
+                italian="[M:D2]TALK-N01-04",
+                spanish="[M:D2]TALK-N01-04",
+            }):
+                $SCENARIO_SIDE = scn[40, 7];
+                jump @label_15;
+        }
+    }
+}

@@ -9,22 +9,168 @@ def 0 {
     }
     switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
         case 0:
-            jump @bidoof_se;
+            // Turn towards Charm    
+            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk(" Is that...[W:30] [CS:X]Team Charm[CR]?");
+            message_Talk({
+                english=" They\'re the real deal, by golly!",
+                french=" C\'t\'équipe, c\'est pas d\'la\ngnognote, pour sûr!",
+                german=" Die haben es drauf,\nDonnerwetter!",
+                italian=" Sono proprio le migliori, ohibò!",
+                spanish=" ¡Huyuyuy! ¡Son la bomba!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            call @charm_1;
+            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk({
+                english=" My name\'s [CS:Y]Bidoof[CR].[K]\nI\'m an apprentice at the guild.",
+                french=" Mon nom est [CS:Y]Keunotor[CR].[K]\nJe suis apprenti à la Guilde.",
+                german=" Mein Name ist [CS:Y]Bidiza[CR].[K]\nIch bin ein Gildenlehrling.",
+                italian=" Mi chiamo [CS:Y]Bidoof[CR].[K]\nSono un apprendista della Gilda.",
+                spanish=" Me llamo [CS:Y]Bidoof[CR].[K]\nSoy un aprendiz del [CS:N]Pokégremio[CR].",
+            });
+            call @charm_2;
+            
+            break;
         case 2:
-            jump @sunflora_se;
+            // Turn towards Charm
+            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
+            message_Talk(" Is that...[W:30] [CS:X]Team Charm[CR]?");
+            message_Talk({
+                english=" Oh my gosh! It\'s unbelievable!",
+                french=" Ben mince alors! C\'est\ncarrément hallucinant!",
+                german=" Auweia! Es ist unglaublich!",
+                italian=" Shock! È incredibile!",
+                spanish=" ¡No me lo puedo creer!\n¡Increíble!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            call @charm_1;
+            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+            message_Talk({
+                english=" I\'m [CS:Y]Sunflora[CR]![K]\nI\'m an apprentice to the Guildmaster!",
+                french=" Je m\'appelle [CS:Y]Héliatronc[CR]![K]\nJe suis une apprentie du Maître de la Guilde!",
+                german=" Ich bin [CS:Y]Sonnflora[CR]![K]\nIch bin ein Gildenlehrling!",
+                italian=" Mi chiamo [CS:Y]Sunflora[CR]![K]\nSono un\'apprendista del Capitano!",
+                spanish=" ¡Soy [CS:Y]Sunflora[CR]![K]\n¡Soy una aprendiz del [CS:N]Pokégremio[CR]!",
+            });
+            call @charm_2;
+            
+            break;
         default:
             JumpCommon(CORO_END_TALK);
     }
-    §bidoof_se;
-    §sunflora_se;
+    
+    
+    
+    
+    
+    
+    
+    message_Talk({
+        english=" Take care! Send our love to\n[CS:N]Wigglytuff[CR]!",
+        french=" Prenez soin de vous! Faites\nnos amitiés à notre cher [CS:N]Grodoudou[CR]!",
+        german=" Macht es gut! Grüßt uns\n[CS:N]Knuddeluff[CR] recht herzlich!",
+        italian=" In bocca al lupo! Date un \nbacio da parte nostra a [CS:N]Wigglytuff[CR]!",
+        spanish=" ¡Cuidaos mucho!\n¡Y dadle recuerdos a [CS:N]Wigglytuff[CR]!",
+    });
+    
+    §charm_1;
+    message_SetFace(ACTOR_NPC_AABOKKU,  FACE_PAIN , FACE_POS_STANDARD);
+    message_Monologue("(Ugh, I think we have another one...[W:30] If I have\nto sign one more autograph, I might develop\ncarpal tunnel! Are we done here yet?)");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_DORAPION,  FACE_WORRIED , FACE_POS_STANDARD);
+    message_Monologue("(How awful, we\'re being suffocated by our\nown fame! And we\'ve found out absolutely\nnothing useful in return! How frustrating...)");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MANYUURA,  FACE_SIGH , FACE_POS_STANDARD);
+    message_Monologue("(I know it\'s exhausting, but come on girls!\nWe\'re [CS:X]Team Charm[CR], we can handle being\nrecognized by our fans in public, can\'t we?)");
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_DORAPION, FACE_HAPPY, FACE_POS_STANDARD);
+    message_Talk({
+        english=" We\'re the treasure hunters--\nTeam [CS:X]Charm[CR]!",
+        french=" Nous sommes les chasseuses de\ntrésor de l\'Equipe [CS:X]Charme[CR]!",
+        german=" Wir sind die Schatzjäger von\nTeam [CS:X]Charme[CR]!",
+        italian=" Noi siamo le cacciatrici\ndi tesori... Siamo il Team [CS:X]Malia[CR]!",
+        spanish=" Somos buscadoras de tesoros...\n¡El [CS:X]Equipo Carisma[CR]!",
+    });
+    message_Talk({
+        english=" And you are?",
+        french=" Et toi, tu es?",
+        german=" Und wer bist du?",
+        italian=" E tu chi sei?",
+        spanish=" ¿Y tú eres...?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    return;
+    §charm_2;
+
+    
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    
+    
+    
+
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    
+    
+    message_SetFace(ACTOR_NPC_AABOKKU, FACE_HAPPY, FACE_POS_BOTTOM_L_CENTER);
+    message_Talk({
+        english=" Oh! [CS:N]Wigglytuff[CR] was a real\ngo-getter back in the day. Like, grrrowl!",
+        french=" Oh! [CS:N]Grodoudou[CR] était un vrai\nbattant autrefois. Férrrroce, tu vois le\ngenre!",
+        german=" Oh! [CS:N]Knuddeluff[CR] war ein echter\nDraufgänger damals. Hehe, roaaaaar!",
+        italian=" Oh! [CS:N]Wigglytuff[CR] era un gran bel\nfusto all\'epoca!",
+        spanish=" ¡Claro! [CS:N]Wigglytuff[CR] era todo\nun elemento en su época. ¡Sí, sí!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MANYUURA, FACE_HAPPY, FACE_POS_BOTTOM_R_CENTER);
+    message_Talk({
+        english=" Back then, [CS:N]Wigglytuff[CR] was\nsomething else. No one could beat him. So cool!",
+        french=" Ah, [CS:N]Grodoudou[CR]! Il était\ncoquet, mais personne ne pouvait le battre!\nC\'était la claaaaaasse!",
+        german=" Damals war [CS:N]Knuddeluff[CR] eine\nechte Marke. Niemand konnte ihn besiegen.\nEr war wirklich cool!",
+        italian=" Ai tempi, [CS:N]Wigglytuff[CR] era un\nfenomeno. Nessuno poteva batterlo. Era così\natletico!",
+        spanish=" Por aquel entonces, [CS:N]Wigglytuff[CR]\nera increíble, invencible. ¡Era genial!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_CENTER);
+    message_Talk({
+        english=" That\'s right. We were partners\nin exploration with [CS:N]Wigglytuff[CR].",
+        french=" C\'est exact. Nous étions\nles partenaires d\'exploration de [CS:N]Grodoudou[CR].",
+        german=" Das stimmt. Wir waren Partner\nvon [CS:N]Knuddeluff[CR] bei Erkundungen.",
+        italian=" Esatto. Eravamo compagne \nd\'esplorazione di [CS:N]Wigglytuff[CR].",
+        spanish=" Exacto. Fuimos compañeras de\n[CS:N]Wigglytuff[CR] en una expedición.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    
+    
+    message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_CENTER);
+    message_Talk({
+        english=" We\'ll be going now, sweetie.",
+        french=" Nous y allons, mon biquet.",
+        german=" Wir gehen jetzt, Süßer.",
+        italian=" Adesso ce ne andiamo, tesoro.",
+        spanish=" Nos vamos, cariño.",
+    });
+    
+    message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_C_FACEL);
+    message_Talk({
+        english=" Yes?",
+        french=" Oui?",
+        german=" Ja?",
+        italian=" Sì?",
+        spanish=" ¿Sí?",
+    });
+    
+    
     switch(scn($SCENARIO_SUB1)[1]) {
         case &<< 0:
-            message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
             message_Talk(" PLACEHOLDER");
             message_Close();
             JumpCommon(CORO_END_TALK);
         default:
-            message_SetFace(ACTOR_NPC_MIMIROPPU,FACE_NORMAL,FACE_POS_STANDARD);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL,FACE_POS_STANDARD);
             message_Talk(" PLACEHOLDER");
             switch(message_SwitchMenu(0,1)) {
                 case menu("Yes"):
@@ -34,7 +180,7 @@ def 0 {
                     break;
                 case menu("No"):
                     message_Close();
-                    message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
                     message_Talk(" PLACEHOLDER");
                     message_Close();
                     JumpCommon(CORO_END_TALK);
@@ -70,12 +216,12 @@ def 0 {
         ~AssignCheck(8);
         screen_FadeIn(1, 30);
         bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
-        message_Mail("[CN]You feel as if [CS:G]Team Charm[CR]\n[CN]left out a lot of important context...");
-        message_SetFace(ACTOR_NPC_MIMIROPPU,FACE_NORMAL,FACE_POS_STANDARD);
+        message_Mail("[CN]You feel as if [CS:G]Team AWD[CR]\n[CN]left out a lot of important context...");
+        message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL,FACE_POS_STANDARD);
         message_Talk(" PLACEHOLDER");
-        message_SetFace(ACTOR_NPC_SAANAITO,FACE_NORMAL,FACE_POS_STANDARD);
+        message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL,FACE_POS_STANDARD);
         message_Talk(" PLACEHOLDER");
-        message_SetFace(ACTOR_NPC_CHAAREMU,FACE_NORMAL,FACE_POS_STANDARD);
+        message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
         message_Talk(" PLACEHOLDER");
         message_Close();
         JumpCommon(CORO_END_TALK);
