@@ -2061,5 +2061,22 @@ def 0 {
     message_SetFace(ACTOR_NPC_PARTNER_FIRST,FACE_WORRIED,FACE_POS_STANDARD);
     message_Talk(" I heard we\'re doing a variable\ncheck! Sorry for ruining SE immersion, but\nnobody else has APWorld version dialogue...");
     ~GetVersion();
+    message_Talk(" Oh, right![K]\nAre you currently softlocked?");
+    switch(message_SwitchMenu(1,2)) {
+        case menu("Yes"):
+            message_Close();
+            message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Now then, this [M:I1][CS:I]Escape Orb[CR]\nmight get you home.[K] I have one handy just in\ncase you end up stranded somewhere...");
+            message_Close();
+            bgm_FadeOut(30);
+            screen_FadeOut(1,30);    
+            $SCENARIO_MAIN_BIT_FLAG[3] = 1;
+            supervision_ExecuteCommon(CORO_EVENT_DIVIDE);
+            hold;
+        default:
+        case menu("No"):
+            message_Close();
+            break;
+    }
     return;
 }

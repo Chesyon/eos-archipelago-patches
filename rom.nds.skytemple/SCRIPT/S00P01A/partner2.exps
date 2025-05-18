@@ -48,6 +48,19 @@ def 0 {
                     message_Close();
                     call @variable_checkup;
                     jump @technical_tree;
+                case menu("Escape Softlock"):
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Yikes![K] That\'s not good... Okay,\nso I can teleport you out, but first, I need you\nto report this to [CS:G]happylappy[CR], okay?");
+                    message_Talk(" Just send this list of variables + values to\n[CS:C]happylappy[CR], and we can head home...");
+                    message_Close();
+                    call @variable_checkup;
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Now then, this [M:I1][CS:I]Escape Orb[CR]\nshould get us home.[K] I have one handy just in\ncase we end up stranded somewhere...");
+                    message_Close();
+                    bgm_FadeOut(30);
+                    screen_FadeOut(1,30);
+                    supervision_ExecuteCommon(CORO_EVENT_HA_SAME);
+                    hold;
                 default:
                 case menu("Cancel"):
                     message_Close();
@@ -5848,61 +5861,63 @@ dungeon_mode(191)  = DMODE_CLOSED;
     message_Mail("[CS:S]$TEAM_RANK_EVENT_LEVEL[CR]: [var:110:0]\n[CS:S]$PLAY_OLD_GAME[CR]: [var:111:0]\n[CS:S]$NOTE_MODIFY_FLAG[CR]: [var:112:0]");
     message_Mail("[CS:S]$SUB30_PROJECTP[CR]: [var:113:0][var:113:1][var:113:2][var:113:3][var:113:4][var:113:5][var:113:6][var:113:7]\n[CS:S]$SUM[CR]: [var:114:0]");
     message_Close();
-    switch(ProcessSpecial(112,0,0)) {
-        case 1:
-            message_Mail("Bag Size: 1 item!");
-            break;
-        case 16:
-            message_Mail("Bag Size: 16 items!");
-            break;
-        case 24:
-            message_Mail("Bag Size: 24 items!");
-            break;
-        case 32:
-            message_Mail("Bag Size: 32 items!");
-            break;
-        case 40:
-            message_Mail("Bag Size: 40 items!");
-            break;
-        case 48:
-            message_Mail("Bag Size: 48 items!");
-            break;
-        default:
-            message_Mail("Bag Size: Invalid!\nReport this bug to [CS:G]Chesyon[CR] immediately!");
-            break;
-    }
-    
-    switch(ProcessSpecial(109, 0,0)) {
-        case >= 8: // MASTER
-            message_Mail("Guild Rank: Master or Above");
-            break;
-        case 7: // HYPER
-            message_Mail("Guild Rank: Hyper");
-            break;
-        case 6: // ULTRA
-            message_Mail("Guild Rank: Ultra");
-            break;
-        case 5: // SUPER
-            message_Mail("Guild Rank: Super");
-            break;
-        case 4: // DIAMOND
-            message_Mail("Guild Rank: Diamond");
-            break;
-        case 3: // GOLD
-            message_Mail("Guild Rank: Gold");
-            break;
-        case 2: // SILVER
-            message_Mail("Guild Rank: Silver");
-            break;
-        case 1: // BRONZE
-            message_Mail("Guild Rank: Bronze");
-            break;
-        case 0:
-            message_Mail("Guild Rank: Normal");
-            break;
-        default:
-            message_Mail("Guild Rank: Unknown");
-            break;
+    if (not debug) {
+        switch(ProcessSpecial(112,0,0)) {
+            case 1:
+                message_Mail("Bag Size: 1 item!");
+                break;
+            case 16:
+                message_Mail("Bag Size: 16 items!");
+                break;
+            case 24:
+                message_Mail("Bag Size: 24 items!");
+                break;
+            case 32:
+                message_Mail("Bag Size: 32 items!");
+                break;
+            case 40:
+                message_Mail("Bag Size: 40 items!");
+                break;
+            case 48:
+                message_Mail("Bag Size: 48 items!");
+                break;
+            default:
+                message_Mail("Bag Size: Invalid!\nReport this bug to [CS:G]Chesyon[CR] immediately!");
+                break;
+        }
+        
+        switch(ProcessSpecial(109, 0,0)) {
+            case >= 8: // MASTER
+                message_Mail("Guild Rank: Master or Above");
+                break;
+            case 7: // HYPER
+                message_Mail("Guild Rank: Hyper");
+                break;
+            case 6: // ULTRA
+                message_Mail("Guild Rank: Ultra");
+                break;
+            case 5: // SUPER
+                message_Mail("Guild Rank: Super");
+                break;
+            case 4: // DIAMOND
+                message_Mail("Guild Rank: Diamond");
+                break;
+            case 3: // GOLD
+                message_Mail("Guild Rank: Gold");
+                break;
+            case 2: // SILVER
+                message_Mail("Guild Rank: Silver");
+                break;
+            case 1: // BRONZE
+                message_Mail("Guild Rank: Bronze");
+                break;
+            case 0:
+                message_Mail("Guild Rank: Normal");
+                break;
+            default:
+                message_Mail("Guild Rank: Unknown");
+                break;
+        }
     }
     message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
     message_Talk(" Finally, scroll through these\ndungeons please![K] Your choice does not matter,\nthis is NOT the crossroads.[K] Here we go!");
