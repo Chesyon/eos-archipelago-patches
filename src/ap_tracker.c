@@ -962,7 +962,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
-        case SEALED_RUIN;:
+        case DUNGEON_SEALED_RUIN:;
             // Boss Spiritomb
             break;
         case DUNGEON_MIRACLE_SEA:;
