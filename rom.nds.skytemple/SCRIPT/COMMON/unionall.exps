@@ -9387,6 +9387,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_M08_10);
                     case 9:
+                        §side_path;
                         debug_Print("Break Glass if Softlock!");
                         message_Mail("[CS:P]Side Path[CR] returned\nyou to where you\ncame from!");
                         dungeon_mode(9) = DMODE_OPEN_AND_REQUEST; 
@@ -9402,6 +9403,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 11:
+                        §rock_path;
                         debug_Print("Break Glass if Softlock!");
                         message_Mail("[CS:P]Rock Path[CR] returned\nyou to where you came from!");
                         dungeon_mode(11) = DMODE_OPEN_AND_REQUEST; 
@@ -9416,6 +9418,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_M09_06_07);
                     case 13:
                         debug_Print("Break Glass if Softlock!");
+                        §forest_path;
                         message_Mail("[CS:P]Forest Path[CR] returned\nyou to where you came from!");
                         message_Close();
                         dungeon_mode(13) = DMODE_OPEN_AND_REQUEST;
@@ -10720,11 +10723,14 @@ coro GETOUT_REQUEST_DUNGEON {
                                 §label_1026;
                                 switch($DUNGEON_ENTER_INDEX) {
                                     case 9:
+                                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                        jump @side_path;
                                     case 11:
+                                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                        jump @rock_path;
                                     case 13:
-                                        if (not debug) {
-                                            JumpCommon(CORO_GETOUT_REQUEST_RETURN);
-                                        }
+                                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                                        jump @forest_path;
                                     case 1:
                                     case 89:
                                     case 90:
