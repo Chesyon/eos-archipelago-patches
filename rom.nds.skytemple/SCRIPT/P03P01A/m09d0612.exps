@@ -10,13 +10,7 @@ def 0 {
         italian="[CN]Eccolo!",
         spanish="[CN]¡Eso es!",
     });
-    message_Explanation({
-        english="[CN]It\'s here!",
-        french="[CN]C\'est ici!",
-        german="[CN]Es ist hier!",
-        italian="[CN]È qui!",
-        spanish="[CN]¡Aquí está!",
-    });
+    message_Explanation("[CN]The [qhat:17]![K]\n[CN]It\'s here!");
     message_Explanation({
         english="[CN]It\'s here!",
         french="[CN]C\'est là!",
