@@ -86,6 +86,7 @@ def 0 {
                 case 177: 
                     message_Talk(" Huh? Has the grandmaster of all things bad resurfaced?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
                     jump @dungeon_only;
+                case 16:
                 case 178:
                     message_Talk(" Huh? Wait, did [CS:G]Torkoal[CR] finally croak?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
                     jump @dungeon_only;

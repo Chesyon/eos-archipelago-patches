@@ -188,16 +188,16 @@ macro Happiny($num) {
     message_Mail("\n[CN]You got a check!");
     switch($LOCAL0) {
         case 95:
-            ~AssignCheck(95);
+            ~AssignCheck(96);
             break;
         case 96:
-            ~AssignCheck(96);
-            break;
-        case 97:
             ~AssignCheck(97);
             break;
+        case 97:
+            ~AssignCheck(98);
+            break;
         case 98:
-            ~AssignCheck(96);
+            ~AssignCheck(99);
             break;
     }
     WaitMe(4);
@@ -263,16 +263,16 @@ macro Numel($num) {
     message_Mail("\n[CN]You got a check!");
     switch($LOCAL0) {
         case 99:
-            ~AssignCheck(99);
-            break;
-        case 100:
             ~AssignCheck(100);
             break;
-        case 101:
+        case 100:
             ~AssignCheck(101);
             break;
-        case 102:
+        case 101:
             ~AssignCheck(102);
+            break;
+        case 102:
+            ~AssignCheck(103);
             break;
     }
     WaitMe(4);

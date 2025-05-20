@@ -11,18 +11,6 @@ def 0 {
                     debug_Print('PLAYER_SET');
                     switch ( sector() ) {
                         case 1:
-/*
-                            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
-                                case 0:
-                                    supervision_StationCommon(23);
-                                    break;
-                                case 2:
-                                    supervision_StationCommon(24);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            */
                             end;
                         default:
                             switch ( $GROUND_GETOUT ) {

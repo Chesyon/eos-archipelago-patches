@@ -3191,10 +3191,10 @@ coro EVENT_M00_09 {
             supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P0901', 0);
             break;    
     }
-    
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_T01P03A);
     supervision_ExecuteStationCommon(LEVEL_T01P03A, 1);
+    hold;
     end;
 }
 
@@ -9085,6 +9085,121 @@ coro ENTER_SCENARIO_DUNGEON {
             jump @label_710;
         default:
             switch($DUNGEON_ENTER_INDEX) {
+                case 16:
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    message_Mail("Wait a minute, this isn\'t [CS:P]Steam Cave[CR]![K]\nIt\'s actually [CS:P]Steamy Cave[CR]!");
+                    message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" [CS:P]Steamy[CR]?");
+                    message_Mail("Yes, [CS:P]Steamy[CR]!");
+                    message_Mail("The cave led to the [CS:P]Hot Springs[CR]!");
+                    message_Close();
+                    main_EnterGround(LEVEL_P02P01A, 30);
+                    hold;
+                    end;
+                case 2:
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    main_EnterDungeon(171,30);
+                    main_EnterDungeon(-1,30);
+                    hold;
+                case 5:
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    message_Mail("You were suddenly attacked from behind\nby a Pokémon you\'ve never seen before!");
+                    if (debug) {
+                        message_ResetActor();
+                    } else {
+                        ProcessSpecial(110,72,FACE_ANGRY);
+                    }
+                    message_Talk("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+                    message_Close();
+                    JumpCommon(CORO_EVENT_HA_SAMEX);
+                    hold;
+                case 71:
+                    ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_ONLY,0,0);
+                    jump @label_667;
+                case 179:
+                    $SCENARIO_MAIN_BIT_FLAG[3] = 0;
+                    dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
+                    main_EnterGround(LEVEL_P02P01A, 30);
+                    hold;
+                    end;
+                case 15: // Froggy Forest
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    message_Mail("Wait a minute, this isn\'t [CS:P]Foggy Forest[CR]![K]\nIt\'s actually [CS:P]Froggy Forest[CR]!");
+                    message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" [CS:P]Froggy[CR]?");
+                    message_Mail("Yes, [CS:P]Froggy[CR]!");
+                    message_Close();
+                    $SCENARIO_TALK_BIT_FLAG[248] = 1;
+                    message_SetFaceEmpty(ACTOR_NPC_NYOROTONO,FACE_PAIN, FACE_POS_STANDARD);
+                    message_Talk("[STS][CS:G]Kermit[CR]: [STE]Howdy partner, been a while\nsince someone\'s entered [CS:P]Froggy Forest[CR]!");
+                    message_Talk("[STS][CS:G]Kermit[CR]: [STE]It\'s been real quiet these days.\nUntil you showed up, that is.[K] So here\'s what\'s\ngoing to happen, friend... *cocks shotgun*");
+                    message_Talk("[STS][CS:G]Kermit[CR]: [STE]You\'re going to turn around, and head\nback to the franchise from whence you came.\n[K]Then I\'m going to teach you a little lesson.");
+                    message_Talk("[STS][CS:G]Kermit[CR]: [STE]See, it\'s not easy being [CS:K]green[CR].\nIn a few short minutes, I think you\'ll\nsee what I mean.[K] Now then, get moving!");
+                    // Keep going!
+                    message_Close();
+                    message_Mail("You quickly retreat back to [CS:P]Sharpedo Bluff[CR]\nto regroup, but suddenly...");
+                    message_Close();
+                    main_EnterGround(LEVEL_H02P99A, 30);
+                    hold;
+                    end;
+                case 18: // Craggy Cost
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    message_Mail("Wait a minute, this isn\'t [CS:P]Craggy Coast[CR]![K]\nIt\'s actually [CS:P]Craggy Cost[CR]!");
+                    message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+                    message_Talk(" [CS:P]Cost[CR]?");
+                    message_Mail("Yes, [CS:P]Cost[CR].");
+                    message_Close();
+                    if ($CARRY_GOLD > 2000) {
+                        $CARRY_GOLD -= 2000;
+                        message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+                    } elseif($BANK_GOLD > 2000) {
+                        $BANK_GOLD -= 2000;
+                        message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+                    } elseif($CARRY_GOLD > 0) {
+                        $CARRY_GOLD = 0;
+                        message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                        message_Close();
+                        $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                        CallCommon(CORO_BUBBLE_TEST);
+                    } elseif($BANK_GOLD > 0) {
+                        $CARRY_GOLD = 0;
+                        message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                        $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                        CallCommon(CORO_BUBBLE_TEST);
+                    } else {
+                        message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nbut you had no money on you![K] You paid\nthe fee with a curse, when suddenly...");
+                        $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                        $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                        CallCommon(CORO_BUBBLE_TEST);
+                    }
+                    message_Close();
+                    message_Mail("After a long day of exploring [CS:P]Craggy\nCost[CR], you wonder...[W:60] \'Was it really and\ntruly worth the [CS:C]cost[CR] of admission?'");
+                    JumpCommon(CORO_EVENT_DIVIDE);
+                    hold;
+                case 65:
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    main_EnterDungeon(173,30);
+                    main_EnterDungeon(-1,30);
+                    hold;
+                case 86:
+                    screen_FadeOut(0,30);
+                    bgm_FadeOut(30);
+                    screen2_FadeOut(1,30);
+                    main_EnterDungeon(172,30);
+                    main_EnterDungeon(-1,30);
+                    hold;
                 case 178:
                     dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
                     main_EnterGround(LEVEL_P02P01A, 30);
@@ -12739,6 +12854,141 @@ coro SORANOITADAKI_FLAGSET {
     item_GetVariable(1, $ITEM_BACKUP_TAKE);
     item_SetTableData(2, 2);
     item_GetVariable(2, $ITEM_BACKUP_GET);
+    
+    
+    
+    if not ($SCENARIO_MAIN_BIT_FLAG[61]) { // Happiny sky gift still pending!
+        $LOCAL0 = 0;
+        §happiny_roll;
+        switch ( random(400) ) {
+            case < 50:
+                debug_Print('Happiny at 1st Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[74] = 1;
+                $LOCAL1 = 0;
+                break;
+            case < 100:
+                debug_Print('Happiny at 3rd Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[75] = 1;
+                $LOCAL1 = 1;
+                break;
+            case < 150:
+                debug_Print('Happiny at 5th Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[76] = 1;
+                $LOCAL1 = 2;
+                break;
+            case < 200:
+                debug_Print('Happiny at 7th Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[77] = 1;
+                $LOCAL1 = 3;
+                break;
+            default:
+                $LOCAL1 = 8;
+                break;
+        }
+        // Give 3 opportunities for Happiny to spawn in an unclaimed spot
+        if ($LOCAL0 < 3) {
+            switch(scn($SCENARIO_SUB7)[0]) {
+                case &<< value($LOCAL1):
+                    $LOCAL0 += 1;
+                    jump @happiny_roll;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    if ($ITEM_BACKUP_TAKE != value($ITEM_BACKUP_GET)) {
+        $LOCAL0 = 0;
+        §numel_roll;
+        switch ( random(400) ) {
+            case < 50:
+                debug_Print('Numel at 1st Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[78] = 1;
+                $LOCAL1 = 4;
+                break;
+            case < 100:
+                debug_Print('Numel at 3rd Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[79] = 1;
+                $LOCAL1 = 5;
+                break;
+            case < 150:
+                debug_Print('Numel at 5th Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[80] = 1;
+                $LOCAL1 = 6;
+                break;
+            case < 200:
+                debug_Print('Numel at 7th Clearing');
+                $SCENARIO_MAIN_BIT_FLAG[81] = 1;
+                $LOCAL1 = 7;
+                break;
+            default:
+                $LOCAL1 = 8;
+                break;
+        }
+        // Give 3 opportunities for Numel to spawn in an unclaimed spot
+        if ($LOCAL0 < 3) {
+            switch(scn($SCENARIO_SUB7)[0]) {
+                case &<< value($LOCAL1):
+                    $LOCAL0 += 1;
+                    jump @numel_roll;
+                default:
+                    break;
+            }
+        }
+    }
+    $LOCAL0 = 0;
+    §jumpluff_roll;
+    switch ( random(500) ) {
+        case < 50:
+            debug_Print('Jumpluff at 1st Clearing');
+            $SCENARIO_MAIN_BIT_FLAG[83] = 1;
+            $LOCAL1 = 1;
+            break;
+        case < 100:
+            debug_Print('Jumpluff at 3rd Clearing');
+            $SCENARIO_MAIN_BIT_FLAG[84] = 1;
+            $LOCAL1 = 2;
+            break;
+        case < 150:
+            debug_Print('Jumpluff at 5th Clearing');
+            $SCENARIO_MAIN_BIT_FLAG[85] = 1;
+            $LOCAL1 = 3;
+            break;
+        case < 200:
+            debug_Print('Jumpluff at 7th Clearing');
+            $SCENARIO_MAIN_BIT_FLAG[86] = 1;
+            $LOCAL1 = 4;
+            break;
+        case < 250:
+            debug_Print('Jumpluff at Sky Peak Summit');
+            $SCENARIO_MAIN_BIT_FLAG[87] = 1;
+            $LOCAL1 = 5;
+            break;
+        default:
+            $LOCAL1 = 8;
+            break;
+    }
+    // Give 3 opportunities for Jumpluff to spawn in an unclaimed spot
+    if ($LOCAL0 < 3) {
+        switch(scn($SCENARIO_SUB6)[1]) {
+            case &<< value($LOCAL1):
+                $LOCAL0 += 1;
+                jump @jumpluff_roll;
+            default:
+                break;
+        }
+    }
+
+    §delibird_roll;
+    switch ( random(100) ) {
+        case < 50:
+            debug_Print('Delibird at 9th Clearing');
+            $SCENARIO_MAIN_BIT_FLAG[89] = 1;
+        default:
+            break;
+    }
+    return;
+    /*
     switch ( $ITEM_BACKUP_TAKE ) {
         case == value(103):
             §label_1257;
@@ -12841,6 +13091,7 @@ coro SORANOITADAKI_FLAGSET {
             }
             break;
     }
+    */
 }
 
 coro TITLE_TEST {
@@ -12918,6 +13169,13 @@ coro TITLE_TEST {
 }
 
 coro BUBBLE_TEST {
+    if ($VERSION == 1) {
+        if (not debug) {
+            message_Mail("Version was set to 1 somehow!\nTell [CS:G]happylappy[CR] where this happens\nif you see this!");
+            ~SetVersion();    
+            message_Close();
+        }
+    }
     switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {
         case 0:
         case 1:

@@ -6,7 +6,9 @@ def 0 {
         §label_0;
         supervision_StationCommon(7);
         supervision_StationCommon(0);
+        supervision_StationCommon(24);
         supervision_Acting(0);
+        //supervision_Acting(1);
         with (performer 0) {
             camera_SetMyself();
         }

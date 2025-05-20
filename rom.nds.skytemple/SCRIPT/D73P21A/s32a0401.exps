@@ -167,7 +167,7 @@ def 0 {
                             italian="[CN][player] ha ricevuto lo strumento\n[CN][s_item:1] come ringraziamento!",
                             spanish="[CN]¡[player] ha obtenido el objeto\n[CN][s_item:1] como agradecimiento!",
                         });
-                        ~AssignCheck(103);
+                        ~AssignCheck(95);
                     } else {
                         message_Mail({
                             english="[CN][player] received the\n[CN][s_item:1] as thanks!",
