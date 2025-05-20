@@ -48,7 +48,7 @@ uint8_t trackerLocationDungeonIds[] = {
     // General
     247, // Town
     254, // Guild
-    253, // Dojo
+    180, // Dojo
     255, // Cafe
     // Early
     1,   // Beach Cave
@@ -320,7 +320,7 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
         return buffer;
-    } else if(location == 253) {
+    } else if(location == 180) {
         preArgs.strings[1] = "[CS:P]Marowak Dojo[CR]";
         preArgs.strings[0] = townSymbol;
         struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
@@ -565,7 +565,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", 300);
     } else if (location == 254) {
         strncpy(temp, "Tracker: [CS:P]Wigglytuff Guild[CR]", 300);
-    } else if (location == 253) {
+    } else if (location == 180) {
         strncpy(temp, "Tracker: [CS:P]Marowak Dojo[CR]", 300);
     } else if (location == 252) {
         strncpy(temp, "Tracker: [CS:P]Bidoof's Wish[CR]", 300);
@@ -640,21 +640,21 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 133, guildExtraInfo);
             UpdateWindow(idx);
             return;
-        case 253:; // Dojo
-            preArgs.strings[0] = (GetDungeonMode(180) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (GetDungeonMode(181) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (GetDungeonMode(182) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (GetDungeonMode(183) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (GetDungeonMode(184) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+        case 180:; // Dojo
+            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, dojoInfo1, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.strings[0] = (GetDungeonMode(185) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (GetDungeonMode(186) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (GetDungeonMode(187) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (GetDungeonMode(188) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (GetDungeonMode(189) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, dojoInfo2, preFlags, &preArgs);
-            strncat(temp, (GetDungeonMode(191) == DMODE_OPEN_AND_REQUEST) ? checkSymbol : lockedSymbol, 300);
+            strncat(temp, (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol, 300);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
@@ -1271,13 +1271,13 @@ uint32_t StateManagerTrackerTopScreen() {
                             updaterDelay = 0;
                             if(drinksDisplayed != apSettings.cafeDrinkMax) {
                                 DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 26 + 10*(drinkEventsDisplayed / 8),
-                                    (drinksDisplayed >= CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks) ? lockedSymbol : checkSymbol);
+                                    (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks > drinksDisplayed) ? checkSymbol : lockedSymbol);
                                 drinksDisplayed++;
                                 UpdateWindow(apTrackerWindowPtr->window_id);
                             }
                             if(drinkEventsDisplayed != apSettings.cafeEventMax) {
                                 DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 89 + 10*(drinkEventsDisplayed / 8),
-                                    (drinksDisplayed >= CUSTOM_SAVE_AREA.acquiredCafeEventChecks) ? lockedSymbol : checkSymbol);
+                                    (CUSTOM_SAVE_AREA.acquiredCafeEventChecks > drinkEventsDisplayed) ? checkSymbol : lockedSymbol);
                                 drinkEventsDisplayed++;
                                 UpdateWindow(apTrackerWindowPtr->window_id);
                             }
