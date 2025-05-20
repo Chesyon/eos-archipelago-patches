@@ -14,6 +14,10 @@ enum dungeon_check_type GetDungeonCheckType(short dunId) {
         return DCT_OTHER;
     }
     
+    if(dunId == DUNGEON_STAR_CAVE) {
+        return DCT_EARLY;
+    }
+    
     if(DUNGEON_ZERO_ISLE_NORTH <= dunId && dunId <= DUNGEON_INFERNO_CAVE) {
         return DCT_RULE;
     }
