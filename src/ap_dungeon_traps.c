@@ -13,21 +13,24 @@ void __attribute__((naked)) GenerateFloorCustomLayouts() {
     asm("b   GenerateSidewinderFloor");
 }
 
-uint8_t GetMazeTrapCheck() {
+uint8_t GetMazeTrapCheck(enum floor_layout layout) {
     if(CUSTOM_SAVE_AREA.dungeonTraps.maze) {
         CUSTOM_SAVE_AREA.dungeonTraps.maze = false;
         return DungeonRandInt(2) + 14;
-    } else {
-        return 0;
     }
+    
+    if(layout >= LAYOUT_UNUSED_0xC && DUNGEON_PTR->id.val == 172) {
+        return layout;
+    }
+    
+    return LAYOUT_LARGE;
 }
 
 void __attribute__((naked)) ApMazeTrapCheck() {
     asm("stmdb sp!,{r1,r2,r3,lr}");
+    asm("mov r0,r10");
     asm("bl GetMazeTrapCheck");
-    asm("cmp r0,#0");
-    asm("movne r10,r0");
-    asm("and r0,r10,#0xF");
+    asm("mov r10,r0");
     asm("ldmia sp!,{r1,r2,r3,pc}");
 }
 
