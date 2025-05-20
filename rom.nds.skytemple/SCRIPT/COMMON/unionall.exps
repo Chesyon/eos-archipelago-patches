@@ -6802,7 +6802,7 @@ coro EVENT_S31_34 {
 
 coro EVENT_S31_35 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    dungeon_mode(122) = DMODE_REQUEST;
+    $DUNGEON_OPEN_LIST[122] = 1;
     supervision_ExecuteActingSub(LEVEL_D73P29A, 'S31A3501', 0);
     CallCommon(CORO_EVENT_END_MAPIN_AE);
     main_SetGround(LEVEL_D73P29A);
@@ -9575,8 +9575,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 16:
                         debug_Print("Missions Steam Cave");
                         dungeon_mode(14) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(15) = DMODE_REQUEST;
-                        dungeon_mode(16) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[15] = 1;
+                        $DUNGEON_OPEN_LIST[16] = 1;
                         $PERFORMANCE_PROGRESS_LIST[52] = 1; // Groudon Clear Mark
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M10_11_12);
@@ -9596,7 +9596,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 19:
                         debug_Print("Missions Amp Plains");
                         dungeon_mode(17) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(18) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[18] = 1;
                         $PERFORMANCE_PROGRESS_LIST[53] = 1; // Manetric Clear Mark
                         JumpCommon(CORO_EVENT_M12_10_12);
                     case 20:
@@ -9621,8 +9621,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 23:
                         debug_Print("Missions Quicksand Cave");
                         dungeon_mode(21) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(22) = DMODE_REQUEST;
-                        dungeon_mode(23) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[22] = 1;
+                        $DUNGEON_OPEN_LIST[23] = 1;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M14_08_09);
                     case 24:
@@ -9638,7 +9638,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
                         dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(26) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[26] = 1;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         JumpCommon(CORO_EVENT_M15_10_12);
                     case 27:
@@ -9668,7 +9668,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 31:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(29) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(30) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[30] = 1;
                         JumpCommon(CORO_EVENT_M18_13_14);
                     case 32:
                         dungeon_mode(32) = DMODE_OPEN_AND_REQUEST;
@@ -9708,7 +9708,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Brine Cave");
                         dungeon_mode(35) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(36) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[36] = 1;
                         // JumpCommon(CORO_EVENT_HA_SAME);
                         JumpCommon(CORO_EVENT_M23_09_10);
                     case 38:
@@ -9735,7 +9735,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Dusknoir Dungeon, Likely do nothing");
                         $PERFORMANCE_PROGRESS_LIST[55] = 1; // Dusknoir Clear Mark
                         dungeon_mode(38) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(39) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[39] = 1;
                         screen_WhiteIn(26, 0);
                         JumpCommon(CORO_EVENT_M25_01_05);
                     case 41:
@@ -9763,8 +9763,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("GG you win now!");
                         $PERFORMANCE_PROGRESS_LIST[56] = 1; // Dialga Clear Mark
                         dungeon_mode(41) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(42) = DMODE_REQUEST;
-                        dungeon_mode(43) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[42] = 1;
+                        $DUNGEON_OPEN_LIST[43] = 1;
                         screen_WhiteIn(27, 0);
                         JumpCommon(CORO_EVENT_M26_01_08);
                     case 44:
@@ -9806,8 +9806,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Crevice Cave.");
                         dungeon_mode(47) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(48) = DMODE_REQUEST;
-                        dungeon_mode(49) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[48] = 1;
+                        $DUNGEON_OPEN_LIST[49] = 1;
                         $PERFORMANCE_PROGRESS_LIST[59] = 1; // Scizor Clear Mark
                         JumpCommon(CORO_EVENT_S02_07);
                     case 50:
@@ -9842,8 +9842,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Phione Unlocked");
                         $PERFORMANCE_PROGRESS_LIST[60] = 1; // Manaphy Clear Mark
-                        dungeon_mode(52) = DMODE_REQUEST;
-                        dungeon_mode(53) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[52] = 1;
+                        $DUNGEON_OPEN_LIST[53] = 1;
                         JumpCommon(CORO_EVENT_S03_17_20);
                         hold;
                         $SCENARIO_TALK_BIT_FLAG[215] = 1; // Unused here, but Pelipper uses it!
@@ -9932,8 +9932,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Spacial Rift");
                         dungeon_mode(64) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(65) = DMODE_REQUEST;
-                        dungeon_mode(66) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[65] = 1;
+                        $DUNGEON_OPEN_LIST[66] = 1;
                         screen_WhiteIn(29, 86);
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 67:
@@ -9956,7 +9956,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missions Dark Crater");
                         $PERFORMANCE_PROGRESS_LIST[62] = 1; // Darkrai Clear Mark
                         dungeon_mode(67) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(68) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[68] = 1;
                         JumpCommon(CORO_EVENT_S22_14_15);
                     case 70:
                         dungeon_mode(70) = DMODE_OPEN_AND_REQUEST;
@@ -10564,7 +10564,7 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("The result of this fight doesn't matter!");
                         debug_Print("Missions Crystal Cave");
                         dungeon_mode(25) = DMODE_OPEN_AND_REQUEST;
-                        dungeon_mode(26) = DMODE_REQUEST;
+                        $DUNGEON_OPEN_LIST[26] = 1;
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);

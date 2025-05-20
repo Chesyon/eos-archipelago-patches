@@ -6,6 +6,8 @@ macro SetVersion() {
     $VERSION = 2;
 }
 
+
+
 //TODO: Add new dialogue each time a new version is made!
 macro GetVersion() {
     switch($VERSION) {
