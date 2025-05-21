@@ -13095,75 +13095,35 @@ coro SORANOITADAKI_FLAGSET {
 }
 
 coro TITLE_TEST {
-    message_Notice({
-        english="Debug:\nTime? Darkness?",
-        french="Debug:\nTime? Darkness?",
-        german="Debug:\nTime? Darkness?",
-        italian="Debug:\nTime? Darkness?",
-        spanish="Debug:\nTime? Darkness?",
-    });
+    message_Notice("Debug:\nWhich Credits?");
     switch ( message_SwitchMenu(0, 1) ) {
-        case menu({
-            english="Time",
-            french="Time",
-            german="Time",
-            italian="Time",
-            spanish="Time",
-        }):
+        case menu("Main"):
         default:
             message_Close();
-            $SCENARIO_MAIN_BIT_FLAG[30] = 0;
-            supervision_ExecuteActingSub(LEVEL_S05P01A, 'T01P0101', 0);
-            supervision_ExecuteActingSub(LEVEL_S05P03A, 'T01P0201', 0);
-            supervision_ExecuteActingSub(LEVEL_V26P10A, 'T01P0301', 0);
-            supervision_ExecuteActingSub(LEVEL_V17P03A, 'T01P0302', 0);
-            supervision_ExecuteActingSub(LEVEL_H01P99D, 'T01P0303', 0);
-            supervision_ExecuteActingSub(LEVEL_V03P06A, 'T01P0401', 0);
+            
+            supervision_ExecuteActingSub(LEVEL_D01P11B, 'M26A0615', 0);
+            supervision_ExecuteActingSub(LEVEL_V26P05A, 'M26A0701', 0);
+            /*
+            $SCENARIO_MAIN_BIT_FLAG[8] = 1;
+            JumpCommon(CORO_EVENT_M26_01_08);
+            bgm_Play(BGM_ENDING_THEME);
+            supervision_ExecuteActingSub(LEVEL_V26P05A, 'M26A0701', 0);
+            */
             §label_1290;
+            JumpCommon(CORO_TITLE_TEST);
             end;
-        case menu({
-            english="Darkness",
-            french="Darkness",
-            german="Darkness",
-            italian="Darkness",
-            spanish="Darkness",
-        }):
+        case menu("SE Normal"):
             message_Close();
-            $SCENARIO_MAIN_BIT_FLAG[30] = 1;
-            supervision_ExecuteActingSub(LEVEL_S05P01A, 'T01P0101', 0);
-            supervision_ExecuteActingSub(LEVEL_S05P03A, 'T01P0201', 0);
-            supervision_ExecuteActingSub(LEVEL_V26P10A, 'T01P0301', 0);
-            supervision_ExecuteActingSub(LEVEL_V17P03A, 'T01P0302', 0);
-            supervision_ExecuteActingSub(LEVEL_H01P99D, 'T01P0303', 0);
-            supervision_ExecuteActingSub(LEVEL_V03P08A, 'T01P0501', 0);
+            supervision_ExecuteActingSub(LEVEL_S04P01A, 'N01A3103', 0);
             jump @label_1290;
-        case menu({
-            english="Sky",
-            french="Ciel",
-            german="Himmel",
-            italian="Sky",
-            spanish="Cielo",
-        }):
+        case menu("SE Extended"):
             message_Close();
-            supervision_ExecuteActingSub(LEVEL_S13P02A, 'T02A0201', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P03A, 'T02A0202', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P04B, 'T02A0203', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P05A, 'T02A0204', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P06A, 'T02A0205', 0);
-            supervision_ExecuteActingSub(LEVEL_G01P06B, 'T02A0301', 0);
-            supervision_ExecuteActingSub(LEVEL_D04P31A, 'T02A0302', 0);
-            supervision_ExecuteActingSub(LEVEL_V03P11A, 'T02A0303', 0);
-            supervision_ExecuteActingSub(LEVEL_V03P12A, 'T02A0304', 0);
-            supervision_ExecuteActingSub(LEVEL_D16P31A, 'T02A0305', 0);
-            supervision_ExecuteActingSub(LEVEL_V17P03A, 'T02A0306', 0);
-            supervision_ExecuteActingSub(LEVEL_D28P31A, 'T02A0307', 0);
-            supervision_ExecuteActingSub(LEVEL_V24P05A, 'T02A0308', 0);
-            supervision_ExecuteActingSub(LEVEL_V10P03C, 'T02A0309', 0);
-            supervision_ExecuteActingSub(LEVEL_V26P07A, 'T02A0310', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P08A, 'T02A0311', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P06A, 'T02A0401', 0);
-            supervision_ExecuteActingSub(LEVEL_S13P09A, 'T02A0402', 0);
-            supervision_ExecuteActingSub(LEVEL_V03P07A, 'T02A0501', 0);
+            supervision_ExecuteActingSub(LEVEL_D53P41C, 'N09A2211', 0);
+            supervision_ExecuteActingSub(LEVEL_S04P01A, 'N09A2212', 0);
+/*            
+            JumpCommon(CORO_EVENT_N09_22);
+            supervision_ExecuteActingSub(LEVEL_S04P01A, 'N09A2212', 0);
+            */
             jump @label_1290;
     }
 }

@@ -14,22 +14,9 @@ def 0 {
         spanish="[CN]↑ [CS:N]Pokégremio de Exploradores[CR]\n[CN]← Aldea Tesoro                Territorios →\n[CN]↓ Playa",
     });
     if (debug) {
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
-        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,136,0);
+        message_Close();
+        bgm_Stop();
+        supervision_ExecuteCommon(CORO_TITLE_TEST);
     }
     JumpCommon(CORO_END_TALK);
 }
