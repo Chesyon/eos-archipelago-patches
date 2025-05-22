@@ -93,3 +93,20 @@ enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_i
     
     return GetDungeonMode(dungeon_id);
 }
+
+bool IsLookaLikeDungeonPlaceholder(enum dungeon_id dungeon_id) {
+    switch(dungeon_id) {
+        default:
+            return false;
+        case 2:
+        case 5:
+        case 15:
+        case 16:
+        case 18:
+        case 65:
+        case 71:
+        case 86:
+        case 190:
+            return true;
+    }
+}

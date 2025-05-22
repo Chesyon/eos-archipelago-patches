@@ -19,3 +19,5 @@ bool IsDarkraiGoal();
 bool IsRuleDungeonChecksEnabled();
 
 enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id);
+
+bool IsLookaLikeDungeonPlaceholder(enum dungeon_id dungeon_id);
