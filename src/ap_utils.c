@@ -82,8 +82,8 @@ bool IsDarkraiGoal() {
     return !apSettings.dialgaIsGoal;
 }
 
-bool IsRuleDungeonChecksEnabled() {
-    return apSettings.ruleDungeonChecks;
+bool AreLongLocationsOn() {
+    return apSettings.longLocationsOn;
 }
 
 enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id) {

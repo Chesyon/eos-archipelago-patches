@@ -641,18 +641,18 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             UpdateWindow(idx);
             return;
         case 180:; // Dojo
-            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 180)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 181)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 182)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 183)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 184)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, dojoInfo1, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 185)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 186)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 187)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 188)) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 189)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, 300, dojoInfo2, preFlags, &preArgs);
             strncat(temp, (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol, 300);
             DrawTextInWindow(idx, 1, 81, temp);
@@ -1111,7 +1111,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             DrawTextInWindow(idx, 1, 16, temp);
             break;
         case DCT_RULE:;
-            if(IsRuleDungeonChecksEnabled()) {
+            if(AreLongLocationsOn()) {
                 PreprocessString(temp, 300, ruleDungeonInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
                 PreprocessString(temp, 300, nonEssentialExtraInfo, preFlags, &preArgs);
@@ -1369,7 +1369,7 @@ void CreateTrackerMenu() {
     struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
     struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
     pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn,
-        (sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0])) - (IsRuleDungeonChecksEnabled() ? 0 : 10), 8);
+        (sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0])) - (AreLongLocationsOn() ? 0 : 10), 8);
     if(GetTopScreenOptionType() != 5) {
         SetupGroundTopScreenFunctions(&apTrackerMode);
     }

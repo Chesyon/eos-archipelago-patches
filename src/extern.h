@@ -43,7 +43,7 @@ typedef struct ArchipelagoSettings { // size: 5 bytes
     uint8_t expMultiplier : 4;               // bits 13 through 16
     undefined unused_2 : 1;                  // bit 17
     bool dialgaIsGoal : 1;                   // bit 18
-    bool ruleDungeonChecks : 1;              // bit 19
+    bool longLocationsOn : 1;                // bit 19
     uint8_t totalJobsEarly : 5;              // bits 20 through 24
     uint8_t levelScalingMode : 2;            // bits 25 and 26
     bool levelScaleGuests : 1;               // bit 27

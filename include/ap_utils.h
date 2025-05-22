@@ -16,7 +16,7 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw);
 
 bool IsDarkraiGoal();
 
-bool IsRuleDungeonChecksEnabled();
+bool AreLongLocationsOn();
 
 enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id);
 
