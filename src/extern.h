@@ -166,5 +166,6 @@ void LoadBackgroundDungeon(void* thing, uint32_t* regionInfo, uint32_t num1, uin
 void SetupBackgroundDungeon(void* thing);
 void FreeTopScreenBGDungeon(void* thing);
 void RemoveEmptyItemsInStorage();
+void AnalyzeTextPreamble(undefined param_1, undefined param_2, undefined param_3, char* buffer);
 
 static inline bool IsWithinRange(int x, int min, int max) { return min <= x && x <= max; }

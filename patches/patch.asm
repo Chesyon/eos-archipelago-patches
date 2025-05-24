@@ -259,6 +259,11 @@
         bl AddItemToBagWithMultiworldCheck
 .close
 
+.open "overlay28.bin", overlay28_start
+    .org CreditsDisplayText
+        bl PreprocessAndAnalyzeCreditsText
+.close
+
 .open "overlay29.bin", overlay29_start
     .org LevelScalingHook
         bl DoLevelScalingWrapper
