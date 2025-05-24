@@ -105,6 +105,9 @@ AddShopItemToInventoryHook2 = 0x238B138;
 AddShopItemToInventoryHook3 = 0x238B724;
 AddShopItemToInventoryHook4 = 0x238B784;
 
+/* ! For Overlay28 */
+CreditsDisplayText = 0x238B82C;
+
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 IqScalingDungeonHook = 0x22FAB68;
@@ -163,6 +166,7 @@ CloseMode5TopScreenDungeon = 0x22E9058;
 TopScreenModeSetDungeonMode = 0x22E9658;
 FreeTopScreenBGDungeon = 0x22C2BD0;
 RemoveEmptyItemsInStorage = 0x2010124;
+AnalyzeTextPreamble = 0x20264F8;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;
