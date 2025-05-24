@@ -1,0 +1,44 @@
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_TALK_SUB);
+    }
+    switch(SwitchLives(ACTOR_TALK_SUB)) {
+        case 503:
+        case 1103:
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Quit wasting my time.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_TALK_SUB) {
+                Turn2Direction(1,10,DIR_LEFT);
+            }
+            break;
+        case 494:
+        case 1094:
+            message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" What are you hanging around here\nfor? Can't you tell we're busy?!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_TALK_SUB) {
+                Turn2Direction(1,10,DIR_UP);
+            }
+            break;
+        case 24:
+        case 624:
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I've got nothing to ssssssay to you.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_TALK_SUB) {
+                Turn2Direction(1,10,DIR_DOWN);
+            }
+            break;
+    }
+    JumpCommon(CORO_END_TALK);
+}

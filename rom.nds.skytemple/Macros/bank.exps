@@ -3,7 +3,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
 
     macro CheckBankRewards() {
         debug_PrintFlag($BANK_GOLD,"Bank Gold:");
-        value($DUNGEON_EVENT_LOCAL) = value($LOCAL1);
         switch($BANK_GOLD) {
             case < 100:
                 debug_Print("<100");
@@ -93,7 +92,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_Talk(" [CS:G]100000[CR][M:S0]! Never in my\nafterlife did I expect to see one\nperson leave this much just for me!");
                 message_Talk(" How thrilling! Hee-hee...\nPlease accept this gift as thanks\nfor your continued business!");
                 message_KeyWait();
-                §check_6;
                 ~AssignCheck(86);
                 jump @check_5;
             }
@@ -104,7 +102,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" You know, [CS:G]50000[CR][M:S0] is no amount\nto scoff at![K] I have another gift as thanks\nfor your continued loyalty to [CS:K]Duskull[CR] Bank!");
                 message_KeyWait();
-                §check_5;
                 ~AssignCheck(85);
                 jump @check_4;
             }
@@ -115,7 +112,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" You lift my spirits with your wealth\nof wealth![K] As thanks for depositing a grand\ntotal of [CS:G]20000[CR][M:S0], I have this gift for you!");
                 message_KeyWait();
-                §check_4;
                 ~AssignCheck(84);
                 jump @check_3;
             }
@@ -126,7 +122,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" How hauntingly exciting, hee-hee!\n[CS:G]10000[CR][M:S0], all for me to hold![K] In exchange for\nyour generosity, I have another gift for you!");
                 message_KeyWait();
-                §check_3;
                 ~AssignCheck(83);
                 jump @check_2;
             }
@@ -137,7 +132,6 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
                 message_Talk(" You've reached a new milestone\nof [CS:G]5000[CR][M:S0]![K] Accept my gift, and continue\nto leave your money with me, yes?");
                 message_KeyWait();
-                §check_2;
                 ~AssignCheck(82);
                 jump @check_1;
             }
@@ -149,12 +143,37 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_Talk(" One moment, please!");
                 message_Talk(" [CS:G]100[CR][M:S0]? A good start, but surely\nyou can do more![K] Please take this gift and\ncontinue to allow me to hoard your money!");
                 message_KeyWait();
-                §check_1;
                 ~AssignCheck(81);
-                me_Play(4);
-                message_Mail("\n[CN]You got a check!");
-                WaitMe(4);
-                message_Close();
+                jump @getout;
             }
         }
+        §check_6;
+        if not ($SCENARIO_SUB6 &<< 6) {
+            ~AssignCheck(86);
+        }
+        §check_5;
+        if not ($SCENARIO_SUB6 &<< 5) {
+            ~AssignCheck(85);
+        }
+        §check_4;
+        if not ($SCENARIO_SUB6 &<< 4) {
+            ~AssignCheck(84);
+        }
+        §check_3;
+        if not ($SCENARIO_SUB6 &<< 3) {
+            ~AssignCheck(83);
+        }
+        §check_2;
+        if not ($SCENARIO_SUB6 &<< 2) {
+            ~AssignCheck(82);
+        }
+        §check_1;
+        if not ($SCENARIO_SUB6 &<< 1) {
+            ~AssignCheck(81);
+        }
+        §getout;
+        me_Play(4);
+        message_Mail("\n[CN]You got a check!");
+        WaitMe(4);
+        message_Close();
     }

@@ -13130,10 +13130,12 @@ coro TITLE_TEST {
 
 coro BUBBLE_TEST {
     if ($VERSION == 1) {
-        if (not debug) {
-            message_Mail("Version was set to 1 somehow!\nTell [CS:G]happylappy[CR] where this happens\nif you see this!");
-            ~SetVersion();    
-            message_Close();
+        if ($SCENARIO_MAIN > 10) {
+            if (not debug) {
+                message_Mail("Version was set to 1 somehow!\nTell [CS:G]happylappy[CR] where this happens\nif you see this!");
+                ~SetVersion();    
+                message_Close();
+            }
         }
     }
     switch ($EXECUTE_SPECIAL_EPISODE_TYPE) {

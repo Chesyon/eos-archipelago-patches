@@ -7,84 +7,159 @@ def 0 {
     with (actor ACTOR_TALK_SUB) {
         ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
     }
+    camera_MovePositionMark(1,Position<'m3', 53.5, 35.5>);
+    Wait(30);
     switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
         case 0:
-            // Turn towards Charm    
-            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-            message_Talk(" Is that...[W:30] [CS:X]Team Charm[CR]?");
-            message_Talk({
-                english=" They\'re the real deal, by golly!",
-                french=" C\'t\'équipe, c\'est pas d\'la\ngnognote, pour sûr!",
-                german=" Die haben es drauf,\nDonnerwetter!",
-                italian=" Sono proprio le migliori, ohibò!",
-                spanish=" ¡Huyuyuy! ¡Son la bomba!",
-            });
+            message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Hey, watch it! We're busy here.");
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            call @charm_1;
-            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-            message_Talk({
-                english=" My name\'s [CS:Y]Bidoof[CR].[K]\nI\'m an apprentice at the guild.",
-                french=" Mon nom est [CS:Y]Keunotor[CR].[K]\nJe suis apprenti à la Guilde.",
-                german=" Mein Name ist [CS:Y]Bidiza[CR].[K]\nIch bin ein Gildenlehrling.",
-                italian=" Mi chiamo [CS:Y]Bidoof[CR].[K]\nSono un apprendista della Gilda.",
-                spanish=" Me llamo [CS:Y]Bidoof[CR].[K]\nSoy un aprendiz del [CS:N]Pokégremio[CR].",
-            });
-            call @charm_2;
-            
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" Wait a minute. You're an explorer,\nright?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_BIPPA,FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk(" Ooh, yup-yup! I want to be a great\nexplorer one day, yes sirree!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" You want to be a great explorer?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Ppffaahahaha!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" It's besssst to quit while you're ahead.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Trust me, don't waste your time.\nIt's not as great as people make it out to be.");
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Let me give you an example.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            screen_FadeOut(1,20);
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetPositionMark(Position<'m1', 49.5, 33>);
+            }
+
+            with (actor ACTOR_PLAYER_BIPPA) {
+                SetDirection(DIR_RIGHT);
+            }
+            with (actor ACTOR_NPC_DORAPION) {
+                SetDirection(DIR_UPLEFT);
+            }
+            with (actor ACTOR_NPC_AABOKKU) {
+                SetDirection(DIR_DOWNLEFT);
+            }
+            Wait(40);
+            screen_FadeIn(1,20);
             break;
         case 2:
-            // Turn towards Charm
-            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_TOP_R_FACEINW);
-            message_Talk(" Is that...[W:30] [CS:X]Team Charm[CR]?");
-            message_Talk({
-                english=" Oh my gosh! It\'s unbelievable!",
-                french=" Ben mince alors! C\'est\ncarrément hallucinant!",
-                german=" Auweia! Es ist unglaublich!",
-                italian=" Shock! È incredibile!",
-                spanish=" ¡No me lo puedo creer!\n¡Increíble!",
-            });
+            message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Hey, watch it! We're busy here.");
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-            call @charm_1;
-            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-            message_Talk({
-                english=" I\'m [CS:Y]Sunflora[CR]![K]\nI\'m an apprentice to the Guildmaster!",
-                french=" Je m\'appelle [CS:Y]Héliatronc[CR]![K]\nJe suis une apprentie du Maître de la Guilde!",
-                german=" Ich bin [CS:Y]Sonnflora[CR]![K]\nIch bin ein Gildenlehrling!",
-                italian=" Mi chiamo [CS:Y]Sunflora[CR]![K]\nSono un\'apprendista del Capitano!",
-                spanish=" ¡Soy [CS:Y]Sunflora[CR]![K]\n¡Soy una aprendiz del [CS:N]Pokégremio[CR]!",
-            });
-            call @charm_2;
-            
+            message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" Wait a minute. You're an explorer,\nright?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I am! And I've got a big mission\ntoday!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Big mission... I'm sure it's\nthrilling. Full of fame and glory, right?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_KIMAWARI,FACE_STUNNED, FACE_POS_STANDARD);
+            message_Talk(" Well, I don't know about that...");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" It's not worth it! It never is.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" [CS:G]Drapion[CR]'s right. Let me give\nyou an example of what \"fame and glory\"\ngets you.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            screen_FadeOut(1,20);
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetPositionMark(Position<'m1', 49.5, 33>);
+            }
+
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetDirection(DIR_RIGHT);
+            }
+            with (actor ACTOR_NPC_DORAPION) {
+                SetDirection(DIR_UPLEFT);
+            }
+            with (actor ACTOR_NPC_AABOKKU) {
+                SetDirection(DIR_DOWNLEFT);
+            }
+            Wait(40);
+            screen_FadeIn(1,20);
             break;
         default:
-            call @charm_1;
-            call @charm_2;
+            message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Hey, watch it! We're busy here.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" Wait a minute. You're explorerssss,\nright?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Yes, we are. Why do you ask?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Hilarious. I'm sure you've got\nbig plans, but don't get in over your head.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Like [CS:X]Team Charm[CR] did!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" What do you mean? What's wrong\nwith [CS:X]Team Charm[CR]?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" What, you haven't heard?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" Humor them, Lady [CS:G]Weavile[CR].\nTell the ssssstory.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Of course. So...");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            screen_FadeOut(1,20);
+            with (actor ACTOR_PLAYER) {
+                SetPositionMark(Position<'m2', 49.5, 32>);
+            }
+            with (actor ACTOR_ATTENDANT_PARTNER) {
+                SetPositionMark(Position<'m1', 49.5, 35>);
+            }
+            with (actor ACTOR_PLAYER) {
+                SetDirection(DIR_RIGHT);
+            }
+            with (actor ACTOR_ATTENDANT_PARTNER) {
+                SetDirection(DIR_RIGHT);
+            }
+            with (actor ACTOR_NPC_DORAPION) {
+                SetDirection(DIR_UPLEFT);
+            }
+            with (actor ACTOR_NPC_AABOKKU) {
+                SetDirection(DIR_DOWNLEFT);
+            }
+            Wait(40);
+            screen_FadeIn(1,20);
             break;
     }
     switch(scn($SCENARIO_SUB1)[1]) {
         case &<< 0:
             message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
-            message_Talk(" PLACEHOLDER");
+            message_Talk(" Thissss should never appear![K]\nTell [CS:G]happylappy[CR] if it doessss!");
             message_Close();
             JumpCommon(CORO_END_TALK);
         default:
-            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL,FACE_POS_STANDARD);
-            message_Talk(" PLACEHOLDER");
-            switch(message_SwitchMenu(0,1)) {
-                case menu("Yes"):
-                    message_Close();
-                    bgm_FadeOut(30);
-                    screen_FadeOut(1,30);
-                    break;
-                case menu("No"):
-                    message_Close();
-                    message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
-                    message_Talk(" PLACEHOLDER");
-                    message_Close();
-                    JumpCommon(CORO_END_TALK);
-            }
-            message_Close();
+            message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" You know that [CS:X]Team Charm[CR]? They're a total sham.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+            message_Talk(" Always acting sssssso high and mighty.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" We met them back before they got\ntheir fame, and they were just as annoying\nas they are now!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Let us tell you the story of\n[CS:P]Boulder Quarry[CR].");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
             bgm_FadeOut(30);
             screen_FadeOut(1,30);
             Wait(30);
@@ -116,14 +191,23 @@ def 0 {
             supervision_RemoveCommon(25);
             screen_FadeIn(1, 30);
             bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
-            message_Mail("[CN]You feel as if [CS:G]Team AWD[CR]\n[CN]left out a lot of important context...");
-            message_SetFace(ACTOR_NPC_MANYUURA,FACE_NORMAL,FACE_POS_STANDARD);
-            message_Talk(" PLACEHOLDER");
-            message_SetFace(ACTOR_NPC_DORAPION,FACE_NORMAL,FACE_POS_STANDARD);
-            message_Talk(" PLACEHOLDER");
-            message_SetFace(ACTOR_NPC_AABOKKU,FACE_NORMAL,FACE_POS_STANDARD);
-            message_Talk(" PLACEHOLDER");
-            message_Close();
+            message_Mail("[CN]You feel as if [CS:X]Team AWD[CR]\n[CN]left out a lot of important context...");
+            message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Ahahaha! See? Total sham!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+            message_Talk(" Anyway, it was fun talking to you,\nbut we're busy. So...");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_AABOKKU, FACE_ANGRY, FACE_POS_TOP_R_CENTER);
+            message_Talk(" ssssSSCRAM!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with (actor ACTOR_NPC_DORAPION) {
+                Turn2Direction(1,10,DIR_UP);
+            }
+            with (actor ACTOR_NPC_AABOKKU) {
+                Turn2Direction(1,10,DIR_DOWN);
+            }
+            camera_MoveDefault(1);
             JumpCommon(CORO_END_TALK);
     }
     
@@ -141,11 +225,12 @@ def 0 {
     });
     
     §charm_1;
+
+
     message_SetFace(ACTOR_NPC_AABOKKU,  FACE_PAIN , FACE_POS_STANDARD);
     message_Monologue("(Ugh, I think we have another one...[W:30] If I have\nto sign one more autograph, I might develop\ncarpal tunnel! Are we done here yet?)");
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    message_SetFace(ACTOR_NPC_DORAPION,  FACE_WORRIED , FACE_POS_STANDARD);
-    message_Monologue("(How awful, we\'re being suffocated by our\nown fame! And we\'ve found out absolutely\nnothing useful in return! How frustrating...)");
+
     CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
     message_SetFace(ACTOR_NPC_MANYUURA,  FACE_SIGH , FACE_POS_STANDARD);
     message_Monologue("(I know it\'s exhausting, but come on girls!\nWe\'re [CS:X]Team Charm[CR], we can handle being\nrecognized by our fans in public, can\'t we?)");

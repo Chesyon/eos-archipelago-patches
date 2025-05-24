@@ -15,8 +15,15 @@ def 0 {
                         case 0:
                         case 2:
                             supervision_StationCommon(23);
-                            supervision_StationCommon(24);
-                            supervision_StationCommon(25);
+                            switch(scn($SCENARIO_SUB1)[1]) {
+                                case &<< 0:
+                                    supervision_StationCommon(24);
+                                    break;
+                                default:
+                                    supervision_StationCommon(24);
+                                    supervision_StationCommon(25);
+                                    break;
+                            }
                             jump @label_27;
                             §label_1127;
                             supervision_StationCommon(10);
