@@ -80,7 +80,8 @@ def 0 {
                                 screen_FadeOut(0,30);
                                 bgm_FadeOut(30);
                                 screen2_FadeOut(1,30);
-                                message_SetFaceEmpty(ACTOR_NPC_YUKIMENOKO,FACE_WORRIED,FACE_POS_BOTTOM_L_FACEINW);
+                                Wait(90);
+                                message_SetFaceEmpty(ACTOR_NPC_YUKIMENOKO,FACE_ANGRY,FACE_POS_BOTTOM_L_FACEINW);
                                 message_Talk("[STS][CS:G]Ghast[CR]:[STE] haaaaaaah[W:15]\n(Would you smooch a ghast?)");
                                 switch(message_SwitchMenu(0,1)) {
                                     case menu("Yes!!!"):
@@ -92,7 +93,7 @@ def 0 {
                                         break;
                                     case menu("Yes!"):
                                         message_Close();
-                                        message_SetFaceEmpty(ACTOR_NPC_YUKIMENOKO,FACE_HAPPY,FACE_POS_BOTTOM_L_FACEINW);
+                                        message_SetFaceEmpty(ACTOR_NPC_YUKIMENOKO,FACE_ANGRY,FACE_POS_BOTTOM_L_FACEINW);
                                         message_Talk("[STS][CS:G]Ghast[CR]:[STE] uuuuooooooh[W:15] uuuuuuuaaaaaaannnngh![W:15]\n(The ghast, satisfied with your answer,\ngave you a satisfied nod, and flew away...)");
                                         message_Close();
                                         jump @good_ending;

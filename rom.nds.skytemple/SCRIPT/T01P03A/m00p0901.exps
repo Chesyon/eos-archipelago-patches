@@ -73,7 +73,7 @@ def 0 {
                 message_Talk(" Explorers! You look flustered...[K]\nSurely you didn't go somewhere you\nweren't supposed to, right?");
                 message_KeyWait();
                 Wait(180);
-                message_Talk(" [CS:K]Marowak[CR] Dojo takes no\nresponsibility for any Ghast-smooching\nrelated accidents.");
+                message_Talk(" [W:60][CS:K]Marowak[CR] Dojo takes no\nresponsibility for any Ghast-smooching\nrelated accidents.");
                 message_CloseEnforce();
                 end;
             }
