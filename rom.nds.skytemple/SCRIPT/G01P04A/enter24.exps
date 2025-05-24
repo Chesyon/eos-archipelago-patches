@@ -1,0 +1,21 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    message_Notice({
+        english="[CN]\n[CN]← Mess Hall",
+        french="[CN]\n[CN]← Mess de la Guilde",
+        german="[CN]\n[CN]← Gildenkantine",
+        italian="[CN]\n[CN]← Sala mensa",
+        spanish="[CN]\n[CN]← Comedor",
+    });
+    JumpCommon(CORO_END_TALK);
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

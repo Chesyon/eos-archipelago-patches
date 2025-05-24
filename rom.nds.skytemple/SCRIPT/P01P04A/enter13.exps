@@ -58,7 +58,9 @@ def 0 {
             
             break;
         default:
-            JumpCommon(CORO_END_TALK);
+            call @charm_1;
+            call @charm_2;
+            break;
     }
     switch(scn($SCENARIO_SUB1)[1]) {
         case &<< 0:
@@ -111,6 +113,7 @@ def 0 {
             message_Close();
             Wait(90);
             ~AssignCheck(8);
+            supervision_RemoveCommon(25);
             screen_FadeIn(1, 30);
             bgm_PlayFadeIn(BGM_SPINDAS_CAFE,60,256);
             message_Mail("[CN]You feel as if [CS:G]Team AWD[CR]\n[CN]left out a lot of important context...");

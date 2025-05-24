@@ -15,6 +15,8 @@ def 0 {
                         case 0:
                         case 2:
                             supervision_StationCommon(23);
+                            supervision_StationCommon(24);
+                            supervision_StationCommon(25);
                             jump @label_27;
                             §label_1127;
                             supervision_StationCommon(10);
@@ -155,6 +157,24 @@ def 0 {
                                     supervision_ExecuteStationSub(LEVEL_P01P04A, 'UM26', 0);
                                     jump @label_27;
                                 case == 29:
+                                    if ($PERFORMANCE_PROGRESS_LIST[24]) {
+                                        if($SCENARIO_SUB2 &<< 4) {
+                                        } else {
+                                            message_Narration(30,"[CN][CS:B]Manaphy Progression Error Found![K]\n[CN]Please ping [CS:G]Happylappy[CR] if you see this![CR][K]");
+                                            $PERFORMANCE_PROGRESS_LIST[24] = 0;
+                                            $PERFORMANCE_PROGRESS_LIST[23] = 0;
+                                            message_Close();
+                                        }
+                                    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+                                        switch(scn($SCENARIO_SUB1)[1]) {
+                                            case &<< 0:
+                                                break;
+                                            default:
+                                                supervision_StationCommon(24);
+                                                supervision_StationCommon(25);
+                                                jump @label_27;
+                                        }
+                                    }
                                     if ( scn($SCENARIO_MAIN) >= [29, 93] ) {
                                         supervision_ExecuteStationSub(LEVEL_P01P04A, 'US23', 0);
                                         jump @label_27;
