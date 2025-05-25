@@ -109,7 +109,7 @@ AddShopItemToInventoryHook4 = 0x238B784;
 CreditsDisplayText = 0x238B82C;
 
 /* ! For Overlay29 */
-LevelScalingHook = 0x22E8184; /* In LoadMappaFileAttributes */
+LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
 IqScalingDungeonHook = 0x22FAB68;
 RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
