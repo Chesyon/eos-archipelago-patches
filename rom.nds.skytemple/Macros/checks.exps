@@ -54,7 +54,9 @@ macro AssignCheck($bit) {
         default:
             break;
     }
+    debug_PrintFlag($VERSION,"Version: ");
     ~SetVersion();
+    debug_PrintFlag($VERSION,"Version: ");
 }
 
 
