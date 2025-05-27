@@ -19,7 +19,7 @@ uint8_t GetMazeTrapCheck(enum floor_layout layout) {
         return DungeonRandInt(2) + 14;
     }
     
-    if(layout >= LAYOUT_UNUSED_0xC && DUNGEON_PTR->id.val == 172) {
+    if(layout < LAYOUT_UNUSED_0xC || DUNGEON_PTR->id.val == 172) {
         return layout;
     }
     
