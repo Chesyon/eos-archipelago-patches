@@ -1,0 +1,22 @@
+def 0 {
+    if ($VERSION == 2) {
+        end;
+    }
+    back2_SetMode(0);
+    debug_Print('Press the B button, stupid!');
+    back_SetGround(LEVEL_S99P01A); // back_SetGround(LEVEL_T00P01);
+    supervision_Acting(0);
+    screen_FadeIn(1,0);
+    Wait(300);
+    screen_FadeOut(1, 0);
+    se_Play(271);
+    message_Explanation('[CN][STS][M:T6][S:8]jk lmao[S:8][M:T6][STE]');
+    message_Close();
+    debug_Print('Proceed.');
+    end;
+}
+
+def 1 for_performer(0) {
+    camera_SetMyself();
+    hold;
+}

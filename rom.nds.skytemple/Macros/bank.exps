@@ -144,9 +144,10 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                 message_Talk(" [CS:G]100[CR][M:S0]? A good start, but surely\nyou can do more![K] Please take this gift and\ncontinue to allow me to hoard your money!");
                 message_KeyWait();
                 ~AssignCheck(81);
-                jump @getout;
+                jump @check_0;
             }
         }
+        jump @getout;
         §check_6;
         if not ($SCENARIO_SUB6 &<< 6) {
             ~AssignCheck(86);
@@ -171,9 +172,10 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
         if not ($SCENARIO_SUB6 &<< 1) {
             ~AssignCheck(81);
         }
-        §getout;
+        §check_0;
         me_Play(4);
         message_Mail("\n[CN]You got a check!");
         WaitMe(4);
         message_Close();
+        §getout;
     }

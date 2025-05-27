@@ -2,6 +2,7 @@ import "version.exps"; // Handles game version stuff
 import "checks.exps"; 
 def 0 {
     if (debug) {
+        //~AssignCheck(7); // Sunflora SE Unlocked!
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0);
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;

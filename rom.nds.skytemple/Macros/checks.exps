@@ -1,5 +1,6 @@
 import "version.exps"; // Leave this for me, I don't want to rename this later lol
 
+
 macro RunSP($variable_id,$value) {
     ProcessSpecial(65,$variable_id,$value);
 }
@@ -12,6 +13,12 @@ macro AssignCheck($bit) {
         message_Close();
         return;
     }
+    /*
+    if (not debug) {
+        ProcessSpecial(111,$bit,0);
+        return;
+    }
+    */
     $LOCAL0 /= 8;
     
     if ($LOCAL0 &<< 0) {
@@ -89,3 +96,85 @@ macro InternalCheckMacro($value) {
     }
     
 }
+/*    
+    if ($LOCAL0 &<< 0) {
+        $DUNGEON_EVENT_LOCAL = 1;
+    } else {
+        $DUNGEON_EVENT_LOCAL = 0;
+    }
+    if ($LOCAL0 &<< 1) {
+        $DUNGEON_EVENT_LOCAL += 2;
+    }
+    if ($LOCAL0 &<< 2) {
+        $DUNGEON_EVENT_LOCAL += 4;
+    }
+    
+    if ($LOCAL0 &<< 3) {
+        $LOCAL1 = 1;
+    } else {
+        $LOCAL1 = 0;
+    }
+    
+    switch($LOCAL0) {
+        case < 8:
+            if ($SCENARIO_SUB1[0] &<< value($DUNGEON_EVENT_LOCAL)) {
+                switch($DUNGEON_EVENT_LOCAL) {
+                    case 0:
+                        $SCENARIO_SUB1[0] += 1;
+                        break;
+                    case 1:
+                        $SCENARIO_SUB1[0] += 2;
+                        break;
+                    case 2:
+                        $SCENARIO_SUB1[0] += 4;
+                        break;
+                    case 3:
+                        $SCENARIO_SUB1[0] += 8;
+                        break;
+                    case 4:
+                        $SCENARIO_SUB1[0] += 16;
+                        break;
+                    case 5:
+                        $SCENARIO_SUB1[0] += 32;
+                        break;
+                    case 6:
+                        $SCENARIO_SUB1[0] += 64;
+                        break;
+                    case 7:
+                        $SCENARIO_SUB1[0] += 128;
+                        break;
+                }
+            }
+        case < 16:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB1;
+            break;
+        case < 32:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB2;
+            break;
+        case < 48:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB3;
+            break;
+        case < 64:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB4;
+            break;
+        case < 80:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB5;
+            break;
+        case < 96:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB6;
+            break;
+        case < 112:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB7;
+            break;
+        default:
+            $DUNGEON_EVENT_LOCAL = $SCENARIO_SUB8;
+            break;
+    }
+    
+    
+    switch(scn(value($DUNGEON_EVENT_LOCAL))[1]) {
+        case 0:
+            break;
+    }
+    
+    

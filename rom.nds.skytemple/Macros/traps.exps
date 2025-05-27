@@ -5,6 +5,14 @@ macro UnownTrap() {
         if (debug) {
             jump @do_trap;
         }
+    switch(ProcessSpecial(103,0,0)) { 
+        case 7:
+            message_Mail("The Unown Trap was so strong, no amount of\n[CS:I]Unown Rocks[CR] could have prevented it!");
+            message_Close();
+            jump @do_trap;
+        default:
+            break;
+    }
         switch(ProcessSpecial(106,0,0)) {
             case 0:
                 §do_trap;

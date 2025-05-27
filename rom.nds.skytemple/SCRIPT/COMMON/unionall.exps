@@ -3089,6 +3089,23 @@ coro EVENT_HA_SAME {
 
 coro HA_MIHARIBAN {
     CallCommon(CORO_SUBSCREEN_INIT);
+    if (debug) {
+        jump @is_fiery;
+    }
+    switch(ProcessSpecial(103,0,0)) { 
+        case 7:
+            §is_fiery;
+            ~crass(LEVEL_S00P01A, 'CARTDIE', 0, LEVEL_S00P01A, 'CARTDIE:1', 0);
+            if ($SCENARIO_MAIN_BIT_FLAG[127]) {
+                message_Mail("[FT:0]You can read Unown by now\ncan't you, [CS:G]Fiery[CR]?[K] How about we\ntry something else then...[FT:2]");
+                message_Close();
+            } else {
+                message_Mail("[FT:0]Tired of Sentry Duty yet, [CS:G]Fiery[CR]?[K] How about we\ntry something to spice it up...[FT:3]");
+                message_Close();
+            }
+        default:
+            break;
+    }
     ~crass(LEVEL_S08P01A, 'QUIZ01', 0,LEVEL_S08P01A, 'QUIZ01:1', 0);
     // supervision_ExecuteActingSub(LEVEL_S08P01A, 'QUIZ01', 0);
     if (not debug || $EVENT_LOCAL > 0) {
@@ -3180,6 +3197,19 @@ coro EVENT_M00_08 {
 
 coro EVENT_M00_09 {
     CallCommon(CORO_SUBSCREEN_INIT);
+    if ($DUNGEON_ENTER_INDEX == 190 || $DUNGEON_ENTER_INDEX == 99) {
+        if (debug) {
+            jump @is_chesyon;
+        }
+        switch(ProcessSpecial(103,0,0)) { 
+            case 1:
+            case 4:
+                §is_chesyon;
+                ~crass(LEVEL_S00P01A, 'CARTDIE2', 0, LEVEL_S00P01A, 'CARTDIE2:1', 0);
+            default:
+                break;
+        }
+    }
     switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
         case 0:
             supervision_ExecuteActingSub(LEVEL_T01P03A, 'M00P1001', 0);
@@ -3394,6 +3424,16 @@ coro EVENT_M03_02 {
 coro EVENT_M03_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
     //supervision_ExecuteActingSub(LEVEL_T01P02A, 'M03A0301', 0);
+    if (debug) {
+        jump @is_cryptic;
+    }
+    switch(ProcessSpecial(103,0,0)) { 
+        case 3:
+            §is_cryptic;
+            ~crass(LEVEL_S00P01A, 'CARTDIE', 0, LEVEL_S00P01A, 'CARTDIE:1', 0);
+        default:
+            break;
+    }
     ~crass(LEVEL_S04P01A, 'C00A0701', 0, LEVEL_S04P01A, 'C00A0701:2', 0);
     ~crass(LEVEL_T01P02A, 'M03D0313', 0, LEVEL_T01P02A, 'M03D0313:1', 0);
     ~crass(LEVEL_S04P01A, 'C00A1701', 0, LEVEL_S04P01A, 'C00A1701:2', 0);
@@ -8855,6 +8895,13 @@ coro GETOUT_NORMAL {
                 screen_FadeOut(0,30);
                 bgm_FadeOut(30);
                 screen2_FadeOut(1,30);
+                if (debug) {
+                    message_ResetActor();
+                } else {
+                    ProcessSpecial(110,395,FACE_NORMAL);
+                }
+                message_Talk(" Oi! \'ello there chaps! Mind if I join you\nfor a short while in there?[K] This bluff is\ntotally [CS:C]dench[CR], I can\'t get enough of it!");
+                message_Close();
                 main_EnterDungeon(171,30);
                 main_EnterDungeon(-1,30);
                 hold;
@@ -8868,7 +8915,7 @@ coro GETOUT_NORMAL {
                 } else {
                     ProcessSpecial(110,72,FACE_ANGRY);
                 }
-                message_Talk("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+                message_Monologue("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
                 message_Close();
                 JumpCommon(CORO_EVENT_HA_SAMEX);
                 hold;
@@ -8953,7 +9000,7 @@ coro GETOUT_NORMAL {
                 main_EnterDungeon(172,30);
                 main_EnterDungeon(-1,30);
                 hold;
-            
+
             
             default:
                 jump @label_667;
@@ -9102,6 +9149,13 @@ coro ENTER_SCENARIO_DUNGEON {
                     screen_FadeOut(0,30);
                     bgm_FadeOut(30);
                     screen2_FadeOut(1,30);
+                    if (debug) {
+                        message_ResetActor();
+                    } else {
+                        ProcessSpecial(110,395,FACE_NORMAL);
+                    }
+                    message_Talk(" Oi! \'ello there chaps! Mind if I join you\nfor a short while in there?[K] This bluff is\ntotally [CS:C]dench[CR], I can\'t get enough of it!");
+                    message_Close();
                     main_EnterDungeon(171,30);
                     main_EnterDungeon(-1,30);
                     hold;
@@ -9115,7 +9169,7 @@ coro ENTER_SCENARIO_DUNGEON {
                     } else {
                         ProcessSpecial(110,72,FACE_ANGRY);
                     }
-                    message_Talk("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+                    message_Monologue("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
                     message_Close();
                     JumpCommon(CORO_EVENT_HA_SAMEX);
                     hold;
@@ -10521,11 +10575,17 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 172:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        message_Mail("The dungeon kept going!");
-                        message_Close();
-                        main_EnterDungeon(172,30);
-                        main_EnterDungeon(-1,30);
-                        hold;                    
+                        if (debug) {
+                            jump @is_hecka;
+                        }
+                        switch(ProcessSpecial(103,0,0)) { 
+                            case 4:
+                                §is_hecka;
+                                ~crass(LEVEL_S00P01A, 'CARTDIE', 0, LEVEL_S00P01A, 'CARTDIE:1', 0);
+                            default:
+                                break;
+                        }
+                        break;                  
                     case 173:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         message_Mail("The dungeon kept going!");
@@ -12746,7 +12806,7 @@ coro RESCUE_DEBUG {
                         Wait(60);
                         message_Mail("...wait a minute.[K] You\'re THE [CS:G]happylappy[CR]?");
                         message_Mail("Huge fan![K] Anyway, without further ado...");
-                        Wait(180);
+                        Wait(90);
                         message_CloseEnforce();
                         message_Mail("What, did you expect me to thank\nmyself for contributing?[K] I\'ll\npass for now, thanks!");
                         message_Close();
@@ -13273,7 +13333,7 @@ coro BUBBLE_TEST {
     if ($PERFORMANCE_PROGRESS_LIST[33]) {
         $PERFORMANCE_PROGRESS_LIST[33] = 0;
         ~UnownTrap();
-        message_Mail("You and [partner] begin to feel strange...[W:60]\n[FT:1]OOPS! ALL UNOWN!");
+        // message_Mail("You and [partner] begin to feel strange...[W:60]\n[FT:1]OOPS! ALL UNOWN!");
         message_Close();
     }
     if ($PERFORMANCE_PROGRESS_LIST[34]) {
@@ -13305,6 +13365,7 @@ coro BUBBLE_TEST {
         }
         JumpCommon(CORO_HA_MIHARIBAN);
     }
+    
     if ($PERFORMANCE_PROGRESS_LIST[36]) {
         bgm_FadeOut(30);
         switch(random(5)) {
@@ -13322,6 +13383,16 @@ coro BUBBLE_TEST {
                 break;
             case 4: // Wigglytuff's Big Head
                 ~crass(LEVEL_G01P01B, 'M02A0101', 0, LEVEL_G01P01B, 'M02A0101:1', 0);
+                break;
+        }
+        if (debug) {
+            jump @is_taiIs;
+        }
+        switch(ProcessSpecial(103,0,0)) { 
+            case 6:
+                §is_taiIs;
+                ~crass(LEVEL_S00P01A, 'CARTDIE', 0, LEVEL_S00P01A, 'CARTDIE:1', 0);
+            default:
                 break;
         }
         $PERFORMANCE_PROGRESS_LIST[36] = 0;
@@ -13355,6 +13426,7 @@ coro BUBBLE_TEST {
                         $PERFORMANCE_PROGRESS_LIST[34] = 1;
                         $PERFORMANCE_PROGRESS_LIST[36] = 1;
                     case < 3:
+                        ~crass(LEVEL_S00P01A, 'CARTDIE', 0, LEVEL_S00P01A, 'CARTDIE:1', 0);
                         message_Mail("[CN]You feel like you\'re about to get\nyour shit rocked in a few minutes...");
                         message_Close();
                     default:
