@@ -1,0 +1,89 @@
+
+def 0 {
+    debug_Print('ENTER_S01P02A');
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            supervision_StationCommon(1);
+            camera_MoveDefault(33152);
+            WaitMoveCamera();
+            with (actor ACTOR_PLAYER_APPOINT) {
+                SetFunctionAttribute(2);
+            }
+            supervision_Suspend(-2);
+            supervision_RemoveActing(32766);
+            back2_SetMode(32767);
+            screen2_FadeIn(1, 30);
+            end;
+        case 2:
+            supervision_StationCommon(0);
+            supervision_StationCommon(1);
+            back2_SetMode(32767);
+            screen2_FadeIn(1, 30);
+            end;
+        default:
+            back_SetGround(LEVEL_S01P02A);
+            if ( $SCENARIO_MAIN_BIT_FLAG[31] ) {
+                switch ( $GROUND_START_MODE ) {
+                    case 10:
+                    case 11:
+                        debug_Print('RESCUE_DEAD');
+                        screen2_FadeOut(0, 0);
+                        back2_SetMode(0);
+                        supervision_ExecuteActing(LEVEL_S01P02A, 'DEAD', 0);
+                        hold;
+                    case 9:
+                        debug_Print('RESCUE_RETURN');
+                        screen2_FadeOut(0, 0);
+                        back2_SetMode(0);
+                        supervision_ExecuteActing(LEVEL_S01P02A, 'RETURN', 0);
+                        hold;
+                    case 8:
+                        debug_Print('RESCUE_CONQUEST');
+                        screen2_FadeOut(0, 0);
+                        back2_SetMode(0);
+                        supervision_ExecuteActing(LEVEL_S01P02A, 'CONQUEST', 0);
+                        hold;
+                    default:
+                        bgm_PlayFadeIn(BGM_PELIPPER_ISLAND, 0, 256);
+                        bgm2_PlayFadeIn(BGM_OCEAN1, 0, 128);
+                        supervision_StationCommon(1);
+                        $SCENARIO_MAIN_BIT_FLAG[40] = 0;
+                        supervision_StationCommon(0);
+                        screen_FadeOutAll(1, 0);
+                        JumpCommon(CORO_COMMON_ENTER);
+                }
+            } else {
+                $SCENARIO_MAIN_BIT_FLAG[31] = 1;
+                debug_Print('RESCUE_1ST');
+                screen2_FadeOut(0, 0);
+                back2_SetMode(0);
+                supervision_ExecuteActing(LEVEL_S01P02A, 'FIRST', 0);
+                hold;
+            }
+            break;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 3 for_actor(ACTOR_NPC_CHIRIIN) {
+    if ( scn($SCENARIO_MAIN) >= [6, 3] ) {
+        JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    } else {
+        Destroy();
+    }
+}

@@ -3,7 +3,11 @@
 
 // TODO: Update me everytime a new version is made!
 macro SetVersion() {
-    $VERSION = 2;
+    if (debug) {
+        $VERSION = 1;
+    } else {
+        $VERSION = 2;
+    }
 }
 
 
