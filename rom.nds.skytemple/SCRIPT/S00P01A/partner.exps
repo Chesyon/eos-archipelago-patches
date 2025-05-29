@@ -369,7 +369,7 @@ def 0 {
             break;
     }
     
-    if($DUNGEON_CONQUEST_LIST[127]) {
+    if($DUNGEON_CONQUEST_LIST[127] || $SPECIAL_EPISODE_CONQUEST[0]) {
         message_Talk(" Golly, have I already cleared all of\n[CS:P]Star Cave[CR]? I must have forgotten, yup yup!");
     } elseif($DUNGEON_CONQUEST_LIST[126]) {
         message_Talk(" Golly, it seems like I just have\nto take on [CS:G]Jirachi[CR]\n to get a check. *gulp*");
@@ -635,27 +635,25 @@ def 0 {
     
     §iggly_ideas;
     
-    if($DUNGEON_CONQUEST_LIST[127]) {
-        message_Talk("PLACEHOLDER");
-    } elseif($DUNGEON_CONQUEST_LIST[126]) {
-        message_Talk("PLACEHOLDER");
+    if($DUNGEON_CONQUEST_LIST[132] || $SPECIAL_EPISODE_CONQUEST[1]) {
+        message_Talk(" I think I\'ve already cleared\n[CS:P]Fortune Ravine[CR] before...");
+    } elseif($DUNGEON_CONQUEST_LIST[130]) {
+        message_Talk(" Master and I need to finish\nexploring [CS:P]Fortune Ravine[CR]! We should go do that!");
         jump @iggly_else;
-    } elseif($DUNGEON_CONQUEST_LIST[125]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[129]) {
+        message_Talk(" Master and I need to explore\n[CS:P]Fortune Ravine[CR]! We should go do that!");
         jump @iggly_else;
-    } elseif($DUNGEON_CONQUEST_LIST[124]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[128]) {
+        message_Talk(" Master and I need to explore\n[CS:P]Eastern Cave[CR]! We should go do that!");
         jump @iggly_else;
-    } elseif($DUNGEON_CONQUEST_LIST[123]) {
-        message_Talk("PLACEHOLDER");
-        jump @iggly_else;
-    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
-        message_Talk("PLACEHOLDER");
+    } elseif (scn($SCENARIO_SIDE) >= [41, 2])  {
+        message_Talk(" Me and my friends haven\'t finished exploring\n[CS:P]Murky Forest[CR] yet!");
         jump @iggly_else;
     } else {
-        message_Talk("PLACEHOLDER");
+        message_Talk(" I should hand out some\ntasty [CS:I]Gummis[CR] to my friends!");
         jump @iggly_else;
     }
+    
     if ($SPECIAL_EPISODE_OPEN[0]) {
         if($SPECIAL_EPISODE_CONQUEST[0]) {
         } else {
@@ -984,25 +982,31 @@ def 0 {
             break;
     }
     
-    if($DUNGEON_CONQUEST_LIST[127]) {
-        message_Talk("PLACEHOLDER");
-    } elseif($DUNGEON_CONQUEST_LIST[126]) {
-        message_Talk("PLACEHOLDER");
+    if($DUNGEON_CONQUEST_LIST[164] || $SPECIAL_EPISODE_CONQUEST[2]) {
+        message_Talk(" Oh my gosh! I have some intense\ndeja-vu right now! I think I\'ve already\ncleared [CS:P]Spring Cave[CR] before!");
+    } elseif($DUNGEON_CONQUEST_LIST[163]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nWe need to arrest them in [CS:P]Lower Spring Cave[CR]!");
         jump @sunflora_else;
-    } elseif($DUNGEON_CONQUEST_LIST[125]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[162]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nI need to chase them through [CS:P]Spring Cave Depths[CR]!");
         jump @sunflora_else;
-    } elseif($DUNGEON_CONQUEST_LIST[124]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[161]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nI need to chase him through [CS:P]Lower Spring Cave[CR]!");
         jump @sunflora_else;
-    } elseif($DUNGEON_CONQUEST_LIST[123]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[160]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nI need to arrest him in [CS:P]Middle Spring Cave[CR]!");
         jump @sunflora_else;
-    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[159]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nI need to chase him through [CS:P]Upper Spring Cave[CR]!");
+        jump @sunflora_else;
+    } elseif($DUNGEON_CONQUEST_LIST[158]) {
+        message_Talk(" I can\'t let [CS:G]Haunter[CR] win!\nI need to arrest him in [CS:P]Upper Spring Cave[CR]!");
+        jump @sunflora_else;
+    } elseif ( scn($SCENARIO_SIDE) >= [43, 2] ) {
+        message_Talk(" Eek! I need to go back\nto [CS:P]Spring Cave[CR]!");
         jump @sunflora_else;
     } else {
-        message_Talk("PLACEHOLDER");
+        message_Talk(" Oh my gosh! I need to hurry\nup and head to [CS:P]Spring Cave[CR]!");
         jump @sunflora_else;
     }
     switch(ProcessSpecial(105,0,0)) {
@@ -1250,25 +1254,41 @@ def 0 {
     §charm_ideas;
     
     
-    if($DUNGEON_CONQUEST_LIST[127]) {
-        message_Talk("PLACEHOLDER");
-    } elseif($DUNGEON_CONQUEST_LIST[126]) {
-        message_Talk("PLACEHOLDER");
+    if($DUNGEON_CONQUEST_LIST[157] || $SPECIAL_EPISODE_CONQUEST[3]) {
+        message_Talk(" My psychic powers indicate that we\'ve\nalready explored everything there is to explore here...");
+    } elseif($DUNGEON_CONQUEST_LIST[156]) {
+        message_Talk(" That dastardly Team [CS:X]AWD[CR]!\nWe need to get back to [CS:P]Limestone Cavern Depths[CR] and teach\nthose thugs a lesson! For [CS:G]Sentret[CR]!");
         jump @charm_else;
-    } elseif($DUNGEON_CONQUEST_LIST[125]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[155]) {
+        message_Talk(" We\'re nearly there, I can sense it!\nLet\'s finish exploring [CS:P]Deep Limestone Cavern[CR], and find that treasure!");
         jump @charm_else;
-    } elseif($DUNGEON_CONQUEST_LIST[124]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[154]) {
+        if($DUNGEON_CONQUEST_LIST[153]) {
+            message_Talk(" Uhh...[W:60] we should follow [CS:G]Wigglytuff[CR]\ninto what I\'m going to call [CS:P]Limestone Cavern[CR].\nYeah, yeah, what an original name, right? Let\'s just go...");
+        } else {
+            message_Talk(" The [CS:P]Left Cave Path[CR] didn\'t lead anywhere\nhelpful... Maybe we should take the [CS:P]Right Cave Path[CR] then?");
+        }
         jump @charm_else;
-    } elseif($DUNGEON_CONQUEST_LIST[123]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[153]) {
+        message_Talk(" The [CS:P]Right Cave Path[CR] didn\'t lead anywhere\nhelpful... Maybe we should take the [CS:P]Left Cave Path[CR] then?");
         jump @charm_else;
-    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[152]) {
+        message_Talk(" Hmm... Which way to go?\nShould we head to the[CS:P]Right Cave Path[CR]\nor is the [CS:P]Left Cave Path[CR] the \"right\" way?");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[151]) {
+        message_Talk(" That [CS:G]Aggron[CR] brute really got\non my nerves! Let\'s go back to [CS:P]Boulder Quarry Clearing[CR]\nand teach that knuckle-head a lesson, alright?");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[150]) {
+        message_Talk(" We\'ve come a long way!\nLet\'s keep moving into [CS:P]Deep Boulder Quarry[CR]!");
+        jump @charm_else;
+    } elseif($DUNGEON_CONQUEST_LIST[149]) {
+        message_Talk(" We need to teach Team [CS:X]AWD[CR]\na lesson! Let\'s follow them into [CS:P]Boulder Quarry[CR]!");
+        jump @charm_else;
+    } elseif ( scn($SCENARIO_SIDE) >= [45, 2] ) {
+        message_Talk(" Are you still out of it?\nWe need to head back into [CS:P]Southern Jungle[CR]!");
         jump @charm_else;
     } else {
-        message_Talk("PLACEHOLDER");
+        message_Talk(" Is the jungle heat getting to you?\nWe need to head into [CS:P]Southern Jungle[CR]!");
         jump @charm_else;
     }
     
@@ -1465,25 +1485,58 @@ def 0 {
     
     §grovyle_ideas;
     
-    if($DUNGEON_CONQUEST_LIST[127]) {
-        message_Talk("PLACEHOLDER");
-    } elseif($DUNGEON_CONQUEST_LIST[126]) {
-        message_Talk("PLACEHOLDER");
+    if($DUNGEON_CONQUEST_LIST[148] || $SPECIAL_EPISODE_CONQUEST[4]) {
+        message_Talk(" Have I gone back in time once more?\nI sense that my actions here have\nno bearing on the present this time...");
+    } elseif($DUNGEON_CONQUEST_LIST[147]) {
+        message_Talk(" We must defeat [CS:G]Primal Dialga[CR]\nno matter what! We must return to [CS:P]Vast Ice Mountain Pinnacle[CR]!");
         jump @grovyle_else;
-    } elseif($DUNGEON_CONQUEST_LIST[125]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[146]) {
+        message_Talk(" Onward to [CS:P]Vast Ice Mountain Peak[CR]!");
         jump @grovyle_else;
-    } elseif($DUNGEON_CONQUEST_LIST[124]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[145]) {
+        message_Talk(" Onward to [CS:P]Vast Ice Mountain[CR]!");
         jump @grovyle_else;
-    } elseif($DUNGEON_CONQUEST_LIST[123]) {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[144]) {
+        message_Talk(" Onward to [CS:P]Icicle Forest[CR]!");
         jump @grovyle_else;
-    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
-        message_Talk("PLACEHOLDER");
+    } elseif($DUNGEON_CONQUEST_LIST[143]) {
+        message_Talk(" Those [CS:G]Glalie[CR] and that [CS:G]Mamoswine[CR]\nare formidable foes... but we must defeat them! Back to\n[CS:P]Dark Ice Mountain Pinnacle[CR] we go...");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[142]) {
+        message_Talk(" Onward to [CS:P]Dark Ice Mountain Peak[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[141]) {
+        message_Talk(" Onward to [CS:P]Dark Ice Mountain[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[140]) {
+        message_Talk(" Onward to [CS:P]Spacial Cliffs[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[139]) {
+        message_Talk(" Time to teach those [CS:G]Sableye[CR]\na lesson! Try to ambush us in [CS:P]Black Swamp[CR] again!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[138]) {
+        message_Talk(" Onward to [CS:P]Dusk Forest[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[137]) {
+        message_Talk(" Onward to [CS:P]Temporal Spire[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[136]) {
+        message_Talk(" Onward to [CS:P]Temporal Tower[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[135]) {
+        message_Talk(" Onward to [CS:P]Dark Wasteland[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[134]) {
+        message_Talk(" Onward to [CS:P]Barren Valley Clearing[CR]!");
+        jump @grovyle_else;
+    } elseif($DUNGEON_CONQUEST_LIST[133]) {
+        message_Talk(" Onward to [CS:P]Deep Barren Valley[CR]!");
+        jump @grovyle_else;
+    } elseif ($GROUND_MAP == LEVEL_D46P11A)  {
+        message_Talk(" Once I\'m ready, I should return to\n[CS:P]Barren Valley[CR] and find a way back to the past...");
         jump @grovyle_else;
     } else {
-        message_Talk("PLACEHOLDER");
+        message_Talk(" Tell [CS:G]happylappy[CR]\nif this ever plays!");
         jump @grovyle_else;
     }
 
