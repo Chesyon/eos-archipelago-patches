@@ -163,6 +163,7 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
             if(!GetSubXBit(0) || !GetSubXBit(127)) { // Bag Upgrade 0, Team Name
                 return false;
             }
+            break;
         case DUNGEON_MT_BRISTLE:;
             if(!GetSubXBit(1)) { // Bag Upgrade 1
                 return false;
