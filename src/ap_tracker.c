@@ -479,23 +479,22 @@ char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
                         "[CLUM_SET:15]9999999G: [string:2]\n"
                         "[CLUM_SET:15]Checks Above 20000G\n"
                         "[CLUM_SET:15]Are Non-Essential.";
+char* bagUpgradeInfo = "[CLUM_SET:15]Bag Upgrade [value:0:1]: [string:0]";
 char* beachCaveExtras = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
                         "[CLUM_SET:15][CS:C]After Completing[CR]:\n"
                         "[CLUM_SET:15]Bag Upgrade 0: [string:0]\n"
                         "[CLUM_SET:15]Team Name: [string:1]\n";
 char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
-char* steamCaveExtra = "[CLUM_SET:15]Bag Upgrade 3: [string:0]";
 char* skyPeakEightExtra = "[CLUM_SET:128]Sneasel's Gratitude: [string:0]";
 char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
-char* bossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
-                 "[CLUM_SET:128][string:0]'s Gift: [string:1]";
-char* treasureBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
-                         "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
-                         "[CLUM_SET:128][string:2]: [string:3]";
-char* aegisBossInfo = "[CLUM_SET:128]Boss: [CS:N][string:0][CR]\n"
-                      "[CLUM_SET:128][string:0]'s Gift: [string:1]\n"
-                      "[CLUM_SET:128]Boss: [CS:N][string:2][CR]\n"
-                      "[CLUM_SET:128][string:2]'s Gift: [string:3]";
+char* bossInfo = "[CLUM_SET:128]Boss: [kind:0]";
+char* bossDuoInfo = "[CLUM_SET:128]Boss: [kind:0] & [kind:1]";
+char* giftBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
+                     "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
+char* treasureBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
+                         "[CLUM_SET:128][kind:0]'s Gift: [string:0]\n"
+                         "[CLUM_SET:128][string:1]: [string:2]";
+char* giftInfo = "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
 char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
 char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
 char* cafeInfo1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
@@ -875,9 +874,9 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
         case DUNGEON_TEMPORAL_TOWER:;
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
-                preArgs.strings[0] = "Dialga";
-                preArgs.strings[1] = (GetSubXBit(28)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                preArgs.flag_vals[0] = MONSTER_DIALGA;
+                preArgs.strings[0] = (GetSubXBit(28)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
                 break;
             }
@@ -908,14 +907,20 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             // Needs to show Boss Zubat & Koffing
             break;
         case DUNGEON_MT_BRISTLE:;
-            preArgs.strings[0] = "Drowzee";
-            preArgs.strings[1] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            preArgs.flag_vals[0] = MONSTER_DROWZEE;
+            preArgs.strings[0] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
+            PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            // Needs the Mt. Bristle bag upgrade!
+            preArgs.strings[0] = (GetSubXBit(1)) ? bagSymbol : lockedSymbol;
+            preArgs.number_vals[0] = 2; // Upgrade 2
+            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
             break;
         case DUNGEON_APPLE_WOODS:;
-            // Needs bag upgrade!
+            preArgs.strings[0] = (GetSubXBit(2)) ? bagSymbol : lockedSymbol;
+            preArgs.number_vals[0] = 3; // Upgrade 3
+            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
             break;
         case DUNGEON_CRAGGY_COAST:;
         case DUNGEON_SIDE_PATH:;
@@ -926,151 +931,163 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             break;
         case DUNGEON_STEAM_CAVE:;
+            preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
+            preArgs.number_vals[0] = 4; // Upgrade 4
+            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            preArgs.flag_vals[0] = MONSTER_GROUDON;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
-                PreprocessString(temp, 300, steamCaveExtra, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 81, temp);
-                // First time boss is Groudon, Uxie is only post-secret rank...
-                if(GetDungeonMode(location) == DMODE_OPEN) {
-                    preArgs.strings[0] = "Groudon"; 
-                } else {
-                    preArgs.strings[0] = "Uxie";
-                }
-                // Wrong bag upgrade apparently?
-                preArgs.strings[1] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                preArgs.flag_vals[0] = MONSTER_UXIE;
+                preArgs.strings[0] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 42, temp);
             }
             break;
         case DUNGEON_QUICKSAND_CAVE:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Mesprit";
-                preArgs.strings[1] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                preArgs.flag_vals[0] = MONSTER_MESPRIT;
+                preArgs.strings[0] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
+            break;
         case DUNGEON_CRYSTAL_CROSSING:;
+            preArgs.flag_vals[0] = MONSTER_GROVYLE;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
             if(IsDarkraiGoal()) {
-                 // First time boss is Grovyle, Azelf is only post-secret rank...
-                if(GetDungeonMode(location) == DMODE_OPEN) {
-                    preArgs.strings[0] = "Grovyle"; 
-                } else {
-                    preArgs.strings[0] = "Azelf";
-                }
-                preArgs.strings[1] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                preArgs.flag_vals[0] = MONSTER_AZELF;
+                preArgs.strings[0] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 42, temp);
             }
             break;
         case DUNGEON_SEALED_RUIN:;
-            // Boss Spiritomb
+            preArgs.flag_vals[0] = MONSTER_SPIRITOMB;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
             break;
         case DUNGEON_MIRACLE_SEA:;
+            preArgs.flag_vals[0] = MONSTER_GYARADOS;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Gyarados"; // First time boss is Gyarados, Phione doesn't actually fight you...
-                preArgs.strings[1] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                preArgs.flag_vals[0] = MONSTER_PHIONE;
+                preArgs.strings[0] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftInfo, preFlags, &preArgs);
+                DrawTextInWindow(idx, 1, 29, temp);
             }
             break;
         case DUNGEON_SPACIAL_RIFT:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Palkia";
-                preArgs.strings[1] = (GetSubXBit(30)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                preArgs.flag_vals[0] = MONSTER_PALKIA;
+                preArgs.strings[0] = (GetSubXBit(30)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Muk & Grimer"; // You don't ever fight Shaymin. Summit has Muk and Grimer if uncleared?
-                preArgs.strings[1] = (GetSubXBit(46)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+                preArgs.flag_vals[0] = MONSTER_MUK;
+                preArgs.flag_vals[1] = MONSTER_GRIMER;
+                preArgs.strings[0] = (GetSubXBit(46)) ? completeSymbol : lockedSymbol;
+                PreprocessString(temp, 300, bossDuoInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
+        case DUNGEON_MYSTIFYING_FOREST:;
+            preArgs.strings[0] = (GetSubXBit(4)) ? bagSymbol : lockedSymbol;
+            preArgs.number_vals[0] = 5; // Upgrade 5
+            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 81, temp);
+            break;
         case DUNGEON_CREVICE_CAVE:;
-            if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Froslass"; // Froslass is the boss here. 
-                preArgs.strings[1] = (GetSubXBit(47)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
-            }
+            preArgs.flag_vals[0] = MONSTER_FROSLASS;
+            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 16, temp);
+            preArgs.flag_vals[0] = MONSTER_SCIZOR;
+            preArgs.strings[0] = (GetSubXBit(47)) ? completeSymbol : lockedSymbol;
+            PreprocessString(temp, 300, giftInfo, preFlags, &preArgs);
+            DrawTextInWindow(idx, 1, 29, temp);
             break;
         case DUNGEON_BOTTOMLESS_SEA:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Kyogre";
-                preArgs.strings[1] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Aqua-Monica";
-                preArgs.strings[3] = (GetSubXBit(31)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_KYOGRE;
+                preArgs.strings[0] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Aqua-Monica";
+                preArgs.strings[2] = (GetSubXBit(31)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_SHIMMER_DESERT:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Groudon";
-                preArgs.strings[1] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Terra Cymbal";
-                preArgs.strings[3] = (GetSubXBit(33)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_GROUDON;
+                preArgs.strings[0] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Terra Cymbal";
+                preArgs.strings[2] = (GetSubXBit(33)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_MT_AVALANCHE:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Articuno";
-                preArgs.strings[1] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Icy Flute";
-                preArgs.strings[3] = (GetSubXBit(35)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_ARTICUNO;
+                preArgs.strings[0] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Icy Flute";
+                preArgs.strings[2] = (GetSubXBit(35)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_GIANT_VOLCANO:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Heatran";
-                preArgs.strings[1] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Fiery Drum";
-                preArgs.strings[3] = (GetSubXBit(37)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_HEATRAN;
+                preArgs.strings[0] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Fiery Drum";
+                preArgs.strings[2] = (GetSubXBit(37)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_WORLD_ABYSS:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Giratina";
-                preArgs.strings[1] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Rock Horn";
-                preArgs.strings[3] = (GetSubXBit(40)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_GIRATINA_ALTERED;
+                preArgs.strings[0] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Rock Horn";
+                preArgs.strings[2] = (GetSubXBit(40)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_SKY_STAIRWAY:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Rayquaza";
-                preArgs.strings[1] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Sky Melodica";
-                preArgs.strings[3] = (GetSubXBit(42)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_RAYQUAZA;
+                preArgs.strings[0] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Sky Melodica";
+                preArgs.strings[2] = (GetSubXBit(42)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_MYSTERY_JUNGLE:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Mew";
-                preArgs.strings[1] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Grass Cornet";
-                preArgs.strings[3] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
+                preArgs.flag_vals[0] = MONSTER_MEW;
+                preArgs.strings[0] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
+                preArgs.strings[1] = "Grass Cornet";
+                preArgs.strings[2] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
         case DUNGEON_ICE_AEGIS_CAVE:;
             if(IsDarkraiGoal()) {
-                preArgs.strings[0] = "Regice";
+                // TODO: Update to new format.
+                // TODO: Make this tab use the string "Aegis Cave" instead of "Ice Aegis Cave"
+                /*preArgs.strings[0] = "Regice";
                 preArgs.strings[1] = (GetSubXBit(69)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[2] = "Regirock";
                 preArgs.strings[3] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
@@ -1081,7 +1098,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[2] = "Regigigas";
                 preArgs.strings[3] = (GetSubXBit(71)) ? completeSymbol : lockedSymbol;
                 PreprocessString(temp, 300, aegisBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 68, temp);
+                DrawTextInWindow(idx, 1, 68, temp); */
             } else {
                 PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
                 DrawTextInWindow(idx, 1, 138, temp);
@@ -1251,7 +1268,15 @@ uint32_t StateManagerTrackerTopScreen() {
                     updaterDelay = 0;
                 } else {
                     uint8_t location = CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
-                    if(location == DUNGEON_DARK_CRATER || location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
+                    bool shouldSpinTracker = location == DUNGEON_DARK_CRATER;
+                    if(location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
+                        if(IsDarkraiGoal()) { // If Darkrai is Goal, only spin while not completed yet.
+                            shouldSpinTracker = GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST;
+                        } else { // If Dialga is Goal, always spin tracker.
+                            shouldSpinTracker = true;
+                        }
+                    }
+                    if(shouldSpinTracker) {
                         trackerRotate += 1 + (trackerVelocity >> 5);
                         if (trackerVelocity > 0) {
                             trackerVelocity--;
@@ -1429,7 +1454,16 @@ void CreateTrackerTopScreenDungeon() {
 }
 
 uint32_t UpdateTrackerTopScreenDungeon() {
-    if(dungeonModeDisplayed == DUNGEON_DARK_CRATER || dungeonModeDisplayed == DUNGEON_HIDDEN_LAND) {
+    uint8_t location = CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+    bool shouldSpinTracker = location == DUNGEON_DARK_CRATER;
+    if(location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
+        if(IsDarkraiGoal()) { // If Darkrai is Goal, only spin while not completed yet.
+            shouldSpinTracker = GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST;
+        } else { // If Dialga is Goal, always spin tracker.
+            shouldSpinTracker = true;
+        }
+    }
+    if(shouldSpinTracker) {
         trackerRotate += 1 + (trackerVelocity >> 5);
         if (trackerVelocity > 0) {
             trackerVelocity--;
