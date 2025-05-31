@@ -3,6 +3,8 @@
 #include <ap_utils.h>
 #include "extern.h"
 
+#define TR_BUFF_LEN 300
+
 typedef struct TopScreenApTrackerWindow {
     uint8_t field_0x0; // 0x0: Maybe related to if the background is loaded?
     uint8_t padding1;
@@ -290,6 +292,7 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
     return true;
 }
 
+// Various strings for subbing in symbols in the ap tracker.
 char* townSymbol = "[M:S7][S:8]";
 char* lockedSymbol = "[M:S4][S:8]";
 char* completeSymbol = "[M:S3][S:8]";
@@ -312,55 +315,55 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     } else if(location == 255) {
         preArgs.strings[1] = "[CS:P]Spinda's Cafe[CR]";
         preArgs.strings[0] = townSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 254) {
         preArgs.strings[1] = "[CS:P]Wigglytuff Guild[CR]";
         preArgs.strings[0] = townSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 180) {
         preArgs.strings[1] = "[CS:P]Marowak Dojo[CR]";
         preArgs.strings[0] = townSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 252) {
         preArgs.strings[1] = "[CS:P]Bidoof's SE[CR]";
         preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 0) ? completeSymbol : 
                              LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 0) ? unlockedSymbol : lockedSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 251) {
         preArgs.strings[1] = "[CS:P]Igglybuff's SE[CR]";
         preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 1) ? completeSymbol : 
                              LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 1) ? unlockedSymbol : lockedSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 250) {
         preArgs.strings[1] = "[CS:P]Sunflora's SE[CR]";
         preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 2) ? completeSymbol : 
                              LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 2) ? unlockedSymbol : lockedSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 249) {
         preArgs.strings[1] = "[CS:P]Team Charm SE[CR]";
         preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 3) ? completeSymbol : 
                              LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 3) ? unlockedSymbol : lockedSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == 248) {
         preArgs.strings[1] = "[CS:P]Future SE[CR]";
         preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_CONQUEST, 4) ? completeSymbol : 
                              LoadScriptVariableValueAtIndex(NULL, VAR_SPECIAL_EPISODE_OPEN, 4) ? unlockedSymbol : lockedSymbol;
-        struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlags, &preArgs);
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         enum dungeon_mode dmode = GetDungeonMode(location);
@@ -413,12 +416,13 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
     preArgs.id_vals[0] = trackerLocationDungeonIds[option_id];
     preArgs.strings[0] = locationSymbol;
     
-    struct preprocessor_flags preFlags = {.timer_1 = true, .flags_1 = 0x6A};
-    PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][dungeon:0]", preFlags, &preArgs);
+    struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+    PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][dungeon:0]", preFlagTracker, &preArgs);
 
     return buffer;
 }
 
+// Utility function to handle drawing circular progression bars in the tracker box.
 void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int centerY, uint32_t toGet, uint32_t gotten, char* strLock, char* strUnlocked, int rotation) {
     if (toGet == 0) {
         return;
@@ -438,20 +442,29 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
 }
 
 // TODO: Move into a text file or the text strings file.
-char* genericDungeon = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
-                       "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
-                       "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
-char* shopItemString1 = "[CLUM_SET:132]Shop Item 1: [CLUM_SET:202][string:0]\n"
+// Town Checks
+char* shopItemChecks1 = "[CLUM_SET:132]Shop Item 1: [CLUM_SET:202][string:0]\n"
                         "[CLUM_SET:132]Shop Item 2: [CLUM_SET:202][string:1]\n"
                         "[CLUM_SET:132]Shop Item 3: [CLUM_SET:202][string:2]\n"
                         "[CLUM_SET:132]Shop Item 4: [CLUM_SET:202][string:3]\n"
                         "[CLUM_SET:132]Shop Item 5: [CLUM_SET:202][string:4]\n";
-char* shopItemString2 = "[CLUM_SET:132]Shop Item 6: [CLUM_SET:202][string:0]\n"
+char* shopItemChecks2 = "[CLUM_SET:132]Shop Item 6: [CLUM_SET:202][string:0]\n"
                         "[CLUM_SET:132]Shop Item 7: [CLUM_SET:202][string:1]\n"
                         "[CLUM_SET:132]Shop Item 8: [CLUM_SET:202][string:2]\n"
                         "[CLUM_SET:132]Shop Item 9: [CLUM_SET:202][string:3]\n"
-                        "[CLUM_SET:132]Shop Item 10: [CLUM_SET:199][string:4]";
-char* specialEpisodeString = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
+                        "[CLUM_SET:132]Shop Item 10: [CLUM_SET:202][string:4]";  
+char* townBankChecks1 = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
+                        "[CLUM_SET:13]100G: [string:0]\n"
+                        "[CLUM_SET:15]5000G: [string:1]\n"
+                        "[CLUM_SET:13]10000G: [string:2]\n"
+                        "[CLUM_SET:15]20000G: [string:3]\n";
+char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
+                        "[CLUM_SET:13]100000G: [string:1]\n"
+                        "[CLUM_SET:15]9999999G: [string:2]\n";
+char* townBankCheckNotice = "[CLUM_SET:15]Checks Above 20000G\n"
+                            "[CLUM_SET:15]Are Non-Essential.";
+// Guild Checks
+char* specialEpisodeChecks = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
                              "[CLUM_SET:95]Igglybuff's SE Location: [string:1]\n"
                              "[CLUM_SET:95]Sunflora's SE Location: [string:2]\n"
                              "[CLUM_SET:95]Team Charm SE Location: [string:3]";
@@ -467,36 +480,9 @@ char* rankChecks2 = "[CLUM_SET:15]Ultra Rank: [string:0]\n"
                     "[CLUM_SET:15]Master[M:S3][M:S3] Rank: [string:4]\n";
 char* rankChecks3 = "[CLUM_SET:110]Master[M:S3][M:S3][M:S3] Rank: [string:0]\n"
                     "[CLUM_SET:110]Guildmaster Rank: [string:1]\n";
-char* guildExtraInfo = "[CLUM_SET:110]Ranks Above Master\n"
-                       "[CLUM_SET:110]Are Non-Essential";
-char* townBankChecks1 = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
-                        "[CLUM_SET:13]100G: [string:0]\n"
-                        "[CLUM_SET:15]5000G: [string:1]\n"
-                        "[CLUM_SET:13]10000G: [string:2]\n"
-                        "[CLUM_SET:15]20000G: [string:3]\n";
-char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
-                        "[CLUM_SET:13]100000G: [string:1]\n"
-                        "[CLUM_SET:15]9999999G: [string:2]\n"
-                        "[CLUM_SET:15]Checks Above 20000G\n"
-                        "[CLUM_SET:15]Are Non-Essential.";
-char* bagUpgradeInfo = "[CLUM_SET:15]Bag Upgrade [value:0:1]: [string:0]";
-char* beachCaveExtras = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
-                        "[CLUM_SET:15][CS:C]After Completing[CR]:\n"
-                        "[CLUM_SET:15]Bag Upgrade 0: [string:0]\n"
-                        "[CLUM_SET:15]Team Name: [string:1]\n";
-char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
-char* skyPeakEightExtra = "[CLUM_SET:128]Sneasel's Gratitude: [string:0]";
-char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
-char* bossInfo = "[CLUM_SET:128]Boss: [kind:0]";
-char* bossDuoInfo = "[CLUM_SET:128]Boss: [kind:0] & [kind:1]";
-char* giftBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
-                     "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
-char* treasureBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
-                         "[CLUM_SET:128][kind:0]'s Gift: [string:0]\n"
-                         "[CLUM_SET:128][string:1]: [string:2]";
-char* giftInfo = "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
-char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
-char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
+char* rankChecksNotice = "[CLUM_SET:110]Ranks Above Master\n"
+                         "[CLUM_SET:110]Are Non-Essential";
+// Cafe Checks
 char* cafeInfo1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
                   "[CLUM_SET:15]Terra Cymbal Mission: [string:1]\n"
                   "[CLUM_SET:15]Icy Flute Mission: [string:2]\n"
@@ -508,6 +494,7 @@ char* cafeInfo2 = "[CLUM_SET:15]Sky Melodica Mission: [string:0]\n"
                   "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
                   "[CLUM_SET:15]Recycle Shop Dungeons:\n"
                   "[CLUM_SET:15]";
+// Dojo Checks
 char* dojoInfo1 = "[CLUM_SET:15][CS:P]Normal/Fly Maze[CR]: [string:0]\n"
                   "[CLUM_SET:15][CS:P]Dark/Fire Maze[CR]: [string:1]\n"
                   "[CLUM_SET:15][CS:P]Rock/Water Maze[CR]: [string:2]\n"
@@ -519,6 +506,29 @@ char* dojoInfo2 = "[CLUM_SET:15][CS:P]Ice/Ground Maze[CR]: [string:0]\n"
                   "[CLUM_SET:15][CS:P]Dragon Maze[CR]: [string:3]\n"
                   "[CLUM_SET:15][CS:P]Ghost Maze[CR]: [string:4]\n"
                   "[CLUM_SET:15][CS:P]Final Maze[CR]: ";
+// Dungeon Related Checks
+char* missionDungeonChecks = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
+                             "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
+                             "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
+char* simpleDungeonCheck = "[CLUM_SET:[value:0:1]][dungeon:0]: [string:0]";
+char* bagUpgradeCheck = "[CLUM_SET:15]Bag Upgrade [value:0:1]: [string:0]";
+char* beachCaveExtras = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
+                        "[CLUM_SET:15][CS:C]After Completing[CR]:\n"
+                        "[CLUM_SET:15]Team Name: [string:0]\n";
+char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
+char* skyPeakEightExtra = "[CLUM_SET:128]Sneasel's Gratitude: [string:0]";
+char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
+char* bossInfo = "[CLUM_SET:128]Boss: [kind:0]";
+char* duoBossInfo = "[CLUM_SET:128]Boss: [kind:0] & [kind:1]";
+char* treasureBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
+                         "[CLUM_SET:128][kind:0]'s Gift: [string:0]\n"
+                         "[CLUM_SET:128][string:1]: [string:2]";
+char* giftCheck = "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
+char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
+char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
+char* escortDungeonInfo = "[CLUM_SET:15]Escort: [kind:0]";
+
+// Special Episode Check
 char* bidoofDungeonChecks = "[CLUM_SET:15][CS:P]SE Marowak Dojo's Revival[CR]: [string:0]\n"
                             "[CLUM_SET:15][CS:P]SE Deep Star Cave[CR]: [string:1]\n"
                             "[CLUM_SET:15][CS:P]SE Star Cave Pit[CR]: [string:2]";
@@ -556,29 +566,54 @@ char* bidoSunfGuildChecks = "[CLUM_SET:15]Bidoof's SE Location: [string:0]\n"
                             "[CLUM_SET:15]during this Special Episode!";
 char* fractionString = "[value:0:1]/[value:1:1]";
 struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, .width = 0x1C, .height = 0x14, .screen = {.val = SCREEN_SUB}, .box_type = {.val = 0xFF}};
+struct preprocessor_args preArgs = {};
+struct preprocessor_flags preFlagTracker = {};
+
+
+// Utility function to streamline displaying gift information.
+void DrawGiftCheckInWindow(int idx, int y, char* buffer, enum monster_id monster_id, bool giftGiven) {
+    preArgs.flag_vals[0] = monster_id;
+    preArgs.strings[0] = giftGiven ? completeSymbol : lockedSymbol;
+    PreprocessString(buffer, TR_BUFF_LEN, giftCheck, preFlagTracker, &preArgs);
+    DrawTextInWindow(idx, 1, y, buffer);
+}
+
+// Utility functon to streamline displaying boss information with optional gift.
+void DrawBossInfoInWindow(int idx, int y, char* buffer, enum monster_id boss0, enum monster_id boss1, bool hasGift, bool giftGiven) {
+    preArgs.flag_vals[0] = boss0;
+    preArgs.flag_vals[1] = boss1;
+    PreprocessString(buffer, TR_BUFF_LEN, (boss1 == MONSTER_NONE || hasGift) ? bossInfo : duoBossInfo, preFlagTracker, &preArgs);
+    DrawTextInWindow(idx, 1, y, buffer);
+    
+    if(hasGift == false) {
+        return;
+    }
+    
+    DrawGiftCheckInWindow(idx, y + 13, buffer, boss0, giftGiven);
+}
+
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     ClearWindow(idx);
-    char temp[300];
-    struct preprocessor_args preArgs = {.id_vals[0] = location};
-    struct preprocessor_flags preFlags = {};
+    char temp[TR_BUFF_LEN];
     if(location == 255) {
-        strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", TR_BUFF_LEN);
     } else if (location == 254) {
-        strncpy(temp, "Tracker: [CS:P]Wigglytuff Guild[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Wigglytuff Guild[CR]", TR_BUFF_LEN);
     } else if (location == 180) {
-        strncpy(temp, "Tracker: [CS:P]Marowak Dojo[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Marowak Dojo[CR]", TR_BUFF_LEN);
     } else if (location == 252) {
-        strncpy(temp, "Tracker: [CS:P]Bidoof's Wish[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Bidoof's Wish[CR]", TR_BUFF_LEN);
     } else if (location == 251) {
-        strncpy(temp, "Tracker: [CS:P]Igglybuff The Prodigy[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Igglybuff The Prodigy[CR]", TR_BUFF_LEN);
     } else if (location == 250) {
-        strncpy(temp, "Tracker: [CS:P]Today's \"Oh My Gosh\"[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Today's \"Oh My Gosh\"[CR]", TR_BUFF_LEN);
     } else if (location == 249) {
-        strncpy(temp, "Tracker: [CS:P]Here Comes Team Charm[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]Here Comes Team Charm[CR]", TR_BUFF_LEN);
     } else if (location == 248) {
-        strncpy(temp, "Tracker: [CS:P]In The Future of Darkness[CR]", 300);
+        strncpy(temp, "Tracker: [CS:P]In The Future of Darkness[CR]", TR_BUFF_LEN);
     } else {
-        PreprocessString(temp, 300, "Tracker: [dungeon:0]", preFlags, &preArgs);
+        preArgs.id_vals[0] = location;
+        PreprocessString(temp, TR_BUFF_LEN, "Tracker: [dungeon:0]", preFlagTracker, &preArgs);
     }
     DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 2, temp);
     
@@ -589,26 +624,26 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, shopItemChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             
             preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
-            PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, townBankChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
-            PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, townBankChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
@@ -618,26 +653,28 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(75)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(76)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(77)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, rankChecks1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, rankChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(78)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(79)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(80)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(55)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(56)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, rankChecks2, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, rankChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             preArgs.strings[0] = (GetSubXBit(57)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(58)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, rankChecks3, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, rankChecks3, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, specialEpisodeString, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, specialEpisodeChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 68, temp);
-            DrawTextInWindow(idx, 1, 133, guildExtraInfo);
+            if(!apSettings.longLocationsOn) {
+                DrawTextInWindow(idx, 1, 133, rankChecksNotice);
+            }
             UpdateWindow(idx);
             return;
         case 180:; // Dojo
@@ -646,15 +683,15 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 182)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 183)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 184)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, dojoInfo1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, dojoInfo1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 185)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 186)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 187)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 188)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 189)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, dojoInfo2, preFlags, &preArgs);
-            strncat(temp, (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol, 300);
+            PreprocessString(temp, TR_BUFF_LEN, dojoInfo2, preFlagTracker, &preArgs);
+            strncat(temp, (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
@@ -666,19 +703,19 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(50)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(51)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(52)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, cafeInfo1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, cafeInfo1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(53)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(54)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, cafeInfo2, preFlags, &preArgs);
-            strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
-            strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
-            strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+            PreprocessString(temp, TR_BUFF_LEN, cafeInfo2, preFlagTracker, &preArgs);
+            strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+            strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+            strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
             if (IsDarkraiGoal()) {
-                strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
-                strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+                strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
             }
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
@@ -687,7 +724,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[0] = GetSubXBit(66) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(DUNGEON_DEEP_STAR_CAVE) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(DUNGEON_STAR_CAVE_PIT) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, bidoofDungeonChecks, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, bidoofDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
                 case 323:; // Likely because our pmdsky-debug is outdated. The value for T01P01A/T01P02A
@@ -697,25 +734,25 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, shopItemChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 29, temp);
                     preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 94, temp);
                     preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
-                    PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, townBankChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
-                    PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, townBankChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 120, temp);
                     break;
                 case LEVEL_P01P04A:;
@@ -723,19 +760,19 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[1] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
                     preArgs.number_vals[1] = apSettings.cafeDrinkMax;
                     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
                     preArgs.number_vals[3] = apSettings.cafeEventMax;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks2, preFlags, &preArgs);
-                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
-                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
-                    strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks2, preFlagTracker, &preArgs);
+                    strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     if (IsDarkraiGoal()) {
-                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
-                        strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+                        strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     }
                     DrawTextInWindow(idx, 1, 107, temp);
                     break;
@@ -751,7 +788,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 case LEVEL_G01P10A:;
                     preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, bidoSunfGuildChecks, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfGuildChecks, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 64, temp);
                     break;
                 default:;
@@ -763,7 +800,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[0] = GetDungeonMode(128) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(129) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(130) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, iggybuffDungeonChecks, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, iggybuffDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
@@ -771,7 +808,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[0] = GetDungeonMode(159) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(161) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(164) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, sunfloraDungeonChecks, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, sunfloraDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
                 case 323:; // Likely because our pmdsky-debug is outdated. The value for T01P01A/T01P02A
@@ -781,25 +818,25 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(13)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(14)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, shopItemString1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, shopItemChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 29, temp);
                     preArgs.strings[0] = (GetSubXBit(15)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(16)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(17)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(18)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, shopItemString2, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 94, temp);
                     preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(84)) ? moneySymbol : lockedSymbol;
-                    PreprocessString(temp, 300, townBankChecks1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, townBankChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.strings[0] = (GetSubXBit(85)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(86)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
-                    PreprocessString(temp, 300, townBankChecks2, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, townBankChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 120, temp);
                     break;
                 case LEVEL_P01P04A:;
@@ -807,19 +844,19 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[1] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks1, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
                     preArgs.number_vals[1] = apSettings.cafeDrinkMax;
                     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
                     preArgs.number_vals[3] = apSettings.cafeEventMax;
-                    PreprocessString(temp, 300, bidoSunfCafeChecks2, preFlags, &preArgs);
-                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, 300);
-                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, 300);
-                    strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, 300);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks2, preFlagTracker, &preArgs);
+                    strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                    strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                    strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     if (IsDarkraiGoal()) {
-                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, 300);
-                        strncat(temp, (GetSubXBit(65)) ? checkSymbol : lockedSymbol, 300);
+                        strncat(temp, (GetSubXBit(63)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
+                        strncat(temp, (GetSubXBit(64)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     }
                     DrawTextInWindow(idx, 1, 107, temp);
                     break;
@@ -835,7 +872,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 case LEVEL_G01P10A:;
                     preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
-                    PreprocessString(temp, 300, bidoSunfGuildChecks, preFlags, &preArgs);
+                    PreprocessString(temp, TR_BUFF_LEN, bidoSunfGuildChecks, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 64, temp);
                     break;
                 default:;
@@ -849,7 +886,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = GetDungeonMode(153) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = GetDungeonMode(154) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(155) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, charmDungeonChecks, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, charmDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
@@ -859,31 +896,33 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = GetDungeonMode(137) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = GetDungeonMode(139) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(141) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, susknoirDungeonChecks1, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = GetDungeonMode(142) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = GetDungeonMode(145) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = GetDungeonMode(146) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, susknoirDungeonChecks2, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
             return;
-        case DUNGEON_HIDDEN_LAND:; // Dusknoir is a boss here, iirc. 
+        case DUNGEON_HIDDEN_LAND:;
+            // Note: Dusknoir is a boss here. I am not sure where to put it while the tracker is still
+            // in spinning mode (before you would fight Dusknoir). After the dungeon is completed I'll
+            // add that information; however it's not relevant anymore then. Feel free to change this
+            // should you find a better arrangement.
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
+                DrawBossInfoInWindow(idx, 16, temp, MONSTER_DUSKNOIR, MONSTER_NONE, false, false);
                 break;
             }
         case DUNGEON_TEMPORAL_TOWER:;
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_DIALGA;
-                preArgs.strings[0] = (GetSubXBit(28)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawBossInfoInWindow(idx, 16, temp, MONSTER_DIALGA, MONSTER_NONE, true, GetSubXBit(28));
                 break;
             }
             DrawCircleBarInTextBox(idx, 60, 112, 84, apSettings.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
             preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
             preArgs.number_vals[1] = apSettings.requiredRelicFragmentShards;
-            PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, fractionString, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
             UpdateWindow(idx);
             return;
@@ -892,126 +931,116 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
                 preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
                 preArgs.number_vals[1] = apSettings.requiredInstruments;
-                PreprocessString(temp, 300, fractionString, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, fractionString, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
                 UpdateWindow(idx);
                 return;
             }
             break;
         case DUNGEON_BEACH_CAVE:;
-            preArgs.strings[0] = (GetSubXBit(0)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, 300, beachCaveExtras, preFlags, &preArgs);
+            // Team Name Check
+            preArgs.strings[0] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
+            PreprocessString(temp, TR_BUFF_LEN, beachCaveExtras, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
+            // Bag Upgrade (0) Check
+            preArgs.number_vals[0] = 1;
+            preArgs.strings[0] = (GetSubXBit(0)) ? bagSymbol : lockedSymbol;
+            PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
+            DrawTextInWindow(idx, 1, 120, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_ZUBAT, MONSTER_KOFFING, false, false);
+            // Extra Information
             DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
-            // Needs to show Boss Zubat & Koffing
             break;
         case DUNGEON_MT_BRISTLE:;
-            preArgs.flag_vals[0] = MONSTER_DROWZEE;
-            preArgs.strings[0] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
-            PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
+            // Bag Upgrade (1) Check
             preArgs.strings[0] = (GetSubXBit(1)) ? bagSymbol : lockedSymbol;
-            preArgs.number_vals[0] = 2; // Upgrade 2
-            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            preArgs.number_vals[0] = 2;
+            PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_DROWZEE, MONSTER_NONE, false, false);
             break;
         case DUNGEON_APPLE_WOODS:;
+            // Bag Upgrade (2) Check
             preArgs.strings[0] = (GetSubXBit(2)) ? bagSymbol : lockedSymbol;
-            preArgs.number_vals[0] = 3; // Upgrade 3
-            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            preArgs.number_vals[0] = 3;
+            PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             break;
         case DUNGEON_CRAGGY_COAST:;
         case DUNGEON_SIDE_PATH:;
         case DUNGEON_MT_HORN:;
         case DUNGEON_ROCK_PATH:;
+            // Escort Information
             if(GetDungeonMode(location) == DMODE_OPEN) {
-                // Escort: Bidoof
+                preArgs.id_vals[0] = MONSTER_BIDOOF;
+                PreprocessString(temp, TR_BUFF_LEN, escortDungeonInfo, preFlagTracker, &preArgs);
+                DrawTextInWindow(idx, 1, 138, temp);
             }
             break;
         case DUNGEON_STEAM_CAVE:;
+            // Bag Upgrade (3) Check
             preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
-            preArgs.number_vals[0] = 4; // Upgrade 4
-            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            preArgs.number_vals[0] = 4;
+            PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
-            preArgs.flag_vals[0] = MONSTER_GROUDON;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GROUDON, MONSTER_NONE, false, false);
+            // Boss 2/Gift Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_UXIE;
-                preArgs.strings[0] = (GetSubXBit(25)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 42, temp);
+                DrawBossInfoInWindow(idx, 42, temp, MONSTER_UXIE, MONSTER_NONE, true, GetSubXBit(25));
             }
             break;
         case DUNGEON_QUICKSAND_CAVE:;
-            if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_MESPRIT;
-                preArgs.strings[0] = (GetSubXBit(26)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
-            }
-            break;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_MESPRIT, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(26));
             break;
         case DUNGEON_CRYSTAL_CROSSING:;
-            preArgs.flag_vals[0] = MONSTER_GROVYLE;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GROVYLE, MONSTER_NONE, false, false);
+            // Boss 2/Gift Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_AZELF;
-                preArgs.strings[0] = (GetSubXBit(27)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 42, temp);
+                DrawBossInfoInWindow(idx, 42, temp, MONSTER_AZELF, MONSTER_NONE, true, GetSubXBit(27));
             }
             break;
         case DUNGEON_SEALED_RUIN:;
-            preArgs.flag_vals[0] = MONSTER_SPIRITOMB;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_SPIRITOMB, MONSTER_NONE, false, false);
             break;
         case DUNGEON_MIRACLE_SEA:;
-            preArgs.flag_vals[0] = MONSTER_GYARADOS;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GYARADOS, MONSTER_NONE, false, false);
+            // Gift Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_PHIONE;
-                preArgs.strings[0] = (GetSubXBit(29)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 29, temp);
+                DrawGiftCheckInWindow(idx, 42, temp, MONSTER_PHIONE, GetSubXBit(29));
             }
             break;
         case DUNGEON_SPACIAL_RIFT:;
-            if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_PALKIA;
-                preArgs.strings[0] = (GetSubXBit(30)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, giftBossInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
-            }
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_PALKIA, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(30));
             break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_MUK, MONSTER_GRIMER, false, false);
+            // Gift Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_MUK;
-                preArgs.flag_vals[1] = MONSTER_GRIMER;
-                preArgs.strings[0] = (GetSubXBit(46)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, bossDuoInfo, preFlags, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawGiftCheckInWindow(idx, 42, temp, MONSTER_SHAYMIN_LAND, GetSubXBit(46));
             }
             break;
         case DUNGEON_MYSTIFYING_FOREST:;
             preArgs.strings[0] = (GetSubXBit(4)) ? bagSymbol : lockedSymbol;
             preArgs.number_vals[0] = 5; // Upgrade 5
-            PreprocessString(temp, 300, bagUpgradeInfo, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             break;
         case DUNGEON_CREVICE_CAVE:;
-            preArgs.flag_vals[0] = MONSTER_FROSLASS;
-            PreprocessString(temp, 300, bossInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.flag_vals[0] = MONSTER_SCIZOR;
-            preArgs.strings[0] = (GetSubXBit(47)) ? completeSymbol : lockedSymbol;
-            PreprocessString(temp, 300, giftInfo, preFlags, &preArgs);
-            DrawTextInWindow(idx, 1, 29, temp);
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_FROSLASS, MONSTER_NONE, false, false);
+            // Gift Information
+            if(IsDarkraiGoal()) {
+                DrawGiftCheckInWindow(idx, 42, temp, MONSTER_SCIZOR, GetSubXBit(47));
+            }
             break;
         case DUNGEON_BOTTOMLESS_SEA:;
             if(IsDarkraiGoal()) {
@@ -1019,7 +1048,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Aqua-Monica";
                 preArgs.strings[2] = (GetSubXBit(31)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1029,7 +1058,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Terra Cymbal";
                 preArgs.strings[2] = (GetSubXBit(33)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1039,7 +1068,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Icy Flute";
                 preArgs.strings[2] = (GetSubXBit(35)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1049,7 +1078,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Fiery Drum";
                 preArgs.strings[2] = (GetSubXBit(37)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1059,7 +1088,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Rock Horn";
                 preArgs.strings[2] = (GetSubXBit(40)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1069,7 +1098,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Sky Melodica";
                 preArgs.strings[2] = (GetSubXBit(42)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1079,7 +1108,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[0] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[1] = "Grass Cornet";
                 preArgs.strings[2] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, treasureBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
             }
             break;
@@ -1091,16 +1120,16 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.strings[1] = (GetSubXBit(69)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[2] = "Regirock";
                 preArgs.strings[3] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, aegisBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, aegisBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
                 preArgs.strings[0] = "Registeel";
                 preArgs.strings[1] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
                 preArgs.strings[2] = "Regigigas";
                 preArgs.strings[3] = (GetSubXBit(71)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, 300, aegisBossInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, aegisBossInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 68, temp); */
             } else {
-                PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 138, temp);
             }
             break;
@@ -1116,7 +1145,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case DCT_LATE:;
             preArgs.number_vals[1] = apSettings.totalJobsLate;
             preArgs.number_vals[3] = apSettings.totalOutlawsLate;
-            PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, missionDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             if(!IsDarkraiGoal()) {
                 DrawTextInWindow(idx, 1, 138, nonEssentialExtraInfo);
@@ -1125,21 +1154,21 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case DCT_EARLY:;
             preArgs.number_vals[1] = apSettings.totalJobsEarly;
             preArgs.number_vals[3] = apSettings.totalOutlawsEarly;
-            PreprocessString(temp, 300, genericDungeon, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, missionDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             break;
         case DCT_RULE:;
             if(AreLongLocationsOn()) {
-                PreprocessString(temp, 300, ruleDungeonInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, ruleDungeonInfo, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, 1, 16, temp);
-                PreprocessString(temp, 300, nonEssentialExtraInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, nonEssentialExtraInfo, preFlagTracker, &preArgs);
             } else {
-                PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+                PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
             }
             DrawTextInWindow(idx, 1, 138, temp);
             break;
         case DCT_OTHER:;
-            PreprocessString(temp, 300, checklessDungeonInfo, preFlags, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 138, temp);
             break;
     }
