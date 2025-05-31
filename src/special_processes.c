@@ -233,6 +233,7 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
                 else {
                     amountToRemove -= itemQuantity;
                     RemoveItemAtIdxInStorage(i);
+                    RemoveEmptyItemsInStorage();
                     // if this would be exactly enough or less, lower the amount to remove by this quantity and delete the item.
                 }
             }
@@ -279,7 +280,6 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
     }
     
     // If any remain add it as a new stack to storage.
-    RemoveEmptyItemsInStorage();
     itemToAdd.quantity = amountToAdd;
     AddBulkItemToStorage(&itemToAdd);
     return 1; // Add item to storage as a new item.
