@@ -70,6 +70,7 @@ OpcodeSetWaitModeStuff = 0x22E0234;
 TurnOpcodeSwitchStatementSetup = 0x22E1228;
 ShowStringInDialogueBoxCallsite2 = 0x230129C;
 ShowStringInDialogueBoxCallsite3 = 0x2301624;
+ScriptingDebugInstructionAddr = 0x22DFC70;
 
 /* Overlay 11: Ap Tracker */
 ApTrackerSetupMenuHook = 0x2301A7C;

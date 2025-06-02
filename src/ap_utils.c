@@ -114,3 +114,14 @@ bool IsLookaLikeDungeonPlaceholder(enum dungeon_id dungeon_id) {
             return true;
     }
 }
+
+// Note: This works by checking the instruction in overlay11 being changed to
+// 'cmp r0,#0x1' specifically.
+bool __attribute__((naked)) GetDebugRomFlagEnabled() {
+    asm("ldr r0,=ScriptingDebugInstructionAddr");
+    asm("ldr r0,[r0,#0x0]");
+    asm("ldr r1,=0xE3500001");
+    asm("cmp r0,r1");
+    asm("moveq r0,#1");
+    asm("movne r0,#0");
+}

@@ -83,7 +83,6 @@ uint8_t trackerLocationsDialga[] = {
     38,  // Hidden Land
     41,  // Temporal Tower
     // Special Episodes
-    67,  // Dark Crater
     252, // Bidoof SE
     251, // Igglybuff SE
     250, // Sunflora SE
@@ -394,6 +393,7 @@ char* instrumentSymbol = "[M:R9][S:8]";
 char* relicSymbol = "[M:T4][S:8]";
 char* bagSymbol = "[M:S6]";
 char* moneySymbol = "[M:S0]";
+char* debugSymbol = "M:B30";
 
 // When the player selects the tracker option from the menu, open a menu to
 // allow them to alter the top screen.
@@ -637,7 +637,6 @@ char* miracleSeaCheck = "[kind:0] Healed: [string:0]";
 // Other Checks
 char* blueGoomiCheck = "Blue Goomi #[value:0:0]: [string:0]";
 
-
 // Special Episode Check
 char* bidoofDungeonChecks = "[CLUM_SET:15][CS:P]SE Marowak Dojo's Revival[CR]: [string:0]\n"
                             "[CLUM_SET:15][CS:P]SE Deep Star Cave[CR]: [string:1]\n"
@@ -719,11 +718,46 @@ void DrawBossInfoInWindow(int idx, int y, char* buffer, enum monster_id boss0, e
     DrawGiftCheckInWindow(idx, y + ((boss1 == MONSTER_NONE) ? 13 : 26), buffer, boss0, giftGiven);
 }
 
+// Utility functon to streamline displaying boss information with optional gift.
 void DrawEscortInfoInWindow(int idx, int y, char* buffer, enum monster_id escort0, enum monster_id escort1) {
     preArgs.flag_vals[0] = escort0;
     preArgs.flag_vals[1] = escort1;
     PreprocessString(buffer, TR_BUFF_LEN, (escort1 == MONSTER_NONE) ? escortInfo : duoEscortInfo, preFlagTracker, &preArgs);
     DrawTextInWindow(idx, 15, y, buffer);
+}
+
+// Utility function to help us debug.
+void DrawDebugInfoInWindow(int idx, int x, int y, int maxWidth, char* buffer, enum script_var_id var) {
+    struct script_var *variableInfo = &(SCRIPT_VARS.vars[var]);
+    int width = GetStringWidth(variableInfo->name);
+    DrawTextInWindow(idx, x, y, variableInfo->name);
+    DrawTextInWindow(idx, width + y + 2, y, ":");
+    width+=8;
+    for(int i = 0; i < variableInfo->n_values; i++) {
+        switch(variableInfo->type.val) {
+            case VARTYPE_NONE:;
+                return;
+            case VARTYPE_BIT:;
+                if(LoadScriptVariableValueAtIndex(NULL, var, i)){
+                    DrawTextInWindow(idx, x + width, y, "[M:S2]");
+                    width += 8;
+                } else {
+                    DrawTextInWindow(idx, x + width, y, "[M:S4]");
+                    width += 8;
+                }
+                break;
+            case VARTYPE_STRING:;
+            case VARTYPE_UINT8:;
+            case VARTYPE_UINT16:;
+            case VARTYPE_UINT32:;
+            case VARTYPE_INT32:;
+            case VARTYPE_SPECIAL:;
+        }
+        if(width >= maxWidth) {
+            width = 0;
+            y += 13;
+        }
+    }
 }
 
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
@@ -1197,7 +1231,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 preArgs.flag_vals[0] = MONSTER_SNEASEL;
                 preArgs.strings[0] = GetSubXBit(65) ? checkSymbol : lockedSymbol;
                 PreprocessString(temp, TR_BUFF_LEN, skyPeakEightCheck, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 128, 16, temp);
+                DrawTextInWindow(idx, 110, 16, temp);
             }
             break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
