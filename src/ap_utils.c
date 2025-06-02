@@ -10,7 +10,11 @@ enum dungeon_check_type GetDungeonCheckType(short dunId) {
         }
     }
     
-    if(dunId == DUNGEON_DARK_CRATER) {
+    if(dunId == DUNGEON_DARK_CRATER || dunId == DUNGEON_SKY_PEAK_SUMMIT) {
+        return DCT_OTHER;
+    }
+    
+    if(dunId >= DUNGEON_ICE_AEGIS_CAVE && dunId <= DUNGEON_REGIGIGAS_CHAMBER) {
         return DCT_OTHER;
     }
     

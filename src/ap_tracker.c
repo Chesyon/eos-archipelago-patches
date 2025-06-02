@@ -22,11 +22,6 @@ typedef struct TopScreenApTrackerWindow {
     uint8_t closing;
 } TopScreenApTrackerWindow;
 
-typedef struct ApTrackerTracker {
-    int pickWindowId;
-    int optionState;
-} ApTrackerTracker;
-
 typedef struct SomeMenuStruct {
     uint32_t something; // For submenus this is 0xD?
     void (*createMenuFunction)(void); // is null for some menus and actual init is handled in update.
@@ -38,6 +33,7 @@ TopScreenApTrackerWindow *apTrackerWindowPtr = NULL;
 void* apTrackerTopScreenBG = NULL;
 uint8_t displayedOption = 255;
 signed char pickWindowId = -2;
+signed char localizationWarningId = -2;
 signed char dungeonTopScreenId = -2;
 uint8_t dungeonModeDisplayed = 255;
 uint32_t trackerRotate = 0;
@@ -46,7 +42,7 @@ uint32_t updaterDelay = 0;
 uint8_t drinksDisplayed = 0;
 uint8_t drinkEventsDisplayed = 0;
 
-uint8_t trackerLocationDungeonIds[] = {
+uint8_t trackerLocationsDialga[] = {
     // General
     247, // Town
     254, // Guild
@@ -83,6 +79,67 @@ uint8_t trackerLocationDungeonIds[] = {
     90,  // Tiny Meadow
     91,  // Labyrinth Cave
     92,  // Oran Forest
+    174, // Star Cave
+    38,  // Hidden Land
+    41,  // Temporal Tower
+    // Special Episodes
+    67,  // Dark Crater
+    252, // Bidoof SE
+    251, // Igglybuff SE
+    250, // Sunflora SE
+    249, // Charm SE
+    248, // Future SE
+    // Rule Dungeons (Long Loctions)
+    99,  // Zero Isle North
+    100, // Zero Isle East
+    101, // Zero Isle West
+    102, // Zero Isle South
+    103, // Zero Isle Center
+    104, // Destiny Tower
+    107, // Oblivion Forest
+    108, // Treacherous Waters
+    109, // Southeastern Islands
+    110, // Inferno Cave
+};
+
+uint8_t trackerLocationsDarkrai[] = {
+    // General
+    247, // Town
+    254, // Guild
+    180, // Dojo
+    255, // Cafe
+    // Early
+    1,   // Beach Cave
+    3,   // Drenched Bluff
+    4,   // Mt Bristle
+    6,   // Waterfall Cave
+    7,   // Apple Woods
+    8,   // Craggy Coast
+    9,   // Side Path
+    10,  // Mt. Horn
+    11,  // Rock Path
+    12,  // Foggy Forest
+    13,  // Forest Path
+    14,  // Steam Cave
+    17,  // Amp Plains
+    20,  // Northern Desert
+    21,  // Quicksand Cave
+    24,  // Crystal Cave
+    25,  // Crystal Crossing
+    27,  // Chasm Cave
+    28,  // Dark Hill
+    29,  // Sealed Ruin
+    32,  // Dusk Forest
+    33,  // Deep Dusk Forest
+    34,  // Treeshroud Forest
+    35,  // Brine Cave
+    87,  // Serenity River
+    88,  // Landslide Cave
+    89,  // Lush Prairie
+    90,  // Tiny Meadow
+    91,  // Labyrinth Cave
+    92,  // Oran Forest
+    174, // Star Cave
     38,  // Hidden Land
     41,  // Temporal Tower
     // Late
@@ -121,7 +178,6 @@ uint8_t trackerLocationDungeonIds[] = {
     119, // 9th Station Pass
     120, // Sky Peak Summit Pass
     122, // Sky Peak Summit
-    174, // Star Cave
     // Special Episodes
     67,  // Dark Crater
     252, // Bidoof SE
@@ -129,7 +185,7 @@ uint8_t trackerLocationDungeonIds[] = {
     250, // Sunflora SE
     249, // Charm SE
     248, // Future SE
-    // RULE
+    // Rule Dungeons (Long Loctions)
     99,  // Zero Isle North
     100, // Zero Isle East
     101, // Zero Isle West
@@ -142,6 +198,36 @@ uint8_t trackerLocationDungeonIds[] = {
     110, // Inferno Cave
 };
 
+// Get which list of elements to use depending on goal.
+uint8_t* GetTrackerList() {
+    if (IsDarkraiGoal()) {
+        return trackerLocationsDarkrai;
+    } else {
+        return trackerLocationsDialga;
+    }
+}
+
+// Get the length of the list depending on goal.
+int GetTrackerListLength() {
+    int length;
+    if (IsDarkraiGoal()) {
+        length = sizeof(trackerLocationsDarkrai)/sizeof(trackerLocationsDarkrai[0]);
+    } else {
+        length = sizeof(trackerLocationsDialga)/sizeof(trackerLocationsDialga[0]);
+    }
+    
+    // Remove long locations from the list if they are not enabled. This should only
+    // remove the rule dungeons.
+    if(!apSettings.longLocationsOn) {
+        length -= 10;
+    }
+    
+    return length;
+}
+
+// Check for factors that might make sense to override the tracker. For example,
+// while in Special Episodes we ensure the tracker shows the checks available for
+// that Special Episode.
 uint8_t CheckLocationOverrides (uint8_t location) {
     switch(LoadScriptVariableValue(NULL, VAR_EXECUTE_SPECIAL_EPISODE_TYPE)) {
         case 0:;
@@ -279,6 +365,11 @@ bool IsLocationBonusChecksComplete(enum dungeon_id location) {
             if(!GetSubXBit(69) || !GetSubXBit(70) || !GetSubXBit(71) || !GetSubXBit(72)) { // Regis
                 return false;
             }
+            for (int d = DUNGEON_ICE_AEGIS_CAVE; d <= DUNGEON_REGIGIGAS_CHAMBER; d++) {
+                if(LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, d) != true) {
+                    return false;
+                }
+            }
             break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
             if(!GetSubXBit(46)) { // Shaymin
@@ -308,7 +399,7 @@ char* moneySymbol = "[M:S0]";
 // allow them to alter the top screen.
 char* ApTrackerEntryFn(char* buffer, int option_id) {
     struct preprocessor_args preArgs;
-    uint8_t location = trackerLocationDungeonIds[option_id];
+    uint8_t location = GetTrackerList()[option_id];
     char* locationSymbol;
     if (location == 247) {
         locationSymbol = townSymbol;
@@ -365,17 +456,39 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
         struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
         PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
         return buffer;
+    } else if(location == DUNGEON_ICE_AEGIS_CAVE) {
+        preArgs.strings[1] = "[CS:P]Aegis Cave[CR]";
+        enum dungeon_mode dmode = GetDungeonMode(location);
+        switch(dmode) {
+            default:
+            case DMODE_CLOSED:;
+            case DMODE_REQUEST:;
+                locationSymbol = lockedSymbol;
+                break;
+            case DMODE_OPEN:;
+                locationSymbol = remainingChecksSymbol;
+                break;
+            case DMODE_OPEN_AND_REQUEST:;
+                if (IsLocationBonusChecksComplete(location) == false) {
+                    locationSymbol = remainingChecksSymbol;
+                } else {
+                    locationSymbol = completeSymbol;
+                }
+        }
+        preArgs.strings[0] = IsLocationBonusChecksComplete(location) ? completeSymbol : remainingChecksSymbol;
+        struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
+        PreprocessString(buffer, 0x400, "[string:0][CLUM_SET:26][string:1]", preFlagTracker, &preArgs);
     } else if(location == DUNGEON_HIDDEN_LAND || location == DUNGEON_TEMPORAL_TOWER) {
         enum dungeon_mode dmode = GetDungeonMode(location);
         switch(dmode) {
             default:
             case DMODE_CLOSED:;
             case DMODE_REQUEST:;
-                    locationSymbol = relicSymbol;
-                    break;
+                locationSymbol = relicSymbol;
+                break;
             case DMODE_OPEN:;
-                    locationSymbol = remainingChecksSymbol;
-                    break;
+                locationSymbol = remainingChecksSymbol;
+                break;
             case DMODE_OPEN_AND_REQUEST:;
                 if (GetRemainingDungeonMissionChecks(location, false) != 0) {
                     locationSymbol = remainingChecksSymbol;
@@ -413,7 +526,7 @@ char* ApTrackerEntryFn(char* buffer, int option_id) {
                 break;
         }
     }
-    preArgs.id_vals[0] = trackerLocationDungeonIds[option_id];
+    preArgs.id_vals[0] = GetTrackerList()[option_id];
     preArgs.strings[0] = locationSymbol;
     
     struct preprocessor_flags preFlagTracker = {.timer_1 = true, .flags_1 = 0x6A};
@@ -441,7 +554,12 @@ void DrawCircleBarInTextBox(signed char idx, int radius, int centerX, int center
     }
 }
 
-// TODO: Move into a text file or the text strings file.
+// TODO: Move into a text file or the text strings file to save space in overlay36 and
+// for the purposes of localization.
+// Generic Checks
+char* giftCheck = "[kind:0]'s Gift: [string:0]";
+char* itemCheck = "[item:0]: [string:0]";
+
 // Town Checks
 char* shopItemChecks1 = "[CLUM_SET:132]Shop Item 1: [CLUM_SET:202][string:0]\n"
                         "[CLUM_SET:132]Shop Item 2: [CLUM_SET:202][string:1]\n"
@@ -453,7 +571,7 @@ char* shopItemChecks2 = "[CLUM_SET:132]Shop Item 6: [CLUM_SET:202][string:0]\n"
                         "[CLUM_SET:132]Shop Item 8: [CLUM_SET:202][string:2]\n"
                         "[CLUM_SET:132]Shop Item 9: [CLUM_SET:202][string:3]\n"
                         "[CLUM_SET:132]Shop Item 10: [CLUM_SET:202][string:4]";  
-char* townBankChecks1 = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
+char* townBankChecks1 = "[CLUM_SET:15][kind:0] Rewards\n"
                         "[CLUM_SET:13]100G: [string:0]\n"
                         "[CLUM_SET:15]5000G: [string:1]\n"
                         "[CLUM_SET:13]10000G: [string:2]\n"
@@ -461,8 +579,8 @@ char* townBankChecks1 = "[CLUM_SET:15][CS:N]Duskull[CR] Rewards\n"
 char* townBankChecks2 = "[CLUM_SET:15]50000G: [string:0]\n"
                         "[CLUM_SET:13]100000G: [string:1]\n"
                         "[CLUM_SET:15]9999999G: [string:2]\n";
-char* townBankCheckNotice = "[CLUM_SET:15]Checks Above 20000G\n"
-                            "[CLUM_SET:15]Are Non-Essential.";
+char* townBankCheckNotice = "[CS:Z]Checks Above 20000G Are Non-Essential.[CR]";
+                            
 // Guild Checks
 char* specialEpisodeChecks = "[CLUM_SET:95]Bidoof's SE Location: [string:0]\n"
                              "[CLUM_SET:95]Igglybuff's SE Location: [string:1]\n"
@@ -480,53 +598,45 @@ char* rankChecks2 = "[CLUM_SET:15]Ultra Rank: [string:0]\n"
                     "[CLUM_SET:15]Master[M:S3][M:S3] Rank: [string:4]\n";
 char* rankChecks3 = "[CLUM_SET:110]Master[M:S3][M:S3][M:S3] Rank: [string:0]\n"
                     "[CLUM_SET:110]Guildmaster Rank: [string:1]\n";
-char* rankChecksNotice = "[CLUM_SET:110]Ranks Above Master\n"
-                         "[CLUM_SET:110]Are Non-Essential";
+char* rankChecksNotice = "[CS:Z]Ranks Above Master Are Non-Essential.[CR]";
+                         
 // Cafe Checks
-char* cafeInfo1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
-                  "[CLUM_SET:15]Terra Cymbal Mission: [string:1]\n"
-                  "[CLUM_SET:15]Icy Flute Mission: [string:2]\n"
-                  "[CLUM_SET:15]Fiery Drum Mission: [string:3]\n"
-                  "[CLUM_SET:15]Rock Horn Mission: [string:4]\n";
-char* cafeInfo2 = "[CLUM_SET:15]Sky Melodica Mission: [string:0]\n"
-                  "[CLUM_SET:15]Grass Cornet Mission: [string:1]\n"
-                  "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
-                  "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
-                  "[CLUM_SET:15]Recycle Shop Dungeons:\n"
-                  "[CLUM_SET:15]";
-// Dojo Checks
-char* dojoInfo1 = "[CLUM_SET:15][CS:P]Normal/Fly Maze[CR]: [string:0]\n"
-                  "[CLUM_SET:15][CS:P]Dark/Fire Maze[CR]: [string:1]\n"
-                  "[CLUM_SET:15][CS:P]Rock/Water Maze[CR]: [string:2]\n"
-                  "[CLUM_SET:15][CS:P]Grass Maze[CR]: [string:3]\n"
-                  "[CLUM_SET:15][CS:P]Elec/Steel Maze[CR]: [string:4]\n";
-char* dojoInfo2 = "[CLUM_SET:15][CS:P]Ice/Ground Maze[CR]: [string:0]\n"
-                  "[CLUM_SET:15][CS:P]Fight/Psych Maze[CR]: [string:1]\n"
-                  "[CLUM_SET:15][CS:P]Poison/Bug Maze[CR]: [string:2]\n"
-                  "[CLUM_SET:15][CS:P]Dragon Maze[CR]: [string:3]\n"
-                  "[CLUM_SET:15][CS:P]Ghost Maze[CR]: [string:4]\n"
-                  "[CLUM_SET:15][CS:P]Final Maze[CR]: ";
+char* cafeCheck1 = "[CLUM_SET:15]Aqua-Monica Mission: [string:0]\n"
+                   "[CLUM_SET:15]Terra Cymbal Mission: [string:1]\n"
+                   "[CLUM_SET:15]Icy Flute Mission: [string:2]\n"
+                   "[CLUM_SET:15]Fiery Drum Mission: [string:3]\n"
+                   "[CLUM_SET:15]Rock Horn Mission: [string:4]\n";
+char* cafeCheck2 = "[CLUM_SET:15]Sky Melodica Mission: [string:0]\n"
+                   "[CLUM_SET:15]Grass Cornet Mission: [string:1]\n"
+                   "[CLUM_SET:15]Recycle Shop Treasure: [string:2]\n"
+                   "[CLUM_SET:15]Ludicolo Dance: [string:3]\n"
+                   "[CLUM_SET:15]Recycle Shop Dungeons:\n"
+                   "[CLUM_SET:15]";
+                  
 // Dungeon Related Checks
+char* dungeonCheck = "[dungeon:0]: [string:0]";
 char* missionDungeonChecks = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]\n"
                              "[CLUM_SET:15]Jobs: [CS:C][CLUM_SET:70][value:0:1]/[value:1:1][CR]\n"
                              "[CLUM_SET:15]Outlaws: [CS:C][CLUM_SET:70][value:2:1]/[value:3:1][CR]";
-char* simpleDungeonCheck = "[CLUM_SET:[value:0:1]][dungeon:0]: [string:0]";
-char* bagUpgradeCheck = "[CLUM_SET:15]Bag Upgrade [value:0:1]: [string:0]";
-char* beachCaveExtras = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
+char* bagUpgradeCheck = "Bag Upgrade [value:0:1]: [string:0]";
+char* nonEssentialExtraInfo = "[CS:Z]Non-essential for Completion.[CR]";
+char* bossInfo = "[CLUM_SET:128]Boss: [kind:0]";
+char* duoBossInfo = "[CLUM_SET:128]Boss: [CLUM_SET: 155][kind:0] &\n"
+                    "[CLUM_SET: 155][kind:1]";
+char* ruleDungeonInfo = "Completed: [CLUM_SET:70][string:0]";
+char* checklessDungeonInfo = "[CS:Z]This dungeon has no checks.[CR]";
+char* escortInfo = "[CS:Z]Escort: [kind:0][CR]";
+char* duoEscortInfo = "[CS:Z]Escort: [kind:0] & [kind:1][CR]";
+char* beachCaveChecks = "[CLUM_SET:15][CS:C]Talk To[CR] [CS:N]Wigglytuff[CR]\n"
                         "[CLUM_SET:15][CS:C]After Completing[CR]:\n"
                         "[CLUM_SET:15]Team Name: [string:0]\n";
-char* beachCaveExtraInfo = "[CLUM_SET:15]Unlocked from the start.";
-char* skyPeakEightExtra = "[CLUM_SET:128]Sneasel's Gratitude: [string:0]";
-char* nonEssentialExtraInfo = "[CLUM_SET:15]Non-essential for Completion.";
-char* bossInfo = "[CLUM_SET:128]Boss: [kind:0]";
-char* duoBossInfo = "[CLUM_SET:128]Boss: [kind:0] & [kind:1]";
-char* treasureBossInfo = "[CLUM_SET:128]Boss: [kind:0]\n"
-                         "[CLUM_SET:128][kind:0]'s Gift: [string:0]\n"
-                         "[CLUM_SET:128][string:1]: [string:2]";
-char* giftCheck = "[CLUM_SET:128][kind:0]'s Gift: [string:0]";
-char* ruleDungeonInfo = "[CLUM_SET:15]Completed: [CLUM_SET:70][string:0]";
-char* checklessDungeonInfo = "[CLUM_SET:15]This dungeon has no checks.";
-char* escortDungeonInfo = "[CLUM_SET:15]Escort: [kind:0]";
+char* beachCaveInfo = "[CS:Z]Unlocked from the start.[CR]";
+char* skyPeakEightCheck = "[kind:0]'s Gratitude: [string:0]";
+char* miracleSeaCheck = "[kind:0] Healed: [string:0]";
+
+// Other Checks
+char* blueGoomiCheck = "Blue Goomi #[value:0:0]: [string:0]";
+
 
 // Special Episode Check
 char* bidoofDungeonChecks = "[CLUM_SET:15][CS:P]SE Marowak Dojo's Revival[CR]: [string:0]\n"
@@ -569,32 +679,57 @@ struct window_params trackerTopScreenWinParams = {.x_offset = 2, .y_offset = 2, 
 struct preprocessor_args preArgs = {};
 struct preprocessor_flags preFlagTracker = {};
 
-
 // Utility function to streamline displaying gift information.
 void DrawGiftCheckInWindow(int idx, int y, char* buffer, enum monster_id monster_id, bool giftGiven) {
     preArgs.flag_vals[0] = monster_id;
     preArgs.strings[0] = giftGiven ? completeSymbol : lockedSymbol;
     PreprocessString(buffer, TR_BUFF_LEN, giftCheck, preFlagTracker, &preArgs);
-    DrawTextInWindow(idx, 1, y, buffer);
+    DrawTextInWindow(idx, 128, y, buffer);
+}
+
+// Utility function to streamline displaying item checks.
+void DrawItemCheckInWindow(int idx, int y, char* buffer, enum item_id item_id, bool itemGotten) {
+    preArgs.id_vals[0] = item_id;
+    preArgs.strings[0] = itemGotten ? checkSymbol : lockedSymbol;
+    preArgs.number_vals[0] = 0; // Maybe item quantity?
+    preArgs.number_vals[1] = 0; // Why do items pull from number_vals + 1????
+    PreprocessString(buffer, TR_BUFF_LEN, itemCheck, preFlagTracker, &preArgs);
+    DrawTextInWindow(idx, 128, y, buffer);
+}
+
+// Utility function to streamline displaying checks for individual dungeons.
+void DrawDungeonCheckInWindow(int idx, int y, char* buffer, enum dungeon_id dungeon_id) {
+    preArgs.id_vals[0] = dungeon_id;
+    preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id) ? checkSymbol : lockedSymbol;
+    PreprocessString(buffer, TR_BUFF_LEN, dungeonCheck, preFlagTracker, &preArgs);
+    DrawTextInWindow(idx, 15, y, buffer);
 }
 
 // Utility functon to streamline displaying boss information with optional gift.
 void DrawBossInfoInWindow(int idx, int y, char* buffer, enum monster_id boss0, enum monster_id boss1, bool hasGift, bool giftGiven) {
     preArgs.flag_vals[0] = boss0;
     preArgs.flag_vals[1] = boss1;
-    PreprocessString(buffer, TR_BUFF_LEN, (boss1 == MONSTER_NONE || hasGift) ? bossInfo : duoBossInfo, preFlagTracker, &preArgs);
+    PreprocessString(buffer, TR_BUFF_LEN, (boss1 == MONSTER_NONE) ? bossInfo : duoBossInfo, preFlagTracker, &preArgs);
     DrawTextInWindow(idx, 1, y, buffer);
     
     if(hasGift == false) {
         return;
     }
     
-    DrawGiftCheckInWindow(idx, y + 13, buffer, boss0, giftGiven);
+    DrawGiftCheckInWindow(idx, y + ((boss1 == MONSTER_NONE) ? 13 : 26), buffer, boss0, giftGiven);
+}
+
+void DrawEscortInfoInWindow(int idx, int y, char* buffer, enum monster_id escort0, enum monster_id escort1) {
+    preArgs.flag_vals[0] = escort0;
+    preArgs.flag_vals[1] = escort1;
+    PreprocessString(buffer, TR_BUFF_LEN, (escort1 == MONSTER_NONE) ? escortInfo : duoEscortInfo, preFlagTracker, &preArgs);
+    DrawTextInWindow(idx, 15, y, buffer);
 }
 
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     ClearWindow(idx);
     char temp[TR_BUFF_LEN];
+    // TODO: Replace these where possible with the area tag or copying text strings.
     if(location == 255) {
         strncpy(temp, "Tracker: [CS:P]Spinda's Caf~E9[CR]", TR_BUFF_LEN);
     } else if (location == 254) {
@@ -611,6 +746,8 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         strncpy(temp, "Tracker: [CS:P]Here Comes Team Charm[CR]", TR_BUFF_LEN);
     } else if (location == 248) {
         strncpy(temp, "Tracker: [CS:P]In The Future of Darkness[CR]", TR_BUFF_LEN);
+    } else if (location == DUNGEON_ICE_AEGIS_CAVE) {
+        strncpy(temp, "Tracker: [CS:P]Aegis Cave[CR]", TR_BUFF_LEN);
     } else {
         preArgs.id_vals[0] = location;
         PreprocessString(temp, TR_BUFF_LEN, "Tracker: [dungeon:0]", preFlagTracker, &preArgs);
@@ -619,6 +756,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     
     switch(location) {
         case 247:; // Treasure Town
+            // Shop Checks
             preArgs.strings[0] = (GetSubXBit(10)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(11)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(12)) ? checkSymbol : lockedSymbol;
@@ -633,7 +771,8 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
-            
+            // Bank Checks
+            preArgs.flag_vals[0] = MONSTER_DUSKULL;
             preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
@@ -645,9 +784,13 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, townBankChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
+            if(!apSettings.longLocationsOn) {
+                DrawTextInWindow(idx, 15, 146, townBankCheckNotice);
+            }
             UpdateWindow(idx);
             return;
         case 254:; // Guild
+            // Rank Checks
             preArgs.strings[0] = (GetSubXBit(73)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(74)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(75)) ? checkSymbol : lockedSymbol;
@@ -666,33 +809,31 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[1] = (GetSubXBit(58)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, rankChecks3, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
+            // Special Episode Checks (Main)
             preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(6)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(7)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(8)) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, specialEpisodeChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 68, temp);
+            // Blue Goomi Check (1)
+            preArgs.strings[0] = (GetSubXBit(5)) ? checkSymbol : lockedSymbol;
+            preArgs.number_vals[0] = 1;
+            PreprocessString(temp, TR_BUFF_LEN, blueGoomiCheck, preFlagTracker, &preArgs);
+            DrawTextInWindow(idx, 120, 133, temp);
+            // Long Location Notice
             if(!apSettings.longLocationsOn) {
-                DrawTextInWindow(idx, 1, 133, rankChecksNotice);
+                DrawTextInWindow(idx, 15, 146, rankChecksNotice);
             }
             UpdateWindow(idx);
             return;
-        case 180:; // Dojo
-            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 180)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 181)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 182)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 183)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 184)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, TR_BUFF_LEN, dojoInfo1, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.strings[0] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 185)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 186)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 187)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 188)) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 189)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, TR_BUFF_LEN, dojoInfo2, preFlagTracker, &preArgs);
-            strncat(temp, (LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 190)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
-            DrawTextInWindow(idx, 1, 81, temp);
+        case 180:; // Dojo Checks
+            int y = 16;
+            for(int d = DUNGEON_NORMAL_FLY_MAZE; d <= 189; d++) {
+                DrawDungeonCheckInWindow(idx, y, temp, d);
+                y += 13;
+            }
+            DrawDungeonCheckInWindow(idx, 146, temp, 191);
             UpdateWindow(idx);
             return;
         case 255:; // Cafe
@@ -703,13 +844,13 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(50)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(51)) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = (GetSubXBit(52)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, TR_BUFF_LEN, cafeInfo1, preFlagTracker, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, cafeCheck1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             preArgs.strings[0] = (GetSubXBit(53)) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = (GetSubXBit(54)) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = (GetSubXBit(59)) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = (GetSubXBit(88)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, TR_BUFF_LEN, cafeInfo2, preFlagTracker, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, cafeCheck2, preFlagTracker, &preArgs);
             strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
             strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
             strncat(temp, (GetSubXBit(62)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
@@ -911,7 +1052,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             // add that information; however it's not relevant anymore then. Feel free to change this
             // should you find a better arrangement.
             if(GetDungeonMode(location) == DMODE_OPEN_AND_REQUEST && IsDarkraiGoal()) {
-                DrawBossInfoInWindow(idx, 16, temp, MONSTER_DUSKNOIR, MONSTER_NONE, false, false);
+                DrawBossInfoInWindow(idx, 16, temp, MONSTER_DUSKNOIR, MONSTER_SABLEYE, false, false);
                 break;
             }
         case DUNGEON_TEMPORAL_TOWER:;
@@ -940,24 +1081,24 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case DUNGEON_BEACH_CAVE:;
             // Team Name Check
             preArgs.strings[0] = (GetSubXBit(127)) ? checkSymbol : lockedSymbol;
-            PreprocessString(temp, TR_BUFF_LEN, beachCaveExtras, preFlagTracker, &preArgs);
+            PreprocessString(temp, TR_BUFF_LEN, beachCaveChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             // Bag Upgrade (0) Check
             preArgs.number_vals[0] = 1;
             preArgs.strings[0] = (GetSubXBit(0)) ? bagSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 120, temp);
+            DrawTextInWindow(idx, 15, 120, temp);
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_ZUBAT, MONSTER_KOFFING, false, false);
             // Extra Information
-            DrawTextInWindow(idx, 1, 138, beachCaveExtraInfo);
+            DrawTextInWindow(idx, 15, 146, beachCaveInfo);
             break;
         case DUNGEON_MT_BRISTLE:;
             // Bag Upgrade (1) Check
             preArgs.strings[0] = (GetSubXBit(1)) ? bagSymbol : lockedSymbol;
             preArgs.number_vals[0] = 2;
             PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 81, temp);
+            DrawTextInWindow(idx, 15, 81, temp);
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_DROWZEE, MONSTER_NONE, false, false);
             break;
@@ -966,17 +1107,15 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[0] = (GetSubXBit(2)) ? bagSymbol : lockedSymbol;
             preArgs.number_vals[0] = 3;
             PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 81, temp);
+            DrawTextInWindow(idx, 15, 81, temp);
             break;
         case DUNGEON_CRAGGY_COAST:;
         case DUNGEON_SIDE_PATH:;
         case DUNGEON_MT_HORN:;
         case DUNGEON_ROCK_PATH:;
             // Escort Information
-            if(GetDungeonMode(location) == DMODE_OPEN) {
-                preArgs.id_vals[0] = MONSTER_BIDOOF;
-                PreprocessString(temp, TR_BUFF_LEN, escortDungeonInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 138, temp);
+            if(LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, location) == false) {
+                DrawEscortInfoInWindow(idx, 146, temp, MONSTER_BIDOOF, MONSTER_NONE);
             }
             break;
         case DUNGEON_STEAM_CAVE:;
@@ -984,13 +1123,17 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[0] = (GetSubXBit(3)) ? bagSymbol : lockedSymbol;
             preArgs.number_vals[0] = 4;
             PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 81, temp);
+            DrawTextInWindow(idx, 15, 81, temp);
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_GROUDON, MONSTER_NONE, false, false);
             // Boss 2/Gift Information
             if(IsDarkraiGoal()) {
                 DrawBossInfoInWindow(idx, 42, temp, MONSTER_UXIE, MONSTER_NONE, true, GetSubXBit(25));
             }
+            break;
+        case DUNGEON_AMP_PLAINS:;
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_MANECTRIC, MONSTER_ELECTRIKE, false, false);
             break;
         case DUNGEON_QUICKSAND_CAVE:;
             // Boss/Gift Information
@@ -1008,6 +1151,27 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_SPIRITOMB, MONSTER_NONE, false, false);
             break;
+        case DUNGEON_DUSK_FOREST:;
+        case DUNGEON_TREESHROUD_FOREST:;
+            // Escort Information
+            if(LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, location) == false) {
+                DrawEscortInfoInWindow(idx, 146, temp, MONSTER_GROVYLE, MONSTER_NONE);
+            }
+            break;
+        case DUNGEON_DEEP_DUSK_FOREST:;
+            // Escort Information
+            if(LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, location) == false) {
+                DrawEscortInfoInWindow(idx, 146, temp, MONSTER_GROVYLE, MONSTER_CELEBI);
+            }
+            break;
+        case DUNGEON_BRINE_CAVE:;
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_KABUTOPS, MONSTER_OMASTAR, false, false);
+            // Escort Information
+            if(LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, location) == false && !GetPerformanceFlagWithChecks(25)) {
+                DrawEscortInfoInWindow(idx, 146, temp, MONSTER_CHATOT, MONSTER_NONE);
+            }
+            break;
         case DUNGEON_MIRACLE_SEA:;
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_GYARADOS, MONSTER_NONE, false, false);
@@ -1020,19 +1184,36 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             // Boss/Gift Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_PALKIA, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(30));
             break;
+        case DUNGEON_5TH_STATION_PASS:;
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_CARNIVINE, MONSTER_NONE, false, false);
+            if(IsDarkraiGoal()) {
+                DrawDungeonCheckInWindow(idx, 68, temp, DUNGEON_5TH_STATION_CLEARING);
+            }
+            break;
+        case DUNGEON_8TH_STATION_PASS:;
+            // Gratitude Check? Why is this not just called Sneasel's Gift?
+            if(IsDarkraiGoal()) {
+                preArgs.flag_vals[0] = MONSTER_SNEASEL;
+                preArgs.strings[0] = GetSubXBit(65) ? checkSymbol : lockedSymbol;
+                PreprocessString(temp, TR_BUFF_LEN, skyPeakEightCheck, preFlagTracker, &preArgs);
+                DrawTextInWindow(idx, 128, 16, temp);
+            }
+            break;
         case DUNGEON_SKY_PEAK_SUMMIT:;
             // Boss Information
             DrawBossInfoInWindow(idx, 16, temp, MONSTER_MUK, MONSTER_GRIMER, false, false);
             // Gift Information
             if(IsDarkraiGoal()) {
-                DrawGiftCheckInWindow(idx, 42, temp, MONSTER_SHAYMIN_LAND, GetSubXBit(46));
+                DrawGiftCheckInWindow(idx, 55, temp, MONSTER_SHAYMIN_LAND, GetSubXBit(46));
             }
-            break;
+            UpdateWindow(idx);
+            return;
         case DUNGEON_MYSTIFYING_FOREST:;
             preArgs.strings[0] = (GetSubXBit(4)) ? bagSymbol : lockedSymbol;
             preArgs.number_vals[0] = 5; // Upgrade 5
             PreprocessString(temp, TR_BUFF_LEN, bagUpgradeCheck, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 81, temp);
+            DrawTextInWindow(idx, 15, 81, temp);
             break;
         case DUNGEON_CREVICE_CAVE:;
             // Boss Information
@@ -1043,96 +1224,87 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             break;
         case DUNGEON_BOTTOMLESS_SEA:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_KYOGRE, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(32));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_KYOGRE;
-                preArgs.strings[0] = (GetSubXBit(32)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Aqua-Monica";
-                preArgs.strings[2] = (GetSubXBit(31)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_AQUA_MONICA, GetSubXBit(31));
             }
             break;
         case DUNGEON_SHIMMER_DESERT:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GROUDON, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(34));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_GROUDON;
-                preArgs.strings[0] = (GetSubXBit(34)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Terra Cymbal";
-                preArgs.strings[2] = (GetSubXBit(33)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_TERRA_CYMBAL, GetSubXBit(33));
             }
             break;
         case DUNGEON_MT_AVALANCHE:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_ARTICUNO, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(36));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_ARTICUNO;
-                preArgs.strings[0] = (GetSubXBit(36)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Icy Flute";
-                preArgs.strings[2] = (GetSubXBit(35)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_ICY_FLUTE, GetSubXBit(35));
             }
             break;
         case DUNGEON_GIANT_VOLCANO:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_HEATRAN, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(38));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_HEATRAN;
-                preArgs.strings[0] = (GetSubXBit(38)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Fiery Drum";
-                preArgs.strings[2] = (GetSubXBit(37)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_FIERY_DRUM, GetSubXBit(37));
             }
             break;
         case DUNGEON_WORLD_ABYSS:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GIRATINA_ALTERED, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(40));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_GIRATINA_ALTERED;
-                preArgs.strings[0] = (GetSubXBit(39)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Rock Horn";
-                preArgs.strings[2] = (GetSubXBit(40)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_ROCK_HORN, GetSubXBit(39));
             }
             break;
         case DUNGEON_SKY_STAIRWAY:;
+        // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_RAYQUAZA, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(42));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_RAYQUAZA;
-                preArgs.strings[0] = (GetSubXBit(41)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Sky Melodica";
-                preArgs.strings[2] = (GetSubXBit(42)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_SKY_MELODICA, GetSubXBit(41));
             }
             break;
         case DUNGEON_MYSTERY_JUNGLE:;
+            // Boss/Gift Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_MEW, MONSTER_NONE, IsDarkraiGoal(), GetSubXBit(44));
+            // Seven Treasure Information
             if(IsDarkraiGoal()) {
-                preArgs.flag_vals[0] = MONSTER_MEW;
-                preArgs.strings[0] = (GetSubXBit(44)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[1] = "Grass Cornet";
-                preArgs.strings[2] = (GetSubXBit(43)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, treasureBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawItemCheckInWindow(idx, 42, temp, ITEM_GRASS_CORNET, GetSubXBit(43));
             }
+            break;
+        case DUNGEON_LABYRINTH_CAVE:;
+            // Boss Information
+            DrawBossInfoInWindow(idx, 16, temp, MONSTER_GABITE, MONSTER_NONE, false, false);
             break;
         case DUNGEON_ICE_AEGIS_CAVE:;
             if(IsDarkraiGoal()) {
-                // TODO: Update to new format.
-                // TODO: Make this tab use the string "Aegis Cave" instead of "Ice Aegis Cave"
-                /*preArgs.strings[0] = "Regice";
-                preArgs.strings[1] = (GetSubXBit(69)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Regirock";
-                preArgs.strings[3] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, aegisBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
-                preArgs.strings[0] = "Registeel";
-                preArgs.strings[1] = (GetSubXBit(70)) ? completeSymbol : lockedSymbol;
-                preArgs.strings[2] = "Regigigas";
-                preArgs.strings[3] = (GetSubXBit(71)) ? completeSymbol : lockedSymbol;
-                PreprocessString(temp, TR_BUFF_LEN, aegisBossInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 68, temp); */
+                // Conquest Information (Dungeon Completion)
+                DrawDungeonCheckInWindow(idx, 16, temp, DUNGEON_ICE_AEGIS_CAVE);
+                DrawDungeonCheckInWindow(idx, 29, temp, DUNGEON_REGICE_CHAMBER);
+                DrawDungeonCheckInWindow(idx, 42, temp, DUNGEON_ROCK_AEGIS_CAVE);
+                DrawDungeonCheckInWindow(idx, 55, temp, DUNGEON_REGIROCK_CHAMBER);
+                DrawDungeonCheckInWindow(idx, 68, temp, DUNGEON_STEEL_AEGIS_CAVE);
+                DrawDungeonCheckInWindow(idx, 81, temp, DUNGEON_REGISTEEL_CHAMBER);
+                DrawDungeonCheckInWindow(idx, 94, temp, DUNGEON_AEGIS_CAVE_PIT);
+                DrawDungeonCheckInWindow(idx, 107, temp, DUNGEON_REGIGIGAS_CHAMBER);
+                // Boss/Gift Information
+                DrawBossInfoInWindow(idx, 16, temp, MONSTER_REGICE, MONSTER_NONE, true, GetSubXBit(69));
+                DrawBossInfoInWindow(idx, 55, temp, MONSTER_REGIROCK, MONSTER_NONE, true, GetSubXBit(70));
+                DrawBossInfoInWindow(idx, 94, temp, MONSTER_REGISTEEL, MONSTER_NONE, true, GetSubXBit(71));
+                DrawBossInfoInWindow(idx, 133, temp, MONSTER_REGIGIGAS, MONSTER_NONE, true, GetSubXBit(72));
             } else {
                 PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 138, temp);
+                DrawTextInWindow(idx, 1, 146, temp);
             }
-            break;
+            UpdateWindow(idx);
+            return;
         default:
             break;
     }
@@ -1148,7 +1320,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, TR_BUFF_LEN, missionDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             if(!IsDarkraiGoal()) {
-                DrawTextInWindow(idx, 1, 138, nonEssentialExtraInfo);
+                DrawTextInWindow(idx, 15, 146, nonEssentialExtraInfo);
             }
             break;
         case DCT_EARLY:;
@@ -1160,23 +1332,23 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case DCT_RULE:;
             if(AreLongLocationsOn()) {
                 PreprocessString(temp, TR_BUFF_LEN, ruleDungeonInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 1, 16, temp);
+                DrawTextInWindow(idx, 15, 16, temp);
                 PreprocessString(temp, TR_BUFF_LEN, nonEssentialExtraInfo, preFlagTracker, &preArgs);
             } else {
                 PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
             }
-            DrawTextInWindow(idx, 1, 138, temp);
+            DrawTextInWindow(idx, 15, 146, temp);
             break;
         case DCT_OTHER:;
             PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
-            DrawTextInWindow(idx, 1, 138, temp);
+            DrawTextInWindow(idx, 15, 146, temp);
             break;
     }
     
     UpdateWindow(idx);
 }
 
-// Handles deeleting the top screen background.
+// Handles deleting the top screen background.
 void ApTrackerFreeTopScreenBG() {
     apTrackerWindowPtr->field_0x0 = 0;
     apTrackerWindowPtr->state = 1; // maybe try 0???
@@ -1285,18 +1457,18 @@ uint32_t StateManagerTrackerTopScreen() {
             apTrackerWindowPtr->state = 5;
             // No break is intentional here. It should fall into case 5.
         case 5:;
+            uint8_t location = CheckLocationOverrides(GetTrackerList()[CUSTOM_SAVE_AREA.trackerPage]);
             if(apTrackerWindowPtr->closing == 0 && apTrackerWindowPtr->displayable == 0) {
                 if(displayedOption != CUSTOM_SAVE_AREA.trackerPage) {
                     displayedOption = CUSTOM_SAVE_AREA.trackerPage;
                     trackerVelocity = 200;
-                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]));
-                    if(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage] == 255) {
+                    ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, location);
+                    if(location == 255) {
                         drinksDisplayed = 0;
                         drinkEventsDisplayed = 0;
                     }                        
                     updaterDelay = 0;
                 } else {
-                    uint8_t location = CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
                     bool shouldSpinTracker = location == DUNGEON_DARK_CRATER;
                     if(location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
                         if(IsDarkraiGoal()) { // If Darkrai is Goal, only spin while not completed yet.
@@ -1316,7 +1488,7 @@ uint32_t StateManagerTrackerTopScreen() {
                             // There's so much on the top menu for treasure town that updating every frame causes noticeable lag :(
                             // There could be a better solution? However, the base game does use this method to delay stuff some
                             // number of frames in some places so it's probably okay.
-                            ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+                            ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, location);
                             updaterDelay = 0;
                         } else {
                             updaterDelay++;
@@ -1379,7 +1551,7 @@ void InitializeTrackerTopScreen() {
     if(apTrackerWindowPtr->window_id == -2) {
         displayedOption = CUSTOM_SAVE_AREA.trackerPage;
         apTrackerWindowPtr->window_id = CreateTextBox(&trackerTopScreenWinParams, NULL);
-        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, CheckLocationOverrides(trackerLocationDungeonIds[displayedOption]));
+        ApTrackerTopScreenWindowUpdate(apTrackerWindowPtr->window_id, CheckLocationOverrides(GetTrackerList()[displayedOption]));
     }
     apTrackerWindowPtr->state = 3;
 }
@@ -1421,17 +1593,31 @@ TopScreenMode apTrackerMode = {
 
 void CreateTrackerMenu() {
     struct window_params pickWinParams = {.x_offset = 2, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}};
+    struct window_params warningWinParams = {.x_offset = 22, .y_offset = 2, .box_type = {0xFF}, .screen = {SCREEN_MAIN}, .width = 8, .height = 18};
     struct window_flags winFlags = {.b_cancel = true, .se_on = true, .set_choice = true, .menu_title = true, .menu_lower_bar = true};
     struct window_extra_info winExInfo = {.set_choice_id = CUSTOM_SAVE_AREA.trackerPage, .title_string_id = 527, .title_height = 0x10};
-    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn,
-        (sizeof(trackerLocationDungeonIds)/sizeof(trackerLocationDungeonIds[0])) - (AreLongLocationsOn() ? 0 : 10), 8);
+    // TODO: Remove warning once localizations are complete AND/OR remove it for languages with complete localizations.
+    if(GetLanguage() != 0) {
+        localizationWarningId = CreateTextBox(&warningWinParams, NULL);
+        DrawTextInWindow(localizationWarningId, 1, 1, "Warning:[R]Localization[R]for the AP[R]Tracker is[R]incomplete.[R]Contact if[R]you'd like to[R]help.");
+        UpdateWindow(localizationWarningId);
+    }
+    pickWindowId = CreateAdvancedMenu(&pickWinParams, winFlags, &winExInfo, ApTrackerEntryFn, GetTrackerListLength(), 8);
     if(GetTopScreenOptionType() != 5) {
         SetupGroundTopScreenFunctions(&apTrackerMode);
     }
 }
 
 void CloseTrackerMenu() {
-    CloseTextBox(pickWindowId);
+    if (pickWindowId != -2) {
+        CloseAdvancedMenu(pickWindowId);
+        pickWindowId = -2;
+    }
+    
+    if(localizationWarningId != -2) {
+        CloseTextBox(localizationWarningId);
+        localizationWarningId = -2;
+    }
     return;
 }
 
@@ -1483,7 +1669,7 @@ void CreateTrackerTopScreenDungeon() {
 }
 
 uint32_t UpdateTrackerTopScreenDungeon() {
-    uint8_t location = CheckLocationOverrides(trackerLocationDungeonIds[CUSTOM_SAVE_AREA.trackerPage]);
+    uint8_t location = CheckLocationOverrides(GetTrackerList()[CUSTOM_SAVE_AREA.trackerPage]);
     bool shouldSpinTracker = location == DUNGEON_DARK_CRATER;
     if(location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
         if(IsDarkraiGoal()) { // If Darkrai is Goal, only spin while not completed yet.
