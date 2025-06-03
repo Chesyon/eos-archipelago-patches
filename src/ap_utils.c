@@ -124,4 +124,5 @@ bool __attribute__((naked)) GetDebugRomFlagEnabled() {
     asm("cmp r0,r1");
     asm("moveq r0,#1");
     asm("movne r0,#0");
+    asm("bx lr");
 }
