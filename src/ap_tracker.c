@@ -350,7 +350,7 @@ uint8_t CheckLocationOverrides (uint8_t location) {
         case 3:;
             return 249;
         case 4:;
-            return 249;
+            return 248;
         default:;
             return location;
     }
@@ -1072,8 +1072,8 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             return;
         case 252:; // Bidoof SE
             preArgs.strings[0] = GetSubXBit(66) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(DUNGEON_DEEP_STAR_CAVE) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(DUNGEON_STAR_CAVE_PIT) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, DUNGEON_DEEP_STAR_CAVE) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, DUNGEON_STAR_CAVE_PIT) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, bidoofDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
@@ -1147,17 +1147,17 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             UpdateWindow(idx);
             return;
         case 251:; // Igglybuff SE
-            preArgs.strings[0] = GetDungeonMode(128) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(129) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(130) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 128) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 129) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 130) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, iggybuffDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
         case 250:; // Sunflora SE
-            preArgs.strings[0] = GetDungeonMode(159) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(161) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(164) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 159) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 161) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 164) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, sunfloraDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             switch (LoadScriptVariableValue(NULL, VAR_GROUND_ENTER)) {
@@ -1231,26 +1231,26 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             UpdateWindow(idx);
             return;
         case 249:; // Team Charm SE
-            preArgs.strings[0] = GetDungeonMode(149) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(150) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(153) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = GetDungeonMode(154) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(155) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 149) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 150) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 153) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 154) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 155) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, charmDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
         case 248:; // Future SE
-            preArgs.strings[0] = GetDungeonMode(133) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(136) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(137) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = GetDungeonMode(139) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(141) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 133) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 136) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 137) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 139) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 141) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.strings[0] = GetDungeonMode(142) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = GetDungeonMode(145) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = GetDungeonMode(146) == DMODE_OPEN_AND_REQUEST ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 142) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 145) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 146) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
