@@ -2484,7 +2484,7 @@ coro EVENT_M00A_01 {
             hold;
         default:
 
-            switch (ProcessSpecial(107,0,0)) {
+            switch (ProcessSpecial(114,0,0)) {
                 case 0:
                     jump @yes_main;
                     break;
@@ -13216,6 +13216,7 @@ coro BUBBLE_TEST {
             return;
         default:
             if ( $SCENARIO_MAIN == 30) {
+                
                 $SCENARIO_MAIN = scn[29, 99];
             }
             break;

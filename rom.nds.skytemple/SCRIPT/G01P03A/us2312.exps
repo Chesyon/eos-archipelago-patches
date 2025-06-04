@@ -1,0 +1,7 @@
+def 0 {
+    message_SetFace(ACTOR_NPC_RUNPAPPA,FACE_NORMAL,FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk(" Duuuuuude, some downer is ruining\nthe vibe down at the cafe![K] They won\'t shut up\nabout \"team [team]\".[K] Make 'em go away!");
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+    hold;
+}

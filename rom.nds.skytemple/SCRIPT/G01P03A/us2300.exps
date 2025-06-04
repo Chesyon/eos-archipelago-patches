@@ -30,3 +30,18 @@ def 2 for_actor(ACTOR_NPC_KIMAWARI) {
             JumpCommon(CORO_LIVES_MOVE_NORMAL);
     }
 }
+
+
+def 3 for_actor(ACTOR_NPC_KURABU) {
+    if not ($SCENARIO_MAIN_BIT_FLAG[92]) {
+        Destroy();
+    }
+    end;
+}
+
+def 4 for_actor(ACTOR_NPC_RUNPAPPA) {
+    if not ($SCENARIO_MAIN_BIT_FLAG[93]) {
+        Destroy();
+    }
+    end;
+}
