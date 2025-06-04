@@ -54,11 +54,13 @@ void DoLevelScaling(){
   if((dungeonId >= 123 && dungeonId <= 164) || apSettings.levelScalingMode == LEVEL_SCALING_OFF) return; // block level scaling if we're in an SE dungeon or if level scaling is disabled.
   int maxLevel_mult_512 = GetHighestLevelTeamMember() << 9; // for some reason in the struct, the spawn level is stored as level << 9... so we bitshift it now.
   for (int i = 0; i < 16; i++){ // iterate through spawn_entries_master
-    uint16_t enemyLevel_mult_512 = DUNGEON_PTR->spawn_entries_master[i].level_mult_512;
-    // there are three conditions for scaling, detailed below. i *could* cram it all into one line but i figured this would be better for readability.
+    struct monster_spawn_entry enemy = DUNGEON_PTR->spawn_entries_master[i];
+    uint16_t enemyLevel_mult_512 = enemy.level_mult_512;
+    // there are four conditions for scaling, detailed below. i *could* cram it all into one line but i figured this would be better for readability.
     bool shouldScale = enemyLevel_mult_512 > maxLevel_mult_512; // only scale if the enemy is ABOVE that the party
     shouldScale |= apSettings.levelScalingMode == LEVEL_SCALING_DIFFICULT; // UNLESS on difficult mode, in which case we should scale regardless of the enemy level.
-    shouldScale &= enemyLevel_mult_512 > 512; // and lastly, we should NEVER scale an enemy if they're level 1 or 0.
+    shouldScale &= enemyLevel_mult_512 > 512; // we should NEVER scale an enemy if they're level 1 or 0.
+    shouldScale &= FemaleToMaleForm(enemy.id.val) != 383; // oh and kecleon can't scale either. sorry lappy
     if(shouldScale) {
       DUNGEON_PTR->spawn_entries_master[i].level_mult_512 = maxLevel_mult_512;
     }
