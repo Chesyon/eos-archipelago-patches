@@ -151,7 +151,7 @@ buildobjs:
 .PHONY: clean
 clean:
 	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
-	@echo Clean!
+	@echo "\e[1;36mClean! \e[0m"
  
 #---------------------------------------------------------------------------------
 else
@@ -202,8 +202,8 @@ xdelta:
 	
 .PHONY: bsdiff
 bsdiff:
-	@echo "\e[1;33mThis part takes a while, please be patient! \e[0m"
-	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
+	@echo "\e[1;33mThis part takes up to a minute, please be patient! \e[0m"
+	bsdiff4f vanilla.nds out.nds archipelago-base.bsdiff
 	@echo "\e[1;32mDone! \e[0m"
 	
 .PHONY: overlay36-location
@@ -229,7 +229,7 @@ everything: rom out+c overlay36-location hintables-location
 .PHONY: everything+x
 everything+x: xdelta out+c overlay36-location hintables-location
 
-# Don't apply or make an xdelta, and apply CoT code. (same as out-c)
+# Don't apply or make an xdelta, and apply CoT code. (same as out+c)
 .PHONY: everything-x
 everything-x: out+c overlay36-location hintables-location
 

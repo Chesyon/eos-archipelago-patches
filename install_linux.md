@@ -13,8 +13,8 @@ You can install eos-archipelago-patches on Ubuntu or Debian using the following 
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
 2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta3`. You will need to enter your password during the installation.
-3. Install Python dependencies: `pip3 install pyyaml ndspy bsdiff`
-    - **Note:** If this does not work, try `pip3 install pyyaml ndspy bsdiff --break-system-packages`.
+3. Install Python dependencies: `pip install pyyaml ndspy git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06`
+    - **Note:** If this does not work, try `pip install pyyaml ndspy git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06 --break-system-packages`.
 4. Compile `armips`:
     1. Run `git clone --recursive https://github.com/Kingcom/armips.git` to download the source code.
     2. Run `cd armips` to enter the directory.
