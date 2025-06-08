@@ -9880,20 +9880,10 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 52:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Cleared Deep Miracle Sea Flag 214");
-                        if ($SCENARIO_SUB2 &<< 5) {                    
-                            if ($SCENARIO_TALK_BIT_FLAG[214]) {
-                                JumpCommon(CORO_EVENT_S03_16);
-                            } else {
-                                $SCENARIO_TALK_BIT_FLAG[214] = 1;
-                                JumpCommon(CORO_EVENT_S03_15);
-                            }
-                        } else {
-                            message_Mail("[CN]You cannot challenge [CS:G]Gyarados[CR]\n[CN]until [CS:G]Manaphy[CR] is sick!");
-                            message_Close();
-                            debug_Print("Missions Miracle Sea");
-                            dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
-                            JumpCommon(CORO_EVENT_HA_SAME);
-                        }
+                        
+                        debug_Print("Missions Miracle Sea");
+                        dungeon_mode(51) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                         break;
                     case 53:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -11829,6 +11819,20 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 52:
             debug_Print('LABEL_D052_CLEAR');
+            if not ($SCENARIO_SUB2 &<< 6) {
+                if ($SCENARIO_SUB2 &<< 5) {                    
+                    if ($SCENARIO_TALK_BIT_FLAG[214]) {
+                        JumpCommon(CORO_EVENT_S03_16);
+                    } else {
+                        $SCENARIO_TALK_BIT_FLAG[214] = 1;
+                        JumpCommon(CORO_EVENT_S03_15);
+                    }
+                } else {
+                    message_Mail("[CN]You cannot challenge [CS:G]Gyarados[CR]\n[CN]until [CS:G]Manaphy[CR] is sick!");
+                    message_Close();
+                    JumpCommon(CORO_EVENT_HA_SAME);
+                }
+            }
             if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
                 switch ( scn($SCENARIO_SUB2)[1] ) { // Phione Check Claimed?
                     case &<< 5:
