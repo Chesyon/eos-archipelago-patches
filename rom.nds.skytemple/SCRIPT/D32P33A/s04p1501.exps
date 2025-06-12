@@ -61,7 +61,7 @@ def 0 {
             spanish="[CN]¡Has conseguido el permiso del guardián!",
         });
     } else {
-        $SCENARIO_MAIN_BIT_FLAG[127] = 1;
+        $SCENARIO_MAIN_BIT_FLAG[127] = 0;
         message_Mail("[FT:0][CN]The guardian lifted the curse!");
     }
     WaitSe(7951);

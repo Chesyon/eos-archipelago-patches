@@ -3,6 +3,7 @@ import "checks.exps";
 def 0 {
     if (debug) {
         //~AssignCheck(7); // Sunflora SE Unlocked!
+        //$VERSION = MENU_S_O_S_MAIL_PICKER;
         ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,138,0);
         $SCENARIO_BALANCE_FLAG = 7;
         $PERFORMANCE_PROGRESS_LIST[2] = 1;

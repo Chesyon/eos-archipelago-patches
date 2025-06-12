@@ -1,520 +1,1621 @@
-
 def 0 {
-    sound_Stop();
-    back_SetGround(LEVEL_D03P11A);
-    supervision_Acting(0);
-    with (performer 0) {
-        camera_SetMyself();
-    }
-    screen_FadeIn(1, 30);
-    Wait(30);
-    message_SetFace(ACTOR_NPC_JIBAKOIRU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
-    message_Talk({
-        english=" ZZZT! I am [CS:N]Magnezone[CR], the\nprimary officer in this region! ZZZT!",
-        french=" ZZZT! Je suis [CS:N]Magnézone[CR],\nle shérif de la région! ZZZT!",
-        german=" ZZZT! Ich bin [CS:N]Magnezone[CR], der\nOberwachtmeister der Gegend! ZZZT!",
-        italian=" ZZZT! Sono [CS:N]Magnezone[CR],\nil Commissario di questa regione! ZZZT!",
-        spanish=" ¡Bzz! ¡Soy [CS:N]Magnezone[CR], el\nrepresentante de la ley en esta región! ¡Bzz!",
-    });
-    message_Talk({
-        english=" ZZZT! Thanks to you...",
-        french=" ZZZT! Grâce à vous...",
-        german=" ZZZT! Vielen Dank!",
-        italian=" ZZZT! Grazie a voi...",
-        spanish=" ¡Bzz! Gracias a vuestro equipo...",
-    });
-    message_Talk({
-        english=" We have been able to arrest a\nwanted outlaw! ZZZT!",
-        french=" Nous avons pu arrêter un\ncriminel recherché! ZZZT!",
-        german=" Dank euch konnten wir einen\ngesuchten Verbrecher fassen! ZZZT!",
-        italian=" Siamo riusciti ad arrestare un\nricercato! ZZZT!",
-        spanish=" ¡Hemos podido arrestar\na un peligroso malhechor! ¡Bzz!",
-    });
-    message_Talk({
-        english=" ZZZT! We owe you great thanks\nfor your cooperation! ZZZT!",
-        french=" ZZZT! Merci beaucoup de votre\ncoopération! ZZZT!",
-        german=" ZZZT! Wir sind euch für eure\nMitarbeit zu großem Dank verpflichtet! ZZZT!",
-        italian=" ZZZT! Grazie mille per la vostra\ncollaborazione! ZZZT!",
-        spanish=" ¡Bzz! ¡Estamos muy agradecidos\npor vuestra colaboración! ¡Bzz!",
-    });
-    message_Close();
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    se_Play(6418);
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        SetEffect(EFFECT_LAUGHING, 3);
-    }
-    with (actor ACTOR_NPC_KOIRU) {
-        SetEffect(EFFECT_LAUGHING, 3);
-    }
-    with (actor ACTOR_NPC_KOIRU2) {
-        SetEffect(EFFECT_LAUGHING, 3);
-    }
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        SetAnimation(22);
-    }
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        WaitAnimation();
-    }
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        SetAnimation(2);
-    }
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        SetEffect(EFFECT_NONE, 3);
-    }
-    with (actor ACTOR_NPC_KOIRU) {
-        SetEffect(EFFECT_NONE, 3);
-    }
-    with (actor ACTOR_NPC_KOIRU2) {
-        SetEffect(EFFECT_NONE, 3);
-    }
-    Wait(20);
-    message_Talk({
-        english=" ZZZT! We will send the reward\nto your guild. Thank you again! ZZZT!",
-        french=" ZZZT! Nous remettrons la\nrécompense à votre Guilde. Merci\nencore! ZZZT!",
-        german=" ZZZT! Wir lassen die Belohnung\neurer Gilde zukommen. Nochmals danke! ZZZT!",
-        italian=" ZZZT! Manderemo la ricompensa\nalla Gilda. Grazie ancora! ZZZT!",
-        spanish=" ¡Bzz! Enviaremos la recompensa\na vuestro [CS:N]Pokégremio[CR].\n¡Muchísimas gracias por todo! ¡Bzz!",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_SURIIPU);
-    }
-    WaitExecuteLives(ACTOR_NPC_JIBAKOIRU);
-    message_Talk({
-        english=" ZZZT! Now come with us! ZZZT!",
-        french=" ZZZT! Viens avec nous! ZZZT!",
-        german=" ZZZT! Jetzt komm mit! ZZZT!",
-        italian=" ZZZT! Adesso vieni\ncon noi! ZZZT!",
-        spanish=" ¡Bzz! Ahora, ¡ven con nosotros!\n¡Bzz!",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    se_Play(8961);
-    with (actor ACTOR_NPC_SURIIPU) {
-        SetEffect(EFFECT_SWEAT_DROP, 3);
-    }
-    with (actor ACTOR_NPC_SURIIPU) {
-        WaitEffect();
-    }
-    message_SetFace(ACTOR_NPC_SURIIPU, FACE_SIGH, FACE_POS_TOP_L_CENTER);
-    message_Talk({
-        english=" Awww...",
-        french=" Aïe...",
-        german=" Grmpf...",
-        italian=" Awww...",
-        spanish=" ¡Ay!",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        MovePositionOffset(1, 200, 0);
-    }
-    Wait(15);
-    with (actor ACTOR_ATTENDANT1) {
-        Turn2Direction(4, 10, DIR_UPRIGHT);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2Direction(4, 10, DIR_UPRIGHT);
-    }
-    with (actor ACTOR_NPC_KOIRU) {
-        Turn2Direction(4, 10, DIR_RIGHT);
-    }
-    with (actor ACTOR_NPC_SURIIPU) {
-        MovePositionOffset(1, 16, 16);
-    }
-    with (actor ACTOR_NPC_KOIRU2) {
-        MovePositionOffset(1, 32, 32);
-    }
-    WaitExecuteLives(ACTOR_NPC_SURIIPU);
-    with (actor ACTOR_PLAYER) {
-        Turn2Direction(4, 10, DIR_UPRIGHT);
-    }
-    with (actor ACTOR_NPC_SURIIPU) {
-        Turn2Direction(4, 10, DIR_RIGHT);
-    }
-    WaitExecuteLives(ACTOR_NPC_KOIRU2);
-    with (actor ACTOR_PLAYER) {
-        Turn2Direction(16, 10, DIR_RIGHT);
-    }
-    with (actor ACTOR_ATTENDANT1) {
-        Turn2Direction(16, 10, DIR_RIGHT);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2Direction(16, 10, DIR_RIGHT);
-    }
-    with (actor ACTOR_NPC_KOIRU) {
-        MovePositionOffset(1, 200, 0);
-    }
-    with (actor ACTOR_NPC_SURIIPU) {
-        MovePositionOffset(1, 200, 0);
-    }
-    with (actor ACTOR_NPC_KOIRU2) {
-        MovePositionOffset(1, 200, 0);
-    }
-    WaitExecuteLives(ACTOR_NPC_KOIRU2);
-    with (actor ACTOR_NPC_JIBAKOIRU) {
-        Destroy();
-    }
-    with (actor ACTOR_NPC_SURIIPU) {
-        Destroy();
-    }
-    with (actor ACTOR_NPC_KOIRU) {
-        Destroy();
-    }
-    with (actor ACTOR_NPC_KOIRU2) {
-        Destroy();
-    }
-    supervision_Acting(1);
-    message_SetActor(ACTOR_NPC_MARIRU);
-    message_Talk({
-        english=" [CS:N]Azurill[CR]!",
-        french=" [CS:N]Azurill[CR]!",
-        german=" [CS:N]Azurill[CR]!",
-        italian=" [CS:N]Azurill[CR]!",
-        spanish=" ¡[CS:N]Azurill[CR]!",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    se_Play(8978);
-    with (actor ACTOR_NPC_RURIRI) {
-        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        WaitEffect();
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    with (actor ACTOR_PLAYER) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
-    }
-    with (actor ACTOR_ATTENDANT1) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
-    }
-    with (performer 0) {
-        MovePositionOffset(33152, 0, 80);
-    }
-    WaitExecutePerformer(0);
-    Wait(30);
-    with (actor ACTOR_NPC_RURIRI) {
-        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    message_SetFace(ACTOR_NPC_RURIRI, FACE_TEARY_EYED, FACE_POS_TOP_R_CENTER);
-    message_Talk({
-        english=" [CS:N]Marill[CR]!",
-        french=" [CS:N]Marill[CR]!",
-        german=" [CS:N]Marill[CR]!",
-        italian=" [CS:N]Marill[CR]!",
-        spanish=" ¡[CS:N]Marill[CR]!",
-    });
-    message_Close();
-    with (actor ACTOR_NPC_MARIRU) {
-        MovePositionMark(33152, Position<'m0', 34.5, 36.5>);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        MovePositionMark(33152, Position<'m1', 34.5, 34.5>);
-    }
-    with (performer 0) {
-        MovePositionMark(1, Position<'m2', 35, 34.5>);
-    }
-    WaitExecuteLives(ACTOR_NPC_MARIRU);
-    WaitExecutePerformer(0);
-    bgm_PlayFadeIn(BGM_HEARTWARMING, 0, 256);
-    with (actor ACTOR_NPC_RURIRI) {
-        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    message_SetFace(ACTOR_NPC_RURIRI, FACE_SIGH, FACE_POS_BOTTOM_R_CENTER);
-    message_FacePositionOffset(-1, -2);
-    message_Talk({
-        english=" Waaaaah!",
-        french=" Ouiiin!",
-        german=" Waaaaah!",
-        italian=" Waaaaah!",
-        spanish=" ¡Buaaa!",
-    });
-    message_Talk({
-        english=" [CS:N]Marill[CR]![K] It was so scary!",
-        french=" [CS:N]Marill[CR]![K] J\'ai eu si peur!",
-        german=" [CS:N]Marill[CR]![K] Ich hatte solche Angst!",
-        italian=" [CS:N]Marill[CR]![K] Ho avuto tanta paura!",
-        spanish=" ¡[CS:N]Marill[CR]![K]\n¡Qué miedo he pasado!",
-    });
-    with (actor ACTOR_NPC_RURIRI) {
-        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
-    }
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    message_SetFace(ACTOR_NPC_MARIRU, FACE_SIGH, FACE_POS_BOTTOM_L_FACEINW);
-    message_Talk({
-        english=" You OK, [CS:N]Azurill[CR]?[K] Are you hurt?",
-        french=" Ça va, [CS:N]Azurill[CR]?[K] Tu es blessé?",
-        german=" Alles okay, [CS:N]Azurill[CR]?[K] Bist du\nverletzt?",
-        italian=" Stai bene, [CS:N]Azurill[CR]?[K] Sei ferito?",
-        spanish=" ¿Estás bien, [CS:N]Azurill[CR]?[K]\n¿No te has hecho daño?",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_ATTENDANT1) {
-        MovePositionOffset(1, 0, 8);
-    }
-    Wait(15);
-    with (actor ACTOR_PLAYER) {
-        MovePositionOffset(1, 0, 8);
-    }
-    WaitExecuteLives(ACTOR_PLAYER);
-    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
-    message_SwitchTalk ($PARTNER_TALK_KIND) {
-        case 1:
-            {
-                english=" He\'s fine. The little guy\'s not\nhurt at all.",
-                french=" Il va bien. Le petit bonhomme\nest sain et sauf.",
-                german=" Es geht ihm gut. Der kleine Kerl\nist nicht verletzt.",
-                italian=" Sta bene. Non ha neanche un \ngraffio.",
-                spanish=" Está bien. No tiene ni un\nrasguño.",
-            }
-        case 2:
-            {
-                english=" He\'s fine. The little guy hasn\'t\nbeen harmed in any way.",
-                french=" Il va bien. Le petit bonhomme\nest sain et sauf.",
-                german=" Es geht ihm gut. Der kleine Kerl\nist unversehrt.",
-                italian=" Sta bene. Non ha neanche un \ngraffio.",
-                spanish=" Está bien. No tiene ni un\nrasguño.",
-            }
-        default:
-            {
-                english=" He\'s fine. The little guy\'s not\nhurt in any way.",
-                french=" Il va bien. Le petit bonhomme\nest sain et sauf.",
-                german=" Es geht ihm gut. Der kleine Kerl\nist unversehrt.",
-                italian=" Sta bene. Non ha neanche un \ngraffio.",
-                spanish=" Está bien. No tiene ni un\nrasguño.",
-            }
-    }
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_MARIRU) {
-        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
-    }
-    WaitExecuteLives(ACTOR_NPC_MARIRU);
-    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-    message_Talk({
-        english=" Really?",
-        french=" Vraiment?",
-        german=" Wirklich?",
-        italian=" Davvero?",
-        spanish=" ¿De verdad?",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    message_SetFace(ACTOR_NPC_MARIRU, FACE_TEARY_EYED, FACE_POS_BOTTOM_L_FACEINW);
-    message_Talk({
-        english=" That\'s a relief!",
-        french=" Ouf, je suis soulagé!",
-        german=" Ich bin so erleichtert!",
-        italian=" Per fortuna!",
-        spanish=" ¡Menos mal!",
-    });
-    message_KeyWait();
-    with (actor ACTOR_NPC_MARIRU) {
-        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
-    }
-    message_Talk({
-        english=" Oh, [CS:N]Azurill[CR]...[K][CS:N]Azurill[CR]...",
-        french=" Oh, [CS:N]Azurill[CR]... [K][CS:N]Azurill[CR]...",
-        german=" Oh, [CS:N]Azurill[CR]...[K] [CS:N]Azurill[CR]...",
-        italian=" Oh, [CS:N]Azurill[CR]...[K] [CS:N]Azurill[CR]...",
-        spanish=" [CS:N]Azurill[CR]. [K]¡[CS:N]Azurill[CR]!",
-    });
-    Wait(10);
-    with (actor ACTOR_NPC_RURIRI) {
-        SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
-    }
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    Wait(20);
-    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_TOP_L_CENTER);
-    message_SwitchTalk ($PARTNER_TALK_KIND) {
-        case 1:
-            {
-                english=" I\'m really glad for you guys.",
-                french=" Je suis content pour vous.",
-                german=" Ich freue mich wirklich für\neuch zwei.",
-                italian=" Sono davvero felice per voi.",
-                spanish=" Me alegro mucho por vosotros.",
-            }
-        case 2:
-            {
-                english=" I\'m glad you kids are happy!",
-                french=" Je suis content pour vous.",
-                german=" Ich freue mich so für euch!",
-                italian=" Sono davvero felice per voi.",
-                spanish=" Me alegro mucho por los dos.",
-            }
-        default:
-            {
-                english=" I\'m truly happy for you two!",
-                french=" Je suis contente pour vous.",
-                german=" Ich freue mich wirklich für\neuch beide!",
-                italian=" Sono davvero felice per voi.",
-                spanish=" ¡Me alegro mucho por ambos!",
-            }
-    }
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_MARIRU) {
-        MovePositionOffset(1, -16, -16);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        MovePositionOffset(1, 16, 0);
-    }
-    WaitExecuteLives(ACTOR_NPC_MARIRU);
-    with (actor ACTOR_NPC_MARIRU) {
-        Turn2Direction(4, 10, DIR_UP);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2Direction(4, 10, DIR_UP);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-    message_Talk({
-        english=" You did this all for us,\n[partner] and [hero].",
-        french=" Vous avez fait tout ça pour\nnous, [partner] et [hero].",
-        german=" Ihr habt das nur für uns getan,\n[partner] und [hero].",
-        italian=" Avete fatto tutto questo solo per\nnoi, [partner] e [hero].",
-        spanish=" [partner] y [hero],\nno tenemos palabras.",
-    });
-    message_Talk({
-        english=" We won\'t forget what you did\nfor us.[K] Thank you so much.",
-        french=" Nous n\'oublierons jamais votre\ngentillesse. Merci beaucoup.",
-        german=" Wir werden das niemals\nvergessen.[K] Vielen, vielen Dank.",
-        italian=" Non lo dimenticheremo.[K] \nGrazie mille.",
-        spanish=" No olvidaremos lo que habéis\nhecho por nosotros.[K] Muchísimas gracias.",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_MARIRU) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
-    }
-    WaitExecuteLives(ACTOR_NPC_MARIRU);
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
-    }
-    message_Talk({
-        english=" Come on, [CS:N]Azurill[CR]. You too.",
-        french=" Allez, [CS:N]Azurill[CR]. Toi aussi.",
-        german=" Komm schon, [CS:N]Azurill[CR]. Jetzt du.",
-        italian=" Forza, [CS:N]Azurill[CR]. Ringrazia anche\ntu.",
-        spanish=" Venga, [CS:N]Azurill[CR]. Díselo.",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_RURIRI) {
-        SetAnimation(23);
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        WaitAnimation();
-    }
-    with (actor ACTOR_NPC_RURIRI) {
-        SetAnimation(2);
-    }
-    message_SetFace(ACTOR_NPC_RURIRI, FACE_TEARY_EYED, FACE_POS_BOTTOM_R_FACEINW);
-    message_Talk({
-        english=" Yup...",
-        french=" Ouais...",
-        german=" Ja...",
-        italian=" Sì...",
-        spanish=" Sí.",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    with (actor ACTOR_NPC_RURIRI) {
-        Turn2Direction(4, 10, DIR_UP);
-    }
-    WaitExecuteLives(ACTOR_NPC_RURIRI);
-    with (actor ACTOR_NPC_MARIRU) {
-        Turn2Direction(4, 10, DIR_UP);
-    }
-    message_SetFace(ACTOR_NPC_RURIRI, FACE_TEARY_EYED, FACE_POS_BOTTOM_R_FACEINW);
-    message_Talk({
-        english=" Thank you very much![K] Thank you\nfor rescuing me!",
-        french=" Merci mille fois![K] Merci de\nm\'avoir sauvé!",
-        german=" Vielen, vielen Dank![K] Danke, dass\nihr mich gerettet habt!",
-        italian=" Grazie![K] Grazie per\navermi salvato!",
-        spanish=" ¡Muchísimas gracias![K]\n¡Gracias por rescatarme!",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
-    message_Talk({
-        english=" Really...[K] Really, thank you!",
-        french=" Vraiment...[K] merci!",
-        german=" Wirklich![K] Vielen, vielen Dank!",
-        italian=" Davvero...[K] Grazie di cuore!",
-        spanish=" De verdad...[K] ¡Muchas gracias!",
-    });
-    message_Close();
-    bgm_FadeOut(120);
-    screen_FadeOut(1, 90);
-    WaitBgm(BGM_HEARTWARMING);
-    Wait(60);
-    me_Play(7);
-    message_Explanation({
-        english="[CN]The Exploration Team Federation\n[CN]has sent a message...[W:30]",
-        french="[CN]La Fédération des Equipes d\'Exploration\n[CN]a envoyé un message...[W:30]",
-        german="[CN]Der Erkundungsteamverband\n[CN]hat eine Nachricht geschickt.[W:30]",
-        italian="[CN]Arriva un messaggio della Federazione\n[CN]Squadre d\'Esplorazione![W:30]",
-        spanish="[CN]La Federación de Exploradores\n[CN]ha enviado un mensaje...[W:30]",
-    });
-    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-    me_Play(1);
-    message_Explanation({
-        english="[CN][hero]\'s team (may have been) rewarded\n[CN]with an enlarged Treasure Bag![W:100]",
-        french="[CN]L\'équipe de [hero] est récompensée\n[CN]par un Sac à Trésor plus grand![W:100]",
-        german="[CN]Das Team von [hero] erhält zur\n[CN]Belohnung einen größeren Schatzbeutel![W:100]",
-        italian="[CN]La squadra di [hero] riceve in premio\n[CN]una Sacca dei tesori più capiente![W:100]",
-        spanish="[CN]¡El equipo de [hero] fue recompensado\n[CN]con una Bolsa mayor![W:100]",
-    });
-    message_Explanation({
-        english="[CN]You can now carry more\n[CN]items than you could before!",
-        french="[CN]Dorénavant, vous pourrez\n[CN]transporter plus d\'objets!",
-        german="[CN]Du kannst jetzt mehr\n[CN]Items als bisher tragen!",
-        italian="[CN]Adesso potrete trasportare molti più\n[CN]strumenti di prima!",
-        spanish="[CN]¡Ahora puedes llevar\n[CN]más objetos que antes!",
-    });
-    message_Explanation({
-        english="[CN]Wait...[K]\n[CN]There\'s one more message.",
-        french="[CN]Tiens...[K]\n[CN]Il y a un autre message.",
-        german="[CN]Augenblick...[K]\n[CN]Da ist noch eine Nachricht.",
-        italian="[CN]Un momento...[K]\n[CN]C\'è un altro messaggio.",
-        spanish="[CN]Espera...[K]\n[CN]Hay un mensaje más.",
-    });
-    message_Close();
-    back_SetGround(LEVEL_P15P01A);
-    supervision_Acting(10);
-    with (performer 0) {
-        camera_SetMyself();
-    }
-    back_SetBackEffect(4);
-    screen_FadeIn(1, 15);
-    Wait(30);
-    me_Play(5);
-    message_Mail({
-        english="[CN]The check for the Special Episode\n[CN]\"Bidoof\'s Wish\"\n[CN]is no longer here![W:90]",
-        french="[CN]L\'Episode Spécial\n[CN]\"Le vœu de Keunotor\"\n[CN]est maintenant disponible![W:90]",
-        german="[CN]Die Bonusepisode\n[CN][F:S2]Der Wunsch von Bidiza[F:E2]\n[CN]wurde freigeschaltet![W:90]",
-        italian="[CN]L\'episodio speciale\n[CN]\"Il desiderio di Bidoof\"\n[CN]è ora disponibile![W:90]",
-        spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"El deseo de Bidoof\".[W:90]",
-    });
-    message_Mail({
-        english="[CN]The check can be found by\n[CN]simply reading [CS:G]Bidoof[CR]\'s diary\n[CN]in his room in the guild.",
-        french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
-        german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
-        italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
-        spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
-    });
-    message_Mail({
-        english="[CN]There are no pre-requisites\n[CN]for this check, so be sure to grab it!",
-        french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
-        german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
-        italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
-        spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
-    });
-    message_Close();
-    screen_FadeOut(1, 30);
-    back_SetBackEffect(5);
-    Wait(30);
-    end;
+ $LOCAL1 = value($SCENARIO_SUB2);
+message_Monologue('Thank you for answering all those questions.');
+ switch($LOCAL1) {
+case 0:
+message_Monologue('You seem to be...[K] Someone who is the [CS:C]Star[CR]!\n[P]You love to be center of attention, the boss,\nthe one with the last word! You also\nhave a strong sense of responsibility.[P]\nYou command and work to be kind of a hero!\nYou do the things because of the attention,\nbut deep inside you, you know the good deeds\nmakes you happy regardless.[P]\nBut remember! Bravery and Recklessness are\nare hard to distinguish, be careful![P]\nThat being said... A [CS:C]Star[CR] like yourself is...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,733,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be an Eevee[CR]![W:60]');
+ jump @sH0;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,25,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Pikachu[CR]![W:60]');
+ jump @sH1;
+ }
+ }
+ }
+ case 1:
+message_Monologue('You seem to be...[K] Quite [CS:K]Supportive[CR]!\n[P]You never left someone behind, even if others\nbelieve they are not worth it.[P]\nYour strong heart is what makes other feel\nhappy around you!\nBut it frustrates you when you find out you\ncan\~27t help, no matter what you do.[P]\nBut remember! Being alone and being forgotten\nare two different things!\nYou can be kind of pushy sometimes, but your\ngood faith is inspirational.[P]\nA person so [CS:K]Supportive[CR] is represented by...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,155,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Cyndaquil[CR]![W:60]');
+ jump @sH2;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,625,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Pikachu[CR]![W:60]');
+ jump @sH3;
+ }
+ }
+ }
+ case 2:
+message_Monologue('You seem to be...[K] A little bit [CS:A]Silly[CR]!\n[P]A little bit? Well... Maybe more than that...\nYour wacky personality is kind of clownish.[P]\nBut you love to see people laugh and smile!\nYou sometimes feel like you go to far?[P]\nI\~27m not incriminating you, I\~27m just curious.[P]\nYour company is very appreciated for\nyour peers.\nYou really know how to turn sorrow into\nlaughter, that\~27s what matters the most![P]\nA [CS:A]Silly[CR] and joyous person like you is...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,481,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Mime Jr.[CR]![W:60]');
+ jump @sH4;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1140,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Scorbunny[CR]![W:60]');
+ jump @sH5;
+ }
+ }
+ }
+ case 3:
+message_Monologue('You seem to be...[K] [CS:Z]Lonely[CR]!\n[P]But you like it! Or at least, I hope so...\nYou even believe being alone is refreshing.[P]\nMaybe indirect friends? E-Friends so to speak.\nLife can be hard when you don\~27t find the right\npeople.[P]\nBut learning how to be alone is the key to\nknow how to be accompanied![P]\nNot being afraid of being alone is something\nmany people don\~27t understand...[P]\nBut I digress, you are...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,755,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Cyndaquil[CR]![W:60]');
+ jump @sH6;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,302,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Nuzleaf[CR]![W:60]');
+ jump @sH7;
+ }
+ }
+ }
+ case 4:
+message_Monologue('You seem to be...[K] An [CS:Q]Untalkative[CR] fellow!\n[P]You usually wait for everyone to stop talking\nbefore even trying to say a word.[P]\nSometimes you don\~27t even say it because\nthe topic shifted!\nAnnoying, right?[P]\nBut that also makes you quite a listener!\nPeople love to be heard![P]\nKind of ironic, given you struggle to talk...\nBut an action says more than anything![P]\nYour [CS:Q]Untalkative[CR] demeanor makes you...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,880,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Treecko[CR]![W:60]');
+ jump @sH8;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,541,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Venipede[CR]![W:60]');
+ jump @sH9;
+ }
+ }
+ }
+ case 5:
+message_Monologue('You seem to be...[K] A [CS:J]Restless[CR] individual!\n[P]Staying in one place is lame!\nThat\~27s something you said, right?[P]\nMoving around is what makes you happy.\nProactivity is key for your way of life!\nAre you competitive?[P]\nI ask because your effort is impressive!\nBet you could be a professional on something![P]\nOf course, that require discipline and focus.\n[W:60]Am I going too fast?[P]\nNo more waiting, your Pokémon is...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,538,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Froakie[CR]![W:60]');
+ jump @sH10;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1148,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Nickit[CR]![W:60]');
+ jump @sH11;
+ }
+ }
+ }
+ case 6:
+message_Monologue('You seem to be...[K] Very [CS:B]Grumpy[CR]!\n[P]What are you calling me!?\nI bet you won\~27t say it on my face huh?[P]\nThat was my impression of you.\nVery on point, right?\n...[W:30] No?[P]\nI was just kidding! You are likely very serious,\nbut you enjoy life![P]\nYou like looking tough because it is a vibe, a\nway to connect to others.[P]\nYou might be stylish on the eyes of others.\nFrowning, you live your life, What about it!?[P]\nYour [CS:B]Grumpy[CR] behaviour reminds me to...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,337,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Electrike[CR]![W:60]');
+ jump @sH12;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1141,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Venipede[CR]![W:60]');
+ jump @sH13;
+ }
+ }
+ }
+ case 7:
+message_Monologue('You seem to be...[K] Quite [CS:X]Glamorous[CR]!\n[P]You like to be good looking.\nNo mismatching clothes, pristine hygiene.[P]\nPeople might think you are superficial, but you\njust love the artistic value of it...\nMaybe you are not as good looking...[P]\nBut that is subjective! You like it, isn\~27t it?\nWho cares what other say about you?[P]\nYou enjoy talking about music, art and fashion.\nYou are a well full of interesting topics.[P]\n[CS:X]Glamorous[CR] people like you deserves...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,133,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be an Eevee[CR]![W:60]');
+ jump @sH14;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,547,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Steenee[CR]![W:60]');
+ jump @sH15;
+ }
+ }
+ }
+ case 8:
+message_Monologue('You seem to be...[K] Extremely [CS:P]Competitive[CR]!\n[P]Always aiming for the first place!\nNo matter who you are against, giving it all![P]\nSure, you don\~27t mind getting a lower place, but\nthat just flame up your spirit!\nToday was not the day, but tomorrow will![P]\nYou tend to get too ahead of yourself and that\ncould be trouble![P]\nYet, you don\~27t enjoy competing without aiming\nto be the best! It\~27s fun to fight for our goals![P]\nA [CS:X]Competitive[CR] person such as yourself is...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,425,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Chimchar[CR]![W:60]');
+ jump @sH16;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,677,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Ponyta[CR]![W:60]');
+ jump @sH17;
+ }
+ }
+ }
+ case 9:
+message_Monologue('You seem to be...[K] A [CS:Y]Carefree[CR] dude!\n[P]Worrying is not your thing!\nYou might not even understand what this is![P]\nBut doesn\~27t matter, you don\~27t really care.\nLet the flow moves you until you hit the shore.\nThat is a fair way of life![P]\nBut remember to take the opportunities ahead\nof you![P]\nPeople tend to mistake carefreeness with\nlaziness, but they are wrong![P]\nA [CS:Y]Carefree[CR] guy like you is represented by...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1025,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Chimchar[CR]![W:60]');
+ jump @sH18;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,183,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Marill[CR]![W:60]');
+ jump @sH19;
+ }
+ }
+ }
+ case 10:
+message_Monologue('You seem to be...[K] [CS:O]Confident[CR], very [CS:O]Confident[CR]!\n[P]Can you do it?\nYou know the answer![P]\nYou know what you do, and if you don\~27t, then\nyou learn on the way!\nYou are not afraid of a challenge![P]\nBut... aren\~27t you afraid of failing?\nTo not being able to do it?[P]\nPeople always remind you that you can\~27t do all.\nBut you know that already, right? [P]\nYour [CS:O]Confidence[CR] makes me think of...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,548,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Nickit[CR]![W:60]');
+ jump @sH20;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1137,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Snivy[CR]![W:60]');
+ jump @sH21;
+ }
+ }
+ }
+ case 11:
+message_Monologue('You seem to be...[K] A very [CS:R]Optimistic[CR] fellow!\n[P]No matter how hard the situation is, you keep\nyour head up![P]\nSmile over any adversity.\nFilled with hope to the very end...[P]\nWhat made you that way?\nWhatever, the answer is not relevant.[P]\nThe journey ahead will be hard but have hope...\nBut you already know that, right? [P]\nYour [CS:R]Optimistic[CR] way of life is like the one of...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1139,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Popplio[CR]![W:60]');
+ jump @sH22;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,540,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Scorbunny[CR]![W:60]');
+ jump @sH23;
+ }
+ }
+ }
+ case 12:
+message_Monologue('You seem to be...[K] [CS:P]Euphoric[CR]! Yeah!\n[P]You are up!\nYou~27re eager for an adventure, I sense it![P]\nYou shake with the though of an adventure!\nSmile first, questions later![P]\nDo you really don\~27t care about the reason?\nMmm... I guess not...[P]\nRemember to calm down every now and then,\ngot it? [P]\nYour [CS:P]Euphoric[CR] behaviour mimics...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,639,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Jigglypuff[CR]![W:60]');
+ jump @sH24;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,539,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Popplio[CR]![W:60]');
+ jump @sH25;
+ }
+ }
+ }
+ case 13:
+message_Monologue('You seem to be...[K] [CS:S]Calm[CR] and collected!\n[P]You assess the situation before doing any\nsituation, yet, you don\~27t overthink it.[P]\nEven in extreme situation you don\~27t lose your\ncool, and if you do, it doesn\~27t take much for\nfor you to recover.[P]\nYou are like a stone wall, words do not make\nyou tremble[P]\nYou believe that you~27ll get out of it, one way\nor another...[P]\n[CS:S]Calm[CR] people are best represented by...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,783,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Marill[CR]![W:60]');
+ jump @sH26;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,77,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Ponyta[CR]![W:60]');
+ jump @sH27;
+ }
+ }
+ }
+ case 14:
+message_Monologue('You seem to be...[K] A [CS:L]Protective[CR] friend!\n[P]You don\~27t think twice to jump into the rescue of\nsomeone, specially if they are your friend.[P]\nYou believe in defending those who can\~27t defend\ntheirselves.\nThat is commendable![P]\nYou might find situation where you help doesn\~27t\nhelp the situation...[P]\nBut it is better to ask for forgiveness than to\nas for permission![P]\nA stalward [CS:L]Protector[CR] fits a Pokémon like...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,937,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Electrike[CR]![W:60]');
+ jump @sH28;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,280,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Treecko[CR]![W:60]');
+ jump @sH29;
+ }
+ }
+ }
+ case 15:
+message_Monologue('You seem to be...[K] An [CS:G]Inspirational[CR] figure!\n[P]You seems to be someone with charisma!\nOr in a way, you inspire others with your\ndeeds.[P]\nSometimes you don\~27t even know why...\nSometimes you don\~27t even notice!\nBut some people just have that in them.[P]\nCan\~27t be sure of it... But something in you\nmakes me think that.[P]\nMany people uses their figure for the evil.\nYou are not one of them... Right?[P]\nYou [CS:S]Inspire[CR] me to represent you as...');
+while($SCENARIO_SUB8 != 99) {
+switch(random(2)) {
+ case 0:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[3]) {
+ } else {
+ ProcessSpecial(69,1138,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Froakie[CR]![W:60]');
+ jump @sH30;
+ }
+ case 1:
+ if($SCENARIO_SUB8 == 99) {
+ } elseif($BIT_FUWARANTE_LOCAL[4]) {
+ } else {
+ ProcessSpecial(69,437,0);
+ message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+ message_Monologue('[R][CN]Will be a [CS:K]Snivy[CR]![W:60]');
+ jump @sH31;
+ }
+ }
+ }
 }
+§sc0;
+ message_Monologue('Who would you like to be?');
+if($BIT_FUWARANTE_LOCAL[4]) {
+ switch ( message_SwitchMenu(0, 1) ) {
+case menu('♀ [CS:K]Eevee[CR]'):
+message_Close();
+§sH5;
+ProcessSpecial(69,733,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Eevee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,733);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Pikachu[CR]'):
+message_Close();
+§sH22;
+ProcessSpecial(69,625,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Pikachu[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,625);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Scorbunny[CR]'):
+message_Close();
+§sH24;
+ProcessSpecial(69,1140,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Scorbunny[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1140);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Cyndaquil[CR]'):
+message_Close();
+§sH25;
+ProcessSpecial(69,755,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Cyndaquil[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,755);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Treecko[CR]'):
+message_Close();
+§sH27;
+ProcessSpecial(69,880,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Treecko[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,880);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Nickit[CR]'):
+message_Close();
+§sH30;
+ProcessSpecial(69,1148,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nickit[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1148);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Venipede[CR]'):
+message_Close();
+§sH32;
+ProcessSpecial(69,1141,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Venipede[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1141);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Chimchar[CR]'):
+message_Close();
+§sH37;
+ProcessSpecial(69,1025,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Chimchar[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1025);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Snivy[CR]'):
+message_Close();
+§sH40;
+ProcessSpecial(69,1137,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Snivy[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1137);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Popplio[CR]'):
+message_Close();
+§sH41;
+ProcessSpecial(69,1139,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Popplio[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1139);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Jigglypuff[CR]'):
+message_Close();
+§sH43;
+ProcessSpecial(69,639,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Jigglypuff[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,639);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Marill[CR]'):
+message_Close();
+§sH45;
+ProcessSpecial(69,783,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Marill[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,783);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Ponyta[CR]'):
+message_Close();
+§sH46;
+ProcessSpecial(69,77,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Ponyta[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,77);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Electrike[CR]'):
+message_Close();
+§sH47;
+ProcessSpecial(69,937,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Electrike[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,937);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Froakie[CR]'):
+message_Close();
+§sH49;
+ProcessSpecial(69,1138,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Froakie[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1138);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+}
+} elseif($BIT_FUWARANTE_LOCAL[3]) {
+ switch ( message_SwitchMenu(0, 1) ) {
+case menu('♂ [CS:K]Pikachu[CR]'):
+message_Close();
+//8;
+ProcessSpecial(69,25,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Pikachu[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,25);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Cyndaquil[CR]'):
+message_Close();
+//21;
+ProcessSpecial(69,155,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Cyndaquil[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,155);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Mime Jr.[CR]'):
+message_Close();
+//23;
+ProcessSpecial(69,481,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Mime Jr.[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,481);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Nuzleaf[CR]'):
+message_Close();
+//26;
+ProcessSpecial(69,302,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nuzleaf[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,302);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Venipede[CR]'):
+message_Close();
+//28;
+ProcessSpecial(69,541,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Venipede[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,541);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Froakie[CR]'):
+message_Close();
+//29;
+ProcessSpecial(69,538,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Froakie[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,538);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Electrike[CR]'):
+message_Close();
+//31;
+ProcessSpecial(69,337,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Electrike[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,337);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Eevee[CR]'):
+message_Close();
+//33;
+ProcessSpecial(69,133,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Eevee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,133);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Steenee[CR]'):
+message_Close();
+//34;
+ProcessSpecial(69,547,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Steenee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,547);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Chimchar[CR]'):
+message_Close();
+//35;
+ProcessSpecial(69,425,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Chimchar[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,425);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Ponyta[CR]'):
+message_Close();
+//36;
+ProcessSpecial(69,677,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Ponyta[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,677);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Marill[CR]'):
+message_Close();
+//38;
+ProcessSpecial(69,183,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Marill[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,183);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Nickit[CR]'):
+message_Close();
+//39;
+ProcessSpecial(69,548,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nickit[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,548);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Scorbunny[CR]'):
+message_Close();
+//42;
+ProcessSpecial(69,540,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Scorbunny[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,540);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Popplio[CR]'):
+message_Close();
+//44;
+ProcessSpecial(69,539,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Popplio[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,539);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Treecko[CR]'):
+message_Close();
+//48;
+ProcessSpecial(69,280,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Treecko[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,280);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Snivy[CR]'):
+message_Close();
+//50;
+ProcessSpecial(69,437,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Snivy[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,437);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+}
+} else {
+switch ( message_SwitchMenu(0, 1) ) {
+case menu('♀ [CS:K]Eevee[CR]'):
+message_Close();
+§sH5;
+ProcessSpecial(69,733,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Eevee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,733);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Pikachu[CR]'):
+message_Close();
+§sH8;
+ProcessSpecial(69,25,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Pikachu[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,25);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Cyndaquil[CR]'):
+message_Close();
+§sH21;
+ProcessSpecial(69,155,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Cyndaquil[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,155);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Pikachu[CR]'):
+message_Close();
+§sH22;
+ProcessSpecial(69,625,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Pikachu[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,625);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Mime Jr.[CR]'):
+message_Close();
+§sH23;
+ProcessSpecial(69,481,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Mime Jr.[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,481);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Scorbunny[CR]'):
+message_Close();
+§sH24;
+ProcessSpecial(69,1140,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Scorbunny[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1140);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Cyndaquil[CR]'):
+message_Close();
+§sH25;
+ProcessSpecial(69,755,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Cyndaquil[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,755);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Nuzleaf[CR]'):
+message_Close();
+§sH26;
+ProcessSpecial(69,302,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nuzleaf[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,302);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Treecko[CR]'):
+message_Close();
+§sH27;
+ProcessSpecial(69,880,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Treecko[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,880);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Venipede[CR]'):
+message_Close();
+§sH28;
+ProcessSpecial(69,541,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Venipede[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,541);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Froakie[CR]'):
+message_Close();
+§sH29;
+ProcessSpecial(69,538,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Froakie[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,538);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Nickit[CR]'):
+message_Close();
+§sH30;
+ProcessSpecial(69,1148,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nickit[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1148);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Electrike[CR]'):
+message_Close();
+§sH31;
+ProcessSpecial(69,337,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Electrike[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,337);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Venipede[CR]'):
+message_Close();
+§sH32;
+ProcessSpecial(69,1141,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Venipede[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1141);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Eevee[CR]'):
+message_Close();
+§sH33;
+ProcessSpecial(69,133,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Eevee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,133);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Steenee[CR]'):
+message_Close();
+§sH34;
+ProcessSpecial(69,547,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Steenee[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,547);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Chimchar[CR]'):
+message_Close();
+§sH35;
+ProcessSpecial(69,425,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Chimchar[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,425);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Ponyta[CR]'):
+message_Close();
+§sH36;
+ProcessSpecial(69,677,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Ponyta[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,677);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Chimchar[CR]'):
+message_Close();
+§sH37;
+ProcessSpecial(69,1025,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Chimchar[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1025);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Marill[CR]'):
+message_Close();
+§sH38;
+ProcessSpecial(69,183,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Marill[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,183);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Nickit[CR]'):
+message_Close();
+§sH39;
+ProcessSpecial(69,548,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Nickit[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,548);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Snivy[CR]'):
+message_Close();
+§sH40;
+ProcessSpecial(69,1137,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Snivy[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1137);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Popplio[CR]'):
+message_Close();
+§sH41;
+ProcessSpecial(69,1139,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Popplio[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1139);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Scorbunny[CR]'):
+message_Close();
+§sH42;
+ProcessSpecial(69,540,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Scorbunny[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,540);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Jigglypuff[CR]'):
+message_Close();
+§sH43;
+ProcessSpecial(69,639,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Jigglypuff[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,639);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Popplio[CR]'):
+message_Close();
+§sH44;
+ProcessSpecial(69,539,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Popplio[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,539);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Marill[CR]'):
+message_Close();
+§sH45;
+ProcessSpecial(69,783,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Marill[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,783);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Ponyta[CR]'):
+message_Close();
+§sH46;
+ProcessSpecial(69,77,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Ponyta[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,77);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Electrike[CR]'):
+message_Close();
+§sH47;
+ProcessSpecial(69,937,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Electrike[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,937);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Treecko[CR]'):
+message_Close();
+§sH48;
+ProcessSpecial(69,280,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Treecko[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,280);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♀ [CS:K]Froakie[CR]'):
+message_Close();
+§sH49;
+ProcessSpecial(69,1138,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Froakie[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,1138);
+$HERO_TALK_KIND = 5;
+ProcessSpecial(67,1,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+case menu('♂ [CS:K]Snivy[CR]'):
+message_Close();
+§sH50;
+ProcessSpecial(69,437,0);
+message_SetFaceEmpty(ACTOR_NPC_DEMO_HERO,FACE_HAPPY,FACE_POS_BOTTOM_C_FACER);
+message_Monologue('Is [CS:K]Snivy[CR] who you want?');
+switch(message_SwitchMenu(0, 1)) {
+case menu('Yes'):
+message_Close();
+message_EmptyActor();
+ProcessSpecial(66,0,437);
+$HERO_TALK_KIND = 4;
+ProcessSpecial(67,0,0);
+jump @ec0;
+case menu('No'):
+message_EmptyActor();
+message_Close();
+jump @sc0;
+}
+}
+}
+§ec0;
+
+end;
+ }

@@ -16,7 +16,11 @@ def 0 {
             message_Close();
             message_Talk("[STS] I can't exactly do that on my own, but\nmy dad should be refreshing them soon, if you\nwant to wait a minute or two...[STE]");
             message_Close();
-            ProcessSpecial(104,0,0);
+            if (debug) {
+                switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+            } else {
+                ProcessSpecial(104,0,0);
+            }
             screen_FadeOut(1,30);
             message_Mail("\n[CN]A few minutes later...");
             message_Close();
