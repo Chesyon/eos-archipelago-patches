@@ -6,7 +6,7 @@ macro SetVersion() {
     if (debug) {
         $VERSION = 1;
     } else {
-        $VERSION = 2;
+        $VERSION = 3;
     }
 }
 
