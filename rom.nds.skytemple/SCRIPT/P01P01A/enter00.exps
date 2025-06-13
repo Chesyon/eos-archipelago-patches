@@ -235,6 +235,7 @@ def 0 {
                                     break;
                                 case 0: // Hint not read
                                     supervision_StationCommon(18);
+                                    supervision_StationCommon(19);
                                     break;
                             }
                             break;
