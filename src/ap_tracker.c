@@ -1769,7 +1769,7 @@ uint32_t StateManagerTrackerTopScreen() {
                         if(updaterDelay >= 4) {
                             updaterDelay = 0;
                             if(drinksDisplayed != apSettings.cafeDrinkMax) {
-                                DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 26 + 10*(drinkEventsDisplayed / 8),
+                                DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinksDisplayed & 0x7), 26 + 10*(drinksDisplayed / 8),
                                     (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks > drinksDisplayed) ? checkSymbol : lockedSymbol);
                                 drinksDisplayed++;
                                 UpdateWindow(apTrackerWindowPtr->window_id);
