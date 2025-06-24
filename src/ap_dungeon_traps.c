@@ -73,10 +73,11 @@ void DungeonModeTrapCheck() {
         }
     }
     
+    // TODO: Fix this.
     if (CUSTOM_SAVE_AREA.dungeonTraps.dropItems == true) {
         for (int i = 0; i < 4; i++) {
             struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
-            ApplyTripTrapEffect(monsterEntity, monsterEntity);
+            //ApplyTripTrapEffect(monsterEntity, monsterEntity);
         }
     }
     
