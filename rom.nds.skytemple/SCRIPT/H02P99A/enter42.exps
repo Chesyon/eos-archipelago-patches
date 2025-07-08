@@ -125,7 +125,7 @@ def 0 {
             message_Talk(" One of our most prestigious services\nincluded in your subscription is [CS:C]Express Mail[CR]!\n[K]Transcend the concept of a mailing address!");
             message_Talk(" No matter where you are, I can\ndeliver you inbound packages![K] Rain, shine, or\nparalyzed future, your courier can find you!");
             message_Talk(" If you find this particular feature to\nbe cumbersome, an invasion of privacy, or a\ndistraction from exploration, just disable it!");
-            message_Talk(" You can also send packages to other\nEOS Archipelago players free of charge![K] Or...[W:60]\nyou can in [CS:C]0.3.0[CR]. It isn\'t functional yet, sorry.");
+            message_Talk(" You can also send packages to other\nEOS Archipelago players free of charge![K] Or...[W:60]\nyou can in [CS:C]0.4.0[CR]. It isn\'t functional yet, sorry.");
             message_Close();
             break;
         case menu("Never Mind"):
