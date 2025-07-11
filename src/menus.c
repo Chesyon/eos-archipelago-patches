@@ -87,7 +87,7 @@ void CreateTailoredDungeonMissionMenu(void) {
     
     int numDungeonsToPick = 0;
     for(uint32_t i = 0; i < 0xB4; i++) {
-        if(GetDungeonMode(i) == DMODE_OPEN_AND_REQUEST) {
+        if(GetDungeonMode(i) == DMODE_OPEN_AND_REQUEST && IsLookaLikeDungeonPlaceholder(i) == false) {
             ((uint8_t*)GLOBAL_MENU_INFO.extra_info_ptr)[numDungeonsToPick] = i;
             numDungeonsToPick++;
         }
