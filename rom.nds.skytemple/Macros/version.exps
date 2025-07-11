@@ -6,7 +6,7 @@ macro SetVersion() {
     if (debug) {
         $VERSION = 1;
     } else {
-        $VERSION = 3;
+        $VERSION = 4;
     }
 }
 
@@ -15,11 +15,14 @@ macro SetVersion() {
 //TODO: Add new dialogue each time a new version is made!
 macro GetVersion() {
     switch($VERSION) {
-        case >= 4:
-            message_Talk(" We are currently on 0.3.1![K]\nPLACEHOLDER");
+        case >= 5:
+            message_Talk(" We are currently on 0.4.0![K]\nPLACEHOLDER");
+            break;
+        case 4:
+            message_Talk(" We are currently on 0.3.1![K]\nWe think we got all the 0.3.0 bugs, but if you\nspot any stragglers, don't hesitate to tell us!");
             break;
         case 3:
-            message_Talk(" We are currently on 0.3.0![K]\nI hope you\'re enjoying CRASS and the mission dungeon select!");
+            message_Talk(" We are currently on 0.3.0![K]\nI hope you\'re enjoying CRASS\nand the mission dungeon select!");
             break;        
         case 2:
             message_Talk(" We are currently on a dev build\nof 0.3.0![K] If you aren\'t a playtester or a\ndev, you should not be playing this version!");
