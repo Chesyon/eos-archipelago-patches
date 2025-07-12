@@ -1941,7 +1941,7 @@ void CreateTrackerTopScreenDungeon() {
 }
 
 uint32_t UpdateTrackerTopScreenDungeon() {
-    uint8_t location = CheckLocationOverrides(GetTrackerList()[CUSTOM_SAVE_AREA.trackerPage]);
+    uint8_t location = CheckLocationOverrides(GetTrackerList()[dungeonModeDisplayed]);
     bool shouldSpinTracker = location == DUNGEON_DARK_CRATER;
     if(location == DUNGEON_TEMPORAL_TOWER || location == DUNGEON_HIDDEN_LAND) {
         if(IsDarkraiGoal()) { // If Darkrai is Goal, only spin while not completed yet.
