@@ -32,7 +32,8 @@ IsValidPortraitCallsite = 0x2035814;
 GuestMonsterToGroundMonsterCallsite = 0x0204FC84;
 GetExpReturn = 0x2052DE0;
 OptionsMenuItemListPtr = 0x209B684;
-SevenTreasureCafeMissionCheck = 0x2062A88;
+SevenTreasureCafeMissionCheck1 = 0x2062A88;
+SevenTreasureCafeMissionCheck2 = 0x206810C;
 
 /* ! For Overlay1 */
 ClearMarkHook = 0x2333D68;

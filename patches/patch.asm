@@ -49,9 +49,11 @@
         blne TailoredMissionBoardCheck
     .org GenerateMissionMinFloorRollHook
         bl EarlyMissionFloorsCheck
-    .org SevenTreasureCafeMissionCheck
+    .org SevenTreasureCafeMissionCheck1
         bl GetDungeonModeWithSevenTreasureCheck
-
+	.org SevenTreasureCafeMissionCheck2
+		bl GetDungeonModeWithSevenTreasureCheck
+	
     ; A hook to determine how Guest Pokemon stats will be generated.
     .org GuestMonsterToGroundMonsterCallsite
         bl CustomGuestMonsterToGroundMonster
