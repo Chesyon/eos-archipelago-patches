@@ -16,7 +16,7 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
     int dungeonId = LoadScriptVariableValue(0, 41);
     enum dungeon_check_type dungeonCt = GetDungeonCheckType(dungeonId);
     if(dungeonCt == DCT_OTHER || dungeonCt == DCT_RULE) {
-        return -2;
+        return 255; // This should be larger than any mission 
     }
     
     int totalNumber;
