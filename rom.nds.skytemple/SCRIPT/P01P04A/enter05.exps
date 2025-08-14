@@ -78,7 +78,8 @@ def 0 {
         message_CloseEnforce();
         Wait(60);
         message_SetFace(ACTOR_NPC_SOONANO,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
-        message_Talk(" What [CS:G]Wobbuffet[CR] is trying to say,\nis that you don\'t have any stackable items in\nyour bag or storage...[W:30] Come back when you do!");
+        // message_Talk(" What [CS:G]Wobbuffet[CR] is trying to say,\nis that you don\'t have any stackable items in\nyour bag or storage...[W:30] Come back when you do!");
+        message_Talk(" What [CS:G]Wobbuffet[CR] is trying to say,\nis that you don\'t have any stackable items in\nyour bag...[W:30] Come back when you do!");
         CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
         jump @main_menu;
     }
@@ -632,6 +633,7 @@ def 0 {
         case 0:
             break;
     }
+    /*
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,1,0)) {
         case >= 4:
             $EVENT_LOCAL += 4;
@@ -645,6 +647,7 @@ def 0 {
         case 0:
             break;
     }
+    */
     if ($EVENT_LOCAL >= 4) {
         $DUNGEON_ARRIVE_LIST[0] = 1;
         $DUNGEON_EVENT_LOCAL += 1;
@@ -671,6 +674,7 @@ def 0 {
         case 0:
             break;
     }
+    /*
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,8,0)) {
         case >= 4:
             $EVENT_LOCAL += 2;
@@ -682,6 +686,7 @@ def 0 {
         case 0:
             break;
     }
+    */
     if ($EVENT_LOCAL >= 2) {
         $DUNGEON_ARRIVE_LIST[3] = 1;
         $DUNGEON_EVENT_LOCAL += 1;
@@ -774,6 +779,7 @@ def 0 {
         case 1:
             $EVENT_LOCAL += 1;
         case 0:
+            /*
             switch(ProcessSpecial(35,1,0)) { // Table Item Storage!
                 case >= 24:
                     $EVENT_LOCAL = 24;
@@ -827,6 +833,7 @@ def 0 {
                 case 0:
                     break;
             }
+            */
             break;
     }
     if ($EVENT_LOCAL > 24) {
@@ -848,6 +855,7 @@ macro OwnsItemID($id,$return) {
     $return = 0;
     switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,$id,0)) {
         case 0:
+            /*
             switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,$id,0)) {
                 case 0: 
                     break;
@@ -855,6 +863,7 @@ macro OwnsItemID($id,$return) {
                     $return = 1;
                     break;
             }
+            */
             break;
         default:
             $return = 1;

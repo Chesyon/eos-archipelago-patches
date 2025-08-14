@@ -2111,6 +2111,7 @@ def 0 {
                                                                     italian=" Congratulazioni![K]\nHai vinto uno splendido premio!",
                                                                     spanish=" Enhorabuena.[K]\n¡Aquí tienes tu premio gordo!",
                                                                 });
+                                                                // ~AssignCheck(88);
                                                                 CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
                                                                 switch ( $EVENT_LOCAL ) {
                                                                     case 1:

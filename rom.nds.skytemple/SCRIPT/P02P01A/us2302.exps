@@ -1,0 +1,164 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_OKORIZARU);
+        }
+        message_SetFace(ACTOR_NPC_OKORIZARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We owe a lot to you.",
+            french=" Nous vous devons beaucoup.",
+            german=" Wir schulden euch wirklich viel.",
+            italian=" Vi dobbiamo molto.",
+            spanish=" Os debemos un montón.",
+        });
+        message_Talk({
+            english=" I can relax like this because it\'s\npeaceful.[K] Thanks to you!",
+            french=" Si je peux me détendre comme\nça, c\'est parce que la paix est revenue, grâce\nà vous.[K] Merci!",
+            german=" Ich kann mich nur so entspannen,\nweil es so friedlich ist.[K] Dafür danke ich euch!",
+            italian=" Mi posso rilassare così perché\nè tornata la pace.[K] Grazie a voi!",
+            spanish=" Me puedo relajar así gracias a\nlo que habéis hecho.[K] ¡Muchas gracias!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_OKORIZARU);
+        }
+        message_SetFace(ACTOR_NPC_OKORIZARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It turns out we weren\'t being\nhelpful in any way...",
+            french=" Finalement, on n\'a pas été d\'un\ngrand secours...",
+            german=" Es stellte sich heraus, dass wir\nin keinster Art und Weise hilfreich waren.",
+            italian=" Non potevamo renderci utili\nin nessun modo...",
+            spanish=" Al final, no estábamos haciendo\nnada útil...",
+        });
+        message_Talk({
+            english=" So we came back to the\nHot Spring.",
+            french=" ... alors on est revenus à la\nSource Chaude.",
+            german=" Also sind wir zurück zur\nHeißen Quelle gekommen.",
+            italian=" Così siamo tornati alla Sorgente\nTermale.",
+            spanish=" Así que volvimos a la Terma.",
+        });
+        message_Talk({
+            english=" I feel guilty for being relaxed\nas I say this, but...[K]we\'re counting on you!",
+            french=" Je culpabilise un peu de vous\ndire ça alors que je suis en train de me\nprélasser, mais...[K] on compte sur vous!",
+            german=" Ich fühle mich schuldig, weil ich\nmich zum Zeitpunkt dieses Ausspruchs so\nentspannt fühle, aber...[K] Wir zählen auf euch!",
+            italian=" Mi sento un po\' in colpa a\nstarmene qui a rilassarmi, ma...[K]\ncontiamo su di voi!",
+            spanish=" Me siento culpable por deciros\nesto estando aquí tan relajado, pero...[K]\n¡contamos con que os encarguéis de todo!",
+        });
+        message_Talk({
+            english=" Stop the planet\'s paralysis or\nsomething! You can do it!",
+            french=" Empêchez la Paralysie de la\nPlanète! Faites quelque chose! Vous pouvez\ny arriver!",
+            german=" Haltet die Lähmung des Planeten\nauf! ...Oder so! ...Ihr könnt das schaffen!",
+            italian=" Scongiurate la paralisi del \npianeta! Ce la potete fare!",
+            spanish=" ¡Detened la parálisis del planeta,\nhaced algo! ¡Podéis hacerlo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_OKORIZARU);
+        }
+        message_SetFace(ACTOR_NPC_OKORIZARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We came running when we heard\nthe world\'s in danger!",
+            french=" On a accouru dès qu\'on a su que\nle monde était en danger!",
+            german=" Wir sind hergeeilt, als wir\nerfuhren, dass die Welt in Gefahr ist!",
+            italian=" Quando abbiamo saputo che il\nmondo era in pericolo, ci siamo precipitati qui!",
+            spanish=" ¡Vinimos inmediatamente cuando\nsupimos que el mundo estaba en peligro!",
+        });
+        message_Talk({
+            english=" I tell you, this is no time to be\nsoaking in the Hot Spring!",
+            french=" Non mais vraiment, le moment\nest mal choisi pour se la couler douce\ndans la Source Chaude!",
+            german=" Ich sage euch, das ist nicht die\nrichtige Zeit, um sich in der Heißen Quelle\nzu entspannen!",
+            italian=" Ve lo dico, questo non è il\nmomento di fare il bagno nella\nSorgente Termale!",
+            spanish=" Porque, evidentemente, ¡este\nno es el momento para relajarse en la\nTerma!",
+        });
+        message_Talk({
+            english=" So...[K]we\'ve come but...",
+            french=" Alors... [K]on est venus, mais...",
+            german=" Also...[K] Wir sind hergekommen,\naber...",
+            italian=" Quindi...[K] siamo venuti, ma...",
+            spanish=" Así que...[K] hemos venido, pero...",
+        });
+        message_Talk({
+            english=" What are we supposed to\ndo now...?",
+            french=" Qu\'est-ce qu\'on peut bien\nfaire maintenant...?",
+            german=" Was sollen wir jetzt machen?",
+            italian=" Cosa dobbiamo fare ora?",
+            spanish=" ¿Qué es lo que vamos a hacer\nahora?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_OKORIZARU);
+        }
+        message_SetFace(ACTOR_NPC_OKORIZARU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The Hot Spring here is good for\nloosening up knotted muscles.",
+            french=" La Source Chaude permet de\ndécontracter les muscles noués.",
+            german=" Die Heiße Quelle eignet sich\nbestens, um verhärtete Muskeln aufzulockern.",
+            italian=" La Sorgente Termale va bene\nper rilassare i muscoli.",
+            spanish=" La Terma es estupenda para\nrelajar los músculos agarrotados.",
+        });
+        message_Talk({
+            english=" The way I keep my arms raised\nall the time... It does a number on\nmy shoulders.",
+            french=" Je garde toujours les bras en\nl\'air... C\'est éprouvant pour mes épaules.",
+            german=" Die Art, wie ich meine Arme die\nganze Zeit angehoben lasse, geht ganz schön\nauf meine Schultern.",
+            italian=" Tengo le braccia sollevate tutto\nil tempo e ho sempre le spalle indolenzite.",
+            spanish=" Tener los brazos levantados me\nviene bien para la espalda...",
+        });
+        message_Talk({
+            english=" I\'m lucky the Hot Spring exists!",
+            french=" J\'ai de la chance que la Source\nChaude existe!",
+            german=" Ich bin froh, dass es die Heiße\nQuelle gibt!",
+            italian=" Per fortuna esiste la Sorgente\nTermale!",
+            spanish=" No sé qué sería de mí sin la Terma.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

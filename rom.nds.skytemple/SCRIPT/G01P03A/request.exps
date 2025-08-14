@@ -48,14 +48,17 @@ def 0 {
             switch ( message_Menu(MENU_JOB_REWARD_TEXT) ) { }
             §rewind_9;
             switch(ProcessSpecial(101, 0, 1)) {
+                case 255:
+                    message_Mail("[STS][CN]This dungeon has no mission checks![STE]");
+                    break;
                 case > 0:
                     ProcessSpecial(101, 1, 1);
-                    message_Mail("[CN]You got a check for this outlaw mission!");
+                    message_Mail("[STS][CN]You got a check for this outlaw mission![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[252] = 1;
                     break;
                 case 0:
-                    message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                    message_Mail("[STS][CN]There are no more checks for outlaw\n[CN]jobs for this dungeon![STE]");
                     message_Close();
                     break;
             }
@@ -160,14 +163,17 @@ def 0 {
 */
             §rewind_10;
             switch(ProcessSpecial(101, 0, 1)) {
+                case 255:
+                    message_Mail("[STS][CN]This dungeon has no mission checks![STE]");
+                    break;
                 case > 0:
                     ProcessSpecial(101, 1, 1);
-                    message_Mail("[CN]You got a check for this outlaw mission!\n[CN]Expect it to arrive soon!");
+                    message_Mail("[STS][CN]You got a check for this outlaw mission!\n[CN]Expect it to arrive soon![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[252] = 1;
                     break;
                 case 0:
-                    message_Mail("[CN]There are no more checks for outlaw\n[CN]jobs for this dungeon!");
+                    message_Mail("[STS][CN]There are no more checks for outlaw\n[CN]jobs for this dungeon![STE]");
                     message_Close();
                     break;
             }
@@ -277,29 +283,32 @@ def 0 {
 */
             §rewind_12;
             switch(ProcessSpecial(101, 0, 0)) {
+                case 255:
+                    message_Mail("[STS][CN]This dungeon has no mission checks![STE]");
+                    break;
                 case >= 3:
                     ProcessSpecial(101, 1, 0);
                     ProcessSpecial(101, 1, 0);
                     ProcessSpecial(101, 1, 0);
-                    message_Mail("[CN]You got 3 checks for this regular mission!\n[CN]Expect them to arrive soon!");
+                    message_Mail("[STS][CN]You got 3 checks for this regular mission!\n[CN]Expect them to arrive soon![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
                     break;
                 case 2:
                     ProcessSpecial(101, 1, 0);
                     ProcessSpecial(101, 1, 0);
-                    message_Mail("[CN]You got 2 checks for this regular mission!\n[CN]Expect them to arrive soon!");
+                    message_Mail("[STS][CN]You got 2 checks for this regular mission!\n[CN]Expect them to arrive soon![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
                     break;
                 case 1:
                     ProcessSpecial(101, 1, 0);
-                    message_Mail("[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
+                    message_Mail("[STS][CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
                     break;
                 case 0:
-                    message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                    message_Mail("[STS][CN]There are no more checks for regular\n[CN]missions for this dungeon![STE]");
                     message_Close();
                     break;
             }
@@ -362,14 +371,17 @@ def 0 {
 */     
             §rewind_11;
             switch(ProcessSpecial(101, 0, 0)) {
+                case 255:
+                    message_Mail("[STS][CN]This dungeon has no mission checks![STE]");
+                    break;
                 case > 0:
                     ProcessSpecial(101, 1, 0);
-                    message_Mail("[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
+                    message_Mail("[STS][CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon![STE]");
                     message_Close();
                     $SCENARIO_TALK_BIT_FLAG[253] = 1;
                     break;
                 case 0:
-                    message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                    message_Mail("[STS][CN]There are no more checks for regular\n[CN]missions for this dungeon![STE]");
                     message_Close();
                     break;
             }
@@ -435,14 +447,17 @@ def 0 {
                     }
 */
                     switch(ProcessSpecial(101, 0, 0)) {
+                        case 255:
+                            message_Mail("[STS][CN]This dungeon has no mission checks![STE]");
+                            break;
                         case > 0:
                             ProcessSpecial(101, 1, 0);
-                            message_Mail("[CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon!");
+                            message_Mail("[STS][CN]You got a check for this regular mission!\n[CN]Expect it to arrive soon![STE]");
                             message_Close();
                             $SCENARIO_TALK_BIT_FLAG[253] = 1;
                             break;
                         case 0:
-                            message_Mail("[CN]There are no more checks for regular\n[CN]missions for this dungeon!");
+                            message_Mail("[STS][CN]There are no more checks for regular\n[CN]missions for this dungeon![STE]");
                             message_Close();
                             break;
                     }

@@ -47,10 +47,12 @@ def 0 {
     Wait(90);
     message_SetFaceEmpty(ACTOR_NPC_PUKURIN,FACE_SIGH,FACE_POS_STANDARD);
     if (debug) {
-        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[hero] is found in ~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX\'s\n[hero][partner], don\'t forget!");        
+        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[hero] is found in-[W:90]");        
     } else {
-        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[qhat:19] is found in ~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX~XX\'s\n[qhere:19], don\'t forget!");
+        message_Talk("Hiya [hero]! The box is safe to touch![K] Also,\n[qhat:19] is found in-[W:90]");
     }
+    message_CloseEnforce();
+    message_Talk("Actually I'll just leave a note for you!\nIt'll be so much more fun that way!");
     message_Close();
     Wait(90);
     se_Play(5139);

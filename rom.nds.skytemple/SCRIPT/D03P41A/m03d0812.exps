@@ -16,7 +16,11 @@ def 0 {
             §label_2;
             if ($EVENT_LOCAL > 0) {
                 message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Monologue("(I\'ve got this one in the bag![K] I bet I could\nsteal the [hero] from [partner]\'s\n[c_kind:PLAYER][c_kind:ATTENDANT1] just as easily!)");
+                if (debug) {
+                    message_Monologue("(I\'ve got this one in the bag![K] I bet I could\nsteal the [hero] from [partner]\'s\n[c_kind:PLAYER][c_kind:ATTENDANT1] just as easily!)");     
+                } else {
+                    message_Monologue("(I\'ve got this one in the bag![K] I bet I could\nsteal the [qhat:14] from [qho:14]\'s\n[qhere:14] just as easily!)");
+                }
             }
             message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_STANDARD);
             message_Talk({

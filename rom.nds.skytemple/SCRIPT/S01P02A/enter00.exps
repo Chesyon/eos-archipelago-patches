@@ -13,7 +13,7 @@ def 0 {
             }
             supervision_Suspend(-2);
             supervision_RemoveActing(32766);
-            back2_SetMode(32767);
+            back2_SetMode(-1);
             screen2_FadeIn(1, 30);
             end;
         case 2:

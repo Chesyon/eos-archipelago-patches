@@ -50,6 +50,7 @@ import "version.exps"; // Leave this for me, I don't want to rename this later l
                             jump @twenty_k;
                         }
                         §fifty_k;
+                    case 4:
                     case 5: // 81920 to 98303
                         debug_Print("<100000");
                         $LOCAL1 = 5;

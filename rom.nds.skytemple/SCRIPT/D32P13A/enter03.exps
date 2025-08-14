@@ -25,7 +25,7 @@ def 0 {
             debug_Print('BGM_FADEOUT');
             bgm_FadeOut(60);
             screen_FadeOut(0, 30);
-            switch ( scn($SCENARIO_SUB5)[1] ) {
+            switch ( scn($SCENARIO_SUB5)[0] ) {
                 case &<< 7:
                     §label_2;
                     supervision_ExecuteCommon(CORO_EVENT_S04_24);

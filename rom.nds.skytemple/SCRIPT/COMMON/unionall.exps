@@ -131,156 +131,29 @@ coro TALK_PARTNER_MESSAGE {
                     supervision_Suspend(-2);
                     end;
                 default:
-                    switch ( $GROUND_ENTER ) {
-                        case 23:
-                        case 24:
-                        case 25:
-                        case 26:
-                        case 38:
-                        case 45:
-                        case 46:
-                        case 47:
-                        case 50:
-                        case 51:
-                        case 52:
-                        case 55:
-                        case 59:
-                        case 67:
-                        case 74:
-                        case 97:
-                        case 228:
-                            jump @label_1;
-                        default:
-                            switch ( $GROUND_ENTER ) {
-                                case 27:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                        jump @label_4;
-                                    } elseif ( $SCENARIO_MAIN == 11 ) {
-                                        §label_17;
-                                        with (actor ACTOR_TALK_MAIN) {
-                                            SetAnimation(2);
-                                        }
-                                        with (actor ACTOR_TALK_SUB) {
-                                            SetAnimation(2);
-                                        }
-                                        with (actor ACTOR_TALK_MAIN) {
-                                            Turn2DirectionLives(4, 10, ACTOR_TALK_SUB);
-                                        }
-                                        with (actor ACTOR_TALK_SUB) {
-                                            Turn2DirectionLives(4, 10, ACTOR_TALK_MAIN);
-                                        }
-                                        WaitExecuteLives(ACTOR_TALK_MAIN);
-                                        WaitExecuteLives(ACTOR_TALK_SUB);
-                                        with (actor ACTOR_TALK_MAIN) {
-                                            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-                                        }
-                                        with (actor ACTOR_TALK_SUB) {
-                                            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-                                        }
-                                        debug_Print("Used to be PARTNER");
-                                        supervision_ExecuteExport('PARTNER2');
-                                        JumpCommon(CORO_END_TALK);
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 30:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                        jump @label_4;
-                                    } elseif ( $SCENARIO_MAIN == 13 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 35:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                        jump @label_4;
-                                    } elseif ( $SCENARIO_MAIN == 15 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 48:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                        jump @label_4;
-                                    } elseif ( $SCENARIO_MAIN == 19 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 56:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                        jump @label_4;
-                                    } elseif ( $SCENARIO_MAIN == 24 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 60:
-                                    if ( $SCENARIO_MAIN == 25 || $SCENARIO_MAIN == 26 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 68:
-                                    if ( $SCENARIO_MAIN == 26 ) {
-                                        jump @label_17;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 90:
-                                    §switch3_80;
-                                    jump @label_4;
-                                case 98:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 92] ) {
-                                        jump @label_4;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 102:
-                                    if ( scn($SCENARIO_MAIN) >= [29, 92] ) {
-                                        jump @label_4;
-                                    } else {
-                                        jump @label_1;
-                                    }
-                                    break;
-                                case 177:
-                                case 176:
-                                case 223:
-                                case 77:
-                                case 78:
-                                case 79:
-                                case 157:
-                                case 158:
-                                case 159:
-                                case 160:
-                                case 161:
-                                case 162:
-                                case 163:
-                                case 164:
-                                case 165:
-                                case 166:
-                                    jump @switch3_80;
-                                default:
-                                    if ( $SCENARIO_MAIN_BIT_FLAG[1] ) {
-                                        jump @label_17;
-                                    } elseif ( scn($SCENARIO_MAIN) >= [29, 1] ) {
-                                        jump @label_1;
-                                    } else {
-                                        jump @label_17;
-                                    }
-                                    break;
-                            }
-                            break;
+                    with (actor ACTOR_TALK_MAIN) {
+                        SetAnimation(2);
                     }
-                    break;
+                    with (actor ACTOR_TALK_SUB) {
+                        SetAnimation(2);
+                    }
+                    with (actor ACTOR_TALK_MAIN) {
+                        Turn2DirectionLives(4, 10, ACTOR_TALK_SUB);
+                    }
+                    with (actor ACTOR_TALK_SUB) {
+                        Turn2DirectionLives(4, 10, ACTOR_TALK_MAIN);
+                    }
+                    WaitExecuteLives(ACTOR_TALK_MAIN);
+                    WaitExecuteLives(ACTOR_TALK_SUB);
+                    with (actor ACTOR_TALK_MAIN) {
+                        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+                    }
+                    with (actor ACTOR_TALK_SUB) {
+                        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+                    }
+                    supervision_ExecuteExport('PARTNER2');
+                    JumpCommon(CORO_END_TALK);
+                    hold;
             }
             break;
     }
@@ -9486,7 +9359,7 @@ coro ENTER_DEBUG_DUNGEON {
 
 coro GETOUT_SCENARIO_DUNGEON {
     debug_Print('GETOUT_SCENARIO_DUNGEON');
-    CallCommon(CORO_BUBBLE_TEST);
+    // CallCommon(CORO_BUBBLE_TEST);
     CallCommon(CORO_RESCUE_SET);
     switch ( $GROUND_START_MODE ) {
         case 8:
@@ -10932,7 +10805,7 @@ coro GETOUT_REQUEST_DUNGEON {
                                             case menu("Call It A Day"):
                                                 message_Close();
                                                 message_SetFace(ACTOR_ATTENDANT1,FACE_HAPPY,FACE_POS_BOTTOM_L_FACEINW);
-                                                message_Talk(" I completely understand, we could use a break![K]\nLet\'s take the rest of the day off then...");
+                                                message_Talk(" I completely understand, we\ncould probably use a break, [hero].[K]\nLet\'s take the rest of the day off then...");
                                                 break;
                                         }
                                     default:

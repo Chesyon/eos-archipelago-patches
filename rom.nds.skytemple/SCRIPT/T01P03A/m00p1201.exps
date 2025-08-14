@@ -1,5 +1,55 @@
 import "checks.exps"; // Leave this for me, I don't want to rename this later lol
 def 0 {
+    if ($DUNGEON_CONQUEST_LIST[180]) {
+        $SCENARIO_MAIN_BIT_FLAG[14] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[14] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[181]) {
+        $SCENARIO_MAIN_BIT_FLAG[15] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[15] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[182]) {
+        $SCENARIO_MAIN_BIT_FLAG[16] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[16] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[183]) {
+        $SCENARIO_MAIN_BIT_FLAG[17] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[17] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[184]) {
+        $SCENARIO_MAIN_BIT_FLAG[18] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[18] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[185]) {
+        $SCENARIO_MAIN_BIT_FLAG[19] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[19] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[186]) {
+        $SCENARIO_MAIN_BIT_FLAG[20] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[20] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[187]) {
+        $SCENARIO_MAIN_BIT_FLAG[21] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[21] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[188]) {
+        $SCENARIO_MAIN_BIT_FLAG[22] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[22] = 1;
+    }
+    if ($DUNGEON_CONQUEST_LIST[189]) {
+        $SCENARIO_MAIN_BIT_FLAG[23] = 0;
+    } else {
+        $SCENARIO_MAIN_BIT_FLAG[23] = 1;
+    }
     sound_Stop();
     back_SetGround(LEVEL_T01P03A);
     if ( $EXECUTE_SPECIAL_EPISODE_TYPE == 2 ) {

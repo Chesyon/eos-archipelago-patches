@@ -98,6 +98,9 @@ def 0 {
                             case 2:
                                 jump @label_3;
                             case 3:
+                                if (debug) {
+                                    jump @label_4;
+                                }
                                 WaitSubScreen();
                                 message_Talk({
                                     english=" Hmm...[K] Where is this dungeon\nthat\'s described on this [CS:E]SOS Mail[CR]?",
@@ -160,6 +163,9 @@ def 0 {
                                 });
                                 jump @label_19;
                             case 4:
+                                if (debug) {
+                                    jump @label_4;
+                                }
                                 WaitSubScreen();
                                 message_Talk({
                                     english=" Hmm...[K] I\'m sorry, but you\'re not\nqualified to respond to this [CS:E]SOS Mail[CR].",
