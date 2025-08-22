@@ -134,6 +134,9 @@
         .pool
             .word newTopScreenOptionsList
     .endarea
+	; .org SwapShopScenarioBalanceHook1
+	; .org SwapShopScenarioBalanceHook2
+	; To be used for Croagunk Shenanigans later. 
 .close
 
 .open "overlay31.bin", overlay31_start

@@ -15,7 +15,26 @@ def 0 {
         dungeon_mode(16) = DMODE_OPEN;
         dungeon_mode(16) = DMODE_OPEN_AND_REQUEST;
         */
-        ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0);
+        /*
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 574, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 575, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 574, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 575, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 574, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 575, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 576, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 576, 0);
+        ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG, 577, 0);
+        */
+        $EVENT_LOCAL = 0;
+        §loop;
+        if ($EVENT_LOCAL < 55) {
+            $EVENT_LOCAL += 1;
+            ProcessSpecial(38, 574, 0);
+            jump @loop;
+        }
+        ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY,0,0);
+        // ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0);
         //TODO: Here is safe!
         jump @debug_menu;
                                                                                                     
