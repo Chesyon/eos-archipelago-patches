@@ -2,7 +2,7 @@
 GetCurrentBagCapacityHook = 0x200EE54;
 GenerateKecleonItems1Hook = 0x2010B20;
 GenerateKecleonItems2Hook = 0x2010E30;
-IqScalingGroundHook = 0x20119FC;
+IqMultiplierGroundHook = 0x20119FC;
 NoLowercaseQTagBranch = 0x2022808;
 LowercaseTagCodeError = 0x20234C4;
 AfterLowercaseTagIsFound = 0x20234EC;
@@ -15,7 +15,7 @@ LoadSaveFileCallsite2 = 0x02049714;
 ClearAdventureLogStructCallsite = 0x02048774;
 BlockVersionCorruption = 0x204C794;
 AllowDefaultPortraitInInit = 0x204DB04;
-MiscIqScalingGroundHook = 0x20553D8;
+MiscIqMultiplierGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
 MissionTryOpenDungeon = 0x20682BC;
@@ -116,11 +116,11 @@ CreditsDisplayText = 0x238B82C;
 
 /* ! For Overlay29 */
 LevelScalingHook = 0x22E80B0; /* In LoadMappaFileAttributes */
-IqScalingDungeonHook = 0x22FAB68;
+IqMultiplierDungeonHook = 0x22FAB68;
 RecruitInstrumentHook = 0x230EA28;
 RecruitInstrumentUnhook = 0x230EA48;
 SpawnRateInstrumentHook = 0x230F174;
-IqScalingDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
+IqMultiplierDungeonGummiHook = 0x231DC08; /* In ApplyGummiBoostsDungeonMode */
 DungeonTurnHook = 0x22E0468; /* In RunDungeon near RunFractionalTurn call. */
 DungeonTurnUnhook = 0x22E0454;
 DeathLinkDungeonInitHook = 0x22DF8EC; /* Overwrites A DebugPrint0 in RunDungeon.*/

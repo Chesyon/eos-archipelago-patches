@@ -2,31 +2,31 @@
 .include "symbols.asm"
 
 .open "arm9.bin", arm9_start
-    .org IqScalingGroundHook
+    .org IqMultiplierGroundHook
     .area 0x4
-        bl IqScalingGround
+        bl IqMultiplierGround
     .endarea
 
-    .org MiscIqScalingGroundHook
+    .org MiscIqMultiplierGroundHook
     .area 0x4
-        bl IqScalingGroundMisc
+        bl IqMultiplierGroundMisc
     .endarea
 
-    ; EXP scaling
+    ; EXP multiplier
     .org GetExpReturn
     .area 0x4
-        bl ExpScaling
+        bl ExpMultiplier
     .endarea
 .close
 
 .open "overlay29.bin", overlay29_start
-    .org IqScalingDungeonHook
+    .org IqMultiplierDungeonHook
     .area 0x4
-        bl IqScalingDungeon
+        bl IqMultiplierDungeon
     .endarea
 
-    .org IqScalingDungeonGummiHook
+    .org IqMultiplierDungeonGummiHook
     .area 0x4
-        bl IqScalingDungeonGummi
+        bl IqMultiplierDungeonGummi
     .endarea
 .close
