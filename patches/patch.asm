@@ -20,7 +20,7 @@
     .endarea
 
     ; Set allow_default to true when initializing portraits
-    .org AllowDefaultPortaitInInit
+    .org AllowDefaultPortraitInInit
     .area 0x8
         mov r2,#1
         b AlwaysAllowPortraitDefault ; this is intentionally not bl
@@ -103,12 +103,12 @@
         bl WindCounterCheck
     .endarea
 
-    .org GeneateFloorHook1
+    .org GenerateFloorHook1
     .area 0x4
         b GenerateFloorCustomLayouts
     .endarea
 
-    .org GeneateFloorHook2
+    .org GenerateFloorHook2
     .area 0x4
         bl ApMazeTrapCheck
     .endarea

@@ -10,7 +10,7 @@
 
     .org MissionTryOpenDungeon
     .area 0x4
-        add r0,r0,#0x0 ; nop, the ds does not have a nop operator do this in case
+        nop
     .endarea
     
     .org MissionMultipurposeCheckAreaStart

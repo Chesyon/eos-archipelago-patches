@@ -8,7 +8,7 @@
 
 void __attribute__((naked)) GenerateFloorCustomLayouts() {
     asm("cmp r0,#15");
-    asm("ldr lr,=GeneateFloorUnhook1");
+    asm("ldr lr,=GenerateFloorUnhook1");
     asm("beq GenerateMazeBacktrackingFloor");
     asm("b   GenerateSidewinderFloor");
 }

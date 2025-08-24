@@ -14,7 +14,7 @@ LoadSaveFileCallsite1 = 0x020496F4;
 LoadSaveFileCallsite2 = 0x02049714;
 ClearAdventureLogStructCallsite = 0x02048774;
 BlockVersionCorruption = 0x204C794;
-AllowDefaultPortaitInInit = 0x204DB04;
+AllowDefaultPortraitInInit = 0x204DB04;
 MiscIqScalingGroundHook = 0x20553D8;
 StartOfMissionTypeRoll = 0x20628F8; /* this is the second instruction in the function actually */
 MissionTypeRollHook = 0x2062948;
@@ -132,9 +132,9 @@ TopScreenDungeonModeTrackerHook = 0x22E92AC;
 TopScreenDungeonModeTrackerUnhook = 0x22E938C;
 SetTopScreenTypeDungeonHook = 0x22E9100;
 SetTopScreenTypeDungeonUnhook = 0x22E9110;
-GeneateFloorHook1 = 0x233B62C;
-GeneateFloorUnhook1 = 0x233B75C;
-GeneateFloorHook2 = 0x233B61C;
+GenerateFloorHook1 = 0x233B62C;
+GenerateFloorUnhook1 = 0x233B75C;
+GenerateFloorHook2 = 0x233B61C;
 
 /* ! For Overlay 31 */
 DungeonXMenuNameAddr = 0x23836D8;
