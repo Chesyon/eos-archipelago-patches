@@ -252,7 +252,7 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
                 amountToAdd = newQuantity - 99;
             } else {
                 thisItem->quantity = newQuantity;
-                break;
+                return 0; // Item succesfully stacked in bag.
             }
         } else if (thisItem->id.val == ITEM_NOTHING) {
             thisItem->f_exists = true;
@@ -273,7 +273,7 @@ static int SpRecycleShopStuff(int itemSetId1, int itemSetId2){
                     amountToAdd = newQuantity - 99;
                 } else {
                     SetQuantityOfStorageItem(i, newQuantity);
-                    return 1;
+                    return 1; // Item succesfully stacked in storage.
                 }
             }
         }
