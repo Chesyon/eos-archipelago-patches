@@ -6,7 +6,7 @@ macro SetVersion() {
     if (debug) {
         $VERSION = 1;
     } else {
-        $VERSION = 4;
+        $VERSION = 5;
     }
 }
 
@@ -15,9 +15,11 @@ macro SetVersion() {
 //TODO: Add new dialogue each time a new version is made!
 macro GetVersion() {
     switch($VERSION) {
-        case >= 5:
+        case >= 6:
             message_Talk(" We are currently on 0.4.0![K]\nPLACEHOLDER");
             break;
+        case 5:
+            message_Talk(" We are currently on a\nprerelease of 0.3.2![K] Make sure to check the\nGitHub and let us know what's working!");
         case 4:
             message_Talk(" We are currently on 0.3.1![K]\nWe think we got all the 0.3.0 bugs, but if you\nspot any stragglers, don't hesitate to tell us!");
             break;
@@ -36,11 +38,11 @@ macro GetVersion() {
 
 
 macro IsOdot4dotO($var) {
-    if ($VERSION >= 5) {
+    if ($VERSION >= 6) {
         $var = 1;
     } else {
         $var = 0;
     }
 }
 
-// TODO: $VERSION = 5 assumed 0.4.0 for s32a0401 (Heracross!)
+// TODO: $VERSION = 6 assumed 0.4.0 for s32a0401 (Heracross!)
