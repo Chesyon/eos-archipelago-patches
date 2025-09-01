@@ -24,9 +24,10 @@
 
 typedef struct ArchipelagoSlotData {
     char apSlotName[16];
+    char apSlotNameCleaned[16];
     uint32_t apTrimmedSeed[2];
 } ArchipelagoSlotData;
-ASSERT_SIZE(struct ArchipelagoSlotData, 0x18);
+ASSERT_SIZE(struct ArchipelagoSlotData, 0x28);
 
 extern ArchipelagoSlotData slotData;
 
