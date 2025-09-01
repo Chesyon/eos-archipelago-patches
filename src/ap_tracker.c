@@ -1149,7 +1149,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case 251:; // Igglybuff SE
             preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 128) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 129) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 130) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 132) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, iggybuffDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
@@ -1232,25 +1232,25 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             return;
         case 249:; // Team Charm SE
             preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 149) ? checkSymbol : lockedSymbol;
-            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 150) ? checkSymbol : lockedSymbol;
+            preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 152) ? checkSymbol : lockedSymbol;
             preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 153) ? checkSymbol : lockedSymbol;
             preArgs.strings[3] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 154) ? checkSymbol : lockedSymbol;
-            preArgs.strings[4] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 155) ? checkSymbol : lockedSymbol;
+            preArgs.strings[4] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 157) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, charmDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             UpdateWindow(idx);
             return;
         case 248:; // Future SE
-            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 133) ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 135) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 136) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 137) ? checkSymbol : lockedSymbol;
-            preArgs.strings[3] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 139) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 138) ? checkSymbol : lockedSymbol;
+            preArgs.strings[3] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 140) ? checkSymbol : lockedSymbol;
             preArgs.strings[4] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 141) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks1, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
-            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 142) ? checkSymbol : lockedSymbol;
+            preArgs.strings[0] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 144) ? checkSymbol : lockedSymbol;
             preArgs.strings[1] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 145) ? checkSymbol : lockedSymbol;
-            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 146) ? checkSymbol : lockedSymbol;
+            preArgs.strings[2] = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, 148) ? checkSymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, susknoirDungeonChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
             UpdateWindow(idx);
@@ -1604,8 +1604,6 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
         case DCT_RULE:;
             if(AreLongLocationsOn()) {
                 PreprocessString(temp, TR_BUFF_LEN, ruleDungeonInfo, preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, 15, 16, temp);
-                PreprocessString(temp, TR_BUFF_LEN, nonEssentialExtraInfo, preFlagTracker, &preArgs);
             } else {
                 PreprocessString(temp, TR_BUFF_LEN, checklessDungeonInfo, preFlagTracker, &preArgs);
             }
