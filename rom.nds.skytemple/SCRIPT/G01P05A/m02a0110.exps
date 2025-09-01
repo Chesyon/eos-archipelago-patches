@@ -758,10 +758,15 @@ def 0 {
     }
     switch( ProcessSpecial(103,0,0)) {
         case 1: // Chesyon
-            me_Play(4);
-            message_Mail("A [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] was inside![K] Wait, what?\n[W:60]the bag had a false bottom![K] You cast aside\nthe [CS:I]~XX~XX~XX~XX~XX~XX~XX[CR] for an [CS:I]Aura Bow[CR]!");
-            WaitMe(4);
+            //me_Play(4);
+            message_Mail("An impossibly large number of [CS:I]Purple Bows[CR]\nwere inside![K] You reached in to grab as many\nas you could carry...[W:60] Wait, you only want [CS:C]ONE[CR]?");
+            //WaitMe(4);
+            bgm2_Play(BGM_FAILED_SENTRY_DUTY);
+            message_Mail("You gingerly claimed one singular [CS:I]Purple Bow[CR].\nHow utterly disappointing...");
+            WaitBgm2(BGM_FAILED_SENTRY_DUTY);
+            bgm2_Stop();
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @stupid_purple_bow;
             break;           
         case 2: // Happylappy
             me_Play(4);
@@ -1000,6 +1005,7 @@ def 0 {
             });
             WaitMe(4);
             CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            §stupid_purple_bow;
             item_Set(0, 441, 0);
             jump @label_38;
         case 14:

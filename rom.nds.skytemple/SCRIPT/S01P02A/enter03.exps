@@ -1,0 +1,18 @@
+
+def 0 {
+    $SCENARIO_MAIN_BIT_FLAG[40] = 1;
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_YOMAWARU);
+    }
+    switch ( message_Menu(MENU_DUSKULL_BANK) ) { }
+    JumpCommon(CORO_END_TALK);
+}

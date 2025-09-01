@@ -1,0 +1,855 @@
+
+def 0 {
+    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] ) {
+        §label_131;
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,1386,0)) {
+            case > 0:
+                jump @label_No_Sale;
+            default:
+                switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,1386,0)) {
+                    case > 0:
+                        §label_No_Sale;
+                        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" Meh-heh-heh...[W:60] No can do.[K]\nMy Croagunk Cauldron has gone missing,\nso no swaps until I get it back. Meh-heh-heh");
+                        message_Talk(" Behind me?[K] Nah, that thing isn't the\nreal deal.[K] It's just there to look fancy. The\nreal cauldron does the swapping. Meh-heh-heh.");
+                        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                        jump @label_130;
+                        break;
+                }
+                break;
+        }
+        switch ( message_Menu(MENU_SWAP_SHOP) ) { }
+        §label_135;
+        forever {
+            switch ( message_Menu(MENU_SWAP_SHOP2) ) {
+                case 1:
+                    with (actor ACTOR_NPC_GUREGGURU) {
+                        Turn2Direction(4, 10, DIR_UP);
+                    }
+                    WaitExecuteLives(ACTOR_NPC_GUREGGURU);
+                    continue;  // may be redundant
+                case 2:
+                    se_Play(8718);
+                    Wait(30);
+                    camera_SetEffect(2, 1, 1);
+                    Wait(15);
+                    screen_WhiteOut(1, 2);
+                    Wait(2);
+                    screen_FadeIn(1, 2);
+                    Wait(10);
+                    camera_SetEffect(0, 0, 0);
+                    Wait(30);
+                    continue;  // may be redundant
+                case 3:
+                    with (actor ACTOR_NPC_GUREGGURU) {
+                        Turn2Direction(4, 10, DIR_DOWN);
+                    }
+                    WaitExecuteLives(ACTOR_NPC_GUREGGURU);
+                    continue;  // may be redundant
+                default:
+                    switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG,1386,0)) {
+                        case > 0:
+                            jump @gone_missing;
+                        default:
+                            switch(ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_STORAGE,1386,0)) {
+                                case > 0:
+                                    §gone_missing;
+                                    with (actor ACTOR_NPC_GUREGGURU) {
+                                        Turn2Direction(1, 10, DIR_UP);
+                                    }
+                                    Wait(60);
+                                    with (actor ACTOR_NPC_GUREGGURU) {
+                                        CallCommon(CORO_LOOK_AROUND_FUNC_SERIES);
+                                    }
+                                    Wait(90);
+                                    with (actor ACTOR_NPC_GUREGGURU) {
+                                        Turn2Direction(1, 10, DIR_DOWN);
+                                    }
+                                    Wait(30);
+                                    message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+                                    message_Talk(" Meh-heh-heh...[W:60] Wait, huh?[K]\nWhere'd my Croagunk Cauldron go? I hope\nI didn't swap it away again...");
+                                    message_Talk(" Meh-heh-heh...[W:60] I\'m sure one way\nor another it'll wind up at the Kecleon Shop.\nLike they need more of my [M:S0]! Meh-heh-heh!");
+                                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                                    break;
+                            }
+                            break;
+                    }
+                    break_loop;
+                    break;
+            }
+        }
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[40] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[40] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. You can\'t fail now!",
+                french=" Mwé hé hé... Vous ne pouvez\nplus échouer maintenant!",
+                german=" Mehehe. Ihr dürft jetzt nicht\nversagen!",
+                italian=" Eh eh eh. Ora non potete fallire!",
+                spanish=" ¡Je, je, je! ¡No podéis fracasar\nahora!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] ) {
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[39] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[39] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" That little [CS:N]Azurill[CR] has me\nworried too.",
+                french=" Ce petit [CS:N]Azurill[CR] m\'inquiète moi\naussi.",
+                german=" Dieser kleine [CS:N]Azurill[CR] macht mir\nauch Sorgen.",
+                italian=" Quel piccolo [CS:N]Azurill[CR] preoccupa\nanche me.",
+                spanish=" Ese pequeño [CS:N]Azurill[CR] también\nme tiene preocupado.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 56] ) {
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 55] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[39] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[39] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Team [CS:X]Charm[CR]\ndoesn\'t interest me.",
+                french=" Mwé hé hé... L\'Equipe [CS:X]Charme[CR]\nne m\'intéresse pas.",
+                german=" Mehehe. Team [CS:X]Charme[CR]\ninteressiert mich nicht.",
+                italian=" Eh eh eh. Il Team [CS:X]Malia[CR] non \nm\'interessa.",
+                spanish=" Je, je, je. El [CS:X]Equipo Carisma[CR] no\nme interesa.",
+            });
+            message_Talk({
+                english=" This here is what interests me.\nIt\'s all I care about.",
+                french=" C\'est ça qui m\'intéresse.\nCe chaudron. Le reste, je m\'en moque.",
+                german=" Dies hier interessiert mich. Es\nist das Einzige, was ich wichtig nehme.",
+                italian=" Tutto ciò che mi interessa è qui.\nÈ l\'unica cosa di cui mi preoccupo.",
+                spanish=" Esto de aquí es lo que me\ninteresa. No me importa nada más.",
+            });
+            message_Talk({
+                english=" I love doing swaps more than\nanything! Meh-heh-heh.",
+                french=" J\'aime faire du troc plus\nque tout! Mwé hé hé...",
+                german=" Tauschen liebe ich mehr als alles\nandere! Mehehe.",
+                italian=" Amo i cambi più di qualsiasi \naltra cosa! Eh eh eh.",
+                spanish=" ¡Hacer trueques es lo que más\nme gusta en el mundo! Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] ) {
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[37] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[37] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Congratulations on\nyour graduation, you two.",
+                french=" Mwé hé hé... Félicitations pour\nl\'obtention de votre diplôme, vous deux.",
+                german=" Mehehe. Gratulation zur\nbestandenen Abschlussprüfung, ihr zwei.",
+                italian=" Eh eh eh. Congratulazioni per \nl\'esame, voi due.",
+                spanish=" Je, je, je. Mis felicitaciones\npor superar el gran reto.",
+            });
+            message_Talk({
+                english=" I\'ll admit that I thought you two\nwould fail the exam. Meh-heh-heh.",
+                french=" J\'avoue que j\'étais persuadé que\nvous alliez échouer. Mwé hé hé...",
+                german=" Ich gebe zu, dass ich euch eine\nerfolgreiche Abschlussprüfung nicht zugetraut\nhätte. Mehehe.",
+                italian=" Non pensavo che ce l\'avreste \nfatta. Eh eh eh.",
+                spanish=" Reconozco que pensé que no\nibais a conseguirlo. Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 4] ) {
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[37] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[37] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Hey, you two...",
+                french=" Mwé hé hé... Vous deux, là...",
+                german=" Mehehe. Hey, ihr zwei...",
+                italian=" Eh eh eh. Ehi, voi due...",
+                spanish=" Je, je, je. Eh, escuchadme...",
+            });
+            message_Talk({
+                english=" The graduation exam will put\nyou through the wringer.",
+                french=" Vous allez passer à la\nmoulinette pendant l\'examen de la Guilde.",
+                german=" Bei der Abschlussprüfung werdet\nihr ordentlich in die Mangel genommen.",
+                italian=" L\'esame sarà molto difficile.",
+                spanish=" El gran reto no es cualquier\ncosa.",
+            });
+            message_Talk({
+                english=" Don\'t be flattened! Meh-heh-heh.",
+                french=" Ne vous faites pas écraser!\nMwé hé hé...",
+                german=" Lasst euch ja nicht plätten!\nMehehe.",
+                italian=" Non fatevi schiacciare!\nEh eh eh.",
+                spanish=" ¡Que no os machaquen! Je, je,\nje.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[35] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[35] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Hey, you two...",
+                french=" Mwé hé hé... Vous deux, là...",
+                german=" Mehehe. Hey, ihr zwei...",
+                italian=" Eh eh eh. Ehi, voi due...",
+                spanish=" Je, je, je. Eh, escuchadme...",
+            });
+            message_Talk({
+                english=" I know it\'s not easy, but you\ncan\'t fail now.",
+                french=" Je sais que ce n\'est pas facile,\nmais vous ne pouvez plus échouer maintenant.",
+                german=" Ich weiß, dass es nicht leicht\nist, aber ihr dürft jetzt nicht versagen.",
+                italian=" So che non è facile, ma non \npotete fallire.",
+                spanish=" Sé que no resulta fácil, pero\nno podéis fracasar ahora.",
+            });
+            message_Talk({
+                english=" The world\'s at stake!\nMeh-heh-heh.",
+                french=" Le sort du monde entier est en\njeu! Mwé hé hé...",
+                german=" Das Wohl der Welt steht auf\ndem Spiel! Mehehe.",
+                italian=" C\'è in ballo il futuro del mondo!\nEh eh eh.",
+                spanish=" ¡Está en juego el bienestar\ndel mundo! Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] || scn($SCENARIO_MAIN) >= [23, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[34] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[34] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Tomorrow, I\'m\ngoing too.",
+                french=" Mwé hé hé... Demain, je viens\naussi.",
+                german=" Mehehe. Morgen gehe ich auch\nmit.",
+                italian=" Eh eh eh. Domani, vengo anch\'io.",
+                spanish=" Je, je, je. Mañana yo también\niré.",
+            });
+            message_Talk({
+                english=" To [CS:P]Brine Cave[CR]! Meh-heh-heh.",
+                french=" A la [CS:P]Caverne Saline[CR]!\nMwé hé hé...",
+                german=" In die [CS:P]Salzwasserhöhle[CR]! Mehehe.",
+                italian=" Alla [CS:P]Grotta Salmastra[CR]! Eh eh eh.",
+                spanish=" ¡Todos a la [CS:P]Cueva Aguamar[CR]!\nJe, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[33] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[33] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. It\'s good that you\ntwo made it back from the future.",
+                french=" Mwé hé hé... C\'est bien que vous\nayez réussi à revenir du futur.",
+                german=" Mehehe. Es ist gut, dass ihr zwei\nes aus der Zukunft zurückgeschafft habt.",
+                italian=" Eh eh eh. È bello vedervi di\nritorno dal futuro.",
+                spanish=" Je, je, je. Qué alegría que\nhayáis regresado del futuro.",
+            });
+            message_Talk({
+                english=" It makes me happy.\nMeh-heh-heh-heh!",
+                french=" Ça me rend heureux.\nMwé hé hé hé!",
+                german=" Das macht mich glücklich.\nMehehehe!",
+                italian=" Mi rende felice. Eh eh eh eh!",
+                spanish=" Me habéis alegrado el día.\n¡Je, je, je, je!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[32] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[32] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. You go on. Do your\ngood work.",
+                french=" Mwé hé hé... Allez-y. Faites du\nbon travail.",
+                german=" Mehehe. Macht weiter so. Auf\nweitere gute Arbeit eurerseits.",
+                italian=" Eh eh eh. Forza. Impegnatevi\nal massimo.",
+                spanish=" Je, je, je. Venga, a lo vuestro.\nDemostrad de lo que sois capaces.",
+            });
+            message_Talk({
+                english=" Do it for those like me who just\nstay home. Meh-heh-heh.",
+                french=" Faites-le pour les gens comme\nmoi, qui se contentent de rester chez eux.\nMwé hé hé...",
+                german=" Tut es für jene wie mich, die die\nganze Zeit zu Hause bleiben. Mehehe.",
+                italian=" Fatelo per quelli come me che\nrestano a casa. Eh eh eh.",
+                spanish=" Haced que los que nos quedamos\naquí nos sintamos orgullosos. Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[31] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[31] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Put my swapping\nto good use, you two...",
+                french=" Mwé hé hé... Profitez bien de\nmes trocs, vous deux...",
+                german=" Mehehe. Nutzt die von mir\nangebotene Tauschmöglichkeit sinnvoll,\nihr zwei.",
+                italian=" Eh eh eh. Fate un buon uso\ndei miei servizi, voi due...",
+                spanish=" Je, je, je. Sacad el mayor\npartido de mis trueques...",
+            });
+            message_Talk({
+                english=" Like for catching [CS:N]Grovyle[CR].\nMeh-heh-heh.",
+                french=" Pour capturer [CS:N]Massko[CR], par\nexemple. Mwé hé hé...",
+                german=" Wie etwa zum Fangen von\n[CS:N]Reptain[CR]. Mehehe.",
+                italian=" Potrebbero esservi utili per \ncatturare [CS:N]Grovyle[CR]. Eh eh eh.",
+                spanish=" Igual hasta pueden ayudaros a\natrapar a [CS:N]Grovyle[CR]. Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[30] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[30] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Meh-heh-heh. Now that the\nexpedition is over, I\'m back in business.",
+                french=" Mwé hé hé... Les affaires\npeuvent reprendre, maintenant que l\'expédition\nest terminée.",
+                german=" Mehehe. Jetzt, wo die Expedition\nvorüber ist, bin ich wieder im Geschäft.",
+                italian=" Eh eh eh. Ora che la spedizione\nè conclusa, torno a dedicarmi ai miei affari.",
+                spanish=" Je, je, je. Ahora que se ha\nterminado la expedición puedo reabrir\nel negocio.",
+            });
+            message_Talk({
+                english=" Back to doing swaps! My\nfavorite thing! Meh-heh-heh.",
+                french=" Revenons-en à nos trocs!\nMon activité préférée! Le troc, c\'est mon\ntruc! Mwé hé hé...",
+                german=" Und wieder zurück zum\nTauschen, meiner Lieblingsbeschäftigung!\nMehehe.",
+                italian=" Torno ai cambi! La mia\noccupazione preferita! Eh eh eh.",
+                spanish=" ¡Otra vez a hacer trueques!\n¡Mi afición favorita! Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] ) {
+        if ( $SCENARIO_TALK_BIT_FLAG[29] ) {
+            jump @label_131;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[29] = 1;
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+            }
+            message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We\'re closing up the guild while\nwe\'re on the expedition. I have to leave my\nSwap Cauldron behind. Meh-heh-heh.",
+                french=" On ferme la Guilde le temps de\nl\'expédition. Je vais devoir laisser mon\nChaudron-Troc ici. Mwé hé hé...",
+                german=" Wir schließen die Gilde,\nwährend wir auf der Expedition sind. Ich muss\nmeinen Tauschkessel zurücklassen. Mehehe.",
+                italian=" Durante la spedizione, la Gilda\nrimane chiusa. Non posso portarmi \nil Pentolone dei Cambi. Eh eh eh.",
+                spanish=" Vamos a cerrar el [CS:N]Pokégremio[CR]\ndurante la expedición. Tengo que dejar\naquí mi Caldero de Trueque. Je, je, je.",
+            });
+            message_Talk({
+                english=" I can\'t do this while on the\nexpedition, so if you have anything to swap,\ndo it now. Meh-heh-heh.",
+                french=" Si vous avez quoi que ce soit à\ntroquer, c\'est maintenant. Ça ne sera pas\npossible pendant l\'expédition. Mwé hé hé...",
+                german=" Ich kann das nicht während der\nExpedition machen. Also, wenn du etwas zu\ntauschen hast, dann mach das jetzt. Mehehe.",
+                italian=" Non posso lavorare durante la \nspedizione, quindi se avete qualcosa da \ncambiare fatelo adesso. Eh eh eh.",
+                spanish=" No habrá ocasión de usarlo\ndurante la expedición, así que si queréis hacer\nun trueque tendrá que ser ahora. Je, je, je.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            jump @label_131;
+        }
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] ) {
+        jump @label_131;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I\'m almost done repairing my\nSwap Cauldron here... Almost, but not yet.",
+            french=" J\'ai presque fini de réparer mon\nChaudron-Troc... Presque, mais pas tout à fait.",
+            german=" Ich habe meinen Tauschkessel\nhier fast fertig repariert... Fast, aber eben\nnoch nicht ganz.",
+            italian=" Ho quasi finito di riparare il mio\nPentolone dei Cambi... Quasi, ma non del\ntutto.",
+            spanish=" Ya casi he acabado de reparar\nmi Caldero de Trueque... Casi, pero aún no.",
+        });
+        message_Talk({
+            english=" I\'ll tell you when I\'m done. It\'s\nsomething you should look forward to.\nMeh-heh-heh.",
+            french=" Je vous préviendrai quand\nj\'aurai fini. Vous devez bouillir d\'impatience.\nMwé hé hé...",
+            german=" Ich gebe euch Bescheid, wenn ich\ndamit fertig bin. Es ist etwas, auf das ihr euch\nfreuen solltet. Mehehe.",
+            italian=" Quando avrò finito ve lo farò\nsapere. Non vedete l\'ora, eh?",
+            spanish=" Ya os avisaré cuando termine.\nEs algo por lo que vale la pena esperar.\n¡Ya veréis! Je, je, je.",
+        });
+        message_Talk({
+            english=" You\'ll finally learn what I\'m up\nto here. Meh-heh-heh.",
+            french=" Vous allez enfin savoir ce que je\nfabrique ici. Mwé hé hé...",
+            german=" Ihr werdet schlussendlich\nerfahren, woran ich hier arbeite. Mehehe.",
+            italian=" Così finalmente scoprirete di\ncosa mi occupo qui. Eh eh eh.",
+            spanish=" Ya os enteraréis de lo que\nestoy haciendo aquí. Je, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 6] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Meh-heh-heh. I guess I get to\nenjoy this fine, ripe aroma for a while yet.",
+            french=" Mwé hé hé... Je suppose que je\nvais pouvoir profiter de ce doux fumet\npendant un moment encore.",
+            german=" Mehehe. Mir scheint, als könnte\nich diesen herrlichen, reifen Duft eine Weile\ngenießen.",
+            italian=" Eh eh eh. Penso che rimarrò qui\nancora un poco per godermi questo piacevole e \ndelicato aroma.",
+            spanish=" Je, je, je Supongo que voy a\ntener el privilegio de disfrutar de este\nexquisito aroma una temporadita.",
+        });
+        message_Talk({
+            english=" It\'s another thing that makes me\nhappy. Meh-heh-heh.",
+            french=" C\'est une chose de plus qui me\nrend heureux. Mwé hé hé...",
+            german=" Eine weitere Sache, die mich\nglücklich macht. Mehehe.",
+            italian=" È un\'altra cosa che mi rende\ncontento. Eh eh eh.",
+            spanish=" Otra cosa por la que alegrarme.\nJe, je, je.",
+        });
+        message_Talk({
+            english=" Oh, by the way...",
+            french=" Ah, au fait...",
+            german=" Ach, übrigens...",
+            italian=" Ah, a proposito...",
+            spanish=" Ah, por cierto...",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_GUREGGURU) {
+            Turn2Direction(4, 1, DIR_UP);
+        }
+        WaitExecuteLives(ACTOR_NPC_GUREGGURU);
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I\'m almost done repairing my\nSwap Cauldron here...",
+            french=" J\'ai presque fini de réparer mon\nChaudron-Troc...",
+            german=" Ich habe meinen Tauschkessel\nhier fast fertig repariert.",
+            italian=" Ho quasi finito di riparare il mio\nPentolone dei Cambi...",
+            spanish=" Ya casi he logrado reparar\nmi Caldero de Trueque...",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with (actor ACTOR_NPC_GUREGGURU) {
+            Turn2DirectionLives(4, 2, ACTOR_PLAYER);
+        }
+        WaitExecuteLives(ACTOR_NPC_GUREGGURU);
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" When I\'m done fixing it, I\'ll\nbe sure to let you know.",
+            french=" Je vous préviendrai quand\nj\'aurai fini.",
+            german=" Wenn ich mit der Reparatur\nganz fertig bin, werde ich euch das sicherlich\nwissen lassen.",
+            italian=" Quando avrò finito, ve lo farò\nsapere.",
+            spanish=" Cuando haya terminado de\narreglarlo os avisaré.",
+        });
+        message_Talk({
+            english=" You\'ll finally learn what I\'m up\nto here. Meh-heh-heh.",
+            french=" Vous allez enfin savoir ce que je\nfabrique ici. Mwé hé hé...",
+            german=" Ihr werdet schlussendlich\nerfahren, woran ich hier arbeite. Mehehe.",
+            italian=" Sì, poi vi metterò al corrente di\nciò di cui mi occupo qui... Eh eh eh.",
+            spanish=" Ya os enteraréis de lo que\nestoy haciendo aquí. Je, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Meh-heh-heh. That aroma\nwafting down from upstairs...",
+            french=" Mwé hé hé... Ce fumet en\nprovenance de l\'étage supérieur...",
+            german=" Mehehe. Dieser Duft, der von\noben herabweht...",
+            italian=" Eh eh eh. Quest\'aroma che viene\nda sopra...",
+            spanish=" Je, je, je. Ese aroma que baja\nde la planta de arriba...",
+        });
+        message_Talk({
+            english=" I don\'t mind it at all. Nope, it\'s\nquite all right with me. Meh-heh-heh.",
+            french=" Il ne me gêne pas le moins du\nmonde. Non, il me convient même parfaitement.\nMwé hé hé...",
+            german=" Er macht mir überhaupt nichts\naus. Nein, was mich angeht, ist das voll in\nOrdnung. Mehehe.",
+            italian=" Non mi tocca. Va bene per me.\nEh eh eh.",
+            spanish=" No me importa en absoluto.\nNo, a mí no me molesta. Je, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Meh-heh-heh... You two...[K]\nTrain hard every day. Meh-heh-heh.",
+            french=" Mwé hé hé... Vous deux...[K]\nEntraînez-vous bien tous les jours.\nMwé hé hé...",
+            german=" Mehehe. Ihr zwei...[K] trainiert\njeden Tag sehr hart. Mehehe.",
+            italian=" Eh eh eh... Voi due...[K]\nVi allenate duramente ogni giorno. Eh eh eh.",
+            spanish=" Je, je, je...[K] Espero que entrenéis\nmucho todos los días. Je, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" Hey, [CS:N]Croagunk[CR].[K] I\'ve been meaning\nto ask you...",
+                    french=" Hé, [CS:N]Cradopaud[CR].[K] Je voulais\nte demander...",
+                    german=" Hey, [CS:N]Glibunkel[CR].[K] Ich wollte dich\netwas fragen...",
+                    italian=" Ehi, [CS:N]Croagunk[CR].[K] Avevo intenzione\ndi chiederti...",
+                    spanish=" Oye, [CS:N]Croagunk[CR]...[K] Hace tiempo\nque quiero preguntarte una cosa...",
+                }
+            case 2:
+                {
+                    english=" Hey, [CS:N]Croagunk[CR].[K] I\'ve been meaning\nto ask you...",
+                    french=" Hé, [CS:N]Cradopaud[CR].[K] Je voulais\nte demander...",
+                    german=" Hey, [CS:N]Glibunkel[CR].[K] Ich wollte dich\netwas fragen...",
+                    italian=" Ehi, [CS:N]Croagunk[CR].[K] Avevo intenzione\ndi chiederti...",
+                    spanish=" Oye, [CS:N]Croagunk[CR]...[K] Hace tiempo\nque quiero preguntarte una cosa...",
+                }
+            default:
+                {
+                    english=" Hey, [CS:N]Croagunk[CR].[K] I\'ve been meaning\nto ask you...",
+                    french=" Hé, [CS:N]Cradopaud[CR].[K] Je voulais\nte demander...",
+                    german=" Hey, [CS:N]Glibunkel[CR].[K] Ich wollte dich\netwas fragen...",
+                    italian=" Ehi, [CS:N]Croagunk[CR].[K] Avevo intenzione\ndi chiederti...",
+                    spanish=" Oye, [CS:N]Croagunk[CR]...[K] Hace tiempo\nque quiero preguntarte una cosa...",
+                }
+        }
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" [CS:N]Croagunk[CR], what are you doing\nhere all the time?",
+                    french=" Qu\'est-ce que tu fais ici tout\nle temps?",
+                    german=" [CS:N]Glibunkel[CR], was machst du hier\ndie ganze Zeit?",
+                    italian=" [CS:N]Croagunk[CR], cosa fai qui\ntutto il tempo?",
+                    spanish=" ¿Por qué estás siempre aquí?",
+                }
+            case 2:
+                {
+                    english=" [CS:N]Croagunk[CR], what are you doing\nhere all the time?",
+                    french=" Qu\'est-ce que tu fais ici tout\nle temps?",
+                    german=" [CS:N]Glibunkel[CR], was machst du hier\ndie ganze Zeit?",
+                    italian=" [CS:N]Croagunk[CR], cosa fai qui\ntutto il tempo?",
+                    spanish=" ¿Por qué estás siempre aquí?",
+                }
+            default:
+                {
+                    english=" [CS:N]Croagunk[CR], what are you doing\nhere all the time?",
+                    french=" Qu\'est-ce que tu fais ici tout\nle temps?",
+                    german=" [CS:N]Glibunkel[CR], was machst du hier\ndie ganze Zeit?",
+                    italian=" [CS:N]Croagunk[CR], cosa fai qui\ntutto il tempo?",
+                    spanish=" ¿Por qué estás siempre aquí?",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Huh?[K] Who...me? Meh-heh-heh.",
+            french=" Hein?[K] Qui... moi? Mwé hé hé...",
+            german=" Wie?[K] Wer? Ich? Mehehe.",
+            italian=" Eh?[K] Chi... io? Eh eh eh.",
+            spanish=" ¿Eh?[K] ¿Quién, yo? Je, je, je...",
+        });
+        message_Talk({
+            english=" What am I doing here...?[K]\nMeh-heh...[K] Meh-heh-heh.",
+            french=" Ce que je fais ici...?[K]\nMwé hé...[K] Mwé hé hé...",
+            german=" Was ich hier mache?[K] Mehe...[K]\nMehehe.",
+            italian=" Cosa faccio qui...?[K] Eh eh eh...[K]\nEh eh eh.",
+            spanish=" ¿Que por qué estoy aquí?[K]\nJe, je...[K] Je, je, je.",
+        });
+        message_Talk({
+            english=" Meh-heh-heh-heh-heh...",
+            french=" Mwé hé hé hé hé...",
+            german=" Mehehehehe...",
+            italian=" Eh eh eh eh eh...",
+            spanish=" Je, je, je, je, je...",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [4, 7] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You caught yourselves a wanted\ncriminal?",
+            french=" Vous avez épinglé un criminel\nrecherché?",
+            german=" Ihr habt einen gesuchten Ganoven\ndingfest gemacht?",
+            italian=" Avete catturato un ricercato con\nle vostre forze?",
+            spanish=" ¿Habéis atrapado a algún\nmalhechor buscado por la ley?",
+        });
+        message_Talk({
+            english=" So you really can get things\ndone. Meh-heh-heh.",
+            french=" Alors c\'est que vous savez\nvraiment y faire. Mwé hé hé...",
+            german=" Ihr wisst also wirklich, wie man\ndie Dinge anzupacken hat. Mehehe.",
+            italian=" Sapete davvero quello\nche fate. Eh eh eh.",
+            spanish=" Pues sí que sabéis hacer bien\nlas cosas. Je, je, je.",
+        });
+        message_Talk({
+            english=" Of course, what you did is only\nwhat\'s expected of any exploration team.\nMeh-heh-heh.",
+            french=" Bien sûr, ce que vous avez fait,\nc\'est ce qu\'on attend de n\'importe quelle équipe\nd\'exploration. Mwé hé hé...",
+            german=" Natürlich habt ihr nur das getan,\nwas von einem Erkundungsteam erwartet wird.\nMehehe.",
+            italian=" Certo, fate solo quello che ci si\naspetterebbe da ogni squadra d\'esplorazione.\nEh eh eh.",
+            spanish=" Pero claro, tampoco es que se\nespere menos de un equipo explorador.\nJe, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] ) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GUREGGURU);
+        }
+        message_SetFace(ACTOR_NPC_GUREGGURU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The name\'s [CS:N]Croagunk[CR].",
+            french=" Je m\'appelle [CS:N]Cradopaud[CR].",
+            german=" Mein Name ist [CS:N]Glibunkel[CR].",
+            italian=" Mi chiamo [CS:N]Croagunk[CR]!",
+            spanish=" Me llamo [CS:N]Croagunk[CR].",
+        });
+        message_Talk({
+            english=" Nice to meet you, rookies.\nMeh-heh-heh.",
+            french=" Content de vous connaître,\nla bleusaille... Mwé hé hé...",
+            german=" Freut mich, eure Bekanntschaft\nzu machen, ihr Anfänger. Mehehe.",
+            italian=" Felice di incontrarvi, reclute.\nEh eh eh.",
+            spanish=" Encantado de conoceros,\nreclutas. Je, je, je.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        jump @label_130;
+    } elseif ( scn($SCENARIO_MAIN) >= [3, 1] ) {
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}
