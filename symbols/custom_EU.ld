@@ -34,10 +34,14 @@ GetExpReturn = 0x2052DE0;
 OptionsMenuItemListPtr = 0x209B684;
 SevenTreasureCafeMissionCheck1 = 0x2062A88;
 SevenTreasureCafeMissionCheck2 = 0x206810C;
+ExplorerMazeUnlock = 0x20593D0;
+HardcodedMissionUnlock1 = 0x20682BC;
+HardcodedMissionUnlock2 = 0x20684D0;
+HardcodedMissionUnlock3 = 0x20685E0;
 /* Unused, but intended for Croagunk Shenanigans later. Still in Arm9 */
 SwapShopScenarioBalanceHook1 = 0x2012F3C; 
 SwapShopScenarioBalanceHook2 = 0x20133A0;
-SwapShopInstrumentHook = 0x02012F1C;  
+SwapShopInstrumentHook = 0x02012F1C;
 
 /* ! For Overlay1 */
 ClearMarkHook = 0x2333D68;

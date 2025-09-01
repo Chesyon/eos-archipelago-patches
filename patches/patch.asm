@@ -39,6 +39,26 @@
         nop
     .endarea
 
+    .org ExplorerMazeUnlock
+    .area 0x4
+        nop
+    .endarea
+
+    .org HardcodedMissionUnlock1
+    .area 0x4
+        nop
+    .endarea
+
+    .org HardcodedMissionUnlock2
+    .area 0x4
+        nop
+    .endarea
+
+    .org HardcodedMissionUnlock3
+    .area 0x4
+        nop
+    .endarea
+
 	; .org SwapShopScenarioBalanceHook1
 	; .org SwapShopScenarioBalanceHook2
 	; To be used for Croagunk Shenanigans later. 
