@@ -35,14 +35,17 @@ bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf
     }
     if(StrcmpTag(tag_string, "qbby"))
     {
+        char temp_buf[33];
+        MemZero(temp_buf, 33);
         uint32_t tag_param = AtoiTag(tag_string_param);
         enum script_var_id var = tag_param & 0xFF;
-        uint8_t first_bit = (tag_param >> 8) & 0xFF;
-        uint8_t last_bit = tag_param >> 16;
-        for(int bit = first_bit; bit < last_bit; bit++){
-            if(LoadScriptVariableValueAtIndex(NULL, var, bit) != 0) strcat(buf, "1");
-            else strcat(buf, "0");
+        uint8_t first_bit = (tag_param >> 8) & 0xFFF;
+        uint8_t num_bits = (tag_param >> 20);
+        for(int i = 0; i < num_bits; i++){
+            if(LoadScriptVariableValueAtIndex(NULL, var, first_bit+i) != 0) temp_buf[i] = 0x31;
+            else temp_buf[i] = 0x30;
         }
+        strcpy(buf, temp_buf);
         return true;
     }
     return false;
