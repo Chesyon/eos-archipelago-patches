@@ -20,6 +20,7 @@ macro GetVersion() {
             break;
         case 5:
             message_Talk(" We are currently on a\nprerelease of 0.3.2![K] Make sure to check the\nGitHub and let us know what's working!");
+            break; // LMAO chesyon forgor to break
         case 4:
             message_Talk(" We are currently on 0.3.1![K]\nWe think we got all the 0.3.0 bugs, but if you\nspot any stragglers, don't hesitate to tell us!");
             break;
