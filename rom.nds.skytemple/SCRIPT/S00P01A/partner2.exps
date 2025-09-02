@@ -2214,7 +2214,7 @@ def 0 {
     §variable_checkup;
     message_Mail("[STS][CS:S]$VERSION[CR]: [var:0:0]   [CS:S]$CONDITION[CR]: [var:1:0]\n[CS:S]$SCEN   SELECT         MAIN          SIDE[CR]\n      ~5b[var:2:0], [var:2:1]~5d ~5b[var:3:0], [var:3:1]~5d ~5b[var:4:0], [var:4:1]~5d[STE]");
     message_Mail("[STS][CS:S]$SCENARIO_SUBX[CR]: ~5b[var:5:0] [var:5:1]~5d, ~5b[var:6:0], [var:6:1]~5d\n     ~5b[var:7:0], [var:7:1]~5d, ~5b[var:8:0], [var:8:1]~5d, ~5b[var:9:0], [var:9:1]~5d\n     ~5b[var:10:0], [var:10:1]~5d, ~5b[var:11:0], [var:11:1]~5d, ~5b[var:12:0], [var:12:1]~5d[STE]");
-    message_Mail("[STS][CS:S]$SIDE02_TALK[CR]:   [qbby:2293773]  [CS:S]$SIDE06_ROOM[CR]:  [qbby:2293774]\n[CS:S]$SIDE08_BOSS2ND[CR]: [qbby:2293775]  [CS:S]$SIDE01_BOSS2ND[CR]: [qbby:2293776]\n[STE]");
+    message_Mail("[STS][CS:S]$SIDE02_TALK[CR]:   [qbby:196621]  [CS:S]$SIDE06_ROOM[CR]:  [qbby:196622]\n[CS:S]$SIDE08_BOSS2ND[CR]: [qbby:65551]  [CS:S]$SIDE01_BOSS2ND[CR]: [qbby:65552]\n[STE]");
     message_Mail("[STS][CS:S]$SCENARIO_MAIN_BIT_FLAG[CR] (1/2)\n00: [qbby:2031633]\n02: [qbby:4136977][STE]");
     message_Mail("[STS][CS:S]$SCENARIO_MAIN_BIT_FLAG[CR] (2/2)\n04: [qbby:6242321]\n06: [qbby:8347665][STE]");
     message_Mail("[STS][CS:S]$SCENARIO_TALK_BIT_FLAG[CR] (1/4)\n00: [qbby:2031634]\n02: [qbby:4136978][STE]");
@@ -2248,8 +2248,8 @@ def 0 {
     message_Mail("[STS][CS:S]$HERO_TALK_KIND[CR]: [var:66:0]\n[CS:S]$PARTNER_TALK_KIND[CR]: [var:67:0]\n[CS:S]$CONFIG_COLOR_KIND[CR]: [var:69:0][STE]");
     message_Mail("[STS][CS:S]$RANDOM_REQUEST_NPC03_KIND[CR]: [var:68:0]\n[CS:S]$ROM_VARIATION[CR]: [var:70:0]\n[CS:S]$LANGUAGE_TYPE[CR]: [var:71:0][STE]");
     message_Mail("[STS][CS:S]$GAME_MODE[CR]: [var:72:0]\n[CS:S]$EXECUTE_SPECIAL_EPISODE_TYPE[CR]: [var:73:0]\n[CS:S]$SPECIAL_EPISODE_TYPE[CR]: [var:74:0][STE]");
-    message_Mail("[STS][CS:S]$SPECIAL_EPISODE_OPEN[CR]:     [qbby:2031691]\n[CS:S]$SPECIAL_EPISODE_OPEN_OLD[CR]: [qbby:2031692]\n[CS:S]$SPECIAL_EPISODE_CONQUEST[CR]: [qbby:2031693][STE]");
-    message_Mail("[STS][CS:S]$PERFORMANCE_PROGRESS_LIST[CR] (0/1)\n00: [qbby:2031694]\n01: [qbby:4137038][STE]");
+    message_Mail("[STS][CS:S]$SPECIAL_EPISODE_OPEN[CR]:     [qbby:524363]\n[CS:S]$SPECIAL_EPISODE_OPEN_OLD[CR]: [qbby:524364]\n[CS:S]$SPECIAL_EPISODE_CONQUEST[CR]: [qbby:524365][STE]");
+    message_Mail("[STS][CS:S]$PERFORMANCE_PROGRESS_LIST[CR] (1/1)\n00: [qbby:2031694]\n02: [qbby:4137038][STE]");
     message_Mail("[STS][CS:S]$DUNGEON_OPEN_LIST[CR] (1/4)\n00: [qbby:2031695]\n02: [qbby:4137039][STE]");
     message_Mail("[STS][CS:S]$DUNGEON_OPEN_LIST[CR] (2/4)\n04: [qbby:6242383]\n06: [qbby:8347727][STE]");
     message_Mail("[STS][CS:S]$DUNGEON_OPEN_LIST[CR] (3/4)\n08: [qbby:10453071]\n0A: [qbby:12558415][STE]");
@@ -2286,12 +2286,12 @@ def 0 {
     message_Mail("[STS][CS:S]$WORLD_MAP_MARK_LIST_SPECIAL[CR] (5/5)\n10: [qbby:18874454]\n12: [qbby:20979798][STE]");
     message_Mail("[STS][CS:S]$WORLD_MAP_LEVEL[CR]: [var:87:0]\n[CS:S]$POSITION[CR] (1/2)     \n(x1 = [var:88:0], y1 = [var:89:0], z1 = [var:90:0], d1 = [var:91:0])\n(x2 = [var:88:1], y2 = [var:89:1], z2 = [var:90:1], d2 = [var:91:1])[STE]");
     message_Mail("[STS][CS:S]$POSITION[CR] (2/2)     \n(x3 = [var:88:2], y3 = [var:89:2], z3 = [var:90:2], d3 = [var:91:2])[STE]");
-    message_Mail("[STS][CS:S]$EVENT_LOCAL[CR]: [var:92:0]\n[CS:S]$DUNGEON_EVENT_LOCAL[CR]: [var:93:0]\n[CS:S]$BIT_FUWARANTE_LOCAL[CR]: [qbby:2031714][STE]");
+    message_Mail("[STS][CS:S]$EVENT_LOCAL[CR]: [var:92:0]\n[CS:S]$DUNGEON_EVENT_LOCAL[CR]: [var:93:0]\n[CS:S]$BIT_FUWARANTE_LOCAL[CR]: [qbby:327778][STE]");
     message_Mail("[STS][CS:S]$STATION_ITEM[CR] ([CS:S]STATIC[CR], [CS:S]TEMP[CR])\nST: [qbby:2031710]\nTE: [qbby:2031711][STE]");
-    message_Mail("[STS][CS:S]$DELIVER_ITEM[CR] ([CS:S]STATIC[CR], [CS:S]TEMP[CR])\nST: [qbby:2031712]\nTE: [qbby:2031713][STE]");
+    message_Mail("[STS][CS:S]$DELIVER_ITEM[CR] ([CS:S]STATIC[CR], [CS:S]TEMP[CR])\nST: [qbby:1048672]\nTE: [qbby:1048673][STE]");
     message_Mail("[STS][CS:S]$ITEM_BACKUP[CR]: \n~D8: ~5B[var:100:0], [var:100:1]~5D  kurukure: ~5B[var:101:0], [var:101:1]~5D\ntake: ~5B[var:102:0], [var:102:1]~5D  get: ~5B[var:103:0], [var:103:1]~5D[STE]");
     message_Mail("[STS][CS:S]$REQUEST_THANKS_RESULT_KIND[CR]: [var:104:0]\n[CS:S]$REQUEST_THANKS_RESULT_VARIATION[CR]: [var:105:0]\n[CS:S]$TEAM_RANK_EVENT_LEVEL[CR]: [var:110:0][STE]");
-    message_Mail("[STS][CS:S]$RECYCLE_COUNT[CR]: [var:108:0]\n[CS:S]SUB30[CR]: [CS:S]Treasure_Discover[CR] = [qbby:2031722], [CS:S]ProjectP[CR] = [qbby:2031729]\n[CS:S]SUB30[CR]: [CS:S]Spot_Discover[CR] = [qbby:2031723], [CS:S]Spot_Level[CR] = [var:109:0][STE]");
+    message_Mail("[STS][CS:S]$RECYCLE_COUNT[CR]: [var:108:0]\n[CS:S]SUB30[CR]: [CS:S]Treasure_Discover[CR] = [qbby:65642], [CS:S]ProjectP[CR] = [qbby:65649]\n[CS:S]SUB30[CR]: [CS:S]Spot_Discover[CR] = [qbby:65643], [CS:S]Spot_Level[CR] = [var:109:0][STE]");
     message_Mail("[STS][CS:S]$LOTTERY_RESULT[CR]: [var:99:0]\n[CS:S]$PLAY_OLD_GAME[CR]: [var:111:0]\n[CS:S]$NOTE_MODIFY_FLAG[CR]: [var:112:0][STE]");
     message_Mail("[STS][CS:S]$SUM[CR]: [var:114:0][STE]");
     if (not debug) {
