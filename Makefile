@@ -190,7 +190,7 @@ headers:
 	
 .PHONY: backup
 backup: 
-	cp rom.nds backup-"`date +"%s"`".nds
+	xdelta3 -e -f -s vanilla.nds rom.nds backups/backup-"`date +"%s"`".xdelta
 	
 .PHONY: rom
 rom: backup
