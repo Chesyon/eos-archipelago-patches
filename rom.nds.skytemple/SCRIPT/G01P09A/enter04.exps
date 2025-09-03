@@ -41,7 +41,7 @@ def 0 {
         spanish="[CN]Aquí hay algo escrito...",
     });
     §label_56;
-    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) { // Sunflora
+    if ($SPECIAL_EPISODE_TYPE == 2) { // Sunflora
         message_Notice("[CN]Oh my gosh! It\'s your diary!\n[CN]Would you like to read it?");
     } else {
         message_Notice({
@@ -68,7 +68,7 @@ def 0 {
                     break;
                 default:
                     screen_FadeOut(1,30);
-                    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) { // Sunflora
+                    if ($SPECIAL_EPISODE_TYPE == 2) { // Sunflora
                         message_Explanation("[CN]Hold on...[W:30] Oh my gosh![K]\n[CN]You found a note in your diary!\n[CN]When did that get there?");
                     } else {
                         message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Sunflora[CR]\'s diary!");
@@ -101,8 +101,9 @@ def 0 {
                     message_Close();
                     screen_FadeIn(1,30);
             }
-            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+            switch ( $SPECIAL_EPISODE_TYPE ) {
                 case 2:
+                case 0:
                     §label_51;
                     $EVENT_LOCAL = 4;
                     §label_55;

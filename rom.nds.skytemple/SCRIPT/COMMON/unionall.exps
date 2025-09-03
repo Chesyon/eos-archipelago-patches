@@ -12239,6 +12239,7 @@ coro GETOUT_REQUEST_CONQUEST {
                 }
             } else {
                 message_Mail(" You must reach the summit to\nreceive [CS:G]Sneasel[CR]\'s gratitude!");
+                message_Close();
                 main_EnterGround(LEVEL_D73P28A, 30);
                 hold;
             }

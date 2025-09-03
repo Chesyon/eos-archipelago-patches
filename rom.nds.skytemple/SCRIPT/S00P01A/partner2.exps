@@ -6,6 +6,7 @@ def 0 {
         $PERFORMANCE_PROGRESS_LIST[2] = 1;
         $EVENT_LOCAL = 0;
         //TODO: Here is safe!
+        ~AssignCheck(65);
         jump @debug_menu;
                                                                                                     
     }

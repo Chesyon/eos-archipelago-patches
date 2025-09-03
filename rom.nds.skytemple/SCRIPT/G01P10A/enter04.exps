@@ -41,8 +41,8 @@ def 0 {
         spanish="[CN]Aquí hay algo escrito...",
     });
     §label_57;
-    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 0) { // Bidoof
-        message_Notice("[CN]It\'s your diary, yup yup!\n[CN]Would you like to read it?");
+    if ($SPECIAL_EPISODE_TYPE == 0) { // Bidoof
+        message_Notice("[CN]It\'s your diary, yup yup!\n[CN]Would you like to open it?");
     } else {
         message_Notice({
             english="[CN]This is [CS:N]Bidoof[CR]\'s diary.\n[CN]Should we sneak a peek?",
@@ -66,7 +66,7 @@ def 0 {
                 debug_Print("Check already obtained");
             } else {
                 screen_FadeOut(1,30);
-                if ($EXECUTE_SPECIAL_EPISODE_TYPE == 0) { // Bidoof
+                if ($SPECIAL_EPISODE_TYPE == 0) { // Bidoof
                     message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in your diary!\n[CN]When did that get there?");
                 } else {
                     message_Explanation("[CN]Hold on...[K]\n[CN]You found a note in [CS:G]Bidoof[CR]\'s diary!");
@@ -99,7 +99,8 @@ def 0 {
                 message_Close();
                 screen_FadeIn(1,30);
             }
-            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+            switch ( $SPECIAL_EPISODE_TYPE ) {
+                case 0:
                 case 2:
                     $EVENT_LOCAL = 4;
                     switch ( message_Menu(MENU_DIARY_BIDOOF_SP_E_P) ) {

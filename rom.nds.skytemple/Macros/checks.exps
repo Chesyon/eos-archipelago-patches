@@ -68,6 +68,8 @@ macro AssignCheck($bit) {
 
 
 macro InternalCheckMacro($value) {
+    $LOTTERY_RESULT = value($LOCAL0);
+    debug_PrintFlag($LOTTERY_RESULT,"variable?");
     switch($LOCAL0) { // 
         case < 2:
             ~RunSP(5,$value);
