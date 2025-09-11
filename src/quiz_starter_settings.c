@@ -134,7 +134,7 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("bxne lr");
     asm("stmdb sp!,{lr}");
     asm("ldr r0,=slotData");
-    asm("ldr r1,=slotData+16");
+    asm("ldr r1,=slotData+0x20");
     asm("ldr r2,[r1,#0x0]");
     asm("ror r2,r2,#0x7");
     asm("ldr r3,[r0,#0x0]");
@@ -148,7 +148,7 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("ldr r2,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r2,[r2,#0x0]");
     asm("ldr r1,[r2,#0x370]"); // numSelectablePartners
-    asm("bl _s32_div_f");
+    asm("bl _u32_div_f");
     asm("ldr r0,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r0,[r0,#0x0]");
     asm("add r0,r0,#0x300");
