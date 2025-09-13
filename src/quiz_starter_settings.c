@@ -133,8 +133,8 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
     asm("bxne lr");
     asm("stmdb sp!,{lr}");
-    asm("ldr r0,=slotData");
-    asm("ldr r1,=slotData+0x20");
+    asm("ldr r0,=slotData"); // &(slotData->apSlotName)
+    asm("ldr r1,=slotData+0x20"); // &(slotData->apTrimmedSeed)
     asm("ldr r2,[r1,#0x0]");
     asm("ror r2,r2,#0x7");
     asm("ldr r3,[r0,#0x0]");
