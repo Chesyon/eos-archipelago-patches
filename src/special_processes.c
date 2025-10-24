@@ -332,6 +332,18 @@ static int SpGetSkyPeaksOpen() {
     return CUSTOM_SAVE_AREA.openSkyPeakPasses;
 }
 
+// Special process 116: Updates adventure log recycle count. No params/return, but instead uses EVENT_LOCAL as both a parameter and output variable.
+// Input: Number to increase adventure log recycle count by.
+// Output: New adventure log recycle count.
+// NOTE: Couldn't we just... read from VAR_RECYCLE_COUNT...? Eh, lappy asked for it to be implemented this way. Come back to this.
+static void SpUpdateAdventureLogRecycles(){
+    uint32_t num_to_add = LoadScriptVariableValue(NULL, VAR_EVENT_LOCAL);
+    uint32_t recycle_count = GetNbRecycled() + num_to_add;
+    if(recycle_count > 999999) recycle_count = 999999; // for consistency with what'll be shown in adventure log
+    SetNbRecycled(recycle_count);
+    SaveScriptVariableValue(NULL, VAR_EVENT_LOCAL, recycle_count);
+}
+
 // Special process Read/write DeathLink
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
@@ -410,6 +422,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         return true;
     case 115:
         *return_val = SpGetSkyPeaksOpen();
+        return true;
+    case 116:
+        SpUpdateAdventureLogRecycles();
         return true;
     case 255:
         *return_val = SpGetCrassKind();
