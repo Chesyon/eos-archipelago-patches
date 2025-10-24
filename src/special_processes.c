@@ -87,9 +87,8 @@ static int SpDoNameCheck() {
 }
 
 // Special process 104: Regenerates board missions.
-static int SpRegenerateMissions() {
+static void SpRegenerateMissions() {
     GenerateDailyMissions();
-    return 0;
 }
 
 // Special process 105: Read/write Cafe check count. 1 = write, anything else = 0.
@@ -138,7 +137,6 @@ static int SpCheckForUnownRocks(){
 static bool SpIsMainGameUnlocked(){
     return (CUSTOM_SAVE_AREA.mainGameUnlocked | (apSettings.startingEpisode == 0));
 }
-
 
 // Used by SP 108.
 int __attribute__((naked)) GetItemIdAtStorageIdx(int index)
@@ -291,14 +289,13 @@ static int SpGetRank(){
 }
 
 // Special process 110: Set portrait monster and emotion. First parameter: Monster ID, second parameter: emotion.
-static int SpSetPortraitMonster(int monsterId, int emotion){
+static void SpSetPortraitMonster(int monsterId, int emotion){
     SCRIPT_PORTRAIT_PARAMS.monster_id.val = monsterId;
     SetPortraitEmotion(&SCRIPT_PORTRAIT_PARAMS, emotion);
-    return 0;
 }
 
 // Special Process 111: Assign check. Parameter 1: Check ID. Currently unused as I need to test the hell out of it to make sure it has the same behavior as Lappy's macro.
-static int SpAssignCheck(int checkId){
+static void SpAssignCheck(int checkId){
     int subXVar = 5;
     int num = checkId >> 4;
     subXVar += num;
@@ -308,7 +305,6 @@ static int SpAssignCheck(int checkId){
     LoadScriptVariableValueBytes(var_id, &val, 2);
     val |= 1 << checkId;
     SaveScriptVariableValueBytes(var_id, &val, 2);
-    return 0;
 }
 
 // Special process 112: Get current bag capacity. No parameters, returns current bag capacity.
@@ -388,7 +384,7 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         *return_val = SpDoNameCheck();
         return true;
     case 104:
-        *return_val = SpRegenerateMissions();
+        SpRegenerateMissions();
         return true;
     case 105:
         *return_val = SpAccessCafeStatus(arg1, arg2);
@@ -406,10 +402,10 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         *return_val = SpGetRank();
         return true;
     case 110:
-        *return_val = SpSetPortraitMonster(arg1, arg2);
+        SpSetPortraitMonster(arg1, arg2);
         return true;
     case 111:
-        *return_val = SpAssignCheck(arg1);
+        SpAssignCheck(arg1);
         return true;
     case 112:
         *return_val = SpGetCurrentBagCapacity();
