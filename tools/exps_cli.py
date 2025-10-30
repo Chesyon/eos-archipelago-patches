@@ -27,10 +27,13 @@ from skytemple_files.script.ssb.writer import SsbWriter
 from skytemple_files.common import string_codec
 from skytemple_files.common.util import get_ppmdu_config_for_rom
 from skytemple_files.common.ppmdu_config.data import Pmd2Data
-
+from skytemple_files.common.impl_cfg import (
+    change_implementation_type,
+    ImplementationType,
+)
 
 class SimpleExpsCompiler:
-    def __init__(self, rom_name: str, flags: []):
+    def __init__(self, rom_name: str, flags: [] = []):
         self.rom_name = rom_name
         self.rom = NintendoDSRom.fromFile(rom_name)
         self.flags = flags
@@ -90,6 +93,7 @@ class SimpleExpsCompiler:
 
 
 def main(rom_name: str, scripts: [], flags: []):
+    change_implementation_type(ImplementationType.NATIVE) # Use native file handlers
     simple_compiler = SimpleExpsCompiler(rom_name, flags)
     simple_compiler.compile_multiple_scripts(scripts)
     simple_compiler.save()
