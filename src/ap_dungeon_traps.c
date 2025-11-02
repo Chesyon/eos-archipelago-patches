@@ -69,7 +69,7 @@ void DungeonModeTrapCheck() {
     if (CUSTOM_SAVE_AREA.dungeonTraps.whiffer == true) {
         for (int i = 0; i < 4; i++) {
             struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
-            TryInflictWhifferStatus(monsterEntity, monsterEntity);
+            TryInflictWhifferStatus(monsterEntity, monsterEntity, 5, false);
         }
     }
     

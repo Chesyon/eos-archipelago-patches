@@ -42,7 +42,6 @@ void DeathLinkReceiverCheck() {
             PlayEffectAnimationEntityWrapper(leader, 66);
             break;
         case 2: // Wisp Spin
-            leader->transparent = true;
             PlayEffectAnimationEntityWrapper(leader, 75);
             leader->is_visible = false;
             break;
@@ -201,7 +200,7 @@ void DeathLinkReceiverCheck() {
     }
     
     // Reuse [string:2] to use our fallen ally name.
-    strncpy(DUNGEON_PTR->loss_related_monster_name, CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathName, 10);
+    strncpy(DUNGEON_PTR->fallen_escort_monster_name, CUSTOM_SAVE_AREA.deathLinkTracker.allyDeathName, 10);
     
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;
 }
@@ -222,7 +221,7 @@ void DeathLinkSenderCheck() {
     struct preprocessor_args preArgs;
     preArgs.strings[0] = DUNGEON_PTR->fainted_monster_cause_entity_name;
     preArgs.strings[1] = DUNGEON_PTR->fainted_monster_name;
-    preArgs.strings[2] = DUNGEON_PTR->loss_related_monster_name;
+    preArgs.strings[2] = DUNGEON_PTR->fallen_escort_monster_name;
     
     if (SomeDeathMsgCheckFun(damageSource) != 0) {
         strncpy(CUSTOM_SAVE_AREA.deathLinkTracker.skyDeathMessage, StringFromId(0x9CD), 127);
