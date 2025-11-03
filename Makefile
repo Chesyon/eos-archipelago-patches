@@ -142,10 +142,14 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					-I$(CURDIR)/$(BUILD)
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
+
+export CUSTOMSYMBOLS	:= 	$(wildcard symbols/custom_*.ld)
+export GENERATEDSYMBOLS :=	$(foreach sym_file,$(CUSTOMSYMBOLS),\
+							$(patsubst symbols/custom_%.ld,symbols/generated_%.ld,$(sym_file)))
  
 #---------------------------------------------------------------------------------
 .PHONY: $(BUILD)
-$(BUILD): symbols/generated_$(REGION).ld
+$(BUILD): $(GENERATEDSYMBOLS)
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
