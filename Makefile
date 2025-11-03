@@ -143,9 +143,13 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
-export CUSTOMSYMBOLS	:= 	$(wildcard symbols/custom_*.ld)
-export GENERATEDSYMBOLS :=	$(foreach sym_file,$(CUSTOMSYMBOLS),\
-							$(patsubst symbols/custom_%.ld,symbols/generated_%.ld,$(sym_file)))
+CUSTOMSYMBOLS		:=	$(wildcard symbols/custom_*.ld)
+REGIONS				:=	$(foreach sym_file,$(CUSTOMSYMBOLS),\
+						$(patsubst symbols/custom_%.ld,%,$(sym_file)))
+GENERATEDSYMBOLS	:=	$(foreach region,$(REGIONS),\
+						$(patsubst %,symbols/generated_%.ld,$(region)))
+ALLBUILDS			:=	$(foreach region,$(REGIONS),\
+						$(patsubst %,$(BUILD)_%,$(region)))
  
 #---------------------------------------------------------------------------------
 .PHONY: $(BUILD)
