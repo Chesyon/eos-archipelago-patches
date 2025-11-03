@@ -180,8 +180,9 @@ buildobjs: $(OFILES)
 endif
 #---------------------------------------------------------------------------------------
 
-symbols/generated_$(REGION).ld:
-	$(PYTHON) scripts/generate_linkerscript.py $(REGION)
+# Create the desired ld file for a region.
+symbols/generated_%.ld:
+	$(PYTHON) scripts/generate_linkerscript.py $(patsubst generated_%.ld,%,$(@F))
 
 .PHONY: out
 out: build
