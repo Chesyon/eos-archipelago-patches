@@ -107,7 +107,7 @@ LIBDIRS	:=
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
 #---------------------------------------------------------------------------------
-ifneq ($(BUILD),$(notdir $(CURDIR)))
+ifneq ($(BUILD),$(findstring $(BUILD), $(CURDIR)))
 #---------------------------------------------------------------------------------
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
@@ -188,13 +188,13 @@ buildobjs: $(OFILES)
 endif
 #---------------------------------------------------------------------------------------
 
-# Create the desired ld file for a region.
+# Create the desired ld file for any region.
 symbols/generated_%.ld:
 	$(PYTHON) scripts/generate_linkerscript.py $(patsubst generated_%.ld,%,$(@F))
 
 .PHONY: out
 out: build
-	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT)
+	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT) $(BUILD)
 
 .PHONY: asmdump
 asmdump: build
