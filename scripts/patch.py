@@ -11,10 +11,13 @@ import tempfile
 
 OVERLAY_EXTRA = 36
 
+assert len(sys.argv) == 6, "Invalid number of arguments to patch.py (5 expected)."
+
 region = sys.argv[1]
 rom_path = sys.argv[2]
 overlay_elf_path = sys.argv[3]
 rom_out_path = sys.argv[4]
+build_directory = sys.argv[5]
 
 overlay_symbols_lookup = {} # Key = symbol_name: string, value = offset: int
 
@@ -113,11 +116,11 @@ def apply_overlay():
       readline -= 1
 
 def apply_binary_patches():
-  if not os.path.exists("build/binaries"):
-    os.mkdir("build/binaries")
+  if not os.path.exists(build_directory + "/binaries"):
+    os.mkdir(build_directory + "/binaries")
 
   # Write all symbols to a file that can be included in patches
-  with open("build/binaries/symbols.asm", "w", encoding="utf-8") as f:
+  with open(build_directory + "/binaries/symbols.asm", "w", encoding="utf-8") as f:
     # Write symbols
     for symbol, offset in overlay_symbols_lookup.items():
       f.write(f".definelabel {symbol},{hex(offset)}\n")
@@ -133,28 +136,28 @@ def apply_binary_patches():
       f.write(f"overlay{index}_end equ {hex(overlay.ramAddress + overlay.ramSize)}\n")
 
   # Write the main binaries
-  with open("build/binaries/arm9.bin", "wb") as f:
+  with open(build_directory + "/binaries/arm9.bin", "wb") as f:
     f.write(rom.arm9)
-  with open("build/binaries/arm7.bin", "wb") as f:
+  with open(build_directory + "/binaries/arm7.bin", "wb") as f:
     f.write(rom.arm7)
 
   # Write overlay binaries
   for index, overlay in overlays.items():
-    with open(f"build/binaries/overlay{index}.bin", "wb") as f:
+    with open(f"{build_directory}/binaries/overlay{index}.bin", "wb") as f:
       f.write(rom.files[overlay.fileID])
 
   for file in glob.glob("patches/*.asm"):
     apply_binary_patch(file)
 
   # Apply the main binaries
-  with open("build/binaries/arm9.bin", "rb") as f:
+  with open(build_directory + "/binaries/arm9.bin", "rb") as f:
     rom.arm9 = f.read()
-  with open("build/binaries/arm7.bin", "rb") as f:
+  with open(build_directory + "/binaries/arm7.bin", "rb") as f:
     rom.arm7 = f.read()
   
   # Apply overlay binaries
   for index, overlay in overlays.items():
-    with open(f"build/binaries/overlay{index}.bin", "rb") as f:
+    with open(f"{build_directory}/binaries/overlay{index}.bin", "rb") as f:
       rom.files[overlay.fileID] = f.read()
 
 def apply_binary_patch(file_path):
@@ -170,7 +173,7 @@ def apply_binary_patch(file_path):
     armips_path = "bin/armips/armips-win-x64.exe"
   patch_file_path = os.path.join('../../', file_path) # Relative to the root `build/binaries`
 
-  process = Popen([armips_path, patch_file_path, '-root', 'build/binaries'])
+  process = Popen([armips_path, patch_file_path, '-root', build_directory + '/binaries'])
   exit_code = process.wait()
 
   assert exit_code == 0, f"armips failed with code {exit_code}"
