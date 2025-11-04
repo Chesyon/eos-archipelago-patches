@@ -1,10 +1,10 @@
 /backups
-/build
+/build*
 /venv
 /rom.nds.skytemple/debugger
 
 
-out*
+*out.elf
 
 *.nds
 *.sav
