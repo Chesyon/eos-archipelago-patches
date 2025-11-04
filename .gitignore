@@ -1,5 +1,5 @@
 /backups
-/build
+/build*
 /venv
 /rom.nds.skytemple/debugger
 tmp
@@ -9,7 +9,7 @@ compile_commands.json
 
 /locale/excludecache
 
-out*
+*out.elf
 
 *.nds
 *.sav

@@ -44,9 +44,6 @@ export RANLIB   :=      $(PREFIX)gcc-ranlib
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
-
-#             <-- Change to EU or JP if required
-REGION := EU
 ROM := rom.nds
 ROM_OUT := out.nds
 
@@ -62,8 +59,8 @@ INCLUDES	:=	include pmdsky-debug/headers
 OPT_LEVEL := -O2
 
 # Change to "RELEASE_CONFIG := -DNDEBUG" for release builds without asserts and logs
+REGION := $(patsubst $(BUILD)-%,%,$(notdir $(CURDIR)))
 RELEASE_CONFIG := -DDEBUG
-
 PYTHON := python3
 XDELTA := xdelta3
 BSDIFF := bsdiff4f
@@ -107,13 +104,16 @@ LIBDIRS	:=
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
 #---------------------------------------------------------------------------------
+
+OUTPUT	:=	$(TOPDIR)/$(REGION)-$(TARGET)
+DEPSDIR	:=	$(TOPDIR)/$(BUILD)-$(REGION)
+
 ifneq ($(BUILD),$(findstring $(BUILD), $(CURDIR)))
 #---------------------------------------------------------------------------------
 
-export OUTPUT	:=	$(CURDIR)/$(TARGET)
- 
+export TOPDIR := $(CURDIR)
+
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir))
-export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
@@ -139,7 +139,6 @@ export OFILES	:=	$(BINFILES:.bin=.o) \
  
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
-					-I$(CURDIR)/$(BUILD)
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
@@ -149,13 +148,16 @@ REGIONS				:=	$(foreach sym_file,$(CUSTOMSYMBOLS),\
 GENERATEDSYMBOLS	:=	$(foreach region,$(REGIONS),\
 						$(patsubst %,symbols/generated_%.ld,$(region)))
 ALLBUILDS			:=	$(foreach region,$(REGIONS),\
-						$(patsubst %,$(BUILD)_%,$(region)))
+						$(patsubst %,$(BUILD)-%,$(region)))
  
 #---------------------------------------------------------------------------------
 .PHONY: $(BUILD)
-$(BUILD): $(GENERATEDSYMBOLS)
+$(BUILD): $(GENERATEDSYMBOLS) $(ALLBUILDS)
+
+.PHONY: $(BUILD)-%
+$(BUILD)-%:
 	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) --no-print-directory -C $@ -f $(CURDIR)/Makefile
 
 .PHONY: buildobjs
 buildobjs:
@@ -165,7 +167,7 @@ buildobjs:
 #---------------------------------------------------------------------------------
 .PHONY: clean
 clean:
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
+	@rm -fr $(BUILD)* $(TARGET).elf $(TARGET).asm $(ROM_OUT).nds symbols/generated_*.ld
 	@echo "\e[1;36mClean! \e[0m"
  
 #---------------------------------------------------------------------------------
@@ -192,9 +194,14 @@ endif
 symbols/generated_%.ld:
 	$(PYTHON) scripts/generate_linkerscript.py $(patsubst generated_%.ld,%,$(@F))
 
+ALLOUTS	:=	$(foreach region,$(REGIONS),$(patsubst %,out_%,$(region)))
+
 .PHONY: out
-out: build
-	$(PYTHON) scripts/patch.py $(REGION) $(ROM) $(OUTPUT).elf $(ROM_OUT) $(BUILD)
+out: build $(ALLOUTS)
+
+%_out:
+	$(let region,$(patsubst out_%,%,$@), \
+	$(PYTHON) scripts/patch.py $(region) $(ROM) $region_$(OUTPUT).elf $(region)_$(ROM_OUT) $(region)_$(BUILD))
 
 .PHONY: asmdump
 asmdump: build
