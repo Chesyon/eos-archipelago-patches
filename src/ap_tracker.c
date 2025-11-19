@@ -1093,6 +1093,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
                     PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 94, temp);
+                    preArgs.flag_vals[0] = MONSTER_DUSKULL;
                     preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
@@ -1177,6 +1178,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     preArgs.strings[4] = (GetSubXBit(19)) ? checkSymbol : lockedSymbol;
                     PreprocessString(temp, TR_BUFF_LEN, shopItemChecks2, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 94, temp);
+                    preArgs.flag_vals[0] = MONSTER_DUSKULL;
                     preArgs.strings[0] = (GetSubXBit(81)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[1] = (GetSubXBit(82)) ? moneySymbol : lockedSymbol;
                     preArgs.strings[2] = (GetSubXBit(83)) ? moneySymbol : lockedSymbol;
