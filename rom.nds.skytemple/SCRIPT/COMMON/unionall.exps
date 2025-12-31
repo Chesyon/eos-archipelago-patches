@@ -2988,6 +2988,7 @@ coro EVENT_HA_YU_SHU_DOX {
 coro EVENT_HA_SAME {
     // $PERFORMANCE_PROGRESS_LIST[37] Legendary Recruitment!
     CallCommon(CORO_SUBSCREEN_INIT);
+    switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
     switch ( ProcessSpecial(PROCESS_SPECIAL_NEXT_DAY, 0, 0) ) { }
     CallCommon(CORO_BUBBLE_TEST);
     debug_Print('HANYOU_SAMEHADA');
