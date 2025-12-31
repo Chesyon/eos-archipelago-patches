@@ -1,0 +1,78 @@
+def 0 {
+    if($DUNGEON_CONQUEST_LIST[157] || $SPECIAL_EPISODE_CONQUEST[3]) {
+        message_Talk(" My psychic powers indicate that we\'ve\nalready explored everything there is to explore here...");
+    } elseif($DUNGEON_CONQUEST_LIST[156]) {
+        message_Talk(" That dastardly Team [CS:X]AWD[CR]!\nWe need to get back to [CS:P]Limestone Cavern Depths[CR] and teach\nthose thugs a lesson! For [CS:G]Sentret[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[155]) {
+        message_Talk(" We\'re nearly there, I can sense it!\nLet\'s finish exploring [CS:P]Deep Limestone Cavern[CR], and find that treasure!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[154]) {
+        if($DUNGEON_CONQUEST_LIST[153]) {
+            message_Talk(" Uhh...[W:60] we should follow [CS:G]Wigglytuff[CR]\ninto what I\'m going to call [CS:P]Limestone Cavern[CR].\nYeah, yeah, what an original name, right? Let\'s just go...");
+        } else {
+            message_Talk(" The [CS:P]Left Cave Path[CR] didn\'t lead anywhere\nhelpful... Maybe we should take the [CS:P]Right Cave Path[CR] then?");
+        }
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[153]) {
+        message_Talk(" The [CS:P]Right Cave Path[CR] didn\'t lead anywhere\nhelpful... Maybe we should take the [CS:P]Left Cave Path[CR] then?");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[152]) {
+        message_Talk(" Hmm... Which way to go?\nShould we head to the[CS:P]Right Cave Path[CR]\nor is the [CS:P]Left Cave Path[CR] the \"right\" way?");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[151]) {
+        message_Talk(" That [CS:G]Aggron[CR] brute really got\non my nerves! Let\'s go back to [CS:P]Boulder Quarry Clearing[CR]\nand teach that knuckle-head a lesson, alright?");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[150]) {
+        message_Talk(" We\'ve come a long way!\nLet\'s keep moving into [CS:P]Deep Boulder Quarry[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[149]) {
+        message_Talk(" We need to teach Team [CS:X]AWD[CR]\na lesson! Let\'s follow them into [CS:P]Boulder Quarry[CR]!");
+        end;
+    } elseif ( scn($SCENARIO_SIDE) >= [45, 2] ) {
+        message_Talk(" Are you still out of it?\nWe need to head back into [CS:P]Southern Jungle[CR]!");
+        end;
+    } else {
+        message_Talk(" Is the jungle heat getting to you?\nWe need to head into [CS:P]Southern Jungle[CR]!");
+        end;
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+
+    message_SetFace(ACTOR_NPC_SAANAITO,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nwe have access to... I know it isn\'t many,\nbut let me know if I missed one!");
+    message_SetFace(ACTOR_NPC_SAANAITO,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    end;
+}

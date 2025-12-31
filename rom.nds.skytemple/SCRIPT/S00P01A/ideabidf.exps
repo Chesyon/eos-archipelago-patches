@@ -1,0 +1,255 @@
+def 0 {
+    §bidoof_ideas;
+    if ($SCENARIO_SUB5 &<< 2) {
+    } else {
+        message_Talk(" Golly, I should go visit\n[CS:G]Marowak[CR] at his dojo! I bet he has some\nsage advice for me in these trying times...");
+        end;
+    }
+    
+    if ($SCENARIO_SUB1 &<< 5) {
+    } else {
+        message_Talk(" I should check up on my diary\nin my guild room. I always seem to get nasty\nnotes in there when I\'m not around...");
+        message_Close();
+        end;
+    }
+    if ($SCENARIO_SUB1 &<< 6) {
+    } else {
+        message_Talk(" I bet [CS:G]Nidoking[CR] has a\nfun story for me to listen to at the cafe!\nI should go see what he has to say!");
+        message_Close();
+        end;
+    }
+    if ($SCENARIO_SUB1 &<< 7) {
+    } else {
+        message_Talk(" I hear [CS:G]Sunflora[CR] keeps a diary\nin her guild room. I should go\nsee if there\'s anything juicy in there!");
+        message_Close();
+        end;
+    }
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case &<< 0:
+            break;
+        default:
+            message_Talk(" Did I see [CS:X]Team Charm[CR]\n in the cafe? I should go get an autograph\nwhile I have the opportunity!");
+            message_Close();
+            end;
+    }
+    
+    switch (scn($SCENARIO_SUB1)[1]) {
+        case > 4: // At least one shop item bought!
+            break;
+        default:
+            switch (scn($SCENARIO_SUB2)[0]) {
+                case &<< 0:
+                case &<< 1:
+                case &<< 2:
+                case &<< 3:
+                    break;
+                default:
+                    message_Talk(" I should check our shop items...\nSeems like I haven\'t purchased any yet, so\nI should try to buy anything important!");
+                    message_Close();
+                    message_Mail(" Have you checked the shop items yet?");
+                    switch(message_SwitchMenu(1,2)) {
+                        case menu("Yes"):
+                            message_Close();
+                            message_Talk(" Okay, let me see...");
+                            break;
+                        case menu("No"):
+                            message_Close();
+                            end;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    switch( ProcessSpecial(105,0,1)) {
+        case > 0:
+            message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nI should go relax at the cafe, yup yup!");
+            end;
+            break;
+        default:
+            break;
+    }
+
+    switch(dungeon_mode(180)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Normal/Fly Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(181)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dark/Fire Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(182)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Rock/Water Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(183)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Grass Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(184)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Elec/Steel Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(185)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ice/Ground Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(186)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Fight/Psych Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(187)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Poison/Bug Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(188)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Dragon Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    switch(dungeon_mode(189)) {
+        case DMODE_OPEN:
+            message_Talk(" [CS:G]Marowak[CR] told me that I can try\nthe [CS:P]Ghost Maze[CR] whenever I like!\nSome training sounds good right now...");
+            end;
+        default:
+            break;
+    }
+    
+    if($DUNGEON_CONQUEST_LIST[127] || $SPECIAL_EPISODE_CONQUEST[0]) {
+        message_Talk(" Golly, have I already cleared all of\n[CS:P]Star Cave[CR]? I must have forgotten, yup yup!");
+    } elseif($DUNGEON_CONQUEST_LIST[126]) {
+        message_Talk(" Golly, it seems like I just have\nto take on [CS:G]Jirachi[CR]\n to get a check. *gulp*");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[125]) {
+        message_Talk(" Golly, that battle against [CS:G]Snover[CR]\nwas tough! But I can still head deeper into [CS:P]Star Cave[CR],\nso let\'s go do that!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[124]) {
+        message_Talk(" Golly, [CS:G]Snover[CR] has been a big\nhelp getting this far.\nI wonder what we\'ll find if we keep\non exploring [CS:P]Star Cave[CR]?");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[123]) {
+        message_Talk(" Golly, have I already cleared all of\n[CS:P]Star Cave[CR]? I must have forgotten, yup yup!");
+        end;
+    } elseif (scn($SCENARIO_SIDE) >= [40, 2])  {
+        message_Talk(" I bet [CS:P]Star Cave[CR] will be full\nof checks! I should head there once I\'m ready...");
+        end;
+    } else {
+        message_Talk(" [CS:G]Chatot[CR] wanted me to do something\nat the [CS:G]Kecleon[CR] Market, right?\nI bet things open up a lot after I do that...");
+        end;
+    }
+    switch(ProcessSpecial(105,0,0)) {
+        case > 0:
+            message_Talk(" Seems like I can do a few\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
+            message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else I can do...");
+        default:
+            break;
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    
+    if ($SUB30_SPOT_LEVEL < 5) {
+        message_Talk(" Seems like they\'re missing Project P\ndungeon checks! I can recycle some stuff,\nif it helps out [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]!");
+        end;
+    }
+    switch(scn($SCENARIO_SUB6)[0]) {
+        case &<< 7:
+            // Deposit 9999999G
+            message_Talk(" Golly, do we really have\n[CS:G]9,999,999[CR][M:S0]? Okay, we're done with\n[CS:G]Duskull[CR] checks, that's incredible!");
+            break;
+        case &<< 6:
+            // Deposit 100000G
+            message_Talk(" Golly, we\'ve obtained\na staggering [CS:G]100,000[CR][M:S0], yup yup! We still\nhave 9 Mil left for [CS:G]Duskull[CR] checks, I think...");
+            end;
+            break;
+        case &<< 5:
+            // Deposit 50000G
+            message_Talk(" Golly, we\'ve obtained\na nutty [CS:G]50,000[CR][M:S0]! We still have 100k\nleft for [CS:G]Duskull[CR] checks, I suppose...");
+            end;
+            break;
+        case &<< 4:
+            // Deposit 20000G
+            message_Talk(" Golly, we\'ve obtained\na whopping [CS:G]20,000[CR][M:S0]! We only have \"Long\"\nchecks left for [CS:G]Duskull[CR], yup yup!");
+            end;
+            break;
+        case &<< 3:
+            // Deposit 10000G
+            message_Talk(" Golly, we\'ve obtained\na massive [CS:G]10,000[CR][M:S0]! We need to amass 20k\nfor the next [CS:G]Duskull[CR] check, yup yup!");
+            end;
+            break;
+        case &<< 2:
+            // Deposit 5000G
+            message_Talk(" Golly, we\'ve obtained\na sizable [CS:G]5,000[CR][M:S0]! We need to amass 10k\nfor our next [CS:G]Duskull[CR] check, yup yup!");
+            end;
+            break;
+        case &<< 1:
+            // Deposit 100G
+            message_Talk(" Golly, we\'ve obtained\na puny [CS:G]100[CR][M:S0]! We need to amass 5k\nfor our next [CS:G]Duskull[CR] check, yup yup!");
+            end;
+            break;
+        default:
+            message_Talk(" Golly, Duskull could\nuse a hand right now. Mayb I can deposit some [M:S0]\ninto the bank to help him out a bit?");
+            end;
+            break;
+    }
+    message_SetFace(ACTOR_PLAYER_BIPPA,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" Wuh-oh, I\'m all out of stuff to\ndo, I think! Let me know if I\'m wrong\nabout that, but this isn\'t good, yup yup!");
+    message_SetFace(ACTOR_PLAYER_BIPPA,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    end;
+}

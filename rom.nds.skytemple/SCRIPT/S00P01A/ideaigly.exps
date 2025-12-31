@@ -1,0 +1,60 @@
+def 0 {
+
+    if($DUNGEON_CONQUEST_LIST[132] || $SPECIAL_EPISODE_CONQUEST[1]) {
+        message_Talk(" I think I\'ve already cleared\n[CS:P]Fortune Ravine[CR] before...");
+    } elseif($DUNGEON_CONQUEST_LIST[130]) {
+        message_Talk(" Master and I need to finish\nexploring [CS:P]Fortune Ravine[CR]! We should go do that!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[129]) {
+        message_Talk(" Master and I need to explore\n[CS:P]Fortune Ravine[CR]! We should go do that!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[128]) {
+        message_Talk(" Master and I need to explore\n[CS:P]Eastern Cave[CR]! We should go do that!");
+        end;
+    } elseif (scn($SCENARIO_SIDE) >= [41, 2])  {
+        message_Talk(" Me and my friends haven\'t finished exploring\n[CS:P]Murky Forest[CR] yet!");
+        end;
+    } else {
+        message_Talk(" I should hand out some\ntasty [CS:I]Gummis[CR] to my friends!");
+        end;
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[4]) {
+        if($SPECIAL_EPISODE_CONQUEST[4]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]In the Future of Darkness[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+
+    message_SetFace(ACTOR_PLAYER_PUPURIN,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nI have access to... I know it isn\'t many\nbut let me know if I missed one!");
+    message_SetFace(ACTOR_PLAYER_PUPURIN,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    end;
+}

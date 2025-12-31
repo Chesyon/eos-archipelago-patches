@@ -1,0 +1,133 @@
+macro PlayRPS() {
+    message_Close();
+    bgm_FadeOut(30);
+    Wait(30);
+    message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Talk(" Sure, we can play\nRock-Paper-Scissors for a minute!");
+    message_Close();
+    Wait(10);
+    bgm_PlayFadeIn(BGM_THE_GATEKEEPERS,0,256);
+    §rps_start;
+    Wait(10);
+    se_Play(6916);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(1029);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(1029);
+    }
+    Wait(60);
+    message_SetFace(ACTOR_ATTENDANT1,FACE_HAPPY,FACE_POS_STANDARD);
+    message_Talk(" Alright then, on three!");
+    message_Mail("[STS][CN]What will you choose?[STE]");
+    switch(random(3)) {
+        case 0:
+            debug_Print("Rock");
+            switch(message_SwitchMenu(0,0)) {
+                case menu("Rock"):
+                    message_Close();
+                    ~ResultRPS(11268,FACE_JOYOUS," We both got Rock![K] You know what\nthat means, [hero]!");
+                    jump @rps_start;
+                case menu("Paper"):
+                    message_Close();
+                    ~ResultRPS(11270,FACE_SIGH," Awww! Paper beats Rock![K]\nDo you want a rematch, [hero]?");
+                    break;
+                case menu("Scissors"):
+                    message_Close();
+                    ~ResultRPS(11271,FACE_HAPPY," Yes! Rock beats Scissors![K]\nDo you want a rematch, [hero]?");
+                    break;
+            }
+            break;
+        case 1:
+            debug_Print("Paper");
+            switch(message_SwitchMenu(0,0)) {
+                case menu("Rock"):
+                    message_Close();
+                    ~ResultRPS(11271,FACE_HAPPY," Yes! Paper beats Rock![K]\nDo you want a rematch, [hero]?");
+                    break;
+                case menu("Paper"):
+                    message_Close();
+                    ~ResultRPS(11268,FACE_JOYOUS," We both got Paper![K] You know what\nthat means, [hero]!");
+                    jump @rps_start;
+                case menu("Scissors"):
+                    message_Close();
+                    ~ResultRPS(11270,FACE_SIGH," Awww! Scissors beats Paper![K]\nDo you want a rematch, [hero]?");
+                    break;
+            }
+            break;
+        case 2:
+            debug_Print("Scissors");
+            switch(message_SwitchMenu(0,0)) {
+                case menu("Rock"):
+                    message_Close();
+                    ~ResultRPS(11270,FACE_SIGH," Awww! Rock beats Scissors![K]\nDo you want a rematch, [hero]?");
+                    break;
+                case menu("Paper"):
+                    message_Close();
+                    ~ResultRPS(11271,FACE_HAPPY," Yes! Scissors beats Paper![K]\nDo you want a rematch, [hero]?");
+                    break;
+                case menu("Scissors"):
+                    message_Close();
+                    ~ResultRPS(11268,FACE_JOYOUS," We both got Scissors![K] You know what\nthat means, [hero]!");
+                    jump @rps_start;
+            }
+            break;
+    }
+    bgm2_ChangeVolume(30,128);
+    switch(message_SwitchMenu(0,0)) {
+        case menu("Play Again"):
+            message_Close();
+            bgm2_ChangeVolume(30,256);
+            jump @rps_start;
+        case menu("Quit"):
+            bgm2_Stop();
+            bgm_ChangeVolume(30,256);
+            message_Close();
+            break;
+    }
+
+}
+
+
+// 11270
+// We both got Rock![K] You know what\nthat means, [hero]!
+macro ResultRPS($se, $face, $string) {
+    $LOCAL1 = $face;
+    se_Stop(6916);
+    se_Play(11269);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    WaitSe(11269);
+    Wait(30);
+    se_Play(8974);
+    if ($LOCAL1 == FACE_HAPPY || $LOCAL1 == FACE_JOYOUS) {
+        with (actor ACTOR_ATTENDANT1) {
+	        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+	        WaitEffect();
+        }
+    }
+    if ($LOCAL1 == FACE_SIGH || $LOCAL1 == FACE_JOYOUS) {
+        with (actor ACTOR_PLAYER) {
+	        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+        }
+        with (actor ACTOR_PLAYER) {
+	        WaitEffect();
+        }
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    
+    Wait(60);
+    se_Play($se);
+    message_SetFace(ACTOR_ATTENDANT1,$face,FACE_POS_STANDARD);
+    message_Talk($string);
+    WaitSe($se);
+    message_KeyWait();
+    Wait(10);
+}

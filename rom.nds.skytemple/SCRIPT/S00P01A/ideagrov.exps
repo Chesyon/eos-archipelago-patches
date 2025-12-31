@@ -1,0 +1,98 @@
+def 0 {
+    §grovyle_ideas;
+    
+    if($DUNGEON_CONQUEST_LIST[148] || $SPECIAL_EPISODE_CONQUEST[4]) {
+        message_Talk(" Have I gone back in time once more?\nI sense that my actions here have\nno bearing on the present this time...");
+    } elseif($DUNGEON_CONQUEST_LIST[147]) {
+        message_Talk(" We must defeat [CS:G]Primal Dialga[CR]\nno matter what! We must return to [CS:P]Vast Ice Mountain Pinnacle[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[146]) {
+        message_Talk(" Onward to [CS:P]Vast Ice Mountain Peak[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[145]) {
+        message_Talk(" Onward to [CS:P]Vast Ice Mountain[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[144]) {
+        message_Talk(" Onward to [CS:P]Icicle Forest[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[143]) {
+        message_Talk(" Those [CS:G]Glalie[CR] and that [CS:G]Mamoswine[CR]\nare formidable foes... but we must defeat them! Back to\n[CS:P]Dark Ice Mountain Pinnacle[CR] we go...");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[142]) {
+        message_Talk(" Onward to [CS:P]Dark Ice Mountain Peak[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[141]) {
+        message_Talk(" Onward to [CS:P]Dark Ice Mountain[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[140]) {
+        message_Talk(" Onward to [CS:P]Spacial Cliffs[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[139]) {
+        message_Talk(" Time to teach those [CS:G]Sableye[CR]\na lesson! Try to ambush us in [CS:P]Black Swamp[CR] again!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[138]) {
+        message_Talk(" Onward to [CS:P]Dusk Forest[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[137]) {
+        message_Talk(" Onward to [CS:P]Temporal Spire[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[136]) {
+        message_Talk(" Onward to [CS:P]Temporal Tower[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[135]) {
+        message_Talk(" Onward to [CS:P]Dark Wasteland[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[134]) {
+        message_Talk(" Onward to [CS:P]Barren Valley Clearing[CR]!");
+        end;
+    } elseif($DUNGEON_CONQUEST_LIST[133]) {
+        message_Talk(" Onward to [CS:P]Deep Barren Valley[CR]!");
+        end;
+    } elseif ($GROUND_MAP == LEVEL_D46P11A)  {
+        message_Talk(" Once I\'m ready, I should return to\n[CS:P]Barren Valley[CR] and find a way back to the past...");
+        end;
+    } else {
+        message_Talk(" Tell [CS:G]happylappy[CR]\nif this ever plays!");
+        end;
+    }
+
+    if ($SPECIAL_EPISODE_OPEN[0]) {
+        if($SPECIAL_EPISODE_CONQUEST[0]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Bidoof\'s Wish[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    
+    if ($SPECIAL_EPISODE_OPEN[1]) {
+        if($SPECIAL_EPISODE_CONQUEST[1]) {
+        } else {
+            message_Talk("Sounds like you can complete\n[CS:G]Igglybuff the Prodigy[CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[2]) {
+        if($SPECIAL_EPISODE_CONQUEST[2]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Today\'s \"Oh My Gosh\"[CR] right now! Let\'s do that!"); // #N/A
+            message_Close();
+            end;
+        }
+    }
+    if ($SPECIAL_EPISODE_OPEN[3]) {
+        if($SPECIAL_EPISODE_CONQUEST[3]) {
+        } else {
+            message_Talk(" Sounds like you can complete\n[CS:G]Here Comes Team Charm![CR] right now! Let\'s do that!");
+            message_Close();
+            end;
+        }
+    }
+
+    message_SetFace(ACTOR_NPC_JUPUTORU,FACE_WORRIED,FACE_POS_STANDARD);
+    message_Talk(" I think that\'s all the checks\nI have access to in this decrepit place.\nI know it isn\'t many, but let me know if I missed one!");
+    message_SetFace(ACTOR_NPC_JUPUTORU,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Close();
+    end;
+}

@@ -7,7 +7,7 @@ import "traps.exps"; // This handles traps like the unown trap!
 import "fade_in.exps"; // Handles fading the screen in, and any effects related to that process
 import "version.exps"; // Handles game version stuff
 import "GiveSEItems.exps"; // Handles Episode-sanity starting items
-
+import "rps.exps"; // Handles Rock Paper Scissors. It's cleaner this way, trust.
 coro END_TALK {
     message_Close();
     supervision_Suspend(-2);
@@ -90,10 +90,50 @@ coro TALK_ATTENDANT {
 }
 
 coro TALK_PARTNER_MESSAGE {
-    switch ( scn($SCENARIO_SELECT)[0] ) {
-        case == 51:
-        case == 52:
-            §label_1;
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+            with (actor ACTOR_PLAYER_BIPPA) {
+            SetAnimation(2);
+            }
+            jump @bidoof_tree;
+        case 1:
+            with (actor ACTOR_PLAYER_PUPURIN) {
+                SetAnimation(2);
+            }
+            jump @iggly_tree;
+        case 2:
+            with (actor ACTOR_PLAYER_KIMAWARI) {
+                SetAnimation(2);
+            }
+            jump @sunflora_tree;
+        case 3:
+            with (actor ACTOR_PLAYER_CHARMS) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_NPC_CHAAREMU) {
+                SetAnimation(2);
+            }
+            with (actor ACTOR_PLAYER_CHARMS) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SAANAITO);
+            }
+            with (actor ACTOR_NPC_SAANAITO) {
+                Turn2DirectionLives(4, 10, ACTOR_PLAYER_CHARMS);
+            }
+            with (actor ACTOR_NPC_CHAAREMU) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SAANAITO);
+            }
+            WaitExecuteLives(ACTOR_PLAYER_CHARMS);
+            WaitExecuteLives(ACTOR_NPC_SAANAITO);
+            jump @charm_tree;
+        case 4:
+            with (actor ACTOR_PLAYER_FUTURE) {
+                SetAnimation(2);
+            }
+            jump @grovyle_tree;
+        default:
             with (actor ACTOR_TALK_MAIN) {
                 SetAnimation(2);
             }
@@ -114,49 +154,300 @@ coro TALK_PARTNER_MESSAGE {
             with (actor ACTOR_TALK_SUB) {
                 ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
             }
-            supervision_ExecuteExport('PARTNER2');
-            JumpCommon(CORO_END_TALK);
-        case == 53:
-            JumpCommon(CORO_END_TALK);
-        default:
-            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
-                case 0:
-                case 1:
-                case 2:
-                case 4:
-                case 3:
-                    supervision_ExecuteExport('PARTNER');
-                    JumpCommon(CORO_END_TALK);
-                    §label_4;
-                    supervision_Suspend(-2);
-                    end;
-                default:
-                    with (actor ACTOR_TALK_MAIN) {
-                        SetAnimation(2);
-                    }
-                    with (actor ACTOR_TALK_SUB) {
-                        SetAnimation(2);
-                    }
-                    with (actor ACTOR_TALK_MAIN) {
-                        Turn2DirectionLives(4, 10, ACTOR_TALK_SUB);
-                    }
-                    with (actor ACTOR_TALK_SUB) {
-                        Turn2DirectionLives(4, 10, ACTOR_TALK_MAIN);
-                    }
-                    WaitExecuteLives(ACTOR_TALK_MAIN);
-                    WaitExecuteLives(ACTOR_TALK_SUB);
-                    with (actor ACTOR_TALK_MAIN) {
-                        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-                    }
-                    with (actor ACTOR_TALK_SUB) {
-                        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-                    }
-                    supervision_ExecuteExport('PARTNER2');
-                    JumpCommon(CORO_END_TALK);
-                    hold;
+            jump @decision_tree;
+    }
+    §decision_tree;
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" What\'s on your mind, [hero]?");
+    switch(message_SwitchMenu(7,7)) {
+        case menu("Add To Team"):
+            message_Close();
+            message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk(" Sure![K] I\'d love to explore\nwith you today!");
+            message_Close();
+            ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_AND_PARTNER_ONLY,0,0);
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk(" Sure! I\'d be happy to give you\na recap on what our goals are, [hero]!\nLet\'s see, according to my notes...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEAMAIN");
+            break;
+        case menu("Just Chatting"):
+            message_Close();
+            if ($PERFORMANCE_PROGRESS_LIST[17]) {
+                $SIDE02_TALK[0] = 1;
+            } else {
+                supervision_ExecuteExportSub("PARTNER");
+            }
+            if ($SIDE02_TALK[0]) {
+                supervision_ExecuteExportSub("PARTNER2");
+                $SIDE02_TALK[0] = 0;
             }
             break;
+        case menu ("Play [CS:C]R.P.S[CR]"):
+            message_Close();
+            ~PlayRPS();
+            break;
+        case menu("Technical"):
+            message_Close();
+            §technical_tree;
+            message_Talk(" Alright, what do you need?"); 
+            switch(message_SwitchMenu(4,1)) {
+                case menu("Version"):
+                    message_Close();
+                    ~GetVersion();
+                    jump @technical_tree;
+                case menu("Variable Check"):   
+                    message_Close();         
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Did something break again?[K] I\nhope it\'s an easy fix...[W:30] No worries![K] Just send\nthis list of variables + values to [CS:C]happylappy[CR]!");
+                    message_Close();
+                    supervision_ExecuteExportSub("VARCHECK");
+                    jump @technical_tree;
+                case menu("Escape Softlock"):
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Yikes![K] That\'s not good... Okay,\nso I can teleport you out, but first, I need you\nto report this to [CS:G]happylappy[CR], okay?");
+                    message_Talk(" Just send this list of variables + values to\n[CS:C]happylappy[CR], and we can head home...");
+                    message_Close();
+                    supervision_ExecuteExportSub("VARCHECK");
+                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                    message_Talk(" Now then, this [M:I1][CS:I]Escape Orb[CR]\nshould get us home.[K] I have one handy just in\ncase we end up stranded somewhere...");
+                    message_Close();
+                    bgm_FadeOut(30);
+                    screen_FadeOut(1,30);
+                    supervision_ExecuteCommon(CORO_EVENT_HA_SAME);
+                    hold;
+                default:
+                case menu("Cancel"):
+                    message_Close();
+                    break;
+            }
+            break;
+        case menu("Never Mind"):
+        default:
+            §shut_up;
+            JumpCommon(CORO_END_TALK);
     }
+
+    §anything_else;
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Anything else, [hero]?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @decision_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
+    §bidoof_tree;
+    message_Close();
+    se_Play(276);
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetAnimation(11);
+    }
+    Wait(30);
+    with (actor ACTOR_PLAYER_BIPPA) {
+        SetAnimation(2);
+    }
+    Wait(60);
+    se_Play(8961);
+    with (actor ACTOR_PLAYER_BIPPA) {
+	SetEffect(EFFECT_SWEAT_DROP, 3);
+    }
+    with (actor ACTOR_PLAYER_BIPPA) {
+	WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER_BIPPA);
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Doh, I dropped my notebook again!\nMaybe I should check it real quick...");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Uh-oh, did something break?[K] Golly, I\nhope it wasn\'t my fault this time... Just pass\nthis along to [CS:G]happylappy[CR] for me, alright?");
+            message_Close();
+            supervision_ExecuteExportSub("VARCHECK");
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I\'m always spacing out, I should\nprobably refresh myself on what I\'m\nmeant to be doing, yup yup! Let\'s see...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEABIDF");
+            break;
+        case menu("Never Mind"):
+        default:
+            jump @shut_up;
+    }
+
+    §bidoof_else;
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Golly, am I forgetting anything else?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @bidoof_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
+    §iggly_tree;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Oh yeah![K] Papa got me this pretty\njournal for collecting my thoughts recently!\nI wonder what I\'ve written in it so far?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh no, did something break?[K] I\'m\nsure it\'s an easy fix![K] Mama always says to\nsend this to [CS:G]happylappy[CR] if something breaks!");
+            message_Close();
+            supervision_ExecuteExportSub("VARCHECK");
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Papa says I should always keep\nmoving forward, and remember my goals!\nLet\'s see what I have in here right now...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEAIGLY");
+            break;
+        case menu("Never Mind"):
+        default:
+            jump @shut_up;
+    }
+    
+    §iggly_else;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Am I done with my journal?\nOr is there more I need to read?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @iggly_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+    
+    §sunflora_tree;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Eek! I should be checking\nthe planner [CS:G]Chatot[CR] gave me more often!\nLet\'s see, what did I put in here so far?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh my gosh, did something break?[K]\nEek! I hope it\'s an easy fix! You should\nprobably send this to [CS:G]happylappy[CR] right away!");
+            message_Close();
+            supervision_ExecuteExportSub("VARCHECK");
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Oh my gosh, that\'s right! I need to\nstay focused on my goals! I can\'t let the\nguild down now! Okay, let\'s see here...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEASUNF");
+            break;
+        case menu("Never Mind"):
+        default:
+            jump @shut_up;
+    }
+
+    §sunflora_else;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Oh my gosh! I hope I\'m not wasting\ntoo much time! Was there anything else?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @sunflora_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+    
+    §charm_tree;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Is something the matter, [CS:Q]Lopunny[CR]?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Oh no! Did something break?[K]\nI hope it\'s an easy enough fix! Send this to\n[CS:G]happylappy[CR] as soon as possible, alright?");
+            message_Close();
+            supervision_ExecuteExportSub("VARCHECK");
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" That\'s right, [CS:X]Team Charm[CR]\nneeds to always remain laser-focused\non our targets! Let me check my notes...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEACHRM");
+            break;
+        case menu("Never Mind"):
+        default:
+            jump @shut_up;
+    }
+
+    §charm_else;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Will that be all, [CS:Q]Lopunny[CR]?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @shut_up;
+        case menu("No"):
+        default:
+            jump @charm_tree;
+    }
+    
+    §grovyle_tree;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk("Now might be a good time to\nreview my notes. Where to start?");
+    switch(message_SwitchMenu(4,6)) {
+        case menu("Variable Check"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+            message_Talk(" Ugh, did something break again?[K] I\nbet it was [CS:G]Dusknoir[CR]\'s fault, as usual! Well,\nyou know what to do, send this to [CS:G]happylappy[CR]!");
+            message_Close();
+            supervision_ExecuteExportSub("VARCHECK");
+            break;
+        case menu("What to do"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" I should probably review my goals\nand objectives, to maintain my momentum.\nLet\'s see, what did I put down in here...");
+            supervision_ExecuteExportSub("GOALSALL");
+            break;
+        case menu("Any ideas"):
+            message_Close();
+            supervision_ExecuteExportSub("IDEAGROV");
+            break;
+        case menu("Never Mind"):
+        default:
+            jump @shut_up;
+    }
+
+    §grovyle_else;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" I should keep moving, but moments\nlike these aren\'t common. Is there anything\nelse I needed to refresh my memory on?");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Yes"):
+            jump @grovyle_tree;
+        case menu("No"):
+        default:
+            jump @shut_up;
+    }
+
 }
 
 coro LIVES_MOVE_NORMAL {
@@ -2874,7 +3165,7 @@ coro EVENT_HA_SAME {
                 italian="[M:D2][CS:C]Wonder Egg[CR]",
                 spanish="[M:D2][CS:C]Wonder Egg[CR]",
             });
-            switch ( message_SwitchMenu(0, 1) ) {
+            switch ( message_SwitchMenu(2, 2) ) {
                 case menu({
                     english="[M:D2][CS:C]Held[CR]",
                     french="[M:D2][CS:C]Held[CR]",
@@ -7021,6 +7312,7 @@ coro EVENT_N01_22 {
 }
 
 coro EVENT_N01_23 {
+    $DUNGEON_CONQUEST_LIST[125] = 1;
     CallCommon(CORO_DEBUG_FLAG_SETTING_BIPPA);
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D42P31A, 'N01A2301', 0);
@@ -9284,6 +9576,129 @@ coro ENTER_REQUEST_DUNGEON {
                 jump @label_736;
             }
             break;
+        case 16:
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            message_Mail("Wait a minute, this isn\'t [CS:P]Steam Cave[CR]![K]\nIt\'s actually [CS:P]Steamy Cave[CR]!");
+            message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" [CS:P]Steamy[CR]?");
+            message_Mail("Yes, [CS:P]Steamy[CR]!");
+            message_Mail("The cave led to the [CS:P]Hot Springs[CR]!");
+            message_Close();
+            main_EnterGround(LEVEL_P02P01A, 30);
+            hold;
+            end;
+        case 2:
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            if (debug) {
+                message_ResetActor();
+            } else {
+                ProcessSpecial(110,395,FACE_NORMAL);
+            }
+            message_Talk(" Oi! \'ello there chaps! Mind if I join you\nfor a short while in there?[K] This bluff is\ntotally [CS:C]dench[CR], I can\'t get enough of it!");
+            message_Close();
+            main_EnterDungeon(171,30);
+            main_EnterDungeon(-1,30);
+            hold;
+        case 5:
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            message_Mail("You were suddenly attacked from behind\nby a Pokémon you\'ve never seen before!");
+            if (debug) {
+                message_ResetActor();
+            } else {
+                ProcessSpecial(110,72,FACE_ANGRY);
+            }
+            message_Monologue("[STS][CS:G]Metroid[CR]:[STE] *squelch*");
+            message_Close();
+            JumpCommon(CORO_EVENT_HA_SAMEX);
+            hold;
+        case 71:
+            ProcessSpecial(PROCESS_SPECIAL_SET_TEAM_SETUP_HERO_ONLY,0,0);
+            jump @label_667;
+        case 179:
+            $SCENARIO_MAIN_BIT_FLAG[3] = 0;
+            dungeon_mode(178) = DMODE_OPEN_AND_REQUEST;
+            main_EnterGround(LEVEL_P02P01A, 30);
+            hold;
+            end;
+        case 15: // Froggy Forest
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            message_Mail("Wait a minute, this isn\'t [CS:P]Foggy Forest[CR]![K]\nIt\'s actually [CS:P]Froggy Forest[CR]!");
+            message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" [CS:P]Froggy[CR]?");
+            message_Mail("Yes, [CS:P]Froggy[CR]!");
+            message_Close();
+            $SCENARIO_TALK_BIT_FLAG[248] = 1;
+            message_SetFaceEmpty(ACTOR_NPC_NYOROTONO,FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk("[STS][CS:G]Kermit[CR]: [STE]Howdy partner, been a while\nsince someone\'s entered [CS:P]Froggy Forest[CR]!");
+            message_Talk("[STS][CS:G]Kermit[CR]: [STE]It\'s been real quiet these days.\nUntil you showed up, that is.[K] So here\'s what\'s\ngoing to happen, friend... *cocks shotgun*");
+            message_Talk("[STS][CS:G]Kermit[CR]: [STE]You\'re going to turn around, and head\nback to the franchise from whence you came.\n[K]Then I\'m going to teach you a little lesson.");
+            message_Talk("[STS][CS:G]Kermit[CR]: [STE]See, it\'s not easy being [CS:K]green[CR].\nIn a few short minutes, I think you\'ll\nsee what I mean.[K] Now then, get moving!");
+            // Keep going!
+            message_Close();
+            message_Mail("You quickly retreat back to [CS:P]Sharpedo Bluff[CR]\nto regroup, but suddenly...");
+            message_Close();
+            main_EnterGround(LEVEL_H02P99A, 30);
+            hold;
+            end;
+        case 18: // Craggy Cost
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            message_Mail("Wait a minute, this isn\'t [CS:P]Craggy Coast[CR]![K]\nIt\'s actually [CS:P]Craggy Cost[CR]!");
+            message_SetFace(ACTOR_PLAYER,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" [CS:P]Cost[CR]?");
+            message_Mail("Yes, [CS:P]Cost[CR].");
+            message_Close();
+            if ($CARRY_GOLD > 2000) {
+                $CARRY_GOLD -= 2000;
+                message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+            } elseif($BANK_GOLD > 2000) {
+                $BANK_GOLD -= 2000;
+                message_Mail("You paid the entry fee of [CS:G]2000[CR][M:S0]!");
+            } elseif($CARRY_GOLD > 0) {
+                $CARRY_GOLD = 0;
+                message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                message_Close();
+                $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                CallCommon(CORO_BUBBLE_TEST);
+            } elseif($BANK_GOLD > 0) {
+                $CARRY_GOLD = 0;
+                message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nhowever you came up short, and couldn\'t pay![K]\nInstead, you paid the fee with a curse!");
+                $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                CallCommon(CORO_BUBBLE_TEST);
+            } else {
+                message_Mail("You tried to pay the entry fee of [CS:G]2000[CR][M:S0],\nbut you had no money on you![K] You paid\nthe fee with a curse, when suddenly...");
+                $PERFORMANCE_PROGRESS_LIST[33] = 1;
+                $PERFORMANCE_PROGRESS_LIST[34] = 1;
+                CallCommon(CORO_BUBBLE_TEST);
+            }
+            message_Close();
+            message_Mail("After a long day of exploring [CS:P]Craggy\nCost[CR], you wonder...[W:60] \'Was it really and\ntruly worth the [CS:C]cost[CR] of admission?'");
+            message_Close();
+            JumpCommon(CORO_EVENT_DIVIDE);
+            hold;
+        case 65:
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            main_EnterDungeon(173,30);
+            main_EnterDungeon(-1,30);
+            hold;
+        case 86:
+            screen_FadeOut(0,30);
+            bgm_FadeOut(30);
+            screen2_FadeOut(1,30);
+            main_EnterDungeon(172,30);
+            main_EnterDungeon(-1,30);
+            hold;
         default:
             debug_Print('OTHERDUNGEON');
             switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
@@ -13249,6 +13664,7 @@ coro BUBBLE_TEST {
     }
     
     if ($PERFORMANCE_PROGRESS_LIST[36]) {
+        §prevent_bug_temp;
         bgm_FadeOut(30);
         switch(random(5)) {
             case 0: // Sky Peak
@@ -13261,6 +13677,7 @@ coro BUBBLE_TEST {
                 ~crass(LEVEL_D53P41B, 'N09A2201', 0, LEVEL_D53P41B, 'N09A2201:1', 0);
                 break;
             case 3: // Beach Bubbles
+                jump @prevent_bug_temp;
                 ~crass(LEVEL_V26P05A, 'M01A0207', 0, LEVEL_V26P05A, 'M01A0207:1', 0);
                 break;
             case 4: // Wigglytuff's Big Head

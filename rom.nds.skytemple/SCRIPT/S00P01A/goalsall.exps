@@ -1,0 +1,649 @@
+def 0 {
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+            jump @bidoof_goals;
+        case 1:
+            jump @iggly_goals;
+        case 2:
+            jump @sunflora_goals;
+        case 3:
+            jump @charm_goals;
+        case 4:
+            jump @grovyle_goals;
+        default:
+            jump @main_goals;
+    }
+    
+    §main_goals;
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Our current goal is to defeat\nthat wicked [CS:G]Darkrai[CR] in [CS:P]Dark Crater[CR].[K] To open\nthe way, we need the [CS:C]Legendary Treasures[CR]!");
+        message_Talk(" We have [quag:1] Treasures\nright now! Let me see how that stacks up against\nwhat we need to face [CS:G]Darkrai[CR]...");
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_JOYOUS, FACE_POS_STANDARD);
+                        message_Talk(" GG [hero]! We did it!");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" If my records are correct, we\nhave all of the treasures we need![K] Let\'s go to\n[CS:P]Dark Crater[CR] and beat [CS:G]Darkrai[CR], [hero]!");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we have\nall the [CS:I]Instruments[CR] we need![K] But [CS:P]Dark Crater[CR]\nis still closed?[K] Probably [CS:G]Cryptic[CR]\'s fault!");
+                        message_Talk(" Okay, so I can open [CS:P]Dark Crater[CR]\nfor us, but [CS:B]definitely report this as a bug[CR] if\nyou see this message, okay [hero]?");
+                        screen_FadeOut(1,30);
+                        message_Mail("[CN][partner] pulled out a [CS:I]Rusty Trumpet[CR] and\n[CN]began playing it![K] Suddenly, a beam of light\n[CN]burst out of it, heading to the North-West![W:90]");
+                        dungeon_mode(67) = DMODE_OPEN;
+                        screen_FadeIn(1,30);
+                        message_Talk(" There we go, [CS:G]Cresselia[CR]\nshould be ready for us at [CS:P]Dark Crater[CR]![K]\nDon\'t forget, [CS:B]this wasn\'t supposed to happen![CR]");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records, we\'re\njust missing one treasure![K] We need to find\nthat last one before we can go to [CS:P]Dark Crater[CR]!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records, we\'re\nstill missing several treasures![K] We need to\nfind them all before we can go to [CS:P]Dark Crater[CR]!");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Our current goal is to defeat\n[CS:G]Dialga[CR] at the pinnacle of [CS:P]Temporal Tower[CR]! To\nget there, we need access to [CS:P]Hidden Land[CR]!");
+        message_Talk(" [CS:P]Hidden Land[CR] is only accessible\nfrom [CS:G]Lapras[CR] on the beach. In order to summon\nhim, we need enough [CS:I]Relic Fragment[CR] shards!");
+        message_Talk(" We have [quag:0] shards\nright now! Let me see how that stacks up against\nwhat we need to find [CS:P]Hidden Land[CR]...");
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" According to my records,\nwe\'ve already cleared [CS:P]Hidden Land[CR], and\nexplored it top-to-bottom, [hero]!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" According to my records,\n[CS:G]Lapras[CR] is waiting for us on the beach\nto take us to [CS:P]Hidden Land[CR], [hero]!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we have\nall the [CS:I]Relic Fragment Shards[CR] we need![K] But\n[CS:P]Hidden Land[CR] is closed?[K] Probably [CS:G]Cryptic[CR]\'s fault!");
+                        message_Talk(" Okay, so I can open [CS:P]Hidden Land[CR]\nfor us, but [CS:B]definitely report this as a bug[CR] if\nyou see this message, okay [hero]?");
+                        screen_FadeOut(1,30);
+                        message_Mail("[CN][partner] held their [CS:I]Relic Fragment[CR] high in\n[CN]the air![K] Suddenly, it began to glow, and a beam\n[CN]of light burst out of it, heading for the beach![W:90]");
+                        dungeon_mode(38) = DMODE_OPEN;
+                        screen_FadeIn(1,30);
+                        message_Talk(" There we go, [CS:G]Lapras[CR] should be\nwaiting for us on the beach right now![K] Don\'t\nforget, [CS:B]this wasn\'t supposed to happen![CR]");
+                        break;
+                    
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we are\nmissing just one [CS:I]Relic Fragment Shard[CR].[K] I hope\nit isn\'t too hard to find for you, [hero]!");
+                        break;
+
+                    default: // Missing several!
+                        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" According to my notes, we are\nmissing a few [CS:I]Relic Fragment Shards[CR].[K] We need\nthem all in order to reach [CS:P]Hidden Land[CR], okay?");
+                        break;      
+                }
+                break;
+        }
+        message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Oh right, I almost forgot![K]\nwe also need to have [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" According to my notes, we\'ve\nmanaged to clear [CS:P]Temporal Tower[CR] without\nbeating [CS:G]Dialga[CR]... [CS:B]this is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" According to my notes, we\'ve\nmanaged to unlock [CS:P]Temporal Tower[CR], so if we\nmade it to [CS:P]Hidden Land[CR], we could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_Talk(" According to my notes, we still\nneed to find [CS:P]Temporal Tower[CR] before we can\ndefeat [CS:G]Dialga[CR], even if we clear [CS:P]Hidden Land[CR]!");
+                message_Talk(" Keep in mind, it\'s very possible\nthat [CS:P]Temporal Tower[CR] is found in [CS:P]Hidden Land[CR].\n[K]If we can clear [CS:P]Hidden Land[CR], we may want to.");
+                message_Talk(" Even if we don\'t find [CS:P]Temporal\nTower[CR] there, [CS:G]Lapras[CR] can take us directly to the\ntower if we have it, and [CS:P]Hidden Land[CR] is clear!");
+                break;
+        }   
+    }
+    end;
+    
+    §bidoof_goals;
+    message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" Looks like my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty sure I\'ve already played\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Looks like you can access the\n[CS:C]Main Episode[CR] right now, yup yup! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards clobbering that\nwicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Is that enough?");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Golly, it seems like you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating the\nAPWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need, yup yup! I\nwonder what they\'re waiting for?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Golly, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Golly, I hope I can find\nthe last one for them! I\'d be a hero!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" They\'re still missing quite a few,\nyup yup! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing good, yup yup!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Golly, I hope I can find\nthe last one for them! I\'d be a hero!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" They\'re still missing quite a few,\nyup yup! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Golly, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? Golly, that sure would be nice!");
+                break;
+        }
+        
+    }
+    end;
+
+    §iggly_goals;
+    message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" I bet my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty sure I\'ve already done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Looks like you can access the\n[CS:C]Main Episode[CR] right now, yay! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards helping that\ntroubled [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Math is soooo hard!");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Yay, it seems like you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating the\nAPWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need... I think! I\nwonder who they\'re waiting on?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Huh, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! I hope Master and I can find\nthe last one for them! It\'d be so much fun!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" They\'re still missing quite a few,\nI think! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\nhaving a lot of fun!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Hee-hee, sounds like\n[CS:G]Cryptic[CR] really goofed this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! I hope Master and I can find\nthe last one for them! It\'d be so much fun!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" They\'re still missing quite a few,\nI think! I hope I can help them with it\nsomehow... Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Right, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? That would be fun!");
+                break;
+        }
+        
+    }
+    end;
+    
+    §sunflora_goals;
+    message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" I think my current goal is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" I\'m pretty confident I\'ve done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Eek! It looks like you can access the\n[CS:C]Main Episode[CR] right now! We should\nfinish up here, and do that right away!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards slapping that\n[CS:G]Darkrai[CR] senseless in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. What did they need?");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Oh my gosh, it seems like you\'ve already\ntaken down [CS:G]Darkrai[CR]! Congratulations on beating\nthe APWorld![W:60] ...but why are you still here?");
+                        break;
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need, right? I\nwonder what\'s keeping them?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" Eek, they have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Eek, I hope I can find\nthe last one for them! I\'d be a hero!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few.\nI hope I can help them with it somehow...\nOh my gosh! Maybe I can find one for them?");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Eek!\nI\'m so excited for them!");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Eek, sounds like\n[CS:G]Cryptic[CR] really missed on this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Eek, I hope I can find\nthe last one for them! I\'d be a hero!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few.\nI hope I can help them with it somehow...\nOh my gosh! Maybe I can find one for them?");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Oh my gosh, I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. I wonder if I can help them\nfind it? Eek! That sure would be nice!");
+                break;
+        }
+    }
+    end;
+
+    §charm_goals;
+    message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" As I recall, our current target is\nthe elusive [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" My records suggest that we\'ve done\nthis Special Episode from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk("Darling, it looks like you can access\nthe [CS:C]Main Episode[CR] right now! We should finish\nup here, and do that right away! [M:H3]");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards dealing with that\nwicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let me check...");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Well done! It seems like you\'ve already\ntaken down [CS:G]Darkrai[CR]!\nCongratulations on beating the APWorld!\n...But why are you still here?");
+                        break; // I think all of us know the answer\nto that question, isn\'t that right girls? [M:H3]
+                    case DMODE_OPEN:             // Lopunny: That\'s right, you\'re a fan! Isn\'t that\njust adorable! [M:H3]
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD); // Medicham: Unfortunately for you, darling,\nwe don\'t do fan-service. But we don\'t mind\nyou watching us explore! [M:H3]
+                        message_Talk(" Seems like they have all the\ntreasures they need! [M:H3]  I\nwonder what they\'re waiting for?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" They have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!");
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! Alright girls, let\'s go save the day!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few...\nAlright girls, we have work to do! Let\'s help them out!");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Is that enough?");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing quite well for themselves.");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Seems like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! Alright girls, let\'s go save the day!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few...\nAlright girls, we have work to do! Let\'s help them out!");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" Right! I almost forgot![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" Huh? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_NPC_SAANAITO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. Alright girls, let\'s go save the day!");
+                break;
+        }
+    }
+    end;
+    
+    §grovyle_goals;
+    message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+    if ($SCENARIO_MAIN == 30) {
+        switch (ProcessSpecial(107,0,0)) {
+            case 0: // No main Episode Access
+                message_Talk(" My current objective is\nto find the [CS:C]Main Episode[CR]. Most of the\nchecks are there, not here.");
+                if ($SPECIAL_EPISODE_CONQUEST[0]) {
+                    message_Talk(" My records suggest that I\'ve done\nthis dance with [CS:G]Dusknoir[CR] from start to finish,\nso there\'s a chance we\'re stuck right now.");
+                }
+                return;
+            default: // Main Episode Access
+                message_Talk(" Hold on! It looks like you can access the\n[CS:C]Main Episode[CR] right now! We should\nfinish up here, and do that yesterday!");
+                break;
+        }
+    }
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // Dialga Dead
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards stopping\nthat wicked [CS:G]Darkrai[CR] in the depths of [CS:P]Dark Crater[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let\'s see...");
+        }
+        switch(ProcessSpecial(102,0,1)) { // Instruments
+            case 0: // Have all of them!
+                switch(dungeon_mode(67)) {
+                    case DMODE_OPEN_AND_REQUEST:
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk("Impressive! It seems you\'ve already taken\ndown [CS:G]Darkrai[CR]! Congratulations on beating\nthe APWorld![W:60] ...but why are you still here?");
+                        break; //  Now hold on a minute! Don\'t get any\ntwisted fantasies here! [CS:G]Dusknoir[CR] and I...\nWe\'re not like that, okay!
+                    case DMODE_OPEN:            
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                        message_Talk(" Seems like they have all the\ntreasures they need! So\nwhy haven\'t they beaten [CS:G]Darkrai[CR] yet?");
+                        break;
+                    default:
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" What? They have everything, but\nit isn\'t working? Hmm, [c_name:NPC_PARTNER_FIRST]\nwould probably know what to do...");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Dark Crater[CR]!"); // ([CS:G]Cryptic[CR] I swear if this is your fault...)
+                        break;
+                }
+                break;
+            
+            case 1: // Missing one!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" That\'s only one off of what\nthey need! I bet I could find the last one\nin no time, even with [CS:GDusknoir[CR] slowing me down!");
+                break;
+            default: // Missing several!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("They\'re still missing quite a few...\nI will see what I can do to help...");
+                break;
+        }
+    } else {
+        // Dialga Alive!
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I know [c_name:NPC_HERO_FIRST] and [c_name:NPC_PARTNER_FIRST]\nare working towards reaching [CS:G]Dialga[CR] at\nthe very pinnacle of [CS:P]Temporal Tower[CR].");
+        if (not debug) {
+            message_Talk(" To do that, they need a lot of\n[CS:I]Relic Fragment[CR] Shards! Last I heard, they\nhad [quag:0] of them already. Hmm...");
+        }
+        switch(dungeon_mode(38)) { // Hidden Land access?
+            case DMODE_OPEN_AND_REQUEST:
+                // Cleared Hidden Land!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" By the sounds of it, they\'ve already\nmade it to [CS:P]Hidden Land[CR]! Sounds like they\'re\ndoing quite well in their mission.");
+                break;
+            case DMODE_OPEN:
+                // Unlocked Hidden Land!
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! Excellent!");
+                break;
+            default: // Hidden Land not Unlocked!
+                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                    case 0: // Have all of them! ... but this is impossible!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                        message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Come on, [CS:G]Cryptic[CR]!\nYou\'re better than this!");
+                        message_Talk(" I bet [c_name:NPC_PARTNER_FIRST]\nwould know what to do!");
+                        message_Mail(" Do this in the [CS:C]Main Episode[CR] to\nactivate the failsafe for [CS:P]Hidden Land[CR]!");
+                        break;
+                    case 1: // Missing one!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk(" That\'s only one off of what\nthey need! I bet I could find the last one\nin no time, even with [CS:GDusknoir[CR] slowing me down!");
+                        break;
+                    default: // Missing several!
+                        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                        message_Talk("They\'re still missing quite a few...\nI will see what I can do to help...");
+                        break;    
+                }
+                break;
+        }
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" But there\'s more![K]\nthey also need [CS:P]Temporal Tower[CR] itself\nunlocked to be able to make it there!");
+        switch(dungeon_mode(41)) { // Temporal Tower access?
+            case DMODE_OPEN_AND_REQUEST:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
+                message_Talk(" What? They\'ve managed to clear\n[CS:P]Temporal Tower[CR] without beating [CS:G]Dialga[CR]...\nThat\'s strange... [CS:B]This is definitely a bug![CR]");
+                break;                    
+            case DMODE_OPEN:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Sounds like they\'ve managed to\nunlock [CS:P]Temporal Tower[CR], so if they made\nit to [CS:P]Hidden Land[CR], they could beat [CS:G]Dialga[CR]!");
+                break;
+            default:
+                message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk("Sounds like they\'re still looking for\n[CS:P]Temporal Tower[CR]. What ameteurs!");
+                break;
+        }    
+    }
+    end;
+}
