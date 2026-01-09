@@ -179,6 +179,14 @@ coro TALK_PARTNER_MESSAGE {
             break;
         case menu("Just Chatting"):
             message_Close();
+            if ($SCENARIO_SUB2 &<< 5) {
+            } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+                supervision_ExecuteExportSub("GOOMI");
+            }
+            message_SetFace(ACTOR_NPC_PARTNER,FACE_TEARY_EYED,FACE_POS_STANDARD);
+            message_Talk(" You actually wanted to talk?[W:30]\nLet me try to find a line of my vanilla dialogue\nthat suits our gamestate, ok [hero]?");
+            message_Close();
+            Wait(30);
             if ($PERFORMANCE_PROGRESS_LIST[17]) {
                 $SIDE02_TALK[0] = 1;
             } else {

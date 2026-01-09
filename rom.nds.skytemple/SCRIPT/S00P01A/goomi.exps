@@ -1,0 +1,268 @@
+def 0 {
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Did you want a reminder of which\ndungeons contain [CS:I]Blue Gummis[CR]?");
+    switch(message_SwitchMenu(2,1)) {
+        case menu("Yes"):
+            message_Close();
+            Wait(10);
+            break;
+        case menu("No"):
+        default:
+            message_Close();
+            Wait(10);
+            end;
+    }
+    message_Talk(" According to notes from the\n[CS:X]Survey Team[CR], cross-referenced against our\ndungeon list...[W:60] Here\'s some [CS:I]Blue Gummi[CR] odds:");
+    message_Close();
+    Wait(10);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);
+    switch(dungeon_mode(91)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Labyrinth Cave[CR]: [CS:C]1.2717%[CR] to [CS:C]3.6813[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(4)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Bristle[CR]: [CS:C]1.725%[CR] to [CS:C]3.45[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(85)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mystery Jungle[CR]: [CS:C]1.25%[CR] to [CS:C]3.1[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(17)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Amp Plains[CR]: [CS:C]0.5132%[CR] to [CS:C]2.8853[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(99)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Zero Isle North[CR]: [CS:C]0.6833%[CR] to [CS:C]2.775[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(8)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Craggy Coast[CR]: [CS:C]2.6313%[CR] to [CS:C]2.6313[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(174)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Star Cave[CR]: [CS:C]1.26%[CR] to [CS:C]2.36[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(104)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Destiny Tower[CR]: [CS:C]0.33%[CR] to [CS:C]2.356[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(72)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Marine Resort[CR]: [CS:C]1.0667%[CR] to [CS:C]2.2364[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(101)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Zero Isle West[CR]: [CS:C]1.8406%[CR] to [CS:C]1.8406[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(7)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Apple Woods[CR]: [CS:C]1.5461%[CR] to [CS:C]1.5461[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(111)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Sky Peak[CR]: [CS:C]1.3875%[CR] to [CS:C]1.3875[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(6)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Waterfall Cave[CR]: [CS:C]1.1654%[CR] to [CS:C]1.1654[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(3)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Drenched Bluff[CR]: [CS:C]1.122%[CR] to [CS:C]1.122[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(191)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Dojo: Final Maze[CR]: [CS:C]0.6096%[CR] to [CS:C]0.6096[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(12)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Foggy Forest[CR]: [CS:C]0.5676%[CR] to [CS:C]0.5676[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(64)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Spacial Rift[CR]: [CS:C]0.5318%[CR] to [CS:C]0.5318[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(94)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Happy Outlook[CR]: [CS:C]0.5277%[CR] to [CS:C]0.5277[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(67)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Dark Crater[CR]: [CS:C]0.5208%[CR] to [CS:C]0.5208[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(14)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Steam Cave[CR]: [CS:C]0.5132%[CR] to [CS:C]0.5132[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(25)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crystal Crossing[CR]: [CS:C]0.5132%[CR] to [CS:C]0.5132[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(47)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crevice Cave[CR]: [CS:C]0.4929%[CR] to [CS:C]0.4929[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(35)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Brine Cave[CR]: [CS:C]0.4879%[CR] to [CS:C]0.4879[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(54)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Aegis Cave[CR]: [CS:C]0.4767%[CR] to [CS:C]0.4767[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(34)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Treeshroud Forest[CR]: [CS:C]0.4724%[CR] to [CS:C]0.4724[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(38)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Hidden Land[CR]: [CS:C]0.4415%[CR] to [CS:C]0.472[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(41)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Temporal Tower[CR]: [CS:C]0.4415%[CR] to [CS:C]0.472[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(95)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Mistral[CR]: [CS:C]0.4555%[CR] to [CS:C]0.4555[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(10)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Mt. Horn[CR]: [CS:C]0.1614%[CR] to [CS:C]0.4281[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(24)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Crystal Cave[CR]: [CS:C]0.3544%[CR] to [CS:C]0.3544[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(108)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Treacherous Waters[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(109)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Southeastern Islands[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(110)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Inferno Cave[CR]: [CS:C]0.33%[CR] to [CS:C]0.33[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(50)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Surrounded Sea[CR]: [CS:C]0.1513%[CR] to [CS:C]0.1513[CR]% per floor");
+        default:
+            break;
+    }
+    switch(dungeon_mode(51)) {
+        case DMODE_OPEN:
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[CS:P]Miracle Sea[CR]: [CS:C]0.1369%[CR] to [CS:C]0.1369[CR]% per floor");
+        default:
+            break;
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_Talk(" Feel free to ask me\nfor that data again at any time!");
+    message_Close();
+    end;
+}

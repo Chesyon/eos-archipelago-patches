@@ -14,6 +14,7 @@ def 0 {
                             debug_Print('BGM_FADEOUT');
                             bgm_FadeOut(60);
                             §label_4;
+                            screen_FadeOutAll(1,30);
                             main_EnterGround(LEVEL_H02P99A, 30);
                             hold;
                         } else {

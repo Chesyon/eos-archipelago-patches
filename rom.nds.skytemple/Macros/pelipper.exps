@@ -5,10 +5,24 @@
         } else {
             if ($PERFORMANCE_PROGRESS_LIST[35]) {
                 // Continue!
+                if (not debug) {
+                    switch(ProcessSpecial(117,0,0)) {
+                        case 1:
+                            message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk("[STS] I\'ve got a special delivery for... they\ncan't see me with the screen faded out, can\nthey? Stupid FadeOutAll causing stupid bugs...[STE]");
+                            message_CloseEnforce();
+                            return;
+                        case 0:
+                            break;
+                    }
+                } else {
+                    debug_Print("Pelipper is active!");
+                }
             } else {
                 return; // Exit macro!
             }
         }
+        
         §trans_choose;
         message_SetFace(ACTOR_NPC_PERIPPAA1,FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk(" I\'ve got a special delivery for\nteam [team] via [CS:C]Express Mail[CR]!\nHow would you like to receive your delivery?");
@@ -69,6 +83,7 @@
         }
         ~PelipperDeliverAll();
         $LOCAL1 = 0;
+        
         return;
     }
     

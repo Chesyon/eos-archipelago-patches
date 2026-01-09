@@ -6,7 +6,7 @@ macro SetVersion() {
     if (debug) {
         $VERSION = 1;
     } else {
-        $VERSION = 5;
+        $VERSION = 6;
     }
 }
 
@@ -15,8 +15,12 @@ macro SetVersion() {
 //TODO: Add new dialogue each time a new version is made!
 macro GetVersion() {
     switch($VERSION) {
-        case >= 6:
+        case >= 7:
             message_Talk(" We are currently on 0.4.0![K]\nPLACEHOLDER");
+            break;
+        
+        case 6:
+            message_Talk(" We are currently on 0.3.2\nproper![K] It took us a while, but we can play\n[CS:C]Rock Paper Scissors[CR], even if the bgm is weird!");
             break;
         case 5:
             message_Talk(" We are currently on a\nprerelease of 0.3.2![K] Make sure to check the\nGitHub and let us know what's working!");
@@ -39,7 +43,7 @@ macro GetVersion() {
 
 
 macro IsOdot4dotO($var) {
-    if ($VERSION >= 6) {
+    if ($VERSION >= 7) {
         $var = 1;
     } else {
         $var = 0;
