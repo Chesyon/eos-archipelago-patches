@@ -48,6 +48,10 @@ ClearMarkHook = 0x2333D68;
 
 /* ! For Overlay11 */
 NameAutofillHook = 0x22E6B94;
+FadeOutAllCall = 0x22e0a2c;
+FadeOutAll = 0x22ea510;
+FadeInAllCall = 0x22e09fc;
+FadeInAll = 0x22ea4c4;
 
 /* Overlay 11: CRASS */
 GroundMainLoopStuff = 0x22E98D4;
@@ -148,6 +152,7 @@ DungeonXMenuNameAddr = 0x23836D8;
 archipelagoAreaStart = 0x23DE000;
 slotData = 0x23DE000;
 apSettings = 0x23DE028;
+fadeOutAllActive = 0x23DE031;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 

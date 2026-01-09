@@ -190,7 +190,7 @@ headers:
 	
 .PHONY: backup
 backup: 
-#	xdelta3 -e -f -s vanilla.nds rom.nds backups/backup-"`date +"%s"`".xdelta
+	xdelta3 -e -f -s vanilla.nds rom.nds backups/backup-"`date +"%s"`".xdelta
 	
 .PHONY: rom
 rom: backup
@@ -203,7 +203,7 @@ xdelta:
 .PHONY: bsdiff
 bsdiff:
 	@echo "\e[1;33mThis part takes up to a minute, please be patient! \e[0m"
-	bsdiff4 vanilla.nds out.nds archipelago-base.bsdiff
+	bsdiff4f vanilla.nds out.nds archipelago-base.bsdiff
 	@echo "\e[1;32mDone! \e[0m"
 	
 .PHONY: overlay36-location

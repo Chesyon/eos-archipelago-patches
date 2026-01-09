@@ -127,6 +127,8 @@ typedef struct TopScreenMode {
 
 extern CustomSaveArea CUSTOM_SAVE_AREA;
 
+extern bool fadeOutAllActive;
+
 extern struct vec2 PARTNER_SELECT_PORTRAIT_OFFSETS;
 extern int MESSAGE_SET_WAIT_MODE_PARAMS[2];
 extern void* UNIONALL_RAM_ADDRESS;

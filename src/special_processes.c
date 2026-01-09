@@ -422,6 +422,9 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
     case 116:
         SpUpdateAdventureLogRecycles();
         return true;
+    case 117:
+        *return_val = fadeOutAllActive;
+        return true;
     case 255:
         *return_val = SpGetCrassKind();
         return true;
