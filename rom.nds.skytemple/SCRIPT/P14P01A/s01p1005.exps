@@ -1188,7 +1188,7 @@ def 0 {
                 spanish=" Aunque no sé por qué.",
             }
     }
-    message_Talk("Maybe [CS:C]Chunsoft[CR] didn\'t draw\nportraits and sprites for our evolved forms?\n[K]I guess that makes sense, right [hero]?");
+    message_Talk(" Maybe [CS:C]Chunsoft[CR] didn\'t draw\nportraits and sprites for our evolved forms?\n[K]I guess that makes sense, right [hero]?");
     switch(dungeon_mode(177)) {
         case DMODE_OPEN:
         case DMODE_OPEN_AND_REQUEST:
