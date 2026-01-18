@@ -1,0 +1,184 @@
+
+def 0 {
+    sound_Stop();
+    $PERFORMANCE_PROGRESS_LIST[30] = 1;
+    back_SetBanner2(LEVEL_V02P02A, 0, 156, 140, 10, {
+        english="Dusknoir",
+        french="Noctunoir",
+        german="Zwirrfinst",
+        italian="Dusknoir",
+        spanish="El gran Dusknoir",
+    });
+    screen_FadeIn(1, 45);
+    Wait(160);
+    screen_FadeOut(1, 45);
+    Wait(15);
+    $SCENARIO_MAIN_BIT_FLAG[1] = 1;
+    Wait(30);
+    message_Narration(30, {
+        english="[CN]The next morning...",
+        french="[CN]Le lendemain matin...",
+        german="[CN]Am nächsten Morgen...",
+        italian="[CN]La mattina dopo...",
+        spanish="[CN]A la mañana siguiente...",
+    });
+    message_Close();
+    Wait(30);
+    message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEINW);
+    message_Talk({
+        english=" UP AND AT \'EM![K] IT\'S MORNING!",
+        french=" DEBOUT![K] C\'EST L\'HEURE!\nHOP HOP HOP!",
+        german=" RAUS AUS DEN BETTEN![K] ES IST\nMORGEN!",
+        italian=" SVEGLIA![K] È MATTINA!",
+        spanish=" ¡ARRIBA GANDULES![K]\n¡YA ES DE DÍA!",
+    });
+    message_Close();
+    back_SetGround(LEVEL_G01P07A);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(76);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(76);
+    }
+    screen_FadeIn(1, 30);
+    se_Play(8971);
+    camera_SetEffect(2, 2, 33536);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetAnimation(18);
+    }
+    with (actor ACTOR_NPC_DOGOOMU) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_NPC_DOGOOMU);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        SetAnimation(2);
+    }
+    camera_SetEffect(0, 0, 0);
+    Wait(10);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        MovePositionOffset(33152, -96, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_DOGOOMU);
+    with (actor ACTOR_NPC_DOGOOMU) {
+        Destroy();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(1, 1, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(2);
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, 1, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(1, -1, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(2);
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, -1, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(1, 1, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(2);
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, 1, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SlidePositionOffset(1, -1, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    Wait(2);
+    with (actor ACTOR_PLAYER) {
+        SlidePositionOffset(1, -1, 0);
+    }
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_DIZZY, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Ugh...",
+                french=" Argh...",
+                german=" Ugh...",
+                italian=" Ugh...",
+                spanish=" Ay...",
+            }
+        case 2:
+            {
+                english=" Ugh...",
+                french=" Argh...",
+                german=" Ugh...",
+                italian=" Ugh...",
+                spanish=" Ay...",
+            }
+        default:
+            {
+                english=" Ugh...",
+                french=" Argh...",
+                german=" Ugh...",
+                italian=" Ugh...",
+                spanish=" Ay...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Been a while since we\'ve been\nwoken up like that...",
+                french=" Ça faisait un moment qu\'on\nn\'avait pas eu un tel réveil...",
+                german=" So wurden wir schon lange nicht\nmehr geweckt...",
+                italian=" Era un po\' che non ci svegliavano\ncosì...",
+                spanish=" Hacía tiempo que no me\ndespertaban de esa forma...",
+            }
+        case 2:
+            {
+                english=" It\'s been a while since we were\nwoken up like that...",
+                french=" Ça faisait un moment qu\'on\nn\'avait pas eu un tel réveil...",
+                german=" So wurden wir schon lange nicht\nmehr geweckt...",
+                italian=" È passato un po\' di tempo\ndall\'ultima volta che ci hanno svegliato così...",
+                spanish=" Hacía tiempo que no me\ndespertaban de esa forma...",
+            }
+        default:
+            {
+                english=" It\'s been a while since we were\nwoken up like that...",
+                french=" Ça faisait un moment qu\'on\nn\'avait pas eu un tel réveil...",
+                german=" So wurden wir schon lange nicht\nmehr geweckt...",
+                italian=" È passato un po\' di tempo\ndall\'ultima volta che ci hanno svegliato così...",
+                spanish=" Hacía tiempo que no me\ndespertaban de esa forma...",
+            }
+    }
+    message_Close();
+    Wait(30);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(63);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(63);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitAnimation();
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitAnimation();
+    }
+    Wait(10);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    Wait(30);
+    end;
+}

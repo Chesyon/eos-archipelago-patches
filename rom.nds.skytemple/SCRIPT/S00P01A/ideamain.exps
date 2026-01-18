@@ -110,6 +110,22 @@ def 0 {
             return;
         }
     }
+    if ($DUNGEON_CONQUEST_LIST[16]) {
+        switch(scn($SCENARIO_SUB7)[1]) {
+            case &<< 0:
+                break;
+            default:
+                message_Talk(" We should go speak to [CS:G]Chansey[CR]\nnow that we've cleared [CS:P]Steam Cave[CR]![K] Let's\ngo do that now, [hero]!");
+                return;
+        }
+        switch(scn($SCENARIO_SUB7)[1]) {
+            case &<< 1:
+                break;
+            default:
+                message_Talk(" We should go speak to [CS:G]Croagunk[CR]\nnow that we've cleared [CS:P]Steam Cave[CR]![K] Let's\ngo do that now, [hero]!");
+                return;
+        }
+    }
     if ($SUB30_SPOT_LEVEL < 3) {
         message_Talk(" Seems like we\'re missing Project P\ndungeon checks! Let\'s do some recycling, [hero]!");
         return;
@@ -181,7 +197,6 @@ def 0 {
             message_Talk(" We should put some money into\nDuskull Bank, okay [hero]?");
             break;
     }
-    
     message_Talk(" Seems like we only have\ndungeon checks left Pre-Dialga. Let me see...");
     switch(dungeon_mode(1)) {
         case DMODE_OPEN_AND_REQUEST:

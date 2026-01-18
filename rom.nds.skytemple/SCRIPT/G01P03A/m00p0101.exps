@@ -1,0 +1,481 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    screen_WhiteIn(6, 3);
+    back_SetGround(LEVEL_G01P03A);
+    supervision_LoadStation(LEVEL_G01P03A, 'UM05');
+    supervision_Station(7);
+    supervision_Acting(0);
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetAnimation(2);
+    }
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    screen_FadeIn(1, 30);
+    with (actor ACTOR_NPC_CHIRIIN) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_CHIRIIN);
+    message_SetActor(ACTOR_NPC_CHIRIIN);
+    message_Talk({
+        english=" Oh! [hero]! And\n[partner] too!",
+        french=" Oh! [hero]! Et\ntoi aussi, [partner]!",
+        german=" Oh! [hero]! Und\n[partner] ist auch da!",
+        italian=" Oh! [hero]! E anche\n[partner]!",
+        spanish=" ¡[hero]! ¡[partner]!\n¡Venid aquí!",
+    });
+    message_Close();
+    se_Play(8964);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_LEFT, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_TWO_ARROWS_AT_SIDE_LEFT, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    Wait(5);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Huh?[K] What\'s [CS:N]Chimecho[CR]\nup to there?",
+                french=" Quoi?[K] Qu\'est-ce qu\'[CS:N]Eoko[CR]\nmijote là-bas?",
+                german=" Huch?[K] Was macht [CS:N]Palimpalim[CR]\ndenn da?",
+                italian=" Eh?[K] Cosa ci fa [CS:N]Chimecho[CR] lì?",
+                spanish=" ¡Oye![K] ¿Qué hace allí [CS:N]Chimecho[CR]?",
+            }
+        case 2:
+            {
+                english=" Huh?[K] What\'s [CS:N]Chimecho[CR]\ndoing there?",
+                french=" Quoi?[K] Qu\'est-ce qu\'[CS:N]Eoko[CR]\nmijote là-bas?",
+                german=" Huch?[K] Was macht [CS:N]Palimpalim[CR]\ndenn da?",
+                italian=" Eh?[K] Cosa ci fa [CS:N]Chimecho[CR] lì?",
+                spanish=" ¿Eh?[K] ¿Qué hace allí [CS:N]Chimecho[CR]?",
+            }
+        default:
+            {
+                english=" Oh?[K] What is [CS:N]Chimecho[CR]\ndoing there?",
+                french=" Quoi?[K] Qu\'est-ce qu\'[CS:N]Eoko[CR]\nmijote là-bas?",
+                german=" Huch?[K] Was macht [CS:N]Palimpalim[CR]\ndenn da?",
+                italian=" Eh?[K] Cosa ci fa [CS:N]Chimecho[CR] lì?",
+                spanish=" Oye...[K] ¿Qué hace allí [CS:N]Chimecho[CR]?",
+            }
+    }
+    message_Close();
+    with (performer 0) {
+        MovePositionMark(1, Position<'m0', 64.5, 31.5>);
+    }
+    with (actor ACTOR_PLAYER) {
+        MovePositionMark(1, Position<'m1', 66, 33.5>);
+    }
+    Wait(5);
+    with (actor ACTOR_ATTENDANT1) {
+        MovePositionMark(1, Position<'m2', 63, 33.5>);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        Turn2Direction(32, 10, DIR_DOWN);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_CHIRIIN);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_CHIRIIN);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    WaitExecuteLives(ACTOR_PLAYER);
+    Wait(15);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Hey, what\'s going on over here?",
+                french=" Salut! Que se passe-t-il ici?",
+                german=" Hey, was ist denn hier los?",
+                italian=" Ehi, cosa succede qui?",
+                spanish=" Oye, ¿qué haces aquí?",
+            }
+        case 2:
+            {
+                english=" Hello! What\'s going on here?",
+                french=" Salut! Que se passe-t-il ici?",
+                german=" Hallo! Was ist denn hier los?",
+                italian=" Ciao! Cosa succede qui?",
+                spanish=" ¡Hola! ¿Qué haces aquí?",
+            }
+        default:
+            {
+                english=" Hello! What\'s going on here?",
+                french=" Salut! Que se passe-t-il ici?",
+                german=" Hallo! Was ist denn hier los?",
+                italian=" Ciao! Cosa succede qui?",
+                spanish=" ¡Hola! ¿Qué haces?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" I just started an Assembly here.\nToday, in fact.",
+        french=" Je viens de créer un\nRassemblement ici. D\'ailleurs, c\'est\naujourd\'hui la grande ouverture.",
+        german=" Das hier ist ein Treffpunkt.\nIch habe ihn heute erst eröffnet!",
+        italian=" Sto inaugurando il mio Raduno.",
+        spanish=" Pues acabo de abrir un registro.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8962);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Assembly?",
+                french=" Un Rassemblement?",
+                german=" Ein Treffpunkt?",
+                italian=" Raduno?",
+                spanish=" ¿Un registro?",
+            }
+        case 2:
+            {
+                english=" Assembly?",
+                french=" Un Rassemblement?",
+                german=" Ein Treffpunkt?",
+                italian=" Raduno?",
+                spanish=" ¿Un registro?",
+            }
+        default:
+            {
+                english=" Assembly?",
+                french=" Un Rassemblement?",
+                german=" Ein Treffpunkt?",
+                italian=" Raduno?",
+                spanish=" ¿Un registro?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" Yes![K] For assembling your team!\nHave you ever considered adding members,\n[partner]?",
+        french=" Oui![K] Afin de rassembler votre\néquipe! As-tu déjà envisagé de recruter\ndes coéquipiers, [partner]?",
+        german=" Ja.[K] Hast du schon mal daran\ngedacht, mehr Mitglieder ins Team\naufzunehmen, [partner]?",
+        italian=" Sì![K] Per organizzare la tua\nsquadra! Hai mai pensato di aggiungere\naltri membri, [partner]?",
+        spanish=" Así es.[K] A ver, ¿no os gustaría\nincluir a nuevos miembros en vuestro equipo,\n[partner]?",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Other members?[K] Well, sure!\nIt\'d be cool to add other members!",
+                french=" Des coéquipiers?[K] Non, mais\nce serait génial de pouvoir recruter\nd\'autres membres!",
+                german=" Mehr Mitglieder?[K] Na klar!\nEs wäre cool, neue Mitglieder aufzunehmen!",
+                italian=" Altri membri?[K] Perché no?\nSarebbe bello ampliare la squadra!",
+                spanish=" ¿Nuevos miembros?[K]\n¡Pues no estaría nada mal!",
+            }
+        case 2:
+            {
+                english=" Other members?[K] Well, sure!\nIt\'d be cool to add other members!",
+                french=" Des coéquipiers?[K] Non, mais\nce serait génial de pouvoir recruter\nd\'autres membres!",
+                german=" Mehr Mitglieder?[K] Na klar!\nEs wäre cool, neue Mitglieder aufzunehmen!",
+                italian=" Altri membri?[K] Perché no?\nSarebbe bello ampliare la squadra!",
+                spanish=" ¿Nuevos miembros?[K] ¡Buena idea!\n¡Estaría bien que se nos unieran más Pokémon!",
+            }
+        default:
+            {
+                english=" Other members?[K] Well, sure!\nIt\'d be cool to add other members!",
+                french=" Des coéquipiers?[K] Non, mais\nce serait génial de pouvoir recruter\nd\'autres membres!",
+                german=" Mehr Mitglieder?[K] Na klar!\nEs wäre cool, neue Mitglieder aufzunehmen!",
+                italian=" Altri membri?[K] Perché no?\nSarebbe bello ampliare la squadra!",
+                spanish=" ¿Nuevos miembros?[K] ¡Buena idea!\n¡Nos encantaría contar con más Pokémon!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" If there were more than just\nthe two of us...",
+                french=" Si notre équipe comptait plus de\nmembres et pas seulement nous deux...",
+                german=" Wenn wir nicht mehr nur zu\nzweit wären...",
+                italian=" Se ci fossero altri Pokémon\noltre noi due...",
+                spanish=" Ir con otros Pokémon que nos\nechen una mano...",
+            }
+        case 2:
+            {
+                english=" If there were more than just\nthe two of us...",
+                french=" Si notre équipe comptait plus de\nmembres et pas seulement nous deux...",
+                german=" Wenn wir nicht mehr nur zu\nzweit wären...",
+                italian=" Se ci fossero altri Pokémon\noltre noi due...",
+                spanish=" Si somos más en el equipo...",
+            }
+        default:
+            {
+                english=" If there were more than just\nthe two of us...",
+                french=" Si notre équipe comptait plus de\nmembres et pas seulement nous deux...",
+                german=" Wenn wir nicht mehr nur zu\nzweit wären...",
+                italian=" Se ci fossero altri Pokémon\noltre noi due...",
+                spanish=" Ampliar el grupo con otros\nPokémon...",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" It sure would help when we\nexplore dungeons!",
+                french=" ... ce serait plus facile pour\nexplorer les donjons!",
+                german=" Das wäre bestimmt hilfreich\nbeim Erkunden von Dungeons!",
+                italian=" ... avremmo la vita più facile \nquando esploriamo i dungeon!",
+                spanish=" ¡Nos vendrá muy bien cuando\nexploremos territorios!",
+            }
+        case 2:
+            {
+                english=" It sure would help when we\nexplore dungeons!",
+                french=" ... ce serait plus facile pour\nexplorer les donjons!",
+                german=" Das wäre bestimmt hilfreich\nbeim Erkunden von Dungeons!",
+                italian=" ... avremmo la vita più facile \nquando esploriamo i dungeon!",
+                spanish=" ¡Será mucho más fácil explorar\nlos territorios!",
+            }
+        default:
+            {
+                english=" It sure would help when we\nexplore dungeons!",
+                french=" ... ce serait plus facile pour\nexplorer les donjons!",
+                german=" Das wäre bestimmt hilfreich\nbeim Erkunden von Dungeons!",
+                italian=" ... avremmo la vita più facile \nquando esploriamo i dungeon!",
+                spanish=" ¡Sería de gran ayuda al explorar\nterritorios!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8978);
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_CHIRIIN);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" Well then![K] You need to start\nrecruiting new members!",
+        french=" Eh bien voilà![K] Vous devriez\ncommencer à recruter de nouveaux membres!",
+        german=" Na also![K] Dann solltet ihr neue\nMitglieder anwerben!",
+        italian=" Bene![K] Allora dovete iniziare a\nreclutare altri membri!",
+        spanish=" Eso me imaginaba.[K] Entonces,\ntendréis que empezar a reclutar nuevos\nmiembros...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8974);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SURPRISED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yeah? How do we start?",
+                french=" D\'accord! Comment doit-on\ns\'y prendre?",
+                german=" So? Und wie geht das?",
+                italian=" Ah sì? Da dove iniziamo?",
+                spanish=" ¿Sí? ¿Y cómo lo hacemos?",
+            }
+        case 2:
+            {
+                english=" Oh? How do we start?",
+                french=" D\'accord! Comment doit-on\ns\'y prendre?",
+                german=" Oh! Wie geht das denn?",
+                italian=" Ah sì? Da dove iniziamo?",
+                spanish=" ¿Sí? ¿Y cómo lo hacemos?",
+            }
+        default:
+            {
+                english=" How do we start?",
+                french=" D\'accord! Comment doit-on\ns\'y prendre?",
+                german=" Wie geht das denn?",
+                italian=" Come facciamo?",
+                spanish=" ¿Sí? ¿Y cómo lo hacemos?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" I\'ll just ring the Friendship Bell\nfor you, Team [team:]!",
+        french=" Je vais faire sonner la Cloche\nde l\'Amitié pour vous, Equipe [team:]!",
+        german=" Ich läute ganz einfach die\nFreundesglocke für euch, Team [team:]!",
+        italian=" Suonerò la Campana dell\'Amicizia\nper voi, Team [team:]!",
+        spanish=" Antes de nada, tengo que hacer\nsonar la Campana Amistad en vuestro honor,\n[CS:X]Equipo[CR] [team:].",
+    });
+    message_Talk({
+        english=" Here goes![K] Hey-yah!",
+        french=" C\'est parti![K] Et hop là!",
+        german=" Dann mal los![K] Hey-yah!",
+        italian=" Ecco qui![K] Evviva!",
+        spanish=" Pues...[K] ¡Allá voy!",
+    });
+    message_Close();
+    bgm_FadeOut(10);
+    se_Play(5123);
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetAnimation(19);
+    }
+    with (actor ACTOR_NPC_CHIRIIN) {
+        WaitAnimation();
+    }
+    WaitExecuteLives(ACTOR_NPC_CHIRIIN);
+    with (actor ACTOR_NPC_CHIRIIN) {
+        SetAnimation(2);
+    }
+    WaitSe(5123);
+    se_Play(5127);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    Wait(10);
+    se_Play(5127);
+    screen_WhiteOut(1, 2);
+    Wait(2);
+    screen_FadeIn(1, 2);
+    WaitSe(5127);
+    message_Mail({
+        english="[CN][CS:N]Chimecho[CR] rang\n[CN]the Friendship Bell!",
+        french="[CN][CS:N]Eoko[CR] fait sonner\n[CN]la Cloche de l\'Amitié!",
+        german="[CN][CS:N]Palimpalim[CR] läutet\n[CN]die Freundesglocke!",
+        italian="[CN][CS:N]Chimecho[CR] suona\n[CN]la Campana dell\'Amicizia!",
+        spanish="[CN]¡[CS:N]Chimecho[CR] hizo sonar\n[CN]la Campana Amistad!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" Now Team [team:] has the\npower to recruit new members!",
+        french=" Vous pouvez désormais recruter\nde nouveaux membres, Equipe [team:]!",
+        german=" Team [team:] ist nun in\nder Lage, neue Mitglieder anzuwerben!",
+        italian=" Adesso, il Team [team:] \npuò reclutare altri membri!",
+        spanish=" ¡Ahora el [CS:X]Equipo[CR] [team:]\npuede reclutar nuevos miembros!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8967);
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_PLAYER) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" R-really?",
+                french=" V-vraiment?",
+                german=" W-wirklich?",
+                italian=" Sul serio?",
+                spanish=" ¿En serio?",
+            }
+        case 2:
+            {
+                english=" R-really?",
+                french=" V-vraiment?",
+                german=" W-wirklich?",
+                italian=" Dici davvero?",
+                spanish=" ¿De verdad?",
+            }
+        default:
+            {
+                english=" R-really?",
+                french=" V-vraiment?",
+                german=" W-wirklich?",
+                italian=" D-Davvero?",
+                spanish=" ¿De... De verdad?",
+            }
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_TOP_C_FACEL);
+    message_Talk({
+        english=" Yes! From now on, while battling\nPokémon in dungeons...",
+        french=" Oui! Dorénavant, en affrontant\ncertains Pokémon dans des donjons...",
+        german=" Ja! Ihr bekämpft Pokémon in\nDungeons, nicht wahr?",
+        italian=" Sì! D\'ora in poi, quando \naffrontate dei Pokémon nei dungeon...",
+        spanish=" ¡Sí! Desde ahora, cuando luchéis\nahí fuera contra otros Pokémon...",
+    });
+    message_Talk({
+        english=" You may earn respect from\nsome of them...[K]and those Pokémon will then\nask to join Team [team:].",
+        french=" ... vous pourrez gagner leur\nrespect![K] Ils vous demanderont alors\ns\'ils peuvent rejoindre l\'Equipe [team:].",
+        german=" Ab sofort kann es passieren,\ndass manche Pokémon aus Respekt vor\neuch...[K] Team [team:] beitreten wollen!",
+        italian=" ... potreste guadagnarvi il \nrispetto di alcuni di loro...[K] Questi potrebbero\nchiedervi di unirsi al Team [team:].",
+        spanish=" Puede que os ganéis el respeto\nde algunos de ellos...[K] y que quieran unirse\nal [CS:X]Equipo[CR] [team:].",
+    });
+    message_Talk({
+        english=" Once you have recruited a\nPokémon, you can bring it along with you\non dungeon explorations.",
+        french=" Une fois que vous avez recruté\nun Pokémon, vous pouvez l\'emmener avec\nvous pour explorer les donjons.",
+        german=" Habt ihr ein Pokémon einmal\nangeworben, könnt ihr es mit auf Erkundungen\nvon Dungeons nehmen.",
+        italian=" Una volta reclutato un Pokémon, \npotete portarlo con voi quando esplorate un \ndungeon.",
+        spanish=" Una vez reclutados, podrán\nacompañaros en vuestras exploraciones.",
+    });
+    message_Talk({
+        english=" To bring a Pokémon along, visit\nmy Assembly, then choose which members\nshould join your team for the exploration.",
+        french=" Pour emmener un Pokémon,\nvenez au Rassemblement afin de choisir quels\nmembres rejoignent l\'équipe pour l\'exploration.",
+        german=" Dazu kommt ihr dann zu meinem\nTreffpunkt und bestimmt, welche Mitglieder\nihr mit auf Erkundung nehmen wollt.",
+        italian=" Per portare con voi un Pokémon,\nvisitate il mio Raduno, poi scegliete quali \nmembri devono unirsi alla squadra.",
+        spanish=" Para ello, solo tenéis que visitar\nmi registro y escoger los miembros que\nqueráis que vayan de expedición.",
+    });
+    message_Talk({
+        english=" Always see me when you want\nto assemble a team that includes recruits! ♪",
+        french=" Venez toujours me voir quand\nvous voulez inclure de nouvelles recrues\ndans votre équipe! ♪",
+        german=" Kommt also immer zu mir,\nwenn ihr Rekruten mitnehmen wollt! ♪",
+        italian=" Venite a trovarmi quando volete\ncambiare i componenti della squadra! ♪",
+        spanish=" ¡Así que venid a verme siempre\nque queráis que os acompañe algún recluta! ♪",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Great! Thanks, [CS:N]Chimecho[CR]!",
+                french=" Super! Merci, [CS:N]Eoko[CR]!",
+                german=" Super! Vielen Dank, [CS:N]Palimpalim[CR]!",
+                italian=" Grandioso! Grazie, [CS:N]Chimecho[CR]!",
+                spanish=" ¡Genial! ¡Gracias, [CS:N]Chimecho[CR]!",
+            }
+        case 2:
+            {
+                english=" Oh, wow! Thanks, [CS:N]Chimecho[CR]!",
+                french=" Super! Merci, [CS:N]Eoko[CR]!",
+                german=" Wow! Danke, [CS:N]Palimpalim[CR]!",
+                italian=" Oh, wow! Grazie, [CS:N]Chimecho[CR]!",
+                spanish=" ¡Estupendo! ¡Gracias, [CS:N]Chimecho[CR]!",
+            }
+        default:
+            {
+                english=" Wow! Thank you, [CS:N]Chimecho[CR]!",
+                french=" Super! Merci, [CS:N]Eoko[CR]!",
+                german=" Wow! Danke, [CS:N]Palimpalim[CR]!",
+                italian=" Bene! Grazie, [CS:N]Chimecho[CR]!",
+                spanish=" ¡Qué bien! ¡Gracias, [CS:N]Chimecho[CR]!",
+            }
+    }
+    message_Close();
+    $PERFORMANCE_PROGRESS_LIST[5] = 1;
+    $PERFORMANCE_PROGRESS_LIST[29] = 1;
+    end;
+}

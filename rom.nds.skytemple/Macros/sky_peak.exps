@@ -588,7 +588,7 @@ macro PeakBlock() {
                         break;
                     default:   // Diet Ribbon x1
                         item_Set(0, 34, 0);
-                        message_Talk("[CN]The wounded [CS:K]Carnivine[CR] coughed up an\n[CN]intact [CS:I]Vile Seed[CR] during recovery!");
+                        message_Talk("[CN]The wounded [CS:K]Carnivine[CR] coughed up an\n[CN]intact [CS:I]Diet Ribbon[CR] during recovery!");
                         message_Mail("You got a dubiously sourced [s_item:0]!");
                         message_KeyWait();
                         message_Menu(MENU_GIVE_ITEM);

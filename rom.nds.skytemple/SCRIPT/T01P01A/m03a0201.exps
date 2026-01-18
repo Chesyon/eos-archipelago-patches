@@ -1,0 +1,105 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" The [CS:K]Kecleon[CR] Market isn\'t over\nthis way.",
+                french=" Ce n\'est pas le bon chemin pour\naller au [CS:K]Marché Kecleon[CR].",
+                german=" Der [CS:K]Kecleon-Markt[CR] liegt nicht in\ndieser Richtung.",
+                italian=" Il [CS:K]Kecleon[CR] Market non è da\nquesta parte.",
+                spanish=" El [CS:K]Bazar Kecleon[CR] no está por\nallí.",
+            }
+        case 2:
+            {
+                english=" The [CS:K]Kecleon[CR] Market isn\'t over\nthis way.",
+                french=" Ce n\'est pas le bon chemin pour\naller au [CS:K]Marché Kecleon[CR].",
+                german=" Der [CS:K]Kecleon-Markt[CR] liegt nicht in\ndieser Richtung.",
+                italian=" Il [CS:K]Kecleon[CR] Market non è da\nquesta parte.",
+                spanish=" El [CS:K]Bazar Kecleon[CR] no está por\nahí.",
+            }
+        default:
+            {
+                english=" The [CS:K]Kecleon[CR] Market isn\'t over\nthis way.",
+                french=" Ce n\'est pas le bon chemin pour\naller au [CS:K]Marché Kecleon[CR].",
+                german=" Der [CS:K]Kecleon-Markt[CR] liegt nicht in\ndieser Richtung.",
+                italian=" Il [CS:K]Kecleon[CR] Market non è da\nquesta parte.",
+                spanish=" El [CS:K]Bazar Kecleon[CR] no está por\nahí.",
+            }
+    }
+    message_Close();
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEOUTW);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" The [CS:K]Kecleon[CR] Market is this way.",
+                french=" Le [CS:K]Marché Kecleon[CR] est par là.",
+                german=" Zum [CS:K]Kecleon-Markt[CR] geht es da\nlang.",
+                italian=" Il [CS:K]Kecleon[CR] Market è da questa\nparte.",
+                spanish=" Al [CS:K]Bazar Kecleon[CR] se va por aquí.",
+            }
+        case 2:
+            {
+                english=" The [CS:K]Kecleon[CR] Market is this way.",
+                french=" Le [CS:K]Marché Kecleon[CR] est par là.",
+                german=" Zum [CS:K]Kecleon-Markt[CR] geht es da\nlang.",
+                italian=" Il [CS:K]Kecleon[CR] Market è da questa\nparte.",
+                spanish=" Al [CS:K]Bazar Kecleon[CR] se va por aquí.",
+            }
+        default:
+            {
+                english=" The [CS:K]Kecleon[CR] Market is this way.",
+                french=" Le [CS:K]Marché Kecleon[CR] est par là.",
+                german=" Zum [CS:K]Kecleon-Markt[CR] geht es da\nlang.",
+                italian=" Il [CS:K]Kecleon[CR] Market è da questa\nparte.",
+                spanish=" Al [CS:K]Bazar Kecleon[CR] se va por aquí.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s go, [hero]!",
+                french=" C\'est parti, [hero]!",
+                german=" Lass uns gehen, [hero]!",
+                italian=" Andiamo, [hero]!",
+                spanish=" ¡Vamos, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s go, [hero]!",
+                french=" C\'est parti, [hero]!",
+                german=" Lass uns gehen, [hero]!",
+                italian=" Andiamo, [hero]!",
+                spanish=" ¡Vamos, [hero]!",
+            }
+        default:
+            {
+                english=" Let\'s go, [hero]!",
+                french=" C\'est parti, [hero]!",
+                german=" Lass uns gehen, [hero]!",
+                italian=" Andiamo, [hero]!",
+                spanish=" ¡Vamos, [hero]!",
+            }
+    }
+    message_Close();
+    end;
+}

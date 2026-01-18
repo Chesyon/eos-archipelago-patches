@@ -1,0 +1,66 @@
+
+def 0 {
+    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+        case 0:
+        case 2:
+            §label_0;
+            switch ( $GROUND_ENTER ) {
+                case 324:
+                    §label_5;
+                    debug_Print('BGM_FADEOUT');
+                    bgm_FadeOut(60);
+                    §label_7;
+                    main_EnterGround(LEVEL_H01P99A, 30);
+                    hold;
+                case 222:
+                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
+                        jump @label_5;
+                    } else {
+                        jump @label_7;
+                    }
+                    break;
+                default:
+                    jump @label_7;
+            }
+            break;
+        default:
+            if ( scn($SCENARIO_MAIN) == [23, 2] ) {
+                debug_Print('BGM_FADEOUT');
+                bgm_FadeOut(60);
+                screen_FadeOutAll(0, 30);
+                screen2_FadeOut(1, 30);
+                WaitScreenFade();
+                WaitScreenFadeAll();
+                screen_FadeOut(1, 0);
+                screen_FadeInAll(1, 0);
+                supervision_ExecuteCommon(CORO_EVENT_M22_06);
+                §label_2;
+                debug_Print('BGM_FADEOUT');
+                bgm_FadeOut(60);
+                screen_FadeOut(0, 30);
+                supervision_ExecuteCommon(CORO_EVENT_S20_04_05);
+                §label_3;
+                screen_FadeOut(0, 30);
+                supervision_ExecuteCommon(CORO_EVENT_S21_02);
+                §label_4;
+                debug_Print('BGM_FADEOUT');
+                bgm_FadeOut(60);
+                screen_FadeOut(0, 30);
+                supervision_ExecuteCommon(CORO_EVENT_S23_01);
+                end;
+            } elseif ( scn($SCENARIO_MAIN) == [29, 71] ) {
+                jump @label_2;
+            } elseif ( scn($SCENARIO_MAIN) == [29, 78] ) {
+                jump @label_3;
+            } elseif ( scn($SCENARIO_MAIN) == [29, 80] || scn($SCENARIO_MAIN) == [29, 93] ) {
+                jump @label_4;
+            } else {
+                jump @label_0;
+            }
+            break;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    hold;
+}

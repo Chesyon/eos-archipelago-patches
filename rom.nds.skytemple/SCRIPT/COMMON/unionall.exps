@@ -90,6 +90,21 @@ coro TALK_ATTENDANT {
 }
 
 coro TALK_PARTNER_MESSAGE {
+    if (debug) {
+        if ($SIDE02_TALK[0]) {
+            supervision_ExecuteExportSub("PDEBUG");
+            if ($SIDE02_TALK[0]) {
+                return;
+            }
+            $SIDE02_TALK[0] = 1;
+        } else {
+            supervision_ExecuteExportSub("PDEBUG");
+            if ($SIDE02_TALK[0]) {
+                $SIDE02_TALK[0] = 0;
+                return;
+            }
+        }
+    }
     switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
         case 0:
             with (actor ACTOR_PLAYER_BIPPA) {

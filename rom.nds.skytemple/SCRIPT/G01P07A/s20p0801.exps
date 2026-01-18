@@ -1,0 +1,479 @@
+
+def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_G01P07A);
+    supervision_LoadStation(LEVEL_G01P07A, 'US20');
+    supervision_StationCommon(0);
+    supervision_Station(12);
+    supervision_Acting(0);
+    with (performer 0) {
+        camera_SetMyself();
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        SetPositionInitial();
+    }
+    with (actor ACTOR_NPC_SURIIPU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_NPC_RURIRI) {
+        SetAnimation(45);
+    }
+    screen_FadeIn(1, 30);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" ..................",
+        french=" ..................",
+        german=" ..................",
+        italian=" ..................",
+        spanish=" ...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_TOP_L_CENTER);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" How\'s it looking, [CS:N]Drowzee[CR]?",
+                french=" Alors, qu\'est-ce que tu en\npenses, [CS:N]Soporifik[CR]?",
+                german=" Wie sieht es aus, [CS:N]Traumato[CR]?",
+                italian=" Come sta andando, [CS:N]Drowzee[CR]?",
+                spanish=" ¿Qué te parece, [CS:N]Drowzee[CR]?",
+            }
+        case 2:
+            {
+                english=" How is it going, [CS:N]Drowzee[CR]?",
+                french=" Alors, qu\'est-ce que tu en\npenses, [CS:N]Soporifik[CR]?",
+                german=" Wie sieht es aus, [CS:N]Traumato[CR]?",
+                italian=" Come sta andando, [CS:N]Drowzee[CR]?",
+                spanish=" ¿Qué te parece, [CS:N]Drowzee[CR]?",
+            }
+        default:
+            {
+                english=" How is it going, [CS:N]Drowzee[CR]?",
+                french=" Alors, qu\'est-ce que tu en\npenses, [CS:N]Soporifik[CR]?",
+                german=" Wie sieht es aus, [CS:N]Traumato[CR]?",
+                italian=" Come sta andando, [CS:N]Drowzee[CR]?",
+                spanish=" ¿Qué te parece, [CS:N]Drowzee[CR]?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Are you getting anywhere?",
+                french=" Tu peux faire quelque chose?",
+                german=" Kommst du voran?",
+                italian=" Puoi fare qualcosa?",
+                spanish=" ¿Has conseguido algo?",
+            }
+        case 2:
+            {
+                english=" Can you do something?",
+                french=" Tu peux faire quelque chose?",
+                german=" Kannst du irgendetwas tun?",
+                italian=" Puoi fare qualcosa?",
+                spanish=" ¿Has podido hacer algo?",
+            }
+        default:
+            {
+                english=" Can you do something?",
+                french=" Tu peux faire quelque chose?",
+                german=" Kannst du irgendetwas tun?",
+                italian=" Puoi fare qualcosa?",
+                spanish=" ¿Has podido hacer algo?",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" ...[K]Oh, you two![K] I want you\nto get stocked up for an exploration.",
+        french=" ...[K] Oh, vous deux![K] Je veux que\nvous vous prépariez à une exploration.",
+        german=" ...[K]Oh, ihr beiden![K] Ich möchte,\ndass ihr euch für eine Erkundung ausrüstet.",
+        italian=" ...[K] Ah, voi due![K] Preparatevi\nper un\'esplorazione.",
+        spanish=" Bien...[K] ¡Aquí estáis![K]\nDebéis prepararos para una expedición.",
+    });
+    message_Talk({
+        english=" When you\'re all ready, I\'ll send\nyou on an exploration of...[K][CS:N]Azurill[CR]\'s dream.",
+        french=" Une fois que vous aurez fini\nvos préparatifs, je vous enverrai explorer...[K]\nle rêve d\'[CS:N]Azurill[CR].",
+        german=" Wenn ihr bereit seid, schicke ich\neuch auf eine Erkundung...[K] In den Traum von\n[CS:N]Azurill[CR].",
+        italian=" Quando sarà tutto pronto, vi\nmanderò a esplorare...[K] il sogno di [CS:N]Azurill[CR].",
+        spanish=" Cuando lo tengáis todo listo,\nos enviaré...[K] al sueño de [CS:N]Azurill[CR].",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8967);
+    with (actor ACTOR_PLAYER) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    Wait(5);
+    with (actor ACTOR_NPC_MARIRU) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Huh?![K] So that means...!",
+                french=" Hein?![K] Alors ça veut dire...!",
+                german=" Wie bitte?!?[K] Das bedeutet...",
+                italian=" Eh?![K] Quindi significa che...!",
+                spanish=" ¡¿Qué?![K] ¡Eso significa que...!",
+            }
+        case 2:
+            {
+                english=" What?![K] So that means...!",
+                french=" Hein?![K] Alors ça veut dire...!",
+                german=" Was?!?[K] Das bedeutet...",
+                italian=" Eh?![K] Quindi significa che...!",
+                spanish=" ¡¿Qué?![K] ¡Eso significa que...!",
+            }
+        default:
+            {
+                english=" What?![K] So that means...!",
+                french=" Hein?![K] Alors ça veut dire...!",
+                german=" Was?!?[K] Das bedeutet...",
+                italian=" Eh?![K] Quindi significa che...!",
+                spanish=" ¡¿Qué?![K] ¡Eso significa que...!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_SURIIPU) {
+        Turn2Direction(4, 10, DIR_UPLEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_SURIIPU);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" You guessed it.[K] It is possible to\nget into [CS:N]Azurill[CR]\'s dream.",
+        french=" Vous avez deviné.[K] Il est possible\nd\'aller dans le rêve d\'[CS:N]Azurill[CR].",
+        german=" Ihr habt es erraten.[K] Es ist\nmöglich, in den Traum von [CS:N]Azurill[CR]\nhineinzugelangen.",
+        italian=" Avete indovinato.[K] È possibile\nentrare nel sogno di [CS:N]Azurill[CR].",
+        spanish=" Pues sí.[K] Se puede penetrar\nen el sueño de [CS:N]Azurill[CR].",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_JUMP_ANGRY_FUNC_SERIES, 0);
+    }
+    bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_INSPIRED, FACE_POS_TOP_L_CENTER);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Yes!",
+                french=" Oui!",
+                german=" Ja!",
+                italian=" Sì!",
+                spanish=" ¡Estupendo!",
+            }
+        case 2:
+            {
+                english=" Yes!",
+                french=" Oui!",
+                german=" Ja!",
+                italian=" Sì!",
+                spanish=" ¡Bien!",
+            }
+        default:
+            {
+                english=" Yes!",
+                french=" Oui!",
+                german=" Ja!",
+                italian=" Sì!",
+                spanish=" ¡Bien!",
+            }
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_RIGHT);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_UPRIGHT);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2Direction(4, 10, DIR_LEFT);
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" [CS:N]Marill[CR]![K] We can tackle the\nmystery of the nightmare now!",
+                french=" [CS:N]Marill[CR]![K] Nous pouvons\nrésoudre le mystère du cauchemar!",
+                german=" [CS:N]Marill[CR]![K] Wir können jetzt\ndem Rätsel des Albtraums auf den Grund\ngehen!",
+                italian=" [CS:N]Marill[CR]![K] Adesso possiamo\nindagare sul mistero dell\'incubo!",
+                spanish=" ¡[CS:N]Marill[CR]![K] ¡Ahora podremos\nresolver el misterio de la pesadilla eterna!",
+            }
+        case 2:
+            {
+                english=" [CS:N]Marill[CR]![K] We can tackle the\nmystery of the unending nightmare now!",
+                french=" [CS:N]Marill[CR]![K] Nous pouvons\nrésoudre le mystère du cauchemar!",
+                german=" [CS:N]Marill[CR]![K] Wir können jetzt\ndem Rätsel des nicht enden wollenden\nAlbtraums auf den Grund gehen!",
+                italian=" [CS:N]Marill[CR]![K] Adesso possiamo\nindagare sul mistero dell\'incubo!",
+                spanish=" ¡[CS:N]Marill[CR]![K] ¡Ahora podremos\nresolver el misterio de la pesadilla eterna!",
+            }
+        default:
+            {
+                english=" [CS:N]Marill[CR]![K] We can tackle the\nmystery of the unending nightmare now!",
+                french=" [CS:N]Marill[CR]![K] Nous pouvons\nrésoudre le mystère du cauchemar!",
+                german=" [CS:N]Marill[CR]![K] Wir können jetzt\ndem Rätsel des nicht enden wollenden\nAlbtraums auf den Grund gehen!",
+                italian=" [CS:N]Marill[CR]![K] Adesso possiamo\nindagare sul mistero dell\'incubo!",
+                spanish=" ¡[CS:N]Marill[CR]![K] ¡Ahora podremos\nresolver el misterio de la pesadilla eterna!",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_NPC_MARIRU) {
+        ExecuteCommon(CORO_JUMP_HAPPY_FUNC_SERIES, 0);
+    }
+    WaitExecuteLives(ACTOR_NPC_MARIRU);
+    message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_TOP_R_CENTER);
+    message_Talk({
+        english=" Great!",
+        french=" Génial!",
+        german=" Klasse!",
+        italian=" Grandioso!",
+        spanish=" ¡Estupendo!",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" But I want you to be extra\ncareful when you\'re inside this kid\'s dream.",
+        french=" Mais je veux que vous fassiez\npreuve de prudence quand vous serez dans le\nrêve de ce garçon.",
+        german=" Aber ich will, dass ihr ganz\nbesonders vorsichtig seid, wenn ihr im Traum\ndes Kleinen seid.",
+        italian=" Ma voglio che facciate molta\nattenzione quando sarete all\'interno del sogno\ndel ragazzo.",
+        spanish=" Debéis andar con muchísimo\ncuidado.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_PLAYER) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2Direction(4, 10, DIR_DOWNRIGHT);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2Direction(4, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    message_Talk({
+        english=" There\'s something rotten about\nthis dream...[K] I have a feeling that something\nhas gone bad. Or gone wrong.",
+        french=" Il y a quelque chose de bizarre\ndans ce rêve...[K] J\'ai l\'impression que quelque\nchose a déraillé quelque part.",
+        german=" An dem Traum ist irgendwas\nfaul...[K] Ich glaube, da läuft irgendetwas\nverkehrt.",
+        italian=" C\'è qualcosa che non mi \nconvince...[K] Ho la sensazione che qualcosa sia\nandato storto con questo sogno.",
+        spanish=" Algo va mal en su sueño...[K]\nCreo que ha ocurrido algo malo.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_SAD, FACE_POS_TOP_L_CENTER);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Urk...[K] Is that right...?",
+                french=" Hein...[K] vraiment...?",
+                german=" Uff...[K] Stimmt das?",
+                italian=" Uh...[K] Dici davvero...?",
+                spanish=" Glup...[K] ¿De verdad?",
+            }
+        case 2:
+            {
+                english=" Urk...[K] Is that right...?",
+                french=" Hein...[K] vraiment...?",
+                german=" Uff...[K] Stimmt das?",
+                italian=" Uh...[K] Dici davvero...?",
+                spanish=" Glup...[K] ¿De verdad?",
+            }
+        default:
+            {
+                english=" Urk...[K] Is that right...?",
+                french=" Hein...[K] vraiment...?",
+                german=" Uff...[K] Stimmt das?",
+                italian=" Uh...[K] Dici davvero...?",
+                spanish=" Glup...[K] ¿De verdad?",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" All right. We\'ll be careful.",
+                french=" D\'accord. Nous ferons attention.",
+                german=" Alles klar. Wir werden\nvorsichtig sein.",
+                italian=" Ok. Staremo in guardia.",
+                spanish=" Muy bien. Tendremos cuidado.",
+            }
+        case 2:
+            {
+                english=" OK. We\'ll be on our guard.",
+                french=" D\'accord. Nous ferons attention.",
+                german=" Okay, wir werden auf der Hut\nsein.",
+                italian=" Ok. Staremo in guardia.",
+                spanish=" Muy bien. Tendremos cuidado.",
+            }
+        default:
+            {
+                english=" OK. We\'ll be careful.",
+                french=" D\'accord. Nous ferons attention.",
+                german=" Okay. Wir werden\nvorsichtig sein.",
+                italian=" Ok. Staremo in guardia.",
+                spanish=" Muy bien. Iremos con cuidado.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_NPC_SURIIPU, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk({
+        english=" One more thing.[K] I want only you\ntwo to enter the dream.",
+        french=" Une chose encore.[K] Vous ne serez\nque deux dans ce rêve.",
+        german=" Noch eine Sache.[K] Ich möchte,\ndass nur ihr beiden in den Traum geht.",
+        italian=" Un\'altra cosa.[K] Voglio che solo\nvoi due entriate nel sogno.",
+        spanish=" Otra cosa...[K]\nNadie más entrará en el sueño.",
+    });
+    message_Talk({
+        english=" I\'d prefer to go as well, but...",
+        french=" J\'aurais préféré venir mais...",
+        german=" Ich würde gerne selber\nmitkommen...",
+        italian=" Preferirei venire anch\'io, ma...",
+        spanish=" Me gustaría ir también, pero...",
+    });
+    message_Talk({
+        english=" In all honesty, at my skill level,\nI think I\'d slow you down too much.",
+        french=" ... en toute sincérité, à mon\nniveau, je ne ferais que vous ralentir.",
+        german=" Aber um ehrlich zu sein, bei dem\nStand meiner Fähigkeiten würde ich euch nur\naufhalten.",
+        italian=" Penso che, visto il mio\nlivello, vi rallenterei troppo.",
+        spanish=" Para seros sincero, con mi\nnivel, solo os ralentizaría.",
+    });
+    message_Talk({
+        english=" I\'m sorry I couldn\'t do more for\nyou, but...",
+        french=" Désolé de ne pas pouvoir faire\nplus pour vous aider...",
+        german=" Tut mir leid, dass ich nicht mehr\nfür euch tun kann...",
+        italian=" Mi spiace non poter fare di\npiù, ma...",
+        spanish=" Lamento no poder ayudaros\nmás...",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Don\'t be silly.[K] You\'re doing\nplenty, sending us into the dream.",
+                french=" Ne dis pas de bêtises.[K] Tu en fais\nénormément en nous envoyant dans ce rêve.",
+                german=" Sei nicht albern.[K] Du tust schon\nso viel für uns, indem du uns in den Traum\nhineinschickst.",
+                italian=" Non essere sciocco.[K] Stai già \nfacendo molto. Grazie a te riusciremo a \nentrare nel sogno.",
+                spanish=" No te preocupes.[K] Con enviarnos\na su sueño estás haciendo más que de sobra.",
+            }
+        case 2:
+            {
+                english=" No, there\'s no need for that![K]\nSending us into the dream is more than enough!",
+                french=" Ne dis pas de bêtises.[K] Tu en fais\nénormément en nous envoyant dans ce rêve.",
+                german=" Nein, dazu gibt es keinen\nAnlass![K] Uns in den Traum zu schicken,\nist Hilfe genug!",
+                italian=" No, non devi scusarti.[K] Farci \nentrare nel sogno è già molto!",
+                spanish=" No te preocupes.[K] Con enviarnos\na su sueño estás haciendo más que de sobra.",
+            }
+        default:
+            {
+                english=" No, you\'re great.[K] Just sending us\ninto the dream is plenty.",
+                french=" Ne dis pas de bêtises.[K] Tu en fais\ndéjà énormément en nous envoyant dans\nce rêve.",
+                german=" Nein, du bist klasse.[K] Uns ist\ndadurch genug geholfen, dass du uns in den\nTraum schickst.",
+                italian=" No, sei grandioso.[K] Grazie a te\nriusciremo a entrare nel sogno.",
+                spanish=" No te preocupes.[K] Con enviarnos\na su sueño estás haciendo más que de sobra.",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Thanks, [CS:N]Drowzee[CR].[K] We\'ll get\nready to go.",
+                french=" Merci, [CS:N]Soporifik[CR].[K] Nous allons\nnous préparer.",
+                german=" Danke, [CS:N]Traumato[CR].[K] Wir machen\nuns bereit zu gehen.",
+                italian=" Grazie, [CS:N]Drowzee[CR].[K] Noi andiamo a\nprepararci.",
+                spanish=" Gracias, [CS:N]Drowzee[CR].[K] Iremos a\nprepararnos.",
+            }
+        case 2:
+            {
+                english=" Thank you, [CS:N]Drowzee[CR].[K] We\'ll get\nready to go.",
+                french=" Merci, [CS:N]Soporifik[CR].[K] Nous allons\nnous préparer.",
+                german=" Danke dir, [CS:N]Traumato[CR].[K] Wir\nmachen uns bereit zu gehen.",
+                italian=" Grazie, [CS:N]Drowzee[CR].[K] Noi andiamo a\nprepararci.",
+                spanish=" Gracias, [CS:N]Drowzee[CR].[K] Iremos a\nprepararnos.",
+            }
+        default:
+            {
+                english=" Thank you, [CS:N]Drowzee[CR].[K] We\'ll get\nready to go.",
+                french=" Merci, [CS:N]Soporifik[CR].[K] Nous allons\nnous préparer.",
+                german=" Danke dir, [CS:N]Traumato[CR].[K] Wir\nmachen uns bereit zu gehen.",
+                italian=" Grazie, [CS:N]Drowzee[CR].[K] Noi andiamo a\nprepararci.",
+                spanish=" Gracias, [CS:N]Drowzee[CR].[K] Iremos a\nprepararnos.",
+            }
+    }
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    with (actor ACTOR_NPC_MARIRU) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" Let\'s move, [hero]!",
+                french=" Allons-y, [hero]!",
+                german=" Gehen wir, [hero]!",
+                italian=" Muoviamoci, [hero]!",
+                spanish=" ¡En marcha, [hero]!",
+            }
+        case 2:
+            {
+                english=" Let\'s hustle, [hero]!",
+                french=" Allons-y, [hero]!",
+                german=" Los geht\'s, [hero]!",
+                italian=" Muoviamoci, [hero]!",
+                spanish=" ¡En marcha, [hero]!",
+            }
+        default:
+            {
+                english=" Let\'s get moving, [hero]!",
+                french=" Allons-y, [hero]!",
+                german=" Ab dafür, [hero]!",
+                italian=" Muoviamoci, [hero]!",
+                spanish=" ¡En marcha, [hero]!",
+            }
+    }
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" We\'ll come back as soon as we\nget ready!",
+                french=" Nous reviendrons quand nous\naurons fini nos préparatifs!",
+                german=" Wir kommen zurück, sobald wir\nbereit sind!",
+                italian=" Torneremo non appena\nsarà tutto pronto!",
+                spanish=" ¡Volveremos en cuanto estemos\nlistos!",
+            }
+        case 2:
+            {
+                english=" We\'ll be back as soon as we\nget ready!",
+                french=" Nous reviendrons quand nous\naurons fini nos préparatifs!",
+                german=" Wir kommen zurück, sobald wir\nbereit sind!",
+                italian=" Torneremo non appena\nsarà tutto pronto!",
+                spanish=" ¡Volveremos en cuanto estemos\nlistos!",
+            }
+        default:
+            {
+                english=" We\'ll come back as soon as we\nget ready!",
+                french=" Nous reviendrons quand nous\naurons fini nos préparatifs!",
+                german=" Wir kommen zurück, sobald wir\nbereit sind!",
+                italian=" Torneremo non appena\nsarà tutto pronto!",
+                spanish=" ¡Volveremos en cuanto nos\nhayamos preparado!",
+            }
+    }
+    message_Close();
+    end;
+}
