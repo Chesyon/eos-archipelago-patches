@@ -1,0 +1,27 @@
+// Duplicate file group
+// Shuppet
+// - SCRIPT/D73P11A/us3123.exps
+// - SCRIPT/D73P21A/us3101.exps
+// - SCRIPT/D73P21A/us3102.exps
+// - SCRIPT/D73P26A/us3102.exps
+// - SCRIPT/G01P03A/um0402.exps
+// - SCRIPT/G01P03A/um1310.exps
+// - SCRIPT/G01P03A/um1402.exps
+// - SCRIPT/G01P03A/um2102.exps
+// - SCRIPT/P01P04A/um1105.exps
+// - SCRIPT/P01P04A/us3110.exps
+// - SCRIPT/P01P04A/us3117.exps
+// - SCRIPT/T01P01A/us2009.exps
+// - SCRIPT/T01P01A/us2012.exps
+// - SCRIPT/T01P01A/us2304.exps
+// - SCRIPT/T01P02A/um0303.exps
+// - SCRIPT/T01P02A/um0307.exps
+// - SCRIPT/T01P02A/um1410.exps
+// - SCRIPT/T01P02A/um1505.exps
+// - SCRIPT/T01P02A/us0208.exps
+// - SCRIPT/T01P02A/us0302.exps
+
+import 'subscripts/shuppet.exps;'
+def 0 {
+    ~ShuppetMain();
+}

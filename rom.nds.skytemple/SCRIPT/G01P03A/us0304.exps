@@ -1,0 +1,25 @@
+// Duplicate file group
+// Scyther
+// - SCRIPT/D73P23A/us3105.exps
+// - SCRIPT/G01P03A/um1110.exps
+// - SCRIPT/G01P03A/um1115.exps
+// - SCRIPT/G01P03A/um1313.exps
+// - SCRIPT/G01P03A/um1405.exps
+// - SCRIPT/G01P03A/us0207.exps
+// - SCRIPT/G01P03A/us0304.exps
+// - SCRIPT/P01P04A/um0602.exps
+// - SCRIPT/P01P04A/um0706.exps
+// - SCRIPT/P01P04A/um0713.exps
+// - SCRIPT/P01P04A/us3115.exps
+// - SCRIPT/T01P01A/um0502.exps
+// - SCRIPT/T01P02A/um1604.exps
+// - SCRIPT/T01P02A/um2108.exps
+// - SCRIPT/T01P02A/um2113.exps
+// - SCRIPT/T01P02A/um2402.exps
+// - SCRIPT/T01P02A/um2502.exps
+// - SCRIPT/T01P02A/us0306.exps
+
+import 'subscripts/scyther.exps;'
+def 0 {
+    ~ScytherMain();
+}

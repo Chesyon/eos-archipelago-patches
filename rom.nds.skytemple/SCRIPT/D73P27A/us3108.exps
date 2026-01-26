@@ -1,0 +1,29 @@
+// Duplicate file group
+// Zigzagoon
+// - SCRIPT/D73P22A/us3102.exps
+// - SCRIPT/D73P24A/us3102.exps
+// - SCRIPT/D73P27A/us3108.exps
+// - SCRIPT/D73P31A/us0202.exps
+// - SCRIPT/D73P31A/us0302.exps
+// - SCRIPT/D73P31A/us0402.exps
+// - SCRIPT/P01P04A/um0608.exps
+// - SCRIPT/P01P04A/um0704.exps
+// - SCRIPT/P01P04A/um0715.exps
+// - SCRIPT/P01P04A/um0722.exps
+// - SCRIPT/P01P04A/um0804.exps
+// - SCRIPT/P01P04A/um1103.exps
+// - SCRIPT/P01P04A/um1203.exps
+// - SCRIPT/P01P04A/um2105.exps
+// - SCRIPT/P01P04A/um2205.exps
+// - SCRIPT/P01P04A/um2305.exps
+// - SCRIPT/P01P04A/us0104.exps
+// - SCRIPT/P01P04A/us2004.exps
+// - SCRIPT/P01P04A/us2104.exps
+// - SCRIPT/P01P04A/us2204.exps
+// - SCRIPT/P01P04A/us2304.exps
+// - SCRIPT/P01P04A/us3106.exps
+
+import 'subscripts/zigzagoon.exps;'
+def 0 {
+    ~ZigzagoonMain();
+}

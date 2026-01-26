@@ -1,0 +1,10 @@
+// Duplicate file group
+// Koffing
+// - SCRIPT/G01P03A/um0606.exps
+// - SCRIPT/G01P06A/um0703.exps
+// - SCRIPT/T01P02A/um0811.exps
+
+import 'subscripts/koffing.exps;'
+def 0 {
+    ~KoffingMain();
+}

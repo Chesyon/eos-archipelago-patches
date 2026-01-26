@@ -1,0 +1,27 @@
+// Duplicate file group
+// Teddiursa
+// - SCRIPT/T01P01A/um0321.exps
+// - SCRIPT/T01P01A/um0601.exps
+// - SCRIPT/T01P01A/um0605.exps
+// - SCRIPT/T01P01A/um0705.exps
+// - SCRIPT/T01P01A/um0801.exps
+// - SCRIPT/T01P01A/um1103.exps
+// - SCRIPT/T01P01A/um1201.exps
+// - SCRIPT/T01P01A/um1203.exps
+// - SCRIPT/T01P01A/um1301.exps
+// - SCRIPT/T01P01A/um1310.exps
+// - SCRIPT/T01P01A/um1313.exps
+// - SCRIPT/T01P01A/um1316.exps
+// - SCRIPT/T01P01A/um1401.exps
+// - SCRIPT/T01P01A/um1601.exps
+// - SCRIPT/T01P01A/um1607.exps
+// - SCRIPT/T01P01A/um2102.exps
+// - SCRIPT/T01P01A/um2107.exps
+// - SCRIPT/T01P01A/um2401.exps
+// - SCRIPT/T01P01A/um2501.exps
+// - SCRIPT/T01P02A/um2203.exps
+
+import 'subscripts/teddiursa.exps;'
+def 0 {
+    ~TeddiursaMain();
+}

@@ -1,0 +1,24 @@
+// Duplicate file group
+// Wurmple
+// - SCRIPT/D01P11A/us0404.exps
+// - SCRIPT/G01P03A/um0318.exps
+// - SCRIPT/G01P03A/um2404.exps
+// - SCRIPT/G01P03A/um2504.exps
+// - SCRIPT/P01P04A/um1205.exps
+// - SCRIPT/P01P04A/us3120.exps
+// - SCRIPT/T01P01A/um0313.exps
+// - SCRIPT/T01P01A/um0319.exps
+// - SCRIPT/T01P01A/um0404.exps
+// - SCRIPT/T01P01A/us0305.exps
+// - SCRIPT/T01P01A/us2214.exps
+// - SCRIPT/T01P02A/um1317.exps
+// - SCRIPT/T01P02A/um1403.exps
+// - SCRIPT/T01P02A/um1607.exps
+// - SCRIPT/T01P02A/us0111.exps
+// - SCRIPT/T01P02A/us0203.exps
+// - SCRIPT/T01P02A/us3103.exps
+
+import 'subscripts/wurmple.exps;'
+def 0 {
+    ~WurmpleMain();
+}

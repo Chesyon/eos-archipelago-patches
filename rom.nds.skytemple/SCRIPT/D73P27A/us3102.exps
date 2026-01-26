@@ -1,0 +1,16 @@
+// Duplicate file group
+// Sneasel
+// - SCRIPT/D73P11A/us3103.exps
+// - SCRIPT/D73P21A/us3108.exps
+// - SCRIPT/D73P23A/us3106.exps
+// - SCRIPT/D73P27A/us3102.exps
+// - SCRIPT/D73P28A/us3105.exps
+// - SCRIPT/P01P04A/um1106.exps
+// - SCRIPT/P01P04A/um1406.exps
+// - SCRIPT/P01P04A/um1506.exps
+// - SCRIPT/P01P04A/um1604.exps
+
+import 'subscripts/sneasel.exps;'
+def 0 {
+    ~SneaselMain();
+}

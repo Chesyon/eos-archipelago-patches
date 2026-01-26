@@ -1,20 +1,42 @@
 // Duplicate file group
-// Camerupt
-// - SCRIPT/G01P03A/um0504.exps
-// - SCRIPT/G01P03A/um1409.exps
-// - SCRIPT/G01P03A/um1506.exps
-// - SCRIPT/G01P03A/um1608.exps
-// - SCRIPT/G01P03A/us2208.exps
-// - SCRIPT/T01P01A/um2407.exps
-// - SCRIPT/T01P01A/um2507.exps
-// - SCRIPT/T01P02A/um1305.exps
-// - SCRIPT/T01P02A/um1309.exps
-// - SCRIPT/T01P02A/um1313.exps
-// - SCRIPT/T01P02A/us0104.exps
-// - SCRIPT/T01P02A/us0408.exps
-// - SCRIPT/T01P02A/us2004.exps
+// Torkoal
+// - SCRIPT/P02P01A/um0604.exps
+// - SCRIPT/P02P01A/um0607.exps
+// - SCRIPT/P02P01A/um0703.exps
+// - SCRIPT/P02P01A/um0706.exps
+// - SCRIPT/P02P01A/um0709.exps
+// - SCRIPT/P02P01A/um1103.exps
+// - SCRIPT/P02P01A/um1106.exps
+// - SCRIPT/P02P01A/um1109.exps
+// - SCRIPT/P02P01A/um1201.exps
+// - SCRIPT/P02P01A/um1204.exps
+// - SCRIPT/P02P01A/um1303.exps
+// - SCRIPT/P02P01A/um1306.exps
+// - SCRIPT/P02P01A/um1309.exps
+// - SCRIPT/P02P01A/um1401.exps
+// - SCRIPT/P02P01A/um1404.exps
+// - SCRIPT/P02P01A/um1407.exps
+// - SCRIPT/P02P01A/um1501.exps
+// - SCRIPT/P02P01A/um1601.exps
+// - SCRIPT/P02P01A/um1604.exps
+// - SCRIPT/P02P01A/um2101.exps
+// - SCRIPT/P02P01A/um2401.exps
+// - SCRIPT/P02P01A/um2501.exps
+// - SCRIPT/P02P01A/us0101.exps
+// - SCRIPT/P02P01A/us0201.exps
+// - SCRIPT/P02P01A/us0204.exps
+// - SCRIPT/P02P01A/us0301.exps
+// - SCRIPT/P02P01A/us0304.exps
+// - SCRIPT/P02P01A/us0401.exps
+// - SCRIPT/P02P01A/us2001.exps
+// - SCRIPT/P02P01A/us2004.exps
+// - SCRIPT/P02P01A/us2007.exps
+// - SCRIPT/P02P01A/us2101.exps
+// - SCRIPT/P02P01A/us2201.exps
+// - SCRIPT/P02P01A/us2204.exps
+// - SCRIPT/P02P01A/us3101.exps
 
-import subscripts/camerupt.exps;
+import 'subscripts/torkoal.exps;'
 def 0 {
-    ~CameruptMain();
+    ~TorkoalMain();
 }

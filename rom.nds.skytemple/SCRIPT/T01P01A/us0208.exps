@@ -1,0 +1,19 @@
+// Duplicate file group
+// Ursaring Evo
+// - SCRIPT/T01P01A/us0113.exps
+// - SCRIPT/T01P01A/us0202.exps
+// - SCRIPT/T01P01A/us0208.exps
+// - SCRIPT/T01P01A/us0303.exps
+// - SCRIPT/T01P01A/us0307.exps
+// - SCRIPT/T01P01A/us0309.exps
+// - SCRIPT/T01P01A/us0402.exps
+// - SCRIPT/T01P01A/us2102.exps
+// - SCRIPT/T01P01A/us2202.exps
+// - SCRIPT/T01P01A/us2211.exps
+// - SCRIPT/T01P01A/us2306.exps
+// - SCRIPT/T01P01A/us3106.exps
+
+import 'subscripts/ursaring_evo.exps;'
+def 0 {
+    ~Ursaring_EvoMain();
+}

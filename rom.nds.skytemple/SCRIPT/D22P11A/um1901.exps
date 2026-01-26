@@ -1,0 +1,19 @@
+// Duplicate file group
+// Grovyle
+// - SCRIPT/D01P11A/um2401.exps
+// - SCRIPT/D22P11A/um1901.exps
+// - SCRIPT/D22P11A/um1902.exps
+// - SCRIPT/D23P11A/um1901.exps
+// - SCRIPT/D23P11A/um1903.exps
+// - SCRIPT/D24P11A/um2001.exps
+// - SCRIPT/D24P11A/um2002.exps
+// - SCRIPT/D27P11A/um2402.exps
+// - SCRIPT/D27P11A/um2404.exps
+// - SCRIPT/D28P21A/um2401.exps
+// - SCRIPT/D28P21A/um2402.exps
+// - SCRIPT/D28P21A/um2403.exps
+
+import 'subscripts/grovyle.exps;'
+def 0 {
+    ~GrovyleMain();
+}

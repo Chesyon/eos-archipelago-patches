@@ -7,7 +7,7 @@
 // - SCRIPT/T01P01A/us2005.exps
 // - SCRIPT/T01P02A/um0405.exps
 
-import subscripts/drapion.exps;
+import 'subscripts/drapion.exps;'
 def 0 {
     ~DrapionMain();
 }

@@ -1,0 +1,18 @@
+// Duplicate file group
+// Slowpoke
+// - SCRIPT/G01P03A/um0506.exps
+// - SCRIPT/G01P03A/um2204.exps
+// - SCRIPT/P01P04A/us0201.exps
+// - SCRIPT/P01P04A/us0305.exps
+// - SCRIPT/T01P01A/um0603.exps
+// - SCRIPT/T01P01A/um1109.exps
+// - SCRIPT/T01P01A/um1112.exps
+// - SCRIPT/T01P02A/um0605.exps
+// - SCRIPT/T01P02A/um1318.exps
+// - SCRIPT/T01P02A/um1404.exps
+// - SCRIPT/T01P02A/us2307.exps
+
+import 'subscripts/slowpoke.exps;'
+def 0 {
+    ~SlowpokeMain();
+}

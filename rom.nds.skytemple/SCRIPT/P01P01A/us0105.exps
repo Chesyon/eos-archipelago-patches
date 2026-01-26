@@ -1,0 +1,13 @@
+// Duplicate file group
+// Weavile
+// - SCRIPT/G01P03A/um1104.exps
+// - SCRIPT/P01P01A/us0105.exps
+// - SCRIPT/P01P01A/us3101.exps
+// - SCRIPT/T01P01A/us0412.exps
+// - SCRIPT/T01P01A/us2003.exps
+// - SCRIPT/T01P02A/um0403.exps
+
+import 'subscripts/weavile.exps;'
+def 0 {
+    ~WeavileMain();
+}

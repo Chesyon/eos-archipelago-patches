@@ -14,7 +14,7 @@
 // - SCRIPT/T01P02A/us0408.exps
 // - SCRIPT/T01P02A/us2004.exps
 
-import subscripts/camerupt.exps;
+import 'subscripts/camerupt.exps;'
 def 0 {
     ~CameruptMain();
 }

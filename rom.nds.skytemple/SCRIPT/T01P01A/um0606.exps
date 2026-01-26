@@ -1,0 +1,38 @@
+// Duplicate file group
+// Ursaring Norm
+// - SCRIPT/T01P01A/um0320.exps
+// - SCRIPT/T01P01A/um0602.exps
+// - SCRIPT/T01P01A/um0606.exps
+// - SCRIPT/T01P01A/um0802.exps
+// - SCRIPT/T01P01A/um1104.exps
+// - SCRIPT/T01P01A/um1202.exps
+// - SCRIPT/T01P01A/um1204.exps
+// - SCRIPT/T01P01A/um1302.exps
+// - SCRIPT/T01P01A/um1311.exps
+// - SCRIPT/T01P01A/um1314.exps
+// - SCRIPT/T01P01A/um1317.exps
+// - SCRIPT/T01P01A/um1402.exps
+// - SCRIPT/T01P01A/um1602.exps
+// - SCRIPT/T01P01A/um1609.exps
+// - SCRIPT/T01P01A/um2103.exps
+// - SCRIPT/T01P01A/um2108.exps
+// - SCRIPT/T01P01A/um2402.exps
+// - SCRIPT/T01P01A/um2502.exps
+// - SCRIPT/T01P01A/us0109.exps
+// - SCRIPT/T01P01A/us0201.exps
+// - SCRIPT/T01P01A/us0207.exps
+// - SCRIPT/T01P01A/us0302.exps
+// - SCRIPT/T01P01A/us0306.exps
+// - SCRIPT/T01P01A/us0308.exps
+// - SCRIPT/T01P01A/us0401.exps
+// - SCRIPT/T01P01A/us2101.exps
+// - SCRIPT/T01P01A/us2201.exps
+// - SCRIPT/T01P01A/us2210.exps
+// - SCRIPT/T01P01A/us2301.exps
+// - SCRIPT/T01P01A/us3102.exps
+// - SCRIPT/T01P02A/um2204.exps
+
+import 'subscripts/ursaring_norm.exps;'
+def 0 {
+    ~Ursaring_NormMain();
+}

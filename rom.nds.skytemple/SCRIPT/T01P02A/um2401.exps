@@ -1,0 +1,25 @@
+// Duplicate file group
+// Zangoose
+// - SCRIPT/D73P23A/us3103.exps
+// - SCRIPT/G01P03A/um1109.exps
+// - SCRIPT/G01P03A/um1114.exps
+// - SCRIPT/G01P03A/um1312.exps
+// - SCRIPT/G01P03A/um1404.exps
+// - SCRIPT/G01P03A/us0206.exps
+// - SCRIPT/G01P03A/us0303.exps
+// - SCRIPT/P01P04A/um0601.exps
+// - SCRIPT/P01P04A/um0705.exps
+// - SCRIPT/P01P04A/um0712.exps
+// - SCRIPT/P01P04A/us3114.exps
+// - SCRIPT/T01P01A/um0501.exps
+// - SCRIPT/T01P02A/um1603.exps
+// - SCRIPT/T01P02A/um2107.exps
+// - SCRIPT/T01P02A/um2112.exps
+// - SCRIPT/T01P02A/um2401.exps
+// - SCRIPT/T01P02A/um2501.exps
+// - SCRIPT/T01P02A/us0305.exps
+
+import 'subscripts/zangoose.exps;'
+def 0 {
+    ~ZangooseMain();
+}

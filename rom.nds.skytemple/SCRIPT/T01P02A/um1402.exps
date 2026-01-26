@@ -1,0 +1,22 @@
+// Duplicate file group
+// Swellow
+// - SCRIPT/D01P11A/us0403.exps
+// - SCRIPT/G01P03A/um0317.exps
+// - SCRIPT/G01P03A/um2503.exps
+// - SCRIPT/P01P04A/um1204.exps
+// - SCRIPT/P01P04A/us3119.exps
+// - SCRIPT/T01P01A/um0312.exps
+// - SCRIPT/T01P01A/um0318.exps
+// - SCRIPT/T01P01A/um0403.exps
+// - SCRIPT/T01P01A/us2213.exps
+// - SCRIPT/T01P02A/um1316.exps
+// - SCRIPT/T01P02A/um1402.exps
+// - SCRIPT/T01P02A/um1608.exps
+// - SCRIPT/T01P02A/us0110.exps
+// - SCRIPT/T01P02A/us0204.exps
+// - SCRIPT/T01P02A/us3102.exps
+
+import 'subscripts/swellow.exps;'
+def 0 {
+    ~SwellowMain();
+}

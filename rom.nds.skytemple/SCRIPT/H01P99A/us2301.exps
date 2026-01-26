@@ -4,7 +4,7 @@
 // - SCRIPT/H01P99A/us2202.exps
 // - SCRIPT/H01P99A/us2301.exps
 
-import subscripts/cresselia.exps;
+import 'subscripts/cresselia.exps;'
 def 0 {
     ~CresseliaMain();
 }

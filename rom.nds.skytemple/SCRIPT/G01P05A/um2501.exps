@@ -1,0 +1,53 @@
+// Duplicate file group
+// Wigglytuff
+// - SCRIPT/D08P11A/um0902.exps
+// - SCRIPT/G01P03A/um1302.exps
+// - SCRIPT/G01P03A/um1305.exps
+// - SCRIPT/G01P04A/um1404.exps
+// - SCRIPT/G01P04A/us0401.exps
+// - SCRIPT/G01P04A/us2007.exps
+// - SCRIPT/G01P05A/um0301.exps
+// - SCRIPT/G01P05A/um0302.exps
+// - SCRIPT/G01P05A/um0303.exps
+// - SCRIPT/G01P05A/um0401.exps
+// - SCRIPT/G01P05A/um0501.exps
+// - SCRIPT/G01P05A/um0601.exps
+// - SCRIPT/G01P05A/um0602.exps
+// - SCRIPT/G01P05A/um0603.exps
+// - SCRIPT/G01P05A/um0701.exps
+// - SCRIPT/G01P05A/um0702.exps
+// - SCRIPT/G01P05A/um0801.exps
+// - SCRIPT/G01P05A/um1101.exps
+// - SCRIPT/G01P05A/um1102.exps
+// - SCRIPT/G01P05A/um1103.exps
+// - SCRIPT/G01P05A/um1201.exps
+// - SCRIPT/G01P05A/um1202.exps
+// - SCRIPT/G01P05A/um1301.exps
+// - SCRIPT/G01P05A/um1302.exps
+// - SCRIPT/G01P05A/um1401.exps
+// - SCRIPT/G01P05A/um1501.exps
+// - SCRIPT/G01P05A/um1502.exps
+// - SCRIPT/G01P05A/um1601.exps
+// - SCRIPT/G01P05A/um1602.exps
+// - SCRIPT/G01P05A/um2101.exps
+// - SCRIPT/G01P05A/um2201.exps
+// - SCRIPT/G01P05A/um2202.exps
+// - SCRIPT/G01P05A/um2401.exps
+// - SCRIPT/G01P05A/um2501.exps
+// - SCRIPT/G01P05A/us0101.exps
+// - SCRIPT/G01P05A/us0201.exps
+// - SCRIPT/G01P05A/us0202.exps
+// - SCRIPT/G01P05A/us0301.exps
+// - SCRIPT/G01P05A/us0302.exps
+// - SCRIPT/G01P05A/us0401.exps
+// - SCRIPT/G01P05A/us0402.exps
+// - SCRIPT/G01P05A/us2001.exps
+// - SCRIPT/G01P05A/us2101.exps
+// - SCRIPT/G01P05A/us2201.exps
+// - SCRIPT/G01P05A/us2202.exps
+// - SCRIPT/G01P07A/us2002.exps
+
+import 'subscripts/wigglytuff.exps;'
+def 0 {
+    ~WigglytuffMain();
+}

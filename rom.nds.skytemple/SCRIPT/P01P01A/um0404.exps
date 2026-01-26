@@ -1,27 +1,10 @@
 // Duplicate file group
-// Azurill
-// - SCRIPT/G01P01A/um1202.exps
-// - SCRIPT/G01P07A/us2004.exps
-// - SCRIPT/G01P07A/us2007.exps
-// - SCRIPT/G01P07A/us2102.exps
-// - SCRIPT/T01P01A/um0402.exps
-// - SCRIPT/T01P01A/um0804.exps
-// - SCRIPT/T01P01A/um2105.exps
-// - SCRIPT/T01P01A/um2110.exps
-// - SCRIPT/T01P01A/um2405.exps
-// - SCRIPT/T01P01A/um2505.exps
-// - SCRIPT/T01P01A/us0104.exps
-// - SCRIPT/T01P01A/us0110.exps
-// - SCRIPT/T01P01A/us0204.exps
-// - SCRIPT/T01P01A/us3103.exps
-// - SCRIPT/T01P02A/um1409.exps
-// - SCRIPT/T01P02A/um1502.exps
-// - SCRIPT/T01P02A/us2203.exps
-// - SCRIPT/T01P02A/us2208.exps
-// - SCRIPT/T01P02A/us2302.exps
+// Wobbuffet
+// - SCRIPT/P01P01A/um0404.exps
+// - SCRIPT/P01P04A/um0726.exps
+// - SCRIPT/P01P04A/us3113.exps
 
-import subscripts/azurill.exps;
+import 'subscripts/wobbuffet.exps;'
 def 0 {
-
-    ~AzurillMain();
+    ~WobbuffetMain();
 }

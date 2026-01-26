@@ -1,0 +1,26 @@
+// Duplicate file group
+// Sandslash
+// - SCRIPT/D73P23A/us3104.exps
+// - SCRIPT/D73P26A/us3107.exps
+// - SCRIPT/G01P03A/um1111.exps
+// - SCRIPT/G01P03A/um1116.exps
+// - SCRIPT/G01P03A/um1314.exps
+// - SCRIPT/G01P03A/um1406.exps
+// - SCRIPT/G01P03A/us0208.exps
+// - SCRIPT/G01P03A/us0305.exps
+// - SCRIPT/P01P04A/um0603.exps
+// - SCRIPT/P01P04A/um0707.exps
+// - SCRIPT/P01P04A/um0714.exps
+// - SCRIPT/P01P04A/us3116.exps
+// - SCRIPT/T01P01A/um0503.exps
+// - SCRIPT/T01P02A/um1605.exps
+// - SCRIPT/T01P02A/um2109.exps
+// - SCRIPT/T01P02A/um2114.exps
+// - SCRIPT/T01P02A/um2403.exps
+// - SCRIPT/T01P02A/um2503.exps
+// - SCRIPT/T01P02A/us0307.exps
+
+import 'subscripts/sandslash.exps;'
+def 0 {
+    ~SandslashMain();
+}

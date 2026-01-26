@@ -1,50 +1,15 @@
 // Duplicate file group
-// Chimecho
-// - SCRIPT/G01P03A/um0502.exps
-// - SCRIPT/G01P03A/um0602.exps
-// - SCRIPT/G01P03A/um0610.exps
-// - SCRIPT/G01P03A/um0701.exps
-// - SCRIPT/G01P03A/um0705.exps
-// - SCRIPT/G01P03A/um0801.exps
-// - SCRIPT/G01P03A/um1101.exps
-// - SCRIPT/G01P03A/um1107.exps
-// - SCRIPT/G01P03A/um1112.exps
-// - SCRIPT/G01P03A/um1203.exps
-// - SCRIPT/G01P03A/um1208.exps
-// - SCRIPT/G01P03A/um1303.exps
-// - SCRIPT/G01P03A/um1306.exps
-// - SCRIPT/G01P03A/um1308.exps
-// - SCRIPT/G01P03A/um1309.exps
-// - SCRIPT/G01P03A/um1401.exps
-// - SCRIPT/G01P03A/um1407.exps
-// - SCRIPT/G01P03A/um1501.exps
-// - SCRIPT/G01P03A/um1509.exps
-// - SCRIPT/G01P03A/um1603.exps
-// - SCRIPT/G01P03A/um1612.exps
-// - SCRIPT/G01P03A/um2101.exps
-// - SCRIPT/G01P03A/um2201.exps
-// - SCRIPT/G01P03A/um2402.exps
-// - SCRIPT/G01P03A/um2502.exps
-// - SCRIPT/G01P03A/us0101.exps
-// - SCRIPT/G01P03A/us0113.exps
-// - SCRIPT/G01P03A/us0201.exps
-// - SCRIPT/G01P03A/us0302.exps
-// - SCRIPT/G01P03A/us0309.exps
-// - SCRIPT/G01P03A/us0401.exps
-// - SCRIPT/G01P03A/us0406.exps
-// - SCRIPT/G01P03A/us2001.exps
-// - SCRIPT/G01P03A/us2006.exps
-// - SCRIPT/G01P03A/us2009.exps
-// - SCRIPT/G01P03A/us2101.exps
-// - SCRIPT/G01P03A/us2201.exps
-// - SCRIPT/G01P03A/us2205.exps
-// - SCRIPT/G01P03A/us2305.exps
-// - SCRIPT/G01P03A/us3105.exps
-// - SCRIPT/G01P06A/um0301.exps
-// - SCRIPT/G01P06A/um0302.exps
-// - SCRIPT/G01P06A/um0303.exps
-// - SCRIPT/G01P06A/um0401.exps
-import subscripts/chimecho.exps;
+// Shaymin 3
+// - SCRIPT/D73P11A/us0203.exps
+// - SCRIPT/D73P11A/us0302.exps
+// - SCRIPT/D73P11A/us0403.exps
+// - SCRIPT/D73P11A/us2002.exps
+// - SCRIPT/D73P11A/us2102.exps
+// - SCRIPT/D73P11A/us2202.exps
+// - SCRIPT/D73P11A/us2302.exps
+// - SCRIPT/D73P11A/us3108.exps
+
+import 'subscripts/shaymin_3.exps;'
 def 0 {
-    ~ChimechoMain();
+    ~Shaymin_3Main();
 }

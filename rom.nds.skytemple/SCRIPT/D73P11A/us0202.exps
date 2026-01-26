@@ -1,10 +1,14 @@
 // Duplicate file group
-// Cresselia
-// - SCRIPT/H01P99A/us2201.exps
-// - SCRIPT/H01P99A/us2202.exps
-// - SCRIPT/H01P99A/us2301.exps
+// Shaymin 5
+// - SCRIPT/D73P11A/us0202.exps
+// - SCRIPT/D73P11A/us0301.exps
+// - SCRIPT/D73P11A/us0402.exps
+// - SCRIPT/D73P11A/us2001.exps
+// - SCRIPT/D73P11A/us2101.exps
+// - SCRIPT/D73P11A/us2201.exps
+// - SCRIPT/D73P11A/us2301.exps
 
-import subscripts/cresselia.exps;
+import 'subscripts/shaymin_5.exps;'
 def 0 {
-    ~CresseliaMain();
+    ~Shaymin_5Main();
 }

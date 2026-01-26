@@ -1,0 +1,19 @@
+// Duplicate file group
+// Tangela
+// - SCRIPT/G01P03A/um1103.exps
+// - SCRIPT/G01P03A/um1614.exps
+// - SCRIPT/G01P03A/um2203.exps
+// - SCRIPT/G01P03A/us0105.exps
+// - SCRIPT/G01P03A/us0403.exps
+// - SCRIPT/G01P03A/us2211.exps
+// - SCRIPT/P01P04A/um1405.exps
+// - SCRIPT/P01P04A/um1505.exps
+// - SCRIPT/T01P01A/um0311.exps
+// - SCRIPT/T01P01A/um0317.exps
+// - SCRIPT/T01P02A/um1202.exps
+// - SCRIPT/T01P02A/um1204.exps
+
+import 'subscripts/tangela.exps;'
+def 0 {
+    ~TangelaMain();
+}

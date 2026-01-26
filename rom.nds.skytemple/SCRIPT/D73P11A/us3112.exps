@@ -1,16 +1,15 @@
 // Duplicate file group
-// Breloom
-// - SCRIPT/D73P11A/us0214.exps
-// - SCRIPT/D73P11A/us0308.exps
-// - SCRIPT/D73P11A/us0411.exps
-// - SCRIPT/D73P11A/us3115.exps
-// - SCRIPT/D73P11A/us3116.exps
-// - SCRIPT/D73P22A/us3104.exps
-// - SCRIPT/D73P25A/us3103.exps
-// - SCRIPT/D73P27A/us3103.exps
-// - SCRIPT/D73P28A/us3103.exps
+// Shaymin 2
+// - SCRIPT/D73P11A/us0201.exps
+// - SCRIPT/D73P11A/us0309.exps
+// - SCRIPT/D73P11A/us0407.exps
+// - SCRIPT/D73P11A/us2006.exps
+// - SCRIPT/D73P11A/us2106.exps
+// - SCRIPT/D73P11A/us2206.exps
+// - SCRIPT/D73P11A/us2306.exps
+// - SCRIPT/D73P11A/us3112.exps
 
-import subscripts/breloom.exps;
+import 'subscripts/shaymin_2.exps;'
 def 0 {
-    ~BreloomMain();
+    ~Shaymin_2Main();
 }

@@ -1,0 +1,10 @@
+// Duplicate file group
+// Cresselia
+// - SCRIPT/D41P21A/us2201.exps
+// - SCRIPT/D41P21A/us2202.exps
+// - SCRIPT/D41P21A/us2203.exps
+
+import 'subscripts/cresselia.exps;'
+def 0 {
+    ~CresseliaMain();
+}

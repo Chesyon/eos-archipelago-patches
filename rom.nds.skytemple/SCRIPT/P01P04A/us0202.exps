@@ -1,0 +1,18 @@
+// Duplicate file group
+// Slakoth
+// - SCRIPT/G01P03A/um0507.exps
+// - SCRIPT/G01P03A/um2205.exps
+// - SCRIPT/P01P04A/us0202.exps
+// - SCRIPT/P01P04A/us0306.exps
+// - SCRIPT/T01P01A/um0604.exps
+// - SCRIPT/T01P01A/um1110.exps
+// - SCRIPT/T01P01A/um1113.exps
+// - SCRIPT/T01P02A/um0606.exps
+// - SCRIPT/T01P02A/um1319.exps
+// - SCRIPT/T01P02A/um1405.exps
+// - SCRIPT/T01P02A/us2308.exps
+
+import 'subscripts/slakoth.exps;'
+def 0 {
+    ~SlakothMain();
+}

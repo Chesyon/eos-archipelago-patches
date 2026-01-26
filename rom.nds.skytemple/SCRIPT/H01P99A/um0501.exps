@@ -1,13 +1,30 @@
 // Duplicate file group
-// Drapion
-// - SCRIPT/G01P03A/um1106.exps
-// - SCRIPT/P01P01A/us0107.exps
-// - SCRIPT/P01P01A/us3103.exps
-// - SCRIPT/T01P01A/us0414.exps
-// - SCRIPT/T01P01A/us2005.exps
-// - SCRIPT/T01P02A/um0405.exps
+// Dugtrio
+// - SCRIPT/D01P11A/us0102.exps
+// - SCRIPT/D01P11A/us3102.exps
+// - SCRIPT/D25P11A/um2304.exps
+// - SCRIPT/D25P11A/um2307.exps
+// - SCRIPT/H01P99A/um0301.exps
+// - SCRIPT/H01P99A/um0401.exps
+// - SCRIPT/H01P99A/um0501.exps
+// - SCRIPT/H01P99A/um0601.exps
+// - SCRIPT/H01P99A/um0602.exps
+// - SCRIPT/H01P99A/um0702.exps
+// - SCRIPT/H01P99A/um0703.exps
+// - SCRIPT/H01P99A/um0801.exps
+// - SCRIPT/H01P99A/um1101.exps
+// - SCRIPT/H01P99A/um1102.exps
+// - SCRIPT/H01P99A/um1201.exps
+// - SCRIPT/H01P99A/um1202.exps
+// - SCRIPT/H01P99A/um1301.exps
+// - SCRIPT/H01P99A/um1601.exps
+// - SCRIPT/H01P99A/um1602.exps
+// - SCRIPT/H01P99A/um2401.exps
+// - SCRIPT/H01P99A/um2501.exps
+// - SCRIPT/H01P99A/us0101.exps
+// - SCRIPT/H01P99A/us0102.exps
 
-import subscripts/drapion.exps;
+import 'subscripts/dugtrio.exps;'
 def 0 {
-    ~DrapionMain();
+    ~DugtrioMain();
 }

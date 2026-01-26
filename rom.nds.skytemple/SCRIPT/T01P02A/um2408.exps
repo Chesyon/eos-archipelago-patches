@@ -1,0 +1,42 @@
+// Duplicate file group
+// Sunflora
+// - SCRIPT/G01P03A/um0308.exps
+// - SCRIPT/G01P03A/um0315.exps
+// - SCRIPT/G01P03A/um0604.exps
+// - SCRIPT/G01P03A/um0608.exps
+// - SCRIPT/G01P03A/um0702.exps
+// - SCRIPT/G01P03A/um1108.exps
+// - SCRIPT/G01P03A/um1113.exps
+// - SCRIPT/G01P03A/um1201.exps
+// - SCRIPT/G01P03A/um1206.exps
+// - SCRIPT/G01P03A/um1601.exps
+// - SCRIPT/G01P03A/us0109.exps
+// - SCRIPT/G01P03A/us0203.exps
+// - SCRIPT/G01P03A/us0204.exps
+// - SCRIPT/G01P03A/us0307.exps
+// - SCRIPT/G01P03A/us0404.exps
+// - SCRIPT/G01P03A/us2005.exps
+// - SCRIPT/G01P03A/us2008.exps
+// - SCRIPT/G01P03A/us2203.exps
+// - SCRIPT/G01P03A/us3101.exps
+// - SCRIPT/G01P04A/us0303.exps
+// - SCRIPT/G01P04A/us0403.exps
+// - SCRIPT/G01P04A/us2010.exps
+// - SCRIPT/P01P01A/um0402.exps
+// - SCRIPT/P01P01A/um1301.exps
+// - SCRIPT/P01P01A/us0101.exps
+// - SCRIPT/P01P01A/us0103.exps
+// - SCRIPT/T01P01A/um0306.exps
+// - SCRIPT/T01P01A/um1101.exps
+// - SCRIPT/T01P02A/um0701.exps
+// - SCRIPT/T01P02A/um0801.exps
+// - SCRIPT/T01P02A/um1301.exps
+// - SCRIPT/T01P02A/um2201.exps
+// - SCRIPT/T01P02A/um2408.exps
+// - SCRIPT/T01P02A/um2508.exps
+// - SCRIPT/T01P02A/us2210.exps
+
+import 'subscripts/sunflora.exps;'
+def 0 {
+    ~SunfloraMain();
+}

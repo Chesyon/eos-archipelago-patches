@@ -7,7 +7,7 @@
 // - SCRIPT/T01P01A/us2004.exps
 // - SCRIPT/T01P02A/um0404.exps
 
-import subscripts/arbok.exps;
+import 'subscripts/arbok.exps;'
 def 0 {
     ~ArbokMain();
 }

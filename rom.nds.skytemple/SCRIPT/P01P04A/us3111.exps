@@ -1,0 +1,11 @@
+// Duplicate file group
+// Spinda
+// - SCRIPT/P01P01A/um0305.exps
+// - SCRIPT/P01P04A/um0727.exps
+// - SCRIPT/P01P04A/us3111.exps
+
+import 'subscripts/spinda.exps';
+def 0 {
+    ~SpindaSkyGift();
+    ~SpindaMain();
+}
