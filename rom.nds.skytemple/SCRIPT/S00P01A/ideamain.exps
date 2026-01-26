@@ -486,6 +486,78 @@ def 0 {
         default:
             break;
     }
+    switch(dungeon_mode(87)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Serenity River[CR] already...[STE]");
+            $LOCAL0 = 87;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Serenity River[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(88)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Landslide Cave[CR] already...[STE]");
+            $LOCAL0 = 88;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Landslide Cave[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(89)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lush Prairie[CR] already...[STE]");
+            $LOCAL0 = 89;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Lush Prairie[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(90)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Tiny Meadow[CR] already...[STE]");
+            $LOCAL0 = 90;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Tiny Meadow[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(91)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Labyrinth Cave[CR] already...[STE]");
+            $LOCAL0 = 91;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Labyrinth Cave[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    switch(dungeon_mode(92)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Oran Forest[CR] already...[STE]");
+            $LOCAL0 = 92;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Oran Forest[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
     switch(dungeon_mode(38)) {
         case DMODE_OPEN:
             message_Talk(" According to my notes, we still\nneed to clear [CS:P]Hidden Land[CR]! Let\'s go\ndo that now, [hero]!");
@@ -583,6 +655,19 @@ def 0 {
         default:
             break;
     }
+    switch(dungeon_mode(174)) {
+        case DMODE_OPEN_AND_REQUEST:
+            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Star Cave2[CR] already...[STE]");
+            $LOCAL0 = 174;
+            call @missions_check;
+            break;
+        case DMODE_OPEN:
+            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Star Cave2[CR]! Let\'s go\ndo that now, [hero]!");
+            return;
+        default:
+            break;
+    }
+    
     switch(ProcessSpecial(105,0,0)) {
         case > 0:
             message_Talk(" Seems like we need to make\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
@@ -866,78 +951,6 @@ def 0 {
         default:
             break;
     }
-    switch(dungeon_mode(87)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Serenity River[CR] already...[STE]");
-            $LOCAL0 = 87;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Serenity River[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(88)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Landslide Cave[CR] already...[STE]");
-            $LOCAL0 = 88;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Landslide Cave[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(89)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lush Prairie[CR] already...[STE]");
-            $LOCAL0 = 89;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Lush Prairie[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(90)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Tiny Meadow[CR] already...[STE]");
-            $LOCAL0 = 90;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Tiny Meadow[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(91)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Labyrinth Cave[CR] already...[STE]");
-            $LOCAL0 = 91;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Labyrinth Cave[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(92)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Oran Forest[CR] already...[STE]");
-            $LOCAL0 = 92;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Oran Forest[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
     switch(dungeon_mode(93)) {
         case DMODE_OPEN_AND_REQUEST:
             message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Lake Afar[CR] already...[STE]");
@@ -1126,18 +1139,6 @@ def 0 {
             break;
         case DMODE_OPEN:
             message_Talk(" According to my notes, we still\nneed to clear [CS:P]Summit Station Pass[CR]! Let\'s go\ndo that now, [hero]!");
-            return;
-        default:
-            break;
-    }
-    switch(dungeon_mode(174)) {
-        case DMODE_OPEN_AND_REQUEST:
-            message_Talk("[STS] According to my notes, we\'ve\ncleared [CS:P]Star Cave2[CR] already...[STE]");
-            $LOCAL0 = 174;
-            call @missions_check;
-            break;
-        case DMODE_OPEN:
-            message_Talk(" According to my notes, we still\nneed to clear [CS:P]Star Cave2[CR]! Let\'s go\ndo that now, [hero]!");
             return;
         default:
             break;

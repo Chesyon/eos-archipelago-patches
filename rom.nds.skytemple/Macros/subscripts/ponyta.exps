@@ -1,0 +1,257 @@
+macro PonytaMain() {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
+        // [29, 92], Darkrai Defeated
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Another great accomplishment\nfor Team [team:]!",
+            french=" Un exploit supplémentaire à\nl'actif de l'Equipe [team:]!",
+            german=" Eine weitere tolle\nErrungenschaft für Team [team:]!",
+            italian=" Un altro grande risultato per il\nTeam [team:]!",
+            spanish=" ¡Otro gran logro del [CS:X]Equipo[CR]\n[team:]!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Team [CS:X]Raider[CR] is another team\nthat would be fantastic to meet.",
+            french=" Ce serait tout aussi fantastique\nde rencontrer l'Equipe [CS:X]As[CR].",
+            german=" Team [CS:X]Schatzsucher[CR] ist auch ein\nTeam, das wir unheimlich gerne einmal\nkennenlernen würden.",
+            italian=" Sarebbe fantastico anche\nincontrare il Team [CS:X]Asso[CR].",
+            spanish=" También sería genial conocer al\n[CS:X]Equipo As[CR].",
+        });
+        message_Talk({
+            english=" They must be incredibly cool\nin person...",
+            french=" C'est sûrement l'équipe la plus\nclasse du monde...",
+            german=" So von Angesicht zu Angesicht\nmüssen die ziemlich cool sein.",
+            italian=" Devono essere fantastici...",
+            spanish=" Seguro que son Pokémon\nincreíbles...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, Team [CS:X]Charm[CR] was here...?",
+            french=" Oh, l'Equipe [CS:X]Charme[CR] est venue\nici...?",
+            german=" Oh, Team [CS:X]Charme[CR] war hier?",
+            italian=" Ah, il Team [CS:X]Malia[CR] è stato qui?",
+            spanish=" Oh, ¿el [CS:X]Equipo Carisma[CR] ha estado\naquí?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You've stopped the planet's\nparalysis?!",
+            french=" Vous avez empêché la Paralysie\nde la Planète?!",
+            german=" Ihr habt die Lähmung des\nPlaneten aufgehalten?!?",
+            italian=" Avete evitato la paralisi del\npianeta?!",
+            spanish=" ¡¿Habéis detenido la parálisis\ndel planeta?!",
+        });
+        message_Talk({
+            english=" H-how incredible! Thank you!",
+            french=" C'est incroyable! Merci!",
+            german=" W-wie unglaublich! Danke!",
+            italian=" I-incredibile! Grazie!",
+            spanish=" ¡Es increíble! ¡Muchas gracias!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It isn't over yet! Good luck!",
+            french=" Rien n'est encore perdu!\nBonne chance!",
+            german=" Es ist noch nicht vorbei!\nViel Glück!",
+            italian=" Non è ancora finita! Buona\nfortuna!",
+            spanish=" ¡Esto aún no ha acabado! ¡Buena\nsuerte!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[25]) {
+        // [17, 1], Dusknoir's Secret
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The planet's paralysis can't be\nallowed to happen!",
+            french=" Il faut absolument empêcher\nla Paralysie de la Planète de se produire!",
+            german=" Die Lähmung des Planeten muss\nabgewendet werden!",
+            italian=" Non possiamo permettere che il\npianeta si paralizzi!",
+            spanish=" ¡No podemos permitir que\nparalice el planeta!",
+        });
+        message_Talk({
+            english=" That [CS:N]Grovyle[CR] must be caught!",
+            french=" Il faut capturer ce [CS:N]Massko[CR]!",
+            german=" Dieser [CS:N]Reptain[CR] muss geschnappt\nwerden!",
+            italian=" Quel [CS:N]Grovyle[CR] dev'essere\ncatturato!",
+            spanish=" ¡Hay que coger a ese [CS:N]Grovyle[CR]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" So, everyone is saying that\n[CS:N]Grovyle[CR] has appeared again!",
+            french=" Il paraît que [CS:N]Massko[CR] a encore\nfrappé.",
+            german=" Es ist also in aller Munde, dass\n[CS:N]Reptain[CR] wieder aufgetaucht ist.",
+            italian=" Dicono che [CS:N]Grovyle[CR] sia\nricomparso.",
+            spanish=" ¡Así que todos dicen que [CS:N]Grovyle[CR]\nha reaparecido!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        // [14, 1], Northern Desert Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've heard...",
+            french=" On a appris la nouvelle...",
+            german=" Wir haben gehört...",
+            italian=" Abbiamo saputo...",
+            spanish=" Hemos oído que...",
+        });
+        message_Talk({
+            english=" They've identified the thief who\nhas been stealing the Time Gears?",
+            french=" Ils ont identifié le voleur qui a\nsubtilisé les Rouages du Temps?",
+            german=" Sie haben den Dieb identifiziert,\nder die Zahnräder der Zeit gestohlen hat?",
+            italian=" ... che hanno identificato il ladro\nche ha rubato gli Ingranaggi del Tempo.",
+            spanish=" ¿Han identificado al ladrón que\nha estado robando los Engranajes del Tiempo?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PONIITA);
+        }
+        message_SetFace(ACTOR_NPC_PONIITA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Our leader is always nervous\naround fire.[K] But that's a small thing compared\nto all the positives!",
+            french=" A cause du feu, notre meneur\npanique... [K]mais ses qualités l'emportent\nde loin sur ce seul défaut.",
+            german=" Unser Anführer ist nervös,\nwenn Feuer im Spiel ist.[K] Aber die Vorteile\nüberwiegen die Nachteile.",
+            italian=" Il nostro leader diventa nervoso\nquando vede il fuoco...[K] Ma ha tanti\naltri aspetti positivi.",
+            spanish=" Nuestro líder siempre se pone\nmuy nervioso cuando hay fuego cerca.[K]\n¡Pero no lo cambiaríamos por nada!",
+        });
+        message_Talk({
+            english=" So I'm happy to support our\nleader through thick or thin.",
+            french=" Alors je me réjouis de soutenir\nnotre meneur contre vents et marées.",
+            german=" Daher bin ich glücklich, unserem\nAnführer durch dick und dünn zu folgen.",
+            italian=" Io sosterrò sempre il leader,\nnella buona e nella cattiva sorte!",
+            spanish=" ¡Eso es una nimiedad al lado de\ntodos sus méritos!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

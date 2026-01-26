@@ -1,0 +1,123 @@
+macro TorkoalMain() {
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KOOTASU);
+        }
+        message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I thank you sincerely.",
+            french=" Je vous remercie sincèrement.",
+            german=" Ich danke euch zutiefst.",
+            italian=" Vi ringrazio di tutto cuore.",
+            spanish=" Muchas gracias.",
+        });
+        message_Talk({
+            english=" It was your doing that brought\npeace to our world.",
+            french=" C'est grâce à vous que la paix\nde notre monde a été restaurée.",
+            german=" Eure Taten waren es, die der\nWelt Frieden gebracht haben.",
+            italian=" Grazie a voi è tornata la pace\nnel nostro mondo.",
+            spanish=" Habéis traído la paz a nuestro\nmundo.",
+        });
+        message_Talk({
+            english=" The fact that I can lounge on the\nrocks here... That's your doing too. Ho-ho-ho!",
+            french=" Si je peux me prélasser sur\nces rochers... c'est également grâce à vous.\nHo ho ho!",
+            german=" Die Tatsache, dass ich hier auf\nden Felsen faulenzen kann... Das habe ich auch\neuch zu verdanken. Hehehe!",
+            italian=" Se posso oziare su queste\nrocce... lo devo a voi. Oh-oh-oh!",
+            spanish=" Y por eso puedo quedarme aquí\nen las rocas de relax... ¡Jo, jo, jo!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KOOTASU);
+        }
+        message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, my goodness gracious![K]\nYou say you made it to the [CS:P]Hidden Land[CR]?!",
+            french=" Oh, merveille des merveilles![K]\nVous dites que vous avez réussi à atteindre\nles [CS:P]Terres Illusoires[CR]?!",
+            german=" Ach, du meine Güte![K] Ihr sagt, ihr\nhabt einen Weg in das [CS:P]Verborgene Land[CR]\ngefunden?!?",
+            italian=" Caspiterina![K] Dite che avete\nraggiunto la [CS:P]Terra Nascosta[CR]?!",
+            spanish=" ¡Me habéis dejado de piedra![K]\n¿Así que estuvisteis en la [CS:P]Tierra Oculta[CR]?",
+        });
+        message_Talk({
+            english=" Who would have thought it? The\n[CS:P]Hidden Land[CR] really did exist!",
+            french=" Qui l'eût cru? Les [CS:P]Terres\nIllusoires[CR] existent bel et bien, alors!",
+            german=" Wer hätte das gedacht? Das\n[CS:P]Verborgene Land[CR] existiert also wirklich!",
+            italian=" Chi l'avrebbe detto? La [CS:P]Terra[CR]\n[CS:P]Nascosta[CR] esiste davvero!",
+            spanish=" ¡Increíble! ¡La [CS:P]Tierra Oculta[CR]\nexiste!",
+        });
+        message_Talk({
+            english=" Well, I daresay you're most\nremarkable. Ho-ho-ho!",
+            french=" Eh bien, vous êtes vraiment\nadmirables, sans aucun doute. Ho ho ho!",
+            german=" Nun, ich wage zu sagen, dass ihr\nziemlich bemerkenswert seid. Hehehe!",
+            italian=" Bene, oserei dire che siete\ndi un'abilità fuori dal comune!",
+            spanish=" Debo admitir que sois una pareja\nde grandes exploradores. ¡Jo, jo, jo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[35]) {
+        // [23, 1], Torkoal's News
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[34]) {
+        // [22, 2], Returned to Guild
+        §label_82;
+        forever {
+            supervision_ExecuteCommon(CORO_EVENT_M21_06);
+            continue;  // may be redundant
+        }
+    } elseif ($DUNGEON_OPEN_LIST[178]) {
+        // [7, 2], Get Skunked On!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KOOTASU);
+        }
+        message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I can't soak in the Hot Spring\nmyself...",
+            french=" Moi, je ne peux pas faire\ntrempette dans la Source Chaude...",
+            german=" Ich kann mich nicht von der\nHeißen Quelle durchweichen lassen.",
+            italian=" Non posso immergermi nella\nSorgente Termale...",
+            spanish=" No puedo bañarme en la Terma...",
+        });
+        message_Talk({
+            english=" Instead, I lounge about on the\nheated rocks here. Ho-ho-ho!",
+            french=" Au lieu de ça, je me prélasse\nsur les rochers chauffés par le soleil.\nHo ho ho!",
+            german=" Stattdessen faulenze ich hier auf\nden aufgeheizten Felsen. Hehehe!",
+            italian=" E così, ozio qui sulle rocce\nriscaldate. Oh-oh-oh!",
+            spanish=" Pero me quedo aquí en las rocas\ncalientes, relajándome. ¡Jo, jo, jo!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

@@ -1,0 +1,254 @@
+macro MawileMain() {
+    if ($DUNGEON_ARRIVE_LIST[15]) {
+        // [29, 54], 2 missions complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KUCHIITO);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'd love to go on an expedition\nwith everyone again sometime!",
+            french=" J'adorerais repartir en\nexploration avec toute l'équipe un jour!",
+            german=" Ich würde so gerne noch einmal\nmit allen auf eine Expedition gehen!",
+            italian=" Non vedo l'ora di partire per\nun'altra spedizione con qualcuno!",
+            spanish=" ¡Sería genial que fuéramos\ntodos de expedición otra vez!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_ARRIVE_LIST[14]) {
+        // [29, 40], 1 mission complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KUCHIITO);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Haven't had a break in a while...",
+            french=" Ça fait un bout de temps qu'on\nn'a pas fait de pause...",
+            german=" Schon lange keine Pause mehr\ngehabt...",
+            italian=" È da un po' che non faccio\nuna sosta...",
+            spanish=" Hace tiempo que no\nme tomo un respiro...",
+        });
+        message_Talk({
+            english=" It's great to just relax and take\nyour time once in a while! Tee-hee-hee!",
+            french=" Prendre son temps et se\ndétendre, c'est si agréable! Youhouhou!",
+            german=" Es ist großartig, hin und wieder\neinfach nur zu entspannen und sich Zeit zu\nnehmen! Ji-chi-chi!",
+            italian=" Ogni tanto è così bello fare\nuna pausa e rilassarsi senza pensare\na nulla! Hi hi hi!",
+            spanish=" ¡Con lo que mola relajarse\ny descansar de vez en cuando! ¡Ji, ji, ji!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KUCHIITO);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Memories of exploring with\neveryone will last a lifetime! Tee-hee!",
+            french=" Les souvenirs de nos\nexplorations en équipe resteront\ngravés à jamais! Youhou!",
+            german=" Die Erinnerung daran, wie alle\nzusammen auf Erkundung waren, hält für\nimmer! Ji-chi!",
+            italian=" I ricordi delle esplorazioni che\nho fatto con i miei amici dureranno per\nsempre! Hi hi!",
+            spanish=" ¡Los recuerdos de nuestras\nexploraciones perdurarán siempre! ¡Ji, ji!",
+        });
+        message_Talk({
+            english=" I won't be able to forget the\nspectacular view from the summit, either...",
+            french=" En plus, je ne pourrai jamais\noublier la vue à couper le souffle\nqu'on a du sommet.",
+            german=" Auch die spektakuläre Aussicht\nvom Gipfel werde ich niemals vergessen...",
+            italian=" E non potrò nemmeno scordare\nil magnifico panorama che ho ammirato\ndalla cima della montagna...",
+            spanish=" Las espectaculares vistas desde\nla cima también son inolvidables, la verdad...",
+        });
+        message_Talk({
+            english=" That's why I just can't stop\nexploring!",
+            french=" C'est pour ça que je ne peux pas\nm'arrêter d'explorer!",
+            german=" Deswegen krieg ich nicht genug\nvon Erkundungen!",
+            italian=" Ecco perché non riesco\na smettere di esplorare!",
+            spanish=" ¡Por eso no puedo dejar\nde explorar!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
+        // [29, 26], First Time at 8th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_KUCHIITO) {
+            SetAnimation(2);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_WORRIED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder if [CS:N]Sneasel[CR] is\nall right...",
+            french=" J'espère que [CS:N]Farfuret[CR] va vite\ns'en remettre...",
+            german=" Ich frage mich, ob es [CS:N]Sniebel[CR]\ngut geht...",
+            italian=" Chissà se [CS:N]Sneasel[CR] sta bene...",
+            spanish=" Me pregunto si [CS:N]Sneasel[CR]\nestará bien...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[117]) {
+        // [29, 24], First Time at 7th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Leave this to me. You go and\nhurry on ahead and get some help.",
+            french=" Laisse, je m'en occupe. Toi,\ndépêche-toi d'avancer et va chercher\nde l'aide.",
+            german=" Überlasst das mir. Ihr beeilt\neuch und holt Hilfe.",
+            italian=" Qui ci penso io. Voi andate\navanti e cercate aiuto.",
+            spanish=" Déjamelo a mí, tú ve corriendo\na buscar ayuda.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[115]) {
+        // [29, 20], First time at 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_ANGRY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We misunderstood earlier too.\nI wonder what that [CS:N]Sneasel[CR] was up\nto anyway!",
+            french=" On n'a pas bien compris, tout à\nl'heure. Je me demande ce que [CS:N]Farfuret[CR]\nmanigançait.",
+            german=" Wir haben das zuvor auch\nfalsch verstanden. Ich frage mich, was [CS:N]Sniebel[CR]\nüberhaupt vorhatte!",
+            italian=" Anche noi siamo stati tratti in\ninganno prima. Comunque mi chiedo cosa stesse\narchitettando quello [CS:N]Sneasel[CR]!",
+            spanish=" Antes nos hicimos un lío.\nMe pregunto qué tramaría ese [CS:N]Sneasel[CR].",
+        });
+        message_Talk({
+            english=" He just ran off without saying\na word to anyone...",
+            french=" Il s'est enfui comme ça,\nsans rien dire à qui que ce soit...",
+            german=" Er ist einfach weggerannt, ohne\nirgendjemandem auch nur ein Wort zu sagen...",
+            italian=" È scappato via senza dire\nuna parola...",
+            spanish=" Se fue corriendo sin decir\nesta boca es mía...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[112]) {
+        // [29, 14], First Time at 2nd Station Clearing
+        with(actor ACTOR_NPC_KUCHIITO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_PLAYER_APPOINT) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_KUCHIITO) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_FUWARAIDO);
+        }
+        WaitExecuteLives(ACTOR_NPC_KUCHIITO);
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" This is [CS:K]Drifblim[CR]'s Gondola.",
+            french=" C'est la [CS:K]Navette Grodrive[CR].",
+            german=" Das hier ist die\n[CS:K]Drifzepeli-Seilbahn[CR].",
+            italian=" Questa è l'Agenzia Viaggi\n[CS:K]Drifblim[CR].",
+            spanish=" Esta es la [CS:K]Góndola Drifblim[CR].",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_KUCHIITO) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER_APPOINT);
+        }
+        WaitExecuteLives(ACTOR_NPC_KUCHIITO);
+        message_Talk({
+            english=" It's really handy transportation,\nconnecting the [CS:P]Shaymin Village[CR] to the bases.",
+            french=" C'est un moyen de transport\ntrès pratique qui relie le [CS:P]Village Shaymin[CR]\naux différents campements.",
+            german=" Ein sehr komfortables\nTransportmittel, das [CS:P]Shaymin-Dorf[CR] mit den\nZwischenlagern verbindet.",
+            italian=" Offre un comodo sistema di\ntrasporto dal [CS:P]Villaggio Shaymin[CR] ai bivacchi.",
+            spanish=" Es un transporte superpráctico\nque enlaza [CS:P]Aldea Shaymin[CR] con las bases.",
+        });
+        message_Talk({
+            english=" Right now this only connects the\n2nd Station Clearing and the village...",
+            french=" Pour l'instant, il relie seulement\nla trouée du 2[F:E] Relais au village...",
+            german=" Bis jetzt verbindet sie nur die\n2. Zwischenlagerlichtung mit dem Dorf...",
+            italian=" Al momento collega solo\nil Bivacco 2 e il villaggio...",
+            spanish=" Ahora solo enlaza la Base del\nSegundo Puerto con la aldea...",
+        });
+        message_Talk({
+            english=" Once a new base is established,\nwe should be able to travel there. Tee-hee!",
+            french=" Une fois qu'un nouveau\ncampement aura été établi, on devrait pouvoir\nl'atteindre par ce moyen. Yahou!",
+            german=" Aber sobald eine neue Basis\nerrichtet wurde, sollten wir dorthin reisen\nkönnen. Ji-chi!",
+            italian=" ... ma quando si raggiunge\nun nuovo bivacco, è possibile viaggiare anche\nda lì. Hi hi!",
+            spanish=" Pero en cuanto haya una nueva\nbase se podrá viajar a ella. ¡Ji, ji!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KUCHIITO);
+        }
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm [CS:N]Mawile[CR], a member of\nTeam [CS:X]Frontier[CR], the survey team.",
+            french=" Je suis [CS:N]Mysdibule[CR], membre de\nl'Equipe [CS:X]Eclaireurs[CR], l'équipe de reconnaissance.",
+            german=" Mein Name ist [CS:N]Flunkifer[CR],\nMitglied von Team [CS:X]Grenzland[CR], dem\nVermessungsteam.",
+            italian=" Mi chiamo [CS:N]Mawile[CR], sono un\nmembro del Team [CS:X]Pioniere[CR],\nla squadra d'indagine.",
+            spanish=" Soy [CS:N]Mawile[CR], miembro del\n[CS:X]Equipo Frontera[CR], el equipo de reconocimiento.",
+        });
+        message_Talk({
+            english=" It's kind of difficult getting\nup here...",
+            french=" C'est assez difficile\nde monter là-haut...",
+            german=" Ziemlich schwierig, hier hoch zu\nkommen.",
+            italian=" È piuttosto difficile arrivare\nfin qui...",
+            spanish=" Es bastante complicado llegar\nhasta aquí...",
+        });
+        message_Talk({
+            english=" When we found the [CS:P]Shaymin\nVillage[CR], we jumped for joy. Tee-hee!\nOur weariness just vanished!",
+            french=" Quand nous avons trouvé le\n[CS:P]Village Shaymin[CR], on a sauté de joie. Yahou!\nNotre fatigue s'est envolée!",
+            german=" Als wir [CS:P]Shaymin-Dorf[CR] entdeckt\nhaben, haben wir vor Freude getanzt. Ji-chi!\nUnsere Erschöpfung war verschwunden!",
+            italian=" Quando abbiamo trovato il\n[CS:P]Villaggio Shaymin[CR], abbiamo fatto i salti di gioia.\nHi hi! La nostra stanchezza è svanita subito!",
+            spanish=" Cuando encontramos [CS:P]Aldea Shaymin[CR],\nsaltamos de alegría, ji, ji.\n¡Se nos fue el cansancio de golpe!",
+        });
+        message_SetFace(ACTOR_NPC_KUCHIITO, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That's why I just can't stop\nexploring! Tee-hee-hee!",
+            french=" C'est pour ça que je ne peux pas\nm'arrêter d'explorer! Youhou!",
+            german=" Genau deswegen krieg ich nicht\ngenug von Erkundungen! Ji-chi-chi!",
+            italian=" Ecco perché non riesco\na smettere di esplorare! Hi hi hi!",
+            spanish=" Por eso no puedo dejar de explorar.\n¡Ji, ji, ji!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

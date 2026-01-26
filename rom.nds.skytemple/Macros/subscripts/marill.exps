@@ -1,0 +1,418 @@
+macro MarillMain() {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
+        // [29, 92], Darkrai Defeated
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You saved [CS:N]Azurill[CR]...[K] You made\nthe world peaceful...",
+            french=" Vous avez sauvé [CS:N]Azurill[CR]...[K]\nVous avez rétabli la paix dans le monde...",
+            german=" Ihr habt [CS:N]Azurill[CR] gerettet.[K]\nIhr habt für Frieden auf der Welt gesorgt...",
+            italian=" Avete salvato [CS:N]Azurill[CR]...[K] Avete\nriportato la pace nel mondo...",
+            spanish=" Salvasteis a [CS:N]Azurill[CR]...[K] y,\nademás, devolvisteis la paz al mundo...",
+        });
+        message_Talk({
+            english=" Thank you... Thank you so much!",
+            french=" Merci... merci de tout cœur!",
+            german=" Danke. Habt vielen Dank!",
+            italian=" Grazie...\nGrazie infinite!",
+            spanish=" Gracias... ¡Muchísimas gracias!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[67]) {
+        // [29, 87], Dark Crater is Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Good luck, [hero] and\n[partner]!",
+            french=" Bonne chance, [hero] et\n[partner]!",
+            german=" Viel Glück noch, [hero]\nund [partner]!",
+            italian=" Buona fortuna, [hero] e\n[partner]!",
+            spanish=" ¡Buena suerte, [hero] y\n[partner]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( $DUNGEON_CONQUEST_LIST[64] ) {
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡[hero] y [partner]!",
+        });
+        message_Talk({
+            english=" Mr. [CS:N]Drowzee[CR] left to go travel a\nwhile ago.",
+            french=" Monsieur [CS:N]Soporifik[CR], il est parti\nen voyage il y a quelque temps.",
+            german=" Herr [CS:N]Traumato[CR] ist vor einiger\nZeit zu einer Reise aufgebrochen.",
+            italian=" Il signor [CS:N]Drowzee[CR] è partito per\nun viaggio un po' di tempo fa.",
+            spanish=" El señor [CS:N]Drowzee[CR] salió de viaje\nhace un rato.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[63]) {
+        // [29, 78], Nightmare is complete
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_SIGH, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Azurill[CR]...?",
+            french=" [CS:N]Azurill[CR]...?",
+            german=" [CS:N]Azurill[CR]?",
+            italian=" [CS:N]Azurill[CR]...?",
+            spanish=" ¿[CS:N]Azurill[CR]...?",
+        });
+        message_Talk({
+            english=" He's still asleep...",
+            french=" Il est encore endormi...",
+            german=" Er schläft noch...",
+            italian=" Sta ancora dormendo...",
+            spanish=" Sigue dormido...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[62]) {
+        // [29, 72], Mt. Trevail not unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_SIGH, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Sniffle... [hero],\n[partner]...",
+            french=" Snif... [hero],\n[partner]...",
+            german=" Schnüffel... [hero],\n[partner]...",
+            italian=" Sniff... [hero],\n[partner]...",
+            spanish=" [hero], [partner]...\nSnif...",
+        });
+        message_Talk({
+            english=" You always, always help us...[K]\nThank you so much...",
+            french=" Vous êtes toujours là pour\nnous...[K] Merci, merci infiniment...",
+            german=" Ihr helft uns immer und immer\nwieder.[K] Vielen Dank.",
+            italian=" Voi ci avete sempre, sempre\naiutati...[K] Grazie mille...",
+            spanish=" Siempre, siempre nos ayudáis...[K]\nMuchísimas gracias...",
+        });
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+        // [29, 5], Graduating from the guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've heard! You graduated\nfrom the guild!",
+            french=" On a appris la nouvelle!\nVous avez obtenu votre diplôme de la Guilde!",
+            german=" Wir haben es gehört! Ihr habt\ndie Gildenabschlussprüfung erfolgreich\nabgeschlossen!",
+            italian=" L'abbiamo saputo! Avete passato\nl'esame della Gilda!",
+            spanish=" ¡Ya nos hemos enterado!\n¡Habéis superado el gran reto!",
+        });
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Congratulations!",
+            french=" C'est super! Félicitations!",
+            german=" Glückwunsch!",
+            italian=" Congratulazioni!",
+            spanish=" ¡Enhorabuena!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The grand master of all\nthings bad?",
+            french=" Le grand maître de tous les\nmaux?",
+            german=" Der Großmeister allen Übels?",
+            italian=" Sua Malvagità?",
+            spanish=" ¿El gran malo requetemalo?",
+        });
+        message_Talk({
+            english=" Ummm... Sorry.[K] I've never heard\nof such a creature.",
+            french=" Hmm... Désolé.[K] Je n'ai jamais\nentendu parler de cette créature.",
+            german=" Hmm, tut mir leid.[K] Ich habe\nnoch nie von so einer Kreatur gehört.",
+            italian=" Uhmm... Mi spiace.[K] Non ho mai\nsentito parlare di questa creatura.",
+            spanish=" Hum... No, lo siento.[K] Nunca\nhabía oído hablar de eso.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We'll be thinking of you!\nGood luck!",
+            french=" On pensera très fort à vous!\nBonne chance!",
+            german=" Wir werden an euch denken!\nViel Glück!",
+            italian=" Vi penseremo! In bocca al lupo!",
+            spanish=" ¡No os olvidamos! ¡Mucha\nsuerte!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[34]) {
+        // [22, 2], Returned to Guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡[hero] y [partner]!",
+        });
+        message_Talk({
+            english=" You're all right! Am I ever glad!",
+            french=" Vous allez bien! Je suis si\ncontent!",
+            german=" Euch geht es gut! Ich bin so\nfroh!",
+            italian=" State bene! Che gioia!",
+            spanish=" ¡Estáis bien! ¡Qué alegría!",
+        });
+        message_Talk({
+            english=" We heard you disappeared into\nsomething called a dimensional hole! That made\nus very worried...",
+            french=" On nous avait dit que vous aviez\ndisparu dans un truc appelé le gouffre\ndimensionnel! On était très inquiets...",
+            german=" Wir haben gehört, dass ihr in\neiner Art dimensionalem Loch verschwunden\nseid! Das hat uns sehr besorgt.",
+            italian=" Abbiamo sentito della vostra\nscomparsa in un... tunnel dimensionale!\nSiamo stati molto in ansia...",
+            spanish=" ¡Nos dijeron que habíais caído\nen algo llamado agujero dimensional!\nEso nos tenía muy preocupados...",
+        });
+        message_Talk({
+            english=" But you're back! And you're all\nright! I'm so glad to see you!",
+            french=" Mais vous êtes de retour!\nEn vie! Je suis si content de vous revoir!",
+            german=" Aber ihr seid zurück! Und es\ngeht euch gut! Ich bin so froh, euch zu sehen!",
+            italian=" Ma siete di nuovo qui! E state\nbene! Sono così felice di vedervi!",
+            spanish=" ¡Pero habéis vuelto! ¡Y estáis\nbien! ¡Qué alegría veros!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡[hero] y [partner]!",
+        });
+        message_Talk({
+            english=" We're counting on you![K]\nGood luck!",
+            french=" On compte sur vous![K]\nBonne chance!",
+            german=" Wir zählen auf euch![K]\nViel Glück!",
+            italian=" Contiamo su di voi![K]\nBuona fortuna!",
+            spanish=" ¡Gracias por vuestra ayuda![K]\n¡Buena suerte!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[17]) {
+        // [13, 1], Amp Plains is open
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're sorry to bother you.[K]\nPlease get back our item!",
+            french=" Excusez-nous de vous\ndéranger.[K] Mais récupérez notre objet,\ns'il vous plaît!",
+            german=" Tut uns leid, euch zu stören.[K]\nBitte holt unser Item zurück!",
+            italian=" Ci dispiace disturbarvi.[K]\nMa per favore, riportateci il nostro strumento!",
+            spanish=" Sentimos causaros molestias.[K]\n¡Por favor, recuperad nuestro objeto!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡[hero] y [partner]!",
+        });
+        message_Talk({
+            english=" Please take care on your\nexpedition!",
+            french=" Faites attention à vous pendant\nl'expédition!",
+            german=" Bitte passt während eurer\nExpedition auf euch auf!",
+            italian=" Mi raccomando, fate attenzione\ndurante la spedizione!",
+            spanish=" ¡Tened mucho cuidado en vuestra\nexpedición!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡[hero] y [partner]!",
+        });
+        message_Talk({
+            english=" Thank you so much for saving\nmy little brother!",
+            french=" Merci beaucoup d'avoir sauvé\nmon petit frère!",
+            german=" Vielen Dank dafür, dass ihr\nmeinen Bruder gerettet habt!",
+            italian=" Grazie per aver salvato il mio\nfratellino!",
+            spanish=" ¡Muchas gracias por salvar\na mi hermanito!",
+        });
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_TEARY_EYED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Azurill[CR] came back safely...[K]\nI...[K]I...",
+            french=" [CS:N]Azurill[CR] est revenu sain\net sauf...[K] Je... [K]je...",
+            german=" [CS:N]Azurill[CR] ist sicher\nzurückgekehrt.[K] Ich...[K] Ich...",
+            italian=" [CS:N]Azurill[CR] è tornato sano e\nsalvo...[K] Io...[K] Io....",
+            spanish=" [CS:N]Azurill[CR] regresó sano y salvo.[K]\nYo...[K] Yo...",
+        });
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you so very much!",
+            french=" Je vous remercie du fond\ndu cœur!",
+            german=" Habt vielen Dank!",
+            italian=" Vi ringrazio dal profondo del\ncuore!",
+            spanish=" ¡Muchísimas gracias!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

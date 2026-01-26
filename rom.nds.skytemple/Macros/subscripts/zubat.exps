@@ -1,0 +1,92 @@
+macro ZubatMain() {
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_ZUBATTO);
+        }
+        message_SetFace(ACTOR_NPC_ZUBATTO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're only stocking up.",
+            french=" On fait juste des provisions.",
+            german=" Wir stocken nur den Vorrat auf.",
+            italian=" Ci stiamo solo rifornendo.",
+            spanish=" Solo venimos a por provisiones.",
+        });
+        message_Talk({
+            english=" Oh, come on! Don't make nasty\nfaces at me. Heh-heh-heh!",
+            french=" Oh, ça va! Me regardez pas\ncomme ça. Hin hin hin!",
+            german=" Aber, aber. Nun macht doch nicht\nso grimmige Gesichter mir gegenüber. Hehehe!",
+            italian=" Oh, andiamo! Non guardatemi\ncosì male. Eh eh eh!",
+            spanish=" ¡Venga, no me pongáis esa mala\ncara! ¡Jue, jue, jue!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[7]) {
+        // [8, 3], Apple Woods Cleared
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_ZUBATTO);
+        }
+        message_SetFace(ACTOR_NPC_ZUBATTO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh? What are we doing in here?",
+            french=" Tiens? Qu'est-ce qu'on fait\nlà-dedans?",
+            german=" Oh, was wir hier tun?",
+            italian=" Eh? Cosa ci facciamo qui?",
+            spanish=" ¿Cómo? ¿Que qué estamos\nhaciendo aquí?",
+        });
+        message_Talk({
+            english=" Nothing! Nothing at all!\nHeh-heh-heh!",
+            french=" Rien! Rien du tout!\nHin hin hin!",
+            german=" Nichts! Wir tun gar nichts.\nHehehe!",
+            italian=" Nulla! Nulla di nulla!\nEh eh eh!",
+            spanish=" ¡Nada! ¡Nada de nada!\n¡Jue, jue, jue!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+        // [7, 6], Team Skull Live Here...
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_ZUBATTO);
+        }
+        message_SetFace(ACTOR_NPC_ZUBATTO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Heh-heh-heh! Nice to see\nyou again.",
+            french=" Hin hin hin! Content de vous\nrevoir.",
+            german=" Hehehe! Schön, euch\nwiederzusehen.",
+            italian=" Eh eh eh! È bello rivedervi.",
+            spanish=" ¡Jue, jue, jue! ¡Es estupendo\nvolver a veros!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

@@ -1,0 +1,254 @@
+macro CameruptMain() {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
+        // [29, 92], Darkrai Defeated
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you, Team [team:]!",
+            french=" Merci à vous, l'Equipe\n[team:]!",
+            german=" Danke, Team [team:]!",
+            italian=" Grazie, Team [team:]!",
+            spanish=" ¡Gracias, [CS:X]Equipo[CR] [team:]!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" There are exploration teams\neven more famous than Team [CS:X]Charm[CR].",
+            french=" Il existe des équipes\nd'exploration plus célèbres encore que\nl'Equipe [CS:X]Charme[CR].",
+            german=" Es gibt Erkundungsteams, die\nnoch berühmter sind als Team [CS:X]Charme[CR].",
+            italian=" Ci sono anche squadre\nd'esplorazione più famose del Team [CS:X]Malia[CR].",
+            spanish=" Hay equipos de exploración más\nfamosos incluso que el [CS:X]Equipo Carisma[CR].",
+        });
+        message_Talk({
+            english=" The most famous would have to\nbe Team [CS:X]Raider[CR].",
+            french=" L'Equipe [CS:X]As[CR] est sans\ndoute la plus célèbre de toutes.",
+            german=" Das berühmteste ist wohl\nTeam [CS:X]Schatzsucher[CR].",
+            italian=" La squadra più famosa dovrebbe\nessere il Team [CS:X]Asso[CR].",
+            spanish=" El equipo más famoso debe de\nser el [CS:X]Equipo As[CR].",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You did it! That's wonderful!",
+            french=" Formidable! Vous avez réussi!",
+            german=" Ihr habt es geschafft. Das ist\nwundervoll!",
+            italian=" Ce l'avete fatta! È magnifico!",
+            spanish=" ¡Lo lograsteis! ¡Maravilloso!",
+        });
+        message_Talk({
+            english=" Thank you so much!",
+            french=" Merci mille fois!",
+            german=" Habt vielen Dank!",
+            italian=" Grazie mille!",
+            spanish=" ¡Muchas gracias!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Your team won't fail! Go for it!",
+            french=" Votre équipe vaincra! Foncez!",
+            german=" Euer Team wird nicht verlieren!\nVorwärts!",
+            italian=" Ce la farete! Forza!",
+            spanish=" ¡Vuestro equipo no puede perder!\n¡A por él!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[25]) {
+        // [17, 1], Dusknoir's Secret
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Grovyle[CR] is a Grass type, I hear.",
+            french=" [CS:N]Massko[CR] est un Pokémon\nde type Plante, à ce qu'il paraît.",
+            german=" [CS:N]Reptain[CR] ist ein\nPflanzen-Pokémon, wie ich gehört habe.",
+            italian=" [CS:N]Grovyle[CR], da quel che ho sentito,\nè di tipo Erba.",
+            spanish=" Según dicen, [CS:N]Grovyle[CR] es de tipo\nPlanta.",
+        });
+        message_Talk({
+            english=" Though he's said to be very\nskilled...[K]our attacks are mostly fire based!",
+            french=" Même s'il est aussi fort\nqu'on le dit...[K] la plupart de nos attaques\nsont de type Feu!",
+            german=" Er soll ja sehr erfahren sein...[K]\nDafür basieren die meisten unserer Attacken\nauf Feuer!",
+            italian=" Nonostante dicano sia così\nscaltro...[K] i nostri attacchi si basano\nprincipalmente sul fuoco!",
+            spanish=" Nuestros ataques son sobre todo\nde tipo Fuego...[K] Así que, por muy hábil que\nsea...",
+        });
+        message_Talk({
+            english=" So I think we'd be more than a\nmatch for him. At least as far as our types\nare concerned!",
+            french=" Alors, je pense qu'on serait\ndes adversaires redoutables pour lui.\nAu moins du point de vue de nos types!",
+            german=" Ich glaube also, dass wir ihm\ndurchaus ebenbürtig wären. Zumindest was\ndie Typen betrifft!",
+            italian=" Non gli renderemo certo la vita\nfacile.",
+            spanish=" Creo que, como rivales, damos\nla talla... Al menos en cuanto a tipo.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I've heard even the great\n[CS:N]Dusknoir[CR] himself is tracking [CS:N]Grovyle[CR].",
+            french=" Il paraît que le grand [CS:N]Noctunoir[CR]\nlui-même est à la poursuite de [CS:N]Massko[CR].",
+            german=" Ich habe gehört, dass sogar der\ngroße [CS:N]Zwirrfinst[CR] selbst auf der Suche nach\n[CS:N]Reptain[CR] ist.",
+            italian=" Ho sentito pure che sulle tracce\ndi [CS:N]Grovyle[CR] si è messo il grande [CS:N]Dusknoir[CR]\nin persona.",
+            spanish=" También se rumorea que el gran\n[CS:N]Dusknoir[CR] en persona está buscándolo.",
+        });
+        message_Talk({
+            english=" But so far, the thief has eluded\nthem all. He must be good.",
+            french=" Mais pour l'instant, le voleur\nréussit toujours à lui filer entre les doigts.\nIl doit être très fort, à mon avis.",
+            german=" Aber bisher ist der Dieb allen\nentkommen. Er muss also gut sein.",
+            italian=" Ma il ladro dev'essere molto\nabile, se è riuscito a sfuggire a tutti finora.",
+            spanish=" Pero, de momento, el ladrón ha\nlogrado escapar. Debe de ser muy hábil.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        // [14, 1], Northern Desert Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I've heard that the thief stealing\nthe Time Gears is named [CS:N]Grovyle[CR].",
+            french=" J'ai entendu dire que le voleur\nqui fait main basse sur les Rouages du Temps\ns'appelle [CS:N]Massko[CR].",
+            german=" Ich habe gehört, dass der Dieb,\nder die Zahnräder der Zeit stiehlt, [CS:N]Reptain[CR]\nheißt.",
+            italian=" Ho sentito che il ladro degli\nIngranaggi del Tempo si chiama [CS:N]Grovyle[CR].",
+            spanish=" He oído que el ladrón de los\nEngranajes del Tiempo se llama [CS:N]Grovyle[CR].",
+        });
+        message_Talk({
+            english=" Hmm... Can't say that I've heard\nof him.",
+            french=" Hmmm... Je ne crois pas en\navoir entendu parler auparavant.",
+            german=" Hmm... Kann nicht behaupten,\nvorher schon einmal von ihm gehört zu haben.",
+            italian=" Mmm... Questo nome non mi è\nfamiliare.",
+            spanish=" Aunque tampoco es que se sepa\nmucho de él.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_BAKUUDA);
+        }
+        message_SetFace(ACTOR_NPC_BAKUUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Ponyta[CR] and I are great at using\nfire-based attacks, as you can imagine. But...",
+            french=" Comme vous vous en doutez,\nles attaques de type Feu n'ont pas de secret\npour [CS:N]Ponyta[CR] et moi. Mais...",
+            german=" [CS:N]Ponita[CR] und ich sind gut, wenn es\num das Verwenden von Feuer-Attacken geht,\nwie du dir vorstellen kannst. Aber...",
+            italian=" Come potrai immaginare, [CS:N]Ponyta[CR]\ne io siamo maestre negli attacchi di tipo Fuoco.\nMa...",
+            spanish=" [CS:N]Ponyta[CR] y yo usamos con gran\ndestreza ataques de tipo Fuego, pero...",
+        });
+        message_Talk({
+            english=" We leave swirling fire in our\nwake as we fight...[K]and that scares our leader.",
+            french=" On laisse des tourbillons de feu\ndans notre sillage...[K] et cela effraie\nnotre meneur.",
+            german=" Wir lassen Feuerwirbel an\nunseren Kampfschauplätzen zurück...[K] Und das\nmacht unserem Anführer Angst.",
+            italian=" Ci lasciamo alle spalle un turbine\ndi fuoco quando lottiamo...[K] e il nostro leader\nsi spaventa.",
+            spanish=" Al luchar dejamos una estela...[K]\nque asusta bastante a nuestro líder.",
+        });
+        message_Talk({
+            english=" I think our leader has lost\nconfidence because of this...[K] But I don't know\nwhat we can do about it.",
+            french=" Je crois que c'est pour ça que\nnotre meneur a perdu confiance en lui...[K]\nMais je ne vois pas ce qu'on peut y faire...",
+            german=" Ich glaube, unser Anführer hat\ndeshalb das Vertrauen verloren...[K] Ich bin mir\nnicht sicher, was wir dagegen tun können.",
+            italian=" Penso che il nostro leader abbia\nperso sicurezza...[K] Ma cosa ci possiamo\nfare?",
+            spanish=" Me temo que nuestro líder ha\nperdido la confianza...[K] pero no sé qué\npodemos hacer al respecto.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

@@ -1,0 +1,24 @@
+// Duplicate file group
+// Diglett
+// - SCRIPT/D25P11A/um2301.exps
+// - SCRIPT/D25P11A/um2305.exps
+// - SCRIPT/G01P04A/um0202.exps
+// - SCRIPT/G01P04A/um0310.exps
+// - SCRIPT/G01P04A/um0402.exps
+// - SCRIPT/G01P04A/um0601.exps
+// - SCRIPT/G01P04A/um0606.exps
+// - SCRIPT/G01P04A/um1604.exps
+// - SCRIPT/G01P04A/um2402.exps
+// - SCRIPT/G01P04A/um2502.exps
+// - SCRIPT/G01P04A/us0103.exps
+// - SCRIPT/G01P04A/us0402.exps
+// - SCRIPT/G01P04A/us2201.exps
+// - SCRIPT/G01P04A/us2204.exps
+// - SCRIPT/H01P99A/um0701.exps
+// - SCRIPT/P01P01A/um0801.exps
+// - SCRIPT/T01P02A/um2101.exps
+
+import subscripts/diglett.exps;
+def 0 {
+    ~DiglettMain();
+}

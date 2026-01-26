@@ -1,0 +1,213 @@
+macro WeavileMain() {
+    if ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_MANYUURA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_AABOKKU) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_DORAPION) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You're making our Team [CS:X]AWD[CR]\nlook bad!",
+            french=" A cause de vos exploits, vous\njetez le discrédit sur notre Equipe [CS:X]DDA[CR]!",
+            german=" Ihr lasst unser Team [CS:X]SPA[CR]\nschlecht aussehen!",
+            italian=" State mettendo in cattiva luce il\nTeam [CS:X]AWD[CR]!",
+            spanish=" ¡El [CS:X]Equipo WAD[CR] no está a\nla altura de vuestro equipo! ¡Qué palo!",
+        });
+        message_Talk({
+            english=" The glory is ours next time!",
+            french=" La prochaine fois, à nous la\ngloire!",
+            german=" Nächstes Mal werden wir\ntriumphieren!",
+            italian=" La prossima volta saremo noi a\nprimeggiare!",
+            spanish=" ¡Pero os superaremos la\npróxima vez!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+        // [29, 5], Graduating from the guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Well if it isn't you two.[K]\nIt's been a long time.",
+            french=" C'est vous.[K] Ça faisait\nlongtemps.",
+            german=" Wenn das mal nicht ihr zwei\nseid. [K]Ist schon eine Weile her.",
+            italian=" Ma siete proprio voi due![K]\nNe è passato di tempo!",
+            spanish=" Mira a quién tenemos aquí.[K]\nHa pasado mucho tiempo.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[16]) {
+        // [12, 1], Returned from Expedition
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_MANYUURA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Then we failed to find clues\nhere too...",
+            french=" Ici aussi, nous avons donc\néchoué dans notre quête d'indices...",
+            german=" Dann haben wir es auch hier\nnicht geschafft, Hinweise zu finden.",
+            italian=" Non abbiamo trovato indizi\nneanche qui...",
+            spanish=" Entonces tampoco hemos\nencontrado ninguna pista aquí...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey, you two![K] Are you from\naround here?",
+            french=" Hé, vous deux![K]\nVous êtes du coin?",
+            german=" Hey, ihr zwei![K] Kommt ihr aus\ndieser Gegend?",
+            italian=" Ehi, voi due![K] Siete di queste\nparti?",
+            spanish=" ¡Eh, pareja![K] ¿Sois de por aquí?",
+        });
+        message_Talk({
+            english=" Then let me ask you...",
+            french=" Alors dites-moi...",
+            german=" Dann verratet mir...",
+            italian=" Posso chiedervi...",
+            spanish=" Entonces, dejadme que os\npregunte una cosa...",
+        });
+        message_Talk({
+            english=" Somewhere in this area...[K]\nthere should be a place called [CS:P]Zero Isle[CR]...",
+            french=" Quelque part par ici...[K]\nil devrait y avoir un endroit qu'on appelle\nl'[CS:P]Ile Zéro[CR]...",
+            german=" Irgendwo in dieser Gegend[K] soll\nes einen Ort namens [CS:P]Null-Insel[CR] geben.",
+            italian=" Qui intorno da qualche parte...[K]\nCi dovrebbe essere un posto chiamato\n[CS:P]Isola Zero[CR]...",
+            spanish=" En algún lugar de esta zona...[K]\nhay un sitio llamado la [CS:P]Isla Cero[CR]...",
+        });
+        message_Talk({
+            english=" Do you know of it?",
+            french=" En avez-vous déjà entendu\nparler?",
+            german=" Kennt ihr ihn?",
+            italian=" La conoscete?",
+            spanish=" ¿Lo conocéis?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+            case 2:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+            default:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8962);
+        with(actor ACTOR_ATTENDANT1) {
+            SetEffect(EFFECT_QUESTION_MARK, 3);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" No. Should I?",
+                    french=" Non, jamais entendu parler.\nPourquoi?",
+                    german=" Nein. Sollte ich diesen Ort\nkennen?",
+                    italian=" No. Dovrei conoscerla?",
+                    spanish=" No. ¿Debería?",
+                }
+            case 2:
+                {
+                    english=" No. Should I?",
+                    french=" Non, jamais entendu parler.\nPourquoi?",
+                    german=" Nein. Sollte ich diesen Ort\nkennen?",
+                    italian=" No. Dovrei conoscerla?",
+                    spanish=" No. ¿Debería?",
+                }
+            default:
+                {
+                    english=" No. Should I?",
+                    french=" Non, jamais entendu parler.\nPourquoi?",
+                    german=" Nein. Sollte ich diesen Ort\nkennen?",
+                    italian=" No. Dovrei conoscerla?",
+                    spanish=" No. ¿Debería?",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hmmm...[K] So that's the case?[K]\nFine. Be that way.",
+            french=" Hmmm...[K] Dans ce cas...[K] Bien.\nD'accord.",
+            german=" Hmm...[K] So ist das also, wie?[K]\nGut, dann eben nicht.",
+            italian=" Mmm...[K] Se le cose stanno\ncosì...",
+            spanish=" Hum...[K] ¿Seguro?[K]\nEn fin, si tú lo dices...",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_MANYUURA) {
+            Turn2Direction(4, 10, DIR_UP);
+        }
+        WaitExecuteLives(ACTOR_NPC_MANYUURA);
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

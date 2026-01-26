@@ -1,0 +1,11 @@
+// Duplicate file group
+// Drowzee
+// - SCRIPT/G01P07A/us2008.exps
+// - SCRIPT/G01P07A/us2103.exps
+// - SCRIPT/T01P02A/us2204.exps
+// - SCRIPT/T01P02A/us2209.exps
+
+import subscripts/drowzee.exps;
+def 0 {
+    ~DrowzeeMain();
+}

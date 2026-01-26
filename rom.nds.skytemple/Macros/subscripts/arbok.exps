@@ -1,0 +1,123 @@
+macro ArbokMain() {
+    if ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_AABOKKU);
+        }
+        message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've been exploring\n[CS:P]Zero Isle[CR], but...",
+            french=" Nous avons exsssploré\nl'[CS:P]Ile Zéro[CR]...",
+            german=" Wir haben die [CS:P]Null-Insel[CR]\nerkundet, aber...",
+            italian=" Abbiamo esssplorato l'[CS:P]Isssola[CR]\n[CS:P]Zero[CR], ma...",
+            spanish=" Hemosss essstado explorando la\n[CS:P]Isla Cero[CR], pero...",
+        });
+        message_Talk({
+            english=" That ssssspot isssssn't for the\nfaint of heart.",
+            french=" Ce n'est pas un endroit pour\nles froussssards.",
+            german=" Diessser Ort ist nichtsss für\njemanden mit einem ssschwachen Herzen.",
+            italian=" Non è un posssto per chi\nsssoffre di cuore!",
+            spanish=" No esss un lugar para débilesss.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+        // [29, 5], Graduating from the guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_AABOKKU);
+        }
+        message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've finally found it!",
+            french=" Enfin, nous l'avons trouvée!",
+            german=" Wir haben sssie endlich\ngefunden!",
+            italian=" Alla fine l'abbiamo trovata!",
+            spanish=" ¡La encontramosss!",
+        });
+        message_Talk({
+            english=" [CS:P]Zero Isle[CR]!",
+            french=" L'[CS:P]Ile Zéro[CR]!",
+            german=" Die [CS:P]Null-Insel[CR]!",
+            italian=" L'[CS:P]Isssola Zero[CR]!",
+            spanish=" ¡Esss la [CS:P]Isla Cero[CR]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[16]) {
+        // [12, 1], Returned from Expedition
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_AABOKKU) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_AABOKKU);
+        }
+        message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It isssss rare to come by\nnewssssss on [CS:P]Zero Isle[CR]. Right, bossssssss?",
+            french=" C'est rare qu'on entende quoi que\nce sssoit sur l'[CS:P]Ile Zéro[CR]. Pas vrai, chef?",
+            german=" Esss issst ssschwierig, an\nNeuigkeiten über die [CS:P]Null-Insel[CR] zu kommen.\nNicht wahr, Bossssss?",
+            italian=" Sssi hanno raramente notizie\nsssull'[CS:P]Isssola Zero[CR]. Vero, capo?",
+            spanish=" No esss nada fácil encontrar\ninformación sssobre la [CS:P]Isla Cero[CR].\n¿Verdad, jefa?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_AABOKKU);
+        }
+        message_SetFace(ACTOR_NPC_AABOKKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We traveled all the way out\nhere, but...",
+            french=" Nous ssssommes venus de très\nloin...",
+            german=" Wir sssind den ganzen Weg\nhierher gereissst...",
+            italian=" Ssssssiamo venuti fin qui, ma...",
+            spanish=" Hemosss viajado hasssta aquí,\npero...",
+        });
+        message_Talk({
+            english=" It turnsssss out that thisssss\nssssspot isssss pretty dingy, issssn't it?",
+            french=" Mais finalement, cet endroit,\nil est un peu miteux, non?",
+            german=" Diessser Ort ssscheint jedoch\neher ssschäbig zu sssein, oder?",
+            italian=" Mi sssembra un posssto un po'\nssssssquallido.",
+            spanish=" Essste lugar parece muy lúgubre,\n¿no?",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

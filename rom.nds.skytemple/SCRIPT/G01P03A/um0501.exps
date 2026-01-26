@@ -1,0 +1,48 @@
+// Duplicate file group
+// Bidoof
+// - SCRIPT/D06P11A/um0802.exps
+// - SCRIPT/D07P11A/um0802.exps
+// - SCRIPT/D07P11A/um0803.exps
+// - SCRIPT/D25P11A/um2303.exps
+// - SCRIPT/D25P11A/um2306.exps
+// - SCRIPT/G01P03A/um0304.exps
+// - SCRIPT/G01P03A/um0310.exps
+// - SCRIPT/G01P03A/um0322.exps
+// - SCRIPT/G01P03A/um0501.exps
+// - SCRIPT/G01P03A/um0601.exps
+// - SCRIPT/G01P03A/um0611.exps
+// - SCRIPT/G01P03A/um0706.exps
+// - SCRIPT/G01P03A/um1204.exps
+// - SCRIPT/G01P03A/um1209.exps
+// - SCRIPT/G01P03A/um1510.exps
+// - SCRIPT/G01P03A/um2501.exps
+// - SCRIPT/G01P03A/us0102.exps
+// - SCRIPT/G01P03A/us0205.exps
+// - SCRIPT/G01P03A/us0301.exps
+// - SCRIPT/G01P03A/us0308.exps
+// - SCRIPT/G01P03A/us2202.exps
+// - SCRIPT/G01P04A/us0406.exps
+// - SCRIPT/G01P04A/us2004.exps
+// - SCRIPT/G01P04A/us2008.exps
+// - SCRIPT/G01P06A/um0701.exps
+// - SCRIPT/P01P01A/um0401.exps
+// - SCRIPT/P01P01A/um1302.exps
+// - SCRIPT/T01P01A/um0806.exps
+// - SCRIPT/T01P01A/um1106.exps
+// - SCRIPT/T01P01A/um1306.exps
+// - SCRIPT/T01P01A/um1605.exps
+// - SCRIPT/T01P01A/um2101.exps
+// - SCRIPT/T01P01A/us2209.exps
+// - SCRIPT/T01P02A/um2207.exps
+// - SCRIPT/T01P02A/us0108.exps
+// - SCRIPT/T01P02A/us0201.exps
+// - SCRIPT/T01P02A/us0405.exps
+// - SCRIPT/T01P02A/us2002.exps
+// - SCRIPT/T01P02A/us2102.exps
+// - SCRIPT/T01P02A/us2305.exps
+// - SCRIPT/T01P02A/us3101.exps
+
+import subscripts/bidoof.exps;
+def 0 {
+    ~BidoofMain();
+}

@@ -1,0 +1,68 @@
+macro Shaymin_3Main() {
+    if ($DUNGEON_CONQUEST_LIST[114]) {
+        // [29, 19], Return to 4th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI3);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Did you already find a\n[CS:I]Sky Gift[CR]?",
+            french=" Vous avez déjà trouvé un\n[CS:I]Don du Ciel[CR]?",
+            german=" Hast du bereits ein\n[CS:I]Himmelspräsent[CR] gefunden?",
+            italian=" Hai già trovato un [CS:I]Dono Cielo[CR]?",
+            spanish=" ¿Ya has encontrado algún\n[CS:I]Regalo Cielo[CR]?",
+        });
+        message_Talk({
+            english=" It's said that the treasure falls\nfrom the sky in proportion to everyone's\nfeelings of gratitude.",
+            french=" On dit que ce trésor tombe du\nciel en fonction de la reconnaissance\nqu'éprouvent les gens.",
+            german=" Man sagt, dass mehr Schätze\nvom Himmel regnen, je mehr Dankbarkeit unser\naller Herzen durchdringt.",
+            italian=" Si dice che il tesoro cada dal\ncielo in proporzione ai sentimenti di\ngratitudine di ognuno.",
+            spanish=" Cuentan que el tesoro cae del\ncielo en proporción a la gratitud que\nsiente todo el mundo.",
+        });
+        message_Talk({
+            english=" It's an old story, but still that\ntreasure has something mysterious about it.",
+            french=" C'est une vieille légende, mais\nil n'en reste pas moins que ce trésor\na quelque chose de mystérieux.",
+            german=" Es ist eine alte Geschichte, aber\ndieser Schatz bleibt mysteriös wie eh und je.",
+            italian=" È una vecchia leggenda, eppure\nc'è qualcosa di misterioso in quel tesoro.",
+            spanish=" Es una vieja leyenda, pero a ese\ntesoro lo sigue envolviendo un halo de misterio.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI3);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You go straight from here, and\nyou won't miss the mountain path.",
+            french=" Le chemin de montagne est\ndroit devant, vous ne pouvez pas le rater.",
+            german=" Wenn du von hier geradeaus\ngehst, kannst du den Gebirgspass nicht\nverfehlen!",
+            italian=" Prosegui dritto da qui e\narriverai al sentiero della montagna.",
+            spanish=" Si sigues recto encontrarás el\nsendero alpino.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

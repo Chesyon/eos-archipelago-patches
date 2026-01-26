@@ -1,0 +1,99 @@
+macro SkuntankMain() {
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUKATANKU);
+        }
+        message_SetFace(ACTOR_NPC_SUKATANKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The expedition will be rough.[K]\nWe'd all better be...well stocked with food.\nChaw-haw-haw!",
+            french=" L'expédition va être rude.[K]\nOn ferait tous mieux de... faire le plein de\nprovisions. Gnark gnark gnark!",
+            german=" Die Expedition wird ziemlich\nholprig werden.[K] Wir sollten alle mit Proviant\nausgestattet sein. Cha-ha-ha!",
+            italian=" La spedizione sarà dura.[K]\nFaremmo meglio a portarci... buone scorte di\ncibo. Ahr-ahr-ahr!",
+            spanish=" La expedición va a ser dura.[K]\nHay que ir bien provistos de comida.\n¡Jua, jua, jua!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[7]) {
+        // [8, 3], Apple Woods Cleared
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUKATANKU);
+        }
+        message_SetFace(ACTOR_NPC_SUKATANKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, come on! You're suspicious\nabout us guests? Chaw-haw-haw!",
+            french=" Oh, allons bon! Voilà que vous\nsoupçonnez d'honnêtes invités maintenant?\nGnark gnark gnark!",
+            german=" Oh, jetzt kommt schon, ihr\nverdächtigt eure Gäste? Cha-ha-ha!",
+            italian=" Oh, suvvia! Sospettate di noi\nospiti? Ahr-ahr-ahr!",
+            spanish=" ¡Pero bueno! ¿Sospecháis de\nvuestros invitados? ¡Jua, jua, jua!",
+        });
+        message_Talk({
+            english=" You're not suggesting that we\nraided your stock, are you? Chaw-haw-haw!",
+            french=" Je suis choqué! Vous osez\ninsinuer que c'est moi qui ai pillé\nvotre réserve? Gnark gnark gnark!",
+            german=" Ihr wollt doch nicht ernsthaft\nbehaupten, wir hätten uns über eure Vorräte\nhergemacht?!? Cha-ha-ha!",
+            italian=" Non starete insinuando che vi\nabbiamo razziato le scorte, vero? Ahr-ahr-ahr!",
+            spanish=" No nos estarás acusando de\nvaciar la despensa, ¿verdad? ¡Jua, jua,\njua!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+        // [7, 6], Team Skull Live Here...
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SUKATANKU);
+        }
+        message_SetFace(ACTOR_NPC_SUKATANKU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The expedition should be a joke.\nI'm looking forward to it. Chaw-haw-haw!",
+            french=" L'expédition, ça va être du\ngâteau. Vivement qu'elle commence! Gnark\ngnark gnark!",
+            german=" Die Expedition dürfte ein Witz\nwerden. Ich freu mich schon drauf.\nCha-ha-ha!",
+            italian=" La spedizione sarà uno scherzo.\nNon vedo l'ora di partire. Ahr-ahr-ahr!",
+            spanish=" Esta expedición va a ser la\nmonda. Estoy impaciente por ver la que\nse monta. ¡Jua, jua, jua!",
+        });
+        message_Talk({
+            english=" Of course, there's just one\nlittle thing...",
+            french=" Bien sûr, il reste juste\nun minuscule détail...",
+            german=" Allerdings stellt sich mir noch\neine Frage...",
+            italian=" Come no, c'è solo un piccolo\ndettaglio...",
+            spanish=" Bueno, hay una cosilla más...",
+        });
+        message_Talk({
+            english=" Will you wimps get picked for\nthe expedition? Chaw-haw-haw!",
+            french=" Est-ce que des poules mouillées\ndans votre genre vont être prises pour\nl'expédition? Gnark gnark gnark!",
+            german=" Werdet ihr Schwächlinge\nüberhaupt für die Expedition ausgewählt?\nCha-ha-ha!",
+            italian=" Sceglieranno dei Pokémon\nimbranati come voi per la spedizione?\nAhr-ahr-ahr!",
+            spanish=" ¿Os dejarán ir a la expedición,\npedazo de enclenques? ¡Jua, jua, jua!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

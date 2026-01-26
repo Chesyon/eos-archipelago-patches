@@ -1,0 +1,218 @@
+macro MachokeMain() {
+    if ($DUNGEON_ARRIVE_LIST[15]) {
+        // [29, 54], 2 missions complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GOORIKII);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Until we meet again!",
+            french=" A la revoyure!",
+            german=" Bis zum nächsten Mal!",
+            italian=" A presto!",
+            spanish=" ¡Hasta la próxima!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_ARRIVE_LIST[14]) {
+        // [29, 40], 1 mission complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GOORIKII);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I like to spend my days off by\nclimbing to the summit and greeting the\nmorning sun.",
+            french=" J'aime passer mes jours\nde congé à escalader la montagne jusqu'au\nsommet pour saluer le soleil levant.",
+            german=" Ich mag es, während meiner\nfreien Tage den Gipfel zu erklimmen, um die\nMorgensonne zu grüßen.",
+            italian=" Mi piace trascorrere il mio\ntempo libero scalando la montagna e\nammirare l'alba da lassù.",
+            spanish=" Me gusta pasar mi tiempo libre\nsubiendo hasta la cima para dar los buenos días\nal sol matutino.",
+        });
+        message_Talk({
+            english=" It's a bit challenging, but that's\nwhy it can be so wonderful.",
+            french=" C'est un peu éprouvant, mais\nla récompense est à la hauteur du défi.",
+            german=" Es ist ein wenig fordernd, aber\ndas ist auch ein Grund dafür, warum es so\nwundervoll sein kann.",
+            italian=" È piuttosto impegnativo, ma è\nper questo che è così bello.",
+            spanish=" Es todo un reto, pero\neso lo convierte en algo maravilloso.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GOORIKII);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That [CS:N]Shaymin[CR]...",
+            french=" Ce [CS:N]Shaymin[CR]...",
+            german=" Dieses [CS:N]Shaymin[CR]...",
+            italian=" Quella [CS:N]Shaymin[CR]...",
+            spanish=" Esa [CS:N]Shaymin[CR]...",
+        });
+        message_KeyWait();
+        with(actor ACTOR_NPC_GOORIKII) {
+            SetEffect(EFFECT_SHOCKED, 3);
+        }
+        message_Talk({
+            english=" I had no idea that [CS:N]Shaymin[CR] could\nchange its Forme like that!",
+            french=" J'ignorais que [CS:N]Shaymin[CR]\npouvait changer de Forme comme ça!",
+            german=" Ich hatte keine Ahnung, dass\n[CS:N]Shaymin[CR] seine Form derart ändern kann!",
+            italian=" Non immaginavo che quella\n[CS:N]Shaymin[CR] potesse cambiare Forma in quel modo!",
+            spanish=" ¡No tenía ni idea de que [CS:N]Shaymin[CR]\npudiera cambiar de forma así!",
+        });
+        with(actor ACTOR_NPC_GOORIKII) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_GOORIKII);
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
+        // [29, 26], First Time at 8th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_GOORIKII) {
+            SetAnimation(2);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" ..................",
+            french=" ..................",
+            german=" ......",
+            italian=" ..................",
+            spanish=" ...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[117]) {
+        // [29, 24], First Time at 7th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Please.",
+            french=" On compte sur toi.",
+            german=" Wir verlassen uns auf euch.",
+            italian=" Contiamo su di voi.",
+            spanish=" Cuento contigo.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[115]) {
+        // [29, 20], First time at 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" ...[K]Sorry!",
+            french=" ...[K] Pardon!",
+            german=" ...[K]Entschuldigung!",
+            italian=" ...[K] Scusate!",
+            spanish=" Esto...[K] ¡Perdón!",
+        });
+        se_Play(8972);
+        with(actor ACTOR_NPC_GOORIKII) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        with(actor ACTOR_NPC_GOORIKII) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_GOORIKII);
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[112]) {
+        // [29, 14], First Time at 2nd Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm [CS:N]Machoke[CR]. I'm the leader of\nTeam [CS:X]Frontier[CR], Project P's survey team.",
+            french=" Je suis [CS:N]Machopeur[CR].\nJe suis le meneur de l'Equipe [CS:X]Eclaireurs[CR],\nl'équipe de reconnaissance du Projet P.",
+            german=" Mein Name ist [CS:N]Maschok[CR]. Ich bin\nder Anführer von Team [CS:X]Grenzland[CR], dem\nVermessungsteam von Projekt P.",
+            italian=" Mi chiamo [CS:N]Machoke[CR]. Sono il\nleader del Team [CS:X]Pioniere[CR], la squadra\ndi indagine del Progetto P.",
+            spanish=" Soy [CS:N]Machoke[CR], el líder del\n[CS:X]Equipo Frontera[CR], el equipo de reconocimiento\ndel Proyecto P.",
+        });
+        message_Talk({
+            english=" If you're ever in trouble,\njust let me know.",
+            french=" Si jamais tu te trouves\nen difficulté, fais-le-moi savoir.",
+            german=" Wenn ihr in Schwierigkeiten\nsteckt, lasst es mich wissen!",
+            italian=" Se doveste trovarvi nei guai,\nfatemelo sapere.",
+            spanish=" Si alguna vez te ves en apuros,\nházmelo saber.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_GOORIKII);
+        }
+        message_SetFace(ACTOR_NPC_GOORIKII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm [CS:N]Machoke[CR]. I'm the leader of\nTeam [CS:X]Frontier[CR], Project P's survey team.",
+            french=" Je suis [CS:N]Machopeur[CR].\nJe suis le meneur de l'Equipe [CS:X]Eclaireurs[CR],\nl'équipe de reconnaissance du Projet P.",
+            german=" Mein Name ist [CS:N]Maschok[CR]. Ich bin\nder Anführer von Team [CS:X]Grenzland[CR], dem\nVermessungsteam von Projekt P.",
+            italian=" Mi chiamo [CS:N]Machoke[CR]. Sono il\nleader del Team [CS:X]Pioniere[CR], la squadra\ndi indagine del Progetto P.",
+            spanish=" Soy [CS:N]Machoke[CR], el líder del [CS:X]Equipo[CR]\n[CS:X]Frontera[CR], el equipo de reconocimiento\ndel Proyecto P.",
+        });
+        message_Talk({
+            english=" If you're ever in trouble,\njust let me know.",
+            french=" Si jamais vous vous trouvez\nen difficulté, faites-le-moi savoir.",
+            german=" Wenn ihr in Schwierigkeiten\nsteckt, lasst es mich wissen!",
+            italian=" Se doveste trovarvi nei guai,\nfatemelo sapere.",
+            spanish=" Si alguna vez te ves en apuros,\nházmelo saber.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

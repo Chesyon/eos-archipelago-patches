@@ -1,0 +1,20 @@
+// Duplicate file group
+// Camerupt
+// - SCRIPT/G01P03A/um0504.exps
+// - SCRIPT/G01P03A/um1409.exps
+// - SCRIPT/G01P03A/um1506.exps
+// - SCRIPT/G01P03A/um1608.exps
+// - SCRIPT/G01P03A/us2208.exps
+// - SCRIPT/T01P01A/um2407.exps
+// - SCRIPT/T01P01A/um2507.exps
+// - SCRIPT/T01P02A/um1305.exps
+// - SCRIPT/T01P02A/um1309.exps
+// - SCRIPT/T01P02A/um1313.exps
+// - SCRIPT/T01P02A/us0104.exps
+// - SCRIPT/T01P02A/us0408.exps
+// - SCRIPT/T01P02A/us2004.exps
+
+import subscripts/camerupt.exps;
+def 0 {
+    ~CameruptMain();
+}

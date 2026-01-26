@@ -1,0 +1,280 @@
+macro Shaymin_2Main() {
+    if ($DUNGEON_ARRIVE_LIST[13]) {
+        // [29, 32], 1 day passes.
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Welcome to the [CS:P]Shaymin Village[CR]!",
+            french=" Bienvenue au [CS:P]Village Shaymin[CR]!",
+            german=" Willkommen in [CS:P]Shaymin-Dorf[CR]!",
+            italian=" Vi do il benvenuto\nal [CS:P]Villaggio Shaymin[CR]!",
+            spanish=" ¡Te doy la bienvenida a\n[CS:P]Aldea Shaymin[CR]!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" How was the summit?",
+            french=" Comment avez-vous\ntrouvé le sommet?",
+            german=" Wie war es auf dem Gipfel?",
+            italian=" Com'era la cima?",
+            spanish=" ¿Qué tal en la cima?",
+        });
+        message_Talk({
+            english=" We're so happy to have so many\nof you climbing our mountain.",
+            french=" Nous sommes heureux que vous\nsoyez si nombreux à gravir la montagne.",
+            german=" Wir sind so froh, dass so viele\nvon euch den Berg besteigen.",
+            italian=" Siamo molto felici di vedere\ncosì tante squadre d'esplorazione\nsu questa montagna.",
+            spanish=" Nos alegra mucho que haya\ntanta gente escalando nuestra montaña.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[120]) {
+        // [29, 30], Lost to Grimer!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        Wait(1);
+        se_Play(8973);
+        with(actor ACTOR_NPC_SHEIMI5) {
+            SetEffect(EFFECT_SHOCKED, 3);
+        }
+        with(actor ACTOR_NPC_SHEIMI5) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_SHEIMI5);
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_SURPRISED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" What?!\nThere are [CS:N]Grimer[CR] and [CS:N]Muk[CR] at the summit?",
+            french=" Quoi?!\nDes [CS:N]Tadmorv[CR] et des [CS:N]Grotadmorv[CR]?\nAu sommet!?",
+            german=" Wie bitte?!? Da sind [CS:N]Sleima[CR] und\n[CS:N]Sleimok[CR] auf dem Gipfel?",
+            italian=" Come?!\nCi sono dei [CS:N]Grimer[CR] e dei [CS:N]Muk[CR] in cima?",
+            spanish=" ¡¿Cómo?!\n¿Que hay [CS:N]Grimer[CR] y [CS:N]Muk[CR] en la cima?",
+        });
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_WORRIED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder what they're up to...",
+            french=" Je me demande\nce qu'ils font là-haut...",
+            german=" Das ist ja der Gipfel!\nWas suchen sie wohl dort?",
+            italian=" Mi chiedo cosa ci facciano lì...",
+            spanish=" Me pregunto qué tramarán...",
+        });
+        message_Talk({
+            english=" They're supposed to be farther\ndown the mountain...",
+            french=" D'ordinaire, ils vivent\nplus bas sur la montagne...",
+            german=" Sie sollten eigentlich weiter\nunten im Tal sein...",
+            italian=" Non dovrebbero trovarsi così\nin alto...",
+            spanish=" Deberían estar en la parte\ninferior de la montaña...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[119]) {
+        // [29, 29], Return to 9th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder how [CS:N]Ampharos[CR] is doing\nat the 8th Station Clearing...",
+            french=" Je me demande comment\nça se passe pour [CS:N]Pharamp[CR],\nà la trouée du 8[F:E] Relais.",
+            german=" Ich frage mich, wie es\n[CS:N]Ampharos[CR] bei der 8. Zwischenlagerlichtung\nwohl ergeht...",
+            italian=" Chissà come se la sta cavando\n[CS:N]Ampharos[CR] al Bivacco 8...",
+            spanish=" Me pregunto cómo le irá a\n[CS:N]Ampharos[CR] en la Base del\nOctavo Puerto...",
+        });
+        message_Talk({
+            english=" We've looked up to him for a\nlong time now.",
+            french=" On a toujours éprouvé\nle plus grand respect pour lui.",
+            german=" Wir sehen schon sehr lange zu\nihm auf.",
+            italian=" Provo davvero una grande\nsimpatia per lui.",
+            spanish=" Ya hace mucho tiempo que\nadmiramos su labor.",
+        });
+        message_Talk({
+            english=" But it seems that he only has\neyes for this mountain...",
+            french=" Mais on dirait qu'il n'a d'yeux\nque pour cette montagne...",
+            german=" Aber anscheinend hat er nur\nAugen für diesen Berg...",
+            italian=" Ma pare che lui non abbia occhi\nche per questa montagna...",
+            spanish=" Pero parece que solo tiene ojos\npara esta montaña...",
+        });
+        message_Close();
+        se_Play(8972);
+        with(actor ACTOR_NPC_SHEIMI5) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        with(actor ACTOR_NPC_SHEIMI5) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_SHEIMI5);
+        message_Talk({
+            english=" Ah! What am I saying? Oops...",
+            french=" Eh! Mais qu'est-ce que\nje raconte, moi? Oups...",
+            german=" Oha! Was sage ich da? Ups...",
+            italian=" Ah! Ma che sto dicendo? Ooops...",
+            spanish=" ¡Huy! ¿Pero qué digo? Jo...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[121]) {
+        // [29, 21], Returned to 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" There seems to have been a\nquarrel with the [CS:N]Carnivine[CR] at the\n5th Station Clearing...",
+            french=" On dirait qu'il y a eu du rififi\navec les [CS:N]Vortente[CR], à la trouée\ndu 5[F:E] Relais...",
+            german=" Es gab wohl einen Streit\nmit den [CS:N]Venuflibis[CR] bei der\n5. Zwischenlagerlichtung...",
+            italian=" Pare che ci siano stati dei\nproblemi con le [CS:N]Carnivine[CR] al Bivacco 5...",
+            spanish=" Parece que ha habido una disputa\ncon los [CS:N]Carnivine[CR] en la Base del\nQuinto Puerto...",
+        });
+        message_KeyWait();
+        with(actor ACTOR_NPC_SHEIMI5) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hee-hee-hee. ♪\nThose [CS:N]Carnivine[CR] never change, do they?",
+            french=" Hi hi hi. ♪\nCes [CS:N]Vortente[CR], toujours les mêmes,\npas vrai?",
+            german=" Hihihihi. ♪\nDiese [CS:N]Venuflibis[CR] ändern sich wohl nie,\nnicht wahr?",
+            italian=" Hi hi hi. ♪\nQuelle [CS:N]Carnivine[CR] non cambiano mai, vero?",
+            spanish=" Ji, ji, ji. ♪\nEsos [CS:N]Carnivine[CR] nunca cambian, ¿eh?",
+        });
+        message_KeyWait();
+        with(actor ACTOR_NPC_SHEIMI5) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" But they're not bad, so please\nforgive them.",
+            french=" Mais ce ne sont pas de mauvais\nbougres, alors il faut les excuser.",
+            german=" Aber sie sind nicht bösartig,\nalso nimm es ihnen nicht übel.",
+            italian=" Però non sono cattive, quindi\ncercate di perdonarle.",
+            spanish=" Pero en el fondo no son malos,\nhay que perdonarlos.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[113]) {
+        // [29, 17], Return to 3rd Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We haven't really climbed the\nmountain in a long time either, not since that\nearthquake.",
+            french=" Nous-mêmes, nous n'avons plus\nvraiment escaladé cette montagne depuis\nce tremblement de terre.",
+            german=" Wir sind den Berg seit einiger\nZeit auch nicht mehr empor geklommen. Auf\njeden Fall nicht mehr seit dem Erdbeben.",
+            italian=" Anche noi non scaliamo la\nmontagna da molto tempo, non da quando quel\nterremoto ha messo a soqquadro il villaggio.",
+            spanish=" Hace mucho que no subimos esa\nmontaña, desde aquel terremoto.",
+        });
+        message_Talk({
+            english=" In the past we used to socialize\nwith the others on the mountain...",
+            french=" Par le passé, nous avions\nl'habitude de nous lier d'amitié avec\nles autres résidents de la montagne...",
+            german=" In der Vergangenheit trafen wir\nhäufig mit anderen auf dem Berg zusammen...",
+            italian=" In passato stringevamo molte\namicizie sulla montagna...",
+            spanish=" Antiguamente solíamos socializar\ncon la gente de la montaña...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SHEIMI5);
+        }
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Welcome to the [CS:P]Shaymin Village[CR]!",
+            french=" Bienvenue au [CS:P]Village Shaymin[CR]!",
+            german=" Willkommen in [CS:P]Shaymin-Dorf[CR]!",
+            italian=" Vi do il benvenuto\nal [CS:P]Villaggio Shaymin[CR]!",
+            spanish=" ¡Te doy la bienvenida a\n[CS:P]Aldea Shaymin[CR]!",
+        });
+        message_Talk({
+            english=" We haven't had this many guests\nsince we had that earthquake so long ago.",
+            french=" Nous n'avons pas beaucoup de\nvisiteurs depuis ce tremblement de terre,\nil y a bien longtemps.",
+            german=" Wir haben seit dem Erdbeben\nnicht mehr so viele Gäste gehabt, und das ist\nlange her.",
+            italian=" Non vedevamo così tanti ospiti\nda quando siamo stati colpiti dal terremoto,\nmolto tempo fa.",
+            spanish=" No hemos tenido muchos\nvisitantes desde que sufrimos aquel terremoto.",
+        });
+        message_Talk({
+            english=" There's not much here to see,\nbut feel free to take your time.",
+            french=" Il n'y a pas grand-chose\nà voir ici, mais prenez votre temps.",
+            german=" Hier gibt es nicht viel zu sehen,\naber nimm dir Zeit und sieh dich in Ruhe um.",
+            italian=" Qui non c'è molto da visitare,\nma fate pure con calma.",
+            spanish=" No es que haya mucho que ver,\npero puedes tomarte tu tiempo si lo deseas.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

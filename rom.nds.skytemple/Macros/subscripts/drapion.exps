@@ -1,0 +1,298 @@
+macro DrapionMain() {
+    if ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DORAPION);
+        }
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We found out [CS:P]Zero Isle[CR] is no\nordinary place.",
+            french=" Nous avons découvert que l'[CS:P]Ile\nZéro[CR] était tout sauf un endroit ordinaire.",
+            german=" Wir haben herausgefunden, dass\ndie [CS:P]Null-Insel[CR] kein gewöhnlicher Ort ist.",
+            italian=" Sappiamo che l'[CS:P]Isola Zero[CR] non è\nun posto come gli altri.",
+            spanish=" Parece ser que la [CS:P]Isla Cero[CR] no\nes un lugar corriente.",
+        });
+        message_Talk({
+            english=" It turns out that the island has\nseveral dungeons.[K] They each put restrictions on\nexplorers in a unique way.",
+            french=" En réalité, il y a plusieurs\ndonjons sur l'île.[K] Chacun impose ses propres\ncontraintes à l'explorateur qui y pénètre.",
+            german=" Es sieht so aus, als gäbe es auf\nder Insel mehrere verschiedene Dungeons.[K] Sie\nalle legen Erkundern diverse Bürden auf.",
+            italian=" Sembra che l'isola abbia diversi\ndungeon.[K] Ognuno di questi pone restrizioni\nnei confronti degli esploratori.",
+            spanish=" Resulta que hay diferentes\nterritorios en la isla.[K] Y en cada uno se\naplican distintas restricciones.",
+        });
+        message_Talk({
+            english=" Some places knock you down to\nLevel 1 temporarily, and another prevents you\nfrom leveling up.",
+            french=" Certains vous font retomber\ntemporairement au Niveau 1, et d'autres\nvous empêchent de monter de niveau.",
+            german=" Einige Orte lassen deinen Level\nvorübergehend auf 1 sinken, andere verhindern\neinen Levelaufstieg.",
+            italian=" Alcuni posti ti fanno tornare\ntemporaneamente al Livello 1 e altri non ti\nconsentono di salire di livello.",
+            spanish=" Algunos te rebajan al Nivel 1\ntemporalmente y otros te impiden subir de\nnivel.",
+        });
+        message_Talk({
+            english=" You may also not be allowed to\ntake items in. You'll be restricted in some way\nor another with those dungeons.",
+            french=" Parfois, il est interdit d'y\nemporter des objets. Ces donjons imposent\ntous des contraintes diverses.",
+            german=" Eventuell ist es dir untersagt,\nItems mitzunehmen. In diesen Dungeons werdet\nihr auf verschiedene Arten eingeschränkt.",
+            italian=" In altri non è permesso\nportare strumenti. In un modo o nell'altro,\nquesti dungeon ti pongono restrizioni.",
+            spanish=" También pueden prohibirte\nentrar con objetos. Siempre hay algún tipo de\nrestricción en estos territorios.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+        // [29, 5], Graduating from the guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DORAPION);
+        }
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:P]Zero Isle[CR] is to the south of\nhere, across the sea.",
+            french=" L'[CS:P]Ile Zéro[CR] se trouve au sud d'ici,\nde l'autre côté de la mer.",
+            german=" Die [CS:P]Null-Insel[CR] befindet sich\nsüdlich von hier, jenseits des Meeres.",
+            italian=" L'[CS:P]Isola Zero[CR] si trova a sud di\nqui, oltre il mare.",
+            spanish=" La [CS:P]Isla Cero[CR] está al sur de aquí,\ncruzando el mar.",
+        });
+        message_Talk({
+            english=" That's where we're about to\nraid now!",
+            french=" C'est notre prochaine\ndestination!",
+            german=" Das ist der Ort, den wir im\nBegriff sind, zu erkunden!",
+            italian=" Stiamo per andare a\nsaccheggiarla!",
+            spanish=" Nos dirigimos hacia allí\nprecisamente.",
+        });
+        message_Talk({
+            english=" The mountains of treasures and\ngold in there... We mean to have it all!",
+            french=" Des montagnes d'or et de\ntrésors... Tout ça sera à nous!",
+            german=" Die Schatz- und Goldberge dort\ndrinnen... Wir wollen sie alle haben!",
+            italian=" Ci sono montagne d'oro e di\ntesori laggiù... Vogliamo tutto!",
+            spanish=" Montañas de oro y riquezas...\n¡Pretendemos quedarnos con todo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[16]) {
+        // [12, 1], Returned from Expedition
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_DORAPION) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_AABOKKU) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_MANYUURA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DORAPION);
+        }
+        with(actor ACTOR_NPC_DORAPION) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        WaitExecuteLives(ACTOR_NPC_DORAPION);
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey, you two.[K] Do you have any\nnews on [CS:P]Zero Isle[CR]?",
+            french=" Hé, vous deux.[K] Vous auriez pas\ndes infos sur l'[CS:P]Ile Zéro[CR], par hasard?",
+            german=" Hey, ihr zwei.[K] Habt ihr\nirgendwelche Neuigkeiten über die [CS:P]Null-Insel[CR]?",
+            italian=" Ehi, voi due.[K] Sapete qualcosa\ndell'[CS:P]Isola Zero[CR]?",
+            spanish=" Eh, pareja.[K] ¿Alguna noticia de\nla [CS:P]Isla Cero[CR]?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(8962);
+        with(actor ACTOR_ATTENDANT1) {
+            SetEffect(EFFECT_QUESTION_MARK, 3);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_BOTTOM_R_FACEINW);
+        message_SwitchTalk ($PARTNER_TALK_KIND) {
+            case 1:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+            case 2:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+            default:
+                {
+                    english=" [CS:P]Zero Isle[CR]?",
+                    french=" L'[CS:P]Ile Zéro[CR]?",
+                    german=" Die [CS:P]Null-Insel[CR]?",
+                    italian=" L'[CS:P]Isola Zero[CR]?",
+                    spanish=" ¿La [CS:P]Isla Cero[CR]?",
+                }
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with(actor ACTOR_NPC_DORAPION) {
+            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+        }
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Yeah. Rumor has it that the\ngreatest treasures are there...",
+            french=" Ouais. Le bruit court que\nc'est là que se trouvent les trésors\nles plus fabuleux...",
+            german=" Ja. Gerüchten zufolge sind dort\ndie größten Schätze zu finden...",
+            italian=" Sì. Girano voci che ci siano\ndei grandi tesori laggiù...",
+            spanish=" Sí. Se rumorea que oculta\ngrandes tesoros...",
+        });
+        message_Talk({
+            english=" But the treasures aren't the\nmost fascinating thing about that place.",
+            french=" Mais sur cette île, il y a\nune chose encore plus fascinante que les\ntrésors.",
+            german=" Aber die Schätze sind nicht das\nfaszinierendste an jenem Ort.",
+            italian=" Ma i tesori non sono la cosa più\ninteressante di quel posto.",
+            spanish=" Aunque esos tesoros no son lo\nmás fascinante de ese sitio, ni mucho\nmenos.",
+        });
+        message_Talk({
+            english=" When you go in the dungeon...[K]\neveryone is temporarily dropped to Level 1 and\ntheir learned abilities are zeroed out.",
+            french=" Quiconque entre dans ce donjon...\nretombe temporairement au Niveau 1 et oublie\ntoutes les capacités apprises auparavant.",
+            german=" Wenn man den Dungeon betritt,[K]\nwird jeder vorübergehend auf Level 1 zurück-\ngestuft und seine Fähigkeiten werden entfernt.",
+            italian=" Chiunque entri nel dungeon...[K]\ntorna temporaneamente al Livello 1 e tutte\nle abilità che ha imparato si azzerano.",
+            spanish=" Al entrar en ese territorio...[K]\nbajas al Nivel 1 y pierdes las habilidades\nque has aprendido.",
+        });
+        message_Talk({
+            english=" From what we've heard, you\ncan't even take in items.",
+            french=" A ce qu'on dit, on ne peut même\npas y emporter d'objets.",
+            german=" Unseres Wissens kann man nicht\neinmal Items mit hineinnehmen.",
+            italian=" Per quel che ne sappiamo, non\npotete neanche portarvi gli strumenti.",
+            spanish=" Por lo que he oído, ni siquiera\npuedes llevar objetos.",
+        });
+        message_Talk({
+            english=" Basically, you walk in alone as if\nyou're a rank amateur again.",
+            french=" En fait, on y entre tout seul,\ncomme un vulgaire amateur.",
+            german=" Im Grunde genommen ist es wie\ndamals, als dein Rang noch der eines Amateurs\nwar.",
+            italian=" A farla breve, ci dovete entrare\nda soli come se foste ancora dei novellini.",
+            spanish=" Básicamente, es como volver a\nexplorar como si fueras un principiante.",
+        });
+        message_Talk({
+            english=" No exploration team's made it to\nthe end yet.",
+            french=" Aucune équipe d'exploration\nn'est encore parvenue à finir ce donjon.",
+            german=" Kein Erkundungsteam hat es\nbisher bis zum Ende geschafft.",
+            italian=" Non ce l'ha ancora fatta nessuna\nsquadra d'esplorazione.",
+            spanish=" Ningún equipo explorador ha\nlogrado atravesar este territorio.",
+        });
+        message_Talk({
+            english=" They're calling it the ultimate\ndungeon for good reason.",
+            french=" Ce n'est pas pour rien qu'il est\nsurnommé "l'ultime donjon".",
+            german=" Sie nennen es aus gutem Grund\nden ultimativen Dungeon.",
+            italian=" È per questo che lo chiamano\nil dungeon definitivo.",
+            spanish=" Por algo lo llaman el territorio\nsupremo.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with(actor ACTOR_NPC_MANYUURA) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DORAPION);
+        }
+        WaitExecuteLives(ACTOR_NPC_MANYUURA);
+        message_SetFace(ACTOR_NPC_MANYUURA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" [CS:N]Drapion[CR]![K] You talk too much!",
+            french=" [CS:N]Drascore[CR]![K] Tu parles trop!",
+            german=" [CS:N]Piondragi[CR]![K] Du redest zu viel!",
+            italian=" [CS:N]Drapion[CR]![K] Parli troppo!",
+            spanish=" ¡[CS:N]Drapion[CR]![K] ¡Hablas demasiado!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with(actor ACTOR_NPC_DORAPION) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        with(actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MANYUURA);
+        }
+        WaitExecuteLives(ACTOR_NPC_DORAPION);
+        se_Play(8972);
+        with(actor ACTOR_NPC_DORAPION) {
+            SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+        }
+        with(actor ACTOR_NPC_DORAPION) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_DORAPION);
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Urk![K] I'm sorry, my lady [CS:N]Weavile[CR].",
+            french=" Oups![K] Veuillez m'excuser,\ndame [CS:N]Dimoret[CR].",
+            german=" Ups![K] Es tut mir leid, [CS:N]Snibunna[CR].",
+            italian=" Ups![K] Mi spiace, lady [CS:N]Weavile[CR].",
+            spanish=" ¡Huy![K] Discúlpeme, señorita\n[CS:N]Weavile[CR].",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_DORAPION) {
+            Turn2Direction(4, 10, DIR_UP);
+        }
+        WaitExecuteLives(ACTOR_NPC_DORAPION);
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DORAPION);
+        }
+        message_SetFace(ACTOR_NPC_DORAPION, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're Team [CS:X]AWD[CR]![K] We're a band\nof thieves led by [CS:N]Weavile[CR].",
+            french=" On est l'Equipe [CS:X]DDA[CR]![K]\nOn est une bande de voleurs, et notre chef\ns'appelle [CS:N]Dimoret[CR].",
+            german=" Wir sind Team [CS:X]SPA[CR]![K] Wir sind\neine Gruppe von Dieben und werden von\n[CS:N]Snibunna[CR] angeführt.",
+            italian=" Noi siamo il Team [CS:X]AWD[CR]![K]\nSiamo una banda di ladri guidati da [CS:N]Weavile[CR].",
+            spanish=" ¡Somos el [CS:X]Equipo WAD[CR]![K]\nUna banda de ladrones dirigida por [CS:N]Weavile[CR].",
+        });
+        message_Talk({
+            english=" Our travels in search of the\nultimate treasures brought us here...",
+            french=" Notre quête du trésor suprême\nnous a conduits jusqu'ici...",
+            german=" Die Suche nach dem ultimativen\nSchatz hat uns hierher geführt...",
+            italian=" I nostri viaggi alla ricerca dei\ntesori più ambiti ci hanno portato fin qui...",
+            spanish=" Nuestros viajes en busca de los\nmejores tesoros nos han traído hasta aquí...",
+        });
+        message_Talk({
+            english=" But this place doesn't appear to\nbe much of a prospect.",
+            french=" Mais j'ai bien peur qu'on ne\ntrouve rien d'intéressant ici.",
+            german=" Aber dieser Ort sieht nicht\nsonderlich vielversprechend aus.",
+            italian=" Ma questo posto non sembra\noffrire granché.",
+            spanish=" Pero este lugar no parece que\nvaya a ser de provecho.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

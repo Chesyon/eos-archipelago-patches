@@ -1,0 +1,237 @@
+macro CelebiMain() {
+    if ($DUNGEON_ENTER_INDEX == 33) {
+        // [20, 4], Deep Dusk Forest Die
+        if ( $SCENARIO_TALK_BIT_FLAG[28] ) {
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SEREBII);
+            }
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_SIGH, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I don't have any special feelings\nfor him or anything!",
+                french=" Je ne ressens rien de particulier\npour lui!",
+                german=" Ich hege keine besonderen\nGefühle für ihn oder dergleichen!",
+                italian=" Non provo nulla di speciale\nper lui!",
+                spanish=" ¡No siento nada especial por él!",
+            });
+            message_Talk({
+                english=" Let's go already!",
+                french=" Allons-y!",
+                german=" Jetzt aber los!",
+                italian=" Forza, muoviamoci!",
+                spanish=" ¡Vámonos ya!",
+            });
+            message_Close();
+            §label_130;
+            JumpCommon(CORO_END_TALK);
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[28] = 1;
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SEREBII);
+            }
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ugh! We couldn't get through...",
+                french=" Aaaah! Nous avons échoué...",
+                german=" Urgs! Wir sind nicht\ndurchgekommen.",
+                italian=" Uh! Non ce l'abbiamo fatta...",
+                spanish=" ¡Ay! No hemos podido pasar...",
+            });
+            message_Talk({
+                english=" But I'm not disappointed. I'm\neven a little happy.",
+                french=" Mais je ne suis pas déçue.\nAu contraire, je suis plutôt contente.",
+                german=" Aber ich bin nicht enttäuscht.\nIch bin sogar ein wenig froh.",
+                italian=" Ma non sono triste. Anzi, sono\nanche un po' felice.",
+                spanish=" Pero no estoy decepcionada.\nEstoy hasta un poquito contenta.",
+            });
+            message_Talk({
+                english=" It means I get to spend a little\nmore time with [CS:N]Grovyle[CR]! ♪",
+                french=" Ça veut dire que je vais pouvoir\npasser plus de temps avec [CS:N]Massko[CR]! ♪",
+                german=" Das bedeutet, dass ich ein wenig\nmehr Zeit mit [CS:N]Reptain[CR] verbringen kann! ♪",
+                italian=" Vorrà dire che passerò un po'\ndi tempo in più con [CS:N]Grovyle[CR]! ♪",
+                spanish=" ¡Eso significa que así estoy\nun rato más con [CS:N]Grovyle[CR]! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with(actor ACTOR_NPC_SEREBII) {
+                Turn2DirectionTurn(1, 10, 5);
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            Wait(20);
+            se_Play(8978);
+            with(actor ACTOR_NPC_SEREBII) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with(actor ACTOR_NPC_SEREBII) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            with(actor ACTOR_NPC_SEREBII) {
+                Turn2DirectionLives(1, 10, ACTOR_PLAYER);
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            se_Play(8972);
+            with(actor ACTOR_NPC_SEREBII) {
+                SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+            }
+            with(actor ACTOR_NPC_SEREBII) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_SIGH, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Uh... Oh![K] Don't take it the wrong\nway! That's not what I meant!",
+                french=" Euh... oh![K] Ne le prenez pas\ndans ce sens-là! Ce n'est pas du tout ce que\nje voulais dire!",
+                german=" Ah... Oh![K] Versteht das nicht\nfalsch! Das war nicht das, was ich gemeint\nhabe!",
+                italian=" Uh... Oh![K] Non pensate male!\nNon intendevo quello!",
+                spanish=" ¡Oh! Esto...[K] No lo interpretéis\nmal, ¿eh? ¡Eso no es lo que quería decir!",
+            });
+            message_Close();
+            jump @label_130;
+        }
+    } elseif ($DUNGEON_OPEN_LIST[33]) {
+        // [20, 3], Deep Dusk Forest Unlocked
+        if ( $SCENARIO_TALK_BIT_FLAG[27] ) {
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SEREBII);
+            }
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_SIGH, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I don't have any special feelings\nfor him or anything!",
+                french=" Je ne ressens rien de particulier\npour lui!",
+                german=" Ich hege keine besonderen\nGefühle für ihn oder dergleichen!",
+                italian=" Non provo nulla di speciale\nper lui!",
+                spanish=" ¡No hay nada entre nosotros!",
+            });
+            message_Talk({
+                english=" We need to keep moving!",
+                french=" Il faut continuer à avancer!",
+                german=" Wir müssen weiter!",
+                italian=" Forza, muoviamoci!",
+                spanish=" ¡Hay que seguir adelante!",
+            });
+            message_Close();
+            jump @label_130;
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[27] = 1;
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_SEREBII);
+            }
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Hi, hi! So listen.[K] This is just a\nlittle secret...",
+                french=" Hi, hi! Ecoutez bien.[K] J'ai un\npetit secret à vous confier...",
+                german=" Hi, hi! Also hört mal zu![K] Hier ist\nein kleines Geheimnis...",
+                italian=" Hi, hi! Ascoltate allora.[K] Solo\nun piccolo segreto...",
+                spanish=" ¡Hola, hola! Escuchadme.[K] Tengo\nun secretito...",
+            });
+            message_Talk({
+                english=" Did you know that [CS:N]Grovyle[CR] is\nreally impatient and hasty?",
+                french=" Saviez-vous que [CS:N]Massko[CR] est\nun Pokémon très impatient qui a souvent\ntendance à précipiter les choses?",
+                german=" Wusstet ihr, dass [CS:N]Reptain[CR]\nwirklich ungeduldig und ungestüm ist?",
+                italian=" Lo sapete che [CS:N]Grovyle[CR] è davvero\nimpaziente e frettoloso?",
+                spanish=" ¿Sabíais que [CS:N]Grovyle[CR] es muy\nimpaciente y siempre va con prisas?",
+            });
+            message_Talk({
+                english=" I know that he wants to hurry,\nbut I do wish he would slow down a little...",
+                french=" Je sais bien qu'il veut toujours\nfaire vite, mais j'aimerais quand même qu'il\nralentisse un peu le pas...",
+                german=" Ich weiß, dass er es eilig hat,\naber ich wünschte mir, er würde es etwas\nlangsamer angehen lassen.",
+                italian=" So che vuole sempre fare tutto\ndi fretta, ma mi piacerebbe che ogni tanto\nrallentasse un po'...",
+                spanish=" Ya sé que quiere acabar con\nesto cuanto antes, pero a veces me\ngustaría que frenara un poco...",
+            });
+            message_Talk({
+                english=" It would sure make me happier\nif he did...",
+                french=" Je serais heureuse s'il le\nfaisait...",
+                german=" Wenn er es täte, würde mich\ndas auf jeden Fall glücklicher machen...",
+                italian=" Sarei felice se lo facesse...",
+                spanish=" A mí, desde luego, me haría\nmucho más feliz...",
+            });
+            message_Talk({
+                english=" I want to spend as much time as\nI can with him...",
+                french=" Je veux passer autant de temps\nque possible avec lui...",
+                german=" Ich möchte so viel Zeit wie\nmöglich mit ihm verbringen...",
+                italian=" Voglio passare con lui tutto il\ntempo che posso...",
+                spanish=" Quiero pasar todo el tiempo\nque pueda con él...",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            with(actor ACTOR_NPC_SEREBII) {
+                Turn2DirectionTurn(1, 10, 5);
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            Wait(20);
+            se_Play(8978);
+            with(actor ACTOR_NPC_SEREBII) {
+                SetEffect(EFFECT_EXCLAMATION_MARK, 3);
+            }
+            with(actor ACTOR_NPC_SEREBII) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            with(actor ACTOR_NPC_SEREBII) {
+                Turn2DirectionLives(1, 10, ACTOR_PLAYER);
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            se_Play(8972);
+            with(actor ACTOR_NPC_SEREBII) {
+                SetEffect(EFFECT_SWEAT_DROPS_FROM_BOTH_SIDES_MEDIUM, 3);
+            }
+            with(actor ACTOR_NPC_SEREBII) {
+                WaitEffect();
+            }
+            WaitExecuteLives(ACTOR_NPC_SEREBII);
+            message_SetFace(ACTOR_NPC_SEREBII, FACE_SIGH, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Uh... Oh![K] That's not how I meant\nit! Not at all!",
+                french=" Oui... euh![K] Ce n'est pas ce que\nje voulais dire! Pas du tout! Je n'ai rien dit!",
+                german=" Ah... Oh![K] So war das nicht\ngemeint! Ganz und gar nicht!",
+                italian=" Uh... Oh![K] Non intendevo quello!\nAssolutamente!",
+                spanish=" Esto... ¡Oh![K] ¡Eso no es lo que\nquería decir! ¡Para nada!",
+            });
+            message_Talk({
+                english=" I don't have any special feelings\nfor him or anything!",
+                french=" Je ne ressens rien de particulier\npour lui!",
+                german=" Ich hege keine besonderen\nGefühle für ihn oder dergleichen!",
+                italian=" Non provo nulla di speciale\nper lui!",
+                spanish=" ¡No hay nada entre nosotros!",
+            });
+            message_Close();
+            jump @label_130;
+        }
+    } else {
+        jump @label_130;
+    }
+}

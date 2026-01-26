@@ -1,0 +1,148 @@
+macro SpindaMain() {
+        if ($DUNGEON_REQUEST_LIST[175]) {
+            // [29, 10], First Time at Shaymin Village
+            §label_151;
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_PATCHIIRU);
+            }
+            supervision_ExecuteCommon(CORO_EVENT_S30_07);
+            jump @label_5;
+        } elseif ($DUNGEON_OPEN_LIST[175]) {
+            // [29, 8], Cafe Describe Shaymin Village
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_PATCHIIRU);
+            }
+            with(actor ACTOR_NPC_PATCHIIRU) {
+                SetEffect(EFFECT_JOYOUS, 3);
+            }
+            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_SHOUTING, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Aaaah!",
+                french=" Aaaah!",
+                german=" Aaaah!",
+                italian=" Aaah!",
+                spanish=" ¡Aaaah!",
+            });
+            message_Talk({
+                english=" Eureka![K]\nIt sounds good to hear a shout like that, huh?",
+                french=" Eurêka![K]\nC'est une douce musique pour les oreilles\nque ce cri de joie, non?",
+                german=" Heureka![K]\nDer Ausruf klingt gut, nicht wahr?",
+                italian=" Perbacco![K]\nSentire un urlo simile ti dà la carica, eh?",
+                spanish=" ¡Eureka![K] Es genial oír ese grito, ¿eh?",
+            });
+            message_KeyWait();
+            with(actor ACTOR_NPC_PATCHIIRU) {
+                SetEffect(EFFECT_NONE, 3);
+            }
+            with(actor ACTOR_NPC_PATCHIIRU) {
+                SetAnimation(2);
+            }
+            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_JOYOUS, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Please continue to explore!",
+                french=" S'il vous plaît,\ncontinuez à explorer le monde!",
+                german=" Bitte erkundet weiter!",
+                italian=" Continuate a esplorare!",
+                spanish=" ¡Continúa explorando!",
+            });
+            message_Close();
+            jump @label_5;
+        } elseif ($SUB30_SPOT_LEVEL > 1 || $RECYCLE_COUNT > 20) {
+            // [8, 7], Project P Old News
+            jump @label_151;
+        } elseif ($SUB30_PROJECTP) {
+            // [8, 5], Project P Seen?
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_PATCHIIRU);
+            }
+            message_SetFace(ACTOR_NPC_PATCHIIRU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Project P is a dream I've had\nfor many years...",
+                french=" Le Projet P est un rêve\nque j'entretiens depuis des années...",
+                german=" Projekt P ist ein über viele\nJahre gehegter Traum von mir...",
+                italian=" Il Progetto P è un sogno che\ncovavo da molti anni...",
+                spanish=" Llevo muchos años soñando\ncon el Proyecto P...",
+            });
+            message_Talk({
+                english=" Someday, I know I'll make a huge\ndiscovery that will amaze everyone, all over\nthe world.",
+                french=" Un jour, je ferai une découverte\ngigantesque qui éblouira le monde entier.",
+                german=" Ich weiß, dass ich eines Tages\neine gewaltige Entdeckung machen werde, die\nalle rund um die Welt erstaunen wird.",
+                italian=" Un giorno scoprirò qualcosa\nche lascerà il mondo intero a bocca\naperta per lo stupore.... Ne sono certo!",
+                spanish=" Sé que algún día haré un\ndescubrimiento que maraville al mundo entero.",
+            });
+            message_Close();
+            jump @label_5;
+        } elseif ($DUNGEON_OPEN_LIST[178]) {
+            // [7, 2], Get Skunked On!
+            jump @label_151;
+        } elseif ($DUNGEON_CONQUEST_LIST[5]) {
+            // [4, 7], Drowzee defeated!
+            with(actor ACTOR_PLAYER) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_PATCHIIRU);
+            }
+            with(actor ACTOR_NPC_PATCHIIRU) {
+                SetAnimation(2);
+            }
+            message_SetFaceOnly(ACTOR_NPC_PATCHIIRU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" ......................................",
+                french=" ......................................",
+                german=" ......................................",
+                italian=" ......................................",
+                spanish=" ...",
+            });
+            message_SetFaceOnly(ACTOR_NPC_PATCHIIRU, FACE_SIGH, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Hopes and dreams...",
+                french=" Vos rêves se réalisent...",
+                german=" Hoffen und träumen...",
+                italian=" Sogni e speranze...",
+                spanish=" De ensueño...",
+            });
+            message_Talk({
+                english=" This is...",
+                french=" C'est...",
+                german=" Das ist...",
+                italian=" Questo è...",
+                spanish=" Esto es...",
+            });
+            message_Close();
+            jump @label_5;
+        } else {
+            jump @label_5;
+        }
+    }
+}

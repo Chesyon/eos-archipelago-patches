@@ -1,3 +1,1641 @@
+macro XatuDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_NEITYIO);
+    }
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[96] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[96] = 1;
+            message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We all have a purpose. One that\nis unique to each of us.",
+                french=" Nous avons tous un but. Un but\nqui nous est propre.",
+                german=" Wir alle dienen einem\nbestimmten Zweck. Einem, der bei jedem von\nuns anders geartet ist.",
+                italian=" Tutti abbiamo un obiettivo. \nUn fine che è unico per ognuno di noi.",
+                spanish=" Todos tenemos un propósito. Es\nalgo que solo posee cada uno de nosotros.",
+            });
+            message_Talk({
+                english=" One must serve that purpose the\nbest they can. Kwah... Hah!",
+                french=" Chacun doit tendre vers ce but\ndu mieux qu\'il peut. Kwah... HRROAAAH!!!",
+                german=" Diesem Zweck muss man dienen,\nso gut man kann. Kwah... Hah!",
+                italian=" Ognuno deve cercare di\nrealizzare il proprio obiettivo dando il meglio\ndi sé. Aaah... ah!",
+                spanish=" Uno ha de servir a ese propósito\nlo mejor que pueda. ¡Cuac, cuac!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[97] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[97] = 1;
+            message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" .............................................[K]\n...........................................................",
+                french=" .............................................[K]\n.....................................................................",
+                german=" ......[K] ......",
+                italian=" .............................................[K]\n.....................................................................",
+                spanish=" Hum...[K] Hum...",
+            });
+            message_Talk({
+                english=" ...[K]It has been a long time...",
+                french=" ... [K]Cela faisait fort longtemps...",
+                german=" ...[K]Es ist lange her.",
+                italian=" ...[K] È passato molto tempo...",
+                spanish=" Pues...[K] Ha pasado mucho tiempo.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[98] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[98] = 1;
+                message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" .............................................[K]\nTime marches on inexorably.",
+                    french=" .............................................[K]\nLe temps suit son cours, inexorablement.",
+                    german=" ......[K]Die Zeit schreitet\nunaufhaltsam voran.",
+                    italian=" .............................................[K]\nIl tempo avanza inesorabilmente.",
+                    spanish=" Sí...[K] El tiempo pasa y no vuelve.",
+                });
+                message_Talk({
+                    english=" The time allowed you is but\nlittle. However...",
+                    french=" Il vous reste bien peu de temps.\nNéanmoins...",
+                    german=" Die Zeit, die euch gegeben wird,\nist nur kurz. Allerdings...",
+                    italian=" Avete così poco tempo.\nTuttavia...",
+                    spanish=" El tiempo con que contáis es\nescaso. Pese a ello...",
+                });
+                message_Talk({
+                    english=" You, I can tell, shall prevail.[K]\nBut you must not falter.",
+                    french=" Je sais que vous triompherez\nde tous les obstacles.[K] Mais vous ne devez pas\nfaillir.",
+                    german=" Ihr, so weiß ich, werdet euch\ndurchsetzen.[K] Aber ihr dürft nicht zögern.",
+                    italian=" Voi, lo so, ce la potete fare.[K]\nMa non dovete esitare.",
+                    spanish=" Puedo ver que tendréis éxito.[K]\nPero no debéis desfallecer.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[99] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[99] = 1;
+            message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" .............................................",
+                french=" .............................................",
+                german=" ......",
+                italian=" .............................................",
+                spanish=" ...",
+            });
+            message_Talk({
+                english=" ...[K]You two... I commend you\nfor graduating.",
+                french=" ...[K] Vous... avez obtenu\nle diplôme de la Guilde. Je vous félicite.",
+                german=" ...[K]Ihr zwei habt die\nAbschlussprüfung bestanden. Herzlichen\nGlückwunsch!",
+                italian=" ...[K] Voi due... Complimenti per \naver passato l\'esame.",
+                spanish=" Vaya...[K] Es admirable que hayáis\nsuperado el gran reto.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[100] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[100] = 1;
+                message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" .............................................",
+                    french=" .............................................",
+                    german=" ......",
+                    italian=" .............................................",
+                    spanish=" ...",
+                });
+                message_Talk({
+                    english=" ...[K]Team [CS:X]Charm[CR]... Kwah-ha-ha...\nJust lovely...",
+                    french=" ... [K]L\'Equipe [CS:X]Charme[CR]...\nKwah HRROAAAH! Tout simplement adorables...",
+                    german=" ...[K]Team [CS:X]Charme[CR]... Kwah-ha-ha...\nEinfach reizend.",
+                    italian=" ...[K] Il Team [CS:X]Malia[CR]... \nAaah-ah-ah... Com\'è delizioso...",
+                    spanish=" Cuac...[K] El [CS:X]Equipo Carisma[CR]...\nCuac, cuac... Son encantadoras...",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ($SCENARIO_TALK_BIT_FLAG[102]) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[102] = 1;
+                message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" ...[K]The darkness...",
+                    french=" ... [K]L\'ombre...",
+                    german=" ...[K]Die Dunkelheit...",
+                    italian=" ...[K] L\'oscurità...",
+                    spanish=" ¡Oh!...[K] Las tinieblas...",
+                });
+                message_Talk({
+                    english=" The malevolent darkness has\nmelted away...",
+                    french=" L\'ombre malfaisante s\'est\ndissipée...",
+                    german=" Die heimtückische Dunkelheit hat\nsich aufgelöst.",
+                    italian=" L\'oscurità maligna è svanita...",
+                    spanish=" Las malévolas tinieblas se han\ndisipado...",
+                });
+                message_Talk({
+                    english=" It is your doing. You have\nmy thanks.",
+                    french=" C\'est grâce à vous. Je vous\nadresse mes remerciements.",
+                    german=" Das ist euer Werk. Ich danke\neuch.",
+                    italian=" È merito vostro. Vi ringrazio.",
+                    spanish=" Y todo se debe a lo que habéis\nhecho. Tenéis mi agradecimiento.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[101] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[101] = 1;
+                message_SetFace(ACTOR_NPC_NEITYIO, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" ...[K]Malevolent darkness...",
+                    french=" ... [K]Une ombre malfaisante...",
+                    german=" ...[K]Heimtückische Dunkelheit...",
+                    italian=" ...[K] Oscurità maligna...",
+                    spanish=" Hum...[K] Malévola oscuridad...",
+                });
+                message_Talk({
+                    english=" The darkness spreads and\ndeepens...",
+                    french=" L\'ombre s\'étend et\ns\'épaissit...",
+                    german=" Die Dunkelheit breitet sich aus\nund vertieft sich.",
+                    italian=" L\'oscurità si diffonde e si fa\npiù profonda...",
+                    spanish=" Las tinieblas se extienden, las\nsombras acechan...",
+                });
+                message_Talk({
+                    english=" Its progress can be halted,\nyes...[K] But only by you.",
+                    french=" On peut encore mettre un terme\nà sa progression... [K]Mais notre seul espoir,\nc\'est vous.",
+                    german=" Ihr Ausbreiten kann verhindert\nwerden, ja.[K] Aber nur von euch.",
+                    italian=" La sua diffusione può essere\narrestata, sì...[K] Ma soltanto da voi.",
+                    spanish=" Tal vez se podría detener su\navance...[K] Pero eso es algo que solo\nestá en vuestras manos.",
+                });
+                message_Talk({
+                    english=" I shall ask this of you.[K]\nStop [CS:N]Darkrai[CR]\'s future of nightmares...",
+                    french=" Je vous le demande instamment.\nEmpêchez l\'avènement de ce futur\ncauchemardesque que nous prépare [CS:N]Darkrai[CR]...",
+                    german=" Ich bitte euch darum,[K] die von\n[CS:N]Darkrai[CR] herbeigesehnte Zukunft voller\nAlbträume aufzuhalten.",
+                    italian=" Devo chiedervelo.[K] Fermate \nil futuro fatto di incubi che vorrebbe [CS:N]Darkrai[CR]...",
+                    spanish=" Os debo pedir algo.[K] Detened la\npesadilla que nos quiere imponer [CS:N]Darkrai[CR].\nSería un futuro muy negro.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+}
+
+
+macro KangaskhanDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_GARUURA);
+    }
+    if($SCENARIO_MAIN_BIT_FLAG[127]) {
+        message_SetFace(ACTOR_NPC_GARUURA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" [FT:1]DARLING I CAN\'T SEEM\nTO UNDERSTAND A WORD YOU\'RE\nSAYING RIGHT NOW![K] HELLO?\nCAN YOU SPEAK COMMON?[K]\nOOH, I JUST GOT AN IDEA!");
+        message_Close();
+        message_SetWaitMode(0,0);
+        message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk("[FT:1] BY STORING ITEMS,\nYOU ACKNOWLEDGE THAT\nKANGASKHAN STORAGE IS NOT A\nFREE SERVICE. STORED ITEMS\nWILL BE APPRAISED BY [CS:G]KECLEON[CR],\nAND ALL ITEMS APPRAISED AT MORE\nTHAN [CS:G]500[CR][M:S0] WILL BE SOLD AS\nPAYMENT. ADDITIONALLY, STORED\nITEMS WILL ACCRUE A [CS:C]9%[CR]\nINTEREST, COMPOUNDED DAILY,\nTO BE PAID IN MONTHLY\nINSTALLMENTS. SHOULD THIS\nINTEREST GO UNPAID, STORED\nITEMS MAY BE TAKEN AS\nCOMPENSATION, OR A LOAN MAY\nBE ISSUED ON YOUR BEHALF\nWITH DUSKULL BANK. PLEASE\nSEE OUR FULL LIST OF TERMS\nAND CONDITIONS BELOW!\n[CN][CS:Y]HTTPS://TINYURL.COM/YWYPTFPS[CR]");
+        message_Close();
+        message_SetWaitMode(-1,-1);
+        §just_monika;
+        message_Talk(" [FT:0]Did you get all of that?[FT:1]");
+        switch(message_SwitchMenu(0,1)) {
+            case menu("YES"):
+                message_Talk(" WONDERFUL, HAVE A\nGREAT DAY!");
+                message_Close();
+                JumpCommon(CORO_END_TALK);
+                hold;
+            case menu("NO"):
+            case menu("WHAT???"):
+            default:
+                message_Close();
+                jump @just_monika;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[7]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[63] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[63] = 1;
+            message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk({
+                english=" You\'re going on an expedition?\nWell, doesn\'t that sound fun!",
+                french=" Vous partez en expédition?\nVoilà qui promet d\'être amusant, dites-moi!",
+                german=" Ihr begebt euch auf eine\nExpedition? Nun, wenn das mal nicht nach Spaß\nklingt!",
+                italian=" State partendo per una\nspedizione? Sembra divertente!",
+                spanish=" ¿Vais de expedición? ¡Vaya,\nsuena muy divertido!",
+            });
+            message_Talk({
+                english=" I\'ll be thinking of you, my dears!\nHave a good time!",
+                french=" Je penserai à vous, mes\nenfants! Amusez-vous bien!",
+                german=" Ich werde an euch denken, meine\nLieben! Viel Vergnügen!",
+                italian=" Vi penserò, tesori miei!\nPassatevela bene!",
+                spanish=" ¡Os deseo lo mejor! ¡Que os\ndivirtáis!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[16]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[64] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[64] = 1;
+            message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Welcome back!",
+                french=" Contente de vous revoir!",
+                german=" Willkommen zurück!",
+                italian=" Sono contenta di vedervi di\nnuovo qui!",
+                spanish=" ¡Qué alegría que hayáis vuelto!",
+            });
+            message_Talk({
+                english=" Oh! After that expedition, you\nboth seem a little different. My dears, you\nhave a new lean, mean look!",
+                french=" Oh! Vous avez changé au cours\nde cette expédition, mes enfants! Comme vous\navez maigri!",
+                german=" Oh! Die Expedition hat euch\nirgendwie verändert. Meine Lieben, ihr seht\nja so verwegen aus!",
+                italian=" Oh! Dopo quella spedizione, \ntesori miei, mi sembra che abbiate acquisito\npiù smalto!",
+                spanish=" Tras esa expedición parecéis\nhaber cambiado. ¡Ahora se os ve capaces\nde cualquier cosa!",
+            });
+            message_Talk({
+                english=" I can see that!",
+                french=" Je le vois bien!",
+                german=" Das kann ich wohl sehen!",
+                italian=" Lo distinguo chiaramente!",
+                spanish=" ¡Está tan claro como el agua!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[65] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[65] = 1;
+            message_SetFace(ACTOR_NPC_GARUURA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" If that [CS:N]Grovyle[CR] doesn\'t get\ncaught soon, this old lady won\'t sleep easy!",
+                french=" Si on n\'attrape pas ce [CS:N]Massko[CR]\nrapidement, la vieille dame que je suis ne\ndormira pas sur ses deux oreilles!",
+                german=" Falls dieser [CS:N]Reptain[CR] nicht bald\ngefasst wird, werde ich alte Dame nicht mehr\nruhig schlafen können!",
+                italian=" Se quel [CS:N]Grovyle[CR] non verrà \ncatturato presto, questa vecchia signora non \nriuscirà a dormire sonni tranquilli!",
+                spanish=" Si no atrapan pronto a [CS:N]Grovyle[CR],\n¡no sé cómo voy a dormir tranquila!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[66] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[66] = 1;
+            message_SetFace(ACTOR_NPC_GARUURA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Oh, my goodness! You\'re safe!\nOh, thank mercy!",
+                french=" Oh là là! Vous êtes indemnes!\nQuel bonheur!",
+                german=" Ach du meine Güte! Ihr seid\nin Sicherheit! Oh, ich bin ja so dankbar!",
+                italian=" Oh, accipicchia! State bene!\nOh, grazie al cielo!",
+                spanish=" ¡Vaya, menos mal! ¡Estáis bien!\n¡Qué alivio!",
+            });
+            message_Talk({
+                english=" I was so worried about you![K]\nYou\'re back without a scratch on you...[K]\nThis is w-w-wonderful!",
+                french=" J\'étais si inquiète![K]\nEt vous voilà de retour sans la moindre\négratignure...[K] Mais c\'est merveilleux!",
+                german=" Ich habe mir solche Sorgen um\neuch gemacht![K] Ihr seid völlig unversehrt\nzurückgekehrt.[K] Das ist einfach w-wunderbar!",
+                italian=" Ero così preoccupata per voi![K]\nSiete di ritorno senza un graffio...[K]\nÈ m-m-magnifico!",
+                spanish=" ¡Me teníais preocupada![K] Habéis\nvuelto de una pieza.[K] ¡Ya puedo respirar\ntranquila!",
+            });
+            message_Talk({
+                english=" ...[K]I shouldn\'t be sobbing.\nI should be strong like you.",
+                french=" ... [K]Je ne devrais pas pleurnicher.\nJe devrais me montrer forte, comme vous.",
+                german=" ...[K]Ich sollte nicht rumschluchzen,\nsondern stark sein... So wie ihr.",
+                italian=" ...[K] Non dovrei piangere.\nDovrei essere forte come voi.",
+                spanish=" Ya sé...[K] No debería dejarme\nllevar tanto por las emociones. Debería\nseguir vuestro ejemplo y ser fuerte.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[67] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[67] = 1;
+                message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Don\'t worry, sweeties![K] With you\ntwo in charge, nothing can go wrong!",
+                    french=" Pas d\'inquiétude à avoir, mes\nenfants![K] Avec vous deux aux commandes, rien\nde mal ne peut arriver!",
+                    german=" Keine Sorge, ihr Süßen![K] Jetzt,\nwo ihr beide die Sache in die Hand genommen\nhabt, kann nichts mehr schiefgehen!",
+                    italian=" Non preoccupatevi, dolcezze\nmie![K] Con voi due in azione, nulla può\nandare storto!",
+                    spanish=" No os preocupéis.[K] Si os ocupáis\nvosotros, seguro que no pasará nada malo.",
+                });
+                message_Talk({
+                    english=" Have confidence in yourselves,\nmy dears!",
+                    french=" Ayez confiance en vous,\nmes enfants!",
+                    german=" Ihr müsst mehr an euch glauben,\nmeine Lieben!",
+                    italian=" Abbiate fiducia in voi,\ntesori miei!",
+                    spanish=" Debéis tener confianza y creer\nen vuestras habilidades.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[68] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[68] = 1;
+            message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Congratulations on graduating!\nYou two are extraordinary!",
+                french=" Félicitations pour votre\ndiplôme! Vous êtes extraordinaires!",
+                german=" Gratulation zur bestandenen\nAbschlussprüfung! Ihr zwei seid wirklich\naußergewöhnlich!",
+                italian=" Congratulazioni per l\'esame!\nÈ una notizia straordinaria!",
+                spanish=" ¡Felicidades por superar el gran\nreto! ¡Sois de lo que no hay!",
+            });
+            message_Talk({
+                english=" Do you know what they say\nabout that guild?[K] That they make it terribly\nhard for apprentices to graduate!",
+                french=" Vous savez ce qu\'on dit à propos\nde la Guilde?[K] Que l\'examen est terriblement\ndifficile!",
+                german=" Wisst ihr, was sie über diese\nGilde sagen?[K] Dass sie es ihren Lehrlingen\nschwer macht, einen Abschluss zu erwerben!",
+                italian=" Sapete cosa dicono a proposito\ndi quella Gilda?[K] Che l\'esame finale\nsia molto difficile per le reclute!",
+                spanish=" ¿Sabéis lo que dicen por ahí del\n[CS:N]Pokégremio[CR]?[K] ¡Que hacen todo lo posible para\nque ningún aprendiz supere el reto!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[69] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[69] = 1;
+                message_SetFace(ACTOR_NPC_GARUURA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" You know, I\'m not at all that\nenthralled by Team [CS:X]Charm[CR].",
+                    french=" Vous savez, l\'Equipe [CS:X]Charme[CR]\nne me fait ni chaud ni froid.",
+                    german=" Um ehrlich zu sein, fesselt mich\nTeam [CS:X]Charme[CR] nicht so besonders.",
+                    italian=" Sapete, non sono così \naffascinata dal Team [CS:X]Malia[CR].",
+                    spanish=" A mí no me impresiona tanto\nel [CS:X]Equipo Carisma[CR].",
+                });
+                message_Talk({
+                    english=" I honestly don\'t understand what\nthe fuss is all about.",
+                    french=" Honnêtement, je ne comprends\npas tout ce tapage autour d\'elles.",
+                    german=" Ich verstehe echt den ganzen\nAufruhr nicht.",
+                    italian=" Onestamente non capisco perché\ntutti siano così agitati in proposito.",
+                    spanish=" De verdad que no entiendo por\nqué causan tanta expectación.",
+                });
+                message_Talk({
+                    english=" I mean, what is so special about\nTeam [CS:X]Charm[CR], I ask you...",
+                    french=" C\'est vrai quoi, qu\'est-ce qu\'elle\na de si spécial, l\'Equipe [CS:X]Charme[CR],\nje vous le demande...",
+                    german=" Ich meine, was ist denn so\nbesonders an Team [CS:X]Charme[CR]?",
+                    italian=" Voglio dire, cos\'ha di speciale\nquesto Team [CS:X]Malia[CR], dico io...",
+                    spanish=" ¿Qué es lo que tiene de especial\nel [CS:X]Equipo Carisma[CR]? Si lo sabéis, decídmelo.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ( $SCENARIO_TALK_BIT_FLAG[71] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[71] = 1;
+                message_SetFace(ACTOR_NPC_GARUURA, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Well! Aren\'t you impressive!",
+                    french=" Eh bien! Vous êtes\nfantastiques!",
+                    german=" Ihr seid echt beeindruckend!",
+                    italian=" Bene! Siete grandi!",
+                    spanish=" ¡Vaya! ¡Me siento muy orgullosa!",
+                });
+                message_Talk({
+                    english=" My dears, I love the both of you\nas if you were my own children!",
+                    french=" Je vous aime\ncomme mes propres enfants!",
+                    german=" Meine Lieben, ich liebe euch\nbeide, als wärt ihr meine eigenen Kinder!",
+                    italian=" Dolcezze mie, vi voglio bene\ncome se foste miei cuccioli!",
+                    spanish=" No hace falta que os diga que\npara mí sois como de la familia.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[70] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[70] = 1;
+                message_SetFace(ACTOR_NPC_GARUURA, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" I\'ve heard you have to face a\ntough enemy...",
+                    french=" J\'ai entendu dire que vous alliez\naffronter un ennemi coriace...",
+                    german=" Ich habe gehört, dass ihr es mit\neinem schwierigen Gegner zu tun habt.",
+                    italian=" Ho sentito che dovete affrontare\nun nemico di quelli tosti...",
+                    spanish=" He oído que debéis enfrentaros\na un duro enemigo...",
+                });
+                message_Talk({
+                    english=" But you two can do it! You\'re\nsure to win! Don\'t lose faith!",
+                    french=" Mais vous pouvez y arriver!\nVous allez gagner, c\'est sûr! Ne perdez pas\nespoir!",
+                    german=" Aber ihr zwei könnt es\nschaffen! Ihr werdet mit Sicherheit siegreich\nsein! Ihr müsst nur daran glauben!",
+                    italian=" Ma voi ce la potete fare! \nVincerete di sicuro! Abbiate fiducia!",
+                    spanish=" ¡Pero sé que podréis vencerle!\n¡No perdáis la fe en vuestro potencial!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+}
+
+
+macro PurpleKecDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_KAKUREON2);
+    }
+    if($SCENARIO_MAIN_BIT_FLAG[127]) {
+        ~KecleonScam(ACTOR_NPC_KAKUREON2,ACTOR_NPC_KAKUREON1);
+    }
+    if ($DUNGEON_CONQUEST_LIST[5]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[84] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[84] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ahhh! To arrest a criminal so\nearly in your career! You must be exceptional!",
+                french=" Waouh! Vous devez être\nune équipe exceptionnelle pour capturer\nun criminel si tôt dans votre carrière!",
+                german=" Ahhh! So früh in eurer Laufbahn\neinen Ganoven dingfest zu machen! Ihr müsst\nwirklich außergewöhnlich sein!",
+                italian=" Ahhh! Arrestare un criminale\nall\'inizio della carriera! Siete eccezionali!",
+                spanish=" ¡Vaya! ¿Ya han arrestado a un\nmalhechor? ¡Sin duda son excepcionales!",
+            });
+            message_Talk({
+                english=" It\'s hard to believe you\'ve been\non an exploration team for a short while! ♪",
+                french=" Difficile de croire que vous\nvenez de former votre équipe d\'exploration\nil y a si peu de temps! ♪",
+                german=" Es ist schwer zu glauben, dass\nihr erst seit Kurzem einem Erkundungsteam\nangehört! ♪",
+                italian=" È difficile credere che siete una\nsquadra d\'esplorazione da così poco tempo! ♪",
+                spanish=" ¡Casi no puedo creer que lleven\ntan poco tiempo con su equipo explorador! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[7]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[85] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[85] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" The guild is going on an\nexpedition, I hear! ♪",
+                french=" La Guilde part bientôt en\nexpédition, à ce qu\'il paraît! ♪",
+                german=" Ich habe gehört, dass sich die\nGilde auf eine Expedition begibt! ♪",
+                italian=" La Gilda sta partendo per una\nspedizione, ho sentito! ♪",
+                spanish=" ¡Me han dicho que el [CS:N]Pokégremio[CR]\nse va de expedición! ♪",
+            });
+            message_Talk({
+                english=" Ah, it has been a long time! ♪",
+                french=" Ah, ça faisait longtemps! ♪",
+                german=" Ah, es ist lange her! ♪",
+                italian=" Ah, era da tanto tempo! ♪",
+                spanish=" ¡Ah, cuánto tiempo! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9] || $DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11] || $DUNGEON_OPEN_LIST[12] || $DUNGEON_OPEN_LIST[13]) { 
+        if ( $SCENARIO_TALK_BIT_FLAG[86] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[86] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I hope you enjoy yourselves on\nthe guild\'s expedition! ♪",
+                french=" J\'espère que vous vous\namuserez bien pendant l\'expédition de\nla Guilde! ♪",
+                german=" Ich hoffe, dass ihr euch auf der\nExpedition der Gilde gut amüsiert! ♪",
+                italian=" Spero che vi divertirete durante\nla spedizione della Gilda! ♪",
+                spanish=" ¡Espero que lo pasen muy bien en\nla expedición del [CS:N]Pokégremio[CR]! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[16]) {    
+        if ( $SCENARIO_TALK_BIT_FLAG[87] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[87] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Welcome back! ♪[K] Back to your\nguild training, eh?",
+                french=" Content de vous revoir! ♪[K]\nOn reprend l\'entraînement de la Guilde, hein?",
+                german=" Willkommen zurück! ♪[K] Wieder\nzurück zum Gildentraining, wie?",
+                italian=" Felice ritorno! ♪[K] Avete\nripreso gli allenamenti della Gilda, eh?",
+                spanish=" ¡Encantado de verles! ♪[K] Otra\nvez a entrenar con el [CS:N]Pokégremio[CR], ¿eh?",
+            });
+            message_Talk({
+                english=" We hope for your continued\npatronage of our humble business! ♪",
+                french=" Nous espérons que vous\ncontinuerez à fréquenter notre humble\nboutique! ♪",
+                german=" Wir hoffen auf eure\nfortwährende Unterstützung, was unsere\nbescheidene Sache anbelangt! ♪",
+                italian=" Speriamo che continuerete a \nsostenere la nostra modesta impresa! ♪",
+                spanish=" ¡Esperamos que sigan visitando\nnuestro humilde negocio! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[88] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[88] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Surely, the great [CS:N]Dusknoir[CR] will\nbring that terrible [CS:N]Grovyle[CR] to justice.",
+                french=" Je suis sûr que le grand\n[CS:N]Noctunoir[CR] arrivera à capturer cet odieux\n[CS:N]Massko[CR].",
+                german=" Der große [CS:N]Zwirrfinst[CR] wird den\nschrecklichen [CS:N]Reptain[CR] mit Sicherheit seiner\ngerechten Strafe zuführen.",
+                italian=" Sicuramente il grande [CS:N]Dusknoir[CR]\nassicurerà alla giustizia quel manigoldo di\n[CS:N]Grovyle[CR].",
+                spanish=" Sin duda el gran [CS:N]Dusknoir[CR] se\nencargará de poner a ese terrible [CS:N]Grovyle[CR]\nen manos de la justicia.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[89] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[89] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, welcome back, [hero]\nand [partner]!",
+                french=" Ah, content de vous revoir,\n[hero] et [partner]!",
+                german=" Ah, willkommen zurück,\n[hero] und [partner]!",
+                italian=" Ah, siete di nuovo qui,\n[hero] e [partner]! Che bello!",
+                spanish=" ¡Hola, [hero] y [partner]!\n¡Otra vez por aquí!",
+            });
+            message_Talk({
+                english=" Ahhh! We are happy to see you!\nWe were so very worried about you!",
+                french=" Aaah! Ça nous fait plaisir de\nvous voir! Nous étions si inquiets à\nvotre sujet!",
+                german=" Ahhh! Wir freuen uns, euch zu\nsehen! Wir haben uns solche Sorgen um euch\ngemacht!",
+                italian=" Ahhh! Siamo felici di vedervi!\nEravamo così preoccupati per voi!",
+                spanish=" ¡Aaah! ¡Qué alegría, de nuevo\npor aquí! ¡Estábamos muy preocupados\npor ustedes!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[90] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[90] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Our thoughts go with you!\nPlease be strong!",
+                    french=" Nos pensées vous accompagnent!\nCourage!",
+                    german=" In Gedanken sind wir bei euch!\nBitte seid stark!",
+                    italian=" Vi penseremo! Siate forti!",
+                    spanish=" ¡Les deseamos lo mejor! ¡Sean\nfuertes!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+                return;
+            }
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[91] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[91] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" You\'ve graduated!\nCongratulations!",
+                french=" Vous avez décroché le diplôme\nde la Guilde! Félicitations!",
+                german=" Ihr habt den Abschluss\nerworben! Glückwunsch!",
+                italian=" Avete superato l\'esame!\nCongratulazioni!",
+                spanish=" ¡Han superado el reto!\n¡Enhorabuena!",
+            });
+            message_Talk({
+                english=" We hope for your continued\npatronage and generosity! ♪",
+                french=" Nous espérons que vous\ncontinuerez à fréquenter notre humble\nboutique! ♪",
+                german=" Wir hoffen auf eure\nfortwährende Unterstützung und\nGroßzügigkeit! ♪",
+                italian=" Contiamo sul vostro sostegno\ne sulla vostra generosità! ♪",
+                spanish=" ¡Esperamos que sigan visitando\nnuestro comercio! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+            return;
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[92] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[92] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" My brother is waiting for a\nchance to speed over to see Team [CS:X]Charm[CR].\nIt\'s quite annoying!",
+                    french=" Mon frère guette le moment\nopportun pour filer voir l\'Equipe [CS:X]Charme[CR].\nÇa m\'énerve, ça m\'énerve!",
+                    german=" Mein Bruder wartet auf eine\nMöglichkeit hinüberzueilen, um Team [CS:X]Charme[CR]\nsehen zu können. Das ist ziemlich nervig!",
+                    italian=" Mio fratello sta aspettando\nl\'occasione giusta per andare a vedere il \nTeam [CS:X]Malia[CR]. Uffa.",
+                    spanish=" Mi hermano no piensa más que\nen salir corriendo a ver al [CS:X]Equipo Carisma[CR].\n¡Es irritante!",
+                });
+                message_Talk({
+                    english=" For when that very chance\narrives...[K] I intend to dash first!",
+                    french=" Car, lorsque ce moment\narrivera...[K] J\'ai bien l\'intention d\'être le\npremier à décamper!",
+                    german=" Denn wenn sich diese Möglichkeit\nbietet...[K] Dann bin ich der Erste, der\nlosflitzen wird!",
+                    italian=" Se si dovesse presentare\nl\'occasione...[K]\nVoglio arrivare io per primo!",
+                    spanish=" Pero cuando llegue la ocasión...[K]\n¡Seré yo quien vaya primero!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+                return;
+            }
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[62]) {
+        if ($DUNGEON_CONQUEST_LIST[63]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[93] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[93] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" ...Hmmm...",
+                    french=" ... Hmmm...",
+                    german=" ...Hmm...",
+                    italian=" Mmmm...",
+                    spanish=" Hum...",
+                });
+                message_Talk({
+                    english=" What could it possibly be? What\nhas made little [CS:N]Azurill[CR] unable to wake?",
+                    french=" Qu\'est-ce que ça peut bien être?\nQu\'est-ce qui empêche le petit [CS:N]Azurill[CR] de se\nréveiller?",
+                    german=" Was könnte es nur sein? Was\nkönnte den kleinen [CS:N]Azurill[CR] nur davon abhalten,\naufzuwachen?",
+                    italian=" Com\'è possibile? Cos\'è che non\npermette al piccolo [CS:N]Azurill[CR] di svegliarsi?",
+                    spanish=" ¿De qué se tratará? ¿Qué será\nlo que impide despertarse al pequeño [CS:N]Azurill[CR]?",
+                });
+                message_Talk({
+                    english=" I do hope the dear child will\nawaken and brighten our day with his cheer.",
+                    french=" J\'espère que ce petit va finir\npar se réveiller pour éclairer notre journée\nde sa gaieté.",
+                    german=" Ich hoffe inständig, dass der\nliebe Kleine aufwachen und unseren Tag\nmit seinem Frohsinn bereichern wird.",
+                    italian=" Spero che quel caro piccino si\nsvegli e rassereni la nostra giornata con la\nsua allegria.",
+                    spanish=" Espero que ese chiquillo\nnos alegre el día despertándose al fin.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+                return;
+            }
+        }
+    }
+    
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ( $SCENARIO_TALK_BIT_FLAG[95] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[95] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Ah, the returning heroes\nof Team [team:]!",
+                    french=" Ah, les voilà de retour,\nle duo héroïque de l\'Equipe [team:]!",
+                    german=" Ah, die heimkehrenden Helden\nvon Team [team:]!",
+                    italian=" Ah, l\'eroico Team [team:] \nè di ritorno!",
+                    spanish=" Ah, ¡aquí tenemos de vuelta\nel heroico [CS:X]Equipo[CR] [team:]!",
+                });
+                message_Talk({
+                    english=" I thank you sincerely for\nstopping the spreading nightmare!",
+                    french=" Merci beaucoup d\'avoir mis un\nterme à la propagation du cauchemar!",
+                    german=" Ich danke euch zutiefst, dass ihr\ndie Ausbreitung des Albtraums verhindert habt!",
+                    italian=" Vi ringrazio di cuore per\naver fermato la diffusione dell\'incubo!",
+                    spanish=" ¡Les agradezco sinceramente que\ndetuvieran el avance de esa pesadilla!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[94] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[94] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON2, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Please don\'t succumb to\nanyone bad!",
+                    french=" Veillez à ne pas succomber aux\nassauts des Pokémon méchants!",
+                    german=" Bitte gebt euch dem Bösen nicht\ngeschlagen!",
+                    italian=" Vi prego, non cedete di fronte\nalla malvagità!",
+                    spanish=" ¡No sucumban ante los\npeligros que les esperan ahí fuera!",
+                });
+                message_Talk({
+                    english=" Go forward to victory! Fight!\nFight!",
+                    french=" Tout droit à la victoire!\nBattez-vous! Battez-vous!",
+                    german=" Vorwärts zum Sieg! Kämpft!\nKämpft!",
+                    italian=" Puntate alla vittoria! Lottate!\nLottate!",
+                    spanish=" ¡Sean fuertes! ¡Luchen con brío!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON2);
+                return;
+            }
+        }
+    } 
+}
+
+
+
+
+
+macro GreenKecDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_KAKUREON1);
+    }
+    if($SCENARIO_MAIN_BIT_FLAG[127]) {
+        ~KecleonScam(ACTOR_NPC_KAKUREON1,ACTOR_NPC_KAKUREON2);
+    }
+    if ($DUNGEON_CONQUEST_LIST[5]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[72] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[72] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, yes, I\'ve heard!",
+                french=" Ah oui! J\'ai appris la nouvelle!",
+                german=" Ah, ja. Ich habe es gehört!",
+                italian=" Ciao! L\'ho saputo!",
+                spanish=" Ah, sí, ¡ya me he enterado!",
+            });
+            message_Talk({
+                english=" You saved that cute [CS:N]Azurill[CR] from\na horrible outlaw?!",
+                french=" Vous avez sauvé [CS:N]Azurill[CR] des\ngriffes de cet horrible hors-la-loi?!",
+                german=" Ihr habt den süßen [CS:N]Azurill[CR] vor\neinem schrecklichen Ganoven gerettet!",
+                italian=" Avete salvato il piccolo [CS:N]Azurill[CR] \nda un orribile criminale?!",
+                spanish=" Han salvado al simpático\n[CS:N]Azurill[CR] de un terrible malhechor, ¿eh?",
+            });
+            message_Talk({
+                english=" For that, please accept our\nsincere thanks!",
+                french=" Acceptez nos remerciements\nles plus sincères!",
+                german=" Dafür gebührt euch unser\naufrichtiger Dank!",
+                italian=" Accettate i nostri più sentiti\nringraziamenti!",
+                spanish=" Acepten, por ello, nuestro más\nsincero agradecimiento.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[7]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[73] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[73] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, yes, I\'ve heard!",
+                french=" Ah oui! J\'ai appris la nouvelle!",
+                german=" Ah, ja. Ich habe es gehört!",
+                italian=" Ah, sì, ho sentito!",
+                spanish=" Ah, sí, ¡ya me he enterado!",
+            });
+            message_Talk({
+                english=" The guild is preparing for an\nexpedition soon?!",
+                french=" La Guilde se prépare à partir\nen expédition très prochainement?!",
+                german=" Die Gilde bereitet sich\ndemnächst auf eine Expedition vor!",
+                italian=" La Gilda si sta preparando \nper una spedizione?",
+                spanish=" El [CS:N]Pokégremio[CR] se está preparando\npara una expedición inminente, ¿no?",
+            });
+            message_Talk({
+                english=" Please do try to be chosen\nas members! ♪",
+                french=" Essayez à tout prix d\'en\nfaire partie! ♪",
+                german=" Bitte versucht, als Mitglieder\nausgewählt zu werden! ♪",
+                italian=" Dovete fare in modo di andare\nanche voi! ♪",
+                spanish=" ¡Hagan lo que puedan para poder\ntomar parte en ella! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9] || $DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11] || $DUNGEON_OPEN_LIST[12] || $DUNGEON_OPEN_LIST[13]) { 
+        if ( $SCENARIO_TALK_BIT_FLAG[74] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[74] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, yes, I\'ve heard!",
+                french=" Ah oui! J\'ai appris la nouvelle!",
+                german=" Ah, ja. Ich habe es gehört!",
+                italian=" Ah, sì, ho sentito!",
+                spanish=" Ah, sí, ¡ya me he enterado!",
+            });
+            message_Talk({
+                english=" You were chosen for the\nexpedition?!",
+                french=" Vous allez participer à\nl\'expédition?!",
+                german=" Ihr seid für die Expedition\nausgewählt worden!",
+                italian=" Vi hanno scelto per la \nspedizione?!",
+                spanish=" ¿Han tenido suerte? ¿Van a\nparticipar en la expedición?",
+            });
+            message_Talk({
+                english=" Congratulations! I so hope you\ndo very well! ♪",
+                french=" Félicitations! J\'espère que vous\nvous en sortirez bien! ♪",
+                german=" Glückwunsch! Ich hoffe so sehr,\ndass euch alles gut gelingen wird! ♪",
+                italian=" Congratulazioni! Spero che andrà\ntutto bene! ♪",
+                spanish=" ¡Mi enhorabuena! ¡Espero que\nles vaya muy bien! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[16]) {    
+        if ( $SCENARIO_TALK_BIT_FLAG[75] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[75] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, welcome back! ♪",
+                french=" Ah, content de vous revoir! ♪",
+                german=" Ah, willkommen zurück! ♪",
+                italian=" Ah, finalmente di ritorno! ♪",
+                spanish=" Ah, ¡les doy la bienvenida! ♪",
+            });
+            message_Talk({
+                english=" It sounds very much like it was\na fine expedition for your guild! ♪",
+                french=" On dirait que l\'expédition s\'est\nbien passée pour la Guilde! ♪",
+                german=" Es klingt danach, als wäre es\neine tolle Expedition für eure Gilde\ngewesen! ♪",
+                italian=" Sembra sia stata una spedizione\npositiva per la vostra Gilda! ♪",
+                spanish=" ¡Parece que ha sido una\nexpedición estupenda! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[76] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[76] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, yes, it was very surprising,\nto say the least! ♪",
+                french=" Ah oui! Le moins qu\'on puisse\ndire, c\'est que c\'était très surprenant! ♪",
+                german=" Oh ja, es gab viele\nÜberraschungen, um es vorsichtig\nauszudrücken! ♪",
+                italian=" Ah, sì, è stata una cosa a \ndir poco sorprendente! ♪",
+                spanish=" Como mínimo, ¡se puede decir\nque ha sido sorprendente! ♪",
+            });
+            message_Talk({
+                english=" The great [CS:N]Dusknoir[CR] is a Pokémon\nfrom the future! Imagine that!",
+                french=" Le grand [CS:N]Noctunoir[CR] vient du\nfutur! Vous vous rendez compte?",
+                german=" Der große [CS:N]Zwirrfinst[CR] ist ein\nPokémon aus der Zukunft! Stellt euch das mal\nvor!",
+                italian=" Il grande [CS:N]Dusknoir[CR] è un Pokémon\nche viene dal futuro! Ma ve lo immaginate?",
+                spanish=" ¿El gran [CS:N]Dusknoir[CR] es un Pokémon\ndel futuro? ¡Lo que hay que oír!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[77] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[77] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, welcome back! ♪",
+                french=" Ah, content de vous revoir! ♪",
+                german=" Ah, willkommen zurück! ♪",
+                italian=" Ah, finalmente di ritorno! ♪",
+                spanish=" Ah, ¡les doy la bienvenida! ♪",
+            });
+            message_Talk({
+                english=" We were very worried about\nyou. No one seemed to know where you went!",
+                french=" On était si inquiets pour\nvous! On pensait que vous aviez disparu!",
+                german=" Wir haben uns große Sorgen um\neuch gemacht. Niemand schien zu wissen, wo\nihr hingegangen seid!",
+                italian=" Eravamo molto preoccupati per\nvoi. Nessuno sapeva dove eravate!",
+                spanish=" Estábamos muy preocupados por\nustedes. ¡Nadie sabía dónde podrían estar!",
+            });
+            message_Talk({
+                english=" It is good to see you home safe!\nAnd good to have you shop with us again! ♪",
+                french=" Ça fait plaisir de vous voir de\nretour indemnes! Et de faire des affaires\navec vous! ♪",
+                german=" Schön, dass ihr wohlbehalten\nzurückgekehrt seid! Und gut, dass ihr wieder\nbei uns einkauft! ♪",
+                italian=" È bello vedervi tornare in \nsalute! Ed è bello vedervi di nuovo nel nostro \nnegozio! ♪",
+                spanish=" ¡Es estupendo que hayan podido\nvolver al fin! ¡Y que se pasen por nuestra\ntienda! ♪",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[78] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[78] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" My thoughts go with you! I do\nhope the best for you!",
+                    french=" Mes pensées vous accompagnent!\nJe vous souhaite bien de la chance!",
+                    german=" In Gedanken bin ich bei euch!\nMeine besten Wünsche begleiten euch!",
+                    italian=" Vi penserò! Vi auguro tutto\nil meglio!",
+                    spanish=" ¡Les deseo lo mejor! ¡Espero que\ntodo vaya muy bien!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[79] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[79] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, yes, I\'ve heard!",
+                french=" Ah oui! J\'ai appris la nouvelle!",
+                german=" Ah, ja. Ich habe es gehört!",
+                italian=" Ah, sì, ho sentito!",
+                spanish=" Ah, sí, ¡ya me he enterado!",
+            });
+            message_Talk({
+                english=" You have completed the guild\'s\ngraduation exam?! How fantastic!",
+                french=" Vous avez obtenu le diplôme de\nla Guilde?! C\'est fantastique!",
+                german=" Ihr habt die\nGildenabschlussprüfung bestanden!\nFantastisch!",
+                italian=" Avete passato l\'esame della\nGilda?! Che notizia fantastica!",
+                spanish=" Han completado el gran reto del\n[CS:N]Pokégremio[CR], ¿verdad? ¡Qué maravilla!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61] || $SCENARIO_TALK_BIT_FLAG[80]) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[80] = 1;
+            message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Could it be true?[K] Team [CS:X]Charm[CR]\nis truly visiting?!",
+                french=" C\'est vrai?[K] L\'Equipe [CS:X]Charme[CR]\nest ici, à Bourg-Trésor?!",
+                german=" Könnte das wahr sein?[K] Team\n[CS:X]Charme[CR] kommt wirklich zu Besuch?",
+                italian=" Davvero?[K] Il Team [CS:X]Malia[CR] è qui\nin visita?!",
+                spanish=" Vaya, ¿de verdad?[K] ¿El [CS:X]Equipo[CR]\n[CS:X]Carisma[CR] nos visita?",
+            });
+            message_Talk({
+                english=" What am I doing? This is no\ntime for me to worry about this shop!",
+                french=" Qu\'est-ce que je fais encore ici?\nCe n\'est pas le moment de s\'enquiquiner\navec cette boutique!",
+                german=" Was mache ich denn?!? Das ist\nnicht die richtige Zeit, um mir Sorgen um\ndiesen Laden zu machen!",
+                italian=" Cosa sto facendo? Non è il \nmomento di preoccuparsi del negozio!",
+                spanish=" ¿Qué estoy haciendo? ¡No es\nmomento de preocuparme por la tienda!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[62]) {
+        if ($DUNGEON_CONQUEST_LIST[63]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[81] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[81] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Little [CS:N]Azurill[CR] will not awaken\nfrom a nightmare...?",
+                    french=" Le petit [CS:N]Azurill[CR] ne peut pas\nsortir de son cauchemar...?",
+                    german=" Der kleine [CS:N]Azurill[CR] erwacht\neinfach nicht aus einem Albtraum?",
+                    italian=" Il piccolo [CS:N]Azurill[CR] non si risveglia\ndall\'incubo?",
+                    spanish=" ¿El pequeño [CS:N]Azurill[CR] no se\ndespierta de una pesadilla?",
+                });
+                message_Talk({
+                    english=" Hmm... That is quite\nworrisome...",
+                    french=" Hmm... Voilà qui est inquiétant...",
+                    german=" Hmm, das ist ziemlich\nbesorgniserregend.",
+                    italian=" Mmm... È abbastanza \npreoccupante...",
+                    spanish=" Hum... Eso resulta muy\npreocupante...",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+                return;
+            }
+        }
+    }
+
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ( $SCENARIO_TALK_BIT_FLAG[83] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[83] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Ah, yes, I\'ve heard!",
+                    french=" Ah oui! J\'ai appris la nouvelle!",
+                    german=" Ah, ja. Ich habe es gehört!",
+                    italian=" Ah, sì, ho sentito!",
+                    spanish=" Ah, sí, ¡ya me he enterado!",
+                });
+                message_Talk({
+                    english=" You\'ve defeated [CS:N]Darkrai[CR]?!",
+                    french=" Vous avez vaincu [CS:N]Darkrai[CR]?!",
+                    german=" Ihr habt [CS:N]Darkrai[CR] besiegt?!?",
+                    italian=" Avete sconfitto [CS:N]Darkrai[CR]?!",
+                    spanish=" ¡Han derrotado a [CS:N]Darkrai[CR]!",
+                });
+                message_Talk({
+                    english=" That\'s the [hero] and\n[partner] I revere! So fantastic!",
+                    french=" Voilà les incomparables\n[hero] et [partner]! Formidable!",
+                    german=" Das sind [hero] und\n[partner]. Ich bewundere euch! Einfach\nfantastisch!",
+                    italian=" [hero] e [partner], \nvi adoro! Siete grandi!",
+                    spanish=" ¡Mi admiración por ustedes,\n[hero] y [partner], no tiene límites!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[82] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[82] = 1;
+                message_SetFace(ACTOR_NPC_KAKUREON1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" I will wish for your success,\n[hero] and [partner]!",
+                    french=" Je souhaite de tout cœur que\nvous réussissiez, [hero] et\n[partner]!",
+                    german=" Ich drücke euch die Daumen\nfür ein erfolgreiches Gelingen, [hero]\nund [partner]!",
+                    italian=" Vi auguro ogni bene,\n[hero] e [partner]!",
+                    spanish=" ¡Les deseo éxito, [hero] y\n[partner]!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                ~KecleonPatron(ACTOR_NPC_KAKUREON1);
+                return;
+            }
+        }
+    }
+    
+
+}
+
+macro KecleonPatron($actor) {
+    switch(ProcessSpecial(103,0,0)) {
+        case 4:
+            message_SetFace($actor, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" And of course, thanks to the artist\n[hero]'s contribution to the [M:T6][CS:H]APWorld[CR],\nhere is your commission for today's sales!");            
+            message_Close();
+            $CARRY_GOLD += 100;
+            me_Play(4);
+            message_Mail("Got [CS:G]100[CR][M:S0] in commissions!");
+            WaitMe(4);
+            message_Close();
+        default:
+            break;
+    }
+    return;
+}
+
+
+macro KecleonScam($actor1, $actor2) {    
+    message_SetFace($actor1, FACE_ANGRY, FACE_POS_STANDARD);
+    message_Talk(" WHAT?[K] YOU AND I ARE NOT\nSPEAKING THE SAME LANGUAGE,\nMY FRIEND![K] THIS WILL NOT DO!");
+    if ($CARRY_GOLD > 0) {
+        bgm_FadeOut(30);
+        message_SetFace($actor2, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" WAIT...[W:60] DO YOU HAVE [M:S0]?\nBROTHER, YOU KNOW WHAT TO\nDO FOR OUR FRIEND HERE, YES?");
+        message_Close();
+        message_SetFace($actor1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I DO INDEED, YES... IT IS\nJUST LIKE OLD TIMES, ISN\'T IT,\nBROTHER?");
+        message_SetFace($actor1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" WHAT YOU NEED, MY\nFRIEND, IS THIS WONDROUS\n[CS:I]MIRACLE APPLE[CR]!");
+        message_Mail("\n[FT:0][CN][CS:G]Kecleon[CR] hands you an [CS:I]Apple[CR][FT:1]");
+        message_Talk(" YOU WANT THAT [CS:I]APPLE[CR]?\nIT\'S ONLY [CS:G]100,000[CR][M:S0]!");
+        switch(message_SwitchMenu(0,1)) {
+            case menu("YES"):
+            default:
+                message_Close();
+                §purchase;
+                bgm_Play(BGM_OUTLAW);
+                Wait(60);
+                message_Close();
+                message_SetFace($actor1, FACE_ANGRY, FACE_POS_STANDARD);
+                message_Talk(" THIEF![K] CATCH THE THIEF!");
+                message_Close();
+                screen_FadeOut(1,30);
+                message_Mail("[CN][FT:0][hero] and [partner] were mauled\n[CN]by a swarm of [CS:G]Kecleon[CR] for theft![K]\n[CN]All their money was taken![FT:1]");
+                message_Close();
+                $CARRY_GOLD = 0;
+                supervision_ExecuteCommon(CORO_EVENT_HA_SAMEX);
+                hold;
+            case menu("DO NOT"):
+                message_Close();
+                bgm_Play(BGM_TREASURE_TOWN);
+                message_SetFace($actor1, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk(" NOT INTERESTED?[K] I SEE.\nWELL, IN THAT CASE, COME BACK\nIF YOU CHANGE YOUR MIND!");
+                message_Close();
+                JumpCommon(CORO_END_TALK);
+            case menu("WHAT???"):
+                message_Close();
+                jump @purchase;
+        }
+    }
+    JumpCommon(CORO_END_TALK);
+}
+
+
+macro ElectivireDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_EREKIBURU);
+    }
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9] || $DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11] || $DUNGEON_OPEN_LIST[12] || $DUNGEON_OPEN_LIST[13]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[51] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[51] = 1;
+            message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Show them you\'ve got the power\non the expedition!",
+                french=" Montrez-leur toute l\'intensité\nqui vous anime pendant cette expédition!",
+                german=" Zeig ihnen auf der Expedition,\ndass du die Energie hast!",
+                italian=" Fategli vedere che siete in grado\ndi affrontare la spedizione!",
+                spanish=" ¡Mostradles en la expedición\nque tenéis energía de sobra!",
+            });
+            message_Talk({
+                english=" I\'ll be happy to keep the power\ngoing until we\'ve done all the linking you need.",
+                french=" De mon côté, je me charge de\nmaintenir le courant tant que vous avez\nencore des capacités à lier.",
+                german=" Aber klar erhalte ich die Energie\naufrecht, bis wir all die Kombinationen\nvorgenommen haben, die du benötigst.",
+                italian=" Sarò felice di essere qui a \ndisposizione finché avrete bisogno di creare\ndelle combinazioni.",
+                spanish=" Yo me encargo de mantener\nla energía a tope mientras hacemos\nlos enlaces que necesitáis.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[16]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[52] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[52] = 1;
+            message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" How was the expedition? Was it\nfun enough for you? Ha ha ha!",
+                french=" C\'était comment, l\'expédition?\nElectrisant, j\'espère? Ha ha ha!",
+                german=" Wie war die Expedition? Hat sie\neuch genug Spaß gemacht? Hahaha!",
+                italian=" Com\'è andata la spedizione?\nÈ stata divertente? Ah ah ah!",
+                spanish=" ¿Qué tal la expedición?\n¿Os divertisteis bastante? ¡Ja, ja, ja!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ($SCENARIO_TALK_BIT_FLAG[53]) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[53] = 1;
+            message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" It\'d be good to see that [CS:N]Grovyle[CR]\ncaught soon!",
+                french=" Ce serait un plaisir de voir ce\n[CS:N]Massko[CR] sous les verrous au plus vite!",
+                german=" Es wäre gut, wenn [CS:N]Reptain[CR] bald\ngefasst werden würde!",
+                italian=" Come vorrei che [CS:N]Grovyle[CR]\nvenisse catturato presto!",
+                spanish=" ¡Espero que agarren pronto a\nese [CS:N]Grovyle[CR]!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }  
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[54] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[54] = 1;
+            message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I heard something that gave me\na short circuit!",
+                french=" J\'ai entendu quelque chose qui\nm\'a causé un choc terrible!",
+                german=" Ich habe etwas gehört, das bei\nmir fast einen Kurzschluss verursacht hätte!",
+                italian=" Ho sentito una cosa che mi ha\nmandato in corto circuito!",
+                spanish=" ¡He oído algo que ha hecho que\nme salten chispas!",
+            });
+            message_Talk({
+                english=" [CS:N]Grovyle[CR] is really the good guy?\nAnd [CS:N]Dusknoir[CR] is the bad guy?!",
+                french=" [CS:N]Massko[CR] est le gentil, en fait?\nEt [CS:N]Noctunoir[CR], le méchant?!",
+                german=" [CS:N]Reptain[CR] ist in Wirklichkeit der\nGute? Und [CS:N]Zwirrfinst[CR] ist der Böse?!?",
+                italian=" [CS:N]Grovyle[CR] è davvero uno dei \nbuoni? E [CS:N]Dusknoir[CR] è il cattivo?!",
+                spanish=" ¿[CS:N]Grovyle[CR] es realmente el bueno?\n¡¿Y [CS:N]Dusknoir[CR] es el villano?!",
+            });
+            message_Talk({
+                english=" The world\'s a funny place. You\nnever know what to expect...",
+                french=" Etrange, le monde est étrange...\nOn ne sait jamais à quoi s\'attendre.",
+                german=" Die Welt ist schon ein lustiger\nOrt. Man weiß nie, was man zu erwarten hat.",
+                italian=" È strana la vita. Non sai \nmai cosa aspettarti...",
+                spanish=" Hay que ver cómo es el mundo.\nLa gente nunca es lo que aparenta...",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[55] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[55] = 1;
+                message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Give it everything you\'ve got!",
+                    french=" Donnez le maximum!",
+                    german=" Gebt alles, was ihr habt!",
+                    italian=" Mettetecela tutta!",
+                    spanish=" ¡Tenéis que emplearos a fondo!",
+                });
+                message_Talk({
+                    english=" If it would help, I\'ll pump up the\npower to link all the moves you need!",
+                    french=" Si ça peut vous aider, je vais\nemployer mon énergie à lier toutes\nles capacités que vous voulez!",
+                    german=" Falls das hilft, drehe ich die\nEnergie voll auf, um all die von euch\ngewünschten Attacken zu kombinieren!",
+                    italian=" Se può essere d\'aiuto, userò \ntutta la mia energia per combinare le vostre\nmosse!",
+                    spanish=" Si necesitáis que os enlace algún\nmovimiento, solo tenéis que pedírmelo. Iré\nacumulando energía por si acaso.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[56] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[56] = 1;
+            message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Graduated from the guild,\nI hear!",
+                french=" Vous avez obtenu le diplôme de\nla Guilde, à ce qu\'on dit!",
+                german=" Ihr habt die\nGildenabschlussprüfung bestanden, wie ich\ngehört habe!",
+                italian=" Ho saputo che avete superato\nl\'esame della Gilda.",
+                spanish=" He oído que habéis superado\nel gran reto.",
+            });
+            message_Talk({
+                english=" I\'m guessing my linking got you\nthrough, am I right?! Ha ha ha!",
+                french=" Je vois que mes chaînes de\ncapacités vous ont bien servi, pas vrai?!\nHa ha ha!",
+                german=" Ich denke, meine Kombinationen\nhaben euch geholfen durchzukommen, habe ich\nrecht?!? Hahaha!",
+                italian=" Suppongo che utilizziate le\nmie combinazioni, vero?! Ah ah ah!",
+                spanish=" Supongo que fueron mis enlaces\nlos que os sacaron las castañas del fuego,\n¿eh? ¡Ja, ja, ja!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61]) {
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[57] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[57] = 1;
+                message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" T-Team [CS:X]Ch-Charm[CR] is here,\nright?! I mean, at the guild?!",
+                    french=" L\'E-Equipe [CS:X]Ch-Charme[CR] est dans\nle coin, pas vrai?! A la Guilde?!",
+                    german=" T-team [CS:X]Ch-Charme[CR] ist hier,\nrichtig? Ich meine hier in der Gilde?!?",
+                    italian=" Il T-Team [CS:X]Ma-Malia[CR] è qui,\nvero?! Voglio dire, alla Gilda?!",
+                    spanish=" El... el [CS:X]Equipo Carisma[CR] está aquí,\n¿no? Es decir, ¿en el [CS:N]Pokégremio[CR]?",
+                });
+                message_Talk({
+                    english=" Whoaaah! Whoooaaah![K]\nWhoo-hoo-whoooaaah!",
+                    french=" Wouaaah! Wouaaaaah![K]\nWou-ou-ouaaaaah!",
+                    german=" Boaaah! Boooaaah![K]\nB-b-boooaaah!",
+                    italian=" Woooow! Wooooooow![K]\nWoooooooooooooooow!",
+                    spanish=" ¡Guaaauuuu! ¡Guaaauuu![K]\n¡Requeteguaaauuuuu!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ( $SCENARIO_TALK_BIT_FLAG[59] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[59] = 1;
+                message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" All right! You two are heroes!",
+                    french=" Super! Vous êtes de véritables\nhéros!",
+                    german=" In Ordnung! Ihr zwei seid\nHelden!",
+                    italian=" Wow, siete due Pokémon eroici!",
+                    spanish=" La verdad es que siempre nos\nayudáis cuando hace falta.",
+                });
+                message_Talk({
+                    english=" It\'ll get peaceful in Treasure\nTown too. Thanks for that!",
+                    french=" Grâce à vous, la paix va\nrevenir à Bourg-Trésor aussi! Merci!",
+                    german=" Auch in Schatzstadt wird es\nfriedlich werden. Dafür danke ich euch!",
+                    italian=" Tornerà la pace anche a Borgo\nTesoro. Grazie!",
+                    spanish=" Por fin podremos respirar\ntranquilos en Aldea Tesoro. Os lo\nagradezco.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[58] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[58] = 1;
+                message_SetFace(ACTOR_NPC_EREKIBURU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" You throw everything you have\ninto this, you two!",
+                    french=" Donnez tout ce que vous avez,\nvous deux!",
+                    german=" Legt alles in diese Sache, was\nihr habt, ihr zwei!",
+                    italian=" Mettetecela tutta, voi due!",
+                    spanish=" ¡Empleaos a fondo con esto!",
+                });
+                message_Talk({
+                    english=" You set that [CS:N]Darkrai[CR] straight!",
+                    french=" Donnez une bonne leçon à ce\n[CS:N]Darkrai[CR]!",
+                    german=" Rückt diesem [CS:N]Darkrai[CR] den Kopf\nzurecht!",
+                    italian=" Fategliela vedere a quel [CS:N]Darkrai[CR]!",
+                    spanish=" ¡Tenéis que darle una lección\na ese [CS:N]Darkrai[CR]!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+}
+
+
+macro DuskullDialogue() {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_YOMAWARU);
+    }
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9] || $DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11] || $DUNGEON_OPEN_LIST[12] || $DUNGEON_OPEN_LIST[13]) { 
+        if ( $SCENARIO_TALK_BIT_FLAG[110] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[110] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I wish you the best of fortunes\non your expedition. Hee-hee!",
+                french=" Je souhaite que la fortune vous\nsourie pendant l\'expédition. Gni hi hiii...",
+                german=" Ich wünsche euch viel Glück\nauf eurer Expedition. Heehee!",
+                italian=" Vi auguro il meglio per la vostra\nspedizione. Eeh-eeh!",
+                spanish=" Os deseo la mejor de las suertes\nen vuestra expedición.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[16]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[111] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[111] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ah, welcome back.",
+                french=" Ah, content de vous revoir.",
+                german=" Ah, willkommen zurück.",
+                italian=" Ah, sono contento di vedervi di\nritorno.",
+                spanish=" Ah, casi parecéis una aparición.",
+            });
+            message_Talk({
+                english=" The money earned on your\nexpedition... Please allow me to hoard it for\nyou in my bank.",
+                french=" L\'argent que vous avez gagné au\ncours de l\'expédition... Laissez-moi en prendre\nsoin pour vous dans ma banque.",
+                german=" Das Geld, das ihr auf eurer\nExpedition erbeutet habt... Bitte erlaubt, dass\nich es in meiner Bank horte.",
+                italian=" I soldi guadagnati durante la \nvostra spedizione... Permettete che li tenga io\nnella mia banca.",
+                spanish=" Permitidme que custodie la suma\nque habéis atesorado en la expedición.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[26]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[112] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[112] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Startling, isn\'t it?[K] Visitations of\nPokémon from a distant future...",
+                french=" N\'est-ce pas stupéfiant?[K]\nLa venue de Pokémon en provenance d\'un\nlointain futur...",
+                german=" Alarmierend, nicht wahr?[K]\nBesuche von Pokémon aus einer fernen\nZukunft.",
+                italian=" Sorprendente, nevvero?[K] Visite\ndi Pokémon da un futuro lontano...",
+                spanish=" Inquietante, ¿verdad?[K] Visitas de\nPokémon del futuro...",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[113] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[113] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Good to see you with us...[K]\nYour absence kept me from resting in peace...",
+                french=" C\'est bon de vous revoir parmi\nnous...[K] Votre absence m\'a empêché de\nreposer en paix...",
+                german=" Gut, euch bei uns zu haben.[K]\nEure Abwesenheit hat dafür gesorgt, dass ich\nkeine ruhige Minute hatte.",
+                italian=" È bello avervi di nuovo con\nnoi...[K] La vostra assenza non mi consentiva\ndi dormire sonni tranquilli...",
+                spanish=" Es un alivio veros por aquí...[K]\nVuestra ausencia me impedía descansar en\npaz...",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[38]) {
+        if ($PERFORMANCE_PROGRESS_LIST[17] || $SCENARIO_TALK_BIT_FLAG[114]) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[114] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" My thoughts go with you...",
+                french=" Mes pensées vous\naccompagnent...",
+                german=" In Gedanken bin ich bei euch...",
+                italian=" Il mio pensiero va a voi...",
+                spanish=" Os acompañaré en espíritu...",
+            });
+            message_Talk({
+                english=" Please, put an end to the planet\'s\nparalysis.",
+                french=" Mettez un terme à la Paralysie\nde la Planète, je vous en prie.",
+                german=" Bitte bereitet der Lähmung des\nPlaneten ein Ende.",
+                italian=" Per favore, scongiurate la\nparalisi del pianeta.",
+                spanish=" Por favor, detened la parálisis\ndel planeta.",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        if ( $SCENARIO_TALK_BIT_FLAG[116] ) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[116] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I congratulate you on your guild\ngraduation.",
+                french=" Je vous félicite pour l\'obtention\nde votre diplôme.",
+                german=" Ich beglückwünsche euch zu der\nbestandenen Gildenabschlussprüfung.",
+                italian=" Mi congratulo con voi per\naver superato l\'esame.",
+                spanish=" Os felicito por haber superado\nel reto del [CS:N]Pokégremio[CR].",
+            });
+            message_Talk({
+                english=" I do hope you continue to rake in\nmoney...[K]and allow me to hoard it!",
+                french=" Je compte sur vous pour\ncontinuer à amasser de l\'argent...[K]\nque je puisse garder précieusement!",
+                german=" Ich hoffe, ihr nehmt auch\nweiterhin Geld ein...[K] Und gestattet mir, es zu\nhorten!",
+                italian=" Spero che continuerete a\nrastrellare soldi...[K] e che mi permetterete di\ntenerli per voi!",
+                spanish=" Espero que sigáis atesorando\nmucho dinero...[K] ¡y que me permitáis\nguardarlo!",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[54]) {
+        if ($DUNGEON_CONQUEST_LIST[61] || $SCENARIO_TALK_BIT_FLAG[115]) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[115] = 1;
+            message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Whooooo! I wish to see them!",
+                french=" Ouuuh là là! Je veux les voir!",
+                german=" Whuuuuu! Ich möchte sie sehen!",
+                italian=" Woooooow! Voglio vederle!",
+                spanish=" ¡Ah, se me parte el alma de\nemoción! ¡Quiero verlas!",
+            });
+            message_Talk({
+                english=" What I would give for a mere\nglimpse of the members of Team [CS:X]Charm[CR]!",
+                french=" Que ne donnerais-je pas\npour entrapercevoir l\'Equipe\n[CS:X]Charme[CR]!",
+                german=" Was würde ich nur darum\ngeben, einen Blick auf die Mitglieder von Team\n[CS:X]Charme[CR] zu erhaschen!",
+                italian=" Cosa non darei per vedere anche\nper un attimo le belle del Team [CS:X]Malia[CR]!",
+                spanish=" ¡Daría lo que fuera por poder\nver al [CS:X]Equipo Carisma[CR]!",
+            });
+            message_Talk({
+                english=" Will you be offended if I left to\nlook at them right now?",
+                french=" Vous offusqueriez-vous si je\nm\'éclipsais pour les voir?",
+                german=" Wäret ihr beleidigt, wenn ich\nmich jetzt aufmachen würde, um sie zu\nsuchen?",
+                italian=" Vi offendete se vado a dare\nun\'occhiata proprio adesso?",
+                spanish=" ¿Os ofendería que saliera\nvolando a verlas?",
+            });
+            message_Talk({
+                english=" ...But that would certainly result\nin me being reprimanded...",
+                french=" ... Mais je n\'y gagnerais\ncertainement que des réprimandes...",
+                german=" Aber dafür würde ich sicherlich\neine Rüge bekommen.",
+                italian=" Ma verrò sicuramente\nrimproverato...",
+                spanish=" Aunque si lo hiciera, me\nremordería la conciencia. La culpa\nsería mi pena...",
+            });
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            return;
+        }
+    }
+    if ($DUNGEON_OPEN_LIST[67]) {
+        if ($DUNGEON_CONQUEST_LIST[69]) {
+            if ( $SCENARIO_TALK_BIT_FLAG[118] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[118] = 1;
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Thank you so much,\n[hero] and [partner]!",
+                    french=" Merci mille fois,\n[hero] et [partner]!",
+                    german=" Vielen Dank, [hero] und\n[partner]!",
+                    italian=" Grazie molte, [hero] e\n[partner]!",
+                    spanish=" ¡Muchísimas gracias,\n[hero] y [partner]!",
+                });
+                message_Talk({
+                    english=" This gives me the peace of mind\nto run the bank properly!",
+                    french=" Ainsi, je peux gérer la\nbanque l\'âme en paix!",
+                    german=" Das gibt mir den Seelenfrieden,\nden ich benötige, um die Bank ordentlich zu\nführen!",
+                    italian=" Ora che il mondo è salvo, ho la\npace mentale necessaria per occuparmi\nadeguatamente della banca.",
+                    spanish=" Me habéis tranquilizado lo\nsuficiente como para llevar este\nbanco como debe ser.",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        } else {
+            if ( $SCENARIO_TALK_BIT_FLAG[117] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[117] = 1;
+                message_SetFace(ACTOR_NPC_YOMAWARU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Best of luck! Do take care!",
+                    french=" Bonne chance! Prenez soin de\nvous!",
+                    german=" Viel Glück! Gebt auf euch acht!",
+                    italian=" Auguri! Fate attenzione!",
+                    spanish=" ¡Buena suerte! ¡Cuidaos!",
+                });
+                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                return;
+            }
+        }
+    }
+}
+
+
+
+
+
+
 
 macro ChatotDialogue() {
     with (actor ACTOR_TALK_MAIN) {
@@ -1245,13 +2883,6 @@ macro ChatotDialogue() {
         }
     }
     
-    switch(scn($SCENARIO_SUB1)[1]) {
-        case &<< 0:
-            break;
-        default:
-            jump @chatot_smitten;
-    }
-    
     if ($DUNGEON_OPEN_LIST[54]) {
         if ($DUNGEON_CONQUEST_LIST[61]) {
         } elseif ($DUNGEON_CONQUEST_LIST[54] || $DUNGEON_CONQUEST_LIST[55]) {
@@ -1699,7 +3330,7 @@ macro WigglytuffDialogue() {
     
     if ($DUNGEON_OPEN_LIST[21] || $DUNGEON_OPEN_LIST[25]) {
         if ($DUNGEON_CONQUEST_LIST[23]) {
-            if ($DUNGEON_CONQUEST_LIST[26]) {   
+            if ($DUNGEON_CONQUEST_LIST[26]) {
             } else {
                 jump @wiggly_grovyle_angy;
             }

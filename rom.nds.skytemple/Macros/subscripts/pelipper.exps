@@ -1,0 +1,61 @@
+macro PelipperMain() {
+    if ($DUNGEON_CONQUEST_LIST[113]) {
+        // [29, 17], Return to 3rd Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PERIPPAA1);
+        }
+        message_SetFace(ACTOR_NPC_PERIPPAA1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I really dedicate myself\nwholeheartedly to my work!",
+            french=" Je me consacre à mon travail\ncorps et âme!",
+            german=" Ich widme mich ganzen Herzens\nmeiner Arbeit!",
+            italian=" Mi dedico al mio lavoro con\ntutto il cuore!",
+            spanish=" Estoy totalmente entregado\na mi trabajo.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_PERIPPAA1);
+        }
+        message_SetFace(ACTOR_NPC_PERIPPAA1, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Back in business after a\nshort wait!",
+            french=" Bientôt de retour aux affaires\naprès une petite pause!",
+            german=" Nach kurzen Betriebsferien\nsind wir bald wieder für Sie da!",
+            italian=" Eccomi di nuovo in attività dopo\nun breve periodo di pausa!",
+            spanish=" ¡Volveremos a abrir dentro de poco!",
+        });
+        message_Talk({
+            english=" I'm hurrying to get prepared.\nPlease be patient with me a little longer!",
+            french=" J'essaye de me dépêcher pour\nque tout soit prêt le plus vite possible. Merci\nde votre patience.",
+            german=" Bin gerade dabei, alles fertig zu\nbekommen. Habt noch etwas Geduld!",
+            italian=" Sto facendo del mio meglio per\nriaprire il prima possibile. Vi prego di avere\nancora un po' di pazienza!",
+            spanish=" Me estoy dando prisa para tenerlo\ntodo a punto. ¡Te ruego que tengas solo\nun poquito más de paciencia!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

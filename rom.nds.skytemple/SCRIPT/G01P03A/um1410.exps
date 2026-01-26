@@ -1,0 +1,20 @@
+// Duplicate file group
+// Bellsprout
+// - SCRIPT/G01P03A/um0505.exps
+// - SCRIPT/G01P03A/um1410.exps
+// - SCRIPT/G01P03A/um1507.exps
+// - SCRIPT/G01P03A/um1609.exps
+// - SCRIPT/G01P03A/us2209.exps
+// - SCRIPT/T01P01A/um2408.exps
+// - SCRIPT/T01P01A/um2508.exps
+// - SCRIPT/T01P02A/um1306.exps
+// - SCRIPT/T01P02A/um1310.exps
+// - SCRIPT/T01P02A/um1314.exps
+// - SCRIPT/T01P02A/us0105.exps
+// - SCRIPT/T01P02A/us0409.exps
+// - SCRIPT/T01P02A/us2005.exps
+
+import subscripts/bellsprout.exps;
+def 0 {
+    ~BellsproutMain();
+}

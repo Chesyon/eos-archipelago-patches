@@ -1,0 +1,99 @@
+macro KoffingMain() {
+    if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DOGAASU);
+        }
+        message_SetFace(ACTOR_NPC_DOGAASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Whoa-ho! We're fellow members\nwith you in the expedition, remember?",
+            french=" Mouarf! On est vos alliés\npour cette expédition, je vous le rappelle.",
+            german=" Whoaho! Wir sind, wie ihr,\nMitglieder der Expedition, schon vergessen?",
+            italian=" Uooh-oh! Siamo membri della\nspedizione come voi, ricordate?",
+            spanish=" ¡Jo, jo! Somos compañeros de\nexpedición, por si no os acordáis.",
+        });
+        message_Talk({
+            english=" We have to be more open and\ntrusting of one another, whoa-ho-ho!",
+            french=" Il faut qu'on soit plus sincères\net qu'on ait confiance les uns envers les\nautres. Mouarf!",
+            german=" Wir müssen offener sein und\neinander mehr vertrauen, whoahoho!",
+            italian=" Dobbiamo essere più aperti e\nfidarci gli uni degli altri, uooh-oh!",
+            spanish=" Hay que ser más abiertos y\nconfiar los unos en los otros... ¡Jo, jo, jo!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[7]) {
+        // [8, 3], Apple Woods Cleared
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DOGAASU);
+        }
+        message_SetFace(ACTOR_NPC_DOGAASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Whoa-ho! Gonna whine again?",
+            french=" Mouarf! Vous allez encore\nvous mettre à pleurnicher?",
+            german=" Whoaho! Wollt ihr schon wieder\njammern und heulen?",
+            italian=" Uooh-oh! State per mettervi a\npiagnucolare?",
+            spanish=" ¡Vaya! ¿Otra vez a lloriquear?",
+        });
+        message_Talk({
+            english=" You gonna say that you don't\nwant us around? Whoa-ho-ho!",
+            french=" Vous allez encore dire que vous\nvoulez pas de nous dans le coin, hein?\nMouarf mouarf!",
+            german=" Ihr wollt sagen, dass ihr uns\nnicht in eurer Nähe haben wollt?!? Whoahoho!",
+            italian=" Ci state dicendo che non ci\nvolete qua attorno, uooh-oh?",
+            spanish=" No iréis a decir que no nos\nqueréis por aquí, ¿no? ¡Jo, jo, jo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+        // [7, 6], Team Skull Live Here...
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DOGAASU);
+        }
+        message_SetFace(ACTOR_NPC_DOGAASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Whoa-ho-ho! Seems we're living\nhere with you wimps for a while.",
+            french=" Mouarf mouarf mouarf!\nOn dirait qu'on va devoir cohabiter pendant\nquelque temps, bande de poules mouillées.",
+            german=" Whoahoho! Scheint, als würden\nwir hier eine Weile mit euch Schwächlingen\nleben.",
+            italian=" Uooh-oh-oh! Mi sembra quasi di\nvivere qui con voi mezze calzette da un po'.",
+            spanish=" ¡Jo, jo, jo! Parece que vamos a\nestar juntos una temporada, peleles.",
+        });
+        message_Talk({
+            english=" We'll put up with you, whoa-ho!",
+            french=" On fera ce qu'on peut pour vous\nsupporter. Mouarf mouarf mouarf!",
+            german=" Wir ertragen euch schon,\nwhoaho!",
+            italian=" Dovremo sopportarvi, ah!",
+            spanish=" Tendremos que soportaros,\n¡jo, jo!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

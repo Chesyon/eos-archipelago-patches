@@ -1,0 +1,965 @@
+macro Shaymin_1Main() {
+    if ($DUNGEON_CONQUEST_LIST[113]) {
+        // [29, 17], Return to 3rd Station Clearing
+        if ( $SCENARIO_TALK_BIT_FLAG[123] ) {
+            §label_132;
+            message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Send a [CS:I]Sky Gift[CR] to a friend?",
+                french=" Envoyer un [CS:I]Don du Ciel[CR]\nà un ami?",
+                german=" Möchtest du ein [CS:I]Himmelspräsent[CR]\nan einen Freund schicken?",
+                italian=" Vuoi inviare un [CS:I]Dono Cielo[CR]\na un amico?",
+                spanish=" ¿Quieres enviar un [CS:I]Regalo Cielo[CR]?",
+            });
+            switch ( message_SwitchMenu(0, 1) ) {
+                case menu({
+                    english="Send",
+                    french="Envoyer",
+                    german="Schicken",
+                    italian="Invia",
+                    spanish="Enviar",
+                }):
+                    §label_133;
+                    switch ( ProcessSpecial(PROCESS_SPECIAL_COUNT_ITEM_TYPE_IN_BAG, 180, 0) ) {
+                        case >= 1:
+                            §label_136;
+                            message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk({
+                                english=" Who will you send it to?",
+                                french=" A qui voulez-vous l'envoyer?",
+                                german=" Wem möchtest du es schicken?",
+                                italian=" A chi vuoi inviarlo?",
+                                spanish=" ¿A quién quieres enviárselo?",
+                            });
+                            switch ( message_SwitchMenu(0, 1) ) {
+                                case menu({
+                                    english="Guildmaster",
+                                    french="Au Maître de la Guilde",
+                                    german="Gildenmeister",
+                                    italian="Al Capitano",
+                                    spanish="Gran Bluff",
+                                }):
+                                default:
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[50] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto the Guildmaster.",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné au Maître de la Guilde.",
+                                            german=" Wir liefern zurzeit dem\nGildenmeister ein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\nal Capitano.",
+                                            spanish=" Estamos en proceso de enviar\nun regalo al Gran Bluff.",
+                                        });
+                                        §pass_reply;
+                                        message_Talk({
+                                            english=" Maybe there will be a reply, so\nplease wait a little while to send another one.",
+                                            french=" Il y aura peut-être une réponse,\nalors veuillez patienter un peu avant d'envoyer\nun autre cadeau.",
+                                            german=" Vielleicht wird es eine Antwort\ngeben, also warte eine Weile, bevor du erneut\neines verschickst.",
+                                            italian=" Forse riceverai una risposta,\nquindi aspetta un po' prima di inviarne un altro.",
+                                            spanish=" Puede que haya respuesta, así\nque debes esperar para enviar otro regalo\nal mismo Pokémon.",
+                                        });
+                                        message_Talk({
+                                            english=" If there is any reply for\nTeam [team:], we will pass it along to\n[CS:N]Spinda[CR] to deliver to you...",
+                                            french=" Si nous recevons une réponse\npour l'Equipe [team:], nous la donnerons à\n[CS:N]Spinda[CR] afin qu'il vous la transmette...",
+                                            german=" Wenn wir eine Antwort für\nTeam [team:] erhalten, geben wir sie\n[CS:N]Pandir[CR], damit sie dich erreicht.",
+                                            italian=" In caso il Team [team:]\nriceva una risposta, potrai leggerla presso\nil Barsucco di [CS:N]Spinda[CR]...",
+                                            spanish=" Si hay alguna respuesta para el\n[CS:X]Equipo[CR] [team:], se la mandaremos a\n[CS:N]Spinda[CR] para que os la entregue...",
+                                        });
+                                        message_Talk({
+                                            english=" Please check with [CS:N]Spinda[CR].",
+                                            french=" Veuillez consulter [CS:N]Spinda[CR].",
+                                            german=" Bitte frag bei [CS:N]Pandir[CR] nach.",
+                                            italian=" Controlla da [CS:N]Spinda[CR].",
+                                            spanish=" Visita a [CS:N]Spinda[CR] para saberlo.",
+                                        });
+                                        message_Close();
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to the\nGuildmaster?",
+                                            french=" Voulez-vous vraiment l'envoyer\nau Maître de la Guilde?",
+                                            german=" Möchtest du es dem\nGildenmeister schicken?",
+                                            italian=" Vuoi inviarlo al Capitano?",
+                                            spanish=" ¿Quieres enviárselo\nal Gran Bluff?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[50] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to the Guildmaster! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour le Maître de\nla Guilde, un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan den Gildenmeister verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare al\nCapitano pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para el Gran Bluff! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                §label_152;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_SEND_SKY_GIFT_TO_GUILDMASTER, 0, 0) ) { }
+                                                switch ( message_SwitchMenu(0, 1) ) {
+                                                    case menu({
+                                                        english="Yes",
+                                                        french="Oui",
+                                                        german="Ja",
+                                                        italian="Sì",
+                                                        spanish="Sí",
+                                                    }):
+                                                        jump @label_133;
+                                                    case menu({
+                                                        english="No",
+                                                        french="Non",
+                                                        german="Nein",
+                                                        italian="No",
+                                                        spanish="No",
+                                                    }):
+                                                    default:
+                                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                        message_Talk({
+                                                            english=" Come back anytime you want to\nsend a gift. ♪",
+                                                            french=" N'hésitez pas à repasser dès\nque vous désirez envoyer un cadeau! ♪",
+                                                            german=" Komm zurück, wann immer du\nein Präsent verschicken möchtest! ♪",
+                                                            italian=" Torna pure quando vuoi per\nspedire un dono! ♪",
+                                                            spanish=" Vuelve siempre que quieras\nenviar un regalo. ♪",
+                                                        });
+                                                        message_Close();
+                                                        jump @label_130;
+                                                }
+                                                break;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Chatot",
+                                    french="A Pijako",
+                                    german="Plaudagei",
+                                    italian="Chatot",
+                                    spanish="Chatot",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[51] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Chatot[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Pijako[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Plaudagei[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Chatot[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Chatot[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Chatot[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Pijako[CR]?",
+                                            german=" Möchtest du es [CS:N]Plaudagei[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Chatot[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Chatot[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[51] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Chatot[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Pijako[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Plaudagei[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Chatot[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Chatot[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Diglett",
+                                    french="A Taupiqueur",
+                                    german="Digda",
+                                    italian="Diglett",
+                                    spanish="Diglett",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[52] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Diglett[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Taupiqueur[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Digda[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Diglett[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Diglett[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Diglett[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Taupiqueur[CR]?",
+                                            german=" Möchtest du es [CS:N]Digda[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Diglett[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Diglett[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[52] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Diglett[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Taupiqueur[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Digda[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Diglett[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Diglett[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Dugtrio",
+                                    french="A Triopikeur",
+                                    german="Digdri",
+                                    italian="Dugtrio",
+                                    spanish="Dugtrio",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[53] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Dugtrio[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Triopikeur[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Digdri[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Dugtrio[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Dugtrio[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Dugtrio[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Triopikeur[CR]?",
+                                            german=" Möchtest du es [CS:N]Digdri[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Dugtrio[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Dugtrio[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[53] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Dugtrio[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Triopikeur[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Digdri[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Dugtrio[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Dugtrio[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Sunflora",
+                                    french="A Héliatronc",
+                                    german="Sonnflora",
+                                    italian="Sunflora",
+                                    spanish="Sunflora",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[54] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Sunflora[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Héliatronc[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Sonnflora[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Sunflora[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Sunflora[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Sunflora[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Héliatronc[CR]?",
+                                            german=" Möchtest du es [CS:N]Sonnflora[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Sunflora[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Sunflora[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[54] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Sunflora[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Héliatronc[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Sonnflora[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Sunflora[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Sunflora[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Loudred",
+                                    french="A Ramboum",
+                                    german="Krakeelo",
+                                    italian="Loudred",
+                                    spanish="Loudred",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[55] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Loudred[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Ramboum[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Krakeelo[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Loudred[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Loudred[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Loudred[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Ramboum[CR]?",
+                                            german=" Möchtest du es [CS:N]Krakeelo[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Loudred[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Loudred[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[55] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Loudred[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Ramboum[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Krakeelo[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Loudred[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Loudred[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Corphish",
+                                    french="A Ecrapince",
+                                    german="Krebscorps",
+                                    italian="Corphish",
+                                    spanish="Corphish",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[56] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Corphish[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Ecrapince[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Krebscorps[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Corphish[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Corphish[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Corphish[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Ecrapince[CR]?",
+                                            german=" Möchtest du es [CS:N]Krebscorps[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Corphish[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Corphish[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[56] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Corphish[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Ecrapince[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Krebscorps[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Corphish[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Corphish[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Chimecho",
+                                    french="A Eoko",
+                                    german="Palimpalim",
+                                    italian="Chimecho",
+                                    spanish="Chimecho",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[57] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Chimecho[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Eoko[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Palimpalim[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Chimecho[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Chimecho[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Send it to [CS:N]Chimecho[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Eoko[CR]?",
+                                            german=" Möchtest du es [CS:N]Palimpalim[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Chimecho[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Chimecho[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[57] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Chimecho[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Eoko[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Palimpalim[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Chimecho[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Chimecho[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Bidoof",
+                                    french="A Keunotor",
+                                    german="Bidiza",
+                                    italian="Bidoof",
+                                    spanish="Bidoof",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[58] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Bidoof[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Keunotor[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Bidiza[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Bidoof[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Bidoof[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Bidoof[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Keunotor[CR]?",
+                                            german=" Möchtest du es [CS:N]Bidiza[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Bidoof[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Bidoof[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[58] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Bidoof[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Keunotor[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Bidiza[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Bidoof[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Bidoof[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Croagunk",
+                                    french="A Cradopaud",
+                                    german="Glibunkel",
+                                    italian="Croagunk",
+                                    spanish="Croagunk",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[59] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [CS:N]Croagunk[CR].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [CS:N]Cradopaud[CR].",
+                                            german=" Wir liefern zurzeit [CS:N]Glibunkel[CR]\nein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [CS:N]Croagunk[CR].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [CS:N]Croagunk[CR].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to [CS:N]Croagunk[CR]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [CS:N]Cradopaud[CR]?",
+                                            german=" Möchtest du es [CS:N]Glibunkel[CR]\nschicken?",
+                                            italian=" Vuoi inviarlo a [CS:N]Croagunk[CR]?",
+                                            spanish=" ¿Quieres enviárselo a [CS:N]Croagunk[CR]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[59] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [CS:N]Croagunk[CR]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [CS:N]Cradopaud[CR], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [CS:N]Glibunkel[CR] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[CS:N]Croagunk[CR] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [CS:N]Croagunk[CR]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="[partner]",
+                                    french="A [partner]",
+                                    german="[partner]",
+                                    italian="[partner]",
+                                    spanish="[partner]",
+                                }):
+                                    if ( $SCENARIO_MAIN_BIT_FLAG[60] ) {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" We are currently sending a gift\nto [partner].",
+                                            french=" Nous acheminons en ce moment\nle cadeau destiné à [partner].",
+                                            german=" Wir liefern zurzeit\n[partner] ein Präsent aus.",
+                                            italian=" Stiamo inviando un dono\na [partner].",
+                                            spanish=" Estamos en proceso de enviar\nun regalo a [partner].",
+                                        });
+                                        jump @pass_reply;
+                                    } else {
+                                        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                        message_Talk({
+                                            english=" Is it OK to send it to\n[partner]?",
+                                            french=" Voulez-vous vraiment l'envoyer\nà [partner]?",
+                                            german=" Möchtest du es [partner]\nschicken?",
+                                            italian=" Vuoi inviarlo a [partner]?",
+                                            spanish=" ¿Quieres enviárselo a\n[partner]?",
+                                        });
+                                        switch ( message_SwitchMenu(0, 1) ) {
+                                            case menu({
+                                                english="Yes",
+                                                french="Oui",
+                                                german="Ja",
+                                                italian="Sì",
+                                                spanish="Sí",
+                                            }):
+                                            default:
+                                                $SCENARIO_MAIN_BIT_FLAG[60] = 1;
+                                                switch ( ProcessSpecial(PROCESS_SPECIAL_REMOVE_ITEMS_TYPE_IN_BAG, 180, 0) ) { }
+                                                message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                                message_Talk({
+                                                    english=" OK. That's one [CS:I]Sky Gift[CR], to be\nsent to [partner]! ♪",
+                                                    french=" Emballez, c'est pesé!\nEt un [CS:I]Don du Ciel[CR] pour [partner], un! ♪",
+                                                    german=" Okay! Ein [CS:I]Himmelspräsent[CR] wurde\nan [partner] verschickt! ♪",
+                                                    italian=" Ok. [CS:I]Dono Cielo[CR] da inviare a\n[partner] pronto per la spedizione! ♪",
+                                                    spanish=" De acuerdo. ¡Marchando un\n[CS:I]Regalo Cielo[CR] para [partner]! ♪",
+                                                });
+                                                message_Talk({
+                                                    english=" Anything else we can do?",
+                                                    french=" Désirez-vous en envoyer\nun autre?",
+                                                    german=" Möchtest du noch eins schicken?",
+                                                    italian=" Vuoi inviarne un altro?",
+                                                    spanish=" ¿Deseas enviar otro?",
+                                                });
+                                                jump @label_152;
+                                            case menu({
+                                                english="No",
+                                                french="Non",
+                                                german="Nein",
+                                                italian="No",
+                                                spanish="No",
+                                            }):
+                                                jump @label_136;
+                                        }
+                                    }
+                                    break;
+                                case menu({
+                                    english="Cancel",
+                                    french="Annuler",
+                                    german="Zurück",
+                                    italian="Annulla",
+                                    spanish="Salir",
+                                }):
+                                    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                                    message_Talk({
+                                        english=" Come back anytime you want to\nsend a gift! ♪",
+                                        french=" N'hésitez pas à repasser dès\nque vous désirez envoyer un cadeau! ♪",
+                                        german=" Komm zurück, wann immer du\nein Präsent verschicken möchtest! ♪",
+                                        italian=" Torna pure quando vuoi per\nspedire un dono! ♪",
+                                        spanish=" ¡Vuelve siempre que quieras\nenviar un regalo! ♪",
+                                    });
+                                    message_Close();
+                                    jump @label_130;
+                            }
+                            break;
+                        default:
+                            §label_137;
+                            message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                            message_Talk({
+                                english=" Oh? I'm afraid you don't\nhave any [CS:I]Sky Gift[CR]s.",
+                                french=" Oh? J'ai bien peur\nque vous n'ayez aucun [CS:I]Don du Ciel[CR].",
+                                german=" Oh, leider besitzt du kein\n[CS:I]Himmelspräsent[CR].",
+                                italian=" Oh? Temo che tu non abbia\nnessun [CS:I]Dono Cielo[CR].",
+                                spanish=" Vaya, me temo que no tienes\nningún [CS:I]Regalo Cielo[CR].",
+                            });
+                            message_Close();
+                            jump @label_130;
+                    }
+                    break;
+                case menu({
+                    english="Info",
+                    french="Infos",
+                    german="Info",
+                    italian="Info",
+                    spanish="Información",
+                }):
+                    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" [CS:K]Shaymin[CR]'s Delivery Service\nwill send [CS:I]Sky Gift[CR]s to your friends for you.",
+                        french=" Le [CS:K]Service de Livraison\nShaymin[CR] distribue en votre nom\ndes [CS:I]Dons du Ciel[CR] à vos amis.",
+                        german=" Der [CS:K]Shaymin-Lieferservice[CR]\nliefert [CS:I]Himmelspräsente[CR] an deine Freunde.",
+                        italian=" Il Servizio Consegne [CS:K]Shaymin[CR]\nsi occupa di inviare [CS:I]Doni Cielo[CR] ai tuoi amici.",
+                        spanish=" [CS:K]Repartos Shaymin[CR]\nenvía [CS:I]Regalos Cielo[CR] a tus amigos.",
+                    });
+                    message_Talk({
+                        english=" Handing out gifts in person is so\nvery exciting...",
+                        french=" Livrer les cadeaux en personne,\nc'est si excitant.",
+                        german=" Präsente zu überbringen\nist so unglaublich aufregend...",
+                        italian=" Regalare qualcosa di persona\nè molto emozionante...",
+                        spanish=" Entregar regalos en persona\nes tan emocionante...",
+                    });
+                    message_Talk({
+                        english=" But delivering a gift that is\nunexpected is also a wonderful surprise,\ndon't you think?",
+                        french=" Mais livrer un cadeau inattendu\nest aussi une surprise merveilleuse,\nvous ne pensez pas?",
+                        german=" Aber ein unerwartetes Präsent\nzu überbringen ist erst recht eine wundervolle\nÜberraschung, nicht wahr?",
+                        italian=" Ma ricevere un dono inaspettato\nè una sorpresa altrettanto meravigliosa,\nnon credi?",
+                        spanish=" Pero entregar un regalo\ninesperado también es una sorpresa\nmaravillosa, ¿no crees?",
+                    });
+                    message_Talk({
+                        english=" To a person you like, or to\nsomeone that's helped you...",
+                        french=" A une personne que vous\nappréciez ou qui vous a donné\nun coup de main...",
+                        german=" An eine Person, die du magst\noder die dir geholfen hat...",
+                        italian=" Può essere qualcuno che ti piace\noppure che ti ha offerto il suo aiuto...",
+                        spanish=" A alguien que te guste o que\nte haya ayudado...",
+                    });
+                    message_Talk({
+                        english=" Anytime you want to send a gift,\nyou can count on [CS:K]Shaymin[CR]'s Delivery Service\nto get it there! ♪",
+                        french=" Chaque fois que vous désirez\nenvoyer un cadeau, vous pouvez compter sur\nle [CS:K]Service de Livraison Shaymin[CR]! ♪",
+                        german=" Willst du ein Präsent versenden,\ndann kannst du auf den [CS:K]Shaymin-Lieferservice[CR]\nvertrauen, es zuverlässig auszuliefern! ♪",
+                        italian=" Ogni volta che vuoi spedire\nun dono, vai sul sicuro! Affidati al Servizio\nConsegne [CS:K]Shaymin[CR]! ♪",
+                        spanish=" ¡Siempre que quieras enviar uno,\npodrás contar con que [CS:K]Repartos Shaymin[CR]\nlo entregue sin demora! ♪",
+                    });
+                    message_Talk({
+                        english=" If the person Team [team:]\nsent a gift to sends a reply in return...",
+                        french=" Si la personne à laquelle\nl'Equipe [team:] a envoyé un cadeau\nrépond...",
+                        german=" Wenn die Person, der Team\n[team:] ein Präsent geschickt hat, eine\nAntwort schickt...",
+                        italian=" Se il Pokémon che ha ricevuto\nun dono dal Team [team:] decide di\ninviare una risposta...",
+                        spanish=" Si quien recibe el regalo del\n[CS:X]Equipo[CR] [team:] envía una respuesta...",
+                    });
+                    message_Talk({
+                        english=" We'll pass that reply on to\n[CS:N]Spinda[CR] to deliver, so please check with\nhim, OK?",
+                        french=" ... nous confierons cette\nréponse à [CS:N]Spinda[CR] pour qu'il vous la transmette,\nalors n'hésitez pas à le consulter.",
+                        german=" Dann wird diese an [CS:N]Pandir[CR]\nweitergeleitet. Also vergiss nicht, bei ihm\nnachzusehen!",
+                        italian=" ... la consegneremo al Barsucco\ndi [CS:N]Spinda[CR] affinché te la consegni, quindi\nchiedi a lui, va bene?",
+                        spanish=" Se la daremos a [CS:N]Spinda[CR]\npara que la entregue, así que id a visitarlo,\n¿de acuerdo?",
+                    });
+                    jump @label_132;
+                case menu({
+                    english="Cancel",
+                    french="Annuler",
+                    german="Zurück",
+                    italian="Annulla",
+                    spanish="Salir",
+                }):
+                default:
+                    message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" Come back anytime you want to\nsend a gift! ♪",
+                        french=" N'hésitez pas à repasser dès\nque vous désirez envoyer un cadeau! ♪",
+                        german=" Komm zurück, wann immer du\nein Präsent verschicken möchtest! ♪",
+                        italian=" Torna pure quando vuoi per\nspedire un dono! ♪",
+                        spanish=" ¡Vuelve siempre que quieras\nenviar un regalo! ♪",
+                    });
+                    message_Close();
+                    jump @label_130;
+            }
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[123] = 1;
+            message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Sorry to have kept you waiting!\nThis is [CS:K]Shaymin[CR]'s Delivery Service!",
+                french=" Désolée de vous avoir fait\nattendre! Bienvenue au [CS:K]Service de\nLivraison Shaymin[CR]!",
+                german=" Entschuldige bitte die Warterei!\nHerzlich willkommen beim\n[CS:K]Shaymin-Lieferservice[CR]!",
+                italian=" Ti ringraziamo per la pazienza!\nQuesto è il Servizio Consegne [CS:K]Shaymin[CR]!",
+                spanish=" Siento haberte hecho esperar.\nEstás en [CS:K]Repartos Shaymin[CR].",
+            });
+            message_Talk({
+                english=" We are a delivery service that\nwill send [CS:I]Sky Gift[CR]s to your friends for you.",
+                french=" Nous sommes un service de\nlivraison chargé de distribuer en votre\nnom les [CS:I]Dons du Ciel[CR] à vos amis.",
+                german=" Wir sind ein Lieferservice, der\n[CS:I]Himmelspräsente[CR] an deine Freunde ausliefert.",
+                italian=" Siamo un servizio di spedizioni\nche si occupa di inviare [CS:I]Doni Cielo[CR]\nai tuoi amici.",
+                spanish=" Somos un servicio de reparto\ndedicado a la entrega de [CS:I]Regalos Cielo[CR].",
+            });
+            message_Talk({
+                english=" To a person you like, or to\nsomeone that's helped you...",
+                french=" A une personne que vous\nappréciez ou qui vous a donné\nun coup de main...",
+                german=" An eine Person, die du magst\noder die dir geholfen hat...",
+                italian=" Può essere qualcuno che ti piace\noppure che ti ha offerto il suo aiuto...",
+                spanish=" Podemos entregarlos a alguien\nque te guste o que te haya ayudado...",
+            });
+            message_Talk({
+                english=" Anytime you want to send a gift,\nyou can count on [CS:K]Shaymin[CR]'s Delivery Service\nto get it there! ♪",
+                french=" Chaque fois que vous désirez\nenvoyer un cadeau, vous pouvez compter sur\nle [CS:K]Service de Livraison Shaymin[CR]! ♪",
+                german=" Willst du ein Präsent versenden,\ndann kannst du auf den [CS:K]Shaymin-Lieferservice[CR]\nvertrauen, es zuverlässig auszuliefern! ♪",
+                italian=" Ogni volta che vuoi spedire\nun dono, vai sul sicuro! Affidati al Servizio\nConsegne [CS:K]Shaymin[CR]! ♪",
+                spanish=" ¡Siempre que quieras enviar uno,\npodrás contar con que [CS:K]Repartos Shaymin[CR]\nlo entregue sin demora! ♪",
+            });
+            jump @label_132;
+        }
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        message_SetFace(ACTOR_NPC_SHEIMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hi there, travelers!",
+            french=" Holà, voyageurs!",
+            german=" Hallo, Reisende!",
+            italian=" Salve, viaggiatori!",
+            spanish=" ¡Hola, trotamundos!",
+        });
+        message_Talk({
+            english=" This is [CS:K]Shaymin[CR]'s Delivery\nService.",
+            french=" Bienvenue au\n[CS:K]Service de Livraison Shaymin[CR].",
+            german=" Das hier ist der\n[CS:K]Shaymin-Lieferservice[CR].",
+            italian=" Questo è il Servizio Consegne\n[CS:K]Shaymin[CR].",
+            spanish=" Estás en [CS:K]Repartos Shaymin[CR].",
+        });
+        message_Talk({
+            english=" But right now we're in the\nmiddle of opening preparations. Please come\nback later.",
+            french=" Hélas, en ce moment, nous\nfaisons les derniers préparatifs avant\nl'ouverture. Veuillez repasser plus tard.",
+            german=" Wir bereiten gerade noch die\nEröffnung vor. Bitte kommt später wieder.",
+            italian=" Ma attualmente siamo ancora in\nfase di allestimento. Ripassate più tardi.",
+            spanish=" Pero justo ahora estamos\npreparándonos para la inauguración.\nVuelve más tarde, por favor.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+    JumpCommon(CORO_END_TALK);
+}

@@ -1,0 +1,26 @@
+// Duplicate file group
+// Heracross
+// - SCRIPT/D73P23A/us3108.exps
+// - SCRIPT/D73P27A/us3107.exps
+// - SCRIPT/D73P31A/us0204.exps
+// - SCRIPT/D73P31A/us0304.exps
+// - SCRIPT/D73P31A/us0404.exps
+// - SCRIPT/P01P04A/um0606.exps
+// - SCRIPT/P01P04A/um0710.exps
+// - SCRIPT/P01P04A/um0723.exps
+// - SCRIPT/P01P04A/um0805.exps
+// - SCRIPT/P01P04A/um1302.exps
+// - SCRIPT/P01P04A/um1408.exps
+// - SCRIPT/P01P04A/um2103.exps
+// - SCRIPT/P01P04A/um2203.exps
+// - SCRIPT/P01P04A/um2303.exps
+// - SCRIPT/P01P04A/us2005.exps
+// - SCRIPT/P01P04A/us2105.exps
+// - SCRIPT/P01P04A/us2205.exps
+// - SCRIPT/P01P04A/us2305.exps
+// - SCRIPT/P01P04A/us3105.exps
+
+import subscripts/heracross.exps;
+def 0 {
+    ~HeracrossMain();
+}

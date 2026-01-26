@@ -1,0 +1,301 @@
+macro AzurillMain() {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
+        // [29, 92], Darkrai Defeated
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you, [hero] and\n[partner]!",
+            french=" Merci, [hero]\net [partner]!",
+            german=" Danke, [hero] und\n[partner]!",
+            italian=" Grazie, [hero] e\n[partner]!",
+            spanish=" ¡Gracias, [hero] y\n[partner]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[67]) {
+        // [29, 87], Dark Crater is Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Go, go, go, [hero] and\n[partner]!",
+            french=" Foncez, foncez, [partner]\net [hero]!",
+            german=" Los, los, los, [partner] und\n[hero]!",
+            italian=" Forza, forza, forza,\n[hero] e [partner]!",
+            spanish=" ¡Adelante, [partner] y\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ( $DUNGEON_CONQUEST_LIST[64] ) {
+        debug_Print("Previously a few days after defeating Darkrai");
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Mr. [CS:N]Drowzee[CR] told me to tell you,\n"Take care and thanks," [hero] and\n[partner].",
+            french=" Monsieur [CS:N]Soporifik[CR] m'a dit\nde vous dire: "Faites attention à vous et\nmerci, [hero] et [partner]."",
+            german=" Herr [CS:N]Traumato[CR] bat mich, euch\nseinen Dank auszurichten, und ihr sollt auf euch\naufpassen, [hero] und [partner].",
+            italian=" Il signor [CS:N]Drowzee[CR] mi ha detto\ndi dirvi: "In gamba e grazie", [hero] e\n[partner].",
+            spanish=" El señor [CS:N]Drowzee[CR] me pidió que\nos diera las gracias y que os deseara\nlo mejor de su parte.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[62]) {
+        // [29, 72], Mt. Trevail not unlocked
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Urf...[K] Urrrrrfff...",
+            french=" Pff...[K] Pff...",
+            german=" Urf...[K] Urrrrrfff...",
+            italian=" Uff...[K] Ufffffff...",
+            spanish=" Ay...[K] Aaay...",
+        });
+        message_Close();
+        §label_131;
+        message_Close();
+        supervision_Suspend(-2);
+        end;
+    } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+        // [29, 5], Graduating from the guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Congratulations, [partner]\nand [hero]!",
+            french=" Félicitations, [partner]\net [hero]!",
+            german=" Glückwunsch, [partner]\nund [hero]!",
+            italian=" Congratulazioni, [partner]\ne [hero]!",
+            spanish=" ¡Enhorabuena, [partner] y\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Good morning! [partner] and\n[hero]!",
+            french=" Bonjour, [partner]\net [hero]!",
+            german=" Guten Morgen, [partner] und\n[hero]!",
+            italian=" Buongiorno! [partner] e\n[hero]!",
+            spanish=" ¡Buenos días! ¡[partner] y\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Go, go, go, [partner] and\n[hero]!",
+            french=" Foncez, foncez, [partner]\net [hero]!",
+            german=" Los, los, los, [partner] und\n[hero]!",
+            italian=" Forza, forza, forza,\n[partner] e [hero]!",
+            spanish=" ¡Adelante, [partner] y\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[34]) {
+        // [22, 2], Returned to Guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Welcome back, [partner] and\n[hero]!",
+            french=" Content de vous revoir,\n[partner] et [hero]!",
+            german=" Willkommen zurück,\n[partner] und [hero]!",
+            italian=" Che bello rivedervi,\n[partner] e [hero]!",
+            spanish=" ¡Os doy la bienvenida,\n[partner] y [hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Yay! Good luck, [hero] and\n[partner]!",
+            french=" Youhou! Bonne chance,\n[hero] et [partner]!",
+            german=" Hurra! Viel Glück, [hero]\nund [partner]!",
+            italian=" Sì! Buona fortuna,\n[hero] e [partner]!",
+            spanish=" ¡Sí! ¡Buena suerte, [hero]\ny [partner]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[17]) {
+        // [13, 1], Amp Plains is open
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Please help us, Team\n[team:]!",
+            french=" S'il vous plaît, aidez-nous,\nEquipe [team:]!",
+            german=" Bitte helft uns, Team\n[team:]!",
+            italian=" Per favore aiutateci, Team\n[team:]!",
+            spanish=" ¡Ayudadnos, [CS:X]Equipo[CR] [team:]!",
+        });
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" Oh, ¡[hero] y\n[partner]!",
+        });
+        message_Talk({
+            english=" I hope you get lots of treasure!",
+            french=" J'espère que vous découvrirez\nplein de trésors!",
+            german=" Ich hoffe, dass ihr reichlich\nSchätze erbeutet!",
+            italian=" Spero che troverete tanti tesori!",
+            spanish=" ¡Espero que encontréis miles de\ntesoros!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_JOYOUS, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you, [hero] and\n[partner]!",
+            french=" Merci, [hero] et\n[partner]!",
+            german=" Danke, [hero] und\n[partner]!",
+            italian=" Grazie, [hero] e\n[partner]!",
+            spanish=" ¡Gracias, [hero] y\n[partner]!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

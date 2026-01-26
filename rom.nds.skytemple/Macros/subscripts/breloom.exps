@@ -1,0 +1,240 @@
+macro BreloomMain() {
+    if ($DUNGEON_ARRIVE_LIST[15]) {
+        // [29, 54], 2 missions complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KINOGASSA);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It's time for us to move on and\ndiscover new areas that no one's seen before.",
+            french=" Il est temps pour nous de\nreprendre la route et de partir explorer\ndes territoires inconnus.",
+            german=" Es ist an der Zeit, dass wir\nweiterziehen und neue Gebiete erkunden, die\nnoch niemand vor uns gesehen hat.",
+            italian=" Ora dobbiamo ripartire\ne scoprire nuovi luoghi in cui nessuno\nha ancora messo piede.",
+            spanish=" Ya es hora de seguir adelante y\ndescubrir zonas que nadie haya visto antes.",
+        });
+        message_Talk({
+            english=" If there happens to be a new\ndiscovery, we will let you know!",
+            french=" Si on fait une nouvelle\ndécouverte, on vous préviendra.",
+            german=" Wenn es eine neue Entdeckung\ngibt, lassen wir es euch wissen!",
+            italian=" Se scopriremo qualcosa di nuovo,\nve lo faremo sapere!",
+            spanish=" Si resulta que descubrimos algo,\nya te lo contaremos.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_ARRIVE_LIST[14]) {
+        // [29, 40], 1 mission complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KINOGASSA);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've been working pretty hard\nfor [CS:N]Spinda[CR], so he gave us the day off.",
+            french=" On a travaillé plutôt dur pour\n[CS:N]Spinda[CR], alors ils nous a accordé\nune journée de congé.",
+            german=" Wir haben ziemlich hart für\n[CS:N]Pandir[CR] gearbeitet, daher hat er uns einen Tag\nfreigegeben.",
+            italian=" Abbiamo lavorato molto sodo per\n[CS:N]Spinda[CR], così ci ha dato un giorno libero.",
+            spanish=" Trabajamos muy duro para\n[CS:N]Spinda[CR], así que nos ha dado el día libre.",
+        });
+        message_Talk({
+            english=" [CS:N]Shaymin[CR] are really easy to get\nalong with and hospitable. We were thinking of\njust relaxing here for a while.",
+            french=" Les [CS:N]Shaymin[CR] sont vraiment\nagréables et accueillants. On pensait passer\nun peu de temps ici pour se reposer.",
+            german=" Mit [CS:N]Shaymin[CR] kann man wirklich\ngut auskommen. Und sie sind so gastfreundlich!\nWir gedenken noch eine Weile hierzubleiben.",
+            italian=" È facile andare d'accordo con\ni Pokémon [CS:N]Shaymin[CR]... sono così ospitali!\nPensavamo di rimanere qui a rilassarci un po'.",
+            spanish=" Los [CS:N]Shaymin[CR] son de lo más\nhospitalario y amable, así que igual\nnos quedamos por aquí a relajarnos un rato.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KINOGASSA);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_HAPPY, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey![K] That last exploration was\nincredible, huh?",
+            french=" Hé![K] Cette dernière exploration\nétait incroyable, pas vrai?",
+            german=" Hey![K] Die letzte Erkundung war\nunglaublich, nicht wahr?",
+            italian=" Ehi![K] L'ultima esplorazione è stata\ngrandiosa, non è vero?",
+            spanish=" ¡Oye![K] Esa última exploración\nfue de traca, ¿eh?",
+        });
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm still shaking a little from\nflying down here from the summit!",
+            french=" On est redescendus du sommet\nde la montagne par la voie des airs!\nJ'en frissonne encore!",
+            german=" Ich zittere immer noch ein wenig\nvon dem Flug vom Gipfel hier herunter!",
+            italian=" Ho ancora il batticuore per il\nvolo che ho fatto per tornare quaggiù!",
+            spanish=" ¡Todavía tengo un poco de\ntembleque por bajar volando desde la cima!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
+        // [29, 26], First Time at 8th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_WORRIED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We should do what [CS:N]Ampharos[CR]\nsays and head for the summit.",
+            french=" [CS:N]Pharamp[CR] nous a dit de\nreprendre notre ascension\nvers le sommet.",
+            german=" [CS:N]Ampharos[CR] sagte uns,\nwir sollten zum Gipfel eilen.",
+            italian=" Dovremmo seguire il consiglio di\n[CS:N]Ampharos[CR] e raggiungere la cima.",
+            spanish=" [CS:N]Ampharos[CR] nos dijo que podíamos\nsubir a la cima.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[117]) {
+        // [29, 24], First Time at 7th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It's dangerous if you don't hurry.",
+            french=" Dépêche-toi, il y a urgence!",
+            german=" Wenn du dich nicht beeilst, kann\nes gefährlich werden.",
+            italian=" Sbrigatevi o vi troverete\nin pericolo.",
+            spanish=" Si no te das prisa es un peligro.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[115]) {
+        // [29, 20], First time at 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_WORRIED, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You can't judge based on\nappearance... Let me tell you.",
+            french=" Il ne faut pas se fier aux\napparences... Crois-moi.",
+            german=" Hör gut zu. Verlass dich beim\nUrteilen nicht darauf, wie etwas scheint.",
+            italian=" Non puoi esprimere un giudizio\nin base all'aspetto... Credi a me.",
+            spanish=" Deja que te diga que no se puede\njuzgar a la gente por las apariencias...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[112]) {
+        // [29, 14], First Time at 2nd Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_KINOGASSA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_KINOGASSA) {
+            Turn2Direction(4, 10, DIR_UP);
+        }
+        WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Over there is one of those\nubiquitous Kangaskhan Rocks.",
+            french=" Là-bas, il y a une de ces Statues\nKangourex qu'on trouve un peu partout.",
+            german=" Dort drüben ist einer jener\nallgegenwärtigen Kangama-Speicher.",
+            italian=" Laggiù c'è una di quelle\nonnipresenti Statue Kangaskhan.",
+            spanish=" Ahí hay una de esas Rocas de\nKangaskhan que están por todos lados.",
+        });
+        message_KeyWait();
+        with(actor ACTOR_NPC_KINOGASSA) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER_APPOINT);
+        }
+        WaitExecuteLives(ACTOR_NPC_KINOGASSA);
+        message_Talk({
+            english=" Make sure to store anything\nvaluable you don't want to lose!",
+            french=" Assure-toi bien de placer dans la\nréserve les objets importants\nque tu ne veux pas perdre!",
+            german=" Lagere dort alle\nWertgegenstände, die du nicht verlieren\nwillst!",
+            italian=" Se non si vuole perdere\nqualcosa di prezioso, bisogna depositarlo!",
+            spanish=" ¡Asegúrate de guardar cualquier\ncosa valiosa que no quieras perder!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 10], First Time at Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KINOGASSA);
+        }
+        message_SetFace(ACTOR_NPC_KINOGASSA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Yo! I'm [CS:N]Breloom[CR]. I'm part of the\nsurvey team.",
+            french=" Bonjour! Je suis [CS:N]Chapignon[CR].\nJe fais partie de l'équipe de reconnaissance.",
+            german=" Jau! Ich bin [CS:N]Kapilz[CR]. Ich gehöre\nzum Vermessungsteam.",
+            italian=" Yo! Mi chiamo [CS:N]Breloom[CR].\nSono un membro della squadra d'indagine.",
+            spanish=" ¡Buenas! Soy [CS:N]Breloom[CR], formo\nparte del equipo de reconocimiento.",
+        });
+        message_Talk({
+            english=" I thought I'd take on this\nmountain before anyone else got here\nto see how it is, you know?",
+            french=" Je me suis dit que j'aimerais\nbien escalader cette montagne seul avant\nque les autres n'arrivent.",
+            german=" Ich wollte mir den Berg schon\nmal allein vornehmen, bevor der Rest des\nTeams ihn zu sehen bekommt, verstehst du?",
+            italian=" Stavo pensando di precedere\ni miei compagni per dare un'occhiata\nal cammino che ci aspetta...",
+            spanish=" Me apetecía subir aquí antes que\nnadie para tener información privilegiada.",
+        });
+        message_Talk({
+            english=" But you know, the dungeon\nis pretty tough!",
+            french=" Mais, figurez-vous que le donjon\nest plutôt corsé!",
+            german=" Aber weißt du, der Dungeon ist\nleider ganz schön schwierig!",
+            italian=" ... ma il dungeon è davvero\ndifficile!",
+            spanish=" ¡Pero resulta que el territorio\nes bastante dificilillo!",
+        });
+        message_Talk({
+            english=" It's so complex that\na rescue request can't be sent...",
+            french=" Il est si compliqué qu'aucune\ndemande de sauvetage ne peut être envoyée...",
+            german=" Er ist so komplex, dass man\nkeine Hilfe anfordern kann...",
+            italian=" È talmente complesso che non è\npossibile richiedere un Pronto Intervento...",
+            spanish=" Tanto que no se puede ni mandar\nuna petición de rescate...",
+        });
+        message_Talk({
+            english=" All collected treasures can be...\nPoof! Gone!",
+            french=" Tous les trésors ramassés\npeuvent... pouf! s'envoler!",
+            german=" Alle gesammelten Schätze...\nPuff! Weg!",
+            italian=" Tutti i tesori raccolti possono...\nPuf! Sparire nel nulla!",
+            spanish=" Si te descuidas, los tesoros...\n¡Puf! ¡Desaparecen!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

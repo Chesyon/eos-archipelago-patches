@@ -1,0 +1,303 @@
+macro BellsproutMain() {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
+        // [29, 92], Darkrai Defeated
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" So everything was\ntied together...",
+            french=" Ainsi donc, tout était lié...",
+            german=" Also war alles miteinander\nverwoben...",
+            italian=" Quindi era tutto collegato...",
+            spanish=" Así que todo estaba relacionado.",
+        });
+        message_Talk({
+            english=" It was one vast conspiracy\nby [CS:N]Darkrai[CR]...[K] It's quite astounding.",
+            french=" Tout ça n'était qu'une immonde\nconspiration ourdie par ce [CS:N]Darkrai[CR]...[K]\nC'est stupéfiant.",
+            german=" Es war ein Riesenkomplott von\n[CS:N]Darkrai[CR].[K] Ziemlich erstaunlich.",
+            italian=" Era un'immensa cospirazione di\n[CS:N]Darkrai[CR]...[K]\nIncredibile...",
+            spanish=" Se trataba de una conspiración\nurdida por [CS:N]Darkrai[CR]...[K] Asombroso.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Team [CS:X]Raider[CR] is a legendary\nexploration team.",
+            french=" L'Equipe [CS:X]As[CR] est une\nvéritable légende de l'exploration.",
+            german=" Team [CS:X]Schatzsucher[CR] ist ein\nlegendäres Erkundungsteam.",
+            italian=" Il Team [CS:X]Asso[CR] è una leggendaria\nsquadra d'esplorazione.",
+            spanish=" El [CS:X]Equipo As[CR] es un equipo\nexplorador legendario.",
+        });
+        message_Talk({
+            english=" The team consists of three\nmembers: [CS:N]Gallade[CR], [CS:N]Roserade[CR], and [CS:N]Rhyperior[CR].",
+            french=" L'équipe est composée de trois\nmembres: [CS:N]Gallame[CR], [CS:N]Roserade[CR] et [CS:N]Rhinastoc[CR].",
+            german=" Das Team besteht aus drei\nMitgliedern: [CS:N]Galagladi[CR], [CS:N]Roserade[CR] und [CS:N]Rihornior[CR].",
+            italian=" La squadra è formata da tre\nPokémon: [CS:N]Gallade[CR], [CS:N]Roserade[CR] e [CS:N]Rhyperior[CR].",
+            spanish=" Tiene tres miembros: [CS:N]Gallade[CR],\n[CS:N]Roserade[CR] y [CS:N]Rhyperior[CR].",
+        });
+        message_Talk({
+            english=" They're said to never be denied\nfrom getting the treasures they target.",
+            french=" On dit que quand ils jettent leur\ndévolu sur un trésor, ils n'échouent jamais:\nils finissent toujours par l'obtenir.",
+            german=" Man sagt, sie bekommen immer\ndie Schätze, auf die sie es abgesehen haben.",
+            italian=" Si dice che siano sempre riusciti\na ottenere i tesori su cui avevano messo gli\nocchi.",
+            spanish=" Se dice que siempre consiguen\ntodo lo que se proponen.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You've brought peace to the\nworld at last!",
+            french=" Vous avez enfin restauré la\npaix en ce monde!",
+            german=" Ihr habt der Welt endlich\nFrieden gebracht!",
+            italian=" Alla fine avete riportato la pace\nnel mondo!",
+            spanish=" ¡Al fin habéis devuelto la paz a\neste mundo!",
+        });
+        message_Talk({
+            english=" Thank you!",
+            french=" Merci!",
+            german=" Danke!",
+            italian=" Grazie!",
+            spanish=" ¡Muchas gracias!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Team [team:] is up for the\nchallenge! I'm sure of it!",
+            french=" L'Equipe [team:] est de\ntaille à relever le défi! Ça ne fait\naucun doute!",
+            german=" Team [team:] ist bereit\nfür die Herausforderung! Da bin ich mir\nsicher!",
+            italian=" Il Team [team:] è\nall'altezza della sfida! È sicuro!",
+            spanish=" ¡Estoy seguro de que el [CS:X]Equipo[CR]\n[team:] está a la altura de este reto!\n¡No me cabe la menor duda!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[25]) {
+        // [17, 1], Dusknoir's Secret
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Learning about [CS:N]Grovyle[CR]'s wicked\nplan has hardened our resolve.[K] He must not get\naway with this.",
+            french=" Depuis qu'on sait ce que\nmanigance [CS:N]Massko[CR], on est encore plus\ndéterminés.[K] On ne peut pas le laisser faire!",
+            german=" Die Kenntnis des üblen Plans\nvon [CS:N]Reptain[CR] hat unsere Entschlossenheit\ngefestigt.[K] Er darf damit nicht durchkommen.",
+            italian=" Apprendere del malvagio piano di\n[CS:N]Grovyle[CR] ci ha temprato lo spirito.[K] Non gli\npermetteremo di sfuggire.",
+            spanish=" Al enterarnos del malvado plan\nde [CS:N]Grovyle[CR] nuestra determinación se ha visto\nreforzada.[K] No se saldrá con la suya.",
+        });
+        message_Talk({
+            english=" [CS:N]Grovyle[CR] is sure to strike at\n[CS:P]Crystal Cave[CR] again.",
+            french=" [CS:N]Massko[CR] va sûrement encore\ntenter sa chance à la [CS:P]Caverne Cristal[CR].",
+            german=" [CS:N]Reptain[CR] schlägt ganz bestimmt\nnoch einmal in der [CS:P]Kristallhöhle[CR] zu.",
+            italian=" [CS:N]Grovyle[CR] colpirà sicuramente\ndi nuovo nella [CS:P]Grotta di Cristallo[CR].",
+            spanish=" [CS:N]Grovyle[CR] volverá, sin duda,\na la [CS:P]Cueva Cristal[CR].",
+        });
+        message_Talk({
+            english=" We therefore decided that we\nshould go there too![K] However...",
+            french=" C'est pour cette raison qu'on\nvoulait y aller nous aussi![K] Cependant...",
+            german=" Deshalb haben wir entschieden,\ndass auch wir uns dorthin begeben sollten![K]\nAllerdings gibt es da noch etwas...",
+            italian=" Quindi abbiamo deciso che ci\nandremo anche noi![K] Però...",
+            spanish=" Por eso, habíamos decidido ir.[K]\nSin embargo...",
+        });
+        message_Talk({
+            english=" Officer [CS:N]Magnezone[CR] informed us\nthat [CS:P]Crystal Cave[CR] is now off limits.",
+            french=" ... le shérif [CS:N]Magnézone[CR] nous a\ninformés que l'accès à la [CS:P]Caverne Cristal[CR] est\ndésormais interdit.",
+            german=" Unser Oberwachtmeister\n[CS:N]Magnezone[CR] hat uns informiert, dass die\n[CS:P]Kristallhöhle[CR] jetzt tabu ist.",
+            italian=" Il Commissario [CS:N]Magnezone[CR] ci ha\ninformato che per ora la [CS:P]Grotta di Cristallo[CR]\nè inaccessibile.",
+            spanish=" El agente [CS:N]Magnezone[CR] nos ha\ninformado de que ahora está prohibido\nacceder a esa cueva.",
+        });
+        message_Talk({
+            english=" Is there a reason for that?",
+            french=" Vous savez pourquoi, vous?",
+            german=" Gibt es einen Grund dafür?",
+            italian=" Per quale motivo?",
+            spanish=" ¿Hay algún motivo?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm sorry.",
+            french=" Je vous prie de nous excuser.",
+            german=" Es tut mir leid.",
+            italian=" Sono spiacente.",
+            spanish=" Lo siento.",
+        });
+        message_Talk({
+            english=" We've been trying to gather\nnews about [CS:N]Grovyle[CR], but...",
+            french=" Nous avons essayé de recueillir\ndes informations au sujet de [CS:N]Massko[CR], mais...",
+            german=" Wir haben versucht, Neuigkeiten\nüber [CS:N]Reptain[CR] zu sammeln, aber...",
+            italian=" Abbiamo cercato di raccogliere\nnotizie su [CS:N]Grovyle[CR], ma...",
+            spanish=" Hemos intentado averiguar todo\nlo posible sobre [CS:N]Grovyle[CR], pero...",
+        });
+        message_Talk({
+            english=" We've had no success finding\nuseful information...",
+            french=" ... rien qui soit vraiment utile...",
+            german=" Leider konnten wir dabei keine\nnützlichen Informationen finden.",
+            italian=" Non siamo riusciti a trovare\ninformazioni utili...",
+            spanish=" No hemos conseguido dar con\nnada...",
+        });
+        message_Talk({
+            english=" But we promise we'll keep at it!",
+            french=" Nous allons persévérer, c'est\npromis!",
+            german=" Aber wir versprechen, dass wir\nam Ball bleiben werden!",
+            italian=" Ma promettiamo di continuare\na cercare!",
+            spanish=" ¡Eso sí, prometemos seguir\nintentándolo!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        // [14, 1], Northern Desert Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We of Team [CS:X]Flame[CR] will\nparticipate in the hunt for [CS:N]Grovyle[CR]!",
+            french=" Nous, l'Equipe [CS:X]Flamme[CR], nous\nallons participer à la poursuite de [CS:N]Massko[CR]!",
+            german=" Wir von Team [CS:X]Flamme[CR] werden\nuns an der Jagd auf [CS:N]Reptain[CR] beteiligen!",
+            italian=" Anche noi del Team [CS:X]Fiamma[CR]\ndaremo la caccia a [CS:N]Grovyle[CR]!",
+            spanish=" ¡El [CS:X]Equipo Llameante[CR] piensa\nunirse a la caza de [CS:N]Grovyle[CR]!",
+        });
+        message_Talk({
+            english=" I'll work up my courage for this!",
+            french=" C'est une tâche importante!\nJe vais rassembler tout mon courage pour\ny arriver!",
+            german=" Ich werde dafür meinen Mut\nzusammennehmen!",
+            italian=" Farò del mio meglio per\ndiventare più coraggioso!",
+            spanish=" ¡Voy a intentar ser valiente\nen esta misión!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MADATSUBOMI);
+        }
+        message_SetFace(ACTOR_NPC_MADATSUBOMI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're Team [CS:X]Flame[CR].\nI'm the leader.",
+            french=" On est l'Equipe [CS:X]Flamme[CR]. C'est moi\nle meneur.",
+            german=" Wir sind Team [CS:X]Flamme[CR]. Ich bin\nder Anführer.",
+            italian=" Noi siamo il Team [CS:X]Fiamma[CR].\nIo sono il leader.",
+            spanish=" Somos el [CS:X]Equipo Llameante[CR].\nEl líder soy yo.",
+        });
+        message_Talk({
+            english=" I don't like to admit it, but I'm\nvery timid...",
+            french=" Ça me gêne de l'avouer, mais\nje suis très peureux...",
+            german=" Ich gebe das nicht gerne zu,\naber ich bin sehr ängstlich...",
+            italian=" Mi vergogno ad ammetterlo, ma\nsono un po' fifone...",
+            spanish=" No me gusta admitirlo, pero\nsoy algo temeroso...",
+        });
+        message_Talk({
+            english=" When my team members start\nfighting with fire, I can't do a thing but stand\nback and hope I don't get hit...",
+            french=" Quand mes coéquipiers se\nmettent à utiliser des attaques de type Feu, je\ndois rester à l'écart pour éviter d'être touché.",
+            german=" Wenn meine Team-Mitglieder mit\nFeuer kämpfen, kann ich nur dastehen und\nhoffen, dass ich nicht getroffen werde.",
+            italian=" Quando la mia squadra lotta\ncon il fuoco, non posso far altro che stare\nindietro e sperare che non mi colpiscano...",
+            spanish=" Cuando mis compañeros lanzan\nsus ataques de tipo Fuego, lo único que\npuedo hacer es apartarme...",
+        });
+        message_Talk({
+            english=" Ugh...[K]I feel so pathetic...",
+            french=" Pfff... [K]Je me trouve\npitoyable...",
+            german=" Uff,[K] ich fühle mich so\nerbärmlich.",
+            italian=" Uh...[K] Mi sento così patetico...",
+            spanish=" Y confiar en que no me quemen.[K]\nQué patético resulto...",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

@@ -1,0 +1,594 @@
+macro TogepiMain() {
+    if (???) {
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm having so much fun! ♪",
+            french=" Je m'amuse comme un petit\nfou, pas vrai, les copains? ♪",
+            german=" Ich habe so viel Spaß! ♪",
+            italian=" Mi sto divertendo un mondo! ♪",
+            spanish=" ¡Me estoy divirtiendo un\nmontón! ♪",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[67]) {
+        // [29, 87], Dark Crater is Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Be strong for us![K] And go bring\npeace to the world!",
+            french=" Faites preuve de courage![K]\nPartez ramener la paix dans le monde!",
+            german=" Seid stark für uns![K] Und bringt\nder Welt Frieden!",
+            italian=" Forza![K] Riportate la pace nel\nmondo!",
+            spanish=" ¡Sed fuertes por nosotros![K]\n¡Y traed la paz a este mundo!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Do you know about the [CS:I]Wonder\nGummi[CR]?",
+            french=" Vous connaissez la [CS:I]Gelée\nMiracle[CR]?",
+            german=" Wisst ihr über das\n[CS:I]Wundergummi[CR] Bescheid?",
+            italian=" Sapete niente della\n[CS:I]Gommaincanto[CR]?",
+            spanish=" ¿Habéis oído hablar de la [CS:I]Gomi[CR]\n[CS:I]Ingenio[CR]?",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I went to meet Team [CS:X]Charm[CR] and\ngot their autographs! ♪",
+            french=" Je suis allé voir l'Equipe [CS:X]Charme[CR]\net j'ai eu leur autographe! ♪",
+            german=" Ich bin zu Team [CS:X]Charme[CR]\ngegangen und habe mir ihre Autogramme geben\nlassen! ♪",
+            italian=" Voglio incontrare il Team [CS:X]Malia[CR] e\nchiedere i loro autografi! ♪",
+            spanish=" Fui a conocer al [CS:X]Equipo Carisma[CR],\n¡y me dieron sus autógrafos! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+        // [29, 42], Manaphy hatched.
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We ended up coming back home\nbefore climbing the whole [CS:P]Sky Peak[CR]!",
+            french=" Finalement on a rebroussé\nchemin avant d'avoir atteint le sommet du\n[CS:P]Pic Céleste[CR]!",
+            german=" So sind wir nach Hause\nzurückgekehrt, ohne den [CS:P]Himmelsgipfel[CR]\nbestiegen zu haben!",
+            italian=" E così alla fine siamo tornati\nindietro senza raggiungere la cima del\n[CS:P]Picco del Cielo[CR]!",
+            spanish=" ¡Acabábamos volviendo a casa\nantes de escalar toda la [CS:P]Cumbre del Cielo[CR]!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I heard from [CS:N]Shaymin[CR] earlier,\nbut this isn't the mountain's summit...",
+            french=" J'avais déjà entendu parler des\n[CS:N]Shaymin[CR], alors on est venus.\nMais ce n'est pas le sommet, ici...",
+            german=" Ich habe vorhin von [CS:N]Shaymin[CR]\ngehört. Aber das hier ist noch nicht der\nBerggipfel...",
+            italian=" Prima ho sentito dire da [CS:N]Shaymin[CR]\nche questa non è la cima della montagna...",
+            spanish=" [CS:N]Shaymin[CR] me lo había dicho,\nresulta que esta no es la cima de la montaña...",
+        });
+        message_Talk({
+            english=" We always thought that this was\nthe top of the mountain. Ha ha ha!",
+            french=" Au début, on pensait que c'était\nle sommet de la montagne. Ha ha ha!",
+            german=" Wir haben immer gedacht, dass\ndas hier schon der höchste Punkt sei. Ha ha ha!",
+            italian=" E dire che abbiamo sempre\ncreduto che lo fosse. Ah ah ah!",
+            spanish=" Siempre pensábamos que\nhabíamos alcanzado la cima, ¡ja, ja, ja!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
+        // [29, 27], Return to 8th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Mountains are so beautiful! ♪",
+            french=" Les montagnes, c'est si joli! ♪",
+            german=" Berge sind so schön! ♪",
+            italian=" La montagna è meravigliosa! ♪",
+            spanish=" ¡Las montañas son preciosas! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[121]) {
+        // [29, 21], Returned to 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder where the Secret\nRoom that [CS:N]Shaymin[CR] was talking\nabout is.",
+            french=" Je me demande ce que ce\n[CS:N]Shaymin[CR] entendait par\n"Salle Secrète".",
+            german=" Ich frage mich, wo wohl der\nGeheimraum ist, von dem dieses [CS:N]Shaymin[CR]\ngesprochen hat?",
+            italian=" Mi domando dove sia questa\nSala Segreta di cui parlava [CS:N]Shaymin[CR]...",
+            spanish=" Me pregunto dónde estará la\nCámara Secreta de la que hablaba [CS:N]Shaymin[CR].",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 11], Returned to Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Shaymin[CR] all look so much alike.\nIt's almost impossible to tell them apart...",
+            french=" Les [CS:N]Shaymin[CR] se ressemblent\ntous. Il est quasiment impossible de les\ndistinguer les uns des autres.",
+            german=" Alle [CS:N]Shaymin[CR] sehen so gleich\naus, dass es fast unmöglich ist, sie\nauseinanderzuhalten...",
+            italian=" I Pokémon [CS:N]Shaymin[CR] sono tutti\nuguali. È praticamente impossibile distinguerli\ngli uni dagli altri...",
+            spanish=" Todos los [CS:N]Shaymin[CR] se parecen un\nmontón, es casi imposible distinguirlos...",
+        });
+        message_KeyWait();
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        message_Talk({
+            english=" Ha ha ha!",
+            french=" Ha ha ha!",
+            german=" Hahaha!",
+            italian=" Ah ah ah!",
+            spanish=" ¡Ja, ja, ja!",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[175]) {
+        // [29, 8], Cafe Describe Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Let's go! Let's go! ♪",
+            french=" C'est parti! C'est parti! ♪",
+            german=" Los geht's! Los geht's! ♪",
+            italian=" Forza! Forza! ♪",
+            spanish=" ¡Venga! ¡Vamos! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You're the team that went to the\n[CS:P]Hidden Land[CR] and stopped the planet's paralysis?",
+            french=" C'est vous, l'équipe qui est allée\ndans les [CS:P]Terres Illusoires[CR] pour empêcher\nla Paralysie de la Planète?",
+            german=" Ihr seid das Team, das in das\n[CS:P]Verborgene Land[CR] gereist ist und die Lähmung\ndes Planeten aufgehalten hat?",
+            italian=" Voi siete la squadra che è stata\nalla [CS:P]Terra Nascosta[CR] e ha scongiurato\nla paralisi del pianeta?",
+            spanish=" ¿Sois el equipo que fue a la\n[CS:P]Tierra Oculta[CR] y detuvo la parálisis del\nplaneta?",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:K]Chansey[CR] Day Care will look after\nany Egg for you.",
+            french=" La [CS:K]Garderie Leveinard[CR] veillera\nsur vos Œufs pour vous.",
+            german=" Die [CS:K]Chaneira-Tagesstätte[CR] wird\nauf jedes eurer Eier achtgeben.",
+            italian=" La Pensione [CS:K]Chansey[CR] si prende\ncura delle Uova.",
+            spanish=" En la [CS:K]Guardería Chansey[CR] se\nencargarán de cuidar cualquier Huevo\nque tengáis.",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        // [14, 1], Northern Desert Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I hear that when you win big on\na [CS:I]Prize Ticket[CR], there's a celebratory dance!",
+            french=" Il paraît qu'en cas de gros lot à\nMéga Magot, il y a une danse pour\nféliciter le gagnant!",
+            german=" Es gibt wohl einen Freudentanz,\nwenn du mit einem [CS:I]Preisticket[CR] groß abräumst!",
+            italian=" Ho sentito che quando ottieni una\ngrossa vincita con un [CS:I]Buono Premio[CR], parte una\ndanza celebrativa!",
+            spanish=" He oído que, cuando alguien gana\nalgún premio gordo, se festeja bailando.",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Everyone in the guild is going\nout on an expedition?",
+            french=" Tous les membres de la Guilde\npartent en expédition?",
+            german=" Jeder aus der Gilde wird auf\neine Expedition gehen?",
+            italian=" Parteciperà tutta la Gilda alla\nspedizione?",
+            spanish=" ¿Todo el [CS:N]Pokégremio[CR] va a salir\nde expedición?",
+        });
+        message_Talk({
+            english=" Ooh, that's so cool! ♪",
+            french=" Oooh, c'est trop cool! ♪",
+            german=" Ooh, das ist so cool! ♪",
+            italian=" Ooh, che bello! ♪",
+            spanish=" ¡Vaya, cómo mola! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($SUB30_PROJECTP) {
+        // [8, 5], Project P Seen?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I don't really get it, but it\nsounds great, I guess! ♪",
+            french=" Je ne comprends pas tout\nmais ça a l'air extra, non? ♪",
+            german=" Ich verstehe es zwar nicht\nganz, aber es hört sich wohl klasse an! ♪",
+            italian=" Non sono sicuro di aver capito,\nma va bene così... credo! ♪",
+            spanish=" ¡No lo entiendo muy bien, pero\nsupongo que suena estupendo! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[178]) {
+        // [7, 2], Get Skunked On!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're the exploration team that\ndelivers happiness! We're Team [CS:X]Glee[CR]!",
+            french=" On est l'Equipe [CS:X]Bonheur[CR]![K]\nL'équipe d'exploration qui répand la joie et\nla bonne humeur!",
+            german=" Wir sind das Erkundungsteam,\ndas Fröhlichkeit verbreitet! Wir sind Team\n[CS:X]Frohsinn[CR]!",
+            italian=" Siamo la squadra d'esplorazione\nche porta la felicità! Siamo il Team [CS:X]Allegria[CR]!",
+            spanish=" ¡Somos el equipo explorador\nque reparte felicidad! ¡El [CS:X]Equipo Alegría[CR]!",
+        });
+        message_Talk({
+            english=" Hey, gang! What kind of items\nshould we buy today?",
+            french=" Hé, les copains! Quel genre\nd'objets on va acheter aujourd'hui?",
+            german=" Hey Leute! Was für Items\nsollen wir heute kaufen?",
+            italian=" Ehi, amici! Che tipo di strumenti\ndovremmo comprare oggi?",
+            spanish=" ¡Eh, pandilla! ¿Qué objetos\ncompramos hoy?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" I want a [CS:I]Blue Gummi[CR]!",
+            french=" Je veux une [CS:I]Gelée Bleue[CR]!",
+            german=" Ich will ein [CS:I]Blaugummi[CR]!",
+            italian=" Io voglio una [CS:I]Gommablu[CR]!",
+            spanish=" ¡Yo quiero una [CS:I]Gomi Azul[CR]!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" I want a [CS:I]Green Gummi[CR]!",
+            french=" Je veux une [CS:I]Gelée Verte[CR]!",
+            german=" Ich will ein [CS:I]Grüngummi[CR]!",
+            italian=" Io voglio una [CS:I]Gommaverde[CR]!",
+            spanish=" ¡Yo quiero una [CS:I]Gomi Verde[CR]!",
+        });
+        message_Talk({
+            english=" But wait...![K] Hold on a second!",
+            french=" Mais, attendez...![K]\nAttendez une seconde!",
+            german=" Stopp![K] Wartet mal eine\nSekunde!",
+            italian=" Ma aspetta...![K] Aspetta un\nsecondo!",
+            spanish=" Pero, ¡esperad![K] ¡Esperad un\nminuto!",
+        });
+        message_Talk({
+            english=" Let's think about it for a second!\nWe don't have any money, do we?",
+            french=" Réfléchissons une minute,\nles copains! On n'a pas du tout d'argent,\npas vrai?",
+            german=" Denken wir doch mal eine\nSekunde drüber nach! Wir haben kein Geld,\noder?",
+            italian=" Pensiamoci un attimo! Non\nabbiamo soldi, vero?",
+            spanish=" Vamos a pensar seriamente un\nmomento. No tenemos dinero, ¿verdad?",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh! You're so right!",
+            french=" Mais oui, c'est vrai, on n'y avait\npas pensé!",
+            german=" Oh! Du hast ja so recht!",
+            italian=" Oh! Hai proprio ragione!",
+            spanish=" ¡Vaya, es verdad!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" That's so silly of us!",
+            french=" Qu'est-ce qu'on est bêtes, hein,\nles copains?",
+            german=" Das war ja so dumm von uns!",
+            italian=" Che sciocco da parte nostra!",
+            spanish=" ¡Vaya tontos que somos!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Ha ha ha!",
+            french=" Ha ha ha!",
+            german=" Hahaha!",
+            italian=" Ah ah ah!",
+            spanish=" ¡Ja, ja, ja!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" Ha ha ha!",
+            french=" Hé hé hé!",
+            german=" Hahaha!",
+            italian=" Ah ah ah!",
+            spanish=" ¡Ja, ja, ja!",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" Ha ha ha! Ha ha ha!",
+            french=" Ha ha ha! Hé hé hé!",
+            german=" Hahaha! Hahaha!",
+            italian=" Ah ah ah! Ah ah ah!",
+            spanish=" ¡Ja, ja, ja! ¡Ja, ja, ja!",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[5]) {
+        // [4, 7], Drowzee defeated!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're the exploration team that\ndelivers happiness! We're Team [CS:X]Glee[CR]!",
+            french=" On est l'Equipe [CS:X]Bonheur[CR]![K]\nL'équipe d'exploration qui répand la joie et\nla bonne humeur!",
+            german=" Wir sind das Erkundungsteam,\ndas Fröhlichkeit verbreitet! Wir sind Team\n[CS:X]Frohsinn[CR]!",
+            italian=" Siamo la squadra d'esplorazione\nche porta la felicità! Siamo il Team [CS:X]Allegria[CR]!",
+            spanish=" ¡Somos el equipo explorador\nque reparte felicidad! ¡El [CS:X]Equipo Alegría[CR]!",
+        });
+        message_Talk({
+            english=" Hey, gang! Where should we go\nexploring today?",
+            french=" Hé, les copains! On va explorer\nquoi aujourd'hui?",
+            german=" Hey, Leute! Wo sollen wir heute\nauf Erkundung gehen?",
+            italian=" Ehi, amici! Oggi dove dobbiamo\nandare a esplorare?",
+            spanish=" ¡Eh, pandilla! ¿Adónde podemos\nir a explorar hoy?",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[4]) {
+        // [4, 3], Mt. Bristle Open?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're Team [CS:X]Glee[CR]![K] We're the\nexploration team that delivers happiness!",
+            french=" On est l'Equipe [CS:X]Bonheur[CR]![K]\nL'équipe d'exploration qui répand la joie et\nla bonne humeur!",
+            german=" Wir sind Team [CS:X]Frohsinn[CR]![K] Wir\nsind das Erkundungsteam, das Fröhlichkeit\nverbreitet!",
+            italian=" Siamo il Team [CS:X]Allegria[CR]![K] Siamo\nla squadra d'esplorazione che porta la felicità!",
+            spanish=" ¡Somos el [CS:X]Equipo Alegría[CR]![K]\n¡El equipo explorador que reparte\nfelicidad!",
+        });
+        message_Close();
+        jump @label_131;
+    } else {
+        jump @label_131;
+    }
+}

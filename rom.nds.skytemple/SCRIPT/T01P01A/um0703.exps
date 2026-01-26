@@ -1,0 +1,38 @@
+// Duplicate file group
+// Corphish
+// - SCRIPT/G01P03A/um0401.exps
+// - SCRIPT/G01P03A/um0603.exps
+// - SCRIPT/G01P03A/um0609.exps
+// - SCRIPT/G01P03A/um0703.exps
+// - SCRIPT/G01P03A/um1202.exps
+// - SCRIPT/G01P03A/um1207.exps
+// - SCRIPT/G01P03A/um1610.exps
+// - SCRIPT/G01P03A/us0111.exps
+// - SCRIPT/G01P03A/us0202.exps
+// - SCRIPT/G01P03A/us0311.exps
+// - SCRIPT/G01P03A/us2007.exps
+// - SCRIPT/G01P03A/us2204.exps
+// - SCRIPT/G01P03A/us2206.exps
+// - SCRIPT/G01P03A/us2303.exps
+// - SCRIPT/G01P03A/us3103.exps
+// - SCRIPT/G01P04A/us0405.exps
+// - SCRIPT/G01P04A/us2009.exps
+// - SCRIPT/P01P01A/um0301.exps
+// - SCRIPT/P01P01A/um0303.exps
+// - SCRIPT/P01P01A/us0102.exps
+// - SCRIPT/P01P01A/us0104.exps
+// - SCRIPT/P01P01A/us0303.exps
+// - SCRIPT/T01P01A/um0308.exps
+// - SCRIPT/T01P01A/um0703.exps
+// - SCRIPT/T01P01A/um0805.exps
+// - SCRIPT/T01P01A/um1304.exps
+// - SCRIPT/T01P01A/um2205.exps
+// - SCRIPT/T01P01A/us0410.exps
+// - SCRIPT/T01P01A/us2001.exps
+// - SCRIPT/T01P02A/um2406.exps
+// - SCRIPT/T01P02A/um2506.exps
+
+import subscripts/corphish.exps;
+def 0 {
+    ~CorphishMain();
+}

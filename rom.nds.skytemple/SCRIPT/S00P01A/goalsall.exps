@@ -58,7 +58,11 @@ def 0 {
         message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk(" Our current goal is to defeat\n[CS:G]Dialga[CR] at the pinnacle of [CS:P]Temporal Tower[CR]! To\nget there, we need access to [CS:P]Hidden Land[CR]!");
         message_Talk(" [CS:P]Hidden Land[CR] is only accessible\nfrom [CS:G]Lapras[CR] on the beach. In order to summon\nhim, we need enough [CS:I]Relic Fragment[CR] shards!");
+        if (debug) {
+            message_Talk(" Because the game would crash\nif I tried to display the RFS counts right now,\nI don't know how many RFS we have, sorry!");
+        } else {
         message_Talk(" We have [quag:0] shards\nright now! Let me see how that stacks up against\nwhat we need to find [CS:P]Hidden Land[CR]...");
+        }
         switch(dungeon_mode(38)) { // Hidden Land access?
             case DMODE_OPEN_AND_REQUEST:
                 // Cleared Hidden Land!
@@ -101,6 +105,25 @@ def 0 {
             case DMODE_OPEN_AND_REQUEST:
                 message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
                 message_Talk(" According to my notes, we\'ve\nmanaged to clear [CS:P]Temporal Tower[CR] without\nbeating [CS:G]Dialga[CR]... [CS:B]this is definitely a bug![CR]");
+                message_Close();
+                Wait(10);
+                message_SetFace(ACTOR_ATTENDANT1, FACE_SIGH, FACE_POS_STANDARD);
+                message_Talk(" Luckily, I can fix this, but...[W:30]\nIt's a little bit embarrassing.[K] Do you think you\ncould close your eyes for me, [hero]?");
+                message_Close();
+                Wait(10);
+                $PERFORMANCE_PROGRESS_LIST[17] = 1;
+                screen_FadeOut(1,30);
+                Wait(30);
+                se_Play(6930);
+                message_Mail("[CN][partner] turned towards the ocean, and\n[CN]let out an uncharactaristically loud roar![K]\n[CN]For a while, there is silence.[K] Until...");
+                WaitSe(6930);
+                message_Close();
+                Wait(90);
+                se_Play(6933);
+                message_Mail("[CN]From across the waves, atop [CS:P]Temporal\n[CN]Pinnacle[CR], a bellowing roar echoes back.[K]\n[CN]Just like that, [CS:P]Temporal Tower[CR] is saved!");
+                WaitSe(6933);
+                message_Close();
+                screen_FadeIn(1,30);
                 break;                    
             case DMODE_OPEN:
                 message_SetFace(ACTOR_ATTENDANT1, FACE_HAPPY, FACE_POS_STANDARD);

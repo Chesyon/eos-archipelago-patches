@@ -1,0 +1,12 @@
+// Duplicate file group
+// Dusknoir
+// - SCRIPT/G01P03A/um1307.exps
+// - SCRIPT/G01P04A/um1303.exps
+// - SCRIPT/G01P04A/um1402.exps
+// - SCRIPT/T01P01A/um1308.exps
+// - SCRIPT/T01P02A/um1108.exps
+
+import subscripts/dusknoir.exps;
+def 0 {
+    ~DusknoirMain();
+}

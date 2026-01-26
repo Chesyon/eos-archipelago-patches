@@ -1,0 +1,13 @@
+// Duplicate file group
+// Drapion
+// - SCRIPT/G01P03A/um1106.exps
+// - SCRIPT/P01P01A/us0107.exps
+// - SCRIPT/P01P01A/us3103.exps
+// - SCRIPT/T01P01A/us0414.exps
+// - SCRIPT/T01P01A/us2005.exps
+// - SCRIPT/T01P02A/um0405.exps
+
+import subscripts/drapion.exps;
+def 0 {
+    ~DrapionMain();
+}

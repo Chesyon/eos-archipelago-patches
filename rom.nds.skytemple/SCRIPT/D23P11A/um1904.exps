@@ -1,0 +1,9 @@
+// Duplicate file group
+// Celebi
+// - SCRIPT/D23P11A/um1902.exps
+// - SCRIPT/D23P11A/um1904.exps
+
+import subscripts/celebi.exps;
+def 0 {
+    ~CelebiMain();
+}

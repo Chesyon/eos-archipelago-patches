@@ -1,0 +1,503 @@
+macro LedybaMain() {
+    if (???) {
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It's superfun! ♪",
+            french=" C'est super marrant! ♪",
+            german=" Es ist ein Riesenspaß! ♪",
+            italian=" È uno spasso! ♪",
+            spanish=" ¡Es supergenial! ♪",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[67]) {
+        // [29, 87], Dark Crater is Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Good luck!",
+            french=" Bonne chance!",
+            german=" Viel Glück!",
+            italian=" Buona fortuna!",
+            spanish=" ¡Buena suerte!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[61]) {
+        // [29, 67], Aegis Cave Complete!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" A [CS:I]Wonder Gummi[CR] is a very rare\nGummi found somewhere in the world! ♪",
+            french=" La [CS:I]Gelée Miracle[CR] est une gelée\ntrès rare qu'on peut trouver quelque part dans\nle monde! ♪",
+            german=" Ein [CS:I]Wundergummi[CR] ist ein Gummi,\ndas man in der Welt nur sehr selten findet! ♪",
+            italian=" La [CS:I]Gommaincanto[CR] è una Gomma\nmolto rara! ♪",
+            spanish=" Una de las gomis más raras que\npuedes encontrarte es la [CS:I]Gomi Ingenio[CR]. ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, wow! How nice! ♪",
+            french=" Oh, waouh! Trop bien! ♪",
+            german=" Oh, wow! Wie toll! ♪",
+            italian=" Oh, wow! Che bello! ♪",
+            spanish=" ¡Vaya! ¡Qué maravilla! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+        // [29, 42], Manaphy hatched.
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It was so much fun talking with\n[CS:N]Shaymin[CR]! ♪ Ha ha ha!",
+            french=" C'était vraiment sympa de parler\navec [CS:N]Shaymin[CR]! ♪ Ha ha ha!",
+            german=" Mit den [CS:N]Shaymin[CR] zu reden, hat\nmir wirklich Spaß gemacht! ♪ Ha ha ha!",
+            italian=" È stato così divertente parlare\ncon [CS:N]Shaymin[CR]! ♪ Ah ah ah!",
+            spanish=" ¡Ha sido divertidísimo hablar con\n[CS:N]Shaymin[CR]! ♪ ¡Ja, ja, ja!",
+        });
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_REDIBA);
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" This is only the base of the\nmountain. Ha ha ha!",
+            french=" On n'est qu'au pied de la\nmontagne. Ha ha ha!",
+            german=" Dies ist erst der Fuß des\nBerges. Ha ha ha!",
+            italian=" Questa è solo la base della\nmontagna... Ah ah ah!",
+            spanish=" Este es solo el pie\nde la montaña. ¡Ja, ja, ja!",
+        });
+        message_Close();
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
+        // [29, 27], Return to 8th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Those [CS:N]Shaymin[CR] have a wide\nknowledge of many things! ♪",
+            french=" Ces [CS:N]Shaymin[CR] en connaissent\nun rayon sur tout un tas de sujets! ♪",
+            german=" Diese [CS:N]Shaymin[CR] besitzen ein\ngroßes Wissen über viele Dinge! ♪",
+            italian=" Questi Pokémon [CS:N]Shaymin[CR]\nconoscono davvero un sacco di cose! ♪",
+            spanish=" Esos [CS:N]Shaymin[CR] saben\nun montón sobre muchas cosas diferentes. ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[121]) {
+        // [29, 21], Returned to 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder who made the\nSecret Room.",
+            french=" Je me demande qui a construit\nla Salle Secrète.",
+            german=" Ich frage mich, wer diesen\nGeheimraum wohl gebaut hat?",
+            italian=" Chi avrà creato la Sala Segreta?",
+            spanish=" Me pregunto quién construiría\nla Cámara Secreta.",
+        });
+        message_Talk({
+            english=" It's so mysterious! ♪",
+            french=" C'est si mystérieux, tout ça! ♪",
+            german=" Wie mysteriös! ♪",
+            italian=" Che mistero affascinante! ♪",
+            spanish=" ¡Eso sí que es un misterio! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+        // [29, 11], Returned to Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Wow! ♪ A flower garden! ♪",
+            french=" Waouh! Des fleurs partout! ♪",
+            german=" Wow! ♪ Ein Blumengarten! ♪",
+            italian=" Wow! ♪ Un giardino pieno\ndi fiori! ♪",
+            spanish=" ¡Anda! ♪\n¡Un jardín de flores! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[175]) {
+        // [29, 8], Cafe Describe Shaymin Village
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That mountain almost reaches\npast the sky! I can't wait to climb it! ♪",
+            french=" Cette montagne est plus haute\nque le ciel! Je suis trop pressé d'y monter! ♪",
+            german=" Dieser Berg scheint den Himmel\nzu berühren! Ich kann es gar nicht erwarten,\nihn zu besteigen! ♪",
+            italian=" Quella montagna è immensa,\nnon se ne vede la cima! Non vedo l'ora\ndi scalarla! ♪",
+            spanish=" ¡Esa montaña prácticamente toca\nlas nubes! ¡Qué ganas tengo de subir! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Thank you for saving the world!",
+            french=" Merci d'avoir sauvé le monde!",
+            german=" Danke, dass ihr die Welt\ngerettet habt!",
+            italian=" Grazie per aver salvato il\nmondo!",
+            spanish=" ¡Gracias por salvar el mundo!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" For sure! Happy-happy! ♪[K]\nTee-hee! ♪",
+            french=" C'est sûr! Quelle joie! ♪[K]\nYahouu! ♪",
+            german=" Auf jeden Fall!\nFröhlich-fröhlich! ♪[K] Tii-hii! ♪",
+            italian=" Sicuro! Felice-felice! ♪[K]\nTeeeeh! ♪",
+            spanish=" ¡Desde luego! ¡Qué chachi! ♪[K]\n¡Ji, ji! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        // [14, 1], Northern Desert Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder what you get when you\nwin big?",
+            french=" Je me demande ce qu'on gagne\nquand on tire le gros lot.",
+            german=" Ich frage mich, was es wohl\ngibt, wenn man so richtig abräumt.",
+            italian=" Chissà cosa ti danno quando fai\nuna grossa vincita...",
+            spanish=" Me pregunto qué será el premio\ngordo... ¡qué curiosidad!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+        // [9, 1], Expedition Tomorrow
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Going out with the whole gang\nis really what fun's all about! ♪",
+            french=" Partir avec tout le groupe, c'est\nça qui est amusant! ♪",
+            german=" Mit der ganzen Gruppe\nloszuziehen, ist wirklich der Inbegriff von\nSpaß! ♪",
+            italian=" Andare con tutti gli amici\nè veramente divertente! ♪",
+            spanish=" ¡Ir con toda la pandilla es lo\ndivertido! ♪",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($SUB30_PROJECTP) {
+        // [8, 5], Project P Seen?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Well, as long as they're paying...\nHa ha ha!",
+            french=" Bon, du moment qu'ils payent...\nHa ha ha!",
+            german=" Nun gut, solange sie bezahlen...\nHa ha ha!",
+            italian=" Beh, finché ci pagano...\nAh ah ah!",
+            spanish=" Bueno, mientras paguen...\n¡Ja, ja, ja!",
+        });
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_LAUGHING, 3);
+        }
+        message_Close();
+        with(actor ACTOR_NPC_REDIBA) {
+            SetEffect(EFFECT_NONE, 3);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            WaitEffect();
+        }
+        WaitExecuteLives(ACTOR_NPC_REDIBA);
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[178]) {
+        // [7, 2], Get Skunked On!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" Tee-hee!",
+            french=" Yahouuu!",
+            german=" Tii-hii!",
+            italian=" Teeeeh!",
+            spanish=" ¡Ji, ji!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_CONQUEST_LIST[5]) {
+        // [4, 7], Drowzee defeated!
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_REDIBA) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_TOGEPII) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NYOROTONO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're like a garden of flowers!",
+            french=" On est comme un jardin en\nfleurs!",
+            german=" Wir sind wie ein Blumengarten!",
+            italian=" Siamo come un giardino di fiori!",
+            spanish=" ¡Somos como un jardín de\nflores!",
+        });
+        message_Close();
+        jump @label_131;
+    } elseif ($DUNGEON_OPEN_LIST[4]) {
+        // [4, 3], Mt. Bristle Open?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" So many Pokémon in need!\nJust look at those boards!",
+            french=" Tant de Pokémon sont en\ndanger! Jetez donc un coup d'œil à ces\ntableaux d'affichage!",
+            german=" So viele Pokémon in Not!\nSeht euch nur diese Infobretter an!",
+            italian=" Guardate su queste Bacheche\nquanti Pokémon hanno bisogno di soccorso!",
+            spanish=" ¡Cuántos Pokémon en problemas!\n¡Mirad cómo están esos tablones!",
+        });
+        message_Talk({
+            english=" We have to help them!",
+            french=" On doit absolument les aider!",
+            german=" Wir müssen ihnen helfen!",
+            italian=" Dobbiamo aiutarli!",
+            spanish=" ¡Tenemos que ayudarles!",
+        });
+        message_Close();
+        jump @label_131;
+    } else {
+        jump @label_131;
+    }
+}

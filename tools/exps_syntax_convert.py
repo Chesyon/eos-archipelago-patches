@@ -32,7 +32,7 @@ def process_folder(path: str):
     for root, _, files in os.walk(path):
         for file in files:
             if file.endswith('.exps'):
-                full_path = os.path.join(path, file)
+                full_path = os.path.join(root, file)
                 process_single(full_path)
 
 if __name__ == "__main__":

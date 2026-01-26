@@ -1,0 +1,246 @@
+macro SlakothMain() {
+    if (???) {
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Exploring is far too much\neffort...[K] Maybe we'll go to the Hot Spring...",
+            french=" L'exploration, ça nous épuise...[K]\nEt si on allait à la Source Chaude?",
+            german=" Erkunden erfordert viel zu viel\nAnstrengung.[K] Vielleicht werden wir zur\nHeißen Quelle gehen.",
+            italian=" Anche esplorare è troppo\nfaticoso...[K] Al massimo potremmo andare alla\nSorgente Termale...",
+            spanish=" Explorar supondría demasiado\nesfuerzo...[K] Quizás vayamos a la Terma.",
+        });
+        message_Talk({
+            english=" But going to the Hot Spring from\nhere takes too much effort...",
+            french=" Ah ouais, mais il faudrait faire\nla route jusqu'à la Source Chaude... Nan,\nça aussi, ce serait trop épuisant...",
+            german=" Aber von hier zur Heißen Quelle\nzu gehen, erfordert zu viel Anstrengung.",
+            italian=" Ma andare da qui fino alla\nSorgente Termale è troppo faticoso...",
+            spanish=" Aunque ir a la Terma desde aquí\ntambién puede resultar agotador...",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_ARRIVE_LIST[13]) {
+        // [29, 32], 1 day passes.
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" What's a Recycle Shop?",
+            french=" C'est quoi une Bourse d'Echange?",
+            german=" Was ist ein\nWiederverwertungsladen?",
+            italian=" Che cos'è un Centro Riciclo?",
+            spanish=" ¿Qué es el [CS:K]Reciclaje Explorador[CR]?",
+        });
+        message_Talk({
+            english=" Learning things takes too\nmuch effort...",
+            french=" Apprendre de nouveaux trucs,\nc'est trop fatigant...",
+            german=" Neues zu lernen ist wirklich\nsehr anstrengend...",
+            italian=" Imparare è troppo faticoso...",
+            spanish=" Aprender cosas me cansa\nlo indecible...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[35]) {
+        // [23, 2], Skull Ambush Torkoal
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Getting excited over the planet's\nparalysis takes too much effort...",
+            french=" A quoi bon s'agiter pour éviter\nla Paralysie de la Planète? C'est beaucoup\ntrop d'efforts...",
+            german=" Im Hinblick auf die Lähmung des\nPlaneten nervös zu werden, erfordert zu viel\nAnstrengung.",
+            italian=" Agitarsi per la paralisi del\npianeta è troppo faticoso...",
+            spanish=" Inquietarnos por la parálisis del\nplaneta requeriría demasiado esfuerzo...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[20]) {
+        // [14, 5], Northern Desert Dead End
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NAMAKERO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Time stopping...[K]might not make\nany difference to us.",
+            french=" Le temps peut bien s'arrêter...[K]\nNous, on ne remarquera même pas la\ndifférence.",
+            german=" Ein Zeitstillstand...[K] Das würde\nfür uns keinen Unterschied machen.",
+            italian=" Anche se il tempo dovesse\nfermarsi,[K] per noi non cambierebbe nulla.",
+            spanish=" Que se pare el tiempo...[K] a\nnosotros no nos va a afectar gran cosa.",
+        });
+        message_Talk({
+            english=" We're not moving either way.",
+            french=" Nous, on ne bouge jamais,\nquoi qu'il arrive.",
+            german=" Wir bewegen uns schon jetzt\nnicht mehr als unbedingt nötig.",
+            italian=" Non ci muoviamo comunque.",
+            spanish=" Tampoco es que nos movamos\nmucho precisamente.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($SCENARIO_SUB2 &<< 0 || $SCENARIO_SUB2 &<< 1 || $SCENARIO_SUB2 &<< 2 || $SCENARIO_SUB2 &<< 3) {
+        // [12, 3], Kec Sell Perf. Apple?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Just lying here takes too\nmuch effort...",
+            french=" Rien que rester affalés ici,\nc'est déjà trop crevant pour nous...",
+            german=" Nur hier herumzuliegen\nerfordert schon zu viel Anstrengung.",
+            italian=" Stare stesi qui è già anche\ntroppo faticoso per noi...",
+            spanish=" Solo estar aquí parados ya nos\nsupone un gran esfuerzo...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+        // [7, 6], Team Skull Live Here...
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_YADON) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_NAMAKERO) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_YADON, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Other teams are losing their\nstomachs for exploring because of the awful\nstench lately...",
+            french=" Ces derniers temps, certaines\néquipes ne vont plus en exploration à cause\nde cette puanteur infecte...",
+            german=" Andere Teams sind schon so\nbenebelt von dem fürchterlichen Gestank,\ndass sie nicht mehr auf Erkundung gehen.",
+            italian=" Le altre squadre ultimamente\nstanno faticando molto a esplorare a causa di\nquella puzza insopportabile...",
+            spanish=" A otros equipos se les ha\nrevuelto el estómago por explorar con\nel hedor que hay últimamente...",
+        });
+        message_Talk({
+            english=" But it hasn't affected us.",
+            french=" Mais nous, ça ne nous gêne pas\ndu tout.",
+            german=" Aber uns konnte er bisher\nnichts anhaben.",
+            italian=" Ma su di noi non ha effetto.",
+            spanish=" Pero a nosotros no nos ha\nafectado.",
+        });
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_BOTTOM_R_FACEINW);
+        message_Talk({
+            english=" Yeah.[K] How could we get any less\nmotivated than we are now...?",
+            french=" Eh ouais...[K] De toute façon,\nmoins motivés que nous, tu meurs...",
+            german=" Ja.[K] Wie könnten wir auch noch\nweniger motiviert sein als im Moment?",
+            italian=" Sì.[K] Siamo la demotivazione\nfatta Pokémon, noi.",
+            spanish=" Total...[K] ¿Qué nos podría\ndesmotivar más de lo que ya estamos?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[178]) {
+        // [7, 2], Get Skunked On!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We have no motivation at all...",
+            french=" Nous, on n'a jamais aucune\nmotivation pour quoi que ce soit...",
+            german=" Wir haben überhaupt keine\nMotivation.",
+            italian=" Non abbiamo alcuna\nmotivazione...",
+            spanish=" No tenemos ninguna motivación...",
+        });
+        message_Talk({
+            english=" Why did we even bother forming\nan exploration team...?",
+            french=" Franchement, je me demande\nmême pourquoi on s'est fatigués à monter\nune équipe d'exploration...",
+            german=" Warum haben wir überhaupt ein\nErkundungsteam gegründet?",
+            italian=" Perché ci siamo persino\ndisturbati a formare una squadra\nd'esplorazione...?",
+            spanish=" Me pregunto para qué nos\nmolestamos siquiera en formar un equipo\nexplorador.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Exploring is...[K]too much effort.",
+            french=" Raaagh... L'exploration... [K]c'est\ntrop d'efforts, trop fatigant.",
+            german=" Erkunden ist[K] zu anstrengend.",
+            italian=" Esplorare è...[K] troppo faticoso.",
+            spanish=" Explorar supone...[K] demasiado\nesfuerzo.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

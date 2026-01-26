@@ -1,0 +1,521 @@
+macro SandslashMain() {
+    if ($SCENARIO_SUB2 &<< 6) {
+        // [29, 52], Phione Dew Obtained!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're not likely to come here\nagain.",
+            french=" Il y a peu de chances qu'on\nrevienne ici un jour.",
+            german=" Aller Wahrscheinlichkeit nach\nwerden wir nicht noch einmal hierherkommen.",
+            italian=" Probabilmente non torneremo\npiù qui.",
+            spanish=" No creo que volvamos por aquí.",
+        });
+        message_Talk({
+            english=" Take care.",
+            french=" N'oubliez pas, il faut toujours\nrester prudent!",
+            german=" Passt auf euch auf.",
+            italian=" State in gamba.",
+            spanish=" Cuidaos.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($SCENARIO_SUB2 &<< 5) {
+        // [29, 49], Manaphy faints on beach
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" If there's anything we can do to\nhelp, we would, but...",
+            french=" Si on pouvait faire quoi que\nce soit pour vous aider, on le ferait, mais...",
+            german=" Aber falls wir irgendwie helfen\nkönnen, würden wir das tun...",
+            italian=" Se possiamo fare qualcosa per\naiutarvi, fatecelo sapere, ma...",
+            spanish=" Si hubiera algo que pudiéramos\nhacer para ayudar lo haríamos, pero...",
+        });
+        message_Talk({
+            english=" That little baby sure was cute.",
+            french=" Ce bébé est tellement mignon.",
+            german=" Das Kleine war auf jeden Fall\nsüß.",
+            italian=" Quel cucciolo era davvero\ncarino.",
+            spanish=" Aquel pequeñuelo era muy mono.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif (???) {
+        // [29, 47], Playing with Manaphy on beach
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Nope, I haven't seen that baby\nPokémon around either.",
+            french=" Non, moi non plus, je n'ai pas vu\nle bébé Pokémon dans les parages.",
+            german=" Nein, ich habe das kleine\nPokémon nicht gesehen.",
+            italian=" No, non ho visto quel cucciolo di\nPokémon qua in giro.",
+            spanish=" No, tampoco he visto a ningún\nbebé Pokémon por aquí.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif (???) {
+        // [29, 46], Manaphy is following?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" ...[K]That's one cute baby.",
+            french=" ... [K]Qu'il est mignon, ce bébé.",
+            german=" ...[K]Das ist aber ein süßes Ding.",
+            italian=" ...[K] È proprio un bel cucciolo.",
+            spanish=" Oooh...[K] Qué pequeño tan mono.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+        // [29, 42], Manaphy hatched.
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hey, have you heard? They say\nthere's a fabulous treasure at [CS:P]Midnight Forest[CR].",
+            french=" Hé, vous avez entendu? On dit\nqu'il y a un fabuleux trésor dans la [CS:P]Forêt\nMinuit[CR].",
+            german=" Hey, habt ihr gehört? Man sagt,\nes gäbe einen sagenhaften Schatz im\n[CS:P]Mitternachtswald[CR].",
+            italian=" Ehi, avete sentito? Dicono che\nnella [CS:P]Foresta Mezzanotte[CR] ci sia un tesoro\nfantastico.",
+            spanish=" Eh, ¿lo habéis oído? Dicen que\nel [CS:P]Bosque Nocturno[CR] esconde un tesoro\nfabuloso.",
+        });
+        message_Talk({
+            english=" There's one obstacle, though.[K]\nYou can't get at that treasure unless you have\na [CS:I]Key[CR].",
+            french=" Mais il y a un obstacle de\ntaille.[K] Vous ne pourrez mettre la main sur\nce trésor que si vous avez une [CS:I]Clé[CR].",
+            german=" Allerdings gibt es da ein\nHindernis.[K] An diesen Schatz kommt ihr ohne\neinen [CS:I]Schlüssel[CR] nicht heran.",
+            italian=" Ma c'è una difficoltà.[K] Non\npotete accedere al tesoro a meno che non\nabbiate una [CS:I]Chiave[CR].",
+            spanish=" Sin embargo, hay un obstáculo.[K]\nNo puede conseguirse a menos que se tenga\nla [CS:I]Llave[CR].",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[49]) {
+        // [29, 39], Scizor Gives Secret Rank
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" What's that?[K] You had a Secret\nRank mark added to your Explorer Badge?",
+            french=" Hein, quoi?[K] La marque\ndu Grade Secret a été ajoutée à votre\nBadge d'Explorateur?",
+            german=" Was ist denn das?[K]\nEurem Erkunderorden wurde eine\nGeheim-Rang-Kennzeichnung hinzugefügt?",
+            italian=" Cosa?[K] Sulla vostra Targhetta\ndell'esploratore avete anche il Rango Segreto?",
+            spanish=" ¿Qué es eso?[K] ¿Que os han\nmarcado vuestra Placa de Explorador con un\nRango Secreto?",
+        });
+        message_Talk({
+            english=" Here, may I see it?",
+            french=" Faites voir ça.",
+            german=" Kann ich mal sehen?",
+            italian=" Posso vederlo?",
+            spanish=" Oye, ¿puedo verla?",
+        });
+        message_Talk({
+            english=" ...[K]So this mark is it?",
+            french=" ... [K]Alors, c'est cette marque, là?",
+            german=" ...[K]Also diese Kennzeichnung\nist es?",
+            italian=" ...[K] Quindi è questo?",
+            spanish=" Así que...[K] ¿es esta marca?",
+        });
+        message_Talk({
+            english=" ...[K]It's, uh, kind of\ninteresting...",
+            french=" ... [K]Mouais... c'est... euh...\nassez intéressant, je dois dire...",
+            german=" ...[K]Das ist, ähem, recht\ninteressant.",
+            italian=" ...[K] Uhm, sembra interessante...",
+            spanish=" Vaya...[K] ¡Qué interesante!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        // [29, 31], Grimer Defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Taking a break is a good idea\nwhen you are having trouble...but taking too\nlong of a break can be a problem too.",
+            french=" Faire une pause en cas de\ndifficulté, c'est bien... mais une pause trop\nlongue peut aussi poser problème.",
+            german=" Eine Pause zu machen, ist eine\ngute Idee, wenn man in Schwierigkeiten ist.\nAber allzu lange sollte man auch nicht ruhen.",
+            italian=" Fare una pausa se ti trovi nei\nguai è una buona idea... ma non esagerare\nperché potresti correre altri rischi.",
+            spanish=" Tomarse un descanso es buena\nidea si te ves en apuros... Siempre y cuando no\ndure demasiado tiempo, claro.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[119]) {
+        // [29, 29], Return to 9th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" When you're having trouble,\ntaking a break and resting could help.",
+            french=" Quand on rencontre des\ndifficultés, se poser un moment pour\nrécupérer peut être une bonne solution.",
+            german=" Wenn du in Schwierigkeiten bist,\nhilft es oft, eine Pause einzulegen und sich\netwas auszuruhen.",
+            italian=" Se ti trovi nei guai, ti conviene\nfermarti e riposare.",
+            spanish=" Cuando estás en apuros, darse\nun respiro para descansar puede ser útil.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[117]) {
+        // [29, 25], Return to 7th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I wonder if Team [CS:X]Frontier[CR] has\nreached the top yet...",
+            french=" Je me demande si l'Equipe\n[CS:X]Eclaireurs[CR] a déjà atteint le sommet...",
+            german=" Ich frage mich, ob Team\n[CS:X]Grenzland[CR] schon oben angekommen ist...",
+            italian=" Chissà se il Team [CS:X]Pioniere[CR] ha\ngià raggiunto la cima...",
+            spanish=" Me pregunto si el\n[CS:X]Equipo Frontera[CR] habrá llegado ya a la cima...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[121]) {
+        // [29, 21], Returned to 5th Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You know... Team [CS:X]Frontier[CR] is\njust awesome.",
+            french=" Tu sais... l'Equipe [CS:X]Eclaireurs[CR]\nest tout simplement formidable.",
+            german=" Weißt du... Team [CS:X]Grenzland[CR] ist\neinfach der Wahnsinn.",
+            italian=" Beh, sai... Il Team [CS:X]Pioniere[CR]\nè semplicemente fantastico.",
+            spanish=" ¿Sabes? El [CS:X]Equipo Frontera[CR] es\nincreíble.",
+        });
+        message_Talk({
+            english=" They're carrying heavy goods and\nestablishing a base for everyone.",
+            french=" Ses membres transportent des\nmarchandises très lourdes et établissent des\ncampements pour tout le monde.",
+            german=" Sie tragen schwere Dinge, um\nein Basislager für alle zu errichten.",
+            italian=" Trasportano merci pesanti e\ncreano un campo base per tutti.",
+            spanish=" Están moviendo objetos pesados\ny levantando un campamento para todos.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[112]) {
+        // [29, 15], Return to 2nd Station Clearing
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Putting your heart into a gift of\ntreasure...[K] Sounds nice, huh?",
+            french=" Faire don d'un trésor en y\nmettant tout son cœur...[K] C'est charmant, non?",
+            german=" Sein Herz in ein Schatzgeschenk\nzu stecken...[K] Klingt schön, nicht wahr?",
+            italian=" Fare un regalo prezioso con\ntutto il cuore...[K] Che bella cosa, eh?",
+            spanish=" Dar un tesoro como regalo con\ntodo el corazón...[K] Suena bonito, ¿eh?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden "Land Ho!"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're behind you guys![K]\nGood luck!",
+            french=" On est de tout cœur avec vous![K]\nBonne chance!",
+            german=" Wir stehen hinter euch, Leute![K]\nViel Glück!",
+            italian=" Facciamo il tifo per voi![K]\nBuona fortuna!",
+            spanish=" ¡Os apoyamos![K] ¡Buena suerte!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[34]) {
+        // [22, 2], Returned to Guild
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" You're saying our planet's\nparalyzed in the future?",
+            french=" Vous dites que dans le futur,\nnotre planète est paralysée?",
+            german=" Ihr behauptet, unser Planet sei\nin der Zukunft gelähmt?",
+            italian=" State dicendo che nel futuro il\nnostro pianeta rischia di rimanere paralizzato?",
+            spanish=" ¿Dices que en el futuro nuestro\nplaneta está totalmente paralizado?",
+        });
+        message_Talk({
+            english=" ...[K]You're not kidding?!",
+            french=" ... [K]C'est sérieux?!",
+            german=" ...[K]Ernsthaft?!?",
+            italian=" ...[K] Non state scherzando?!",
+            spanish=" Tienes...[K] Tienes que estar\nbromeando, ¿verdad?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[25]) {
+        // [17, 1], Dusknoir's Secret
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" That [CS:N]Grovyle[CR] needs to be\ncaught...and fast!",
+            french=" Il faut attraper ce [CS:N]Massko[CR]...\net vite!",
+            german=" Dieser [CS:N]Reptain[CR] muss gefasst\nwerden! Und zwar schnell!",
+            italian=" Dobbiamo fermare [CS:N]Grovyle[CR]...\ne in fretta!",
+            spanish=" Hay que pararle los pies a ese\n[CS:N]Grovyle[CR]... ¡y cuanto antes!",
+        });
+        message_Talk({
+            english=" I can't sleep at night from all\nthe worrying this is causing!",
+            french=" Je suis si inquiet que je n'en\ndors plus la nuit!",
+            german=" Diese Sorgen lassen mich nachts\nschon nicht mehr schlafen!",
+            italian=" Di notte non dormo per la\npreoccupazione.",
+            spanish=" ¡No puedo dormir con todas\nestas preocupaciones!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[20]) {
+        // [14, 5], Northern Desert Dead End
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Stealing Time Gears... That's\nabout as wrong as you can get.",
+            french=" Voler les Rouages du Temps...\nIl n'y a pas plus abject.",
+            german=" Zahnräder der Zeit zu stehlen...\nDas ist der Gipfel des Unrechts!",
+            italian=" Rubare gli Ingranaggi del\nTempo... È la cosa più sbagliata che si\npossa fare.",
+            spanish=" Robar Engranajes del Tiempo...\nEso es lo peor que se puede hacer.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($SCENARIO_SUB2 &<< 0 || $SCENARIO_SUB2 &<< 1 || $SCENARIO_SUB2 &<< 2 || $SCENARIO_SUB2 &<< 3) {
+        // [12, 3], Kec Sell Perf. Apple?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're considering going after\na high-ranking outlaw. We just may go for it.",
+            french=" Nous envisageons de nous lancer\nà la poursuite d'un hors-la-loi de grade élevé.\nOn va peut-être tenter le coup.",
+            german=" Wir überlegen gerade, ob wir\neinen hochrangigen Ganoven verfolgen sollen.\nVielleicht versuchen wir es einfach.",
+            italian=" Stiamo pensando di dare la\ncaccia a un ricercato di alto livello. Ce la\npossiamo fare.",
+            spanish=" Estamos planteándonos ir tras\nun malhechor de los difíciles de atrapar.\nTal vez lo hagamos.",
+        });
+        message_Talk({
+            english=" It would be a tough fight. But\nthere's only one enemy.",
+            french=" Ce sera un combat difficile.\nMais il sera tout seul contre nous.",
+            german=" Es wäre ein harter Kampf, aber\nimmerhin ist es nur ein einziger Gegner.",
+            italian=" Sarà una dura lotta, ma il\nnemico è uno solo.",
+            spanish=" Sería una lucha dura. Pero solo\nes un enemigo.",
+        });
+        message_Talk({
+            english=" With all three of us in on it,\nwe can take one outlaw!",
+            french=" A nous trois, on peut capturer\nun criminel!",
+            german=" Wenn wir drei uns abstimmen,\nkönnen wir einen einzelnen Ganoven besiegen!",
+            italian=" Unendo le nostre forze,\npossiamo catturarlo!",
+            spanish=" Si nos encargamos los tres, creo\nque podríamos con un solo malhechor.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($SUB30_PROJECTP) {
+        // [8, 5], Project P Seen?
+        with(actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_NPC_SANDOPAN) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It's a bit different from being\neco-friendly, isn't it?",
+            french=" Ce ne sont pas vraiment des\nactions qui s'échangent dans cette bourse, si?",
+            german=" So richtig umweltfreundlich\nist das aber nicht, oder?",
+            italian=" Chissà se è anche rispettoso\ndell'ambiente...",
+            spanish=" Me pregunto si será respetuosa\ncon el medio ambiente...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+        // [7, 6], Team Skull Live Here...
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" This is a pretty nice shop...",
+            french=" C'est un magasin sympa...",
+            german=" Dies ist ein richtig toller\nLaden...",
+            italian=" È davvero un bel locale...",
+            spanish=" Esta tienda está bastante bien...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_SANDOPAN);
+        }
+        message_SetFace(ACTOR_NPC_SANDOPAN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We slash our way through deep\nwoods with our sharp claws!",
+            french=" Nous nous taillons un chemin\ndans la forêt grâce à nos griffes acérées!",
+            german=" Wir bahnen uns unseren Weg\ndurch tiefe Wälder mit unseren scharfen\nKlauen!",
+            italian=" Ci facciamo strada nella fitta\nboscaglia con i nostri artigli affilati!",
+            spanish=" Con nuestras afiladas garras,\nnos abrimos paso por los bosques.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

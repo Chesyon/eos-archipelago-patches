@@ -94,14 +94,14 @@ coro TALK_PARTNER_MESSAGE {
         if ($SIDE02_TALK[0]) {
             supervision_ExecuteExportSub("PDEBUG");
             if ($SIDE02_TALK[0]) {
-                return;
+                jump @shut_up;
             }
             $SIDE02_TALK[0] = 1;
         } else {
             supervision_ExecuteExportSub("PDEBUG");
             if ($SIDE02_TALK[0]) {
                 $SIDE02_TALK[0] = 0;
-                return;
+                jump @shut_up;
             }
         }
     }

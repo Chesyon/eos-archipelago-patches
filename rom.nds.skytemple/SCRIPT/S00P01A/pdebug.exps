@@ -1,6 +1,30 @@
 def 0 {
     $LOCAL0 = 0;
     $SIDE02_TALK[0] = 0;
+    debug_Print("Testing in progress -Lappy");
+    ProcessSpecial(PROCESS_SPECIAL_ADD_RECRUITABLE_TO_TEAM,0,0);
+    debug_Print("item_Set(14,X,X) is really cool, seems to be DSE Field 0x28, causes BGM corrupts.");
+    switch($FRIEND_SUM) {
+        case 0:
+            debug_Print("0");
+            break;
+        case 1:
+            debug_Print("1");
+            break;
+        case 2:
+            debug_Print("2");
+            break;
+        case 3:
+            debug_Print("3");
+            break;
+        case 4:
+            debug_Print("4");
+            break;
+        case >= 5:
+            debug_Print("5+");
+            break;
+    }
+        
     while ($LOCAL0 == 0) {     
         message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
         message_Talk(" [STS]What should we debug today?[STE]");
