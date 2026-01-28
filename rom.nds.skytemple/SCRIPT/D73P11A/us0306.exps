@@ -1,0 +1,16 @@
+// Duplicate file group
+// Machoke
+// - SCRIPT/D73P11A/us0212.exps
+// - SCRIPT/D73P11A/us0306.exps
+// - SCRIPT/D73P11A/us0409.exps
+// - SCRIPT/D73P11A/us3113.exps
+// - SCRIPT/D73P11A/us3114.exps
+// - SCRIPT/D73P22A/us3103.exps
+// - SCRIPT/D73P25A/us3102.exps
+// - SCRIPT/D73P27A/us3105.exps
+// - SCRIPT/D73P28A/us3102.exps
+
+import 'subscripts/machoke.exps';
+def 0 {
+    ~MachokeMain();
+}

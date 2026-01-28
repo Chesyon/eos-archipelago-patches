@@ -1,30 +1,35 @@
 // Duplicate file group
-// Dugtrio
-// - SCRIPT/D01P11A/us0102.exps
-// - SCRIPT/D01P11A/us3102.exps
-// - SCRIPT/D25P11A/um2304.exps
-// - SCRIPT/D25P11A/um2307.exps
-// - SCRIPT/H01P99A/um0301.exps
-// - SCRIPT/H01P99A/um0401.exps
-// - SCRIPT/H01P99A/um0501.exps
-// - SCRIPT/H01P99A/um0601.exps
-// - SCRIPT/H01P99A/um0602.exps
-// - SCRIPT/H01P99A/um0702.exps
-// - SCRIPT/H01P99A/um0703.exps
-// - SCRIPT/H01P99A/um0801.exps
-// - SCRIPT/H01P99A/um1101.exps
-// - SCRIPT/H01P99A/um1102.exps
-// - SCRIPT/H01P99A/um1201.exps
-// - SCRIPT/H01P99A/um1202.exps
-// - SCRIPT/H01P99A/um1301.exps
-// - SCRIPT/H01P99A/um1601.exps
-// - SCRIPT/H01P99A/um1602.exps
-// - SCRIPT/H01P99A/um2401.exps
-// - SCRIPT/H01P99A/um2501.exps
-// - SCRIPT/H01P99A/us0101.exps
-// - SCRIPT/H01P99A/us0102.exps
+// Pachirisu
+// - SCRIPT/D73P23A/us3107.exps
+// - SCRIPT/D73P24A/us3104.exps
+// - SCRIPT/D73P31A/us0203.exps
+// - SCRIPT/D73P31A/us0303.exps
+// - SCRIPT/D73P31A/us0403.exps
+// - SCRIPT/P01P04A/um0607.exps
+// - SCRIPT/P01P04A/um0703.exps
+// - SCRIPT/P01P04A/um0711.exps
+// - SCRIPT/P01P04A/um0721.exps
+// - SCRIPT/P01P04A/um0803.exps
+// - SCRIPT/P01P04A/um1102.exps
+// - SCRIPT/P01P04A/um1202.exps
+// - SCRIPT/P01P04A/um1303.exps
+// - SCRIPT/P01P04A/um1403.exps
+// - SCRIPT/P01P04A/um1409.exps
+// - SCRIPT/P01P04A/um1503.exps
+// - SCRIPT/P01P04A/um1603.exps
+// - SCRIPT/P01P04A/um2104.exps
+// - SCRIPT/P01P04A/um2204.exps
+// - SCRIPT/P01P04A/um2304.exps
+// - SCRIPT/P01P04A/um2403.exps
+// - SCRIPT/P01P04A/um2503.exps
+// - SCRIPT/P01P04A/us0103.exps
+// - SCRIPT/P01P04A/us2003.exps
+// - SCRIPT/P01P04A/us2103.exps
+// - SCRIPT/P01P04A/us2203.exps
+// - SCRIPT/P01P04A/us2303.exps
+// - SCRIPT/P01P04A/us3108.exps
 
-import 'subscripts/dugtrio.exps';
+import 'subscripts/pachirisu.exps';
 def 0 {
-    ~DugtrioMain();
+    ~PachirisuMain();
 }

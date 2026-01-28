@@ -1,59 +1,15 @@
 // Duplicate file group
-// Chatot
-// - SCRIPT/D08P11A/um0901.exps
-// - SCRIPT/D08P11A/um0904.exps
-// - SCRIPT/D25P11A/um2302.exps
-// - SCRIPT/G01P03A/um1301.exps
-// - SCRIPT/G01P03A/um1304.exps
-// - SCRIPT/G01P04A/um0307.exps
-// - SCRIPT/G01P04A/um0309.exps
-// - SCRIPT/G01P04A/um0312.exps
-// - SCRIPT/G01P04A/um0403.exps
-// - SCRIPT/G01P04A/um0502.exps
-// - SCRIPT/G01P04A/um0603.exps
-// - SCRIPT/G01P04A/um0605.exps
-// - SCRIPT/G01P04A/um0608.exps
-// - SCRIPT/G01P04A/um0702.exps
-// - SCRIPT/G01P04A/um0704.exps
-// - SCRIPT/G01P04A/um0801.exps
-// - SCRIPT/G01P04A/um1102.exps
-// - SCRIPT/G01P04A/um1104.exps
-// - SCRIPT/G01P04A/um1106.exps
-// - SCRIPT/G01P04A/um1202.exps
-// - SCRIPT/G01P04A/um1204.exps
-// - SCRIPT/G01P04A/um1301.exps
-// - SCRIPT/G01P04A/um1302.exps
-// - SCRIPT/G01P04A/um1401.exps
-// - SCRIPT/G01P04A/um1403.exps
-// - SCRIPT/G01P04A/um1501.exps
-// - SCRIPT/G01P04A/um1502.exps
-// - SCRIPT/G01P04A/um1602.exps
-// - SCRIPT/G01P04A/um1605.exps
-// - SCRIPT/G01P04A/um2101.exps
-// - SCRIPT/G01P04A/um2202.exps
-// - SCRIPT/G01P04A/um2204.exps
-// - SCRIPT/G01P04A/um2403.exps
-// - SCRIPT/G01P04A/um2503.exps
-// - SCRIPT/G01P04A/us0101.exps
-// - SCRIPT/G01P04A/us0104.exps
-// - SCRIPT/G01P04A/us0202.exps
-// - SCRIPT/G01P04A/us0204.exps
-// - SCRIPT/G01P04A/us0302.exps
-// - SCRIPT/G01P04A/us0305.exps
-// - SCRIPT/G01P04A/us0308.exps
-// - SCRIPT/G01P04A/us0311.exps
-// - SCRIPT/G01P04A/us0407.exps
-// - SCRIPT/G01P04A/us0409.exps
-// - SCRIPT/G01P04A/us2002.exps
-// - SCRIPT/G01P04A/us2006.exps
-// - SCRIPT/G01P04A/us2102.exps
-// - SCRIPT/G01P04A/us2203.exps
-// - SCRIPT/G01P04A/us2206.exps
-// - SCRIPT/G01P04A/us3101.exps
-// - SCRIPT/G01P07A/us2001.exps
-// - SCRIPT/H02P99A/us0303.exps
+// Pelipper
+// - SCRIPT/D73P11A/us0211.exps
+// - SCRIPT/D73P11A/us0311.exps
+// - SCRIPT/D73P11A/us0408.exps
+// - SCRIPT/D73P11A/us2008.exps
+// - SCRIPT/D73P11A/us2108.exps
+// - SCRIPT/D73P11A/us2208.exps
+// - SCRIPT/D73P11A/us2308.exps
+// - SCRIPT/D73P11A/us3117.exps
 
-import 'subscripts/chatot.exps';
+import 'subscripts/pelipper.exps';
 def 0 {
-    ~ChatotMain();
+    ~PelipperMain();
 }

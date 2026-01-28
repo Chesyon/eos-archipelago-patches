@@ -1,0 +1,27 @@
+// Duplicate file group
+// Murkrow
+// - SCRIPT/D73P11A/us3124.exps
+// - SCRIPT/D73P21A/us3103.exps
+// - SCRIPT/D73P21A/us3104.exps
+// - SCRIPT/D73P26A/us3103.exps
+// - SCRIPT/G01P03A/um0403.exps
+// - SCRIPT/G01P03A/um1311.exps
+// - SCRIPT/G01P03A/um1403.exps
+// - SCRIPT/G01P03A/um2103.exps
+// - SCRIPT/P01P04A/um1104.exps
+// - SCRIPT/P01P04A/us3109.exps
+// - SCRIPT/P01P04A/us3118.exps
+// - SCRIPT/T01P01A/us2010.exps
+// - SCRIPT/T01P01A/us2013.exps
+// - SCRIPT/T01P01A/us2305.exps
+// - SCRIPT/T01P02A/um0304.exps
+// - SCRIPT/T01P02A/um0308.exps
+// - SCRIPT/T01P02A/um1411.exps
+// - SCRIPT/T01P02A/um1506.exps
+// - SCRIPT/T01P02A/us0209.exps
+// - SCRIPT/T01P02A/us0303.exps
+
+import 'subscripts/murkrow.exps';
+def 0 {
+    ~MurkrowMain();
+}

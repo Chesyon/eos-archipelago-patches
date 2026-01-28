@@ -1,0 +1,37 @@
+// Duplicate file group
+// Octillery
+// - SCRIPT/D73P11A/us3102.exps
+// - SCRIPT/D73P21A/us3107.exps
+// - SCRIPT/D73P24A/us3103.exps
+// - SCRIPT/D73P26A/us3105.exps
+// - SCRIPT/D73P31A/us0201.exps
+// - SCRIPT/D73P31A/us0301.exps
+// - SCRIPT/D73P31A/us0401.exps
+// - SCRIPT/D73P31A/us3102.exps
+// - SCRIPT/P01P04A/um0605.exps
+// - SCRIPT/P01P04A/um0702.exps
+// - SCRIPT/P01P04A/um0709.exps
+// - SCRIPT/P01P04A/um0720.exps
+// - SCRIPT/P01P04A/um0802.exps
+// - SCRIPT/P01P04A/um1201.exps
+// - SCRIPT/P01P04A/um1301.exps
+// - SCRIPT/P01P04A/um1402.exps
+// - SCRIPT/P01P04A/um1407.exps
+// - SCRIPT/P01P04A/um1502.exps
+// - SCRIPT/P01P04A/um1602.exps
+// - SCRIPT/P01P04A/um2102.exps
+// - SCRIPT/P01P04A/um2202.exps
+// - SCRIPT/P01P04A/um2302.exps
+// - SCRIPT/P01P04A/um2402.exps
+// - SCRIPT/P01P04A/um2502.exps
+// - SCRIPT/P01P04A/us0102.exps
+// - SCRIPT/P01P04A/us2002.exps
+// - SCRIPT/P01P04A/us2102.exps
+// - SCRIPT/P01P04A/us2202.exps
+// - SCRIPT/P01P04A/us2302.exps
+// - SCRIPT/P01P04A/us3107.exps
+
+import 'subscripts/octillery.exps';
+def 0 {
+    ~OctilleryMain();
+}

@@ -1,0 +1,21 @@
+// Duplicate file group
+// Poochyena A
+// - SCRIPT/G01P03A/um0321.exps
+// - SCRIPT/G01P03A/um0406.exps
+// - SCRIPT/G01P03A/um1413.exps
+// - SCRIPT/G01P03A/um1504.exps
+// - SCRIPT/G01P03A/um1606.exps
+// - SCRIPT/G01P03A/um2407.exps
+// - SCRIPT/G01P03A/um2507.exps
+// - SCRIPT/G01P03A/us0108.exps
+// - SCRIPT/P01P04A/us0404.exps
+// - SCRIPT/P01P04A/us2009.exps
+// - SCRIPT/T01P02A/um0503.exps
+// - SCRIPT/T01P02A/um1105.exps
+// - SCRIPT/T01P02A/us2011.exps
+// - SCRIPT/T01P02A/us2015.exps
+
+import 'subscripts/poochyena_a.exps';
+def 0 {
+    ~Poochyena_AMain();
+}

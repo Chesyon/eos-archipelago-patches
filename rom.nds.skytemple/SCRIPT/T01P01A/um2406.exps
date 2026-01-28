@@ -1,0 +1,20 @@
+// Duplicate file group
+// Ponyta
+// - SCRIPT/G01P03A/um0503.exps
+// - SCRIPT/G01P03A/um1408.exps
+// - SCRIPT/G01P03A/um1505.exps
+// - SCRIPT/G01P03A/um1607.exps
+// - SCRIPT/G01P03A/us2207.exps
+// - SCRIPT/T01P01A/um2406.exps
+// - SCRIPT/T01P01A/um2506.exps
+// - SCRIPT/T01P02A/um1304.exps
+// - SCRIPT/T01P02A/um1308.exps
+// - SCRIPT/T01P02A/um1312.exps
+// - SCRIPT/T01P02A/us0103.exps
+// - SCRIPT/T01P02A/us0407.exps
+// - SCRIPT/T01P02A/us2003.exps
+
+import 'subscripts/ponyta.exps';
+def 0 {
+    ~PonytaMain();
+}
