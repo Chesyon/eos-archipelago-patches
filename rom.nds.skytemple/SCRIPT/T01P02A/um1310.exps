@@ -14,7 +14,7 @@
 // - SCRIPT/T01P02A/us0409.exps
 // - SCRIPT/T01P02A/us2005.exps
 
-import 'subscripts/bellsprout.exps;'
+import 'subscripts/bellsprout.exps';
 def 0 {
     ~BellsproutMain();
 }

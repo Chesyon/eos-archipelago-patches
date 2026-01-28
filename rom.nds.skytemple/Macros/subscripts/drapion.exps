@@ -203,7 +203,7 @@ macro DrapionMain() {
         });
         message_Talk({
             english=" They're calling it the ultimate\ndungeon for good reason.",
-            french=" Ce n'est pas pour rien qu'il est\nsurnommé "l'ultime donjon".",
+            french=" Ce n'est pas pour rien qu'il est\nsurnommé \"l'ultime donjon\".",
             german=" Sie nennen es aus gutem Grund\nden ultimativen Dungeon.",
             italian=" È per questo che lo chiamano\nil dungeon definitivo.",
             spanish=" Por algo lo llaman el territorio\nsupremo.",

@@ -4,7 +4,7 @@
 // - SCRIPT/P01P04A/um0725.exps
 // - SCRIPT/P01P04A/us3112.exps
 
-import 'subscripts/wynaut.exps;'
+import 'subscripts/wynaut.exps';
 def 0 {
     ~WynautMain();
 }

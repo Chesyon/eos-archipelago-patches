@@ -86,7 +86,7 @@ macro WynautMain() {
         } else {
             jump @label_132;
         }
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -117,7 +117,7 @@ macro WynautMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif (???) {
+    } elseif ($GROUND_ENTER == LEVEL_P01P04A) {
         // [7, 3], Spinda Cafe is Open!
         jump @label_132;
     } elseif ($DUNGEON_ARRIVE_LIST[19]) {

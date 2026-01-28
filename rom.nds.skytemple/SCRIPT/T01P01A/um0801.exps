@@ -21,7 +21,7 @@
 // - SCRIPT/T01P01A/um2501.exps
 // - SCRIPT/T01P02A/um2203.exps
 
-import 'subscripts/teddiursa.exps;'
+import 'subscripts/teddiursa.exps';
 def 0 {
     ~TeddiursaMain();
 }

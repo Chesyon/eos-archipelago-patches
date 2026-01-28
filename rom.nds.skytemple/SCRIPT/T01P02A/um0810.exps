@@ -4,7 +4,7 @@
 // - SCRIPT/G01P06A/um0702.exps
 // - SCRIPT/T01P02A/um0810.exps
 
-import 'subscripts/zubat.exps;'
+import 'subscripts/zubat.exps';
 def 0 {
     ~ZubatMain();
 }

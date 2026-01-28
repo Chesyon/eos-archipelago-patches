@@ -384,11 +384,11 @@ macro OctilleryMain() {
         }
         message_SetFace(ACTOR_NPC_OKUTAN, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" I love to hear [CS:N]Wobbuffet[CR]\nblurt out, "That's right!" when someone wins\non a [CS:I]Prize Ticket[CR].",
-            french=" J'adore entendre [CS:N]Qulbutoké[CR]\ns'exclamer "Banco!" quand un [CS:I]Ticket Magot[CR]\nest gagnant.",
+            english=" I love to hear [CS:N]Wobbuffet[CR]\nblurt out, \"That's right!\" when someone wins\non a [CS:I]Prize Ticket[CR].",
+            french=" J'adore entendre [CS:N]Qulbutoké[CR]\ns'exclamer \"Banco!\" quand un [CS:I]Ticket Magot[CR]\nest gagnant.",
             german=" Ich liebe es, wenn [CS:N]Woingenau[CR]\n[F:S2]Ganz genau![F:E2] sagt, sobald jemand mit einem\n[CS:I]Preisticket[CR] gewinnt.",
-            italian=" Adoro sentire [CS:N]Wobbuffet[CR]\nche urla "Perfetto!" quando viene estratto\nun [CS:I]Buono Premio[CR] vincente.",
-            spanish=" Me encanta cuando [CS:N]Wobbuffet[CR]\nsuelta: "¡Eso, eso!" cuando alguien gana un\npremio con un [CS:I]boleto[CR].",
+            italian=" Adoro sentire [CS:N]Wobbuffet[CR]\nche urla \"Perfetto!\" quando viene estratto\nun [CS:I]Buono Premio[CR] vincente.",
+            spanish=" Me encanta cuando [CS:N]Wobbuffet[CR]\nsuelta: \"¡Eso, eso!\" cuando alguien gana un\npremio con un [CS:I]boleto[CR].",
         });
         message_Talk({
             english=" Oh... I'd love to hear her yell\nthat again...",
@@ -415,11 +415,11 @@ macro OctilleryMain() {
         }
         message_SetFace(ACTOR_NPC_OKUTAN, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" I'm really enjoying the "Big\nTreasure" [CS:I]Prize Tickets[CR] at the Recycle Shop.\nI can't get enough!",
-            french=" Je trouve ça génial, ces [CS:I]Tickets\nMagot[CR] de chez "Méga Magot", à la Bourse\nd'Echange. Je ne peux plus m'en passer!",
+            english=" I'm really enjoying the \"Big\nTreasure\" [CS:I]Prize Tickets[CR] at the Recycle Shop.\nI can't get enough!",
+            french=" Je trouve ça génial, ces [CS:I]Tickets\nMagot[CR] de chez \"Méga Magot\", à la Bourse\nd'Echange. Je ne peux plus m'en passer!",
             german=" [F:S2]Großer Schatz[F:E2]-[CS:I]Preistickets[CR]\nvom Wiederverwertungsladen sind genial!\nVon denen krieg ich nicht genug!",
             italian=" I [CS:I]Buoni Premio[CR] del Gran Tesoro\nche estraggono al Centro Riciclo sono\nfantastici. Non riesco a farne a meno!",
-            spanish=" Tengo un montón de [CS:I]boletos[CR] del\n"Gran Tesoro" del Reciclaje Explorador,\n¡pero quiero aún más!",
+            spanish=" Tengo un montón de [CS:I]boletos[CR] del\n\"Gran Tesoro\" del Reciclaje Explorador,\n¡pero quiero aún más!",
         });
         message_KeyWait();
         with(actor ACTOR_NPC_OKUTAN) {
@@ -507,7 +507,7 @@ macro OctilleryMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -568,10 +568,10 @@ macro OctilleryMain() {
             spanish=" Solo sirven para degustarlas,\npero ya me basta.[K] O eso pensaba, porque\nno paro de tomármelas...",
         });
         message_Talk({
-            english=" But! Spinda said he had "a\ngood feeling" about this one drink, and when\nI drank it, my attack power increased!",
-            french=" Spinda m'a dit qu'il avait "un bon\npressentiment" à propos de cette boisson.\nEt quand je l'ai bue, mon Attaque a augmenté!",
+            english=" But! Spinda said he had \"a\ngood feeling\" about this one drink, and when\nI drank it, my attack power increased!",
+            french=" Spinda m'a dit qu'il avait \"un bon\npressentiment\" à propos de cette boisson.\nEt quand je l'ai bue, mon Attaque a augmenté!",
             german=" Aber Pandir sagte einst, er habe\n[F:S2]ein erstaunlich gutes Gefühl[F:E2] bei einem Drink.\nAls ich ihn trank, stieg mein Angriffswert!",
-            italian=" Ma poi Spinda mi ha detto che\nquesta bevanda gli dava "una bella sensazione".\nQuando l'ho bevuta la mia potenza è aumentata!",
+            italian=" Ma poi Spinda mi ha detto che\nquesta bevanda gli dava \"una bella sensazione\".\nQuando l'ho bevuta la mia potenza è aumentata!",
             spanish=" Pero Spinda dijo que tenía una\ncorazonada con una bebida y, cuando me\nla tomé, ¡me aumentó el Ataque!",
         });
         message_Talk({
@@ -590,7 +590,7 @@ macro OctilleryMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif (???) {
+    } else {
         // [7, 3], Spinda Cafe is Open!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -648,8 +648,6 @@ macro OctilleryMain() {
             spanish=" Me pregunto si habrá algún\nefecto al usar una gomi...",
         });
         message_Close();
-        jump @label_131;
-    } else {
         jump @label_131;
     }
 }

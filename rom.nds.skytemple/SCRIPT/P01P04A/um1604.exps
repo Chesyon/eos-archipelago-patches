@@ -10,7 +10,7 @@
 // - SCRIPT/P01P04A/um1506.exps
 // - SCRIPT/P01P04A/um1604.exps
 
-import 'subscripts/sneasel.exps;'
+import 'subscripts/sneasel.exps';
 def 0 {
     ~SneaselMain();
 }

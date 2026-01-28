@@ -6,7 +6,7 @@
 // - SCRIPT/T01P01A/um1308.exps
 // - SCRIPT/T01P02A/um1108.exps
 
-import subscripts/dusknoir.exps;
+import 'subscripts/dusknoir.exps';
 def 0 {
     ~DusknoirMain();
 }

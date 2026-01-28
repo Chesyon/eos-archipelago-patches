@@ -12,7 +12,7 @@
 // - SCRIPT/T01P02A/um1405.exps
 // - SCRIPT/T01P02A/us2308.exps
 
-import 'subscripts/slakoth.exps;'
+import 'subscripts/slakoth.exps';
 def 0 {
     ~SlakothMain();
 }

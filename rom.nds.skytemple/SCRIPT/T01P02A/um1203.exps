@@ -1,0 +1,19 @@
+// Duplicate file group
+// Pidgey
+// - SCRIPT/G01P03A/um1102.exps
+// - SCRIPT/G01P03A/um1613.exps
+// - SCRIPT/G01P03A/um2202.exps
+// - SCRIPT/G01P03A/us0104.exps
+// - SCRIPT/G01P03A/us0402.exps
+// - SCRIPT/G01P03A/us2210.exps
+// - SCRIPT/P01P04A/um1404.exps
+// - SCRIPT/P01P04A/um1504.exps
+// - SCRIPT/T01P01A/um0310.exps
+// - SCRIPT/T01P01A/um0316.exps
+// - SCRIPT/T01P02A/um1201.exps
+// - SCRIPT/T01P02A/um1203.exps
+
+import 'subscripts/pidgey.exps';
+def 0 {
+    ~PidgeyMain();
+}

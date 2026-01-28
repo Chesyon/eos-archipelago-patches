@@ -269,7 +269,7 @@ macro HeracrossMain() {
         }
         jump @label_131;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         jump @label_131;
     } elseif ($DUNGEON_OPEN_LIST[35]) {
         // [23, 2], Skull Ambush Torkoal
@@ -429,7 +429,7 @@ macro HeracrossMain() {
             SetEffect(EFFECT_NONE, 3);
         }
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -459,7 +459,7 @@ macro HeracrossMain() {
             SetEffect(EFFECT_NONE, 3);
         }
         jump @label_131;
-    } elseif (???) {
+    } else {
         // [7, 3], Spinda Cafe is Open!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -499,8 +499,6 @@ macro HeracrossMain() {
             WaitEffect();
         }
         WaitExecuteLives(ACTOR_NPC_HERAKUROSU);
-        jump @label_131;
-    } else {
         jump @label_131;
     }
 }

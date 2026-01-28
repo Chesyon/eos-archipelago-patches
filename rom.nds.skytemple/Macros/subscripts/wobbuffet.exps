@@ -108,7 +108,7 @@ macro WobbuffetMain() {
     } elseif ($SUB30_SPOT_LEVEL > 1 || $RECYCLE_COUNT > 20) {
         // [8, 7], Project P Old News
         jump @label_118;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_NPC_SOONANSU) {
             SetAnimation(2);
@@ -142,7 +142,7 @@ macro WobbuffetMain() {
             SetAnimation(4);
         }
         jump @label_131;
-    } elseif (???) {
+    } elseif ($GROUND_ENTER == LEVEL_P01P04A) {
         // [7, 3], Spinda Cafe is Open!
         jump @label_118;
     } elseif ($DUNGEON_ARRIVE_LIST[19]) {

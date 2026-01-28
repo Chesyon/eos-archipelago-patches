@@ -355,7 +355,7 @@ macro GrovyleMain() {
                 jump @label_130;
         }
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         switch ( $GROUND_ENTER ) {
             case 59:
             default:

@@ -1,0 +1,298 @@
+macro Poochyena_BMain() {
+    if ($DUNGEON_OPEN_LIST[63]) {
+        // [29, 75], Nightmare Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Why'd you bring in a known\noutlaw like [CS:N]Drowzee[CR]?",
+            french=" Mais pourquoi vous avez amené\nun criminel notoire comme [CS:N]Soporifik[CR] dans\nl'enceinte de la Guilde?",
+            german=" Warum einen bekannten Ganoven\nwie [CS:N]Traumato[CR] miteinbeziehen?",
+            italian=" Perché hai fatto entrare un noto\ncriminale come [CS:N]Drowzee[CR]?",
+            spanish=" ¿Para qué traer a un delincuente\ncomo [CS:N]Drowzee[CR]?",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_OPEN_LIST[62]) {
+        // [29, 72], Mt. Trevail not unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Drowzee[CR]?[K] ...Oh, right.\nThat petty crook.",
+            french=" [CS:N]Soporifik[CR]?[K] ... Ah, oui.\nCe bandit à la petite semaine.",
+            german=" [CS:N]Traumato[CR]?[K] ...Oh, richtig. Dieser\nkleine Gauner.",
+            italian=" [CS:N]Drowzee[CR]?[K] Ah, giusto. Quel\ncriminale da strapazzo.",
+            spanish=" ¿[CS:N]Drowzee[CR]?[K] Ah, sí. Ese granuja.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[54]) {
+        // [29, 55], Team Charm Arrives!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I enjoy getting [CS:I]Prize Tickets[CR]...",
+            french=" J'adore ça, recevoir\ndes [CS:I]Tickets Magot[CR]...",
+            german=" Von [CS:I]Preistickets[CR] kann ich kaum\ngenug bekommen...",
+            italian=" Mi piace collezionare\n[CS:I]Buoni Premio[CR]...",
+            spanish=" Me encanta conseguir [CS:I]boletos[CR]...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[44]) {
+        // [29, 1], Graduation first announcement
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The grand master of all things\nbad? Nope, never heard of him.",
+            french=" Le grand maître de tous les\nmaux? Non, jamais entendu parler.",
+            german=" Der Großmeister allen Übels?\nNein, nie von ihm gehört.",
+            italian=" Sua Malvagità? No, non ne ho\nmai sentito parlare.",
+            spanish=" ¿El gran malo requetemalo? No,\nnunca había oído hablar de él.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[38]) {
+        // [25, 1], Hidden \"Land Ho!\"
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Team [team:] is in charge!",
+            french=" L'Equipe [team:] s'occupe\nde tout!",
+            german=" Team [team:] hat das\nKommando!",
+            italian=" È compito del\nTeam [team:]!",
+            spanish=" ¡El [CS:X]Equipo[CR] [team:] se\nencargará de esto!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[25]) {
+        // [17, 1], Dusknoir's Secret
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Is it safe to seal away the\nTime Gears?",
+            french=" Est-ce que ça n'est pas risqué\nde sceller les Rouages du Temps?",
+            german=" Ist es sicher, die Zahnräder der\nZeit zu versiegeln?",
+            italian=" È prudente mettere al sicuro\ngli Ingranaggi del Tempo?",
+            spanish=" ¿Es seguro sellar así los\nEngranajes del Tiempo?",
+        });
+        message_Talk({
+            english=" Will that still allow time to\nwork properly in that area?",
+            french=" Vous croyez que ça permettra\nau temps de reprendre son cours normal dans\nla région?",
+            german=" Wird das in der Gegend immer\nnoch einen normalen Fluss der Zeit zulassen?",
+            italian=" Potremmo ancora lavorare bene\nin quell'area?",
+            spanish=" ¿Permitirá eso que el paso del\ntiempo no se vea alterado en esa zona?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[24]) {
+        // [15, 4], Crystal Cave Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Another Time Gear has\nbeen stolen?",
+            french=" Quoi? On a volé un autre\nRouage du Temps?",
+            german=" Ein weiteres Zahnrad der Zeit\nwurde gestohlen?",
+            italian=" È stato rubato un altro\nIngranaggio del Tempo?",
+            spanish=" ¿Han robado otro Engranaje del\nTiempo?",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[16]) {
+        // [12, 1], Returned from Expedition
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It still stinks a little...",
+            french=" Cette mauvaise odeur n'a pas\nencore totalement disparu...",
+            german=" Es stinkt immer noch ein wenig.",
+            italian=" C'è ancora un po' di puzza...",
+            spanish=" Aún hay un cierto mal olor por\naquí...",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_OPEN_LIST[6]) {
+        // [6, 1], Treeshroud Gear Stolen!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We try to buy only cheaper\nitems that have the greatest value!",
+            french=" On n'achète que les objets qui\nont le meilleur rapport qualité-prix!",
+            german=" Wir versuchen, nur\ngünstige Items einzukaufen, die den größten\nNutzen bringen!",
+            italian=" Cerchiamo di comprare solo\ngli strumenti con il miglior rapporto\nqualità-prezzo!",
+            spanish=" ¡Intentamos comprar solo los\nobjetos más baratos, pero más valiosos!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        // [5, 5], Sentry Duty Loss!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We try to pursue weak crooks\nwith only the highest bounties!",
+            french=" On se lance à la poursuite des\nbandits les plus faibles qui font l'objet des\nplus fortes récompenses!",
+            german=" Wir versuchen, nur schwache\nGauner zu verfolgen, die gleichzeitig die\ndicksten Belohnungen einbringen!",
+            italian=" Proviamo a catturare i\ncriminali deboli con le taglie più alte!",
+            spanish=" ¡Intentamos perseguir a los\nmalhechores débiles, pero siempre que\nofrezcan buenas recompensas!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[5]) {
+        // [4, 7], Drowzee defeated!
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_POCHIENA_B);
+        }
+        message_SetFace(ACTOR_NPC_POCHIENA_A, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" The three of us are the\n[CS:N]Poochyena[CR] Brothers![K] We're Team [CS:X]Poochy[CR]!",
+            french=" Nous trois, on est les frères\n[CS:N]Medhyèna[CR]![K]\nOn est l'Equipe [CS:X]Morsure[CR]!",
+            german=" Wir drei sind die\n[CS:N]Fiffyen[CR]-Brüder![K] Wir sind Team [CS:X]Fiffi[CR]!",
+            italian=" Noi tre siamo i fratelli\n[CS:N]Poochyena[CR]![K] E siamo il Team [CS:X]Poochyena[CR]!",
+            spanish=" ¡Somos los hermanos [CS:N]Poochyena[CR]![K]\nY los tres, como no, formamos el [CS:X]Equipo[CR]\n[CS:X]Poochyena[CR].",
+        });
+        message_Talk({
+            english=" We stick to tracking outlaws!",
+            french=" On passe notre vie à traquer les\nhors-la-loi!",
+            german=" Wir haben uns darauf\nspezialisiert, Ganoven zu jagen!",
+            italian=" Diamo la caccia ai ricercati!",
+            spanish=" ¡Nos centramos en perseguir\nmalhechores!",
+        });
+        message_Talk({
+            english=" We chase and chase and chase\nour targets...",
+            french=" On pourchasse les criminels\nencore et encore, sans relâche...",
+            german=" Wir jagen und jagen und jagen\nunsere Ziele...",
+            italian=" Inseguiamo e inseguiamo e\ninseguiamo i nostri obiettivi...",
+            spanish=" Les perseguimos de un sitio\na otro, y a otro, y a otro...",
+        });
+        message_Talk({
+            english=" And then we catch them when\nthey're too tired to move!",
+            french=" Et quand ils sont trop épuisés\npour s'enfuir, on leur tombe dessus!",
+            german=" Und dann überwältigen wir sie,\nwenn sie zu erschöpft sind, um zu entkommen!",
+            italian=" E quando sono sfiniti dalla\nstanchezza, li catturiamo!",
+            spanish=" ¡Hasta que están demasiado\ncansados y les capturamos!",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        jump @label_130;
+    }
+}

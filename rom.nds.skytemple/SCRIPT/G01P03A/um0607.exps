@@ -4,7 +4,7 @@
 // - SCRIPT/G01P06A/um0704.exps
 // - SCRIPT/T01P02A/um0809.exps
 
-import 'subscripts/skuntank.exps;'
+import 'subscripts/skuntank.exps';
 def 0 {
     ~SkuntankMain();
 }

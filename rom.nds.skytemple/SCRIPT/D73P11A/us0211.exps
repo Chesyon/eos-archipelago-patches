@@ -53,7 +53,7 @@
 // - SCRIPT/G01P07A/us2001.exps
 // - SCRIPT/H02P99A/us0303.exps
 
-import subscripts/chatot.exps;
+import 'subscripts/chatot.exps';
 def 0 {
     ~ChatotMain();
 }

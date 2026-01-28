@@ -1,0 +1,28 @@
+// Duplicate file group
+// Politoed
+// - SCRIPT/D73P11A/us0209.exps
+// - SCRIPT/D73P11A/us3121.exps
+// - SCRIPT/G01P03A/um0306.exps
+// - SCRIPT/G01P03A/um0313.exps
+// - SCRIPT/G01P03A/um0803.exps
+// - SCRIPT/G01P03A/us0408.exps
+// - SCRIPT/G01P03A/us2003.exps
+// - SCRIPT/G01P03A/us2307.exps
+// - SCRIPT/P01P04A/um0717.exps
+// - SCRIPT/P01P04A/um1305.exps
+// - SCRIPT/P01P04A/um1411.exps
+// - SCRIPT/P01P04A/us0303.exps
+// - SCRIPT/P01P04A/us0407.exps
+// - SCRIPT/P01P04A/us3101.exps
+// - SCRIPT/T01P01A/um1407.exps
+// - SCRIPT/T01P01A/um1504.exps
+// - SCRIPT/T01P01A/us0106.exps
+// - SCRIPT/T01P01A/us0406.exps
+// - SCRIPT/T01P01A/us2205.exps
+// - SCRIPT/T01P02A/um0312.exps
+// - SCRIPT/T01P02A/um0602.exps
+
+import 'subscripts/politoed.exps';
+def 0 {
+    ~PolitoedMain();
+}

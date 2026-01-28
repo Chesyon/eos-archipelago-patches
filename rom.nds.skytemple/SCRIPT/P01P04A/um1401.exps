@@ -1,0 +1,38 @@
+// Duplicate file group
+// Mr Mime
+// - SCRIPT/D73P11A/us3101.exps
+// - SCRIPT/D73P21A/us3105.exps
+// - SCRIPT/D73P23A/us3102.exps
+// - SCRIPT/D73P26A/us3104.exps
+// - SCRIPT/D73P27A/us3106.exps
+// - SCRIPT/D73P31A/us3101.exps
+// - SCRIPT/P01P01A/us0201.exps
+// - SCRIPT/P01P04A/um0604.exps
+// - SCRIPT/P01P04A/um0701.exps
+// - SCRIPT/P01P04A/um0708.exps
+// - SCRIPT/P01P04A/um0719.exps
+// - SCRIPT/P01P04A/um0801.exps
+// - SCRIPT/P01P04A/um1101.exps
+// - SCRIPT/P01P04A/um1401.exps
+// - SCRIPT/P01P04A/um1501.exps
+// - SCRIPT/P01P04A/um1601.exps
+// - SCRIPT/P01P04A/um2101.exps
+// - SCRIPT/P01P04A/um2201.exps
+// - SCRIPT/P01P04A/um2301.exps
+// - SCRIPT/P01P04A/um2401.exps
+// - SCRIPT/P01P04A/um2501.exps
+// - SCRIPT/P01P04A/us0101.exps
+// - SCRIPT/P01P04A/us0301.exps
+// - SCRIPT/P01P04A/us0401.exps
+// - SCRIPT/P01P04A/us0405.exps
+// - SCRIPT/P01P04A/us2001.exps
+// - SCRIPT/P01P04A/us2006.exps
+// - SCRIPT/P01P04A/us2101.exps
+// - SCRIPT/P01P04A/us2201.exps
+// - SCRIPT/P01P04A/us2301.exps
+// - SCRIPT/P01P04A/us3104.exps
+
+import 'subscripts/mr_mime.exps';
+def 0 {
+    ~Mr_MimeMain();
+}

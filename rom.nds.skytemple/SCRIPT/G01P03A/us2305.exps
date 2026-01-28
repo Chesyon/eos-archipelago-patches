@@ -44,7 +44,7 @@
 // - SCRIPT/G01P06A/um0302.exps
 // - SCRIPT/G01P06A/um0303.exps
 // - SCRIPT/G01P06A/um0401.exps
-import 'subscripts/chimecho.exps;'
+import 'subscripts/chimecho.exps';
 def 0 {
     ~ChimechoMain();
 }

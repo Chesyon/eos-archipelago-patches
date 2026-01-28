@@ -42,7 +42,7 @@
 // - SCRIPT/T01P02A/us2305.exps
 // - SCRIPT/T01P02A/us3101.exps
 
-import 'subscripts/bidoof.exps;'
+import 'subscripts/bidoof.exps';
 def 0 {
     ~BidoofMain();
 }

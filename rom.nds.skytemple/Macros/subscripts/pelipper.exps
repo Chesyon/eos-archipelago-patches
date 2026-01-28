@@ -24,7 +24,7 @@ macro PelipperMain() {
         message_Close();
         §label_130;
         JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_REQUEST_LIST[175]) {
+    } else {
         // [29, 10], First Time at Shaymin Village
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -54,8 +54,6 @@ macro PelipperMain() {
             spanish=" Me estoy dando prisa para tenerlo\ntodo a punto. ¡Te ruego que tengas solo\nun poquito más de paciencia!",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

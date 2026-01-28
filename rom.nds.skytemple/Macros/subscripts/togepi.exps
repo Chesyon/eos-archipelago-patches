@@ -1,31 +1,5 @@
 macro TogepiMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
-        }
-        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" I'm having so much fun! ♪",
-            french=" Je m'amuse comme un petit\nfou, pas vrai, les copains? ♪",
-            german=" Ich habe so viel Spaß! ♪",
-            italian=" Mi sto divertendo un mondo! ♪",
-            spanish=" ¡Me estoy divirtiendo un\nmontón! ♪",
-        });
-        message_Close();
-        §label_131;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_OPEN_LIST[67]) {
+    if ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -193,7 +167,7 @@ macro TogepiMain() {
         message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
             english=" I wonder where the Secret\nRoom that [CS:N]Shaymin[CR] was talking\nabout is.",
-            french=" Je me demande ce que ce\n[CS:N]Shaymin[CR] entendait par\n"Salle Secrète".",
+            french=" Je me demande ce que ce\n[CS:N]Shaymin[CR] entendait par\n\"Salle Secrète\".",
             german=" Ich frage mich, wo wohl der\nGeheimraum ist, von dem dieses [CS:N]Shaymin[CR]\ngesprochen hat?",
             italian=" Mi domando dove sia questa\nSala Segreta di cui parlava [CS:N]Shaymin[CR]...",
             spanish=" Me pregunto dónde estará la\nCámara Secreta de la que hablaba [CS:N]Shaymin[CR].",
@@ -371,7 +345,7 @@ macro TogepiMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -589,6 +563,30 @@ macro TogepiMain() {
         message_Close();
         jump @label_131;
     } else {
-        jump @label_131;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_TOGEPII);
+        }
+        message_SetFace(ACTOR_NPC_TOGEPII, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I'm having so much fun! ♪",
+            french=" Je m'amuse comme un petit\nfou, pas vrai, les copains? ♪",
+            german=" Ich habe so viel Spaß! ♪",
+            italian=" Mi sto divertendo un mondo! ♪",
+            spanish=" ¡Me estoy divirtiendo un\nmontón! ♪",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
     }
 }

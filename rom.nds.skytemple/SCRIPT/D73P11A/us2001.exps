@@ -8,7 +8,7 @@
 // - SCRIPT/D73P11A/us2201.exps
 // - SCRIPT/D73P11A/us2301.exps
 
-import 'subscripts/shaymin_5.exps;'
+import 'subscripts/shaymin_5.exps';
 def 0 {
     ~Shaymin_5Main();
 }

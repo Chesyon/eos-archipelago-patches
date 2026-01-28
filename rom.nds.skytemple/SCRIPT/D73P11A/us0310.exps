@@ -9,7 +9,7 @@
 // - SCRIPT/D73P11A/us2307.exps
 // - SCRIPT/D73P11A/us3106.exps
 
-import 'subscripts/shaymin_1.exps;'
+import 'subscripts/shaymin_1.exps';
 def 0 {
 ExecuteCommon<actor ACTOR_TALK_MAIN>(CORO_LIVES_REPLY_NORMAL, 0);
 ExecuteCommon<actor ACTOR_TALK_SUB>(CORO_LIVES_REPLY_NORMAL, 0);

@@ -433,7 +433,7 @@ macro Mr_MimeMain() {
         message_Close();
         jump @label_131;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -635,7 +635,7 @@ macro Mr_MimeMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -682,11 +682,11 @@ macro Mr_MimeMain() {
         }
         message_SetFace(ACTOR_NPC_BARIYAADO, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" I heard that they even have\n"Offers" at the Recycle Shop.",
-            french=" Il paraît qu'à la Bourse\nd'Echange, ils ont même\ndes "offres" spéciales.",
+            english=" I heard that they even have\n\"Offers\" at the Recycle Shop.",
+            french=" Il paraît qu'à la Bourse\nd'Echange, ils ont même\ndes \"offres\" spéciales.",
             german=" Ich habe gehört, dass es im\nWiederverwertungsladen Angebote gibt.",
-            italian=" Ho sentito che al Centro Riciclo\nci sono delle "Offerte".",
-            spanish=" He oído que en [CS:K]Reciclaje[CR]\n[CS:K]Explorador[CR] tienen una sección de "Ofertas".",
+            italian=" Ho sentito che al Centro Riciclo\nci sono delle \"Offerte\".",
+            spanish=" He oído que en [CS:K]Reciclaje[CR]\n[CS:K]Explorador[CR] tienen una sección de \"Ofertas\".",
         });
         message_Talk({
             english=" They seem to only be available\nfor a limited time. Be sure to check them out!",
@@ -697,7 +697,7 @@ macro Mr_MimeMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif (???) {
+    } else {
         // [7, 3], Spinda Cafe is Open!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -727,8 +727,6 @@ macro Mr_MimeMain() {
             spanish=" Tengo demasiadas [CS:I]Bayas Aranja[CR],\nasí que estoy pensando en intercambiarlas.",
         });
         message_Close();
-        jump @label_131;
-    } else {
         jump @label_131;
     }
 }

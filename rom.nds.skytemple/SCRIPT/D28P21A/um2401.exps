@@ -13,7 +13,7 @@
 // - SCRIPT/D28P21A/um2402.exps
 // - SCRIPT/D28P21A/um2403.exps
 
-import 'subscripts/grovyle.exps;'
+import 'subscripts/grovyle.exps';
 def 0 {
     ~GrovyleMain();
 }

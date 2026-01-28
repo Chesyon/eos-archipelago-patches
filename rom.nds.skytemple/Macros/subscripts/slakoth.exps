@@ -1,38 +1,5 @@
 macro SlakothMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
-        }
-        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Exploring is far too much\neffort...[K] Maybe we'll go to the Hot Spring...",
-            french=" L'exploration, ça nous épuise...[K]\nEt si on allait à la Source Chaude?",
-            german=" Erkunden erfordert viel zu viel\nAnstrengung.[K] Vielleicht werden wir zur\nHeißen Quelle gehen.",
-            italian=" Anche esplorare è troppo\nfaticoso...[K] Al massimo potremmo andare alla\nSorgente Termale...",
-            spanish=" Explorar supondría demasiado\nesfuerzo...[K] Quizás vayamos a la Terma.",
-        });
-        message_Talk({
-            english=" But going to the Hot Spring from\nhere takes too much effort...",
-            french=" Ah ouais, mais il faudrait faire\nla route jusqu'à la Source Chaude... Nan,\nça aussi, ce serait trop épuisant...",
-            german=" Aber von hier zur Heißen Quelle\nzu gehen, erfordert zu viel Anstrengung.",
-            italian=" Ma andare da qui fino alla\nSorgente Termale è troppo faticoso...",
-            spanish=" Aunque ir a la Terma desde aquí\ntambién puede resultar agotador...",
-        });
-        message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_ARRIVE_LIST[13]) {
+    if ($DUNGEON_ARRIVE_LIST[13]) {
         // [29, 32], 1 day passes.
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -241,6 +208,37 @@ macro SlakothMain() {
         message_Close();
         jump @label_130;
     } else {
-        jump @label_130;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NAMAKERO);
+        }
+        message_SetFace(ACTOR_NPC_NAMAKERO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Exploring is far too much\neffort...[K] Maybe we'll go to the Hot Spring...",
+            french=" L'exploration, ça nous épuise...[K]\nEt si on allait à la Source Chaude?",
+            german=" Erkunden erfordert viel zu viel\nAnstrengung.[K] Vielleicht werden wir zur\nHeißen Quelle gehen.",
+            italian=" Anche esplorare è troppo\nfaticoso...[K] Al massimo potremmo andare alla\nSorgente Termale...",
+            spanish=" Explorar supondría demasiado\nesfuerzo...[K] Quizás vayamos a la Terma.",
+        });
+        message_Talk({
+            english=" But going to the Hot Spring from\nhere takes too much effort...",
+            french=" Ah ouais, mais il faudrait faire\nla route jusqu'à la Source Chaude... Nan,\nça aussi, ce serait trop épuisant...",
+            german=" Aber von hier zur Heißen Quelle\nzu gehen, erfordert zu viel Anstrengung.",
+            italian=" Ma andare da qui fino alla\nSorgente Termale è troppo faticoso...",
+            spanish=" Aunque ir a la Terma desde aquí\ntambién puede resultar agotador...",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
     }
 }

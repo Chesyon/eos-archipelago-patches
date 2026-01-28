@@ -361,18 +361,18 @@ macro CorphishMain() {
             spanish=" ¿Sabíais que...?[K] ¿Sabíais que\n[CS:N]Sunflora[CR] ha estado muy nerviosa\núltimamente?",
         });
         message_Talk({
-            english=" Saying stuff like...[K] "Oh my gosh!\nThe [CS:P]Surrounded Sea[CR]! Oh my gosh!"",
-            french=" Elle n'arrête pas de dire des\ntrucs bizarres comme...[K] "Oh là là! La [CS:P]Mer\nFermée[CR]! Oh là là!"",
+            english=" Saying stuff like...[K] \"Oh my gosh!\nThe [CS:P]Surrounded Sea[CR]! Oh my gosh!\"",
+            french=" Elle n'arrête pas de dire des\ntrucs bizarres comme...[K] \"Oh là là! La [CS:P]Mer\nFermée[CR]! Oh là là!\"",
             german=" Faselte etwas wie...[K] [F:S2]Du meine\nGüte! Das [CS:P]Ringmeer[CR]! Du meine Güte![F:E2]",
-            italian=" Dice cose come...[K] "Evviva!\nIl [CS:P]Mar Cinto[CR]! Evviva!"",
-            spanish=" Diciendo cosas como...[K] "¡Jo!\n¡Qué superguay! ¡El [CS:P]Mar Circundante[CR]!\n¡Superdíver!"",
+            italian=" Dice cose come...[K] \"Evviva!\nIl [CS:P]Mar Cinto[CR]! Evviva!\"",
+            spanish=" Diciendo cosas como...[K] \"¡Jo!\n¡Qué superguay! ¡El [CS:P]Mar Circundante[CR]!\n¡Superdíver!\"",
         });
         message_Talk({
-            english=" "Oh my gosh! No one's seen it\nfor tens of thousands of years!"[K] That sort of\nthing, hey, hey?",
-            french=" "Oh là là! Personne ne l'a vue\ndepuis des dizaines de milliers d'années!"[K]\nVous voyez le genre, dis donc!",
+            english=" \"Oh my gosh! No one's seen it\nfor tens of thousands of years!\"[K] That sort of\nthing, hey, hey?",
+            french=" \"Oh là là! Personne ne l'a vue\ndepuis des dizaines de milliers d'années!\"[K]\nVous voyez le genre, dis donc!",
             german=" [F:S2]Du meine Güte! Niemand hat es\nseit Zehntausenden von Jahren gesehen![F:E2][K]\nDerlei Zeugs, hey, hey?",
-            italian=" "Evviva! Non l'ha visto nessuno\nper decine di migliaia di anni!"[K] Cose del\ngenere, ehi, ehi?",
-            spanish=" "¡Qué fuerte! ¡Y nadie lo ha\nvisto en miles de años!"[K] No para de\ndecir ese tipo de cosas.",
+            italian=" \"Evviva! Non l'ha visto nessuno\nper decine di migliaia di anni!\"[K] Cose del\ngenere, ehi, ehi?",
+            spanish=" \"¡Qué fuerte! ¡Y nadie lo ha\nvisto en miles de años!\"[K] No para de\ndecir ese tipo de cosas.",
         });
         message_Talk({
             english=" She's been on a tear about that\nall by herself, hey, hey...",
@@ -529,7 +529,7 @@ macro CorphishMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -672,7 +672,7 @@ macro CorphishMain() {
             french=" Eh dis donc! Aujourd'hui,\nje me lance à la poursuite de hors-la-loi\nrecherchés!",
             german=" Hey, hey, hey! Ich mache mich\nheute auf die Suche nach Ganoven, die auf dem\nGanoven-Infobrett aufgeführt sind!",
             italian=" Ehi, ehi, ehi! Oggi controllo la\nBacheca per andare a caccia di ricercati!",
-            spanish=" ¡Oye, oye! Hoy voy a capturar\nmalhechores del Tablón "Se Busca".",
+            spanish=" ¡Oye, oye! Hoy voy a capturar\nmalhechores del Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" Let's look good training! Hey,\nhey, hey!",

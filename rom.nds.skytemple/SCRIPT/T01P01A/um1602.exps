@@ -32,7 +32,7 @@
 // - SCRIPT/T01P01A/us3102.exps
 // - SCRIPT/T01P02A/um2204.exps
 
-import 'subscripts/ursaring_norm.exps;'
+import 'subscripts/ursaring_norm.exps';
 def 0 {
     ~Ursaring_NormMain();
 }

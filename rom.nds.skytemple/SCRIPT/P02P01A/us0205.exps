@@ -1,0 +1,44 @@
+// Duplicate file group
+// Mankey
+// - SCRIPT/P02P01A/um0601.exps
+// - SCRIPT/P02P01A/um0605.exps
+// - SCRIPT/P02P01A/um0701.exps
+// - SCRIPT/P02P01A/um0704.exps
+// - SCRIPT/P02P01A/um0707.exps
+// - SCRIPT/P02P01A/um1101.exps
+// - SCRIPT/P02P01A/um1104.exps
+// - SCRIPT/P02P01A/um1107.exps
+// - SCRIPT/P02P01A/um1202.exps
+// - SCRIPT/P02P01A/um1205.exps
+// - SCRIPT/P02P01A/um1301.exps
+// - SCRIPT/P02P01A/um1304.exps
+// - SCRIPT/P02P01A/um1307.exps
+// - SCRIPT/P02P01A/um1402.exps
+// - SCRIPT/P02P01A/um1405.exps
+// - SCRIPT/P02P01A/um1408.exps
+// - SCRIPT/P02P01A/um1409.exps
+// - SCRIPT/P02P01A/um1502.exps
+// - SCRIPT/P02P01A/um1602.exps
+// - SCRIPT/P02P01A/um1605.exps
+// - SCRIPT/P02P01A/um2102.exps
+// - SCRIPT/P02P01A/um2402.exps
+// - SCRIPT/P02P01A/um2502.exps
+// - SCRIPT/P02P01A/us0102.exps
+// - SCRIPT/P02P01A/us0202.exps
+// - SCRIPT/P02P01A/us0205.exps
+// - SCRIPT/P02P01A/us0302.exps
+// - SCRIPT/P02P01A/us0305.exps
+// - SCRIPT/P02P01A/us0402.exps
+// - SCRIPT/P02P01A/us2002.exps
+// - SCRIPT/P02P01A/us2005.exps
+// - SCRIPT/P02P01A/us2008.exps
+// - SCRIPT/P02P01A/us2102.exps
+// - SCRIPT/P02P01A/us2202.exps
+// - SCRIPT/P02P01A/us2205.exps
+// - SCRIPT/P02P01A/us3102.exps
+// - SCRIPT/T01P01A/um2201.exps
+
+import 'subscripts/mankey.exps';
+def 0 {
+    ~MankeyMain();
+}

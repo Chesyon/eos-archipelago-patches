@@ -1,38 +1,5 @@
 macro MurkrowMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_YAMIKARASU);
-        }
-        message_SetFace(ACTOR_NPC_YAMIKARASU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oooh, I must have it! The [CS:I]Lost\nLoot[CR] calls to me!",
-            french=" Oooh, il me le faut! Le [CS:I]Butin\nPerdu[CR] m'appelle!",
-            german=" Oooh, ich muss es haben! Das\n[CS:I]Beutegut[CR] ruft nach mir!",
-            italian=" Oooh, devo averlo!\nIl [CS:I]Tesorperduto[CR] mi chiama!",
-            spanish=" ¡Lo necesito! ¡El [CS:I]Botín Oculto[CR] me\nestá llamando!",
-        });
-        message_Talk({
-            english=" The [CS:I]Lost Loot[CR] is rightfully mine!",
-            french=" Le [CS:I]Butin Perdu[CR] m'appartient\nde droit!",
-            german=" Das [CS:I]Beutegut[CR] gehört\nrechtmäßig mir!",
-            italian=" Il [CS:I]Tesorperduto[CR] è mio di diritto!",
-            spanish=" ¡El [CS:I]Botín Oculto[CR] será mío y solo\nmío!",
-        });
-        message_Close();
-        §label_131;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_OPEN_LIST[62]) {
+    if ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -368,11 +335,11 @@ macro MurkrowMain() {
             spanish=" Pero a mi compañera [CS:N]Shuppet[CR]\nno parece hacerle gracia la idea.",
         });
         message_Talk({
-            english=" She refuses, with silly reasons\nlike, "It sounds so garish and tacky!"",
-            french=" Elle refuse toujours et me donne\ndes raisons ridicules du genre "Ça a l'air\ncriard et clinquant, ton truc!"",
+            english=" She refuses, with silly reasons\nlike, \"It sounds so garish and tacky!\"",
+            french=" Elle refuse toujours et me donne\ndes raisons ridicules du genre \"Ça a l'air\ncriard et clinquant, ton truc!\"",
             german=" Sie sagt, es klinge alles so grell\nund kitschig. Das sind ihre Gründe... Einfältige\nGründe...",
-            italian=" Si rifiuta, con sciocche\nmotivazioni come: "Suona così kitsch e di\ncattivo gusto!"",
-            spanish=" No hace más que negarse, con\nrazones tan tontas como que "¡eso suena\nsuperhortera!".",
+            italian=" Si rifiuta, con sciocche\nmotivazioni come: \"Suona così kitsch e di\ncattivo gusto!\"",
+            spanish=" No hace más que negarse, con\nrazones tan tontas como que \"¡eso suena\nsuperhortera!\".",
         });
         message_Talk({
             english=" Arrgh, it is just so frustrating!",
@@ -491,6 +458,37 @@ macro MurkrowMain() {
         message_Close();
         jump @label_131;
     } else {
-        jump @label_131;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_YAMIKARASU);
+        }
+        message_SetFace(ACTOR_NPC_YAMIKARASU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oooh, I must have it! The [CS:I]Lost\nLoot[CR] calls to me!",
+            french=" Oooh, il me le faut! Le [CS:I]Butin\nPerdu[CR] m'appelle!",
+            german=" Oooh, ich muss es haben! Das\n[CS:I]Beutegut[CR] ruft nach mir!",
+            italian=" Oooh, devo averlo!\nIl [CS:I]Tesorperduto[CR] mi chiama!",
+            spanish=" ¡Lo necesito! ¡El [CS:I]Botín Oculto[CR] me\nestá llamando!",
+        });
+        message_Talk({
+            english=" The [CS:I]Lost Loot[CR] is rightfully mine!",
+            french=" Le [CS:I]Butin Perdu[CR] m'appartient\nde droit!",
+            german=" Das [CS:I]Beutegut[CR] gehört\nrechtmäßig mir!",
+            italian=" Il [CS:I]Tesorperduto[CR] è mio di diritto!",
+            spanish=" ¡El [CS:I]Botín Oculto[CR] será mío y solo\nmío!",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
     }
 }

@@ -20,8 +20,7 @@
 // - SCRIPT/T01P02A/us2208.exps
 // - SCRIPT/T01P02A/us2302.exps
 
-import 'subscripts/azurill.exps;'
+import 'subscripts/azurill.exps';
 def 0 {
-
     ~AzurillMain();
 }

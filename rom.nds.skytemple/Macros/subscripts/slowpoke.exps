@@ -1,45 +1,5 @@
 macro SlowpokeMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_YADON);
-        }
-        message_SetFace(ACTOR_NPC_YADON, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We've been away from Treasure\nTown for some time...",
-            french=" On a quitté Bourg-Trésor\nquelque temps...",
-            german=" Nach einiger Zeit sind wir\nmal wieder in Schatzstadt.",
-            italian=" Siamo stati via da Borgo Tesoro\nper un po' di tempo...",
-            spanish=" Hacía tiempo que no veníamos\npor Aldea Tesoro.",
-        });
-        message_Talk({
-            english=" I like it here. It's so laid back.",
-            french=" J'aime bien cet endroit. C'est\ntellement relax.",
-            german=" Mir gefällt es hier. Es ist so\nlocker hier.",
-            italian=" Mi piace qui.\nÈ rilassante.",
-            spanish=" Me gusta estar aquí. Es bastante\nrelajado.",
-        });
-        message_Talk({
-            english=" Oh...[K] My motivation's\nslipping already...",
-            french=" Oh...[K] Voilà que ma motivation\ndécline déjà...",
-            german=" Oh...[K] Meine Motivation schwindet\nbereits...",
-            italian=" Oh...[K] La mia motivazione\nsi sta... dissolvendo...",
-            spanish=" ¡Uf![K] Ya empiezo a\ndesmotivarme.",
-        });
-        message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_ARRIVE_LIST[13]) {
+    if ($DUNGEON_ARRIVE_LIST[13]) {
         // [29, 32], 1 day passes.
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -248,6 +208,44 @@ macro SlowpokeMain() {
         message_Close();
         jump @label_130;
     } else {
-        jump @label_130;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_YADON);
+        }
+        message_SetFace(ACTOR_NPC_YADON, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We've been away from Treasure\nTown for some time...",
+            french=" On a quitté Bourg-Trésor\nquelque temps...",
+            german=" Nach einiger Zeit sind wir\nmal wieder in Schatzstadt.",
+            italian=" Siamo stati via da Borgo Tesoro\nper un po' di tempo...",
+            spanish=" Hacía tiempo que no veníamos\npor Aldea Tesoro.",
+        });
+        message_Talk({
+            english=" I like it here. It's so laid back.",
+            french=" J'aime bien cet endroit. C'est\ntellement relax.",
+            german=" Mir gefällt es hier. Es ist so\nlocker hier.",
+            italian=" Mi piace qui.\nÈ rilassante.",
+            spanish=" Me gusta estar aquí. Es bastante\nrelajado.",
+        });
+        message_Talk({
+            english=" Oh...[K] My motivation's\nslipping already...",
+            french=" Oh...[K] Voilà que ma motivation\ndécline déjà...",
+            german=" Oh...[K] Meine Motivation schwindet\nbereits...",
+            italian=" Oh...[K] La mia motivazione\nsi sta... dissolvendo...",
+            spanish=" ¡Uf![K] Ya empiezo a\ndesmotivarme.",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
     }
 }

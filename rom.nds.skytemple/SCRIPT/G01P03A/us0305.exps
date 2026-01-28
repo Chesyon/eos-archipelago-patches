@@ -20,7 +20,7 @@
 // - SCRIPT/T01P02A/um2503.exps
 // - SCRIPT/T01P02A/us0307.exps
 
-import 'subscripts/sandslash.exps;'
+import 'subscripts/sandslash.exps';
 def 0 {
     ~SandslashMain();
 }

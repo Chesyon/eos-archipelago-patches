@@ -18,7 +18,7 @@
 // - SCRIPT/T01P02A/us0203.exps
 // - SCRIPT/T01P02A/us3103.exps
 
-import 'subscripts/wurmple.exps;'
+import 'subscripts/wurmple.exps';
 def 0 {
     ~WurmpleMain();
 }

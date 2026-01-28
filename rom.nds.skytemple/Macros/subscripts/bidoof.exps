@@ -226,10 +226,10 @@ macro BidoofMain() {
             spanish=" ¡Huyuyuy![K] Voy a explorar con las\nencantadoras señoritas del [CS:X]Equipo Carisma[CR],\ncaramba...",
         });
         message_Talk({
-            english=" If the women of Team [CS:X]Charm[CR]\nnotice me...or praise me with a "lookin' good"...",
+            english=" If the women of Team [CS:X]Charm[CR]\nnotice me...or praise me with a \"lookin' good\"...",
             french=" Si ça s'trouve, les femmes\nd'l'Equipe [CS:X]Charme[CR] me f'ront p'têt' des\ncompliments...",
             german=" Wenn die Damen von Team\n[CS:X]Charme[CR] mich wahrnehmen... Oder mir sogar\nKomplimente machen...",
-            italian=" E se le belle del Team [CS:X]Malia[CR] si\naccorgono di me... o mi dicono "sei caruccio"...",
+            italian=" E se le belle del Team [CS:X]Malia[CR] si\naccorgono di me... o mi dicono \"sei caruccio\"...",
             spanish=" Si las preciosidades del [CS:X]Equipo[CR]\n[CS:X]Carisma[CR] advierten mi presencia o elogian\nmi aspecto...",
         });
         message_Talk({
@@ -579,7 +579,7 @@ macro BidoofMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }

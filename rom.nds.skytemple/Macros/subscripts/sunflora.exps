@@ -140,7 +140,7 @@ macro SunfloraMain() {
             spanish=" ¡Vaya, el [CS:X]Equipo Carisma[CR]!\n¡Jo! ¡Eran increíbles!",
         });
         message_Talk({
-            english=" Just thinking about them makes\nme go, "Oh...my...gosh!"",
+            english=" Just thinking about them makes\nme go, \"Oh...my...gosh!\"",
             french=" Quand je pense à elles, c'est plus\nfort que moi! Faut que je crie: OH... LA... LA!",
             german=" Nur an sie zu denken, ringt mir\nschon ein [F:S2]Du meine Güte![F:E2] ab.",
             italian=" Il solo pensiero...\nShock! Mi scombussola tutta!",
@@ -487,7 +487,7 @@ macro SunfloraMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }

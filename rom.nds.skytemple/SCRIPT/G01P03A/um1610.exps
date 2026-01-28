@@ -32,7 +32,7 @@
 // - SCRIPT/T01P02A/um2406.exps
 // - SCRIPT/T01P02A/um2506.exps
 
-import 'subscripts/corphish.exps;'
+import 'subscripts/corphish.exps';
 def 0 {
     ~CorphishMain();
 }

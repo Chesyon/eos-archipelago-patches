@@ -44,7 +44,7 @@
 // - SCRIPT/T01P02A/us2303.exps
 // - SCRIPT/T01P02A/us3104.exps
 
-import 'subscripts/vigoroth.exps;'
+import 'subscripts/vigoroth.exps';
 def 0 {
     ~VigorothMain();
 }

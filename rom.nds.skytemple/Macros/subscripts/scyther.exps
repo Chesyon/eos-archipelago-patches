@@ -1,4 +1,11 @@
 macro ScytherMain() {
+    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
+        case 532:
+        case 1132:
+            $LOCAL0 = 1;
+        default:
+            break;
+    }
     if ($SCENARIO_SUB2 &<< 6) {
         // [29, 52], Phione Dew Obtained!
         with(actor ACTOR_TALK_MAIN) {
@@ -31,7 +38,7 @@ macro ScytherMain() {
         message_Close();
         §label_130;
         JumpCommon(CORO_END_TALK);
-    } elseif ($SCENARIO_SUB2 &<< 5) {
+    } elseif ($DUNGEON_OPEN_LIST[51]) {
         // [29, 49], Manaphy faints on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -55,7 +62,7 @@ macro ScytherMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif (???) {
+    } elseif ($SCENARIO_SUB2 &<< 5) {
         // [29, 47], Playing with Manaphy on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -86,7 +93,7 @@ macro ScytherMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif (???) {
+    } elseif ($LOCAL1 == 1) {
         // [29, 46], Manaphy is following?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -313,7 +320,7 @@ macro ScytherMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -446,7 +453,7 @@ macro ScytherMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

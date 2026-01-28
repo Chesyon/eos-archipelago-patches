@@ -1,4 +1,4 @@
-macro PrimapeMain() {
+macro PrimeapeMain() {
     if ($DUNGEON_OPEN_LIST[44]) {
         // [29, 1], Graduation first announcement
         with(actor ACTOR_TALK_MAIN) {
@@ -32,7 +32,7 @@ macro PrimapeMain() {
         §label_130;
         JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }

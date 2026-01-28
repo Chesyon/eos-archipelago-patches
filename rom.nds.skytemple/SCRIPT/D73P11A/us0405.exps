@@ -9,7 +9,7 @@
 // - SCRIPT/D73P11A/us2304.exps
 // - SCRIPT/D73P11A/us3110.exps
 
-import 'subscripts/shaymin_4.exps;'
+import 'subscripts/shaymin_4.exps';
 def 0 {
     ~Shaymin_4Main();
 }

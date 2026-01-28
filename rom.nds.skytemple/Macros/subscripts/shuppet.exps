@@ -1,38 +1,5 @@
 macro ShuppetMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_KAGEBOUZU);
-        }
-        message_SetFace(ACTOR_NPC_KAGEBOUZU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" My partner [CS:N]Murkrow[CR] won't do\nanything I say.",
-            french=" Ma partenaire, [CS:N]Cornèbre[CR],\nn'écoute jamais ce que je lui dis de faire.",
-            german=" Mein Partner [CS:N]Kramurx[CR] tut nichts\nvon dem, was ich ihr auftrage.",
-            italian=" La mia compagna [CS:N]Murkrow[CR] non\nfa nulla di quello che le dico.",
-            spanish=" Mi compañera [CS:N]Murkrow[CR] nunca\nhace lo que le digo.",
-        });
-        message_Talk({
-            english=" I really want to go look for the\n[CS:I]Secret Slab[CR], but...",
-            french=" J'aimerais vraiment partir en\nquête du [CS:I]Bloc Secret[CR], mais...",
-            german=" Ich möchte wirklich gerne die\n[CS:I]Geheimtafel[CR] suchen gehen, aber...",
-            italian=" Vorrei davvero cercare la\n[CS:I]Lastraenigma[CR], ma...",
-            spanish=" Querría buscar la [CS:I]Losa Secreta[CR],\npero...",
-        });
-        message_Close();
-        §label_131;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_OPEN_LIST[62]) {
+    if ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -216,11 +183,11 @@ macro ShuppetMain() {
         }
         message_SetFace(ACTOR_NPC_KAGEBOUZU, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" [CS:N]Murkrow[CR] keeps saying,\n"Gold! Gold!" and I'm getting sick of it...",
-            french=" [CS:N]Cornèbre[CR] n'arrête pas de crier\n"De l'or! Encore!", et ça me rend malade...",
+            english=" [CS:N]Murkrow[CR] keeps saying,\n\"Gold! Gold!\" and I'm getting sick of it...",
+            french=" [CS:N]Cornèbre[CR] n'arrête pas de crier\n\"De l'or! Encore!\", et ça me rend malade...",
             german=" [CS:N]Kramurx[CR] sagt ständig nur\n[F:S2]Gold! Gold![F:E2]. Und das geht mir auf den Keks...",
             italian=" [CS:N]Murkrow[CR] non fa che parlare di\noro, oro, oro! Non ne posso più...",
-            spanish=" [CS:N]Murkrow[CR] no para de decir:\n"¡Oro, oro!", y ya me estoy hartando...",
+            spanish=" [CS:N]Murkrow[CR] no para de decir:\n\"¡Oro, oro!\", y ya me estoy hartando...",
         });
         message_Talk({
             english=" I would rather find some stylish\nand elegant treasure...",
@@ -247,11 +214,11 @@ macro ShuppetMain() {
         }
         message_SetFace(ACTOR_NPC_KAGEBOUZU, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" "Mysterious Mountain" just\nsounds cool.",
-            french=" "La Montagne Mystérieuse",\nça sonne vraiment bien.",
+            english=" \"Mysterious Mountain\" just\nsounds cool.",
+            french=" \"La Montagne Mystérieuse\",\nça sonne vraiment bien.",
             german=" [F:S2]Mysteriöser Berg[F:E2] klingt\neinfach cool.",
-            italian=" "Montagna Misteriosa"... che\nnome affascinante.",
-            spanish=" "Montaña Misteriosa" suena\nsuperguay.",
+            italian=" \"Montagna Misteriosa\"... che\nnome affascinante.",
+            spanish=" \"Montaña Misteriosa\" suena\nsuperguay.",
         });
         message_Close();
         jump @label_131;
@@ -347,10 +314,10 @@ macro ShuppetMain() {
             spanish=" Pero mi compañera [CS:N]Murkrow[CR]...",
         });
         message_Talk({
-            english=" She's like, "I have no interest in\na drab and dingy thing like that!"",
-            french=" Elle dit tout le temps:\n"Un truc aussi terne et miteux n'a aucun\nintérêt pour moi!"",
+            english=" She's like, \"I have no interest in\na drab and dingy thing like that!\"",
+            french=" Elle dit tout le temps:\n\"Un truc aussi terne et miteux n'a aucun\nintérêt pour moi!\"",
             german=" [F:S2]Ich habe kein Interesse an\ndiesem eintönigen trüben Ding![F:E2], waren\nihre Worte.",
-            italian=" Lei dice: "Non mi interessano\ncose povere e squallide come quella!".",
+            italian=" Lei dice: \"Non mi interessano\ncose povere e squallide come quella!\".",
             spanish=" Dice que no le interesa algo tan\ngris y lúgubre.",
         });
         message_Talk({
@@ -449,6 +416,37 @@ macro ShuppetMain() {
         message_Close();
         jump @label_131;
     } else {
-        jump @label_131;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KAGEBOUZU);
+        }
+        message_SetFace(ACTOR_NPC_KAGEBOUZU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" My partner [CS:N]Murkrow[CR] won't do\nanything I say.",
+            french=" Ma partenaire, [CS:N]Cornèbre[CR],\nn'écoute jamais ce que je lui dis de faire.",
+            german=" Mein Partner [CS:N]Kramurx[CR] tut nichts\nvon dem, was ich ihr auftrage.",
+            italian=" La mia compagna [CS:N]Murkrow[CR] non\nfa nulla di quello che le dico.",
+            spanish=" Mi compañera [CS:N]Murkrow[CR] nunca\nhace lo que le digo.",
+        });
+        message_Talk({
+            english=" I really want to go look for the\n[CS:I]Secret Slab[CR], but...",
+            french=" J'aimerais vraiment partir en\nquête du [CS:I]Bloc Secret[CR], mais...",
+            german=" Ich möchte wirklich gerne die\n[CS:I]Geheimtafel[CR] suchen gehen, aber...",
+            italian=" Vorrei davvero cercare la\n[CS:I]Lastraenigma[CR], ma...",
+            spanish=" Querría buscar la [CS:I]Losa Secreta[CR],\npero...",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
     }
 }

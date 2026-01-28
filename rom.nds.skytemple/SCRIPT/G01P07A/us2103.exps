@@ -5,7 +5,7 @@
 // - SCRIPT/T01P02A/us2204.exps
 // - SCRIPT/T01P02A/us2209.exps
 
-import 'subscripts/drowzee.exps;'
+import 'subscripts/drowzee.exps';
 def 0 {
     ~DrowzeeMain();
 }

@@ -299,7 +299,7 @@ macro ChimechoMain() {
             jump @label_130;
         }
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         if ( $SCENARIO_TALK_BIT_FLAG[16] ) {
             jump @label_131;
         } else {

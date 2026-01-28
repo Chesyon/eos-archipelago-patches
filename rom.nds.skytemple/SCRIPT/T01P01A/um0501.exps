@@ -19,7 +19,7 @@
 // - SCRIPT/T01P02A/um2501.exps
 // - SCRIPT/T01P02A/us0305.exps
 
-import 'subscripts/zangoose.exps;'
+import 'subscripts/zangoose.exps';
 def 0 {
     ~ZangooseMain();
 }

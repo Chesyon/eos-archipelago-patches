@@ -47,7 +47,7 @@
 // - SCRIPT/G01P05A/us2202.exps
 // - SCRIPT/G01P07A/us2002.exps
 
-import 'subscripts/wigglytuff.exps;'
+import 'subscripts/wigglytuff.exps';
 def 0 {
     ~WigglytuffMain();
 }

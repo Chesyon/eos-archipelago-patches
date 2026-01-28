@@ -652,7 +652,7 @@ macro ChatotMain() {
         message_Close();
         jump @label_129;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -782,7 +782,7 @@ macro ChatotMain() {
         });
         message_Close();
         jump @label_129;
-    } elseif (???) {
+    } elseif ($DUNGEON_REQUEST_LIST[178]) {
         // [22, 3], Didn't go to Hot Spring
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -864,7 +864,7 @@ macro ChatotMain() {
             french=" Le Tableau des Missions et les\nAvis de Recherche suffiront pour aujourd'hui.",
             german=" Das Job-Infobrett und das\nGanoven-Infobrett sollten für euch heute\nausreichen.",
             italian=" Oggi occupatevi delle missioni\nche trovate nelle due Bacheche.",
-            spanish=" Hoy será suficiente con que\nos ocupéis del Tablón de Anuncios\ny del Tablón "Se Busca".",
+            spanish=" Hoy será suficiente con que\nos ocupéis del Tablón de Anuncios\ny del Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" I'll leave you to it! ♪",
@@ -895,7 +895,7 @@ macro ChatotMain() {
             french=" Contentez-vous d'effectuer\ndes missions du Tableau des Missions et\ndes Avis de Recherche pour aujourd'hui.",
             german=" Das Job-Infobrett und das\nGanoven-Infobrett sollten für euch heute\nausreichen.",
             italian=" Oggi occupatevi delle missioni\nche trovate nelle due Bacheche.",
-            spanish=" Hoy será suficiente con que\nos ocupéis del Tablón de Anuncios\ny del Tablón "Se Busca".",
+            spanish=" Hoy será suficiente con que\nos ocupéis del Tablón de Anuncios\ny del Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" I'll leave you to it! ♪",
@@ -1601,7 +1601,7 @@ macro ChatotMain() {
             french=" Vous deux! Oh, occupez-vous\nsimplement des missions du Tableau des\nMissions et des Avis de Recherche...",
             german=" Ihr zwei! Oh, nehmt ein paar\nJobs vom Job-Infobrett und vom\nGanoven-Infobrett an!",
             italian=" Voi due! Oh, fate alcune delle\nmissioni che trovate nelle due Bacheche.",
-            spanish=" ¡Aquí estáis! Bueno, debéis\nrealizar algunas misiones del Tablón de\nAnuncios y del Tablón "Se Busca"...",
+            spanish=" ¡Aquí estáis! Bueno, debéis\nrealizar algunas misiones del Tablón de\nAnuncios y del Tablón \"Se Busca\"...",
         });
         message_Close();
         with(actor ACTOR_NPC_PERAPPU) {
@@ -1673,7 +1673,7 @@ macro ChatotMain() {
             french=" Aujourd'hui, tâchez de\nconsulter le Tableau des Missions et\nles Avis de Recherche.",
             german=" Heute solltet ihr zwei auf dem\nJob-Infobrett und dem Ganoven-Infobrett\nnachsehen gehen.",
             italian=" Oggi dovete occuparvi della\nBacheca delle missioni e della Bacheca dei\nricercati.",
-            spanish=" Hoy tenéis que echar un vistazo\nal Tablón de Anuncios y al Tablón "Se Busca".",
+            spanish=" Hoy tenéis que echar un vistazo\nal Tablón de Anuncios y al Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" Handle the jobs listed there.[K]\nI'll leave you to it! ♪",
@@ -1862,7 +1862,7 @@ macro ChatotMain() {
             french=" Consultez le Tableau des\nMissions et les Avis de Recherche.",
             german=" Seht euch das Job-Infobrett und\ndas Ganoven-Infobrett an.",
             italian=" Date un'occhiata alla Bacheca\ndelle missioni e a quella dei ricercati.",
-            spanish=" Echad un vistazo al Tablón de\nAnuncios y al Tablón "Se Busca".",
+            spanish=" Echad un vistazo al Tablón de\nAnuncios y al Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" Take the jobs that you're capable\nof handling...[K] I'll leave you to it! ♪",
@@ -2027,7 +2027,7 @@ macro ChatotMain() {
             french=" Très bien. Alors je veux que\nvous jetiez un coup d'œil aux Avis de\nRecherche.",
             german=" Gut. Dann möchte ich, dass ihr\neuch mit dem Ganoven-Infobrett vertraut\nmacht.",
             italian=" Molto bene. Allora voglio che\nguardiate la Bacheca dei ricercati.",
-            spanish=" Muy bien. Entonces quiero que\nexaminéis el Tablón "Se Busca".",
+            spanish=" Muy bien. Entonces quiero que\nexaminéis el Tablón \"Se Busca\".",
         });
         message_Talk({
             english=" Choose a weak criminal or two.\nThat should be suitable for you! ♪[K] I can trust\nyou with that, I'm sure! ♪",
@@ -2041,3 +2041,4 @@ macro ChatotMain() {
     } else {
         jump @label_129;
     }
+}

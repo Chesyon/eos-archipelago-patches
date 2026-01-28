@@ -36,7 +36,7 @@
 // - SCRIPT/P02P01A/us2204.exps
 // - SCRIPT/P02P01A/us3101.exps
 
-import 'subscripts/torkoal.exps;'
+import 'subscripts/torkoal.exps';
 def 0 {
     ~TorkoalMain();
 }

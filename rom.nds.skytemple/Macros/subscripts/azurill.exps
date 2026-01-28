@@ -64,10 +64,10 @@ macro AzurillMain() {
         }
         message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" Mr. [CS:N]Drowzee[CR] told me to tell you,\n"Take care and thanks," [hero] and\n[partner].",
-            french=" Monsieur [CS:N]Soporifik[CR] m'a dit\nde vous dire: "Faites attention à vous et\nmerci, [hero] et [partner]."",
+            english=" Mr. [CS:N]Drowzee[CR] told me to tell you,\n\"Take care and thanks,\" [hero] and\n[partner].",
+            french=" Monsieur [CS:N]Soporifik[CR] m'a dit\nde vous dire: \"Faites attention à vous et\nmerci, [hero] et [partner].\"",
             german=" Herr [CS:N]Traumato[CR] bat mich, euch\nseinen Dank auszurichten, und ihr sollt auf euch\naufpassen, [hero] und [partner].",
-            italian=" Il signor [CS:N]Drowzee[CR] mi ha detto\ndi dirvi: "In gamba e grazie", [hero] e\n[partner].",
+            italian=" Il signor [CS:N]Drowzee[CR] mi ha detto\ndi dirvi: \"In gamba e grazie\", [hero] e\n[partner].",
             spanish=" El señor [CS:N]Drowzee[CR] me pidió que\nos diera las gracias y que os deseara\nlo mejor de su parte.",
         });
         message_Close();
@@ -146,7 +146,7 @@ macro AzurillMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }

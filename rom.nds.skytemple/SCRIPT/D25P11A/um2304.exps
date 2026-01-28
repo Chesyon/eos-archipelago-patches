@@ -24,7 +24,7 @@
 // - SCRIPT/H01P99A/us0101.exps
 // - SCRIPT/H01P99A/us0102.exps
 
-import 'subscripts/dugtrio.exps;'
+import 'subscripts/dugtrio.exps';
 def 0 {
     ~DugtrioMain();
 }

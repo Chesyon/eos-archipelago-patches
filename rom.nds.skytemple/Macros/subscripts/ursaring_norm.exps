@@ -1,4 +1,11 @@
 macro Ursaring_NormMain() {
+    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
+        case 532:
+        case 1132:
+            $LOCAL0 = 1;
+        default:
+            break;
+    }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -150,7 +157,7 @@ macro Ursaring_NormMain() {
         });
         message_Close();
         
-    } elseif (???) {
+    } elseif ($DUNGEON_OPEN_LIST[51]) {
         // [29, 47], Playing with Manaphy on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -181,7 +188,7 @@ macro Ursaring_NormMain() {
         });
         message_Close();
         
-    } elseif (???) {
+    } elseif ($LOCAL0 == 1) {
         // [29, 46], Manaphy is following?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -306,7 +313,7 @@ macro Ursaring_NormMain() {
         message_Close();
         
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }

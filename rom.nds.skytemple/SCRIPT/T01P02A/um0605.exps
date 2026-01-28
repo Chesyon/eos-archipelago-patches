@@ -12,7 +12,7 @@
 // - SCRIPT/T01P02A/um1404.exps
 // - SCRIPT/T01P02A/us2307.exps
 
-import 'subscripts/slowpoke.exps;'
+import 'subscripts/slowpoke.exps';
 def 0 {
     ~SlowpokeMain();
 }

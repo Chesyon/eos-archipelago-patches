@@ -36,7 +36,7 @@
 // - SCRIPT/T01P02A/um2508.exps
 // - SCRIPT/T01P02A/us2210.exps
 
-import 'subscripts/sunflora.exps;'
+import 'subscripts/sunflora.exps';
 def 0 {
     ~SunfloraMain();
 }

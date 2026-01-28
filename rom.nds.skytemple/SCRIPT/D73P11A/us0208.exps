@@ -22,7 +22,7 @@
 // - SCRIPT/T01P02A/um0311.exps
 // - SCRIPT/T01P02A/um0601.exps
 
-import 'subscripts/togepi.exps;'
+import 'subscripts/togepi.exps';
 def 0 {
     ~TogepiMain();
 }

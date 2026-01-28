@@ -39,7 +39,7 @@ macro TorkoalMain() {
         §label_130;
         JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -76,17 +76,7 @@ macro TorkoalMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[35]) {
-        // [23, 1], Torkoal's News
-        jump @label_130;
-    } elseif ($DUNGEON_CONQUEST_LIST[34]) {
-        // [22, 2], Returned to Guild
-        §label_82;
-        forever {
-            supervision_ExecuteCommon(CORO_EVENT_M21_06);
-            continue;  // may be redundant
-        }
-    } elseif ($DUNGEON_OPEN_LIST[178]) {
+    } else {
         // [7, 2], Get Skunked On!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -116,8 +106,6 @@ macro TorkoalMain() {
             spanish=" Pero me quedo aquí en las rocas\ncalientes, relajándome. ¡Jo, jo, jo!",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

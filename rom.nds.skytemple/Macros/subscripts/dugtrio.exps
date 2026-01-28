@@ -1,5 +1,5 @@
 macro DugtrioMain() {
-    if (???) {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 94], Chatot Says Manaphy Returned
         §label_0;
         with(actor ACTOR_TALK_MAIN) {
@@ -252,7 +252,7 @@ macro DugtrioMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -424,11 +424,11 @@ macro DugtrioMain() {
             spanish=" ¡Nuestro viaje ha sido retrasado![K]\n¡También se ha aplazado la captura de [CS:N]Grovyle[CR]!",
         });
         message_Talk({
-            english=" In all truth, "postponed" isn't the\nright word for the latter.[K] The great [CS:N]Dusknoir[CR]\nwill handle the capture by himself.",
-            french=" En toute honnêteté, "ajournée"\nn'est pas l'exacte vérité.[K] Le grand [CS:N]Noctunoir[CR]\nva se charger de la capture tout seul.",
+            english=" In all truth, \"postponed\" isn't the\nright word for the latter.[K] The great [CS:N]Dusknoir[CR]\nwill handle the capture by himself.",
+            french=" En toute honnêteté, \"ajournée\"\nn'est pas l'exacte vérité.[K] Le grand [CS:N]Noctunoir[CR]\nva se charger de la capture tout seul.",
             german=" Verschoben trifft es vielleicht\nnicht genau.[K] Der große [CS:N]Zwirrfinst[CR] selbst wird\nsich um die Gefangennahme kümmern.",
-            italian=" A dire il vero, "posticipata" non\nè la parola più adatta.[K] Il grande [CS:N]Dusknoir[CR]\nvuole occuparsi da solo della cattura.",
-            spanish=" A decir verdad, "aplazado" tal\nvez no sea muy exacto.[K] El gran [CS:N]Dusknoir[CR]\nen persona se ocupará de capturar a [CS:N]Grovyle[CR].",
+            italian=" A dire il vero, \"posticipata\" non\nè la parola più adatta.[K] Il grande [CS:N]Dusknoir[CR]\nvuole occuparsi da solo della cattura.",
+            spanish=" A decir verdad, \"aplazado\" tal\nvez no sea muy exacto.[K] El gran [CS:N]Dusknoir[CR]\nen persona se ocupará de capturar a [CS:N]Grovyle[CR].",
         });
         message_Talk({
             english=" It's a little difficult, but\nunderstand us![K] O sea!",

@@ -20,7 +20,7 @@
 // - SCRIPT/P01P04A/us2305.exps
 // - SCRIPT/P01P04A/us3105.exps
 
-import 'subscripts/heracross.exps;'
+import 'subscripts/heracross.exps';
 def 0 {
     ~HeracrossMain();
 }

@@ -1,31 +1,5 @@
 macro LedybaMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
-        }
-        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" It's superfun! ♪",
-            french=" C'est super marrant! ♪",
-            german=" Es ist ein Riesenspaß! ♪",
-            italian=" È uno spasso! ♪",
-            spanish=" ¡Es supergenial! ♪",
-        });
-        message_Close();
-        §label_131;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_OPEN_LIST[67]) {
+    if ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -372,7 +346,7 @@ macro LedybaMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -498,6 +472,30 @@ macro LedybaMain() {
         message_Close();
         jump @label_131;
     } else {
-        jump @label_131;
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_REDIBA);
+        }
+        message_SetFace(ACTOR_NPC_REDIBA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" It's superfun! ♪",
+            french=" C'est super marrant! ♪",
+            german=" Es ist ein Riesenspaß! ♪",
+            italian=" È uno spasso! ♪",
+            spanish=" ¡Es supergenial! ♪",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
     }
 }

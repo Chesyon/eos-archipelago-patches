@@ -79,11 +79,11 @@ macro ZigzagoonMain() {
             spanish=" Me reuní con [CS:N]Heracross[CR] en la\nBase del Séptimo Puerto y subimos juntos.\n¡Fue divertidísimo!",
         });
         message_Talk({
-            english=" He kept yelling, "Whooooa!"\nJust watching it was so much fun.",
-            french=" Il n'arrêtait pas de crier:\n"Youhouuuuu!" Rien que pour entendre ça,\nça valait le détour.",
+            english=" He kept yelling, \"Whooooa!\"\nJust watching it was so much fun.",
+            french=" Il n'arrêtait pas de crier:\n\"Youhouuuuu!\" Rien que pour entendre ça,\nça valait le détour.",
             german=" Er hat die ganze Zeit [F:S2]Boooah![F:E2]\ngeschrieen. Urkomisch!",
-            italian=" Non faceva che gridare\n"Wooow"! Era davvero uno spasso.",
-            spanish=" No paraba de gritar: "¡Guauuu!".\nSolo por verlo valía la pena subir.",
+            italian=" Non faceva che gridare\n\"Wooow\"! Era davvero uno spasso.",
+            spanish=" No paraba de gritar: \"¡Guauuu!\".\nSolo por verlo valía la pena subir.",
         });
         message_Talk({
             english=" I've heard it so many times,\nI can imitate it. Ha ha ha!",
@@ -368,11 +368,11 @@ macro ZigzagoonMain() {
         WaitExecuteLives(ACTOR_NPC_JIGUZAGUMA);
         message_SetFace(ACTOR_NPC_JIGUZAGUMA, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" As soon as he came into the\nstore, he yelled at me, "Don't just loiter!"",
-            french=" A peine entré dans le magasin,\nil m'a crié: "Alors, décide-toi un peu!"",
+            english=" As soon as he came into the\nstore, he yelled at me, \"Don't just loiter!\"",
+            french=" A peine entré dans le magasin,\nil m'a crié: \"Alors, décide-toi un peu!\"",
             german=" Als er den Laden betrat, schrie\ner mich an: [F:S2]Was lümmelst du hier rum![F:E2]",
             italian=" Non appena ho messo piede nel\nnegozio, mi ha gridato di non curiosare!",
-            spanish=" En cuanto entró, le dio por\ngritarme: "¡No te quedes ahí pasmado!"",
+            spanish=" En cuanto entró, le dio por\ngritarme: \"¡No te quedes ahí pasmado!\"",
         });
         message_Talk({
             english=" It's OK to take your time and\nbrowse a bit, though.[K] Isn't it?",
@@ -438,7 +438,7 @@ macro ZigzagoonMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -478,11 +478,11 @@ macro ZigzagoonMain() {
         }
         message_SetFace(ACTOR_NPC_JIGUZAGUMA, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" Do you know of the IQ Skill\n"Acute Sniffer"?",
-            french=" Tu connais l'aptitude Q.I.\n"Flaireur d'Objets"?",
+            english=" Do you know of the IQ Skill\n\"Acute Sniffer\"?",
+            french=" Tu connais l'aptitude Q.I.\n\"Flaireur d'Objets\"?",
             german=" Kennst du die IQ-Fähigkeit\n[F:S2]Spürnase[F:E2]?",
-            italian=" Hai presente l'Abilità QI\n"Fiuto acuto"?",
-            spanish=" ¿Conoces la habilidad CI\n"Cuenta-objetos"?",
+            italian=" Hai presente l'Abilità QI\n\"Fiuto acuto\"?",
+            spanish=" ¿Conoces la habilidad CI\n\"Cuenta-objetos\"?",
         });
         message_Talk({
             english=" It's a skill that allows you to\ninstantly know how many treasures are left\non the floor!",
@@ -500,7 +500,7 @@ macro ZigzagoonMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif (???) {
+    } else {
         // [7, 3], Spinda Cafe is Open!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -523,8 +523,6 @@ macro ZigzagoonMain() {
             spanish=" Je, je, je...\n¡Una nueva fragancia!",
         });
         message_Close();
-        jump @label_131;
-    } else {
         jump @label_131;
     }
 }

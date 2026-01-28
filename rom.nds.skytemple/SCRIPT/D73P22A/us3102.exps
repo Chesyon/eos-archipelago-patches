@@ -23,7 +23,7 @@
 // - SCRIPT/P01P04A/us2304.exps
 // - SCRIPT/P01P04A/us3106.exps
 
-import 'subscripts/zigzagoon.exps;'
+import 'subscripts/zigzagoon.exps';
 def 0 {
     ~ZigzagoonMain();
 }

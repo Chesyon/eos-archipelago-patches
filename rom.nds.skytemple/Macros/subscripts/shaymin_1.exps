@@ -961,5 +961,6 @@ macro Shaymin_1Main() {
     } else {
         jump @label_130;
     }
+    §label_130;
     JumpCommon(CORO_END_TALK);
 }

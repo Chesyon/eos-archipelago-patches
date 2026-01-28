@@ -1,53 +1,5 @@
 macro DiglettMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
-        }
-        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oh, [hero] and\n[partner]!",
-            french=" Hé, [hero] et\n[partner]!",
-            german=" Oh, [hero] und\n[partner]!",
-            italian=" Oh, [hero] e\n[partner]!",
-            spanish=" ¡Hombre, [hero] y\n[partner]!",
-        });
-        message_Talk({
-            english=" I'm happy to see you! Are you\nvisiting us?",
-            french=" Content de vous revoir!\nVous venez nous rendre visite?",
-            german=" Ich freue mich, euch zu sehen!\nBesucht ihr uns?",
-            italian=" Sono contento di vedervi! Siete\nqui in visita?",
-            spanish=" ¡Me alegro de veros! ¿Venís\nde visita?",
-        });
-        message_Talk({
-            english=" By the way...[K] Have you seen my\ndad anywhere?",
-            french=" Au fait...[K] Vous n'auriez pas vu\nmon père?",
-            german=" Übrigens...[K] Habt ihr meinen\nVater gesehen?",
-            italian=" A proposito...[K] Avete visto mio\npadre da qualche parte?",
-            spanish=" Por cierto...[K] ¿Habéis visto\na mi padre por ahí?",
-        });
-        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
-        message_Talk({
-            english=" I haven't seen him for a while.\nI'm beginning to get worried...",
-            french=" Ça fait un moment que je ne l'ai\npas vu. Ça commence à m'inquiéter...",
-            german=" Ich habe ihn eine Weile nicht\ngesehen. So langsam fange ich an, mir Sorgen\nzu machen...",
-            italian=" Non lo vedo da un po'. Comincio\na essere preoccupato...",
-            spanish=" Hace tiempo que no le veo. Estoy\nempezando a preocuparme...",
-        });
-        message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_CONQUEST_LIST[69]) {
+    if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -92,6 +44,53 @@ macro DiglettMain() {
             german=" Ich hoffe, euer Team schlägt\nsich gut, [hero]!",
             italian=" Spero che la tua squadra ce la\nfaccia, [hero]!",
             spanish=" ¡Espero que todo salga bien,\n[hero]!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[63]) {
+        // [29, 94], Chatot Says Manaphy Returned
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+        }
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, [hero] and\n[partner]!",
+            french=" Hé, [hero] et\n[partner]!",
+            german=" Oh, [hero] und\n[partner]!",
+            italian=" Oh, [hero] e\n[partner]!",
+            spanish=" ¡Hombre, [hero] y\n[partner]!",
+        });
+        message_Talk({
+            english=" I'm happy to see you! Are you\nvisiting us?",
+            french=" Content de vous revoir!\nVous venez nous rendre visite?",
+            german=" Ich freue mich, euch zu sehen!\nBesucht ihr uns?",
+            italian=" Sono contento di vedervi! Siete\nqui in visita?",
+            spanish=" ¡Me alegro de veros! ¿Venís\nde visita?",
+        });
+        message_Talk({
+            english=" By the way...[K] Have you seen my\ndad anywhere?",
+            french=" Au fait...[K] Vous n'auriez pas vu\nmon père?",
+            german=" Übrigens...[K] Habt ihr meinen\nVater gesehen?",
+            italian=" A proposito...[K] Avete visto mio\npadre da qualche parte?",
+            spanish=" Por cierto...[K] ¿Habéis visto\na mi padre por ahí?",
+        });
+        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+        message_Talk({
+            english=" I haven't seen him for a while.\nI'm beginning to get worried...",
+            french=" Ça fait un moment que je ne l'ai\npas vu. Ça commence à m'inquiéter...",
+            german=" Ich habe ihn eine Weile nicht\ngesehen. So langsam fange ich an, mir Sorgen\nzu machen...",
+            italian=" Non lo vedo da un po'. Comincio\na essere preoccupato...",
+            spanish=" Hace tiempo que no le veo. Estoy\nempezando a preocuparme...",
         });
         message_Close();
         jump @label_130;
@@ -224,7 +223,7 @@ macro DiglettMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -759,7 +758,7 @@ macro DiglettMain() {
         });
         message_Close();
         jump @label_130;
-    } else {
-        jump @label_130;
     }
+    §label_130;
+    JumpCommon(CORO_END_TALK);
 }

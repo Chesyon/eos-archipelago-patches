@@ -1,0 +1,28 @@
+// Duplicate file group
+// Ledyba
+// - SCRIPT/D73P11A/us0210.exps
+// - SCRIPT/D73P11A/us3122.exps
+// - SCRIPT/G01P03A/um0307.exps
+// - SCRIPT/G01P03A/um0314.exps
+// - SCRIPT/G01P03A/um0804.exps
+// - SCRIPT/G01P03A/us0409.exps
+// - SCRIPT/G01P03A/us2004.exps
+// - SCRIPT/G01P03A/us2308.exps
+// - SCRIPT/P01P04A/um0718.exps
+// - SCRIPT/P01P04A/um1306.exps
+// - SCRIPT/P01P04A/um1412.exps
+// - SCRIPT/P01P04A/us0304.exps
+// - SCRIPT/P01P04A/us0408.exps
+// - SCRIPT/P01P04A/us3102.exps
+// - SCRIPT/T01P01A/um1408.exps
+// - SCRIPT/T01P01A/um1505.exps
+// - SCRIPT/T01P01A/us0107.exps
+// - SCRIPT/T01P01A/us0407.exps
+// - SCRIPT/T01P01A/us2206.exps
+// - SCRIPT/T01P02A/um0313.exps
+// - SCRIPT/T01P02A/um0603.exps
+
+import 'subscripts/ledyba.exps';
+def 0 {
+    ~LedybaMain();
+}

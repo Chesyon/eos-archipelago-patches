@@ -1,4 +1,11 @@
 macro WurmpleMain() {
+    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
+        case 532:
+        case 1132:
+            $LOCAL0 = 1;
+        default:
+            break;
+    }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -149,7 +156,7 @@ macro WurmpleMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($SCENARIO_SUB2 &<< 5) {
+    } elseif ($DUNGEON_OPEN_LIST[51]) {
         // [29, 49], Manaphy faints on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -180,7 +187,7 @@ macro WurmpleMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif (???) {
+    } elseif ($SCENARIO_SUB2 &<< 5) {
         // [29, 47], Playing with Manaphy on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -211,7 +218,7 @@ macro WurmpleMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif (???) {
+    } elseif ($LOCAL0 == 1) {
         // [29, 46], Manaphy is following?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -334,7 +341,7 @@ macro WurmpleMain() {
         // [29, 5], Graduating from the guild
         jump @label_66;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -532,25 +539,25 @@ macro WurmpleMain() {
             spanish=" Las misiones de los tablones se\nordenan según la dificultad: de fácil a difícil.",
         });
         message_Talk({
-            english=" The easiest jobs are marked\nwith the letter "E."",
-            french=" Les plus faciles portent la\nlettre "E".",
+            english=" The easiest jobs are marked\nwith the letter \"E.\"",
+            french=" Les plus faciles portent la\nlettre \"E\".",
             german=" Die leichtesten Jobs sind mit\ndem Buchstaben E gekennzeichnet.",
-            italian=" Le missioni più facili sono\nindicate dalla lettera "E".",
-            spanish=" Los trabajos más sencillos\nestán marcados con la letra "E".",
+            italian=" Le missioni più facili sono\nindicate dalla lettera \"E\".",
+            spanish=" Los trabajos más sencillos\nestán marcados con la letra \"E\".",
         });
         message_Talk({
-            english=" The jobs get progressively\ndifficult from "[CS:I]D[CR:0]" to "[CS:K]C[CR:0]" and so on.",
-            french=" Et la difficulté augmente\nprogressivement avec la lettre: "[CS:I]D[CR:0]" puis "[CS:K]C[CR:0]",\netc.",
+            english=" The jobs get progressively\ndifficult from \"[CS:I]D[CR:0]\" to \"[CS:K]C[CR:0]\" and so on.",
+            french=" Et la difficulté augmente\nprogressivement avec la lettre: \"[CS:I]D[CR:0]\" puis \"[CS:K]C[CR:0]\",\netc.",
             german=" Die Jobs werden zunehmend\nschwieriger von [CS:I]D[CR:0] bis [CS:K]C[CR:0] usw.",
-            italian=" Poi aumentano progressivamente\ndi difficoltà e sono contraddistinte da una "[CS:I]D[CR:0]",\nuna "[CS:K]C[CR:0]" e così via.",
-            spanish=" Las misiones van aumentando de\ndificultad de "[CS:I]D[CR:0]" a "[CS:K]C[CR:0]", etc.",
+            italian=" Poi aumentano progressivamente\ndi difficoltà e sono contraddistinte da una \"[CS:I]D[CR:0]\",\nuna \"[CS:K]C[CR:0]\" e così via.",
+            spanish=" Las misiones van aumentando de\ndificultad de \"[CS:I]D[CR:0]\" a \"[CS:K]C[CR:0]\", etc.",
         });
         message_Talk({
-            english=" If you're just starting out and\nyou're unsure of your skills, you should start\nwith the easiest jobs rated "E."",
-            french=" Si vous débutez et doutez de\nvos capacités, commencez avec les missions\nles plus faciles, qui portent la lettre "E".",
+            english=" If you're just starting out and\nyou're unsure of your skills, you should start\nwith the easiest jobs rated \"E.\"",
+            french=" Si vous débutez et doutez de\nvos capacités, commencez avec les missions\nles plus faciles, qui portent la lettre \"E\".",
             german=" Wenn du gerade anfängst und dir\ndeiner Fähigkeiten noch nicht sicher bist,\nbeginne Jobs, die mit E markiert sind.",
-            italian=" Se sei all'inizio e non sai bene\ncosa sei in grado di fare, dovresti iniziare\ncon le missioni più facili, quelle di tipo "E".",
-            spanish=" Si acabas de llegar y aún no has\ndesarrollado muy bien tus habilidades, sería\nmejor empezar por las marcadas con la "E".",
+            italian=" Se sei all'inizio e non sai bene\ncosa sei in grado di fare, dovresti iniziare\ncon le missioni più facili, quelle di tipo \"E\".",
+            spanish=" Si acabas de llegar y aún no has\ndesarrollado muy bien tus habilidades, sería\nmejor empezar por las marcadas con la \"E\".",
         });
         message_Talk({
             english=" Pardon?[K] Me?",
@@ -560,11 +567,11 @@ macro WurmpleMain() {
             spanish=" ¿Cómo?[K] ¿Yo?",
         });
         message_Talk({
-            english=" I'd never choose a hard job rated\n"[CS:K]C[CR:0]" or anything like that![K] Y-y-yeesh!",
-            french=" Jamais je ne me risquerai à\nchoisir une mission classée "[CS:K]C[CR:0]" ou plus![K]\nGloups!",
+            english=" I'd never choose a hard job rated\n\"[CS:K]C[CR:0]\" or anything like that![K] Y-y-yeesh!",
+            french=" Jamais je ne me risquerai à\nchoisir une mission classée \"[CS:K]C[CR:0]\" ou plus![K]\nGloups!",
             german=" Ich würde niemals einen\nschwierigen Job mit der Bewertung [CS:K]C[CR:0]\nauswählen![K] W-w-waaaaah!",
-            italian=" Io non ho mai scelto una\nmissione di livello "[CS:K]C[CR:0]"![K] G-G-Già...!",
-            spanish=" Nunca he escogido una misión\nmarcada con una "[CS:K]C[CR:0]" ni nada por el estilo.[K]\n¡Qué va!",
+            italian=" Io non ho mai scelto una\nmissione di livello \"[CS:K]C[CR:0]\"![K] G-G-Già...!",
+            spanish=" Nunca he escogido una misión\nmarcada con una \"[CS:K]C[CR:0]\" ni nada por el estilo.[K]\n¡Qué va!",
         });
         message_Close();
         jump @label_130;

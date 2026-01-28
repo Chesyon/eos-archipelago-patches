@@ -378,11 +378,11 @@ macro PachirisuMain() {
             spanish=" Me estaba tomando algo aquí,\ncomo siempre, cuando pasó algo sensacional.",
         });
         message_Talk({
-            english=" Once I finished my drink, I\nfound "Win!" written on the bottom of\nmy glass!",
-            french=" Après avoir fini ma boisson,\nj'ai vu le mot "Gagné!" inscrit sur le fond\nde mon verre!",
+            english=" Once I finished my drink, I\nfound \"Win!\" written on the bottom of\nmy glass!",
+            french=" Après avoir fini ma boisson,\nj'ai vu le mot \"Gagné!\" inscrit sur le fond\nde mon verre!",
             german=" Als ich meinen Drink geleert\nhatte, sah ich [F:S2]Gewonnen![F:E2] auf dem Boden\nmeines Glases geschrieben!",
-            italian=" Dopo aver finito di bere, ho\ntrovato la scritta "Hai vinto" sul fondo\ndel mio bicchiere!",
-            spanish=" Me acabo la bebida y, ¿qué me\nencuentro? ¡"Has ganado", escrito en el fondo\ndel vaso!",
+            italian=" Dopo aver finito di bere, ho\ntrovato la scritta \"Hai vinto\" sul fondo\ndel mio bicchiere!",
+            spanish=" Me acabo la bebida y, ¿qué me\nencuentro? ¡\"Has ganado\", escrito en el fondo\ndel vaso!",
         });
         message_KeyWait();
         with(actor ACTOR_NPC_PACHIRISU) {
@@ -507,7 +507,7 @@ macro PachirisuMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -537,11 +537,11 @@ macro PachirisuMain() {
             spanish=" La última vez que me tomé algo\nhice un nuevo amigo y todo.",
         });
         message_Talk({
-            english=" It's like "juice-drink harmony" or\nsomething.[K] Pretty cool, huh? Drinks, I mean.",
-            french=" C'est comme une "symphonie\nde jus frais".[K] Plutôt classe, hein?",
+            english=" It's like \"juice-drink harmony\" or\nsomething.[K] Pretty cool, huh? Drinks, I mean.",
+            french=" C'est comme une \"symphonie\nde jus frais\".[K] Plutôt classe, hein?",
             german=" Wohl so etwas wie die\n[F:S2]Harmonie der Safttrinkenden[F:E2].[K] Nicht schlecht,\noder? Die Drinks, meine ich.",
-            italian=" È una specie di\n"miscela perfetta" o qualcosa di simile.[K]\nBello, eh? Tutte queste bevande, intendo.",
-            spanish=" Es algo así como "el buen rollo\nde los zumos".[K] Mola, ¿eh? El zumo, digo.",
+            italian=" È una specie di\n\"miscela perfetta\" o qualcosa di simile.[K]\nBello, eh? Tutte queste bevande, intendo.",
+            spanish=" Es algo así como \"el buen rollo\nde los zumos\".[K] Mola, ¿eh? El zumo, digo.",
         });
         message_Close();
         jump @label_131;
@@ -568,11 +568,11 @@ macro PachirisuMain() {
             spanish=" Oye, escucha.",
         });
         message_Talk({
-            english=" I ordered a drink here before,\nand I got this "amazing miracle drink" or\nsomething!",
-            french=" J'ai commandé un verre ici tout\nà l'heure, et j'ai reçu cette "boisson\nmiraculeuse", ou quelque chose comme ça!",
+            english=" I ordered a drink here before,\nand I got this \"amazing miracle drink\" or\nsomething!",
+            french=" J'ai commandé un verre ici tout\nà l'heure, et j'ai reçu cette \"boisson\nmiraculeuse\", ou quelque chose comme ça!",
             german=" Ich habe vorhin einen Drink\nbestellt und dann bekam ich einen\n[F:S2]unglaublichen Wunder-Drink[F:E2]. Oder so!",
-            italian=" Prima ho ordinato qualcosa\nda bere e mi hanno dato questa\n"bevanda miracolosa" o una roba simile!",
-            spanish=" Antes pedí una bebida y me\ndieron "la bebida prodigiosa" o algo así.",
+            italian=" Prima ho ordinato qualcosa\nda bere e mi hanno dato questa\n\"bevanda miracolosa\" o una roba simile!",
+            spanish=" Antes pedí una bebida y me\ndieron \"la bebida prodigiosa\" o algo así.",
         });
         message_Talk({
             english=" I heard it rarely gets made, but\nit was incredibly delicious.",
@@ -583,7 +583,7 @@ macro PachirisuMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif (???) {
+    } else {
         // [7, 3], Spinda Cafe is Open!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -619,8 +619,6 @@ macro PachirisuMain() {
             spanish=" Hum... ¿Qué hago...?\nDebería tirar la casa por la ventana y hacerme\nuna bebida con mi [CS:I]Gomi Ámbar[CR]...",
         });
         message_Close();
-        jump @label_131;
-    } else {
         jump @label_131;
     }
 }

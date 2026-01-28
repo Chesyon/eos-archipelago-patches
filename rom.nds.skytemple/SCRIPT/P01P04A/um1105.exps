@@ -21,7 +21,7 @@
 // - SCRIPT/T01P02A/us0208.exps
 // - SCRIPT/T01P02A/us0302.exps
 
-import 'subscripts/shuppet.exps;'
+import 'subscripts/shuppet.exps';
 def 0 {
     ~ShuppetMain();
 }

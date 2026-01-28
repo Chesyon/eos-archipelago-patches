@@ -16,7 +16,7 @@
 // - SCRIPT/T01P02A/us0204.exps
 // - SCRIPT/T01P02A/us3102.exps
 
-import 'subscripts/swellow.exps;'
+import 'subscripts/swellow.exps';
 def 0 {
     ~SwellowMain();
 }

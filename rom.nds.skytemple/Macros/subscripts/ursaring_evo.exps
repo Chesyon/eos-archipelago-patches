@@ -1,4 +1,11 @@
 macro Ursaring_EvoMain() {
+    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
+        case 532:
+        case 1132:
+            $LOCAL0 = 1;
+        default:
+            break;
+    }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -140,7 +147,7 @@ macro Ursaring_EvoMain() {
         });
         message_Close();
         
-    } elseif ($SCENARIO_SUB2 &<< 5) {
+    } elseif ($DUNGEON_OPEN_LIST[51]) {
         // [29, 49], Manaphy faints on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -171,7 +178,7 @@ macro Ursaring_EvoMain() {
         });
         message_Close();
         
-    } elseif (???) {
+    } elseif ($SCENARIO_SUB2 &<< 5) {
         // [29, 47], Playing with Manaphy on beach
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -195,7 +202,7 @@ macro Ursaring_EvoMain() {
         });
         message_Close();
         
-    } elseif (???) {
+    } elseif ($LOCAL0 == 1) {
         // [29, 46], Manaphy is following?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

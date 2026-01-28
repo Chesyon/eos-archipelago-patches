@@ -1,0 +1,15 @@
+// Duplicate file group
+// Mawile
+// - SCRIPT/D73P11A/us0213.exps
+// - SCRIPT/D73P11A/us0307.exps
+// - SCRIPT/D73P11A/us0410.exps
+// - SCRIPT/D73P11A/us3118.exps
+// - SCRIPT/D73P11A/us3119.exps
+// - SCRIPT/D73P22A/us3105.exps
+// - SCRIPT/D73P25A/us3104.exps
+// - SCRIPT/D73P27A/us3104.exps
+
+import 'subscripts/mawile.exps';
+def 0 {
+    ~MawileMain();
+}

@@ -358,7 +358,7 @@ macro WigglytuffMain() {
         message_Close();
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
-        // [25, 1], Hidden "Land Ho!"
+        // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
         }
@@ -419,7 +419,7 @@ macro WigglytuffMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif (???) {
+    } elseif ($DUNGEON_OPEN_LIST[178]) {
         // [22, 3], Didn't go to Hot Spring
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

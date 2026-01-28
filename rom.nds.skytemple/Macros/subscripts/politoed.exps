@@ -1,31 +1,5 @@
 macro PolitoedMain() {
-    if (???) {
-        // [29, 94], Chatot Says Manaphy Returned
-        §label_0;
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_NYOROTONO);
-        }
-        message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Exploring is always fun! ♪",
-            french=" L'exploration, c'est toujours un\nvisa pour l'aventure, pas vrai, les copains? ♪",
-            german=" Erkunden macht immer Spaß! ♪",
-            italian=" Esplorare è sempre\ndivertente! ♪",
-            spanish=" ¡Explorar es divertidísimo! ♪",
-        });
-        message_Close();
-        §label_131;
-        JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_OPEN_LIST[67]) {
+    if ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -362,7 +336,7 @@ macro PolitoedMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($SUB30_PROJECTP) {
+    } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -471,6 +445,29 @@ macro PolitoedMain() {
         message_Close();
         jump @label_131;
     } else {
-        jump @label_131;
+        §label_0;
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_NYOROTONO);
+        }
+        message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Exploring is always fun! ♪",
+            french=" L'exploration, c'est toujours un\nvisa pour l'aventure, pas vrai, les copains? ♪",
+            german=" Erkunden macht immer Spaß! ♪",
+            italian=" Esplorare è sempre\ndivertente! ♪",
+            spanish=" ¡Explorar es divertidísimo! ♪",
+        });
+        message_Close();
+        §label_131;
+        JumpCommon(CORO_END_TALK);
     }
 }

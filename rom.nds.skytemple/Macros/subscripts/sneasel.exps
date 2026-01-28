@@ -126,11 +126,11 @@ macro SneaselMain() {
         }
         message_SetFace(ACTOR_NPC_NYUURA, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
-            english=" Heh-heh-heh. I found a so-called\n"Secret Room" earlier.",
-            french=" Hé hé hé. J'ai trouvé une\nsoi-disant "Salle Secrète", un peu plus tôt.",
+            english=" Heh-heh-heh. I found a so-called\n\"Secret Room\" earlier.",
+            french=" Hé hé hé. J'ai trouvé une\nsoi-disant \"Salle Secrète\", un peu plus tôt.",
             german=" Hehehe. Ich habe vorhin einen\nsogenannten [F:S2]Geheimraum[F:E2] gefunden.",
-            italian=" Eh eh eh! Prima ho trovato una\ncosiddetta "Sala Segreta".",
-            spanish=" Je, je, je. Antes encontré\nuna de esas "Cámaras Secretas".",
+            italian=" Eh eh eh! Prima ho trovato una\ncosiddetta \"Sala Segreta\".",
+            spanish=" Je, je, je. Antes encontré\nuna de esas \"Cámaras Secretas\".",
         });
         message_Close();
         se_Play(8962);

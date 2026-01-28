@@ -13,7 +13,7 @@
 // - SCRIPT/T01P01A/us2306.exps
 // - SCRIPT/T01P01A/us3106.exps
 
-import 'subscripts/ursaring_evo.exps;'
+import 'subscripts/ursaring_evo.exps';
 def 0 {
     ~Ursaring_EvoMain();
 }

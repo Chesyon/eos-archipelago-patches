@@ -7,7 +7,7 @@
 // - SCRIPT/T01P01A/us2003.exps
 // - SCRIPT/T01P02A/um0403.exps
 
-import 'subscripts/weavile.exps;'
+import 'subscripts/weavile.exps';
 def 0 {
     ~WeavileMain();
 }

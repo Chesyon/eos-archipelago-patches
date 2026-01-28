@@ -10,7 +10,7 @@
 // - SCRIPT/D73P27A/us3103.exps
 // - SCRIPT/D73P28A/us3103.exps
 
-import 'subscripts/breloom.exps;'
+import 'subscripts/breloom.exps';
 def 0 {
     ~BreloomMain();
 }

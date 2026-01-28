@@ -4,7 +4,7 @@
 // - SCRIPT/P01P04A/um0726.exps
 // - SCRIPT/P01P04A/us3113.exps
 
-import 'subscripts/wobbuffet.exps;'
+import 'subscripts/wobbuffet.exps';
 def 0 {
     ~WobbuffetMain();
 }

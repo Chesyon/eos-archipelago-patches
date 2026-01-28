@@ -13,7 +13,7 @@
 // - SCRIPT/T01P02A/um1202.exps
 // - SCRIPT/T01P02A/um1204.exps
 
-import 'subscripts/tangela.exps;'
+import 'subscripts/tangela.exps';
 def 0 {
     ~TangelaMain();
 }

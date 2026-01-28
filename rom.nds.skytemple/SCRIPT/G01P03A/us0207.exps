@@ -19,7 +19,7 @@
 // - SCRIPT/T01P02A/um2502.exps
 // - SCRIPT/T01P02A/us0306.exps
 
-import 'subscripts/scyther.exps;'
+import 'subscripts/scyther.exps';
 def 0 {
     ~ScytherMain();
 }
