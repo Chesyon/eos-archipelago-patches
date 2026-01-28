@@ -1,44 +1,12 @@
 // Duplicate file group
-// primeape
-// - SCRIPT/P02P01A/um0602.exps
-// - SCRIPT/P02P01A/um0606.exps
-// - SCRIPT/P02P01A/um0702.exps
-// - SCRIPT/P02P01A/um0705.exps
-// - SCRIPT/P02P01A/um0708.exps
-// - SCRIPT/P02P01A/um1102.exps
-// - SCRIPT/P02P01A/um1105.exps
-// - SCRIPT/P02P01A/um1108.exps
-// - SCRIPT/P02P01A/um1203.exps
-// - SCRIPT/P02P01A/um1206.exps
-// - SCRIPT/P02P01A/um1302.exps
-// - SCRIPT/P02P01A/um1305.exps
-// - SCRIPT/P02P01A/um1308.exps
-// - SCRIPT/P02P01A/um1403.exps
-// - SCRIPT/P02P01A/um1406.exps
-// - SCRIPT/P02P01A/um1410.exps
-// - SCRIPT/P02P01A/um1411.exps
-// - SCRIPT/P02P01A/um1503.exps
-// - SCRIPT/P02P01A/um1603.exps
-// - SCRIPT/P02P01A/um1606.exps
-// - SCRIPT/P02P01A/um2103.exps
-// - SCRIPT/P02P01A/um2403.exps
-// - SCRIPT/P02P01A/um2503.exps
-// - SCRIPT/P02P01A/us0103.exps
-// - SCRIPT/P02P01A/us0203.exps
-// - SCRIPT/P02P01A/us0206.exps
-// - SCRIPT/P02P01A/us0303.exps
-// - SCRIPT/P02P01A/us0306.exps
-// - SCRIPT/P02P01A/us0403.exps
-// - SCRIPT/P02P01A/us2003.exps
-// - SCRIPT/P02P01A/us2006.exps
-// - SCRIPT/P02P01A/us2009.exps
-// - SCRIPT/P02P01A/us2103.exps
-// - SCRIPT/P02P01A/us2203.exps
-// - SCRIPT/P02P01A/us2206.exps
-// - SCRIPT/P02P01A/us3103.exps
-// - SCRIPT/T01P01A/um2202.exps
+// Dusknoir
+// - SCRIPT/G01P03A/um1307.exps
+// - SCRIPT/G01P04A/um1303.exps
+// - SCRIPT/G01P04A/um1402.exps
+// - SCRIPT/T01P01A/um1308.exps
+// - SCRIPT/T01P02A/um1108.exps
 
-import 'subscripts/primeape.exps';
+import 'subscripts/dusknoir.exps';
 def 0 {
-    ~PrimeapeMain();
+    ~DusknoirMain();
 }
