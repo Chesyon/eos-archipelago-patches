@@ -1,4 +1,6 @@
+import "hints.exps";
 macro SkuntankMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
         // [9, 1], Expedition Tomorrow
         with(actor ACTOR_TALK_MAIN) {

@@ -1,5 +1,7 @@
+import "hints.exps";
 macro BreloomMain() {
-    if ($DUNGEON_ARRIVE_LIST[15]) {
+    ~CheckHints();
+    if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 54], 2 missions complete!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -31,7 +33,7 @@ macro BreloomMain() {
         message_Close();
         §label_130;
         JumpCommon(CORO_END_TALK);
-    } elseif ($DUNGEON_ARRIVE_LIST[14]) {
+    } elseif ($SCENARIO_TALK_BIT_FLAG[122]) {
         // [29, 40], 1 mission complete!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

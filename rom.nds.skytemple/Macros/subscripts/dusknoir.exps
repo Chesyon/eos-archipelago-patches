@@ -1,4 +1,6 @@
+import "hints.exps";
 macro DusknoirMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[20]) {
         // [14, 5], Northern Desert Dead End
         with(actor ACTOR_TALK_MAIN) {
@@ -100,7 +102,7 @@ macro DusknoirMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_ARRIVE_LIST[3]) {
+    } else {
         // [12, 4], Water Float Lost
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -158,8 +160,6 @@ macro DusknoirMain() {
             spanish=" Es un sitio tan acogedor, que\nquizás hasta me quede... ¡Ja, jua, jua!",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

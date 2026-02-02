@@ -1,72 +1,20 @@
+import "hints.exps";
 macro WynautMain() {
+    with(actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with(actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with(actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with(actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
+    }
     if ($DUNGEON_REQUEST_LIST[175]) {
-        // [29, 10], First Time at Shaymin Village
-        if ( $SUB30_TREASURE_DISCOVER[0] ) {
-            §label_133;
-            with(actor ACTOR_TALK_MAIN) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_TALK_SUB) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                SetAnimation(2);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-            }
-            WaitExecuteLives(ACTOR_ATTENDANT1);
-            supervision_ExecuteCommon(CORO_EVENT_S30_04);
-            §label_134;
-            with(actor ACTOR_TALK_MAIN) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_TALK_SUB) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                SetAnimation(2);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-            }
-            WaitExecuteLives(ACTOR_ATTENDANT1);
-            supervision_ExecuteCommon(CORO_EVENT_S30_05);
-            §label_131;
-            JumpCommon(CORO_END_TALK);
-        } elseif ( $SUB30_SPOT_DISCOVER[0] ) {
-            jump @label_134;
-        } else {
-            §label_132;
-            with(actor ACTOR_TALK_MAIN) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_TALK_SUB) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                SetAnimation(2);
-            }
-            with(actor ACTOR_ATTENDANT1) {
-                Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-            }
-            supervision_ExecuteCommon(CORO_EVENT_S30_06);
-            jump @label_133;
-        }
     } elseif ($DUNGEON_OPEN_LIST[175]) {
         // [29, 8], Cafe Describe Shaymin Village
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-        }
         message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
             english=" We made a wonderful discovery!",
@@ -76,30 +24,10 @@ macro WynautMain() {
             spanish=" ¡Menudo descubrimiento\nhemos hecho!",
         });
         message_Close();
-        jump @label_131;
+        // jump @end_talk;
     } elseif ($SUB30_SPOT_LEVEL > 1 || $RECYCLE_COUNT > 20) {
-        // [8, 7], Project P Old News
-        if ( $SUB30_TREASURE_DISCOVER[0] ) {
-            jump @label_133;
-        } elseif ( $SUB30_SPOT_DISCOVER[0] ) {
-            jump @label_134;
-        } else {
-            jump @label_132;
-        }
     } elseif ($SUB30_PROJECTP[0]) {
         // [8, 5], Project P Seen?
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-        }
         message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk({
             english=" If we make a new discovery,\nwe'll make sure to let everyone know.",
@@ -116,21 +44,12 @@ macro WynautMain() {
             spanish=" ¡Seguid a la espera!",
         });
         message_Close();
-        jump @label_131;
+        // jump @end_talk;
     } elseif ($GROUND_ENTER == LEVEL_P01P04A) {
         // [7, 3], Spinda Cafe is Open!
-        jump @label_132;
-    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+        supervision_ExecuteCommon(CORO_EVENT_S30_06);
+    } else {
         // [5, 5], Sentry Duty Loss!
-        with(actor ACTOR_PLAYER) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_SOONANO);
-        }
         with(actor ACTOR_NPC_SOONANO) {
             SetAnimation(2);
         }
@@ -176,8 +95,26 @@ macro WynautMain() {
         with(actor ACTOR_NPC_SOONANSU) {
             SetAnimation(4);
         }
-        jump @label_131;
-    } else {
-        jump @label_131;
     }
+    if ($GROUND_ENTER == LEVEL_P01P04A) {
+        if ($SCENARIO_TALK_BIT_FLAG[219]) {
+        } else {
+            $SCENARIO_TALK_BIT_FLAG[219] = 1;
+            message_SetFace(ACTOR_NPC_SOONANO, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Oh! Hello there, team [team]!\nHere to use the recycle shop?[K] Just so you\nknow, [CS:G]Wobbuffet[CR] just opened a special shop...");
+            message_Talk(" I bet you get a lot of [CS:I]Sticks[CR] and [CS:I]Geo\nPebbles[CR] going through dungeons, don\'t you?\nExcept Project P can\'t recycle them![K] But...");
+            message_Talk(" [CS:G]Wobbuffet[CR] has started collecting\n[CS:C]stackable items[CR], and we\'ve started a shop to\nexchange them for other stackable items!");
+            message_Talk(" Isn\'t that exciting? I\'m so proud of\n[CS:G]Wobbuffet[CR] for coming up with this![K] Simply\ntalk to [CS:G]Wobbuffet[CR] to learn more, okay?");
+            message_Close();
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        if ( $SUB30_TREASURE_DISCOVER[0] ) {
+            supervision_ExecuteCommon(CORO_EVENT_S30_04);
+        } elseif ( $SUB30_SPOT_DISCOVER[0] ) {
+            supervision_ExecuteCommon(CORO_EVENT_S30_05);
+        } else {
+            supervision_ExecuteCommon(CORO_EVENT_S30_06);
+        }
+    }
+    JumpCommon(CORO_END_TALK);
 }

@@ -1,3 +1,4 @@
+import "hints.exps";
 macro Ursaring_NormMain() {
     switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
         case 532:
@@ -6,6 +7,7 @@ macro Ursaring_NormMain() {
         default:
             break;
     }
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {

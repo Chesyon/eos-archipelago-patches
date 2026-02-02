@@ -1,4 +1,6 @@
+import "hints.exps";
 macro ArbokMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[61]) {
         // [29, 67], Aegis Cave Complete!
         with(actor ACTOR_TALK_MAIN) {

@@ -1,19 +1,40 @@
 // Duplicate file group
-// Grovyle
-// - SCRIPT/D01P11A/um2401.exps
-// - SCRIPT/D22P11A/um1901.exps
-// - SCRIPT/D22P11A/um1902.exps
-// - SCRIPT/D23P11A/um1901.exps
-// - SCRIPT/D23P11A/um1903.exps
-// - SCRIPT/D24P11A/um2001.exps
-// - SCRIPT/D24P11A/um2002.exps
-// - SCRIPT/D27P11A/um2402.exps
-// - SCRIPT/D27P11A/um2404.exps
-// - SCRIPT/D28P21A/um2401.exps
-// - SCRIPT/D28P21A/um2402.exps
-// - SCRIPT/D28P21A/um2403.exps
+// Lapras
+// - SCRIPT/D01P11A/um2402.exps
+// - SCRIPT/D01P11A/um2501.exps
+// - SCRIPT/D01P11A/us0101.exps
+// - SCRIPT/D01P11A/us0201.exps
+// - SCRIPT/D01P11A/us0202.exps
+// - SCRIPT/D01P11A/us0301.exps
+// - SCRIPT/D01P11A/us0302.exps
+// - SCRIPT/D01P11A/us0303.exps
+// - SCRIPT/D01P11A/us0401.exps
+// - SCRIPT/D01P11A/us0402.exps
+// - SCRIPT/D01P11A/us2001.exps
+// - SCRIPT/D01P11A/us2002.exps
+// - SCRIPT/D01P11A/us2003.exps
+// - SCRIPT/D01P11A/us2101.exps
+// - SCRIPT/D01P11A/us2201.exps
+// - SCRIPT/D01P11A/us2202.exps
+// - SCRIPT/D01P11A/us3101.exps
+// - SCRIPT/D27P11A/um2401.exps
+// - SCRIPT/D27P11A/um2403.exps
+// - SCRIPT/D27P11A/um2501.exps
+import "lapras.exps";
 
-import 'subscripts/grovyle.exps';
 def 0 {
-    ~GrovyleMain();
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_RAPURASU);
+    }
+    $EVENT_LOCAL = 0;
+    ~LaprasMain();
 }

@@ -1,0 +1,14 @@
+
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    debug_Print('BGM_FADEOUT');
+    bgm_FadeOut(60);
+    screen_FadeOut(0, 30);
+    supervision_ExecuteCommon(CORO_EVENT_M13_03);
+    end;
+}

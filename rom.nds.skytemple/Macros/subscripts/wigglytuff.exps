@@ -1,4 +1,7 @@
+import "hints.exps";
+import 'checks.exps';
 macro WigglytuffMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -52,6 +55,10 @@ macro WigglytuffMain() {
         });
         message_Close();
         §label_130;
+        if ($SCENARIO_SUB1 &<< 6) {
+        } else {
+            ~WigglyOfferCheck();
+        }
         JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
@@ -772,6 +779,72 @@ macro WigglytuffMain() {
         message_Close();
         jump @label_130;
     } else {
+        message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Hiya!",
+            french=" Amis du jour, bonjour!",
+            german=" Hallöchen!",
+            italian=" Ullalà!",
+            spanish=" ¿Qué hay?",
+        });
+        message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Friendly friends! ♪",
+            french=" Copains de moi! ♪",
+            german=" Liebe Freunde! ♪",
+            italian=" Amichevoli amici! ♪",
+            spanish=" ¡Los amigos son lo mejor! ♪",
+        });
+        message_Close();
         jump @label_130;
+    }
+}
+
+macro WigglyOfferCheck() {
+    message_SetFace(ACTOR_NPC_PUKURIN, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" ...would you two like to hear\na fun story instead of exploring today?[K] [CS:G]Chatot[CR]\nloved this story when I told him earlier...");
+    switch(message_SwitchMenu(0,2)) {
+        case menu("Sure!"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_PUKURIN, FACE_HAPPY, FACE_POS_STANDARD);
+            message_Talk(" Yay! ♪");
+            message_Close();
+            bgm_FadeOut(30);
+            screen_FadeOut(1,30);
+            Wait(30);
+            me_Play(5);
+            message_Mail({
+                english="[CN]The Special Episode\n[CN]\"Igglybuff the Prodigy\"\n[CN]may have been unlocked![W:90]",
+                french="[CN]L\'Episode Spécial\n[CN]\"Toudoudou le Surdoué\"\n[CN]est maintenant disponible![W:90]",
+                german="[CN]Die Bonusepisode\n[CN][F:S2]Wundersamer Fluffeluff[F:E2]\n[CN]wurde freigeschaltet![W:90]",
+                italian="[CN]L\'episodio speciale\n[CN]\"Igglybuff il genio\"\n[CN]è ora disponibile![W:90]",
+                spanish="[CN]Se ha desbloqueado\n[CN]el capítulo especial\n[CN]\"Igglybuff es un prodigio\".[W:90]",
+            });
+            message_Mail({
+                english="[CN]To play a Special Episode,\n[CN]select it from the Episode List\n[CN]on the Top Menu.",
+                french="[CN]Pour jouer à un Episode Spécial,\n[CN]sélectionnez-le dans la Liste des épisodes\n[CN]à partir du menu principal.",
+                german="[CN]Um eine Bonusepisode zu spielen,\n[CN]wähle sie in der Episodenliste\n[CN]im Hauptmenü aus.",
+                italian="[CN]Per giocare a un episodio speciale,\n[CN]selezionalo dalla lista episodi\n[CN]nel menu principale.",
+                spanish="[CN]Para jugar a un capítulo especial,\n[CN]elígelo en la lista de capítulos\n[CN]del menú principal.",
+            });
+            message_Mail({
+                english="[CN]If you would like to play the Special Episode,\n[CN]save your adventure progress, and\n[CN]return to the Top Menu.",
+                french="[CN]Si vous souhaitez jouer à cet Episode Spécial,\n[CN]sauvegardez d\'abord votre aventure\n[CN]puis retournez au menu principal.",
+                german="[CN]Wenn du eine Bonusepisode spielen\n[CN]möchtest, speichere deinen Spielstand\n[CN]und kehre zum Hauptmenü zurück.",
+                italian="[CN]Se vuoi giocare all\'episodio speciale,\n[CN]salva i progressi della tua avventura\n[CN]e torna al menu principale.",
+                spanish="[CN]Si quieres jugar al capítulo especial,\n[CN]guarda tu progreso y\n[CN]vuelve al menú principal.",
+            });
+            message_Close();
+            Wait(90);
+            ~AssignCheck(6); // Assign Igglybuff SE
+            message_Mail("After a full day of listening to\nGuildmaster [CS:G]Wigglytuff[CR]\'s story...");
+            message_Close();
+            supervision_ExecuteCommon(CORO_EVENT_HA_SAME);
+        case menu("Maybe later..."):
+            message_Close();
+            message_SetFace(ACTOR_NPC_PUKURIN, FACE_SAD, FACE_POS_STANDARD);
+            message_Talk(" I understand, my friends must be\nreally busy right now.[K] Come back\nsoon, [hero] and [partner]!");
+            message_Close();
+            break;          
     }
 }

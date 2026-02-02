@@ -1,4 +1,6 @@
+import "hints.exps";
 macro Poochyena_CMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[63]) {
         // [29, 75], Nightmare Unlocked
         with(actor ACTOR_TALK_MAIN) {

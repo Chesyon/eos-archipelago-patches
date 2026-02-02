@@ -1,3 +1,4 @@
+import "hints.exps";
 macro OctilleryMain() {
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated

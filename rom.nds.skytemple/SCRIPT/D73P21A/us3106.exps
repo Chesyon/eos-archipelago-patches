@@ -1,30 +1,26 @@
+// Duplicate file group
+// Heracross
+// - SCRIPT/D73P23A/us3108.exps
+// - SCRIPT/D73P27A/us3107.exps
+// - SCRIPT/D73P31A/us0204.exps
+// - SCRIPT/D73P31A/us0304.exps
+// - SCRIPT/D73P31A/us0404.exps
+// - SCRIPT/P01P04A/um0606.exps
+// - SCRIPT/P01P04A/um0710.exps
+// - SCRIPT/P01P04A/um0723.exps
+// - SCRIPT/P01P04A/um0805.exps
+// - SCRIPT/P01P04A/um1302.exps
+// - SCRIPT/P01P04A/um1408.exps
+// - SCRIPT/P01P04A/um2103.exps
+// - SCRIPT/P01P04A/um2203.exps
+// - SCRIPT/P01P04A/um2303.exps
+// - SCRIPT/P01P04A/us2005.exps
+// - SCRIPT/P01P04A/us2105.exps
+// - SCRIPT/P01P04A/us2205.exps
+// - SCRIPT/P01P04A/us2305.exps
+// - SCRIPT/P01P04A/us3105.exps
 
+import 'subscripts/heracross.exps';
 def 0 {
-    if ( $SCENARIO_MAIN_BIT_FLAG[91] ) {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        message_SetFace(ACTOR_NPC_HERAKUROSU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" I will never forget yoooou!\nThank yoooou!!",
-            french=" Je ne t\'oublierai jamais!\nMerci pour tout!!!",
-            german=" Ich werde iiiiimmer an euch\ndenken! Danke schööön!!!",
-            italian=" Non vi dimenticherò maaai!\nGraaazie!!!",
-            spanish=" Nunca te olvidaré,\n¡muchas gracias!",
-        });
-        message_Close();
-        JumpCommon(CORO_END_TALK);
-    } else {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        supervision_ExecuteCommon(CORO_EVENT_S32_04);
-        hold;
-    }
+    ~HeracrossMain();
 }

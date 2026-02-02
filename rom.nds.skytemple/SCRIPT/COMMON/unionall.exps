@@ -9264,6 +9264,7 @@ coro ENTER_SCENARIO_DUNGEON {
                 case 54:
                     switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
                     bgm_FadeOut(60);
+                    $DUNGEON_REQUEST_LIST[54] = 1;
                     main_EnterGround(LEVEL_D32P11A, 30);
                     hold;
                 case 44:
@@ -9283,10 +9284,11 @@ coro ENTER_SCENARIO_DUNGEON {
                     hold;
                     end;
                 case 175:
-                    if ( scn($SCENARIO_MAIN) >= [29, 10] ) {
+                    if ($DUNGEON_REQUEST_LIST[175]) {
                         main_EnterGround(LEVEL_D73P11A, 30);
                         hold;
                     } else {
+                        $DUNGEON_REQUEST_LIST[175] = 1;
                         JumpCommon(CORO_EVENT_S31_02);
                     }
                     break;
@@ -9579,10 +9581,12 @@ coro ENTER_REQUEST_DUNGEON {
             hold;
             end;
         case 175:
+            $DUNGEON_REQUEST_LIST[175] = 1;
             main_EnterGround(LEVEL_D73P11A, 30);
             hold;
             end;
         case 54:
+            $DUNGEON_REQUEST_LIST[54] = 1;
             switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
             bgm_FadeOut(60);
             main_EnterGround(LEVEL_D32P11A, 30);

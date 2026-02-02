@@ -1,0 +1,27 @@
+
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    message_SetFace(ACTOR_NPC_NYOROTONO, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english="[M:D0] ",
+        french="[M:D0] ",
+        german="[M:D0] ",
+        italian="[M:D0] ",
+        spanish="[M:D0] ",
+    });
+    message_Talk({
+        english="[M:D0] ",
+        french="[M:D0] ",
+        german="[M:D0] ",
+        italian="[M:D0] ",
+        spanish="[M:D0] ",
+    });
+    message_Close();
+    §label_0;
+    JumpCommon(CORO_END_TALK);
+}

@@ -1,0 +1,18 @@
+
+def 0 {
+    if ( $SCENARIO_MAIN_BIT_FLAG[9] ) {
+        §label_0;
+        end;
+    } else {
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        $SCENARIO_MAIN_BIT_FLAG[9] = 1;
+        supervision_Remove(11);
+        supervision_ExecuteCommon(CORO_EVENT_M00_02);
+        jump @label_0;
+    }
+}

@@ -1,4 +1,6 @@
+import "hints.exps";
 macro TeddiursaMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[38]) {
         // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {

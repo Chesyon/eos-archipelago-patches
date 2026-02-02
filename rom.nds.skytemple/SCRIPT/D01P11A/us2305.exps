@@ -1,0 +1,33 @@
+
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_NPC_DOSAIDON);
+    }
+    message_SetFace(ACTOR_NPC_DOSAIDON, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk({
+        english=" We\'re Team [CS:X]Raider[CR]!",
+        french=" On est l\'Equipe [CS:X]As[CR]!",
+        german=" Wir sind Team [CS:X]Schatzsucher[CR]!",
+        italian=" Noi siamo il Team [CS:X]Asso[CR]!",
+        spanish=" ¡Somos el [CS:X]Equipo As[CR]!",
+    });
+    message_Talk({
+        english=" We never fail at getting the\ntreasures we set our sights on.[K] Honored to\nmeet you!",
+        french=" Une fois que nous avons jeté\nnotre dévolu sur un trésor, jamais nous\nn\'échouons![K] Honorés de vous connaître!",
+        german=" Wir bekommen immer die\nSchätze, auf die wir ein Auge geworfen\nhaben.[K] Freut uns, euch kennenzulernen.",
+        italian=" Quando mettiamo gli occhi su un \ntesoro non falliamo mai.[K] È un piacere\nconoscervi!",
+        spanish=" Siempre conseguimos los\ntesoros que nos proponemos.[K] ¡Un placer\nconoceros!",
+    });
+    message_Close();
+    §label_130;
+    JumpCommon(CORO_END_TALK);
+}

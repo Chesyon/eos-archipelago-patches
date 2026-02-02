@@ -1,4 +1,6 @@
+import "hints.exps";
 macro WurmpleMain() {
+    ~CheckHints();
     switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
         case 532:
         case 1132:

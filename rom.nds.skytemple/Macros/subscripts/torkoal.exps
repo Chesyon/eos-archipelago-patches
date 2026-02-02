@@ -1,4 +1,5 @@
 macro TorkoalMain() {
+    ~WipeHints();
     if ($PERFORMANCE_PROGRESS_LIST[17]) {
         // [29, 1], Graduation first announcement
         with(actor ACTOR_TALK_MAIN) {
@@ -37,7 +38,7 @@ macro TorkoalMain() {
         });
         message_Close();
         §label_130;
-        JumpCommon(CORO_END_TALK);
+        ~HintMenu();
     } elseif ($DUNGEON_OPEN_LIST[38]) {
         // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
@@ -107,5 +108,704 @@ macro TorkoalMain() {
         });
         message_Close();
         jump @label_130;
+    }
+}
+
+
+
+
+macro HintMenu() {
+    message_Talk({
+        english=" Hm? Ah, my young friends![W:30]\nCome to wash away your exhaustion?",
+        french=" Hmm? Ah, jeunes gens![W:30]\nVous venez prendre un bon bain réparateur?",
+        german=" Hm? Ah, meine jungen Freunde![W:30]\nWollt ihr eure Müdigkeit wegwaschen?",
+        italian=" Eh? Ah, giovani Pokémon![W:30]\nVenite a lavar via la vostra stanchezza?",
+        spanish=" ¿Eh? Ah, ¡mis jóvenes amigos![W:30]\n¿Venís a recuperaros de vuestro agotamiento?",
+    });
+    §menu_1;
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Review Hints"):
+            message_Close();
+            message_Talk({
+                english=" I see...[W:30] You seek my wisdom.",
+                french=" Je vois...[W:30] Vous sollicitez\nmes conseils.",
+                german=" Ich verstehe...[W:30] Ihr sucht meinen\nweisen Rat.",
+                italian=" Capisco...[W:30] Siete alla ricerca\ndella mia saggezza.",
+                spanish=" Ah, ya veo...[W:30]\nOs interesa mi sabiduría.",
+            });
+            message_Close();
+            break;
+        case menu("Cancel"):
+        default:
+            §end_chat;
+            message_Close();
+            JumpCommon(CORO_END_TALK);
+            hold;
+            
+    }
+    message_Talk(" Ho-ho-ho! How can I help, then?");
+    §menu_2;
+    switch(message_SwitchMenu2(1,1,$DUNGEON_ARRIVE_LIST)) {
+        case menu("[CS:B]Torkoal Hidden Land[CR]"):
+        case menu("[M:R7]Torkoal Hidden Land"):
+        case menu("Torkoal Hidden Land"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[1]) {
+                $DUNGEON_ARRIVE_LIST[1] = 0;
+                $DUNGEON_ARRIVE_LIST[2] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[2]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:10]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_0;
+        case menu("[CS:B]Torkoal Pre-Dialga[CR]"):
+        case menu("[M:R7]Torkoal Pre-Dialga"):
+        case menu("Torkoal Pre-Dialga"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[4]) {
+                $DUNGEON_ARRIVE_LIST[4] = 0;
+                $DUNGEON_ARRIVE_LIST[5] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[5]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:11]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_1;
+        case menu("[CS:B]Torkoal Post-Dialga[CR]"):
+        case menu("[M:R7]Torkoal Post-Dialga"):
+        case menu("Torkoal Post-Dialga"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[7]) {
+                $DUNGEON_ARRIVE_LIST[7] = 0;
+                $DUNGEON_ARRIVE_LIST[8] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[8]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:12]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_2;
+        case menu("[CS:B]Azumarill Apple[CR]"):
+        case menu("[M:R7]Azumarill Apple"):
+        case menu("Azumarill Apple"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[10]) {
+                $DUNGEON_ARRIVE_LIST[10] = 0;
+                $DUNGEON_ARRIVE_LIST[11] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[11]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:13]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_3;
+        case menu("[CS:B]Drowzee Bump[CR]"):
+        case menu("[M:R7]Drowzee Bump"):
+        case menu("Drowzee Bump"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[13]) {
+                $DUNGEON_ARRIVE_LIST[13] = 0;
+                $DUNGEON_ARRIVE_LIST[14] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[14]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:14]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_4;
+        case menu("[CS:B]Waterfall Jump[CR]"):
+        case menu("[M:R7]Waterfall Jump"):
+        case menu("Waterfall Jump"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[16]) {
+                $DUNGEON_ARRIVE_LIST[16] = 0;
+                $DUNGEON_ARRIVE_LIST[17] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[17]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:15]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_5;
+        case menu("[CS:B]Waterfall Gem[CR]"):
+        case menu("[M:R7]Waterfall Gem"):
+        case menu("Waterfall Gem"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[19]) {
+                $DUNGEON_ARRIVE_LIST[19] = 0;
+                $DUNGEON_ARRIVE_LIST[20] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[20]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:16]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_6;
+        case menu("[CS:B]Groudon\'s Heart[CR]"):
+        case menu("[M:R7]Groudon\'s Heart"):
+        case menu("Groudon\'s Heart"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[22]) {
+                $DUNGEON_ARRIVE_LIST[22] = 0;
+                $DUNGEON_ARRIVE_LIST[23] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[23]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:17]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_7;
+        case menu("[CS:B]Azelf\'s Duress[CR]"):
+        case menu("[M:R7]Azelf\'s Duress"):
+        case menu("Azelf\'s Duress"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[25]) {
+                $DUNGEON_ARRIVE_LIST[25] = 0;
+                $DUNGEON_ARRIVE_LIST[26] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[26]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:18]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_8;
+        case menu("[CS:B]Mysterious Box[CR]"):
+        case menu("[M:R7]Mysterious Box"):
+        case menu("Mysterious Box"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[28]) {
+                $DUNGEON_ARRIVE_LIST[28] = 0;
+                $DUNGEON_ARRIVE_LIST[29] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[29]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:19]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_9;
+        case menu("[CS:B]THIEF!!![CR]"):
+        case menu("[M:R7]THIEF!!!"):
+        case menu("THIEF!!!"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[31]) {
+                $DUNGEON_ARRIVE_LIST[31] = 0;
+                $DUNGEON_ARRIVE_LIST[32] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[32]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:20]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_10;
+        case menu("[CS:B]Treasure Memo[CR]"):
+        case menu("[M:R7]Treasure Memo"):
+        case menu("Treasure Memo"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[34]) {
+                $DUNGEON_ARRIVE_LIST[34] = 0;
+                $DUNGEON_ARRIVE_LIST[35] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[35]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:21]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_11;
+        case menu("[CS:B]Sick Friend...[CR]"):
+        case menu("[M:R7]Sick Friend..."):
+        case menu("Sick Friend..."):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[37]) {
+                $DUNGEON_ARRIVE_LIST[37] = 0;
+                $DUNGEON_ARRIVE_LIST[38] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[38]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:22]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_12;
+        case menu("[CS:B]Job Board #1[CR]"):
+        case menu("[M:R7]Job Board #1"):
+        case menu("Job Board #1"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[40]) {
+                $DUNGEON_ARRIVE_LIST[40] = 0;
+                $DUNGEON_ARRIVE_LIST[41] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[41]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:23]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_13;
+        case menu("[CS:B]Job Board #2[CR]"):
+        case menu("[M:R7]Job Board #2"):
+        case menu("Job Board #2"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[43]) {
+                $DUNGEON_ARRIVE_LIST[43] = 0;
+                $DUNGEON_ARRIVE_LIST[44] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[44]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:24]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_14;
+        case menu("[CS:B]Job Board #3[CR]"):
+        case menu("[M:R7]Job Board #3"):
+        case menu("Job Board #3"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[46]) {
+                $DUNGEON_ARRIVE_LIST[46] = 0;
+                $DUNGEON_ARRIVE_LIST[47] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[47]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:25]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_15;
+        case menu("[CS:B]A Gourmet...[CR]"):
+        case menu("[M:R7]A Gourmet..."):
+        case menu("A Gourmet..."):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[49]) {
+                $DUNGEON_ARRIVE_LIST[49] = 0;
+                $DUNGEON_ARRIVE_LIST[50] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[50]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:26]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_16;
+        case menu("[CS:B]They're SO slow!!![CR]"):
+        case menu("[M:R7]They're SO slow!!!"):
+        case menu("They're SO slow!!!"):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[52]) {
+                $DUNGEON_ARRIVE_LIST[52] = 0;
+                $DUNGEON_ARRIVE_LIST[53] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[53]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:27]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_17;
+        case menu("[CS:B]Never \"Gone\"[CR]"):
+        case menu("[M:R7]Never \"Gone\""):
+        case menu("Never \"Gone\""):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[55]) {
+                $DUNGEON_ARRIVE_LIST[55] = 0;
+                $DUNGEON_ARRIVE_LIST[56] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[56]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:28]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_18;
+        case menu("[CS:B]Sentry AFK...[CR]"):
+        case menu("[M:R7]Sentry AFK..."):
+        case menu("Sentry AFK..."):
+            message_Close();
+            if ($DUNGEON_ARRIVE_LIST[58]) {
+                $DUNGEON_ARRIVE_LIST[58] = 0;
+                $DUNGEON_ARRIVE_LIST[59] = 1;
+            }
+            if ($DUNGEON_ARRIVE_LIST[59]) {
+                if (debug) {
+                    message_Talk(" You want to know about [partner]?");
+                } else {
+                    message_Talk(" You want to know about [qhat:29]?");
+                }
+            } else {
+                jump @i_forgor;
+            }
+            jump @hint_19;
+        case menu("Never Mind"):
+        default:
+            message_Close();
+            message_Talk(" I see... would you care to relax\nat the hot spring then?");
+            jump @menu_1;
+    }
+    §i_forgor;
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    se_Play(8962);
+    with (actor ACTOR_NPC_KOOTASU) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_KOOTASU) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_KOOTASU);
+    Wait(30);
+    with (actor ACTOR_NPC_KOOTASU) {
+        Turn2Direction(8, 10, DIR_LEFT);
+    }
+    WaitExecuteLives(ACTOR_NPC_KOOTASU);
+    Wait(30);
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_SIGH, FACE_POS_TOP_LC_FACEOUTW);
+    message_Talk({
+        english=" Er...[K] Er...[K] Now what were they?",
+        french=" Euh...[K] euh...[K] qu\'est-ce\nque c\'était déjà?",
+        german=" Ähm...[K] Öhm...[K] Was waren das\nnoch mal für Qualifikationen?",
+        italian=" Ehm...[K] Ehm...[K] Già, quali\nerano?",
+        spanish=" Esto...[K] Yo...[K] ¿Cuál era?",
+    });
+    message_Close();
+    se_Play(8963);
+    with (actor ACTOR_NPC_KOOTASU) {
+        SetEffect(EFFECT_QUESTION_MARK, 3);
+    }
+    with (actor ACTOR_NPC_KOOTASU) {
+        WaitEffect();
+    }
+    WaitExecuteLives(ACTOR_NPC_KOOTASU);
+    Wait(30);
+    with (actor ACTOR_NPC_KOOTASU) {
+        Turn2Direction(8, 10, DIR_DOWN);
+    }
+    WaitExecuteLives(ACTOR_NPC_KOOTASU);
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_LC_FACEOUTW);
+    message_Talk({
+        english=" I\'m sorry.[K] It\'s slipped my mind.",
+        french=" Ça m\'est sorti de la tête.[K]\nDésolé.",
+        german=" Tut mir leid.[K] Das ist mir\nentfallen.",
+        italian=" Mi dispiace.[K] Mi sono sfuggiti di\nmente.",
+        spanish=" Lo siento.[K] Ya no lo recuerdo.",
+    });
+    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+    §keep_going;
+    message_SetFace(ACTOR_NPC_KOOTASU, FACE_NORMAL, FACE_POS_TOP_L_CENTER);
+    message_Talk(" Was there anything else\nyou wanted to ask me?");
+    jump @menu_2;
+    §hint_0;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:10] is fabled to be found in\nthe depths of [qho:10]\'s [qhere:10]!");
+    }
+     jump @helpful;
+    §hint_1;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:11] is fabled to be found in\nthe depths of [qho:11]\'s [qhere:11]!");
+    }
+     jump @helpful;
+    §hint_2;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:12] is fabled to be found in\nthe depths of [qho:12]\'s [qhere:12]!");
+    }
+     jump @helpful;
+    §hint_3;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:13] is fabled to be found in\nthe depths of [qho:13]\'s [qhere:13]!");
+    }
+     jump @helpful;
+    §hint_4;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:14] is fabled to be found in\nthe depths of [qho:14]\'s [qhere:14]!");
+    }
+     jump @helpful;
+    §hint_5;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:15] is fabled to be found in\nthe depths of [qho:15]\'s [qhere:15]!");
+    }
+     jump @helpful;
+    §hint_6;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:16] is fabled to be found in\nthe depths of [qho:16]\'s [qhere:16]!");
+    }
+     jump @helpful;
+    §hint_7;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:17] is fabled to be found in\nthe depths of [qho:17]\'s [qhere:17]!");
+    }
+     jump @helpful;
+    §hint_8;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:18] is fabled to be found in\nthe depths of [qho:18]\'s [qhere:18]!");
+    }
+     jump @helpful;
+    §hint_9;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:19] is fabled to be found in\nthe depths of [qho:19]\'s [qhere:19]!");
+    }
+     jump @helpful;
+    §hint_10;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:20] is fabled to be found in\nthe depths of [qho:20]\'s [qhere:20]!");
+    }
+     jump @helpful;
+    §hint_11;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:21] is fabled to be found in\nthe depths of [qho:21]\'s [qhere:21]!");
+    }
+     jump @helpful;
+    §hint_12;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:22] is fabled to be found in\nthe depths of [qho:22]\'s [qhere:22]!");
+    }
+     jump @helpful;
+    §hint_13;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:23] is fabled to be found in\nthe depths of [qho:23]\'s [qhere:23]!");
+    }
+     jump @helpful;
+    §hint_14;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:24] is fabled to be found in\nthe depths of [qho:24]\'s [qhere:24]!");
+    }
+     jump @helpful;
+    §hint_15;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:25] is fabled to be found in\nthe depths of [qho:25]\'s [qhere:25]!");
+    }
+     jump @helpful;
+    §hint_16;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:26] is fabled to be found in\nthe depths of [qho:26]\'s [qhere:26]!");
+    }
+     jump @helpful;
+    §hint_17;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:27] is fabled to be found in\nthe depths of [qho:27]\'s [qhere:27]!");
+    }
+     jump @helpful;
+    §hint_18;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:28] is fabled to be found in\nthe depths of [qho:28]\'s [qhere:28]!");
+    }
+     jump @helpful;
+    §hint_19;
+    if (debug) {
+        message_Talk(" Ah yes, I remember it clearly!\n[hero] is fabled to be found in\nthe depths of [partner]\'s [c_kind:PLAYER][c_kind:ATTENDANT1]!");
+    } else {
+        message_Talk(" Ah yes, I remember it clearly!\n[qhat:29] is fabled to be found in\nthe depths of [qho:29]\'s [qhere:29]!");
+    }
+    §helpful;
+    message_Talk(" Was that helpful?");
+    message_Close();
+    jump @keep_going;
+}
+
+
+macro WipeHints() {
+    $DUNGEON_ARRIVE_LIST[0] = 0;
+    $DUNGEON_ARRIVE_LIST[1] = 0;
+    $DUNGEON_ARRIVE_LIST[2] = 0;
+    $DUNGEON_ARRIVE_LIST[3] = 0;
+    $DUNGEON_ARRIVE_LIST[4] = 0;
+    $DUNGEON_ARRIVE_LIST[5] = 0;
+    $DUNGEON_ARRIVE_LIST[6] = 0;
+    $DUNGEON_ARRIVE_LIST[7] = 0;
+    $DUNGEON_ARRIVE_LIST[8] = 0;
+    $DUNGEON_ARRIVE_LIST[9] = 0;
+    $DUNGEON_ARRIVE_LIST[10] = 0;
+    $DUNGEON_ARRIVE_LIST[11] = 0;
+    $DUNGEON_ARRIVE_LIST[12] = 0;
+    $DUNGEON_ARRIVE_LIST[13] = 0;
+    $DUNGEON_ARRIVE_LIST[14] = 0;
+    $DUNGEON_ARRIVE_LIST[15] = 0;
+    $DUNGEON_ARRIVE_LIST[16] = 0;
+    $DUNGEON_ARRIVE_LIST[17] = 0;
+    $DUNGEON_ARRIVE_LIST[18] = 0;
+    $DUNGEON_ARRIVE_LIST[19] = 0;
+    $DUNGEON_ARRIVE_LIST[20] = 0;
+    $DUNGEON_ARRIVE_LIST[21] = 0;
+    $DUNGEON_ARRIVE_LIST[22] = 0;
+    $DUNGEON_ARRIVE_LIST[23] = 0;
+    $DUNGEON_ARRIVE_LIST[24] = 0;
+    $DUNGEON_ARRIVE_LIST[25] = 0;
+    $DUNGEON_ARRIVE_LIST[26] = 0;
+    $DUNGEON_ARRIVE_LIST[27] = 0;
+    $DUNGEON_ARRIVE_LIST[28] = 0;
+    $DUNGEON_ARRIVE_LIST[29] = 0;
+    $DUNGEON_ARRIVE_LIST[30] = 0;
+    $DUNGEON_ARRIVE_LIST[31] = 0;
+    $DUNGEON_ARRIVE_LIST[32] = 0;
+    $DUNGEON_ARRIVE_LIST[33] = 0;
+    $DUNGEON_ARRIVE_LIST[34] = 0;
+    $DUNGEON_ARRIVE_LIST[35] = 0;
+    $DUNGEON_ARRIVE_LIST[36] = 0;
+    $DUNGEON_ARRIVE_LIST[37] = 0;
+    $DUNGEON_ARRIVE_LIST[38] = 0;
+    $DUNGEON_ARRIVE_LIST[39] = 0;
+    $DUNGEON_ARRIVE_LIST[40] = 0;
+    $DUNGEON_ARRIVE_LIST[41] = 0;
+    $DUNGEON_ARRIVE_LIST[42] = 0;
+    $DUNGEON_ARRIVE_LIST[43] = 0;
+    $DUNGEON_ARRIVE_LIST[44] = 0;
+    $DUNGEON_ARRIVE_LIST[45] = 0;
+    $DUNGEON_ARRIVE_LIST[46] = 0;
+    $DUNGEON_ARRIVE_LIST[47] = 0;
+    $DUNGEON_ARRIVE_LIST[48] = 0;
+    $DUNGEON_ARRIVE_LIST[49] = 0;
+    $DUNGEON_ARRIVE_LIST[50] = 0;
+    $DUNGEON_ARRIVE_LIST[51] = 0;
+    $DUNGEON_ARRIVE_LIST[52] = 0;
+    $DUNGEON_ARRIVE_LIST[53] = 0;
+    $DUNGEON_ARRIVE_LIST[54] = 0;
+    $DUNGEON_ARRIVE_LIST[55] = 0;
+    $DUNGEON_ARRIVE_LIST[56] = 0;
+    $DUNGEON_ARRIVE_LIST[57] = 0;
+    $DUNGEON_ARRIVE_LIST[58] = 0;
+    $DUNGEON_ARRIVE_LIST[59] = 0;
+    $DUNGEON_ARRIVE_LIST[60] = 1;
+    if ( $PERFORMANCE_PROGRESS_LIST[17] ) {
+        switch(ProcessSpecial(113,12,0)) { // Torkoal Hint 3
+            case 2: // Hint failed?
+                $DUNGEON_ARRIVE_LIST[6] = 1;
+                break;
+            case 0: // Hint not read
+                $DUNGEON_ARRIVE_LIST[7] = 1;
+                break;
+            case 1: // Hint read
+                $DUNGEON_ARRIVE_LIST[8] = 1;
+                break;
+        }
+    }
+    if ($DUNGEON_CONQUEST_LIST[38]) {
+        switch(ProcessSpecial(113,11,0)) { // Torkoal Hint 2
+            case 2: // Hint failed?
+                $DUNGEON_ARRIVE_LIST[3] = 1;
+                break;
+            case 0: // Hint not read
+                $DUNGEON_ARRIVE_LIST[4] = 1;
+                break;
+            case 1: // Hint read
+                $DUNGEON_ARRIVE_LIST[5] = 1;
+                break;
+        }
+    }
+    switch(ProcessSpecial(113,10,0)) { // Torkoal Hint 1
+        case 2: // Hint failed?
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            break;
+        case 0: // Hint not read
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            break;
+        case 1: // Hint read
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            break;
     }
 }

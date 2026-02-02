@@ -1,4 +1,6 @@
+import "hints.exps";
 macro MurkrowMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {

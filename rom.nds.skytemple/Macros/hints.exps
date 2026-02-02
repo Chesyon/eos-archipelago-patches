@@ -1,0 +1,186 @@
+
+macro CheckHints() {
+    if (debug) {
+        $DUNGEON_ARRIVE_LIST[0] = 1;
+        $DUNGEON_ARRIVE_LIST[1] = 1;
+        $DUNGEON_ARRIVE_LIST[2] = 1;
+        $DUNGEON_ARRIVE_LIST[3] = 1;
+        $DUNGEON_ARRIVE_LIST[4] = 1;
+        $DUNGEON_ARRIVE_LIST[5] = 1;
+        $DUNGEON_ARRIVE_LIST[6] = 1;
+        $DUNGEON_ARRIVE_LIST[7] = 1;
+        $DUNGEON_ARRIVE_LIST[8] = 1;
+        $DUNGEON_ARRIVE_LIST[9] = 1;
+        $DUNGEON_ARRIVE_LIST[10] = 1;
+        $DUNGEON_ARRIVE_LIST[11] = 1;
+        $DUNGEON_ARRIVE_LIST[12] = 1;
+        $DUNGEON_ARRIVE_LIST[13] = 1;
+        $DUNGEON_ARRIVE_LIST[14] = 1;
+        $DUNGEON_ARRIVE_LIST[15] = 1;
+        $DUNGEON_ARRIVE_LIST[16] = 1;
+        $DUNGEON_ARRIVE_LIST[17] = 1;
+        $DUNGEON_ARRIVE_LIST[18] = 1;
+        $DUNGEON_ARRIVE_LIST[19] = 1;
+        return;
+    }
+    switch(ProcessSpecial(113,10,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[0] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[0] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,11,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[1] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[1] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,12,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[2] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[2] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,13,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[3] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[3] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,14,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[4] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[4] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,15,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[5] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[5] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,16,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[6] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[6] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,17,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[7] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[7] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,18,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[8] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[8] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,19,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[9] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[9] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,20,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[10] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[10] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,21,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[11] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[11] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,22,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[12] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[12] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,23,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[13] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[13] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,24,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[14] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[14] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,25,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[15] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[15] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,26,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[16] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[16] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,27,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[17] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[17] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,28,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[18] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[18] = 0;
+            break;
+    }
+    switch(ProcessSpecial(113,29,0)) {
+        case > 0:
+            $DUNGEON_ARRIVE_LIST[19] = 1;
+            break;
+        case 0:
+            $DUNGEON_ARRIVE_LIST[19] = 0;
+            break;
+    }
+}

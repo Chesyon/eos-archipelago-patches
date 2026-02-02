@@ -1,115 +1,44 @@
+// Duplicate file group
+// Mankey
+// - SCRIPT/P02P01A/um0601.exps
+// - SCRIPT/P02P01A/um0605.exps
+// - SCRIPT/P02P01A/um0701.exps
+// - SCRIPT/P02P01A/um0704.exps
+// - SCRIPT/P02P01A/um0707.exps
+// - SCRIPT/P02P01A/um1101.exps
+// - SCRIPT/P02P01A/um1104.exps
+// - SCRIPT/P02P01A/um1107.exps
+// - SCRIPT/P02P01A/um1202.exps
+// - SCRIPT/P02P01A/um1205.exps
+// - SCRIPT/P02P01A/um1301.exps
+// - SCRIPT/P02P01A/um1304.exps
+// - SCRIPT/P02P01A/um1307.exps
+// - SCRIPT/P02P01A/um1402.exps
+// - SCRIPT/P02P01A/um1405.exps
+// - SCRIPT/P02P01A/um1408.exps
+// - SCRIPT/P02P01A/um1409.exps
+// - SCRIPT/P02P01A/um1502.exps
+// - SCRIPT/P02P01A/um1602.exps
+// - SCRIPT/P02P01A/um1605.exps
+// - SCRIPT/P02P01A/um2102.exps
+// - SCRIPT/P02P01A/um2402.exps
+// - SCRIPT/P02P01A/um2502.exps
+// - SCRIPT/P02P01A/us0102.exps
+// - SCRIPT/P02P01A/us0202.exps
+// - SCRIPT/P02P01A/us0205.exps
+// - SCRIPT/P02P01A/us0302.exps
+// - SCRIPT/P02P01A/us0305.exps
+// - SCRIPT/P02P01A/us0402.exps
+// - SCRIPT/P02P01A/us2002.exps
+// - SCRIPT/P02P01A/us2005.exps
+// - SCRIPT/P02P01A/us2008.exps
+// - SCRIPT/P02P01A/us2102.exps
+// - SCRIPT/P02P01A/us2202.exps
+// - SCRIPT/P02P01A/us2205.exps
+// - SCRIPT/P02P01A/us3102.exps
+// - SCRIPT/T01P01A/um2201.exps
 
+import 'subscripts/mankey.exps';
 def 0 {
-    if ( scn($SCENARIO_MAIN) >= [29, 94] || scn($SCENARIO_MAIN) >= [29, 93] || scn($SCENARIO_MAIN) >= [29, 92] || scn($SCENARIO_MAIN) >= [29, 91] || scn($SCENARIO_MAIN) >= [29, 90] || scn($SCENARIO_MAIN) >= [29, 89] || scn($SCENARIO_MAIN) >= [29, 88] || scn($SCENARIO_MAIN) >= [29, 87] || scn($SCENARIO_MAIN) >= [29, 85] || scn($SCENARIO_MAIN) >= [29, 84] || scn($SCENARIO_MAIN) >= [29, 83] || scn($SCENARIO_MAIN) >= [29, 82] || scn($SCENARIO_MAIN) >= [29, 81] || scn($SCENARIO_MAIN) >= [29, 80] || scn($SCENARIO_MAIN) >= [29, 78] || scn($SCENARIO_MAIN) >= [29, 76] || scn($SCENARIO_MAIN) >= [29, 75] || scn($SCENARIO_MAIN) >= [29, 73] || scn($SCENARIO_MAIN) >= [29, 72] || scn($SCENARIO_MAIN) >= [29, 71] || scn($SCENARIO_MAIN) >= [29, 70] || scn($SCENARIO_MAIN) >= [29, 69] || scn($SCENARIO_MAIN) >= [29, 67] || scn($SCENARIO_MAIN) >= [29, 56] || scn($SCENARIO_MAIN) >= [29, 55] || scn($SCENARIO_MAIN) >= [29, 54] || scn($SCENARIO_MAIN) >= [29, 53] || scn($SCENARIO_MAIN) >= [29, 52] || scn($SCENARIO_MAIN) >= [29, 50] || scn($SCENARIO_MAIN) >= [29, 49] || scn($SCENARIO_MAIN) >= [29, 48] || scn($SCENARIO_MAIN) >= [29, 47] || scn($SCENARIO_MAIN) >= [29, 46] || scn($SCENARIO_MAIN) >= [29, 45] || scn($SCENARIO_MAIN) >= [29, 44] || scn($SCENARIO_MAIN) >= [29, 43] || scn($SCENARIO_MAIN) >= [29, 42] || scn($SCENARIO_MAIN) >= [29, 41] || scn($SCENARIO_MAIN) >= [29, 40] || scn($SCENARIO_MAIN) >= [29, 39] || scn($SCENARIO_MAIN) >= [29, 33] || scn($SCENARIO_MAIN) >= [29, 32] || scn($SCENARIO_MAIN) >= [29, 31] || scn($SCENARIO_MAIN) >= [29, 30] || scn($SCENARIO_MAIN) >= [29, 29] || scn($SCENARIO_MAIN) >= [29, 28] || scn($SCENARIO_MAIN) >= [29, 27] || scn($SCENARIO_MAIN) >= [29, 26] || scn($SCENARIO_MAIN) >= [29, 25] || scn($SCENARIO_MAIN) >= [29, 24] || scn($SCENARIO_MAIN) >= [29, 23] || scn($SCENARIO_MAIN) >= [29, 22] || scn($SCENARIO_MAIN) >= [29, 21] || scn($SCENARIO_MAIN) >= [29, 20] || scn($SCENARIO_MAIN) >= [29, 19] || scn($SCENARIO_MAIN) >= [29, 18] || scn($SCENARIO_MAIN) >= [29, 17] || scn($SCENARIO_MAIN) >= [29, 16] || scn($SCENARIO_MAIN) >= [29, 15] || scn($SCENARIO_MAIN) >= [29, 14] || scn($SCENARIO_MAIN) >= [29, 13] || scn($SCENARIO_MAIN) >= [29, 12] || scn($SCENARIO_MAIN) >= [29, 11] || scn($SCENARIO_MAIN) >= [29, 10] || scn($SCENARIO_MAIN) >= [29, 8] || scn($SCENARIO_MAIN) >= [29, 6] || scn($SCENARIO_MAIN) >= [29, 5] || scn($SCENARIO_MAIN) >= [29, 4] || scn($SCENARIO_MAIN) >= [29, 3] || scn($SCENARIO_MAIN) >= [29, 2] || scn($SCENARIO_MAIN) >= [29, 1] ) {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_MANKII);
-        }
-        message_SetFace(ACTOR_NPC_MANKII, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oooh, yeah... Soaking in the Hot\nSpring is so relaxing...",
-            french=" Oooh, ouais... Comme c\'est\nreposant de faire trempette dans la Source\nChaude...",
-            german=" Aaach, ja... In die Heiße Quelle\neinzutauchen, ist so entspannend.",
-            italian=" Oooh, sì... Fare il bagno nella\nSorgente Termale è così rilassante...",
-            spanish=" Oooh, sí... Remojarse en la\nTerma es tan relajante...",
-        });
-        message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
-    } elseif ( scn($SCENARIO_MAIN) >= [25, 4] || scn($SCENARIO_MAIN) >= [25, 3] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 2] || scn($SCENARIO_MAIN) >= [25, 1] ) {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_MANKII);
-        }
-        message_SetFace(ACTOR_NPC_MANKII, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" The world\'s going to be ruined if\nsomething\'s not done, is that right?",
-            french=" Mais alors, si on ne fait rien,\nce sera la fin du monde, pas vrai?",
-            german=" Die Welt ist verloren, wenn\nnichts unternommen wird, ist das richtig?",
-            italian=" Se qualcuno non fa qualcosa il\nmondo sarà distrutto, vero?",
-            spanish=" Eso acabaría con el mundo si\nnadie lo evita, ¿verdad?",
-        });
-        message_Talk({
-            english=" But what can I do to stop it?\nI can only cheer you on while lolling in the\nHot Spring...",
-            french=" Qu\'est-ce que j\'y peux, moi?\nRien, à part vous soutenir chaleureusement\ntout en me prélassant dans la Source Chaude...",
-            german=" Aber was können wir tun, um\ndas aufzuhalten? Ich kann euch nur anfeuern,\nwährend ich mich in der Heißen Quelle räkle.",
-            italian=" Ma cosa posso fare io?\nPosso solo tifare per voi mentre mi rilasso\nin questa Sorgente Termale...",
-            spanish=" ¿Pero qué puedo hacer yo? Lo\núnico que se me ocurre es enviaros todo\nmi apoyo mientras me relajo en la Terma...",
-        });
-        message_Talk({
-            english=" But go do it![K] Save the world!",
-            french=" Mais, allez-y, vous![K]\nAllez sauver le monde!",
-            german=" Aber zieht los und tut es![K] Rettet\ndie Welt!",
-            italian=" Forza![K] Salvate il mondo!",
-            spanish=" ¡Ánimo, tenéis que hacerlo![K]\n¡A salvar el mundo!",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ( scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [24, 1] || scn($SCENARIO_MAIN) >= [23, 3] || scn($SCENARIO_MAIN) >= [23, 2] ) {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_MANKII);
-        }
-        message_SetFace(ACTOR_NPC_MANKII, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" The whole world\'s time is about\nto stop?!",
-            french=" Quoi? Le temps va s\'arrêter\ndans le monde entier?!",
-            german=" Die Zeit auf der ganzen Welt\nsteht kurz davor, stehen zu bleiben?!?\n",
-            italian=" Sta per fermarsi il tempo in \ntutto il mondo?",
-            spanish=" ¡¿Va a dejar de fluir el tiempo\nen todo el planeta?!",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ( scn($SCENARIO_MAIN) >= [23, 1] || scn($SCENARIO_MAIN) >= [22, 3] || scn($SCENARIO_MAIN) >= [22, 2] || scn($SCENARIO_MAIN) >= [21, 2] || scn($SCENARIO_MAIN) >= [21, 1] || scn($SCENARIO_MAIN) >= [20, 4] || scn($SCENARIO_MAIN) >= [20, 3] || scn($SCENARIO_MAIN) >= [20, 2] || scn($SCENARIO_MAIN) >= [20, 1] || scn($SCENARIO_MAIN) >= [17, 3] || scn($SCENARIO_MAIN) >= [17, 1] || scn($SCENARIO_MAIN) >= [16, 2] || scn($SCENARIO_MAIN) >= [16, 0] || scn($SCENARIO_MAIN) >= [15, 4] || scn($SCENARIO_MAIN) >= [15, 1] || scn($SCENARIO_MAIN) >= [14, 5] || scn($SCENARIO_MAIN) >= [14, 4] || scn($SCENARIO_MAIN) >= [14, 2] || scn($SCENARIO_MAIN) >= [14, 1] || scn($SCENARIO_MAIN) >= [13, 2] || scn($SCENARIO_MAIN) >= [13, 1] || scn($SCENARIO_MAIN) >= [12, 4] || scn($SCENARIO_MAIN) >= [12, 3] || scn($SCENARIO_MAIN) >= [12, 1] || scn($SCENARIO_MAIN) >= [10, 2] || scn($SCENARIO_MAIN) >= [10, 1] || scn($SCENARIO_MAIN) >= [9, 5] || scn($SCENARIO_MAIN) >= [9, 4] || scn($SCENARIO_MAIN) >= [9, 2] || scn($SCENARIO_MAIN) >= [9, 1] || scn($SCENARIO_MAIN) >= [8, 7] || scn($SCENARIO_MAIN) >= [8, 6] || scn($SCENARIO_MAIN) >= [8, 5] || scn($SCENARIO_MAIN) >= [8, 3] || scn($SCENARIO_MAIN) >= [8, 2] || scn($SCENARIO_MAIN) >= [8, 1] || scn($SCENARIO_MAIN) >= [7, 6] || scn($SCENARIO_MAIN) >= [7, 3] || scn($SCENARIO_MAIN) >= [7, 2] ) {
-        with (actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with (actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_MANKII);
-        }
-        message_SetFace(ACTOR_NPC_MANKII, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" I\'m usually hotheaded, but when\nI come here, I calm right down.",
-            french=" D\'habitude, je suis plutôt\ndu genre fougueux, mais dès que j\'arrive\nici, le calme s\'empare de moi.",
-            german=" Für gewöhnlich bin ich ein\nHeißsporn, aber wenn ich hierherkomme,\nberuhige ich mich sofort.",
-            italian=" Di solito sono una testa calda,\nma quando vengo qui, mi tranquillizzo.",
-            spanish=" Suelo ser muy impulsivo, pero\ncuando vengo aquí me calmo.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ( scn($SCENARIO_MAIN) >= [7, 1] || scn($SCENARIO_MAIN) >= [6, 5] || scn($SCENARIO_MAIN) >= [6, 1] || scn($SCENARIO_MAIN) >= [5, 5] || scn($SCENARIO_MAIN) >= [4, 7] || scn($SCENARIO_MAIN) >= [4, 5] || scn($SCENARIO_MAIN) >= [4, 3] || scn($SCENARIO_MAIN) >= [4, 2] || scn($SCENARIO_MAIN) >= [4, 1] || scn($SCENARIO_MAIN) >= [4, 0] || scn($SCENARIO_MAIN) >= [3, 1] ) {
-        jump @label_130;
-    } else {
-        jump @label_130;
-    }
+    ~MankeyMain();
 }

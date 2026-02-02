@@ -1,4 +1,6 @@
+import "hints.exps";
 macro KoffingMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
         // [9, 1], Expedition Tomorrow
         with(actor ACTOR_TALK_MAIN) {
@@ -62,7 +64,7 @@ macro KoffingMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_ARRIVE_LIST[0]) {
+    } else {
         // [7, 6], Team Skull Live Here...
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -92,8 +94,6 @@ macro KoffingMain() {
             spanish=" Tendremos que soportaros,\n¡jo, jo!",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

@@ -1,4 +1,6 @@
+import "hints.exps";
 macro LoudredMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -28,54 +30,7 @@ macro LoudredMain() {
             italian=" COSA?[K] Volete fare il turno di\nguardia per guadagnare un po' di soldi?",
             spanish=" ¿Qué?[K] ¿Que queréis hacer de\nvigías y ganaros un dinerillo?",
         });
-        switch ( message_SwitchMenu(0, 1) ) {
-            case menu({
-                english="Yes",
-                french="Oui",
-                german="Ja",
-                italian="Sì",
-                spanish="Sí",
-            }):
-            default:
-                message_Close();
-                §label_134;
-                bgm_FadeOut(60);
-                screen2_FadeOut(0, 30);
-                screen_FadeOut(1, 30);
-                supervision_ExecuteCommon(CORO_HA_MIHARIBAN);
-                §label_133;
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                switch ( message_Menu(MENU_GUILD_MINI_GAME_SCOREBOARD) ) { }
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                §label_130;
-                JumpCommon(CORO_END_TALK);
-            case menu({
-                english="No",
-                french="Non",
-                german="Nein",
-                italian="No",
-                spanish="No",
-            }):
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk({
-                    english=" Oh, you won't, HUH?",
-                    french=" Ah, vous voulez pas, HEIN?",
-                    german=" Aha, ihr wollt nicht, WIE?!?",
-                    italian=" Ah, non volete, EH?",
-                    spanish=" Vaya... No queréis, ¿eh?",
-                });
-                message_Close();
-                jump @label_130;
-            case menu({
-                english="Check High Score",
-                french="Meilleur score",
-                german="Highscore prüfen",
-                italian="Guarda i record",
-                spanish="Puntuaciones",
-            }):
-                jump @label_133;
-        }
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -119,44 +74,7 @@ macro LoudredMain() {
             italian=" Volete fare il turno di guardia?",
             spanish=" ¿Vais a hacer de vigías?",
         });
-        switch ( message_SwitchMenu(0, 1) ) {
-            case menu({
-                english="Yes",
-                french="Oui",
-                german="Ja",
-                italian="Sì",
-                spanish="Sí",
-            }):
-            default:
-                message_Close();
-                jump @label_134;
-            case menu({
-                english="No",
-                french="Non",
-                german="Nein",
-                italian="No",
-                spanish="No",
-            }):
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk({
-                    english=" Oh, you won't, HUH?",
-                    french=" Ah, vous voulez pas, HEIN?",
-                    german=" Aha, ihr wollt nicht, WIE?!?",
-                    italian=" Ah, non volete, EH?",
-                    spanish=" Vaya... No queréis, ¿eh?",
-                });
-                message_Close();
-                jump @label_130;
-            case menu({
-                english="Check High Score",
-                french="Meilleur score",
-                german="Highscore prüfen",
-                italian="Guarda i record",
-                spanish="Puntuaciones",
-            }):
-                jump @label_133;
-        }
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_CONQUEST_LIST[63]) {
         // [29, 78], Nightmare is complete
         with(actor ACTOR_TALK_MAIN) {
@@ -200,44 +118,7 @@ macro LoudredMain() {
             italian=" Volete fare il turno di guardia?",
             spanish=" ¿Vais a hacer de vigías?",
         });
-        switch ( message_SwitchMenu(0, 1) ) {
-            case menu({
-                english="Yes",
-                french="Oui",
-                german="Ja",
-                italian="Sì",
-                spanish="Sí",
-            }):
-            default:
-                message_Close();
-                jump @label_134;
-            case menu({
-                english="No",
-                french="Non",
-                german="Nein",
-                italian="No",
-                spanish="No",
-            }):
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk({
-                    english=" Oh, you won't, HUH?",
-                    french=" Ah, vous voulez pas, HEIN?",
-                    german=" Aha, ihr wollt nicht, WIE?!?",
-                    italian=" Ah, non volete, EH?",
-                    spanish=" Vaya... No queréis, ¿eh?",
-                });
-                message_Close();
-                jump @label_130;
-            case menu({
-                english="Check High Score",
-                french="Meilleur score",
-                german="Highscore prüfen",
-                italian="Guarda i record",
-                spanish="Puntuaciones",
-            }):
-                jump @label_133;
-        }
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_ENTER_INDEX == 63) {
         // [29, 76], Nightmare entered
         with(actor ACTOR_TALK_MAIN) {
@@ -261,7 +142,6 @@ macro LoudredMain() {
             spanish=" A saber lo que os espera, porque\neso de explorar un sueño...[K] ¡es tremendo!\n¡Meteos ahí dentro y resolvedlo todo!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[63]) {
         // [29, 75], Nightmare Unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -285,7 +165,6 @@ macro LoudredMain() {
             spanish=" ¿Y bien?[K] ¿Podéis entrar en el\nsueño del pequeño Pokémon?",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -330,7 +209,7 @@ macro LoudredMain() {
         });
         WaitExecuteLives(ACTOR_NPC_DOGOOMU);
         message_Close();
-        jump @label_130;
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_CONQUEST_LIST[61]) {
         // [29, 67], Aegis Cave Complete!
         with(actor ACTOR_TALK_MAIN) {
@@ -374,44 +253,7 @@ macro LoudredMain() {
             italian=" Comunque...[K] Volete stare\ndi guardia?",
             spanish=" Como queráis.[K] ¿Vais a aceptar\nla tarea de vigía?",
         });
-        switch ( message_SwitchMenu(0, 1) ) {
-            case menu({
-                english="Yes",
-                french="Oui",
-                german="Ja",
-                italian="Sì",
-                spanish="Sí",
-            }):
-            default:
-                message_Close();
-                jump @label_134;
-            case menu({
-                english="No",
-                french="Non",
-                german="Nein",
-                italian="No",
-                spanish="No",
-            }):
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk({
-                    english=" Oh, you won't, HUH?",
-                    french=" Oh, finalement, vous voulez\npas, HEIN?",
-                    german=" Aha, ihr wollt nicht, WIE?!?",
-                    italian=" Ah, non volete, EH?",
-                    spanish=" Vaya... No queréis, ¿eh?",
-                });
-                message_Close();
-                jump @label_130;
-            case menu({
-                english="Check High Score",
-                french="Meilleur score",
-                german="Highscore prüfen",
-                italian="Guarda i record",
-                spanish="Puntuaciones",
-            }):
-                jump @label_133;
-        }
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_CONQUEST_LIST[54]) {
         // [29, 56], One day passes.
         with(actor ACTOR_TALK_MAIN) {
@@ -494,7 +336,7 @@ macro LoudredMain() {
             spanish=" Uf...",
         });
         message_Close();
-        jump @label_130;
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_OPEN_LIST[54]) {
         // [29, 55], Team Charm Arrives!
         with(actor ACTOR_TALK_MAIN) {
@@ -573,7 +415,7 @@ macro LoudredMain() {
         });
         WaitExecuteLives(ACTOR_NPC_DOGOOMU);
         message_Close();
-        jump @label_130;
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_CONQUEST_LIST[45]) {
         // [29, 5], Graduating from the guild
         with(actor ACTOR_TALK_MAIN) {
@@ -603,44 +445,7 @@ macro LoudredMain() {
             italian=" COSA?[K] Volete guadagnare\nun po' di soldi facendo il turno di guardia?",
             spanish=" ¿Qué?[K] ¿Queréis sacaros\nun dinerillo trabajando de vigías?",
         });
-        switch ( message_SwitchMenu(0, 1) ) {
-            case menu({
-                english="Yes",
-                french="Oui",
-                german="Ja",
-                italian="Sì",
-                spanish="Sí",
-            }):
-            default:
-                message_Close();
-                jump @label_134;
-            case menu({
-                english="No",
-                french="Non",
-                german="Nein",
-                italian="No",
-                spanish="No",
-            }):
-                CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk({
-                    english=" Oh, you won't, HUH?",
-                    french=" Ah, non, HEIN?",
-                    german=" Aha, ihr wollt nicht, WIE?!?",
-                    italian=" Ah, non volete, EH?",
-                    spanish=" Vaya... No queréis, ¿eh?",
-                });
-                message_Close();
-                jump @label_130;
-            case menu({
-                english="Check High Score",
-                french="Meilleur score",
-                german="Highscore prüfen",
-                italian="Guarda i record",
-                spanish="Puntuaciones",
-            }):
-                jump @label_133;
-        }
+        $LOCAL0 = 1;
     } elseif ($DUNGEON_CONQUEST_LIST[44]) {
         // [29, 4], Lost to Grandmaster of All Things Bad
         with(actor ACTOR_TALK_MAIN) {
@@ -664,7 +469,7 @@ macro LoudredMain() {
             spanish=" ...",
         });
         message_Close();
-        jump @label_130;
+        JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[44]) {
         // [29, 1], Graduation first announcement
         with(actor ACTOR_TALK_MAIN) {
@@ -700,7 +505,6 @@ macro LoudredMain() {
             spanish=" ¡Aaaah!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[38]) {
         // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {
@@ -731,7 +535,6 @@ macro LoudredMain() {
             spanish=" ¡Tenéis que poner freno a la\nparálisis del planeta! ¡Buena suerte!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[35]) {
         // [23, 1], Torkoal's News
         with(actor ACTOR_TALK_MAIN) {
@@ -762,7 +565,6 @@ macro LoudredMain() {
             spanish=" Cuando regrese otro aprendiz,\nharé que me sustituya mientras me equipo.",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_CONQUEST_LIST[26]) {
         // [17, 3], Trap Set for Grovyle
         with(actor ACTOR_PLAYER) {
@@ -789,7 +591,6 @@ macro LoudredMain() {
             spanish=" ¡Eh, [CS:N]Diglett[CR]! ¡Hagamos de vigías!\nSerá suficiente por ahora.",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[25]) {
         // [17, 1], Dusknoir's Secret
         with(actor ACTOR_TALK_MAIN) {
@@ -813,7 +614,6 @@ macro LoudredMain() {
             spanish=" Volvamos a nuestro trabajo\ndiario.",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_CONQUEST_LIST[24]) {
         // [16, 2], Crystal Puzzle Unsolved
         with(actor ACTOR_TALK_MAIN) {
@@ -837,7 +637,6 @@ macro LoudredMain() {
             spanish=" ¡Puedo esforzarme mucho más!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($SCENARIO_SUB2 &<< 0 || $SCENARIO_SUB2 &<< 1 || $SCENARIO_SUB2 &<< 2 || $SCENARIO_SUB2 &<< 3) {
         // [12, 3], Kec Sell Perf. Apple?
         §label_121;
@@ -862,7 +661,6 @@ macro LoudredMain() {
             spanish=" ¡Eh, [CS:N]Diglett[CR]! ¡Ya es de día!\n¡A trabajar! ¡Céntrate!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_CONQUEST_LIST[16]) {
         // [12, 1], Returned from Expedition
         with(actor ACTOR_PLAYER) {
@@ -886,7 +684,6 @@ macro LoudredMain() {
             spanish=" ¡Eh, [CS:N]Diglett[CR]![K] ¡Nos hemos\ndistraído! ¡Tenemos que centrarnos!",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
         // [9, 1], Expedition Tomorrow
         with(actor ACTOR_TALK_MAIN) {
@@ -924,7 +721,6 @@ macro LoudredMain() {
             spanish=" ¿Entendido?",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_CONQUEST_LIST[7]) {
         // [8, 3], Apple Woods Cleared
         with(actor ACTOR_TALK_MAIN) {
@@ -962,7 +758,6 @@ macro LoudredMain() {
             spanish=" En fin, habrá que trabajar duro\npara poder participar en la expedición.",
         });
         message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[7]) {
         // [8, 1], Apple Woods Unlocked
         with(actor ACTOR_PLAYER) {
@@ -986,7 +781,7 @@ macro LoudredMain() {
             spanish=" ¡Eh, [CS:N]Diglett[CR]! ¡Hay que trabajar\nduro si queremos participar en la expedición!",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_ARRIVE_LIST[0]) {
         // [7, 6], Team Skull Live Here...
         with(actor ACTOR_TALK_MAIN) {
@@ -1017,7 +812,7 @@ macro LoudredMain() {
             spanish=" En todos los sentidos...",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_OPEN_LIST[178]) {
         // [7, 2], Get Skunked On!
         with(actor ACTOR_TALK_MAIN) {
@@ -1067,7 +862,7 @@ macro LoudredMain() {
             spanish=" ¿Ha pasado algo en la otra\nplanta?",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_CONQUEST_LIST[6]) {
         // [7, 1], Expedition Announced!
         with(actor ACTOR_PLAYER) {
@@ -1094,7 +889,7 @@ macro LoudredMain() {
             spanish=" ¡Bien! ¡No te distraigas, [CS:N]Diglett[CR]!",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_OPEN_LIST[6]) {
         // [6, 1], Treeshroud Gear Stolen!
         jump @label_121;
@@ -1128,7 +923,7 @@ macro LoudredMain() {
             spanish=" ¡No me inspiráis confianza de\nvigías! ¡Jua, jua!",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_CONQUEST_LIST[5]) {
         // [4, 7], Drowzee defeated!
         with(actor ACTOR_PLAYER) {
@@ -1155,7 +950,7 @@ macro LoudredMain() {
             spanish=" ¡Muy bien, [CS:N]Diglett[CR]![K] ¡Hora de\ntrabajar! ¡Céntrate!",
         });
         message_Close();
-        jump @label_130;
+        
     } elseif ($DUNGEON_ENTER_INDEX == 4 || $DUNGEON_ENTER_INDEX == 5) {
         // [4, 5], Mt. Bristle loss
         with(actor ACTOR_PLAYER) {
@@ -1195,8 +990,8 @@ macro LoudredMain() {
             spanish=" ¡Sí, señor! ¡A la orden!",
         });
         message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[3]) {
+        
+    } else {
         // [3, 1], Drenched Bluff Open!
         with(actor ACTOR_PLAYER) {
             SetAnimation(2);
@@ -1221,9 +1016,69 @@ macro LoudredMain() {
             italian=" Va bene![K] È ora di spicciarsi e\ndi LAVORARE DURO!",
             spanish=" ¡Muy bien![K] ¡Hora de trabajar!",
         });
-        message_Close();
-        jump @label_130;
-    } else {
-        jump @label_130;
+        message_Close();   
+    }
+    if ($LOCAL0 == 0) {
+        message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" WHAT?[K] You want to pull sentry\nduty and earn some money?",
+            french=" QUOI?[K] Vous voulez gagner\nde l'argent en montant la garde?",
+            german=" WAS?[K] Ihr wollt Wache schieben\nund ein wenig Geld verdienen?",
+            italian=" COSA?[K] Volete fare il turno di\nguardia per guadagnare un po' di soldi?",
+            spanish=" ¿Qué?[K] ¿Que queréis hacer de\nvigías y ganaros un dinerillo?",
+        });
+    }
+    ~AskSentryDuty();
+    JumpCommon(CORO_END_TALK);
+}
+
+
+macro AskSentryDuty() {
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu({
+            english="Yes",
+            french="Oui",
+            german="Ja",
+            italian="Sì",
+            spanish="Sí",
+        }):
+        default:
+            message_Close();
+            §init_sentry_duty;
+            bgm_FadeOut(60);
+            screen2_FadeOut(0, 30);
+            screen_FadeOut(1, 30);
+            supervision_ExecuteCommon(CORO_HA_MIHARIBAN);
+            hold;
+        case menu({
+            english="No",
+            french="Non",
+            german="Nein",
+            italian="No",
+            spanish="No",
+        }):
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Oh, you won't, HUH?",
+                french=" Ah, vous voulez pas, HEIN?",
+                german=" Aha, ihr wollt nicht, WIE?!?",
+                italian=" Ah, non volete, EH?",
+                spanish=" Vaya... No queréis, ¿eh?",
+            });
+            message_Close();
+            break;
+        case menu({
+            english="Check High Score",
+            french="Meilleur score",
+            german="Highscore prüfen",
+            italian="Guarda i record",
+            spanish="Puntuaciones",
+        }):
+            §high_score;
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            switch ( message_Menu(MENU_GUILD_MINI_GAME_SCOREBOARD) ) { }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            break;
     }
 }

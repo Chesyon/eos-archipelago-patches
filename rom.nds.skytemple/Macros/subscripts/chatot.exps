@@ -1,4 +1,7 @@
+import "hints.exps";
 macro ChatotMain() {
+    ~CheckHints();
+    $LOCAL1 = 0;
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -45,6 +48,17 @@ macro ChatotMain() {
         });
         message_Close();
         §label_129;
+        switch(scn($SCENARIO_SUB1)[1]){
+            case &<< 0:
+                break;
+            default:    
+                if ($GROUND_ENTER == LEVEL_G01P04A) {                    
+                    ~ChatotAskCheck();
+                } else {
+                    ~ChatotDeferAWD();
+                }
+                break;
+        }
         JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
@@ -2038,7 +2052,70 @@ macro ChatotMain() {
         });
         message_Close();
         jump @label_129;
+    } elseif ($SCENARIO_SUB1 &<< 0) {
+        
+        jump @label_129;
     } else {
+        message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" You two are the representatives from\nthe [CS:G]Kecleon[CR] Mart, yes?");
+        $LOCAL1 = 1;
         jump @label_129;
     }
+}
+
+macro ChatotAskCheck() {
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_WORRIED, FACE_POS_STANDARD);
+    message_Talk(" Would you two be willing to go ask\n[CS:G]Wynaut[CR] if they have plans to sell or barter\nfor Perfect Apples?[K] We\'re running a bit low...");
+    switch(message_SwitchMenu(0,1)) {
+        case menu("Sure!"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_PERAPPU, FACE_HAPPY, FACE_POS_STANDARD);
+            if ($DUNGEON_CONQUEST_LIST[45]) {
+                message_Talk(" Wonderful! I knew I could count on\nour highest-performing recruits to help us in\nthese trying times.[K] Go along, now!");
+            } elseif ($LOCAL1 == 1) {
+                message_Talk(" Excellent, that frees up [CS:G]Bidoof[CR] to do\nsomething more productive today.[K] Now then,\noff you go! Let me know what you find.");
+            } else {
+                message_Talk("  I appreciate the eagerness, but don't\nforget your place around here, rookies! Now,\nlet me know what [CS:G]Wynaut[CR] says.");
+            }
+            message_Close();
+            screen_FadeOut(1,30);
+            supervision_ExecuteCommon(CORO_EVENT_S04_01);
+            hold;
+        case menu("Not right now..."):
+        default:
+            message_Close();
+            message_SetFace(ACTOR_NPC_PERAPPU, FACE_ANGRY, FACE_POS_STANDARD);
+            if ($DUNGEON_CONQUEST_LIST[45]) {
+                message_Talk(" I see...[K] I hope you aren\'t growing lazy\nafter graduation! \"Don\'t shirk work\" is our\nsecond tenant, after all! Very well then...");     
+            } elseif ($LOCAL1 == 1) {
+                message_SetFace(ACTOR_NPC_PERAPPU, FACE_HAPPY, FACE_POS_STANDARD);
+                message_Talk(" Not to worry, I'll have a valued\nmember of our guild take care of it instead.");
+                message_SetFace(ACTOR_NPC_PERAPPU, FACE_ANGRY, FACE_POS_STANDARD);
+                message_Monologue("(Silly salespeople, can't even run an errand\nfor you without a mountain of red tape!)");
+            } else {
+                message_Talk({
+                    english=" You...[K] You must be joking!",
+                    french=" Vous...[K] vous plaisantez,\nj'espère!",
+                    german=" Ihr...[K] Ihr macht wohl Witze!",
+                    italian=" Voi...[K] State scherzando!",
+                    spanish=" Será...[K] ¡Será una broma!",
+                });
+                message_Talk({
+                    english=" A pair of rookies wanting to\nslack off...?",
+                    french=" Et voilà que des novices veulent\nse la couler douce...?",
+                    german=" Zwei Anfänger, die bloß\nfaulenzen wollen?",
+                    italian=" Un paio di reclute che\nvogliono rilassarsi?",
+                    spanish=" ¿De verdad creéis que podemos\npermitirnos que dos reclutas no quieran\ndar golpe?",
+                });
+                message_Talk(" Fine, but listen up, rookies! It doesn't\npay to run away![K] As head of intelligence, It's\nmy job to decide what you do, got it?");
+            }
+            break;
+    }
+}
+
+macro ChatotDeferAWD() {
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_WORRIED, FACE_POS_STANDARD);
+    message_Talk(" That awful Team [CS:X]AWD[CR] have been seen\nin [CS:P]Spinda's Cafe[CR].[K] I'm [CS:C]terribly busy right now[CR],\nbut maybe you could keep a close eye on them?");
+    message_Close();
+    Wait(10);
 }

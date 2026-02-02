@@ -32,8 +32,6 @@ macro HeracrossMain() {
             WaitEffect();
         }
         WaitExecuteLives(ACTOR_NPC_HERAKUROSU);
-        §label_131;
-        JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -200,33 +198,6 @@ macro HeracrossMain() {
         jump @label_131;
     } elseif ($DUNGEON_CONQUEST_LIST[111]) {
         // [29, 12], First Time at 1st Station Clearing
-        if ( $SCENARIO_MAIN_BIT_FLAG[91] ) {
-            with(actor ACTOR_TALK_MAIN) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_TALK_SUB) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            message_SetFace(ACTOR_NPC_HERAKUROSU, FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk({
-                english=" I will never forget yoooou!\nThank yoooou!!",
-                french=" Je ne t'oublierai jamais!\nMerci pour tout!!!",
-                german=" Ich werde iiiiimmer an euch\ndenken! Danke schööön!!!",
-                italian=" Non vi dimenticherò maaai!\nGraaazie!!!",
-                spanish=" Nunca te olvidaré,\n¡muchas gracias!",
-            });
-            message_Close();
-            jump @label_131;
-        } else {
-            with(actor ACTOR_TALK_MAIN) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            with(actor ACTOR_TALK_SUB) {
-                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-            }
-            supervision_ExecuteCommon(CORO_EVENT_S32_04);
-            jump @label_131;
-        }
     } elseif ($DUNGEON_OPEN_LIST[175]) {
         // [29, 8], Cafe Describe Shaymin Village
         with(actor ACTOR_TALK_MAIN) {
@@ -501,4 +472,33 @@ macro HeracrossMain() {
         WaitExecuteLives(ACTOR_NPC_HERAKUROSU);
         jump @label_131;
     }
+    §label_131;    
+    if ($GROUND_ENTER == LEVEL_D73P21A) {
+        if ( $SCENARIO_MAIN_BIT_FLAG[91] ) {
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            message_SetFace(ACTOR_NPC_HERAKUROSU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" I will never forget yoooou!\nThank yoooou!!",
+                french=" Je ne t'oublierai jamais!\nMerci pour tout!!!",
+                german=" Ich werde iiiiimmer an euch\ndenken! Danke schööön!!!",
+                italian=" Non vi dimenticherò maaai!\nGraaazie!!!",
+                spanish=" Nunca te olvidaré,\n¡muchas gracias!",
+            });
+            message_Close();
+        } else {
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            supervision_ExecuteCommon(CORO_EVENT_S32_04);
+        }
+    }
+    JumpCommon(CORO_END_TALK);
 }

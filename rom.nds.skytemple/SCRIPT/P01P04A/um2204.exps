@@ -33,3 +33,4 @@ import 'subscripts/pachirisu.exps';
 def 0 {
     ~PachirisuMain();
 }
+

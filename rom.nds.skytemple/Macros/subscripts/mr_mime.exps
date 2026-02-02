@@ -1,4 +1,6 @@
+import "hints.exps";
 macro Mr_MimeMain() {
+    ~CheckHints();
     if ($DUNGEON_OPEN_LIST[67]) {
         // [29, 87], Dark Crater is Unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -197,7 +199,7 @@ macro Mr_MimeMain() {
         });
         message_Close();
         jump @label_131;
-    } elseif ($DUNGEON_ARRIVE_LIST[13]) {
+    } elseif ($GROUND_ENTER == LEVEL_P01P01A) {
         // [29, 32], 1 day passes.
         supervision_ExecuteCommon(CORO_EVENT_S02_01);
         jump @label_131;

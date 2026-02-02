@@ -1,4 +1,7 @@
+import "hints.exps";
 macro WobbuffetMain() {
+    ~CheckHints();
+    // TODO: P01P04A/enter05.ssb
     if ($DUNGEON_REQUEST_LIST[175]) {
         // [29, 10], First Time at Shaymin Village
         §label_118;

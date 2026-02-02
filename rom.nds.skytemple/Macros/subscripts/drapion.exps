@@ -1,4 +1,6 @@
+import "hints.exps";
 macro DrapionMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[61]) {
         // [29, 67], Aegis Cave Complete!
         with(actor ACTOR_TALK_MAIN) {
@@ -254,7 +256,7 @@ macro DrapionMain() {
         }
         WaitExecuteLives(ACTOR_NPC_DORAPION);
         jump @label_130;
-    } elseif ($DUNGEON_ARRIVE_LIST[19]) {
+    } else {
         // [5, 5], Sentry Duty Loss!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -291,8 +293,6 @@ macro DrapionMain() {
             spanish=" Pero este lugar no parece que\nvaya a ser de provecho.",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

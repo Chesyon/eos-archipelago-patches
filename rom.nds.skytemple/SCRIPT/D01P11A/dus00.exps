@@ -1,0 +1,35 @@
+
+def 0 {
+    back_SetGround(LEVEL_D01P11A);
+    supervision_Station(2);
+    supervision_Acting(0);
+    supervision_Acting(1);
+    supervision_Station(0);
+    supervision_Station(1);
+    screen_FadeIn(1, 10);
+    end;
+}
+
+def 1 for_actor(ACTOR_PLAYER_HERO) {
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    end;
+}
+
+def 3 for_actor(ACTOR_NPC_ZUBATTO) {
+    end;
+}
+
+def 4 for_actor(ACTOR_NPC_MANKII) {
+    end;
+}
+
+def 5 for_actor(ACTOR_NPC_DAGUTORIO) {
+    end;
+}
+
+def 6 for_actor(ACTOR_NPC_HIMEGUMA) {
+    end;
+}

@@ -1,0 +1,47 @@
+
+def 0 {
+    bgm_PlayFadeIn(BGM_TREASURE_TOWN, 0, 256);
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    message_SwitchTalk ($PARTNER_TALK_KIND) {
+        case 1:
+            {
+                english=" The beach isn\'t that way,\n[hero].",
+                french=" Ce n\'est pas la direction de la\nplage, [hero].",
+                german=" Zum Strand geht es nicht dort\nlang, [hero].",
+                italian=" La spiaggia non è da quella \nparte, [hero].",
+                spanish=" La playa no está por ahí,\n[hero].",
+            }
+        case 2:
+            {
+                english=" The beach isn\'t that way,\n[hero].",
+                french=" Ce n\'est pas la direction de la\nplage, [hero].",
+                german=" Zum Strand geht es nicht dort\nlang, [hero].",
+                italian=" La spiaggia non è da quella \nparte, [hero].",
+                spanish=" La playa no está por ahí,\n[hero].",
+            }
+        default:
+            {
+                english=" The beach isn\'t that way,\n[hero].",
+                french=" Ce n\'est pas la direction de la\nplage, [hero].",
+                german=" Zum Strand geht es nicht dort\nlang, [hero].",
+                italian=" La spiaggia non è da quella \nparte, [hero].",
+                spanish=" La playa no está por ahí,\n[hero].",
+            }
+    }
+    message_Close();
+    supervision_Suspend(-2);
+    end;
+}

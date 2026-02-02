@@ -1,3 +1,4 @@
+import "hints.exps";
 macro ZangooseMain() {
     switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
         case 532:
@@ -6,6 +7,7 @@ macro ZangooseMain() {
         default:
             break;
     }
+    ~CheckHints();
     if ($SCENARIO_SUB2 &<< 6) {
         // [29, 52], Phione Dew Obtained!
         with(actor ACTOR_TALK_MAIN) {

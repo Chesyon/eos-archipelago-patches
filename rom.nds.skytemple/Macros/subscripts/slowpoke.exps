@@ -1,5 +1,7 @@
+import "hints.exps";
 macro SlowpokeMain() {
-    if ($DUNGEON_ARRIVE_LIST[13]) {
+    ~CheckHints();
+    if ($SCENARIO_TALK_BIT_FLAG[122]) {
         // [29, 32], 1 day passes.
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

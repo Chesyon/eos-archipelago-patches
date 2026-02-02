@@ -1,0 +1,766 @@
+
+def 0 {
+    §label_14;
+    with (actor ACTOR_PLAYER) {
+        hold;
+    }
+    message_SetFace(ACTOR_NPC_MANKII, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Notice({
+        english=" What\'s it take for you to give\nme a Chestnut?!",
+        french=" What\'s it take for you to give\nme a Chestnut?!",
+        german=" What\'s it take for you to give\nme a Chestnut?!",
+        italian=" What\'s it take for you to give\nme a Chestnut?!",
+        spanish=" What\'s it take for you to give\nme a Chestnut?!",
+    });
+    switch ( message_SwitchMenu(1, 1) ) {
+        case menu({
+            english="Wait & Movement Test",
+            french="Wait & Movement Test",
+            german="Wait & Movement Test",
+            italian="Wait & Movement Test",
+            spanish="Wait & Movement Test",
+        }):
+            §label_0;
+            message_Notice({
+                english=" What\'s the holdup? Hurry up\nand choose!",
+                french=" What\'s the holdup? Hurry up\nand choose!",
+                german=" What\'s the holdup? Hurry up\nand choose!",
+                italian=" What\'s the holdup? Hurry up\nand choose!",
+                spanish=" What\'s the holdup? Hurry up\nand choose!",
+            });
+            switch ( message_SwitchMenu(1, 1) ) {
+                case menu({
+                    english="Hang on...",
+                    french="Hang on...",
+                    german="Hang on...",
+                    italian="Hang on...",
+                    spanish="Hang on...",
+                }):
+                default:
+                    Wait(10);
+                    message_Talk({
+                        english=" What, you\'re holding out?!",
+                        french=" What, you\'re holding out?!",
+                        german=" What, you\'re holding out?!",
+                        italian=" What, you\'re holding out?!",
+                        spanish=" What, you\'re holding out?!",
+                    });
+                    Wait(30);
+                    message_Talk({
+                        english=" What, you\'re holding out on me?!",
+                        french=" What, you\'re holding out on me?!",
+                        german=" What, you\'re holding out on me?!",
+                        italian=" What, you\'re holding out on me?!",
+                        spanish=" What, you\'re holding out on me?!",
+                    });
+                    jump @label_0;
+                case menu({
+                    english="What should I do...",
+                    french="What should I do...",
+                    german="What should I do...",
+                    italian="What should I do...",
+                    spanish="What should I do...",
+                }):
+                    message_Talk({
+                        english=" What\'s the deal with making me\nwait randomly?!",
+                        french=" What\'s the deal with making me\nwait randomly?!",
+                        german=" What\'s the deal with making me\nwait randomly?!",
+                        italian=" What\'s the deal with making me\nwait randomly?!",
+                        spanish=" What\'s the deal with making me\nwait randomly?!",
+                    });
+                    message_Close();
+                    WaitRandom(15, 60);
+                    message_Talk({
+                        english=" Come on, gimme a Chestnut!",
+                        french=" Come on, gimme a Chestnut!",
+                        german=" Come on, gimme a Chestnut!",
+                        italian=" Come on, gimme a Chestnut!",
+                        spanish=" Come on, gimme a Chestnut!",
+                    });
+                    jump @label_0;
+                case menu({
+                    english="Do the [CS:N]Mankey[CR] Dance.",
+                    french="Do the [CS:N]Mankey[CR] Dance.",
+                    german="Do the [CS:N]Mankey[CR] Dance.",
+                    italian="Do the [CS:N]Mankey[CR] Dance.",
+                    spanish="Do the [CS:N]Mankey[CR] Dance.",
+                }):
+                    message_Notice({
+                        english=" Darn tootin\'! You watch me until\nI finish my dance!",
+                        french=" Darn tootin\'! You watch me until\nI finish my dance!",
+                        german=" Darn tootin\'! You watch me until\nI finish my dance!",
+                        italian=" Darn tootin\'! You watch me until\nI finish my dance!",
+                        spanish=" Darn tootin\'! You watch me until\nI finish my dance!",
+                    });
+                    message_Notice({
+                        english=" But let me ask you this first:\nwill it be all right if I bumped into things?",
+                        french=" But let me ask you this first:\nwill it be all right if I bumped into things?",
+                        german=" But let me ask you this first:\nwill it be all right if I bumped into things?",
+                        italian=" But let me ask you this first:\nwill it be all right if I bumped into things?",
+                        spanish=" But let me ask you this first:\nwill it be all right if I bumped into things?",
+                    });
+                    switch ( message_SwitchMenu(0, 1) ) {
+                        case menu({
+                            english="No problem.",
+                            french="No problem.",
+                            german="No problem.",
+                            italian="No problem.",
+                            spanish="No problem.",
+                        }):
+                        default:
+                            with (actor ACTOR_NPC_MANKII) {
+                                ResetHitAttribute(31);
+                            }
+                            with (actor ACTOR_PLAYER) {
+                                ResetHitAttribute(31);
+                            }
+                            message_Notice({
+                                english=" All right! Now I can dance with\nwild abandon!",
+                                french=" All right! Now I can dance with\nwild abandon!",
+                                german=" All right! Now I can dance with\nwild abandon!",
+                                italian=" All right! Now I can dance with\nwild abandon!",
+                                spanish=" All right! Now I can dance with\nwild abandon!",
+                            });
+                            message_Close();
+                            §label_8;
+                            message_Notice({
+                                english=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                french=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                german=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                italian=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                spanish=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                            });
+                            switch ( message_SwitchMenu(1, 1) ) {
+                                case menu({
+                                    english="MovePosition-Related",
+                                    french="MovePosition-Related",
+                                    german="MovePosition-Related",
+                                    italian="MovePosition-Related",
+                                    spanish="MovePosition-Related",
+                                }):
+                                    §label_9;
+                                    message_Notice({
+                                        english=" Hey! Let\'s dance!\nThe Direction Changing Dance!",
+                                        french=" Hey! Let\'s dance!\nThe Direction Changing Dance!",
+                                        german=" Hey! Let\'s dance!\nThe Direction Changing Dance!",
+                                        italian=" Hey! Let\'s dance!\nThe Direction Changing Dance!",
+                                        spanish=" Hey! Let\'s dance!\nThe Direction Changing Dance!",
+                                    });
+                                    message_Close();
+                                    Wait(30);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, 32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, -32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, 0, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, 0, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" When I was a young lad,\nI lived on the straight and narrow! ♪",
+                                        french=" When I was a young lad,\nI lived on the straight and narrow! ♪",
+                                        german=" When I was a young lad,\nI lived on the straight and narrow! ♪",
+                                        italian=" When I was a young lad,\nI lived on the straight and narrow! ♪",
+                                        spanish=" When I was a young lad,\nI lived on the straight and narrow! ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, 32, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, -32, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, 64, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePositionOffset(2, -64, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" But I didn\'t notice myself\nrunning crooked! ♪ Lalala, I\'m the smooth\n[CS:N]Mankey[CR]! ♪",
+                                        french=" But I didn\'t notice myself\nrunning crooked! ♪ Lalala, I\'m the smooth\n[CS:N]Mankey[CR]! ♪",
+                                        german=" But I didn\'t notice myself\nrunning crooked! ♪ Lalala, I\'m the smooth\n[CS:N]Mankey[CR]! ♪",
+                                        italian=" But I didn\'t notice myself\nrunning crooked! ♪ Lalala, I\'m the smooth\n[CS:N]Mankey[CR]! ♪",
+                                        spanish=" But I didn\'t notice myself\nrunning crooked! ♪ Lalala, I\'m the smooth\n[CS:N]Mankey[CR]! ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(2, 128, 128);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Sometimes, I turn \'round! ♪",
+                                        french=" Sometimes, I turn \'round! ♪",
+                                        german=" Sometimes, I turn \'round! ♪",
+                                        italian=" Sometimes, I turn \'round! ♪",
+                                        spanish=" Sometimes, I turn \'round! ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(2, 43, 23);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" But I always run, run, run! ♪♪",
+                                        french=" But I always run, run, run! ♪♪",
+                                        german=" But I always run, run, run! ♪♪",
+                                        italian=" But I always run, run, run! ♪♪",
+                                        spanish=" But I always run, run, run! ♪♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" But with a look back... ♪",
+                                        french=" But with a look back... ♪",
+                                        german=" But with a look back... ♪",
+                                        italian=" But with a look back... ♪",
+                                        spanish=" But with a look back... ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(1, 408, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" And sometimes slow... ♪",
+                                        french=" And sometimes slow... ♪",
+                                        german=" And sometimes slow... ♪",
+                                        italian=" And sometimes slow... ♪",
+                                        spanish=" And sometimes slow... ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Close();
+                                    message_Notice({
+                                        english=" But I get my groove back,\n\'cause it\'s my comeback. ♪",
+                                        french=" But I get my groove back,\n\'cause it\'s my comeback. ♪",
+                                        german=" But I get my groove back,\n\'cause it\'s my comeback. ♪",
+                                        italian=" But I get my groove back,\n\'cause it\'s my comeback. ♪",
+                                        spanish=" But I get my groove back,\n\'cause it\'s my comeback. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(8, 344, 64);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Let\'s kick it up to high speed. ♪",
+                                        french=" Let\'s kick it up to high speed. ♪",
+                                        german=" Let\'s kick it up to high speed. ♪",
+                                        italian=" Let\'s kick it up to high speed. ♪",
+                                        spanish=" Let\'s kick it up to high speed. ♪",
+                                    });
+                                    message_Close();
+                                    message_Notice({
+                                        english=" No walls can hold me back. ♪",
+                                        french=" No walls can hold me back. ♪",
+                                        german=" No walls can hold me back. ♪",
+                                        italian=" No walls can hold me back. ♪",
+                                        spanish=" No walls can hold me back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        MovePosition(2, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Thank you. ♪",
+                                        french=" Thank you. ♪",
+                                        german=" Thank you. ♪",
+                                        italian=" Thank you. ♪",
+                                        spanish=" Thank you. ♪",
+                                    });
+                                    jump @label_14;
+                                case menu({
+                                    english="Move2Position-Related",
+                                    french="Move2Position-Related",
+                                    german="Move2Position-Related",
+                                    italian="Move2Position-Related",
+                                    spanish="Move2Position-Related",
+                                }):
+                                    §label_10;
+                                    message_Notice({
+                                        english=" Hey! Let\'s dance!\nThe Direction Constant Dance!",
+                                        french=" Hey! Let\'s dance!\nThe Direction Constant Dance!",
+                                        german=" Hey! Let\'s dance!\nThe Direction Constant Dance!",
+                                        italian=" Hey! Let\'s dance!\nThe Direction Constant Dance!",
+                                        spanish=" Hey! Let\'s dance!\nThe Direction Constant Dance!",
+                                    });
+                                    message_Close();
+                                    Wait(30);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, 32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, -32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, 0, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, 0, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" I lived straight and narrow\nwithout a look back. ♪",
+                                        french=" I lived straight and narrow\nwithout a look back. ♪",
+                                        german=" I lived straight and narrow\nwithout a look back. ♪",
+                                        italian=" I lived straight and narrow\nwithout a look back. ♪",
+                                        spanish=" I lived straight and narrow\nwithout a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, 32, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, -32, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, 64, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2PositionOffset(2, -64, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        french=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        german=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        italian=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        spanish=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(2, 128, 128);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" I sometimes go back. ♪",
+                                        french=" I sometimes go back. ♪",
+                                        german=" I sometimes go back. ♪",
+                                        italian=" I sometimes go back. ♪",
+                                        spanish=" I sometimes go back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(2, 43, 23);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Then I run again without\nchanging direction. ♪♪",
+                                        french=" Then I run again without\nchanging direction. ♪♪",
+                                        german=" Then I run again without\nchanging direction. ♪♪",
+                                        italian=" Then I run again without\nchanging direction. ♪♪",
+                                        spanish=" Then I run again without\nchanging direction. ♪♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Never will I look back. ♪",
+                                        french=" Never will I look back. ♪",
+                                        german=" Never will I look back. ♪",
+                                        italian=" Never will I look back. ♪",
+                                        spanish=" Never will I look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(1, 408, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Sometimes slow... ♪",
+                                        french=" Sometimes slow... ♪",
+                                        german=" Sometimes slow... ♪",
+                                        italian=" Sometimes slow... ♪",
+                                        spanish=" Sometimes slow... ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(4, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Close();
+                                    message_Notice({
+                                        english=" But not a look back. ♪",
+                                        french=" But not a look back. ♪",
+                                        german=" But not a look back. ♪",
+                                        italian=" But not a look back. ♪",
+                                        spanish=" But not a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(8, 344, 64);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Now let\'s go high speed. ♪",
+                                        french=" Now let\'s go high speed. ♪",
+                                        german=" Now let\'s go high speed. ♪",
+                                        italian=" Now let\'s go high speed. ♪",
+                                        spanish=" Now let\'s go high speed. ♪",
+                                    });
+                                    message_Close();
+                                    message_Notice({
+                                        english=" My own walls can\'t hold\nme now. ♪",
+                                        french=" My own walls can\'t hold me\nnow. ♪",
+                                        german=" My own walls can\'t hold\nme now. ♪",
+                                        italian=" My own walls can\'t hold\nme now. ♪",
+                                        spanish=" My own walls can\'t hold\nme now. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move2Position(2, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Thank you. ♪",
+                                        french=" Thank you. ♪",
+                                        german=" Thank you. ♪",
+                                        italian=" Thank you. ♪",
+                                        spanish=" Thank you. ♪",
+                                    });
+                                    jump @label_14;
+                                case menu({
+                                    english="Move3Position-Related",
+                                    french="Move3Position-Related",
+                                    german="Move3Position-Related",
+                                    italian="Move3Position-Related",
+                                    spanish="Move3Position-Related",
+                                }):
+                                    §label_11;
+                                    message_Notice({
+                                        english=" Hey! Let\'s dance!\nThe Direction Time Dance!",
+                                        french=" Hey! Let\'s dance!\nThe Direction Time Dance!",
+                                        german=" Hey! Let\'s dance!\nThe Direction Time Dance!",
+                                        italian=" Hey! Let\'s dance!\nThe Direction Time Dance!",
+                                        spanish=" Hey! Let\'s dance!\nThe Direction Time Dance!",
+                                    });
+                                    message_Close();
+                                    Wait(30);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, 32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, -32, 0);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, 0, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, 0, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" I lived straight and narrow\nwithout a look back. ♪",
+                                        french=" I lived straight and narrow\nwithout a look back. ♪",
+                                        german=" I lived straight and narrow\nwithout a look back. ♪",
+                                        italian=" I lived straight and narrow\nwithout a look back. ♪",
+                                        spanish=" I lived straight and narrow\nwithout a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, 32, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, -32, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, 64, -32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3PositionOffset(10, -64, 32);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        french=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        german=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        italian=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                        spanish=" But I ran crooked without\nmeaning to. ♪ And never a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 128, 128);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" I sometimes go back. ♪",
+                                        french=" I sometimes go back. ♪",
+                                        german=" I sometimes go back. ♪",
+                                        italian=" I sometimes go back. ♪",
+                                        spanish=" I sometimes go back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 43, 23);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Then I run again without\nchanging direction. ♪♪",
+                                        french=" Then I run again without\nchanging direction. ♪♪",
+                                        german=" Then I run again without\nchanging direction. ♪♪",
+                                        italian=" Then I run again without\nchanging direction. ♪♪",
+                                        spanish=" Then I run again without\nchanging direction. ♪♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Never will I look back. ♪",
+                                        french=" Never will I look back. ♪",
+                                        german=" Never will I look back. ♪",
+                                        italian=" Never will I look back. ♪",
+                                        spanish=" Never will I look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(60, 408, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Sometimes slow... ♪",
+                                        french=" Sometimes slow... ♪",
+                                        german=" Sometimes slow... ♪",
+                                        italian=" Sometimes slow... ♪",
+                                        spanish=" Sometimes slow... ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Close();
+                                    message_Notice({
+                                        english=" But not a look back. ♪",
+                                        french=" But not a look back. ♪",
+                                        german=" But not a look back. ♪",
+                                        italian=" But not a look back. ♪",
+                                        spanish=" But not a look back. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(20, 344, 64);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Now let\'s go high speed. ♪",
+                                        french=" Now let\'s go high speed. ♪",
+                                        german=" Now let\'s go high speed. ♪",
+                                        italian=" Now let\'s go high speed. ♪",
+                                        spanish=" Now let\'s go high speed. ♪",
+                                    });
+                                    message_Close();
+                                    message_Notice({
+                                        english=" My own walls can\'t hold\nme now. ♪",
+                                        french=" My own walls can\'t hold me\nnow. ♪",
+                                        german=" My own walls can\'t hold\nme now. ♪",
+                                        italian=" My own walls can\'t hold\nme now. ♪",
+                                        spanish=" My own walls can\'t hold\nme now. ♪",
+                                    });
+                                    message_Close();
+                                    with (actor ACTOR_NPC_MANKII) {
+                                        Move3Position(30, 344, 184);
+                                    }
+                                    WaitExecuteLives(ACTOR_NPC_MANKII);
+                                    message_Notice({
+                                        english=" Thank you. ♪",
+                                        french=" Thank you. ♪",
+                                        german=" Thank you. ♪",
+                                        italian=" Thank you. ♪",
+                                        spanish=" Thank you. ♪",
+                                    });
+                                    jump @label_14;
+                                case menu({
+                                    english="************",
+                                    french="************",
+                                    german="************",
+                                    italian="************",
+                                    spanish="************",
+                                }):
+                                    jump @label_14;
+                                case menu({
+                                    english="Cancel",
+                                    french="Cancel",
+                                    german="Cancel",
+                                    italian="Cancel",
+                                    spanish="Cancel",
+                                }):
+                                    message_Notice({
+                                        english=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                        french=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                        german=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                        italian=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                        spanish=" Which Dance should I do?\nNo. 1 Direction Variable   No. 2 Constant\nNo. 3 Time",
+                                    });
+                                    switch ( message_SwitchMenu(1, 1) ) {
+                                        case menu({
+                                            english="MovePosition-Related",
+                                            french="MovePosition-Related",
+                                            german="MovePosition-Related",
+                                            italian="MovePosition-Related",
+                                            spanish="MovePosition-Related",
+                                        }):
+                                            jump @label_9;
+                                        case menu({
+                                            english="Move2Position-Related",
+                                            french="Move2Position-Related",
+                                            german="Move2Position-Related",
+                                            italian="Move2Position-Related",
+                                            spanish="Move2Position-Related",
+                                        }):
+                                            jump @label_10;
+                                        case menu({
+                                            english="Move3Position-Related",
+                                            french="Move3Position-Related",
+                                            german="Move3Position-Related",
+                                            italian="Move3Position-Related",
+                                            spanish="Move3Position-Related",
+                                        }):
+                                            jump @label_11;
+                                        case menu({
+                                            english="************",
+                                            french="************",
+                                            german="************",
+                                            italian="************",
+                                            spanish="************",
+                                        }):
+                                        case menu({
+                                            english="Cancel",
+                                            french="Cancel",
+                                            german="Cancel",
+                                            italian="Cancel",
+                                            spanish="Cancel",
+                                        }):
+                                            jump @label_14;
+                                        default:
+                                            jump @label_8;
+                                    }
+                                    break;
+                                default:
+                                    jump @label_14;
+                            }
+                            break;
+                        case menu({
+                            english="I don\'t like pain...",
+                            french="I don\'t like pain...",
+                            german="I don\'t like pain...",
+                            italian="I don\'t like pain...",
+                            spanish="I don\'t like pain...",
+                        }):
+                            with (actor ACTOR_NPC_MANKII) {
+                                SetHitAttribute(4);
+                            }
+                            with (actor ACTOR_PLAYER) {
+                                SetHitAttribute(4);
+                            }
+                            message_Notice({
+                                english=" It could be lights-out if you\nbump into me! Be prepared for that!",
+                                french=" It could be lights-out if you\nbump into me! Be prepared for that!",
+                                german=" It could be lights-out if you\nbump into me! Be prepared for that!",
+                                italian=" It could be lights-out if you\nbump into me! Be prepared for that!",
+                                spanish=" It could be lights-out if you\nbump into me! Be prepared for that!",
+                            });
+                            message_Close();
+                            jump @label_8;
+                    }
+                    break;
+                case menu({
+                    english="You can\'t have one!",
+                    french="You can\'t have one!",
+                    german="You can\'t have one!",
+                    italian="You can\'t have one!",
+                    spanish="You can\'t have one!",
+                }):
+                    §label_1;
+                    message_Talk({
+                        english=" Hah?! You won\'t give me one?!",
+                        french=" Hah?! You won\'t give me one?!",
+                        german=" Hah?! You won\'t give me one?!",
+                        italian=" Hah?! You won\'t give me one?!",
+                        spanish=" Hah?! You won\'t give me one?!",
+                    });
+                    §label_2;
+                    message_Notice({
+                        english=" I\'m out of here!",
+                        french=" I\'m out of here!",
+                        german=" I\'m out of here!",
+                        italian=" I\'m out of here!",
+                        spanish=" I\'m out of here!",
+                    });
+                    message_Close();
+                    with (actor ACTOR_NPC_MANKII) {
+                        SetHitAttribute(0);
+                    }
+                    with (actor ACTOR_PLAYER) {
+                        SetHitAttribute(0);
+                    }
+                    supervision_Suspend(-2);
+                    end;
+            }
+            break;
+        case menu({
+            english="You can\'t have one!",
+            french="You can\'t have one!",
+            german="You can\'t have one!",
+            italian="You can\'t have one!",
+            spanish="You can\'t have one!",
+        }):
+            jump @label_1;
+        default:
+            message_Talk({
+                english=" Hah?! You canceled? Get lost!",
+                french=" Hah?! You canceled? Get lost!",
+                german=" Hah?! You canceled? Get lost!",
+                italian=" Hah?! You canceled? Get lost!",
+                spanish=" Hah?! You canceled? Get lost!",
+            });
+            jump @label_2;
+    }
+}

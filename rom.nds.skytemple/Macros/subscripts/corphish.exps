@@ -1,4 +1,6 @@
+import "hints.exps";
 macro CorphishMain() {
+    ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -331,7 +333,7 @@ macro CorphishMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_ARRIVE_LIST[14]) {
+    } elseif ($PERFORMANCE_PROGRESS_LIST[22]) {
         // [29, 40], 1 mission complete!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

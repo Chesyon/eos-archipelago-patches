@@ -1,0 +1,34 @@
+
+def 0 {
+    supervision_Station(0);
+    if ( scn($SCENARIO_MAIN) >= [8, 4] ) {
+        §label_0;
+        supervision_Station(8);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 3] ) {
+        supervision_Station(6);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 2] ) {
+        supervision_Station(10);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [8, 1] ) {
+        supervision_Station(10);
+        end;
+    } else {
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_MANKII) {
+    ResetOutputAttribute(256);
+    SetAnimation(3);
+    SetEffect(EFFECT_STUCK_IN_YELLOW_WATER_MEDIUM2, 4);
+    JumpCommon(CORO_LIVES_MOVE_NORMAL);
+}
+
+def 2 for_actor(ACTOR_NPC_OKORIZARU) {
+    ResetOutputAttribute(256);
+    SetAnimation(3);
+    SetEffect(EFFECT_STUCK_IN_YELLOW_WATER_DEEP2, 4);
+    JumpCommon(CORO_LIVES_MOVE_NORMAL);
+}

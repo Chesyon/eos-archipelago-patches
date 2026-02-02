@@ -1,0 +1,49 @@
+// Duplicate file group
+// Loudred
+// - SCRIPT/G01P03A/um1508.exps
+// - SCRIPT/G01P04A/um0201.exps
+// - SCRIPT/G01P04A/um0306.exps
+// - SCRIPT/G01P04A/um0308.exps
+// - SCRIPT/G01P04A/um0311.exps
+// - SCRIPT/G01P04A/um0401.exps
+// - SCRIPT/G01P04A/um0501.exps
+// - SCRIPT/G01P04A/um0602.exps
+// - SCRIPT/G01P04A/um0604.exps
+// - SCRIPT/G01P04A/um0607.exps
+// - SCRIPT/G01P04A/um0701.exps
+// - SCRIPT/G01P04A/um0703.exps
+// - SCRIPT/G01P04A/um1101.exps
+// - SCRIPT/G01P04A/um1103.exps
+// - SCRIPT/G01P04A/um1105.exps
+// - SCRIPT/G01P04A/um1201.exps
+// - SCRIPT/G01P04A/um1203.exps
+// - SCRIPT/G01P04A/um1601.exps
+// - SCRIPT/G01P04A/um1603.exps
+// - SCRIPT/G01P04A/um2201.exps
+// - SCRIPT/G01P04A/um2203.exps
+// - SCRIPT/G01P04A/um2401.exps
+// - SCRIPT/G01P04A/um2501.exps
+// - SCRIPT/G01P04A/us0102.exps
+// - SCRIPT/G01P04A/us0105.exps
+// - SCRIPT/G01P04A/us0201.exps
+// - SCRIPT/G01P04A/us0203.exps
+// - SCRIPT/G01P04A/us0301.exps
+// - SCRIPT/G01P04A/us0304.exps
+// - SCRIPT/G01P04A/us0307.exps
+// - SCRIPT/G01P04A/us0309.exps
+// - SCRIPT/G01P04A/us0310.exps
+// - SCRIPT/G01P04A/us0404.exps
+// - SCRIPT/G01P04A/us0408.exps
+// - SCRIPT/G01P04A/us2001.exps
+// - SCRIPT/G01P04A/us2003.exps
+// - SCRIPT/G01P04A/us2005.exps
+// - SCRIPT/G01P04A/us2101.exps
+// - SCRIPT/G01P04A/us2202.exps
+// - SCRIPT/G01P04A/us2205.exps
+// - SCRIPT/G01P04A/us3102.exps
+// - SCRIPT/T01P02A/um0805.exps
+
+import 'subscripts/loudred.exps';
+def 0 {
+    ~LoudredMain();
+}
