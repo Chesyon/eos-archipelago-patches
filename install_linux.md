@@ -13,8 +13,8 @@ You can install eos-archipelago-patches on Ubuntu or Debian using the following 
 
 1. Open the Terminal app in your Applications menu. The exact steps might vary based on your desktop environment.
 2. Run the following command to install the required tools: `sudo apt install build-essential cmake python3-pip gcc-arm-none-eabi binutils-arm-none-eabi xdelta3`. You will need to enter your password during the installation.
-3. Install Python dependencies: `pip install pyyaml ndspy git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06`
-    - **Note:** If this does not work, try `pip install pyyaml ndspy git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06 --break-system-packages`.
+3. Install Python dependencies: `pip install pyyaml ndspy skytemple-files git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06`
+    - **Note:** If this does not work, try `pip install pyyaml ndspy skytemple-files git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06 --break-system-packages`, or make a [virtual environment](https://docs.python.org/3/library/venv.html) and run everything within that (`--break-system-packages` should not be needed within a venv).
 4. Compile `armips`:
     1. Run `git clone --recursive https://github.com/Kingcom/armips.git` to download the source code.
     2. Run `cd armips` to enter the directory.
@@ -37,11 +37,13 @@ You can install eos-archipelago-patches on Ubuntu or Debian using the following 
 
 1. Open the Terminal app. The exact steps vary based on your desktop environment.
 2. Run the following command to install the required tools: `sudo pacman -Syu base-devel git python python-pip arm-none-eabi-gcc arm-none-eabi-binutils xdelta3`. You will need to enter your password during the installation.
-3. Install Python dependencies: `pip3 install pyyaml ndspy bsdiff`
+3. Install Python dependencies: `pip3 install pyyaml ndspy skytemple-files git+https://github.com/Eijebong/bsdiff4f@baba7e24ca5f301b633b4d4de3e1788308d6ac06`
 4. Install the [armips package](https://aur.archlinux.org/packages/armips) via the Arch User Repository (AUR). Please refer to the [Arch Wiki](https://wiki.archlinux.org/title/Arch_User_Repository) for instructions.
 5. You can now continue with the steps 5-10 of the Ubuntu/Debian method above.
 
 ## Other methods (advanced)
+
+These methods are remnants from the official c-of-time repo, and are untested by eos-archipelago-patches developers. Use at your own risk!
 
 - You can use the official [ARM toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) to build c-of-time. Make sure to add the toolchain to your `PATH` environment variable. You will need to install `make` and other Unix build tools as well.
 - [devkitpro](https://devkitpro.org/wiki/Getting_Started) provides an installer for a custom toolchain. Follow the instructions on their website to install it and make sure to add the toolchain to your `PATH` environment variable.
