@@ -3,8 +3,11 @@
 #include "extern.h"
 #include "ap_utils.h"
 
+#define GOAL_DIALGA 1
+#define GOAL_DARKRAI 0
+
 enum dungeon_check_type GetDungeonCheckType(short dunId) {
-    if (apSettings.dialgaIsGoal) {
+    if (newApSettings.nums.goal == GOAL_DIALGA) {
         if(dunId == DUNGEON_TEMPORAL_TOWER || dunId == DUNGEON_HIDDEN_LAND) {
             return DCT_OTHER;
         }
@@ -62,16 +65,16 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
     if (outlaw) {
         completed = CUSTOM_SAVE_AREA.missionStats[dungeon].completedOutlaws;
         if (dungeonCt == DCT_LATE) {
-            expected = apSettings.totalOutlawsLate;
+            expected = newApSettings.nums.totalOutlawsLate;
         } else {
-            expected = apSettings.totalOutlawsEarly;
+            expected = newApSettings.nums.totalOutlawsEarly;
         }
     } else {
         completed = CUSTOM_SAVE_AREA.missionStats[dungeon].completedJobs;
         if (dungeonCt == DCT_LATE) {
-            expected = apSettings.totalJobsLate;
+            expected = newApSettings.nums.totalJobsLate;
         } else {
-            expected = apSettings.totalJobsEarly;
+            expected = newApSettings.nums.totalJobsEarly;
         }
     }
     
@@ -83,11 +86,11 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
 }
 
 bool IsDarkraiGoal() {
-    return !apSettings.dialgaIsGoal;
+    return newApSettings.nums.goal == GOAL_DARKRAI;
 }
 
 bool AreLongLocationsOn() {
-    return apSettings.longLocationsOn;
+    return newApSettings.flags.longLocationsOn;
 }
 
 enum dungeon_mode GetDungeonModeWithSevenTreasureCheck(enum dungeon_id dungeon_id) {

@@ -12,7 +12,7 @@ void DeathLinkInitDungeon() {
 
 union damage_source damageSource = {.other = DEATHLINK_DAMAGE_SOURCE};
 void DeathLinkReceiverCheck() {
-    int dlType = apSettings.deathLinkType;
+    int dlType = newApSettings.nums.deathLinkType;
 
     if(dlType == DEATHLINK_NONE) {
         return; // Do nothing if not deathLink.

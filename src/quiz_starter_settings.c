@@ -89,9 +89,9 @@ typedef struct QuizData {
 } QuizData;
 
 void __attribute__((naked)) TypesanityCheck() {
-    asm("ldr r0,=apSettings");
-    asm("ldrh r0,[r0,#0x0]");
-    asm("tst r0,#0b0000000010000000");
+    asm("ldr r0,=newApSettings");
+    asm("ldrb r0,[r0,#0xF]");
+    asm("tst r0,#0b100");
     asm("bxne lr");
     asm("b SameTypeUnhook");
 }
@@ -99,12 +99,10 @@ void __attribute__((naked)) TypesanityCheck() {
 // Clever hook to initalize the question count to the last question and roll
 // the player at the same time.
 void __attribute__((naked)) ForcedPlayerCheck() {
-    asm("ldr r1,=apSettings");
-    asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000001100000000");
-    asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b11");   // STARTER_OPTION_CHOOSE
-    asm("cmpne r1,#0b01"); // STARTER_OPTION_RANDOM
+    asm("ldr r1,=newApSettings");
+    asm("ldrb r1,[r1,#0xA]");
+    asm("cmp r1,#1");   // STARTER_OPTION_RANDOM
+    asm("cmpne r1,#3"); // STARTER_OPTION_CHOOSE
     asm("moveq r3,#9"); // Only ask gender question.
     asm("movne r3,#0"); // Ask all questions.
     asm("ldr r1,[r0,#0x0]");
@@ -115,22 +113,18 @@ void __attribute__((naked)) ForcedPlayerCheck() {
 // Force the game to use an unrandom order.
 void __attribute__((naked)) ForcedPartnerCheck() {
     asm("mov r7,#0x0"); // Original Instruction
-    asm("ldr r1,=apSettings");
-    asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000001100000000");
-    asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
+    asm("ldr r1,=newApSettings");
+    asm("ldrb r1,[r1,#0xA]");
+    asm("cmp r1,#1"); // STARTER_OPTION_RANDOM
     asm("moveq r6,#0x0");
     asm("bx lr");
 }
 
 void __attribute__((naked)) ForcedPartnerRollCheck() {
     asm("blt QuizForcedPartnerRollUnhook"); // originalish instruction
-    asm("ldr r1,=apSettings");
-    asm("ldrh r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000001100000000");
-    asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b01"); // STARTER_OPTION_RANDOM
+    asm("ldr r1,=newApSettings");
+    asm("ldrb r1,[r1,#0xA]");
+    asm("cmp r1,#1"); // STARTER_OPTION_RANDOM
     asm("bxne lr");
     asm("stmdb sp!,{lr}");
     asm("ldr r0,=slotData"); // &(slotData->apSlotName)
@@ -169,26 +163,20 @@ void __attribute__((naked)) ForcedPartnerRollCheck() {
 // Check if override is active. If so, allow the quiz result to be overwritten.
 void __attribute__((naked)) OverrideHeroCheck() {
     asm("mov r7,#0x0"); // Original Instruction
-    asm("ldr r1,=apSettings");
-    asm("ldr r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000001100000000");
-    asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
+    asm("ldr r1,=newApSettings");
+    asm("ldrb r1,[r1,#0xA]");
+    asm("cmp r1,#2"); // STARTER_OPTION_OVERRIDE
     asm("moveq r0,#0x42");
     asm("movne r0,#0x26");
     asm("bx lr");
 }
 
 void __attribute__((naked)) HeroTweakCheck() {
-    asm("ldr r3,=apSettings");
-    asm("ldr r3,[r3,#0x0]");
-    asm("and r3,r3,#0b0000001100000000");
-    asm("lsr r3,r3,#0x8");
-    asm("cmp r3,#0b10"); // STARTER_OPTION_OVERRIDE
-    asm("cmpne r3,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("cmpne r3,#0b01"); // STARTER_OPTION_RANDOM
-    asm("ldrnesh r3,[r1,r0]"); // originalish instruction
-    asm("bxne lr");
+    asm("ldr r3,=newApSettings");
+    asm("ldrb r3,[r3,#0xA]");
+    asm("cmp r3,#0"); // STARTER_OPTION_VANILLA
+    asm("ldreqsh r3,[r1,r0]"); // originalish instruction
+    asm("bxeq lr");
     asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r3,[r3,#0x0]");
     asm("ldr r3,[r3,#0x24]");
@@ -197,12 +185,10 @@ void __attribute__((naked)) HeroTweakCheck() {
 
 void __attribute__((naked)) ChooseTweakCheck() {
     asm("stmdb sp!,{r0,r1}");
-    asm("ldr r3,=apSettings");
-    asm("ldr r3,[r3,#0x0]");
-    asm("and r3,r3,#0b0000001100000000");
-    asm("lsr r3,r3,#0x8");
-    asm("cmp r3,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("cmpne r3,#0b01"); // STARTER_OPTION_RANDOM
+    asm("ldr r3,=newApSettings");
+    asm("ldrb r3,[r3,#0xA]");
+    asm("cmp r3,#3"); // STARTER_OPTION_CHOOSE
+    asm("cmpne r3,#1"); // STARTER_OPTION_RANDOM
     asm("addne r2,r2,#1"); // originalish instruction
     asm("moveq r2,#0x42");
     asm("ldmia sp!,{r0,r1}");
@@ -210,14 +196,10 @@ void __attribute__((naked)) ChooseTweakCheck() {
 }
 
 void __attribute__((naked)) TypeHeroTweak() {
-    asm("ldr r1,=apSettings");
-    asm("ldr r1,[r1,#0x0]");
-    asm("and r1,r1,#0b0000001100000000");
-    asm("lsr r1,r1,#0x8");
-    asm("cmp r1,#0b10"); // STARTER_OPTION_OVERRIDE
-    asm("cmpne r1,#0b11"); // STARTER_OPTION_CHOOSE
-    asm("cmpne r1,#0b01"); // STARTER_OPTION_RANDOM
-    asm("bne GetPersonality");
+    asm("ldr r1,=newApSettings");
+    asm("ldrb r1,[r1,#0xA]");
+    asm("cmp r1,#0"); // STARTER_OPTION_VANILLA
+    asm("beq GetPersonality");
     asm("ldr r3,=OVERLAY13_UNKNOWN_POINTER__NA_238CEA0");
     asm("ldr r3,[r3,#0x0]");
     asm("ldr r4,[r3,#0x24]");
@@ -296,13 +278,13 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             }
             quizData->numSelectablePartners = selectable;
             // Reuse currentQuestion to store species.
-            if (apSettings.starterOptions == STARTER_OPTION_OVERRIDE) {
+            if (newApSettings.nums.starterOptions == STARTER_OPTION_OVERRIDE) {
                 quizData->currentQuestion = (STARTERS_HERO_IDS[(GetPersonality()*2) + quizData->genderResult]).val;
                 quizData->state = quizData->state + 1;
-            } else if (apSettings.starterOptions == STARTER_OPTION_CHOOSE) {
+            } else if (newApSettings.nums.starterOptions == STARTER_OPTION_CHOOSE) {
                 quizData->portraitBoxId = CreatePortraitBox(0, 3, 1);
                 quizData->state = 0x46;
-            } else if (apSettings.starterOptions == STARTER_OPTION_RANDOM) {
+            } else if (newApSettings.nums.starterOptions == STARTER_OPTION_RANDOM) {
                 quizData->portraitBoxId = CreatePortraitBox(0, 3, 1); // Gets closed right after but that's okay.
                 uint32_t randomizedHeroNum = slotData.apTrimmedSeed[0] ^ slotData.apTrimmedSeed[1];
                 randomizedHeroNum ^= (((uint32_t)slotData.apSlotName[0]));

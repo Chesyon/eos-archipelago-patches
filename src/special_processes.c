@@ -8,7 +8,7 @@
 
 // Special process 100: Returns if guest party members could cause problems for the player.
 static int SpGetLevelScalingStatus() {
-  return apSettings.levelScalingMode != LEVEL_SCALING_OFF && !apSettings.levelScaleGuests;
+    return newApSettings.nums.levelScalingMode != LEVEL_SCALING_OFF && !newApSettings.flags.levelScaleGuests;
 }
 
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
@@ -23,8 +23,8 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
     MissionStatus* missionStats = &(CUSTOM_SAVE_AREA.missionStats[dungeonId]); // get mission stats pointer for the dungeon specified in DUNGEON_ENTER_INDEX
     // load either jobs or outlaws:
     if (missionType == 1) { // outlaws
-        if(dungeonCt == DCT_LATE) totalNumber = apSettings.totalOutlawsLate;
-        else totalNumber = apSettings.totalOutlawsEarly;
+        if(dungeonCt == DCT_LATE) totalNumber = newApSettings.nums.totalOutlawsLate;
+        else totalNumber = newApSettings.nums.totalOutlawsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedOutlaws < totalNumber) {
                 missionStats->completedOutlaws++; // increment by one
@@ -35,8 +35,8 @@ static int SpAccessMissionStatuses(short mode, short missionType) {
         else return totalNumber - missionStats->completedOutlaws; // Read mode
     }
     else { // jobs
-        if(dungeonCt == DCT_LATE) totalNumber = apSettings.totalJobsLate;
-        else totalNumber = apSettings.totalJobsEarly;
+        if(dungeonCt == DCT_LATE) totalNumber = newApSettings.nums.totalJobsLate;
+        else totalNumber = newApSettings.nums.totalJobsEarly;
         if (mode == 1) { // Write mode
             if (missionStats->completedJobs < totalNumber) {
                 missionStats->completedJobs++; // increment by one
@@ -53,23 +53,23 @@ static int SpAccessMacguffinStatus(short mode, short macguffin) {
     short numberToReturn;
     if(macguffin == 1) { // instruments
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredInstruments < apSettings.requiredInstruments) {
+            if (CUSTOM_SAVE_AREA.acquiredInstruments < newApSettings.nums.requiredInstruments) {
                 CUSTOM_SAVE_AREA.acquiredInstruments++; // increment by one
                 numberToReturn = 1;
             }
             else numberToReturn = 0;
         }
-        else numberToReturn = apSettings.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
+        else numberToReturn = newApSettings.nums.requiredInstruments - CUSTOM_SAVE_AREA.acquiredInstruments; // Read mode
     }
     else { // relic fragment
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < apSettings.requiredRelicFragmentShards) {
+            if (CUSTOM_SAVE_AREA.acquiredRelicFragmentShards < newApSettings.nums.requiredRelicFragmentShards) {
                 CUSTOM_SAVE_AREA.acquiredRelicFragmentShards++; // increment by one
                 numberToReturn = 1;
             }
             else numberToReturn = 0;
         }
-        else numberToReturn = apSettings.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
+        else numberToReturn = newApSettings.nums.requiredRelicFragmentShards - CUSTOM_SAVE_AREA.acquiredRelicFragmentShards; // Read mode
     }
     if (numberToReturn < 0) return 0;
     else return numberToReturn;
@@ -99,23 +99,23 @@ static void SpRegenerateMissions() {
 static int SpAccessCafeStatus(short mode, short type) {
     if (type == 0) { // Cafe Events
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredCafeEventChecks < apSettings.cafeEventMax) {
+            if (CUSTOM_SAVE_AREA.acquiredCafeEventChecks < newApSettings.nums.cafeEventMax) {
                 CUSTOM_SAVE_AREA.acquiredCafeEventChecks++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return apSettings.cafeEventMax - CUSTOM_SAVE_AREA.acquiredCafeEventChecks; // Read mode
+        else return newApSettings.nums.cafeEventMax - CUSTOM_SAVE_AREA.acquiredCafeEventChecks; // Read mode
     }
     else { // Cafe Drinks
         if (mode == 1) { // Write mode
-            if (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks < apSettings.cafeDrinkMax) {
+            if (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks < newApSettings.nums.cafeDrinkMax) {
                 CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks++; // increment by one
                 return 1;
             }
             else return 0;
         }
-        else return apSettings.cafeDrinkMax - CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks; // Read mode
+        else return newApSettings.nums.cafeDrinkMax - CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks; // Read mode
     }
 }
 
@@ -135,7 +135,7 @@ static int SpCheckForUnownRocks(){
 
 // Special process 107: Is the main game unlocked? No parameters.
 static bool SpIsMainGameUnlocked(){
-    return (CUSTOM_SAVE_AREA.mainGameUnlocked | (apSettings.startingEpisode == 0));
+    return (CUSTOM_SAVE_AREA.mainGameUnlocked | (newApSettings.nums.startingEpisode == 0));
 }
 
 // Used by SP 108.
@@ -320,7 +320,7 @@ static int SpIsHintChecked(short idx){
 
 // Special Process 114: Get starting episode. No parameters, returns starting episode. 0 = Main Episode, 1 = Bidoof, 2 = Igglybuff, 3 = Sunflora, 4 = Team Charm, 5 = Dark Future
 static int SpGetStartingEpisode() {
-	return apSettings.startingEpisode;
+	return newApSettings.nums.startingEpisode;
 }
 
 // Special Process 115: Gets current number of open Sky Peak passes. No parameters.
@@ -344,7 +344,7 @@ static void SpUpdateAdventureLogRecycles(){
 /*static int SpAccessDeathLinkStatus(short action, short value) {
     switch (action) {
         case 0: // Check Deathlink Type
-            return apSettings.deathLinkType;
+            return newApSettings.nums.deathLinkType;
         case 1: // Check If We Have Received
             return CUSTOM_SAVE_AREA.deathLinkTracker.receiver;
         case 2: // Check If We Have Sent? Not sure why we would need to test this.

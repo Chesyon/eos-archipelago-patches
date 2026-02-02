@@ -151,6 +151,7 @@ DungeonXMenuNameAddr = 0x23836D8;
 /* ! New Archipelago Values For Overlay36 */
 archipelagoAreaStart = 0x23DE000;
 slotData = 0x23DE000;
+newApSettings = 0x23DE028;
 apSettings = 0x23DE028;
 fadeOutAllActive = 0x23DE031;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */

@@ -12,10 +12,10 @@ ExploreNewDungeonCheck:
 // Allow Mission To Be Generated w/ Ealy Floors
 EarlyMissionFloorsCheck:
     ldr   r3,=apSettings
-    ldrh  r3,[r3,#0x0]
-    tst   r3,#0b0000000000010000 // apSettings->earlyMissionFloors
+    ldrb  r3,[r3,#0xF]
+    tst   r3,#0b1        // apSettings->earlyMissionFloors
     movne r0,#2
-    str   r0,[sp,#0x8]           // original instruction
+    str   r0,[sp,#0x8]   // original instruction
     bx    lr
     
 // When missions are being tailored, allow the floors to be duplicates.

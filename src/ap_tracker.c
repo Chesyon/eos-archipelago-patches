@@ -329,7 +329,7 @@ int GetTrackerListLength() {
     
     // Remove long locations from the list if they are not enabled. This should only
     // remove the rule dungeons.
-    if(!apSettings.longLocationsOn) {
+    if(!newApSettings.flags.longLocationsOn) {
         length -= 10;
     }
     
@@ -969,7 +969,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             preArgs.strings[2] = (GetSubXBit(87)) ? moneySymbol : lockedSymbol;
             PreprocessString(temp, TR_BUFF_LEN, townBankChecks2, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 81, temp);
-            if(!apSettings.longLocationsOn) {
+            if(!newApSettings.flags.longLocationsOn) {
                 DrawTextInWindow(idx, 15, 146, townBankCheckNotice);
             }
             UpdateWindow(idx);
@@ -1007,7 +1007,7 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             PreprocessString(temp, TR_BUFF_LEN, blueGoomiCheck, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 120, 133, temp);
             // Long Location Notice
-            if(!apSettings.longLocationsOn) {
+            if(!newApSettings.flags.longLocationsOn) {
                 DrawTextInWindow(idx, 15, 146, rankChecksNotice);
             }
             UpdateWindow(idx);
@@ -1114,9 +1114,9 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
-                    preArgs.number_vals[1] = apSettings.cafeDrinkMax;
+                    preArgs.number_vals[1] = newApSettings.nums.cafeDrinkMax;
                     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
-                    preArgs.number_vals[3] = apSettings.cafeEventMax;
+                    preArgs.number_vals[3] = newApSettings.nums.cafeEventMax;
                     PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks2, preFlagTracker, &preArgs);
                     strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
@@ -1199,9 +1199,9 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                     PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks1, preFlagTracker, &preArgs);
                     DrawTextInWindow(idx, 1, 55, temp);
                     preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
-                    preArgs.number_vals[1] = apSettings.cafeDrinkMax;
+                    preArgs.number_vals[1] = newApSettings.nums.cafeDrinkMax;
                     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
-                    preArgs.number_vals[3] = apSettings.cafeEventMax;
+                    preArgs.number_vals[3] = newApSettings.nums.cafeEventMax;
                     PreprocessString(temp, TR_BUFF_LEN, bidoSunfCafeChecks2, preFlagTracker, &preArgs);
                     strncat(temp, (GetSubXBit(60)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
                     strncat(temp, (GetSubXBit(61)) ? checkSymbol : lockedSymbol, TR_BUFF_LEN);
@@ -1271,18 +1271,18 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
                 DrawBossInfoInWindow(idx, 16, temp, MONSTER_DIALGA, MONSTER_NONE, true, GetSubXBit(28));
                 break;
             }
-            DrawCircleBarInTextBox(idx, 60, 112, 84, apSettings.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
+            DrawCircleBarInTextBox(idx, 60, 112, 84, newApSettings.nums.requiredRelicFragmentShards, CUSTOM_SAVE_AREA.acquiredRelicFragmentShards, lockedSymbol, relicSymbol, trackerRotate);
             preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
-            preArgs.number_vals[1] = apSettings.requiredRelicFragmentShards;
+            preArgs.number_vals[1] = newApSettings.nums.requiredRelicFragmentShards;
             PreprocessString(temp, TR_BUFF_LEN, fractionString, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
             UpdateWindow(idx);
             return;
         case DUNGEON_DARK_CRATER:;
             if(IsDarkraiGoal()) {
-                DrawCircleBarInTextBox(idx, 60, 109, 84, apSettings.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
+                DrawCircleBarInTextBox(idx, 60, 109, 84, newApSettings.nums.requiredInstruments, CUSTOM_SAVE_AREA.acquiredInstruments, lockedSymbol, instrumentSymbol, trackerRotate);
                 preArgs.number_vals[0] = CUSTOM_SAVE_AREA.acquiredInstruments;
-                preArgs.number_vals[1] = apSettings.requiredInstruments;
+                preArgs.number_vals[1] = newApSettings.nums.requiredInstruments;
                 PreprocessString(temp, TR_BUFF_LEN, fractionString, preFlagTracker, &preArgs);
                 DrawTextInWindow(idx, (trackerTopScreenWinParams.width * 8 - GetStringWidth(temp)) / 2, 84, temp);
                 UpdateWindow(idx);
@@ -1589,8 +1589,8 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     preArgs.number_vals[2] = CUSTOM_SAVE_AREA.missionStats[location].completedOutlaws;
     switch(GetDungeonCheckType(location)) {
         case DCT_LATE:;
-            preArgs.number_vals[1] = apSettings.totalJobsLate;
-            preArgs.number_vals[3] = apSettings.totalOutlawsLate;
+            preArgs.number_vals[1] = newApSettings.nums.totalJobsLate;
+            preArgs.number_vals[3] = newApSettings.nums.totalOutlawsLate;
             PreprocessString(temp, TR_BUFF_LEN, missionDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             if(!IsDarkraiGoal()) {
@@ -1598,8 +1598,8 @@ void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
             }
             break;
         case DCT_EARLY:;
-            preArgs.number_vals[1] = apSettings.totalJobsEarly;
-            preArgs.number_vals[3] = apSettings.totalOutlawsEarly;
+            preArgs.number_vals[1] = newApSettings.nums.totalJobsEarly;
+            preArgs.number_vals[3] = newApSettings.nums.totalOutlawsEarly;
             PreprocessString(temp, TR_BUFF_LEN, missionDungeonChecks, preFlagTracker, &preArgs);
             DrawTextInWindow(idx, 1, 16, temp);
             break;
@@ -1768,13 +1768,13 @@ uint32_t StateManagerTrackerTopScreen() {
                     } else if(location == 255) {
                         if(updaterDelay >= 4) {
                             updaterDelay = 0;
-                            if(drinksDisplayed != apSettings.cafeDrinkMax) {
+                            if(drinksDisplayed != newApSettings.nums.cafeDrinkMax) {
                                 DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinksDisplayed & 0x7), 26 + 10*(drinksDisplayed / 8),
                                     (CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks > drinksDisplayed) ? checkSymbol : lockedSymbol);
                                 drinksDisplayed++;
                                 UpdateWindow(apTrackerWindowPtr->window_id);
                             }
-                            if(drinkEventsDisplayed != apSettings.cafeEventMax) {
+                            if(drinkEventsDisplayed != newApSettings.nums.cafeEventMax) {
                                 DrawTextInWindow(apTrackerWindowPtr->window_id, 142 + 9*(drinkEventsDisplayed & 0x7), 89 + 10*(drinkEventsDisplayed / 8),
                                     (CUSTOM_SAVE_AREA.acquiredCafeEventChecks > drinkEventsDisplayed) ? checkSymbol : lockedSymbol);
                                 drinkEventsDisplayed++;

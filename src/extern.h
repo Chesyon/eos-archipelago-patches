@@ -62,6 +62,41 @@ typedef struct ArchipelagoSettings { // size: 5 bytes
 } ArchipelagoSettings;
 ASSERT_SIZE(struct ArchipelagoSettings, 0x9);
 
+typedef struct ArchipelagoNums {
+    uint8_t expMultiplier;               // 0x0
+    uint8_t iqMultiplier;                // 0x1
+    uint8_t levelScalingMode;            // 0x2
+    uint8_t goal;                        // 0x3: For the time being, 0x0=Darkrai, 0x1=Dialga. I know, it should be the other way around, but this used to be a bool called dialgaIsGoal. I'll fix it when we get to recruitemall.
+    uint8_t startingEpisode;             // 0x4
+    uint8_t deathLinkType;               // 0x5
+    uint8_t totalJobsEarly;              // 0x6
+    uint8_t totalOutlawsEarly;           // 0x7
+    uint8_t totalJobsLate;               // 0x8
+    uint8_t totalOutlawsLate;            // 0x9
+    uint8_t starterOptions;              // 0xA
+    uint8_t requiredRelicFragmentShards; // 0xB
+    uint8_t requiredInstruments;         // 0xC
+    uint8_t cafeDrinkMax;                // 0xD
+    uint8_t cafeEventMax;                // 0xE
+} ArchipelagoNums;
+ASSERT_SIZE(struct ArchipelagoNums, 0xF);
+
+typedef struct ArchipelagoFlags {
+    bool earlyMissionFloors : 1; // bit 0 : 0b1
+    bool moveShortcuts : 1;      // bit 1 : 0b10
+    bool typesanity : 1;         // bit 2 : 0b100
+    bool longLocationsOn : 1;    // bit 3 : 0b1000
+    bool levelScaleGuests : 1;   // bit 4
+} ArchipelagoFlags;
+ASSERT_SIZE(struct ArchipelagoFlags, 0x1);
+
+typedef struct NewArchipelagoSettings {
+    ArchipelagoNums nums;   // 0x0
+    ArchipelagoFlags flags; // 0xF
+} NewArchipelagoSettings;
+ASSERT_SIZE(struct NewArchipelagoSettings, 0x10);
+
+extern NewArchipelagoSettings newApSettings;
 extern ArchipelagoSettings apSettings;
 
 typedef struct MissionStatus {
