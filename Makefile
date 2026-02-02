@@ -50,6 +50,11 @@ REGION := EU
 ROM := rom.nds
 ROM_OUT := out.nds
 
+# Helper variables
+VANILLA_ROM := vanilla.nds
+XDELTA_BASE := unpatched-base.xdelta
+BSDIFF_OUT := archipelago-base.bsdiff
+
 TARGET		:=	out
 BUILD		:=	build
 SOURCES		:=	src src/cot
@@ -60,6 +65,8 @@ OPT_LEVEL := -O2
 RELEASE_CONFIG := -DDEBUG
 
 PYTHON := python3
+XDELTA := xdelta3
+BSDIFF := bsdiff4f
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -190,57 +197,32 @@ headers:
 	
 .PHONY: backup
 backup: 
-	xdelta3 -e -f -s vanilla.nds rom.nds backups/backup-"`date +"%s"`".xdelta
+	@if [ -f "$(ROM)" ]; then \
+		$(XDELTA) -e -f -s "$(VANILLA_ROM)" "$(ROM)" backups/backup-"$$(date +%s)".xdelta; \
+	fi
 	
 .PHONY: rom
 rom: backup
-	xdelta3 -d -f -s vanilla.nds unpatched-base.xdelta rom.nds
+	$(XDELTA) -d -f -s $(VANILLA_ROM) $(XDELTA_BASE) $(ROM)
 
 .PHONY: xdelta
 xdelta:
-	xdelta3 -e -f -s vanilla.nds rom.nds unpatched-base.xdelta
+	$(XDELTA) -e -f -s $(VANILLA_ROM) $(ROM) $(XDELTA_BASE)
 	
 .PHONY: bsdiff
 bsdiff:
 	@echo "\e[1;33mThis part takes up to a minute, please be patient! \e[0m"
-	bsdiff4f vanilla.nds out.nds archipelago-base.bsdiff
+	$(BSDIFF) $(VANILLA_ROM) $(ROM_OUT) $(BSDIFF_OUT)
 	@echo "\e[1;32mDone! \e[0m"
-	
-.PHONY: overlay36-location
-.SILENT: overlay36-location
-overlay36-location:
-	echo "Position of Overlay36 (Decimal):"
-	LANG=C grep -a -b -P -U -o "\x0d\xf0\xad\xba" out.nds | cut -d ":" -f1
-	
-.PHONY: hintables-location
-.SILENT: hintables-location
-hintables-location:
-	echo "Position of Hintables (Decimal):"
-	LANG=C grep -a -b -P -U -o "\xe0\x51\x5b\xad" out.nds | cut -d ":" -f1
 
-.PHONY: out+c
-out+c: clean out
+.PHONY: scripts
+scripts:
+	$(PYTHON) tools/exps_cli.py $(ROM)
 
-# Apply the xdelta and apply CoT code.
-.PHONY: everything
-everything: rom out+c overlay36-location hintables-location
-
-# Make an xdelta and apply CoT code.
-.PHONY: everything+x
-everything+x: xdelta out+c overlay36-location hintables-location
-
-# Don't apply or make an xdelta, and apply CoT code. (same as out+c)
-.PHONY: everything-x
-everything-x: out+c overlay36-location hintables-location
-
-# Apply the xdelta, apply CoT code, and make a bsdiff.
-.PHONY: everything+b
-everything+b: rom out+c bsdiff overlay36-location hintables-location
-
-# Make an xdelta, apply CoT code, and make a bsdiff.
-.PHONY: everything+x+b
-everything+x+b: xdelta out+c bsdiff overlay36-location hintables-location
-
-# Don't apply or make an xdelta, apply CoT code, and make a bsdiff.
-.PHONY: everything-x+b 
-everything-x+b: out+c bsdiff overlay36-location hintables-location
+.PHONY: offsets
+.SILENT: offsets
+offsets:
+	echo "Position of overlay36 (Decimal):"
+	LANG=C grep -a -b -P -U -o "\x0d\xf0\xad\xba" $(ROM_OUT) | cut -d ":" -f1
+	echo "Position of hintables.bin (Decimal):"
+	LANG=C grep -a -b -P -U -o "\xe0\x51\x5b\xad" $(ROM_OUT) | cut -d ":" -f1

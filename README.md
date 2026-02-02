@@ -2,31 +2,26 @@
 This repository contains all ROMside custom code used in the Pokémon Mystery Dungeon: Explorers of Sky [Archipelago APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky).
 
 ## Just testing?
-Most of the below info doesn't apply to you. Just go check out the installation guide for your OS ([Linux](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_linux.md)) ([Windows](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_windows.md)) ([MacOS](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_macos.md)). Once the repository is set up, run `make everything+b` to get a `archipelago-base.bsdiff` that you can drop into the [APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/tree/main/worlds/pmd_eos/data).
+Most of the below info doesn't apply to you. Just go check out the installation guide for your OS ([Linux](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_linux.md)) ([Windows](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_windows.md)) ([MacOS](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_macos.md)). Once the repository is set up, run `make rom out bsdiff offsets` to get a `archipelago-base.bsdiff` that you can drop into the [APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/tree/main/worlds/pmd_eos/data). Change the values of `ov36_mem_loc` and `hintable_items_offset` in [Rom.py](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/Rom.py) to the values you get at the end of the `make` command.
 
 ## Makefile and the ROMs:
 We use Makefile to make compiling way easier. There are three NDS files in this repo, each with different purposes:
 * vanilla.nds: This needs to be provided by you. This should be an unmodified EU ROM for Pokémon Mystery Dungeon: Explorers of Sky. You will not modify this file.
 * rom.nds: The input file for c-of-time. Any changes that need to be made in SkyTemple or with external programs that aren't c-of-time should be done on this ROM.
-* out.nds: The output file from c-of-time. This is the final-ish ROM (minus the [world-specific data that gets written while patching](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/Rom.py#L44)), that Archipelago players will be using. This has all the C/ASM code from the repository applied. **Avoid making changes here, since they will be overwritten when re-applying c-of-time code!**
+* out.nds: The output file from c-of-time. This is the final-ish ROM (minus the [world-specific data that gets written while patching](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/Rom.py#L111)), that Archipelago players will be using. This has all the C/ASM code from the repository applied. **Avoid making changes here, since they will be overwritten when re-applying c-of-time code!**
 
-Now, we have a bunch of Makefile commands for the sake of applying code and patches. There are seven base commands, and a bunch of combo commands.
+Now, we have a bunch of Makefile commands for the sake of applying code and patches. There are ten commands that you can mix and match as needed.
 ### Base commands
 * `make out`: Applies code from the CoT repo to rom.nds to generate out.nds.
-* `make clean`: Removes unwanted files. Generally, this needs to be run before running `make out`.
-* `make rom`: Get the latest rom.nds by applying unpatched-base.xdelta to vanilla.nds.
+* `make clean`: Removes unwanted files. Run this if something breaks when running `make out`.
+* `make rom`: Get the latest rom.nds by applying unpatched-base.xdelta to vanilla.nds. Calls `make backup` first.
+* `make backup`: Creates an xdelta for the current rom.nds and stores it in `backups`.
 * `make xdelta`: Make a new unpatched-base.xdelta from rom.nds.
 * `make bsdiff`: Make an output archipelago-base.bsdiff from out.nds.
+* `make scripts`: Compiles all scripts from the rom.nds.skytemple folder into rom.nds. It's generally advised that you do this before `make xdelta`.
+* `make offsets`: Shows the location of overlay36 and hintables.bin in out.nds, to be plugged into ArchipelagoExplorersOfSky's Rom.py.
 * `make asmdump`: Shows the ASM for the compiled C code.
 * `make headers`: No clue what this one does, honestly. You probably won't need it!
-### Combo commands:
-* `make out-c`: Cleans up unwanted files and then applies CoT code. (All below combos use `out-c` when applying CoT code, so don't worry about running `make clean` for them!)
-* `make everything`: Apply the xdelta and apply CoT code.
-* `make everything+x`: Make an xdelta and apply CoT code.
-* `make everything-x`: Don't apply or make an xdelta, and apply CoT code. (This is the same as `out-c`, but I'm just covering all my bases.)
-* `make everything+b`: Apply the xdelta, apply CoT code, and make a bsdiff.
-* `make everything+x+b`: Make an xdelta, apply CoT code, and make a bsdiff.
-* `make everything-x+b`: Don't apply or make an xdelta, apply CoT code, and make a bsdiff.
 
 Below is the readme for c-of-time, which this repository is a fork of.
 # c-of-time
