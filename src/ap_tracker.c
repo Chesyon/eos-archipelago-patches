@@ -2,6 +2,7 @@
 #include <cot.h>
 #include <ap_utils.h>
 #include "extern.h"
+#include "custom_save_area.h"
 
 #define TR_BUFF_LEN 300
 

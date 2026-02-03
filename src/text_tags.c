@@ -1,6 +1,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "custom_save_area.h"
 #include "hints.h"
 
 bool __attribute__((used)) HandleLowercaseQTag(const char* tag_string, char* buf, int tag_param_count, const char* tag_string_param)

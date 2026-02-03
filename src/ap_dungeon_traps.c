@@ -4,6 +4,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "custom_save_area.h"
 #include "dungeon_generation.h"
 
 void __attribute__((naked)) GenerateFloorCustomLayouts() {

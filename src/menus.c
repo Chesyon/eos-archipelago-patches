@@ -2,6 +2,7 @@
 #include <cot.h>
 #include <ap_utils.h>
 #include "extern.h"
+#include "custom_save_area.h"
 
 // Custom script menus are disabled by default.
 // Refer to README.md for more information.

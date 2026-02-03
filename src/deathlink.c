@@ -4,6 +4,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "custom_save_area.h"
 
 void DeathLinkInitDungeon() {
     CUSTOM_SAVE_AREA.deathLinkTracker.receiver = false;

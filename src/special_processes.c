@@ -3,6 +3,7 @@
 #include <ap_utils.h>
 #include "extern.h"
 #include "crass.h"
+#include "custom_save_area.h"
 
 #if CUSTOM_SPECIAL_PROCESSES
 
