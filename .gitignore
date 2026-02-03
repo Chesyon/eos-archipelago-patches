@@ -2,9 +2,12 @@
 /build
 /venv
 /rom.nds.skytemple/debugger
+tmp
+
+/.ccls-cache
+compile_commands.json
 
 /locale/excludecache
-tmp
 
 out*
 
