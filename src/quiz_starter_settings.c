@@ -12,6 +12,7 @@ Random: Be randomly assigned a hero and partner from the starter pool.*/
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "ap_settings.h"
 
 typedef struct QuizData {
     // 0x0: something related to waiting for boxes state

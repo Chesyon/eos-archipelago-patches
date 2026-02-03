@@ -2,7 +2,6 @@
 
 #include <pmdsky.h>
 #include <cot.h>
-#include "extern.h"
 
 void __attribute__((naked)) CreateRoomInCell (int topLeftX, int topLeftY, int botRightX, int botRightY, int roomId, void* roomStuff, int bitflags) {
     asm("stmdb sp!,{r4,r5,r6,r7,r8,r9,lr}");

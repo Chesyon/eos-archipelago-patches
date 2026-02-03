@@ -1,9 +1,9 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include <ap_utils.h>
-#include "extern.h"
 #include "crass.h"
 #include "custom_save_area.h"
+#include "ap_settings.h"
 
 #if CUSTOM_SPECIAL_PROCESSES
 

@@ -1,6 +1,6 @@
 #include <pmdsky.h>
 #include <cot.h>
-#include "extern.h"
+#include "ap_settings.h"
 
 /*
   Returns the highest level across the current active team. If no valid team members are found, the max returned is 0.

@@ -1,6 +1,5 @@
 #include <pmdsky.h>
 #include <cot.h>
-#include "extern.h"
 #include "hints.h"
 
 void CopyFromHintables(void* buf, int offset, int length){
@@ -8,7 +7,7 @@ void CopyFromHintables(void* buf, int offset, int length){
     DataTransferInit();
     FileInit(&file);
     FileOpen(&file, "hintables.bin");
-    FileSeek(&file, offset, SEEK_SET);
+    FileSeek(&file, offset, 0);
     FileRead(&file, buf, length);
     FileClose(&file);
     DataTransferStop();

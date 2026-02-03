@@ -3,6 +3,7 @@
 #include <ap_utils.h>
 #include "extern.h"
 #include "custom_save_area.h"
+#include "ap_settings.h"
 
 #define TR_BUFF_LEN 300
 

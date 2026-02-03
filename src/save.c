@@ -1,6 +1,5 @@
 #include <pmdsky.h>
 #include <cot.h>
-#include "extern.h"
 #include "custom_save_area.h"
 
 int SaveMoreData(int* file_offset, void* buf, int size, int new_file_offset, bool force_save_flag) {

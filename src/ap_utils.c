@@ -2,6 +2,7 @@
 #include <cot.h>
 #include "extern.h"
 #include "custom_save_area.h"
+#include "ap_settings.h"
 #include "ap_utils.h"
 
 #define GOAL_DIALGA 1
