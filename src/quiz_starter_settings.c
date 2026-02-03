@@ -18,11 +18,11 @@ typedef struct QuizData {
     int8_t unk_0x0;
     int8_t unk_0x1;
     // 0x2: during the quiz questions?
-    int8_t dialougeBox1Id;
+    int8_t dialogueBox1Id;
     // 0x3: simple or advanced
     int8_t menuId;
     // 0x4
-    int8_t dialougeBox2Id;
+    int8_t dialogueBox2Id;
     // 0x5
     int8_t portraitBoxId;
     // 0x6: Specifically for Debug Quiz Window?
@@ -312,12 +312,12 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             struct preprocessor_args preArgs;
             InitPreprocessorArgs(&preArgs);
             preArgs.flag_vals[0] = quizData->currentQuestion;
-            ShowDialogueBox(quizData->dialougeBox1Id);
-            ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, CONFIRMATION_STR_ID, &preArgs);
+            ShowDialogueBox(quizData->dialogueBox1Id);
+            ShowStringIdInDialogueBox(quizData->dialogueBox1Id, preFlags, CONFIRMATION_STR_ID, &preArgs);
             quizData->state = quizData->state + 1;
             break;
         case 0x44:; // Override Check Yes/No Menu
-            if(IsDialogueBoxActive(quizData->dialougeBox1Id) == false) {
+            if(IsDialogueBoxActive(quizData->dialogueBox1Id) == false) {
                 quizData->menuId = CreateSimpleMenuFromStringIds(&QUIZ_WINDOW_PARAMS_5, windowYesNoFlags, NULL,
                     QUIZ_MENU_ITEMS_1, 2);
                 quizData->state = quizData->state + 1;
@@ -337,8 +337,8 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
             }
             break;
         case 0x46:; // Make Hero Selection Menu
-            ShowDialogueBox(quizData->dialougeBox1Id);
-            ShowStringIdInDialogueBox(quizData->dialougeBox1Id, preFlags, WHO_LIKE_TO_BE_STR_ID, &preArgs);
+            ShowDialogueBox(quizData->dialogueBox1Id);
+            ShowStringIdInDialogueBox(quizData->dialogueBox1Id, preFlags, WHO_LIKE_TO_BE_STR_ID, &preArgs);
             quizData->menuId = CreateAdvancedMenu(&QUIZ_WINDOW_PARAMS_6, windowHeroSelectFlags,
                 NULL, GetOptionStringFromID, quizData->numSelectablePartners, 6);
             PARTNER_SELECT_MENU_OPTION_TRACKER = 0;
