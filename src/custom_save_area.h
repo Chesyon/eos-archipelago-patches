@@ -6,8 +6,8 @@
 #define NUM_HINTABLES 30
 
 typedef struct MissionStatus {
-    uint8_t completedJobs : 8;    // 0x0
-    uint8_t completedOutlaws : 8; // 0x1
+    uint8_t completedJobs;    // 0x0
+    uint8_t completedOutlaws; // 0x1
 } MissionStatus;
 ASSERT_SIZE(MissionStatus, 0x2);
 
