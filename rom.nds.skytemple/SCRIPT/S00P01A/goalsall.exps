@@ -20,7 +20,7 @@ def 0 {
         message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
         message_Talk(" Our current goal is to defeat\nthat wicked [CS:G]Darkrai[CR] in [CS:P]Dark Crater[CR].[K] To open\nthe way, we need the [CS:C]Legendary Treasures[CR]!");
         message_Talk(" We have [quag:1] Treasures\nright now! Let me see how that stacks up against\nwhat we need to face [CS:G]Darkrai[CR]...");
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -75,7 +75,7 @@ def 0 {
                 message_Talk(" According to my records,\n[CS:G]Lapras[CR] is waiting for us on the beach\nto take us to [CS:P]Hidden Land[CR], [hero]!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" According to my notes, we have\nall the [CS:I]Relic Fragment Shards[CR] we need![K] But\n[CS:P]Hidden Land[CR] is closed?[K] Probably [CS:G]Cryptic[CR]\'s fault!");
@@ -160,7 +160,7 @@ def 0 {
         if (not debug) {
             message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Is that enough?");
         }
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -207,7 +207,7 @@ def 0 {
                 message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_PLAYER_BIPPA, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
@@ -267,7 +267,7 @@ def 0 {
         if (not debug) {
             message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Math is soooo hard!");
         }
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -314,7 +314,7 @@ def 0 {
                 message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_PLAYER_PUPURIN, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Hee-hee, sounds like\n[CS:G]Cryptic[CR] really goofed this one, didn\'t she?");
@@ -374,7 +374,7 @@ def 0 {
         if (not debug) {
             message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. What did they need?");
         }
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -421,7 +421,7 @@ def 0 {
                 message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_PLAYER_KIMAWARI, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Eek, sounds like\n[CS:G]Cryptic[CR] really missed on this one, didn\'t she?");
@@ -480,7 +480,7 @@ def 0 {
         if (not debug) {
             message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let me check...");
         }
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -527,7 +527,7 @@ def 0 {
                 message_Talk(" Seems like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! How exciting!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_NPC_SAANAITO, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Golly, sounds like\n[CS:G]Cryptic[CR] really bungled this one, didn\'t she?");
@@ -586,7 +586,7 @@ def 0 {
         if (not debug) {
             message_Talk(" To do that, they need a bunch of\n[CS:C]Legendary Treasures[CR]! Last I heard, they\nhad [quag:1] of them already. Let\'s see...");
         }
-        switch(ProcessSpecial(102,0,1)) { // Instruments
+        switch(ProcessSpecial(102,0, 3)) { // Instruments
             case 0: // Have all of them!
                 switch(dungeon_mode(67)) {
                     case DMODE_OPEN_AND_REQUEST:
@@ -633,7 +633,7 @@ def 0 {
                 message_Talk(" Sounds to me like they already have\n[CS:G]Lapras[CR] waiting for them on the beach\nto take them to [CS:P]Hidden Land[CR]! Excellent!");
                 break;
             default: // Hidden Land not Unlocked!
-                switch(ProcessSpecial(102,0,0)) { // Fragment Shards
+                switch(ProcessSpecial(102,0, 2)) { // Fragment Shards
                     case 0: // Have all of them! ... but this is impossible!
                         message_SetFace(ACTOR_NPC_JUPUTORU, FACE_WORRIED, FACE_POS_STANDARD);
                         message_Talk(" So they have all the fragments, except\n[CS:G]Lapras[CR] never showed up? Come on, [CS:G]Cryptic[CR]!\nYou\'re better than this!");

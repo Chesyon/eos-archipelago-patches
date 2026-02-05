@@ -24,8 +24,6 @@ macro Poochyena_CMain() {
             spanish=" He oído que [CS:N]Drowzee[CR] está\nen el [CS:N]Pokégremio[CR].",
         });
         message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -273,7 +271,10 @@ macro Poochyena_CMain() {
         });
         message_Close();
         jump @label_130;
-    } else {
-        jump @label_130;
     }
+    message_Talk(" You know how you get [M:T6][CS:I]Checks[CR]\nfrom doing missions?[K] Most of the time, you\nget one check for each mission. Unless...");
+    message_Talk(" I heard it on good authority that\nonce you reach [CS:C]Gold Rank[CR], you sometimes get\nthese annoying restrictions on your missions!");
+    message_Talk(" They say if you complete a mission\nwith a restriction on it, it's worth double the\nchecks![K] We aren't [CS:C]Gold Rank[CR] yet though...");
+    §label_130;
+    JumpCommon(CORO_END_TALK);
 }

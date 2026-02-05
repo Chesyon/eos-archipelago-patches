@@ -1,0 +1,23 @@
+
+def 0 {
+    supervision_Station(0);
+    if ( scn($SCENARIO_MAIN) >= [25, 4] ) {
+        §label_0;
+        supervision_Station(8);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 3] ) {
+        supervision_Station(8);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 2] ) {
+        supervision_Station(8);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 2] ) {
+        supervision_Station(8);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [25, 1] ) {
+        supervision_Station(8);
+        end;
+    } else {
+        end;
+    }
+}

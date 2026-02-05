@@ -789,10 +789,10 @@ def 0 {
     if (debug) {
         return;
     }
-    switch( ProcessSpecial(105,0,0)) {
+    switch( ProcessSpecial(105,0, 4)) {
         case > 0:
             debug_Print("Spinda Case  > 0");
-            ProcessSpecial(105,1,0);
+            ProcessSpecial(105,1, 4);
             message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
             break;
@@ -805,10 +805,10 @@ def 0 {
     if (debug) {
         return;
     }
-    switch( ProcessSpecial(105,0,0)) {
+    switch( ProcessSpecial(105,0, 4)) {
         case > 0:
             debug_Print("Spinda Case  > 0");
-            ProcessSpecial(105,1,0);
+            ProcessSpecial(105,1, 4);
             message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
             break;
@@ -841,10 +841,10 @@ def 0 {
     if (debug) {
         return;    
     }
-    switch( ProcessSpecial(105,0,1)) {
+    switch( ProcessSpecial(105,0, 5)) {
         case > 0:
             debug_Print("Spinda Case  > 0");
-            ProcessSpecial(105,1,1);
+            ProcessSpecial(105,1, 5);
             message_Mail("You got a check!");
             $SCENARIO_TALK_BIT_FLAG[247] = 1;
             break;

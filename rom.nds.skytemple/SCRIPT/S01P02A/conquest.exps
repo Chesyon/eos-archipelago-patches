@@ -1,7 +1,7 @@
 
 def 0 {
     $SCENARIO_MAIN_BIT_FLAG[40] = 0;
-    $DUNGEON_ENTER_INDEX = value($DUNGEON_SELECT);
+    //$DUNGEON_ENTER_INDEX = value($DUNGEON_SELECT);
     debug_Print('CONQUEST_S01P02A');
     back_SetGround(LEVEL_S01P02A);
     switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
@@ -32,6 +32,7 @@ def 0 {
         spanish=" Se puede enviar desde el menú\nque aparece al seleccionar la opción Rescate\nde amigos en el menú principal.",
     });
     message_Close();
+    /*
     if (debug) {
             message_Mail("[STS][CN]You got 3 mission checks for this rescue!\n[CN]Expect them to arrive soon![STE]");
             message_Close();
@@ -68,6 +69,7 @@ def 0 {
                 break;
         }
     }
+    */
     Unlock(3);
     WaitExecuteLives(ACTOR_PLAYER);
     WaitExecuteLives(ACTOR_ATTENDANT1);

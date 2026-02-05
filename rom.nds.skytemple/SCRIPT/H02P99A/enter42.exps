@@ -92,7 +92,7 @@ def 0 {
                         break;
                     case menu("No"):
                         message_Close();
-                        message_Talk(" Very well, it shall remain enabled.");
+                        message_Talk(" Very well, it shall remain disabled.");
                         message_Close();
                         break;
                 }     
@@ -109,7 +109,7 @@ def 0 {
                         break;
                     case menu("No"):
                         message_Close();
-                        message_Talk(" Very well, it shall remain disabled.");
+                        message_Talk(" Very well, it shall remain enabled.");
                         message_Close();
                         break;
                 }       

@@ -137,7 +137,7 @@ def 0 {
             message_Talk(" Seems like we\'re missing a Project P\ntreasure check! Let\'s do some recycling, [hero]!");
             return;
     }
-    switch( ProcessSpecial(105,0,1)) {
+    switch( ProcessSpecial(105,0, 5)) {
         case > 0:
             message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nLet\'s go relax at the cafe, [hero]!");
             return;
@@ -668,7 +668,7 @@ def 0 {
             break;
     }
     
-    switch(ProcessSpecial(105,0,0)) {
+    switch(ProcessSpecial(105,0, 4)) {
         case > 0:
             message_Talk(" Seems like we need to make\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
             message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else we can do...");

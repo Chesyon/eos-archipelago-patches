@@ -38,8 +38,6 @@ macro Poochyena_AMain() {
             spanish=" Pero avísanos si [CS:N]Drowzee[CR]\nvuelve a las andadas, porque entonces...\n¡nos encargaremos de cogerle!",
         });
         message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -357,7 +355,11 @@ macro Poochyena_AMain() {
         });
         message_Close();
         jump @label_130;
-    } else {
-        jump @label_130;
     }
+    §label_130;
+    message_Talk(" You know how you get [M:T6][CS:I]Checks[CR]\nfrom doing missions?[K] Depending on the kind\nof mission, it counts to either jobs or outlaws.");
+    message_Talk(" I've heard that certain missions,\nsuch as challenge letters, actually count as\none of each![K] A job check AND an outlaw check!");
+    message_Talk(" I hear that challenge letters only\never show up in the cafe though. They don't\never show up on the Job or Outlaw boards!");
+    message_Close();
+    JumpCommon(CORO_END_TALK);
 }

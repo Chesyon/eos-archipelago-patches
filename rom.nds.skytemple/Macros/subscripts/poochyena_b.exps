@@ -24,8 +24,6 @@ macro Poochyena_BMain() {
             spanish=" ¿Para qué traer a un delincuente\ncomo [CS:N]Drowzee[CR]?",
         });
         message_Close();
-        §label_130;
-        JumpCommon(CORO_END_TALK);
     } elseif ($DUNGEON_OPEN_LIST[62]) {
         // [29, 72], Mt. Trevail not unlocked
         with(actor ACTOR_TALK_MAIN) {
@@ -294,7 +292,11 @@ macro Poochyena_BMain() {
         });
         message_Close();
         jump @label_130;
-    } else {
-        jump @label_130;
     }
+    §label_130;
+    message_Talk(" You know how you get [M:T6][CS:I]Checks[CR]\nfrom doing missions?[K] Most of the time, you\nget one check for each mission. However...");
+    message_Talk(" I've heard that those icky escort\nmissions tend to pay out with twice as many\nchecks![K] Still isn't enough to get us interested...");
+    message_Talk(" That's not all though! Apparently,\n[CS:G]Chatot[CR] once gave a team a whole bunch of\nchecks after finding [CS:C]hidden treasure[CR]! Woah!");
+    message_Close();
+    JumpCommon(CORO_END_TALK);
 }

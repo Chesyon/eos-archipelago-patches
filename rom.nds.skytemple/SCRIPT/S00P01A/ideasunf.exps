@@ -56,7 +56,7 @@ def 0 {
             break;
     }
 
-    switch( ProcessSpecial(105,0,1)) {
+    switch( ProcessSpecial(105,0, 5)) {
         case > 0:
             message_Talk(" Seems like we need to make\nmore drinks at the cafe. Any kind will do![K]\nOh my gosh, I should go relax at the cafe!");
             end;
@@ -163,7 +163,7 @@ def 0 {
         message_Talk(" Oh my gosh! I need to hurry\nup and head to [CS:P]Spring Cave[CR]!");
         end;
     }
-    switch(ProcessSpecial(105,0,0)) {
+    switch(ProcessSpecial(105,0, 4)) {
         case > 0:
             message_Talk(" Seems like I can do a few\nmore drink events at the cafe. [CS:I]Hunger Seeds[CR]\nhave the highest chance for a drink event!");
             message_Talk(" Gummis are also pretty good, but\nlet\'s see if there\'s anything else I can do...");
