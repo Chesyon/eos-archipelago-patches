@@ -1,6 +1,43 @@
 import "hints.exps";
 macro DiglettMain() {
     ~CheckHints();
+    switch($GROUND_ENTER) {
+        case LEVEL_D25P11A:
+            // [24, 1], Brine Cave Lost
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
+            }
+            message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Ugh...[K] Our team was wiped out\nas well.",
+                french=" Argh...[K] Notre équipe aussi a été\nvaincue.",
+                german=" Hmpf...[K] Unser Team wurde auch\nbesiegt.",
+                italian=" Uh...[K] Anche la nostra squadra\nè stata sconfitta.",
+                spanish=" Uf...[K] También han derrotado a\nnuestro equipo.",
+            });
+            message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" But we won't give up! We'll do\nour best!",
+                french=" Mais on n'abandonnera pas!\nOn se donnera à fond!",
+                german=" Aber wir geben nicht auf! Wir\ngeben unser Bestes!",
+                italian=" Ma non molleremo! Ce la\nmetteremo tutta!",
+                spanish=" ¡Pero no nos rendiremos!\n¡Lo haremos lo mejor posible!",
+            });
+            message_Close();
+            jump @label_130;
+        default:
+            break;
+    }
+    
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -254,39 +291,7 @@ macro DiglettMain() {
             spanish=" ¡Ojalá os vaya bien![K]\n¡Buena suerte!",
         });
         message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 35) {
-        // [24, 1], Brine Cave Lost
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_DIGUDA);
-        }
-        message_SetFace(ACTOR_NPC_DIGUDA, FACE_PAIN, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Ugh...[K] Our team was wiped out\nas well.",
-            french=" Argh...[K] Notre équipe aussi a été\nvaincue.",
-            german=" Hmpf...[K] Unser Team wurde auch\nbesiegt.",
-            italian=" Uh...[K] Anche la nostra squadra\nè stata sconfitta.",
-            spanish=" Uf...[K] También han derrotado a\nnuestro equipo.",
-        });
-        message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" But we won't give up! We'll do\nour best!",
-            french=" Mais on n'abandonnera pas!\nOn se donnera à fond!",
-            german=" Aber wir geben nicht auf! Wir\ngeben unser Bestes!",
-            italian=" Ma non molleremo! Ce la\nmetteremo tutta!",
-            spanish=" ¡Pero no nos rendiremos!\n¡Lo haremos lo mejor posible!",
-        });
-        message_Close();
-        jump @label_130;
+        jump @label_130;   
     } elseif ($DUNGEON_CONQUEST_LIST[34]) {
         // [22, 2], Returned to Guild
         with(actor ACTOR_TALK_MAIN) {

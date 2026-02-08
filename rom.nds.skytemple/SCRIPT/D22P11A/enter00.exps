@@ -1,0 +1,80 @@
+
+def 0 {
+    debug_Print('MAPIN D22P11A');
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            debug_Print('CHARA_SET');
+            supervision_StationCommon(0);
+            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                case 4:
+                    debug_Print('UN08');
+                    supervision_ExecuteStationSub(LEVEL_D22P11A, 'UN08', 0);
+                    §label_3;
+                    debug_Print('PLAYER_SET');
+                    if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                        debug_Print('PLAYER_RESUME');
+                        $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                        switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                            case 4:
+                                debug_Print('PLAYER_RESUME_FUTURE');
+                                supervision_StationCommon(52);
+                                §label_7;
+                                debug_Print('SET_BGM');
+                                bgm_PlayFadeIn(BGM_DUSK_FOREST, 0, 256);
+                                JumpCommon(CORO_COMMON_ENTER);
+                            default:
+                                supervision_StationCommon(2);
+                                jump @label_7;
+                        }
+                    } else {
+                        debug_Print('PLAYER_SET_NORMAL');
+                        switch ( sector() ) {
+                            case 1:
+                                end;
+                            default:
+                                switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                    case 4:
+                                        supervision_StationCommon(51);
+                                        jump @label_7;
+                                    default:
+                                        supervision_StationCommon(1);
+                                        jump @label_7;
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    supervision_ExecuteStationSub(LEVEL_D22P11A, 'UM19', 0);
+                    jump @label_3;
+            }
+            break;
+        default:
+            debug_Print('BACK_SET');
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_D22P11A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 3 for_actor(ACTOR_PLAYER_FUTURE) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

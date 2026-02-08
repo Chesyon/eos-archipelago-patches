@@ -1,0 +1,79 @@
+def 0 {
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+    }
+    with (actor ACTOR_PLAYER) {
+        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+    }
+    WaitExecuteLives(ACTOR_ATTENDANT1);
+    WaitExecuteLives(ACTOR_PLAYER);
+    with (actor ACTOR_PLAYER) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Talk(" Hiya, [hero]![K] Sorry to be\na bother, but have you played this [M:T5][CS:I]APWorld[CR]\nbefore?[K] Or even the vanilla [CS:K]Explorers of Sky[CR]?");
+    switch(message_SwitchMenu(0, 0)) {
+        case menu("Played [M:T5][CS:I]APWorld[CR]"):
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Got it![W:15] Don't forget that you can\nalways talk to me with [M:B7] in any overworld!\n[W:30]I have lots of useful information to share.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            break;
+        default:
+        case menu("Played Vanilla"):
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_HAPPY,FACE_POS_STANDARD);
+            message_Talk(" Phew! I'm glad I asked![K] Okay, so\nthis archi has a few big differences from the\nvanilla game, especially in the QoL department!");
+            §explain;
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" First of all, the [CS:C]FAQ[CR] tab under\n[CS:C]Others[CR] in your pause menu is going to be really\nhelpful for you.[K] Please read those closely!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Next up, [CS:G]CRASS[CR] Cutscene Skip!\n[K]The devs have trimmed off some, but not all\nof the vanilla cutscenes.[K] However...");
+            message_Talk(" If you press [M:B0] during a\ncutscene, it'll try to skip it![K] Some cutscenes\nare unskippable, like the personality quiz...");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_DETERMINED,FACE_POS_STANDARD);
+            message_Talk(" Hopefully you aren't trying to\nskip my dialogue now...[W:15] It won't work, this\nisn't technically a cutscene to begin with!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+            message_Talk(" Sorry for the long monologue,\n[hero]...[K] I won't talk nearly that much\never again unless you ask me to.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_JOYOUS,FACE_POS_STANDARD);
+            message_Talk(" Next up, talking to yours truly!\n[K]In vanilla, you could get flavor text from me\nand little else.[K] Here I'm much more helpful!");
+            message_Talk(" I can explain our current goal,\ntell you about checks you might have missed,\nand I may be able to fix certain glitches too!");
+            message_Talk(" I always carry an [M:I1][CS:I]Escape Orb[CR]\nif we're stuck in an overworld somehow.[K] Most\nimportantly, we can play [CS:C]Rock Paper Scissors[CR]!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+            message_Talk(" The [CS:K]Bronzong[CR] floating in our\nbase is here for fast travel.[K] Honestly I don't\neven know if they're even alive or not...");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Finally, we have [CS:G]Pelipper[CR] over\nthere.[K] He delivers Dungeon [CS:I]Items[CR] we get from\nother players. Ask him about [CS:C]Express Mail[CR]!");
+            message_Talk(" If you have any questions, or\nrecommendations for what other information\nI should mention, please let the devs know!");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            break;
+        case menu("Never Played"):
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" That's probably not a great idea,\n[hero].[K] Spoilers aside, this [M:T5][CS:I]APWorld[CR]\nexpects you to know a quite a bit from vanilla.");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_SIGH,FACE_POS_STANDARD);
+            message_Talk(" There isn't enough RAM available\nfor me to fill in the gaps about the entirety of\nvanilla right now.[K] Maybe watch a playthrough?");
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
+            message_Talk(" Anyway, let me go over stuff\nspecific to our [M:T5][CS:I]APWorld[CR] for you, at the very\nleast.[K] That way you won't be too far behind...");
+            jump @explain;
+    }
+    supervision_RemoveCommon(6);
+    JumpCommon(CORO_END_TALK);
+    hold;
+}

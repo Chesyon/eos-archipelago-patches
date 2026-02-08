@@ -1,0 +1,13 @@
+
+def 0 {
+    supervision_Station(0);
+    switch ( sector() ) { }
+    if ($DUNGEON_ENTER_INDEX == 33) {
+        §label_0;
+        supervision_Station(4);
+        end;
+    } else {
+        supervision_Station(3);
+        end;
+    }
+}

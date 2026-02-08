@@ -11,78 +11,98 @@ def 0 {
             } else {
                 supervision_StationCommon(9);
             }
+            /*
             switch ( scn($SCENARIO_SUB3)[1] ) { // Check already claimed?
                 case &<< 6:
-                supervision_ExecuteStationSub(LEVEL_D73P11A, 'US23', 0);
-                §label_9;
-                debug_Print('LABEL_PLAYER_SET');
-                if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
-                    debug_Print('LABEL_REBIRTH');
-                    supervision_StationCommon(5);
-                    §label_13;
-                    debug_Print('SET_BGM');
-                    bgm_PlayFadeIn(BGM_SHAYMIN_VILLAGE, 0, 256);
-                    debug_Print('LABEL_ENTER_END');
-                    if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
-                        $SCENARIO_MAIN_BIT_FLAG[4] = 0;
-                        §label_10;
-                        debug_Print('LABEL_END');
-                        JumpCommon(CORO_COMMON_ENTER);
-                    } elseif ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
-                        screen_FadeIn(1, 30);
-                        screen_FadeInAll(1, 30);
-                        $SCENARIO_MAIN_BIT_FLAG[46] = 0;
-                        message_SetFace(ACTOR_NPC_FUWARAIDO, FACE_NORMAL, FACE_POS_STANDARD);
-                        message_Talk({
-                            english=" The [CS:P]Shaymin Village[CR].\nThe [CS:P]Shaymin Village[CR].",
-                            french=" [CS:P]Village Shaymin[CR],\n[CS:P]Village Shaymin[CR]!",
-                            german=" Nächster Halt [CS:P]Shaymin-Dorf[CR].\nNächster Halt [CS:P]Shaymin-Dorf[CR].",
-                            italian=" [CS:P]Villaggio Shaymin[CR]!\n[CS:P]Villaggio Shaymin[CR]!",
-                            spanish=" [CS:P]Aldea Shaymin[CR].\nHemos llegado a [CS:P]Aldea Shaymin[CR].",
-                        });
-                        message_Talk({
-                            english=" Thank you for your patronage.",
-                            french=" Merci d\'avoir utilisé\nnos services.",
-                            german=" Es ist mir immer ein Vergnügen,\ndich als Kunden begrüßen zu dürfen.",
-                            italian=" Grazie per averci scelto.",
-                            spanish=" Esperamos verte pronto, gracias.",
-                        });
-                        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
-                        jump @label_10;
-                    } else {
-                        JumpCommon(CORO_COMMON_ENTER);
-                    }
-                } else {
-                    debug_Print('LABEL_PLAYER_SET_RESUME');
-                    if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
-                        debug_Print('LABEL_RESUME');
-                        $SCENARIO_MAIN_BIT_FLAG[7] = 0;
-                        supervision_StationCommon(3);
-                        jump @label_13;
-                    } else {
-                        debug_Print('LABEL_PLAYER_SET_NORMAL');
-                        if ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
-                            supervision_StationCommon(2);
-                            jump @label_13;
-                        } else {
-                            switch ( $GROUND_GETOUT ) {
-                                case 202:
-                                    supervision_StationCommon(4);
-                                    jump @label_13;
-                                case 224:
-                                    supervision_StationCommon(1);
-                                    jump @label_13;
-                                default:
-                                    supervision_StationCommon(6);
-                                    jump @label_13;
-                            }
-                        }
-                    }
-                }
+                    supervision_ExecuteStationSub(LEVEL_D73P11A, 'US23', 0);
+                    break;
                 default:
                     §label_8;
                     supervision_ExecuteStationSub(LEVEL_D73P11A, 'US31', 0);
                     jump @label_9;
+            }
+            */
+            if ($DUNGEON_CONQUEST_LIST[69]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us23', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[66]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us22', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[63]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us21', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[62]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us20', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[53]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us04', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[49]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us03', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us02', 0);
+            } else {
+                supervision_ExecuteStationSub(LEVEL_D73P11A, 'us31', 0);
+            }
+            §label_9;
+            debug_Print('LABEL_PLAYER_SET');
+            if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                debug_Print('LABEL_REBIRTH');
+                supervision_StationCommon(5);
+                §label_13;
+                debug_Print('SET_BGM');
+                bgm_PlayFadeIn(BGM_SHAYMIN_VILLAGE, 0, 256);
+                debug_Print('LABEL_ENTER_END');
+                if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                    $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                    §label_10;
+                    debug_Print('LABEL_END');
+                    JumpCommon(CORO_COMMON_ENTER);
+                } elseif ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
+                    screen_FadeIn(1, 30);
+                    screen_FadeInAll(1, 30);
+                    $SCENARIO_MAIN_BIT_FLAG[46] = 0;
+                    message_SetFace(ACTOR_NPC_FUWARAIDO, FACE_NORMAL, FACE_POS_STANDARD);
+                    message_Talk({
+                        english=" The [CS:P]Shaymin Village[CR].\nThe [CS:P]Shaymin Village[CR].",
+                        french=" [CS:P]Village Shaymin[CR],\n[CS:P]Village Shaymin[CR]!",
+                        german=" Nächster Halt [CS:P]Shaymin-Dorf[CR].\nNächster Halt [CS:P]Shaymin-Dorf[CR].",
+                        italian=" [CS:P]Villaggio Shaymin[CR]!\n[CS:P]Villaggio Shaymin[CR]!",
+                        spanish=" [CS:P]Aldea Shaymin[CR].\nHemos llegado a [CS:P]Aldea Shaymin[CR].",
+                    });
+                    message_Talk({
+                        english=" Thank you for your patronage.",
+                        french=" Merci d\'avoir utilisé\nnos services.",
+                        german=" Es ist mir immer ein Vergnügen,\ndich als Kunden begrüßen zu dürfen.",
+                        italian=" Grazie per averci scelto.",
+                        spanish=" Esperamos verte pronto, gracias.",
+                    });
+                    CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+                    jump @label_10;
+                } else {
+                    JumpCommon(CORO_COMMON_ENTER);
+                }
+            } else {
+                debug_Print('LABEL_PLAYER_SET_RESUME');
+                if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                    debug_Print('LABEL_RESUME');
+                    $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                    supervision_StationCommon(3);
+                    jump @label_13;
+                } else {
+                    debug_Print('LABEL_PLAYER_SET_NORMAL');
+                    if ( $SCENARIO_MAIN_BIT_FLAG[46] ) {
+                        supervision_StationCommon(2);
+                        jump @label_13;
+                    } else {
+                        switch ( $GROUND_GETOUT ) {
+                            case 202:
+                                supervision_StationCommon(4);
+                                jump @label_13;
+                            case 224:
+                                supervision_StationCommon(1);
+                                jump @label_13;
+                            default:
+                                supervision_StationCommon(6);
+                                jump @label_13;
+                        }
+                    }
+                }
             }
             break;
         default:

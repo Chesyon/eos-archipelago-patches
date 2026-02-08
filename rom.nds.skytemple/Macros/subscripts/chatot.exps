@@ -2,6 +2,135 @@ import "hints.exps";
 macro ChatotMain() {
     ~CheckHints();
     $LOCAL1 = 0;
+    switch($GROUND_ENTER) {
+        case LEVEL_D08P11A:
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_PERAPPU);
+            }
+            if ($DUNGEON_CONQUEST_LIST[13]) {
+                // [10, 2], Lost in Foggy Forest
+                message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Oh? You haven't seen our\nGuildmaster? You're wondering where he is?",
+                    french=" Ah? Vous n'avez pas vu le\nMaître de la Guilde? Vous vous demandez\noù il est?",
+                    german=" Oh, ihr habt unseren\nGildenmeister noch nicht gesehen und fragt\neuch, wo er ist?",
+                    italian=" Eh? Non avete visto il nostro\nCapitano? Volete sapere dov'è?",
+                    spanish=" ¿Cómo? ¿Que no habéis visto al\nGran Bluff? ¿Y os preguntáis dónde está?",
+                });
+                message_Talk({
+                    english=" The Guildmaster has...[K]wandered\noff somewhere.",
+                    french=" Le Maître est... [K]parti flâner\nquelque part.",
+                    german=" Der Gildenmeister[K] ist irgendwo\nunterwegs.",
+                    italian=" Il Capitano è...[K] in giro da\nqualche parte.",
+                    spanish=" El Gran Bluff...[K] se ha ido a\ndar una vuelta.",
+                });
+                message_Close();
+                se_Play(5122);
+                with(actor ACTOR_NPC_PERAPPU) {
+                    SetAnimation(18);
+                }
+                with(actor ACTOR_NPC_PERAPPU) {
+                    WaitAnimation();
+                }
+                WaitExecuteLives(ACTOR_NPC_PERAPPU);
+                with(actor ACTOR_NPC_PERAPPU) {
+                    SetAnimation(2);
+                }
+                message_SetFace(ACTOR_NPC_PERAPPU, FACE_PAIN, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" It's amazing, really, how little\npatience he has.",
+                    french=" Vraiment, c'est incroyable, il n'a\naucune patience.",
+                    german=" Es ist wirklich erstaunlich, wie\nwenig Geduld er hat.",
+                    italian=" È sorprendente, davvero,\nla poca pazienza che ha.",
+                    spanish=" Realmente, hay que ver la poca\npaciencia que tiene.",
+                });
+                message_Talk({
+                    english=" I would imagine he's taking a\nstroll in the forest without a care in\nthe world.",
+                    french=" J'imagine qu'il se promène dans\nla forêt sans se soucier de quoi que ce soit.",
+                    german=" Ich könnte mir vorstellen, dass\ner völlig unbesorgt einen kleinen Spaziergang\nim Wald macht.",
+                    italian=" Me lo immagino a passeggiare\nnel bosco senza alcuna preoccupazione.",
+                    spanish=" Seguramente está paseando tan\ntranquilo por el bosque.",
+                });
+                message_Talk({
+                    english=" I imagine he'll come back\nsoon enough.",
+                    french=" Je suppose qu'il va revenir\nbientôt.",
+                    german=" Ich denke mal, er wird schon\nfrüh genug zurückkommen.",
+                    italian=" Immagino che tornerà\nabbastanza presto.",
+                    spanish=" Supongo que volverá enseguida.",
+                });
+                message_Close();
+                jump @label_129;
+            } else {
+                // [10, 1], Foggy Forest Unlocked
+                message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Ah, you two! You have yet\nto leave?",
+                    french=" Ah, vous deux! Vous êtes encore\nlà?",
+                    german=" Ah, ihr zwei! Seid ihr noch nicht\nunterwegs?",
+                    italian=" Ah, voi due! Non siete ancora\nin viaggio?",
+                    spanish=" ¡Ah, aquí estáis! ¿Todavía no\nos habéis ido?",
+                });
+                message_Talk({
+                    english=" Get ready quickly! Then be on\nyour way!",
+                    french=" Préparez-vous vite et\nmettez-vous en route!",
+                    german=" Macht euch schnell fertig! Und\ndann ab mit euch!",
+                    italian=" Preparatevi in fretta!\nE mettetevi in marcia!",
+                    spanish=" ¡Preparaos cuanto antes!\n¡Tenéis que salir enseguida!",
+                });
+                message_Talk({
+                    english=" Ah, by the way...",
+                    french=" Ah, au fait...",
+                    german=" Ah, übrigens...",
+                    italian=" Ah, a proposito...",
+                    spanish=" Ah, y por cierto...",
+                });
+                message_Close();
+                with(actor ACTOR_NPC_PERAPPU) {
+                    Turn2Direction(4, 10, DIR_UPRIGHT);
+                }
+                WaitExecuteLives(ACTOR_NPC_PERAPPU);
+                message_Talk({
+                    english=" You can use the Kangaskhan Rock\nto store and take out your items. And to save\nyour progress.",
+                    french=" Vous pouvez vous servir de la\nStatue Kangourex comme d'une réserve. Vous\npouvez aussi y sauvegarder votre aventure.",
+                    german=" Ihr könnt den Kangama-Speicher\nverwenden, um eure Items einzulagern, zu\nentnehmen und um das Spiel zu speichern.",
+                    italian=" Si può usare la statua\nKangaskhan per depositare e riprendere gli\nstrumenti, nonché per salvare la partita.",
+                    spanish=" La Roca de Kangaskhan sirve\ntanto para almacenar y recuperar objetos,\ncomo para guardar vuestro progreso.",
+                });
+                message_Close();
+                with(actor ACTOR_NPC_PERAPPU) {
+                    Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+                }
+                WaitExecuteLives(ACTOR_NPC_PERAPPU);
+                message_Talk({
+                    english=" So you should try using the\nKangaskhan Rock to sort out your inventory.",
+                    french=" Essayez donc de mettre de\nl'ordre dans votre inventaire à l'aide de\nla Statue Kangourex.",
+                    german=" Ihr solltet also versuchen, den\nKangama-Speicher zu verwenden, um euer\nInventar zu organisieren.",
+                    italian=" Bisogna provare a usare la\nstatua Kangaskhan per controllare e sistemare\ngli strumenti.",
+                    spanish=" Así que os iría bien utilizar la\nRoca de Kangaskhan para poner en\norden vuestro inventario.",
+                });
+                message_Talk({
+                    english=" No matter how you choose to do\nthat, just get ready quickly, then head out!",
+                    french=" Faites comme vous voulez, mais\nfaites-le vite! Débrouillez-vous! Ensuite,\nen route!",
+                    german=" Ganz gleich, wie ihr das anstellt,\nmacht euch nur schnell fertig und brecht dann\nauf!",
+                    italian=" Non importa come decidete di\nfarlo, ma preparatevi velocemente e mettetevi\nin marcia!",
+                    spanish=" ¡No importa cómo decidáis\nhacerlo, pero preparaos y salid cuanto\nantes!",
+                });
+                message_Close();
+                jump @label_129;
+            }
+        default:
+            break;
+    }
+    
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -1695,140 +1824,6 @@ macro ChatotMain() {
             german=" Erledigt die Jobs, die dort\naufgelistet sind.[K] Das ist eure Aufgabe! ♪",
             italian=" Ci sono missioni a sufficienza![K]\nVi lascio al vostro lavoro! ♪",
             spanish=" Encargaos de las misiones que\nencontréis.[K] ¡Escoged las que queráis! ♪",
-        });
-        message_Close();
-        jump @label_129;
-    } elseif ($DUNGEON_ENTER_INDEX == 12) {
-        // [10, 2], Lost in Foggy Forest
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_PERAPPU);
-        }
-        message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oh? You haven't seen our\nGuildmaster? You're wondering where he is?",
-            french=" Ah? Vous n'avez pas vu le\nMaître de la Guilde? Vous vous demandez\noù il est?",
-            german=" Oh, ihr habt unseren\nGildenmeister noch nicht gesehen und fragt\neuch, wo er ist?",
-            italian=" Eh? Non avete visto il nostro\nCapitano? Volete sapere dov'è?",
-            spanish=" ¿Cómo? ¿Que no habéis visto al\nGran Bluff? ¿Y os preguntáis dónde está?",
-        });
-        message_Talk({
-            english=" The Guildmaster has...[K]wandered\noff somewhere.",
-            french=" Le Maître est... [K]parti flâner\nquelque part.",
-            german=" Der Gildenmeister[K] ist irgendwo\nunterwegs.",
-            italian=" Il Capitano è...[K] in giro da\nqualche parte.",
-            spanish=" El Gran Bluff...[K] se ha ido a\ndar una vuelta.",
-        });
-        message_Close();
-        se_Play(5122);
-        with(actor ACTOR_NPC_PERAPPU) {
-            SetAnimation(18);
-        }
-        with(actor ACTOR_NPC_PERAPPU) {
-            WaitAnimation();
-        }
-        WaitExecuteLives(ACTOR_NPC_PERAPPU);
-        with(actor ACTOR_NPC_PERAPPU) {
-            SetAnimation(2);
-        }
-        message_SetFace(ACTOR_NPC_PERAPPU, FACE_PAIN, FACE_POS_STANDARD);
-        message_Talk({
-            english=" It's amazing, really, how little\npatience he has.",
-            french=" Vraiment, c'est incroyable, il n'a\naucune patience.",
-            german=" Es ist wirklich erstaunlich, wie\nwenig Geduld er hat.",
-            italian=" È sorprendente, davvero,\nla poca pazienza che ha.",
-            spanish=" Realmente, hay que ver la poca\npaciencia que tiene.",
-        });
-        message_Talk({
-            english=" I would imagine he's taking a\nstroll in the forest without a care in\nthe world.",
-            french=" J'imagine qu'il se promène dans\nla forêt sans se soucier de quoi que ce soit.",
-            german=" Ich könnte mir vorstellen, dass\ner völlig unbesorgt einen kleinen Spaziergang\nim Wald macht.",
-            italian=" Me lo immagino a passeggiare\nnel bosco senza alcuna preoccupazione.",
-            spanish=" Seguramente está paseando tan\ntranquilo por el bosque.",
-        });
-        message_Talk({
-            english=" I imagine he'll come back\nsoon enough.",
-            french=" Je suppose qu'il va revenir\nbientôt.",
-            german=" Ich denke mal, er wird schon\nfrüh genug zurückkommen.",
-            italian=" Immagino che tornerà\nabbastanza presto.",
-            spanish=" Supongo que volverá enseguida.",
-        });
-        message_Close();
-        jump @label_129;
-    } elseif ($DUNGEON_OPEN_LIST[12]) {
-        // [10, 1], Foggy Forest Unlocked
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_PERAPPU);
-        }
-        message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Ah, you two! You have yet\nto leave?",
-            french=" Ah, vous deux! Vous êtes encore\nlà?",
-            german=" Ah, ihr zwei! Seid ihr noch nicht\nunterwegs?",
-            italian=" Ah, voi due! Non siete ancora\nin viaggio?",
-            spanish=" ¡Ah, aquí estáis! ¿Todavía no\nos habéis ido?",
-        });
-        message_Talk({
-            english=" Get ready quickly! Then be on\nyour way!",
-            french=" Préparez-vous vite et\nmettez-vous en route!",
-            german=" Macht euch schnell fertig! Und\ndann ab mit euch!",
-            italian=" Preparatevi in fretta!\nE mettetevi in marcia!",
-            spanish=" ¡Preparaos cuanto antes!\n¡Tenéis que salir enseguida!",
-        });
-        message_Talk({
-            english=" Ah, by the way...",
-            french=" Ah, au fait...",
-            german=" Ah, übrigens...",
-            italian=" Ah, a proposito...",
-            spanish=" Ah, y por cierto...",
-        });
-        message_Close();
-        with(actor ACTOR_NPC_PERAPPU) {
-            Turn2Direction(4, 10, DIR_UPRIGHT);
-        }
-        WaitExecuteLives(ACTOR_NPC_PERAPPU);
-        message_Talk({
-            english=" You can use the Kangaskhan Rock\nto store and take out your items. And to save\nyour progress.",
-            french=" Vous pouvez vous servir de la\nStatue Kangourex comme d'une réserve. Vous\npouvez aussi y sauvegarder votre aventure.",
-            german=" Ihr könnt den Kangama-Speicher\nverwenden, um eure Items einzulagern, zu\nentnehmen und um das Spiel zu speichern.",
-            italian=" Si può usare la statua\nKangaskhan per depositare e riprendere gli\nstrumenti, nonché per salvare la partita.",
-            spanish=" La Roca de Kangaskhan sirve\ntanto para almacenar y recuperar objetos,\ncomo para guardar vuestro progreso.",
-        });
-        message_Close();
-        with(actor ACTOR_NPC_PERAPPU) {
-            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
-        }
-        WaitExecuteLives(ACTOR_NPC_PERAPPU);
-        message_Talk({
-            english=" So you should try using the\nKangaskhan Rock to sort out your inventory.",
-            french=" Essayez donc de mettre de\nl'ordre dans votre inventaire à l'aide de\nla Statue Kangourex.",
-            german=" Ihr solltet also versuchen, den\nKangama-Speicher zu verwenden, um euer\nInventar zu organisieren.",
-            italian=" Bisogna provare a usare la\nstatua Kangaskhan per controllare e sistemare\ngli strumenti.",
-            spanish=" Así que os iría bien utilizar la\nRoca de Kangaskhan para poner en\norden vuestro inventario.",
-        });
-        message_Talk({
-            english=" No matter how you choose to do\nthat, just get ready quickly, then head out!",
-            french=" Faites comme vous voulez, mais\nfaites-le vite! Débrouillez-vous! Ensuite,\nen route!",
-            german=" Ganz gleich, wie ihr das anstellt,\nmacht euch nur schnell fertig und brecht dann\nauf!",
-            italian=" Non importa come decidete di\nfarlo, ma preparatevi velocemente e mettetevi\nin marcia!",
-            spanish=" ¡No importa cómo decidáis\nhacerlo, pero preparaos y salid cuanto\nantes!",
         });
         message_Close();
         jump @label_129;

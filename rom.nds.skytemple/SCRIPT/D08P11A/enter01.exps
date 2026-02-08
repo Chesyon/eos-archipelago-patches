@@ -1,0 +1,44 @@
+def 0 {
+    with (actor ACTOR_PLAYER) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    with (actor ACTOR_PLAYER_APPOINT) {
+        SetAnimation(2);
+    }
+    message_ResetActor();
+    message_Mail({
+        english="[CN]Would you like to return\n[CN]to Treasure Town?",
+        french="[CN]Voulez-vous retourner\n[CN]à Bourg-Trésor?",
+        german="[CN]Möchtet ihr nach Schatzstadt\n[CN]zurückkehren?",
+        italian="[CN]Vuoi tornare a Borgo Tesoro?",
+        spanish="[CN]¿Quieres volver a\n[CN]Aldea Tesoro?",
+    });
+    switch ( message_SwitchMenu(0, 1) ) {
+        case menu({
+            english="Yes",
+            french="Oui",
+            german="Ja",
+            italian="Sì",
+            spanish="Sí",
+        }):
+            message_Close();
+            bgm_FadeOut(60);
+            screen_FadeOut(1,30);
+            main_EnterGround(LEVEL_P01P01A, 30);
+            hold;
+        default:
+        case menu({
+            english="No",
+            french="Non",
+            german="Nein",
+            italian="No",
+            spanish="No",
+        }):
+            message_Close();
+            supervision_Suspend(-2);
+            end;
+    }
+}

@@ -1,0 +1,14 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_ENTER_INDEX == 35) {
+        §label_0;
+        supervision_Station(2);
+        end;
+    } elseif ( scn($SCENARIO_MAIN) >= [21, 1] ) {
+        supervision_Station(1);
+        end;
+    } else {
+        end;
+    }
+}

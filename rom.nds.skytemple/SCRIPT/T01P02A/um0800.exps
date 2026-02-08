@@ -1,0 +1,46 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(2);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_KIMAWARI) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m0', 50, 26>, 8, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m1', 13, 26>, 10, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 3 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m2', 24, 26>, 8, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 4 for_actor(ACTOR_NPC_DOGOOMU) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m3', 34, 26>, 10, 6);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

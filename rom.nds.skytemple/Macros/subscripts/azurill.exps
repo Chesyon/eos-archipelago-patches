@@ -1,7 +1,30 @@
 import "hints.exps";
 macro AzurillMain() {
     ~CheckHints();
-    if ($DUNGEON_CONQUEST_LIST[69]) {
+    if ($GROUND_ENTER == LEVEL_G01P01A) {
+        // [13, 1], Amp Plains is open
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
+        }
+        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Please help us, Team\n[team:]!",
+            french=" S'il vous plaît, aidez-nous,\nEquipe [team:]!",
+            german=" Bitte helft uns, Team\n[team:]!",
+            italian=" Per favore aiutateci, Team\n[team:]!",
+            spanish=" ¡Ayudadnos, [CS:X]Equipo[CR] [team:]!",
+        });
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -218,29 +241,6 @@ macro AzurillMain() {
             spanish=" ¡Sí! ¡Buena suerte, [hero]\ny [partner]!",
         });
         message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[17]) {
-        // [13, 1], Amp Plains is open
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_RURIRI);
-        }
-        message_SetFace(ACTOR_NPC_RURIRI, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Please help us, Team\n[team:]!",
-            french=" S'il vous plaît, aidez-nous,\nEquipe [team:]!",
-            german=" Bitte helft uns, Team\n[team:]!",
-            italian=" Per favore aiutateci, Team\n[team:]!",
-            spanish=" ¡Ayudadnos, [CS:X]Equipo[CR] [team:]!",
-        });
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
         // [9, 1], Expedition Tomorrow

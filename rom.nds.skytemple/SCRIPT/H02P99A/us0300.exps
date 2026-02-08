@@ -1,6 +1,15 @@
 
 def 0 {
     supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[34]) {
+        switch(scn($SCENARIO_SUB7)[1]) {
+            case &<< 5:
+                break;
+            default:
+                supervision_Station(1);
+                break;
+        }
+    }
     if ($SCENARIO_SUB2 &<< 6) {
         supervision_Station(15);
     } elseif($SCENARIO_SUB2 &<< 5) {

@@ -1,0 +1,25 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_OPEN_LIST[24]) {
+        §label_0;
+        supervision_Station(5);
+        end;
+    } else {
+        supervision_Station(2);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m0', 42, 30>, 7, 9);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 5:
+            SetMoveRange(Position<'m1', 42, 30>, 7, 9);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

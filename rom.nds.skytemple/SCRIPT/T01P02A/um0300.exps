@@ -1,23 +1,15 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [4, 7] ) {
+    if ($DUNGEON_CONQUEST_LIST[4]) {
         §label_0;
         supervision_Station(8);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [4, 5] ) {
+    } elseif ($DUNGEON_ENTER_INDEX == 4) {
         supervision_Station(6);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [4, 3] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [4, 2] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [4, 1] ) {
-        supervision_Station(10);
-        end;
     } else {
+        supervision_Station(10);
         end;
     }
 }

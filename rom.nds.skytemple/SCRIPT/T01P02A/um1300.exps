@@ -1,0 +1,40 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_ENTER_INDEX == 20) {
+        supervision_Station(6);
+        end;
+    } else {
+        supervision_Station(1);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 6:
+            SetMoveRange(Position<'m0', 26, 23>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 4:
+            SetMoveRange(Position<'m1', 26, 23>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 2:
+            SetMoveRange(Position<'m2', 26, 23>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 1:
+            SetMoveRange(Position<'m3', 26, 23>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_KIMAWARI) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m4', 38, 25>, 12, 5);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

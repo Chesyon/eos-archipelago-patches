@@ -1,0 +1,66 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[20]) {
+        supervision_Station(6);
+        end;
+    } elseif ($DUNGEON_ENTER_INDEX == 20) {
+        supervision_Station(4);
+        end;
+    } elseif ($DUNGEON_OPEN_LIST[20]) {
+        supervision_Station(2);
+        end;
+    } else {
+        supervision_Station(1);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 6:
+            SetMoveRange(Position<'m0', 23, 27>, 15, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 4:
+            SetMoveRange(Position<'m1', 23, 27>, 15, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 2:
+            SetMoveRange(Position<'m2', 23, 27>, 15, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 1:
+            SetMoveRange(Position<'m3', 23, 27>, 15, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_HEIGANI) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m4', 39, 31>, 8, 8);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 3 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m5', 50, 27>, 10, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 4 for_actor(ACTOR_NPC_YONOWAARU) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m6', 38, 20>, 10, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

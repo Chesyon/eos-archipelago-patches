@@ -1,0 +1,6 @@
+import "shaymin_gift.exps";
+
+def 0 {
+    ~ShayminGiftMain();
+    end;
+}

@@ -1,0 +1,16 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(3);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 3:
+            SetMoveRange(Position<'m0', 17, 26>, 12, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

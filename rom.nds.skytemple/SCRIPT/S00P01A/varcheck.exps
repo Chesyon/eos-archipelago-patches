@@ -148,7 +148,19 @@ def 0 {
                 break;
         }
     }
-    message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+    switch($EXECUTE_SPECIAL_EPISODE_TYPE) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            message_SetFace(ACTOR_NPC_PARTNER_FIRST,FACE_WORRIED,FACE_POS_STANDARD);
+            message_Talk(" I heard we\'re doing a variable\ncheck! Sorry for ruining SE immersion, but\nnobody else has this dialogue...");
+            break;
+        default:
+            message_SetFace(ACTOR_ATTENDANT1, FACE_NORMAL, FACE_POS_STANDARD);
+            break;
+    }
     message_Talk(" Finally, scroll through these\ndungeons please![K] Your choice does not matter,\nthis is NOT the crossroads.[K] Here we go!");
     message_Close();
     main_EnterAdventure(32767, 30);
@@ -159,16 +171,13 @@ def 0 {
         case 2:
         case 3:
         case 4:
-            break;
-        default:
             message_SetFace(ACTOR_NPC_PARTNER_FIRST,FACE_WORRIED,FACE_POS_STANDARD);
-            message_Talk(" I heard we\'re doing a variable\ncheck! Sorry for ruining SE immersion, but\nnobody else has APWorld version dialogue...");
+        default:
             ~GetVersion();
             message_Talk(" Oh, right![K]\nAre you currently softlocked?");
             switch(message_SwitchMenu(1,2)) {
                 case menu("Yes"):
                     message_Close();
-                    message_SetFace(ACTOR_ATTENDANT1, FACE_WORRIED, FACE_POS_STANDARD);
                     message_Talk(" Now then, this [M:I1][CS:I]Escape Orb[CR]\nmight get you home.[K] I have one handy just in\ncase you end up stranded somewhere...");
                     message_Close();
                     bgm_FadeOut(30);

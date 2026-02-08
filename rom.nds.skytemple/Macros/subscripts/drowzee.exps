@@ -76,7 +76,7 @@ macro DrowzeeMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_CONQUEST_LIST[63]) {
+    } elseif ($DUNGEON_CONQUEST_LIST[63] || $GROUND_ENTER != LEVEL_G01P07A) {
         // [29, 78], Nightmare is complete
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -109,13 +109,19 @@ macro DrowzeeMain() {
         jump @label_130;
     } elseif ($DUNGEON_ENTER_INDEX == 63) {
         // [29, 76], Nightmare entered
-        supervision_ExecuteCommon(CORO_EVENT_S20_10);
+        if ($DUNGEON_CONQUEST_LIST[5]) {
+            supervision_ExecuteCommon(CORO_EVENT_S20_10);
+        } else {
+            message_Mail("You cannot enter [CS:P]The Nightmare[CR]\nunless [CS:G]Drowzee[CR] has been arrested on [CS:P]Mt. Bristle[CR]!");
+        }
         jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[63]) {
         // [29, 75], Nightmare Unlocked
-        supervision_ExecuteCommon(CORO_EVENT_S20_09);
-        jump @label_130;
-    } else {
+        if ($DUNGEON_CONQUEST_LIST[5]) {
+            supervision_ExecuteCommon(CORO_EVENT_S20_09);
+        } else {
+            message_Mail("You cannot enter [CS:P]The Nightmare[CR]\nunless [CS:G]Drowzee[CR] has been arrested on [CS:P]Mt. Bristle[CR]!");
+        }
         jump @label_130;
     }
 }

@@ -1,6 +1,88 @@
 import "hints.exps";
 macro BidoofMain() {
     ~CheckHints();
+    switch($GROUND_ENTER) {
+        case LEVEL_D06P11A:
+            // [9, 2], Died in Craggy Coast
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+            }
+            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We'll get it done next time!",
+                french=" La prochaine fois, on y arrivera!",
+                german=" Beim nächsten Mal schaffen wir\ndas!",
+                italian=" La prossima volta ce la faremo!",
+                spanish=" ¡Mejor la próxima vez!",
+            });
+            message_Close();
+            jump @label_130;
+        case LEVEL_D07P11A:
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+            }
+            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We just have to cross this here\nmountain! That's all! Then we'll be at the base\ncamp, yup yup!",
+                french=" Tout c'qu'il nous reste à faire,\nc'est d'traverser c'te montagne, là. Et après\non sera arrivés au camp d'base, ouaip ouaip!",
+                german=" Alles, was wir jetzt tun müssen,\nist diesen Berg hinter uns zu lassen. Dann sind\nwir am Basislager! Jawollja!",
+                italian=" Dobbiamo solo oltrepassare\nquesta montagna! Tutto qui! Poi saremo al\nCampo Base, sissignore!",
+                spanish=" ¡Solo tenemos que atravesar la\nmontaña y llegaremos al campamento\nbase! ¡Sí, señor!",
+            });
+            message_Talk({
+                english=" Let's do it!",
+                french=" On y va!",
+                german=" Wir können das schaffen!",
+                italian=" Mettiamocela tutta!",
+                spanish=" ¡Hagámoslo!",
+            });
+            message_Close();
+            jump @label_130;
+        case LEVEL_D25P11A:
+            // [24, 1], Brine Cave Lost
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
+            }
+            message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" Golly, this surely isn't easy.[K]\nBut I'm not giving up, no sirree!",
+                french=" C'est pas facile, pour sûr.[K]\nMais j'abandonnerai pas, ah ça non!",
+                german=" Menschenskind, das ist echt\nnicht einfach.[K] Aber ich gebe nicht auf,\nnein, wirklich nicht!",
+                italian=" Ohibò, non sarà per nulla\nfacile.[K] Ma non mollerò, nossignore!",
+                spanish=" Esto no es fácil, caramba.[K]\nPero no me voy a rendir... ¡No, señor!",
+            });
+            message_Close();
+            jump @label_130;
+        default:
+            break;
+    }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -618,30 +700,6 @@ macro BidoofMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 35) {
-        // [24, 1], Brine Cave Lost
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
-        }
-        message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Golly, this surely isn't easy.[K]\nBut I'm not giving up, no sirree!",
-            french=" C'est pas facile, pour sûr.[K]\nMais j'abandonnerai pas, ah ça non!",
-            german=" Menschenskind, das ist echt\nnicht einfach.[K] Aber ich gebe nicht auf,\nnein, wirklich nicht!",
-            italian=" Ohibò, non sarà per nulla\nfacile.[K] Ma non mollerò, nossignore!",
-            spanish=" Esto no es fácil, caramba.[K]\nPero no me voy a rendir... ¡No, señor!",
-        });
-        message_Close();
-        jump @label_130;
     } elseif ($DUNGEON_OPEN_LIST[35]) {
         // [23, 2], Skull Ambush Torkoal
         with(actor ACTOR_TALK_MAIN) {
@@ -874,95 +932,6 @@ macro BidoofMain() {
             german=" Es ist wie...[K] wie ein Traum...[K]\nBeeindruckend...",
             italian=" È come...[K] Come un sogno...[K]\nWow...",
             spanish=" Es como...[K] Como un sueño...[K]\nGuau...",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[12]) {
-        // [10, 1], Foggy Forest Unlocked
-        jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 10 || $DUNGEON_ENTER_INDEX == 11) {
-        // [9, 5], Died in Mt. Horn or Rocky Path
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
-        }
-        message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We just have to cross this here\nmountain! That's all! Then we'll be at the base\ncamp, yup yup!",
-            french=" Tout c'qu'il nous reste à faire,\nc'est d'traverser c'te montagne, là. Et après\non sera arrivés au camp d'base, ouaip ouaip!",
-            german=" Alles, was wir jetzt tun müssen,\nist diesen Berg hinter uns zu lassen. Dann sind\nwir am Basislager! Jawollja!",
-            italian=" Dobbiamo solo oltrepassare\nquesta montagna! Tutto qui! Poi saremo al\nCampo Base, sissignore!",
-            spanish=" ¡Solo tenemos que atravesar la\nmontaña y llegaremos al campamento\nbase! ¡Sí, señor!",
-        });
-        message_Talk({
-            english=" Let's do it!",
-            french=" On y va!",
-            german=" Wir können das schaffen!",
-            italian=" Mettiamocela tutta!",
-            spanish=" ¡Hagámoslo!",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11]) {
-        // [9, 4], Mt. Horn Unlocked
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
-        }
-        message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" All we gotta do now is cross\nover this here mountain. Then we'll be at base\ncamp! Yup yup!",
-            french=" Tout c'qu'il nous reste à faire,\nc'est d'traverser c'te montagne, là. Et après\non sera arrivés au camp d'base, ouaip ouaip!",
-            german=" Alles, was wir jetzt tun müssen,\nist diesen Berg hinter uns zu lassen. Dann sind\nwir am Basislager! Jawollja!",
-            italian=" Dobbiamo solo oltrepassare\nquesta montagna. Poi saremo al campo base!\nSissignore!",
-            spanish=" Solo hay que atravesar esta\nmontaña y llegaremos al campamento\nbase. ¡Sí, señor!",
-        });
-        message_Talk({
-            english=" Let's do it!",
-            french=" On y va!",
-            german=" Wir können das schaffen!",
-            italian=" Ce la possiamo fare!",
-            spanish=" ¡Podemos hacerlo!",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 8) {
-        // [9, 2], Died in Craggy Coast
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_BIPPA);
-        }
-        message_SetFace(ACTOR_NPC_BIPPA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We'll get it done next time!",
-            french=" La prochaine fois, on y arrivera!",
-            german=" Beim nächsten Mal schaffen wir\ndas!",
-            italian=" La prossima volta ce la faremo!",
-            spanish=" ¡Mejor la próxima vez!",
         });
         message_Close();
         jump @label_130;

@@ -1,0 +1,301 @@
+macro WorldMapTransition() {
+    bgm_Stop();
+    switch($WORLD_MAP_LEVEL) {
+        case <= 1:
+            ~WorldMapTwoCheck();
+        case 2:
+            ~WorldMapThreeCheck();
+        case 3:
+            ~WorldMapFourCheck();
+        case 4:
+            ~WorldMapFiveCheck();
+        case 5:
+            ~WorldMapSixCheck();
+        case 6:
+            ~WorldMapSevenCheck();
+        case 7:
+            ~WorldMapEightCheck();
+        default:
+            break;
+    }
+}
+
+
+macro WorldMapTwoCheck() {
+    /* 
+        Pre-Dialga
+            - Steam Cave
+            - Steamy Cave
+        
+        Post-Dialga
+            - Surrounded Sea
+            - Aegis Cave
+            - Concealed Ruins
+            - Congealed Ruins
+            - Marine Resort
+            - World Abyss
+            - Lake Afar
+            - Lost Wilderness
+            - Midnight Forest
+            - Zero Isle North
+            - Zero Isle East
+            - Zero Isle West
+            - Zero Isle South
+            - Zero Isle Center
+            - Southeastern Islands
+    */
+    if ($DUNGEON_CONQUEST_LIST[16] || $DUNGEON_CONQUEST_LIST[50] || $DUNGEON_CONQUEST_LIST[61] || $DUNGEON_CONQUEST_LIST[70] || $DUNGEON_CONQUEST_LIST[71] || $DUNGEON_CONQUEST_LIST[72] || $DUNGEON_CONQUEST_LIST[81] || $DUNGEON_CONQUEST_LIST[93] || $DUNGEON_CONQUEST_LIST[97] || $DUNGEON_CONQUEST_LIST[98] || $DUNGEON_CONQUEST_LIST[99] || $DUNGEON_CONQUEST_LIST[100] || $DUNGEON_CONQUEST_LIST[101] || $DUNGEON_CONQUEST_LIST[102] || $DUNGEON_CONQUEST_LIST[103] || $DUNGEON_CONQUEST_LIST[109]) {
+        Wait(60);
+        worldmap_SetMode(3);
+        worldmap_SetLevel(1);
+        back2_SetMode(3);
+        WaitSubScreen();
+        se_Play(6667);
+        worldmap_ChangeLevel(2);
+        worldmap_SetCamera(15);
+        WaitSubScreen();
+        me_Play(6);
+        message_Mail({
+            english="[CN]The clouds lifted from [CS:P]Fogbound Lake[CR]\n[CN]and its surrounding areas!",
+            french="[CN]Les nuages se dissipent au-dessus du [CS:P]Lac\n[CN]des Brumes[CR] et de sa région!",
+            german="[CN]Die Wolken, die über dem [CS:P]Nebelsee[CR] und überall\n[CN]um ihn herum hingen, sind verschwunden!",
+            italian="[CN]Le nuvole si sollevano dal [CS:P]Lago Foschia[CR]\n[CN]e dalle aree circostanti!",
+            spanish="[CN]Las nubes que cubrían el [CS:P]Lago Velado[CR]\n[CN]y sus inmediaciones se disiparon.",
+        });
+        WaitMe(6);
+        message_Close();
+        se_Play(6667);
+        screen2_FadeOut(1, 15);
+        back2_SetMode(0);
+        WaitSe(6667);
+    }
+}
+
+macro WorldMapThreeCheck() {
+    /* 
+        Pre-Dialga
+            - Northern Desert
+            - Crystal Cave
+    */ 
+    if ($DUNGEON_CONQUEST_LIST[20] || $DUNGEON_CONQUEST_LIST[24]) {
+        Wait(60);
+        worldmap_SetMode(3);
+        worldmap_SetLevel(2);
+        back2_SetMode(3);
+        WaitSubScreen();
+        se_Play(6667);
+        worldmap_ChangeLevel(3);
+        worldmap_SetCamera(21);
+        WaitSubScreen();
+        me_Play(6);
+        message_Mail({
+            english="[CN]The clouds parted over the [CS:P]Northern Desert[CR]!",
+            french="[CN]Les nuages se sont dissipés\n[CN]au-dessus du [CS:P]Désert du Nord[CR]!",
+            german="[CN]Die Wolken über der [CS:P]Nordwüste[CR]\n[CN]haben sich verzogen!",
+            italian="[CN]Le nuvole si sollevano dal [CS:P]Deserto del Nord[CR]!",
+            spanish="[CN]¡Las nubes que cubrían\n[CN]el [CS:P]Desierto Norte[CR] se disiparon!",
+        });
+        WaitMe(6);
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(6667);
+        screen2_FadeOut(1, 15);
+        back2_SetMode(0);
+        WaitSe(6667);
+    }
+}
+
+macro WorldMapFourCheck() {
+    /*
+        Pre-Dialga:
+            - Quicksand Cave 
+        Post-Dialga:
+            - Shimmer Desert
+            - Sky Stairway
+    */ 
+    if ($DUNGEON_CONQUEST_LIST[23] || $DUNGEON_CONQUEST_LIST[76] || $DUNGEON_CONQUEST_LIST[84]) {
+        Wait(60);
+        worldmap_SetMode(3);
+        worldmap_SetLevel(3);
+        back2_SetMode(3);
+        WaitSubScreen();
+        se_Play(6667);
+        worldmap_ChangeLevel(4);
+        worldmap_SetCamera(22);
+        WaitSubScreen();
+        me_Play(6);
+        message_Mail({
+            english="[CN]The clouds lifted over\n[CN][CS:P]Quicksand Cave[CR] and the\n[CN]vicinities of the [CS:P]Arid Area[CR]!",
+            french="[CN]Les nuages se sont dissipés au-dessus\n[CN]de la [CS:P]Grotte Sables Mouvants[CR] et dans\n[CN]les environs de la [CS:P]Région Aride[CR]!",
+            german="[CN]Die Wolken über der [CS:P]Treibsandhöhle[CR]\n[CN]und dem [CS:P]Trockengebiet[CR] haben sich verzogen!",
+            italian="[CN]Le nuvole si sollevano dalla\n[CN][CS:P]Grotta delle Sabbie Mobili[CR]\n[CN]e da tutta la [CS:P]Zona Arida[CR]!",
+            spanish="[CN]¡Las nubes que cubrían la [CS:P]Cueva Arenas[CR]\n[CN]y las inmediaciones de la [CS:P]zona árida[CR]\n[CN]se disiparon!",
+        });
+        WaitMe(6);
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(6667);
+        screen2_FadeOut(1, 15);
+        back2_SetMode(0);
+        WaitSe(6667);
+    }
+}
+
+macro WorldMapFiveCheck() {
+    /* 
+        Pre-Dialga:
+            - Crystal Crossing
+        Post-Dialga:
+            - Mystery Jungle
+            - Destiny Tower
+            - Happy Outlook
+    */
+    if ($DUNGEON_CONQUEST_LIST[25] || $DUNGEON_CONQUEST_LIST[85] || $DUNGEON_CONQUEST_LIST[94] || $DUNGEON_CONQUEST_LIST[104]) {
+        Wait(60);
+        worldmap_SetMode(3);
+        worldmap_SetLevel(4);
+        back2_SetMode(3);
+        WaitSubScreen();
+        se_Play(6667);
+        worldmap_ChangeLevel(5);
+        worldmap_SetCamera(26);
+        WaitSubScreen();
+        me_Play(6);
+        message_Mail({
+            english="[CN]The clouds parted over\n[CN][CS:P]Crystal Crossing[CR] and the\n[CN]vicinities of the [CS:P]Forest Area[CR]!",
+            french="[CN]Les nuages se sont dissipés au-dessus\n[CN]du [CS:P]Croisement Cristal[CR] et dans les environs\n[CN]de la [CS:P]Région Forestière[CR]!",
+            german="[CN]Die Wolken über der [CS:P]Kristallstraße[CR]\n[CN]und dem [CS:P]Waldgebiet[CR] haben sich verzogen!",
+            italian="[CN]Le nuvole si sollevano dal [CS:P]Bivio di Cristallo[CR]\n[CN]e dalle altre aree della [CS:P]Zona delle Foreste[CR]!",
+            spanish="[CN]Las nubes que cubrían\n[CN]la [CS:P]Vía Cristalina[CR] y las inmediaciones\n[CN]de la [CS:P]zona boscosa[CR] se disiparon.",
+        });
+        WaitMe(6);
+        message_Close();
+        se_Play(6667);
+        screen2_FadeOut(1, 15);
+        back2_SetMode(0);
+        WaitSe(6667);
+    }
+}
+
+macro WorldMapSixCheck() {
+    /*
+        Pre-Dialga:
+            - Hidden Land
+            - Temporal Tower
+        Post-Dialga:
+            - Miracle Sea
+            - Mt. Mistral
+            - Bottomless Sea
+            - Giant Volcano
+    */
+    if ($DUNGEON_OPEN_LIST[38] || $DUNGEON_CONQUEST_LIST[43] || $DUNGEON_CONQUEST_LIST[53] || $DUNGEON_CONQUEST_LIST[73] || $DUNGEON_CONQUEST_LIST[79] || $DUNGEON_CONQUEST_LIST[95]) {
+        Wait(60);
+        worldmap_SetMode(3);
+        worldmap_SetLevel(5);
+        back2_SetMode(3);
+        WaitSubScreen();
+        se_Play(6667);
+        worldmap_ChangeLevel(6);
+        worldmap_SetCamera(39);
+        WaitSubScreen();
+        me_Play(6);
+        message_Mail({
+            english="[CN]The clouds parted over\n[CN]the [CS:P]Hidden Land[CR]!",
+            french="[CN]Les nuages se sont dissipés au-dessus\n[CN]des [CS:P]Terres Illusoires[CR]!",
+            german="[CN]Die Wolken teilen sich\n[CN]über dem [CS:P]Verborgenen Land[CR]!",
+            italian="[CN]Le nuvole che ricoprono la [CS:P]Terra Nascosta[CR]\n[CN]si sollevano.",
+            spanish="[CN]¡Las nubes que cubrían la\n[CN][CS:P]Tierra Oculta[CR] se disiparon!",
+        });
+        WaitMe(6);
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        if ($DUNGEON_OPEN_LIST[38]) {
+            message_Mail("[CN][CS:G]Lapras[CR] is now waiting on the beach\n[CN]to take you to the [CS:P]Hidden Land[CR]!");
+        } else {
+            message_Mail("[CN]However, you still do not have\n[CN]access to the [CS:P]Hidden Land[CR]...");
+        }
+        CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+        se_Play(6667);
+        screen2_FadeOut(1, 15);
+        back2_SetMode(0);
+        WaitSe(6667);
+    }
+}
+
+macro WorldMapSevenCheck() {
+    /* 
+        Post-Dialga:
+            - Blizzard Island
+            - Crevice Cave
+        Post-Secret-Rank:
+            - Mt. Avalanche
+            - Treacherous Waters
+    
+    */
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        if ($DUNGEON_CONQUEST_LIST[46] || $DUNGEON_CONQUEST_LIST[49] || $DUNGEON_CONQUEST_LIST[77] || $DUNGEON_CONQUEST_LIST[108]) {
+            Wait(60);
+            worldmap_SetMode(3);
+            worldmap_SetLevel(6);
+            back2_SetMode(3);
+            WaitSubScreen();
+            se_Play(6667);
+            worldmap_ChangeLevel(7);
+            worldmap_SetCamera(47);
+            WaitSubScreen();
+            me_Play(6);
+            message_Mail({
+                english="[CN]The clouds lifted over the\n[CN][CS:P]Icy Area[CR] and its vicinities!",
+                french="[CN]Les nuages se sont levés sur\n[CN]la [CS:P]Région Gelée[CR] et ses alentours.",
+                german="[CN]Die Wolken haben sich über dem [CS:P]Eisgebiet[CR]\n[CN]und seiner Umgebung verzogen!",
+                italian="[CN]Le nuvole si sollevano dalla\n[CN][CS:P]Zona Ghiacciata[CR] e dalle aree circostanti!",
+                spanish="[CN]¡Las nubes que cubrían la\n[CN][CS:P]zona glacial[CR] y alrededores se han disipado!",
+            });
+            WaitMe(6);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(6667);
+            screen2_FadeOut(1, 15);
+            back2_SetMode(0);
+            WaitSe(6667);
+        }
+    }
+}
+
+
+macro WorldMapEightCheck() {
+    /* 
+        Post-Dialga:
+            - Dark Crater
+            - Inferno Cave
+    */
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+        if ($DUNGEON_OPEN_LIST[67] || $DUNGEON_CONQUEST_LIST[110]) {
+            Wait(60);
+            worldmap_SetMode(3);
+            worldmap_SetLevel(7);
+            back2_SetMode(3);
+            WaitSubScreen();
+            se_Play(6667);
+            worldmap_ChangeLevel(8);
+            worldmap_SetCamera(68);
+            WaitSubScreen();
+            me_Play(6);
+            message_Mail({
+                english="[CN]The clouds parted over\n[CN]the [CS:P]Dark Crater[CR]!",
+                french="[CN]Les nuages se sont dissipés au-dessus\n[CN]des [CS:P]Cratère Obscur[CR]!",
+                german="[CN]Die Wolken teilen sich\n[CN]über dem [CS:P]Dunkelkrater[CR]!",
+                italian="[CN]Le nuvole che ricoprono la [CS:P]Cratere Oscuro[CR]\n[CN]si sollevano.",
+                spanish="[CN]¡Las nubes que cubrían la\n[CN][CS:P]Cráter Oscuro[CR] se disiparon!",
+            });
+            WaitMe(6);
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            if ($DUNGEON_OPEN_LIST[67]) {
+                message_Mail("[CN]You can now go to [CS:P]Dark Crater[CR] from the\n[CN]crossroads, or by talking to [CS:G]Cresselia[CR]!");
+            } else {
+                message_Mail("[CN]However, you still do not have\n[CN]access to the [CS:P]Dark Crater[CR]...");
+            }
+            CallCommon(CORO_MESSAGE_CLOSE_WAIT_FUNC);
+            se_Play(6667);
+            screen2_FadeOut(1, 15);
+            back2_SetMode(0);
+            WaitSe(6667);
+        }
+    }
+}

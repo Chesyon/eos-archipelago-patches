@@ -1,0 +1,52 @@
+
+def 0 {
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            switch ( scn($SCENARIO_MAIN)[0] ) {
+                case == 9:
+                    supervision_ExecuteStationSub(LEVEL_D07P11A, 'UM08', 0);
+                    §label_2;
+                    if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                        $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                        supervision_StationCommon(2);
+                        §label_5;
+                        debug_Print('SET_BGM');
+                        bgm_PlayFadeIn(BGM_MT_HORN, 0, 256);
+                        JumpCommon(CORO_COMMON_ENTER);
+                    } else {
+                        switch ( sector() ) {
+                            case 1:
+                                end;
+                            default:
+                                switch ( $GROUND_GETOUT ) { }
+                                supervision_StationCommon(1);
+                                jump @label_5;
+                        }
+                    }
+                    break;
+                default:
+                    jump @label_2;
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_D07P11A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

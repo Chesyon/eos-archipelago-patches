@@ -1,3 +1,4 @@
+/*
 import "fade_in.exps";
 
 def 0 {
@@ -33,35 +34,7 @@ def 0 {
                                                         supervision_StationCommon(4);
                                                         break;
                                                 }
-                                                se_Play(7183);
-                                                screen_FadeInAll(0, 30);
-                                                screen_FadeIn(1, 0);
-                                                ~FadeIn();
-                                                with (actor ACTOR_PLAYER) {
-                                                    SetOutputAttribute(2);
-                                                }
-                                                with (actor ACTOR_ATTENDANT_PARTNER) {
-                                                    SetOutputAttribute(2);
-                                                }
-                                                with (object OBJECT_D39P41A1_90) {
-                                                    SetAnimation(18);
-                                                }
-                                                with (object OBJECT_D39P41A1_90) {
-                                                    WaitAnimation();
-                                                }
-                                                WaitExecuteObject(OBJECT_D39P41A1_90);
-                                                with (object OBJECT_D39P41A1_90) {
-                                                    Destroy();
-                                                }
-                                                Wait(60);
-                                                with (actor ACTOR_PLAYER) {
-                                                    ResetOutputAttribute(2);
-                                                }
-                                                with (actor ACTOR_ATTENDANT_PARTNER) {
-                                                    ResetOutputAttribute(2);
-                                                }
-                                                bgm_PlayFadeIn(BGM_OCEAN1, 0, 256);
-                                                JumpCommon(CORO_END_TALK);
+
                                                 end;
                                             case 225:
                                                 switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
@@ -274,3 +247,179 @@ def 5 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
     }
     end;
 }
+*/
+
+import "fade_in.exps";
+
+def 0 {
+    // Seamless transition?
+    switch ( sector() ) {
+        case < 1:
+        case > 1:
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_D01P11A);
+        case 1:
+            break;
+    }
+    supervision_StationCommon(0);
+    // Spawn Subscene
+    if ($EXECUTE_SPECIAL_EPISODE_TYPE == 0) {
+        supervision_ExecuteStationSub(LEVEL_D01P11A, 'UN01', 0);
+    } elseif ($EXECUTE_SPECIAL_EPISODE_TYPE == 2) {
+        supervision_ExecuteStationSub(LEVEL_D01P11A, 'UN04', 0);
+    } else {
+        // Spawn Beach Bottle
+        if ( $SCENARIO_MAIN_BIT_FLAG[92] ) {
+            switch ( ProcessSpecial(PROCESS_SPECIAL_INIT_RANDOM_NPC_JOBS, 1, 0) ) { }
+            switch ( ProcessSpecial(PROCESS_SPECIAL_GET_RANDOM_NPC_JOB_STILL_AVAILABLE, 0, 0) ) {
+                case 0:
+                    break;
+                default:
+                    supervision_StationCommon(5);
+                    break;
+            }
+        }
+        if ($DUNGEON_OPEN_LIST[38]) {
+            if ($DUNGEON_CONQUEST_LIST[69]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us23', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[66]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us22', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[63]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us21', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[62]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us20', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[53]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us04', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[49]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us03', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us02', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us31', 0);
+            } elseif ($PERFORMANCE_PROGRESS_LIST[17]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'us01', 0);
+            } elseif ($DUNGEON_CONQUEST_LIST[40]) {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'um25', 0);
+            } else {
+                supervision_ExecuteStationSub(LEVEL_D01P11A, 'um24', 0);
+            }
+        } else {
+            supervision_ExecuteStationSub(LEVEL_D01P11A, 'um03', 0);
+        }
+    }
+    switch ( $GROUND_GETOUT ) {
+        case 999:
+            supervision_StationCommon(6);
+            Wait(60);
+            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                case 0:
+                    supervision_StationCommon(22);
+                    break;
+                case 2:
+                    supervision_StationCommon(42);
+                    break;
+                default:
+                    supervision_StationCommon(4);
+                    break;
+            }
+            se_Play(7183);
+            screen_FadeInAll(0, 30);
+            screen_FadeIn(1, 0);
+            ~FadeIn();
+            with (actor ACTOR_PLAYER) {
+                SetOutputAttribute(2);
+            }
+            with (actor ACTOR_ATTENDANT_PARTNER) {
+                SetOutputAttribute(2);
+            }
+            with (object OBJECT_D39P41A1_90) {
+                SetAnimation(18);
+            }
+            with (object OBJECT_D39P41A1_90) {
+                WaitAnimation();
+            }
+            WaitExecuteObject(OBJECT_D39P41A1_90);
+            with (object OBJECT_D39P41A1_90) {
+                Destroy();
+            }
+            Wait(60);
+            with (actor ACTOR_PLAYER) {
+                ResetOutputAttribute(2);
+            }
+            with (actor ACTOR_ATTENDANT_PARTNER) {
+                ResetOutputAttribute(2);
+            }
+            bgm_PlayFadeIn(BGM_OCEAN1, 0, 256);
+            JumpCommon(CORO_END_TALK);
+            end;
+        case 225:
+            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                case 0:
+                    supervision_StationCommon(21);
+                    break;
+                case 2:
+                    supervision_StationCommon(41);
+                    break;
+                default:
+                    supervision_StationCommon(1);
+                    break;
+            }
+            break;
+        case 59:
+            supervision_StationCommon(2);
+            break;
+        default:
+            supervision_StationCommon(3);
+            break;
+    }
+    §label_45;
+    debug_Print('SET_BGM');
+    bgm_PlayFadeIn(BGM_OCEAN1, 0, 256);
+    if ($GROUND_GETOUT == 59) {
+        back2_SetMode(32767);
+        WaitSubScreen();
+    }
+    JumpCommon(CORO_COMMON_ENTER);
+    end;
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitFadeIn();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitFadeIn();
+    end;
+}
+
+def 3 for_actor(ACTOR_PLAYER_BIPPA) {
+    SetAnimation(2);
+    WaitFadeIn();
+    end;
+}
+
+def 4 for_actor(ACTOR_PLAYER_KIMAWARI) {
+    SetAnimation(2);
+    WaitFadeIn();
+    end;
+}
+
+def 5 for_actor(ACTOR_OBJ_IMAGE_DOOTAKUN) {
+    SetHeight(10);
+    forever {
+        MoveHeight(1,11);
+        Wait(30);
+        MoveHeight(1,10);
+        Wait(30);
+        MoveHeight(1,9);
+        Wait(30);
+        MoveHeight(1,10);
+        Wait(30);
+        continue;
+    }
+    end;
+}
+

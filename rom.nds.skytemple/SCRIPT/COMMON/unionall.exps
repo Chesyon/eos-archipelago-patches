@@ -8,6 +8,7 @@ import "fade_in.exps"; // Handles fading the screen in, and any effects related 
 import "version.exps"; // Handles game version stuff
 import "GiveSEItems.exps"; // Handles Episode-sanity starting items
 import "rps.exps"; // Handles Rock Paper Scissors. It's cleaner this way, trust.
+import "world_map.exps"; // Handles World Map Progression
 coro END_TALK {
     message_Close();
     supervision_Suspend(-2);
@@ -2659,7 +2660,7 @@ coro EVENT_M00A_01 {
             jump @no_main;
         }
         $SCENARIO_MAIN = scn[29, 99];
-        main_EnterGround(LEVEL_H02P99A,30);
+        supervision_ExecuteStationCommon(LEVEL_H02P99A, 2);
         hold;
     }
     
@@ -2667,10 +2668,9 @@ coro EVENT_M00A_01 {
         case 1:
             §yes_main;
             $SCENARIO_MAIN = scn[29, 99];
-            main_EnterGround(LEVEL_H02P99A,30);
+            supervision_ExecuteStationCommon(LEVEL_H02P99A, 2);
             hold;
         default:
-
             switch (ProcessSpecial(114,0,0)) {
                 case 0:
                     jump @yes_main;
@@ -3009,6 +3009,7 @@ coro EVENT_HA_YU_SHU_DOX {
 }
 
 coro EVENT_HA_SAME {
+    ~WorldMapTransition();
     // $PERFORMANCE_PROGRESS_LIST[37] Legendary Recruitment!
     CallCommon(CORO_SUBSCREEN_INIT);
     switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 

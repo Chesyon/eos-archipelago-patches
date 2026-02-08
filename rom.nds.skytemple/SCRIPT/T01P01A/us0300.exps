@@ -1,48 +1,15 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [29, 53] ) {
+    if ($SCENARIO_SUB2 &<< 6) {
         §label_0;
         supervision_Station(13);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 52] ) {
+    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
         supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 50] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 49] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 48] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 47] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 46] ) {
-        supervision_Station(19);
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 45] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 44] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 43] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 42] ) {
-        supervision_Station(18);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 41] ) {
-        supervision_Station(17);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
-        supervision_Station(17);
         end;
     } else {
+        supervision_Station(17);
         end;
     }
 }

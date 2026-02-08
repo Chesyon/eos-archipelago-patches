@@ -1,0 +1,26 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(8);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m0', 41, 16>, 8, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_HEIGANI) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m1', 40, 30>, 9, 9);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

@@ -1,0 +1,26 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(3);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_SHEIMI3) {
+    switch ( sector() ) {
+        case 3:
+            SetMoveRange(Position<'m0', 45, 32.5>, 6, 5);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_MOVE_TYPE1);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_SHEIMI4) {
+    switch ( sector() ) {
+        case 3:
+            SetMoveRange(Position<'m1', 60, 33>, 3, 9);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_MOVE_TYPE1);
+    }
+}

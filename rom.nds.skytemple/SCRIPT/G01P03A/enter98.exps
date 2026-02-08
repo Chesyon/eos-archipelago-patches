@@ -1,0 +1,134 @@
+def 0 {
+    message_SetFace(ACTOR_NPC_RUNPAPPA,FACE_NORMAL,FACE_POS_BOTTOM_R_FACEINW);
+    message_Talk(" Duuuuuude, some downer is ruining\nthe vibe down at the cafe!");
+    message_Close();
+    switch ( ProcessSpecial(PROCESS_SPECIAL_INIT_RANDOM_NPC_JOBS, 0, 0) ) { }
+    switch ( ProcessSpecial(PROCESS_SPECIAL_GET_RANDOM_NPC_JOB_TYPE, 0, 0) ) {
+        case 1:
+            // Rescue Target
+            switch($REQUEST_THANKS_RESULT_VARIATION) {
+                case 0:
+                    message_Talk(" So like, there's just some guy trying\nto get a rescue for this other guy.[K] What's\nweird is they like, barely know each-other...");
+                    break;
+                case 1:
+                    message_Talk(" So like, this helicopter parent is\ngetting totally out of hand about their lost\nchild.[K] They really need to take a chill pill...");
+                    break;
+                case 2:
+                    message_Talk(" So like, one of the regulars always\nhangs out with some weirdo due to some hobby\nthey have in common.[K] So they're missing...");
+                    break;
+                case 3:
+                    message_Talk(" So this guy is like freaking out, since\nhis lover/rival/brother went missing?[K] I don't\nknow all the details, but they have chemistry...");
+                    break;
+            }
+            message_Talk(" Anyway, they're causing a ruckus by\nbeing all sad and alone in the cafe.[K] Think you\ncan help them, or at least shoo them away?");
+            break;
+        case 2:
+            // Escort to target
+            if ($REQUEST_THANKS_RESULT_VARIATION == 1) {
+                message_Talk(" There's some hero type in the cafe,\ntrying to get a team together to save their\nbeloved from mortal peril or something...");
+            } else {
+                message_Talk(" There's some dude trying to hitch-hike\ntheir way to visit their friend in some dungeon.\nSuper weird that their friend lives there...");
+            }
+            message_Talk(" They've been really insistent, and it's\nmaking the regulars really uncomfortable to\nkeep saying \"No\". Reeeeally killing the mood...");
+            break;
+        case 3:
+        case 5:
+            // Explore with Client OR Guide Client
+            switch($REQUEST_THANKS_RESULT_VARIATION) {
+                case 0:
+                    // Normal Exploration
+                    message_Talk(" So this wannabe explorer swings by,\nbegging anyone who'd listen to take them on\nan adventure. It's a little sad, honestly...");
+                    break;
+                case 1:
+                    // Sealed Chamber
+                    message_Talk(" So this wide-eyed researcher won't\nshut up about this \"Sealed Chamber\" thingy, and\nis begging anyone who'd listen to take them...");
+                    break;
+                case 2:
+                    // Golden Chamber
+                    message_Talk(" So this wide-eyed researcher won't\nshut up about this \"Golden Chamber\" thingy, and\nis begging anyone who'd listen to take them...");
+                    break;
+            }
+            message_Talk(" Nobody here has the heart to get them\nto buzz off and ask somewhere better.[K] Think\nyou can help them, or tell it to them straight?");
+            break;
+        case 4:
+            message_Talk(" One of them archaeologist types won't\nshut up about some stupid relic. Says he wants\nhelp finding it.[K] Like, booooooooring, am I right?");
+            message_Talk(" Anyway, they're bringing down the\nmood, so can you like, take them to a museum\nor something?[K] Anywhere but the cafe, please!");
+            break;
+        case 6:
+            // Find Item
+            switch($REQUEST_THANKS_RESULT_VARIATION) {
+                case 0:
+                    // Common Item Table
+                    message_Talk(" The stingiest Pokemon I've ever met,\nwants a free item you can just buy in Treasure\nTown for [M:S0].[K] What a wackjob, am I right?");
+                    break;
+                case 1:
+                    // Rare Item Table
+                    message_Talk(" There's this nutjob who wants [CS:G]Spinda[CR]\nto make some really exotic drinks. Problem is\nthey want someone else to get the ingredients!");
+                    message_Talk(" They won't leave, and we literally\ndon't have what they want on the menu, so\nwe can't serve them. Can you chase them off?");
+                    break;
+                case 2:
+                    // Evolution Item
+                    message_Talk(" This pip-squeak says they need an\nitem to evolve. They're obsessed, and will not\nstop talking about it! It's putting people off...");
+                    break;
+                case 3:
+                    // Favorite Gummi
+                    message_Talk(" This bum wants us to go find him a\nspecific kind of [CS:I]Gummi[CR]![K] They insist that they\nneed it, and it's not just for a free drink...");
+                    break;
+                case 4:
+                    // Gabite Scale
+                    message_Talk(" This [CS:G]Togetic[CR] is bawling all over the\ncafe entrance about her dying friend.[K] She said\nsomething about a [CS:I]Gabite Scale[CR] or something.");
+                    message_Talk(" Can you help her, or at least get her\naway from the paying customers?[K] She's crying\na river at the door, bringing the vibes down...");
+                    break;
+            }
+            break;
+        case 8:
+            // Search For Target
+            message_Talk(" One of our regulars went missing in\na dungeon, and one of his friends is trying to\n\"get answers\" about where they might be. ");
+            message_Talk(" It's really cringe to be honest, and\nit's ground the party to a complete halt when\nthey come by to \"question\" us... Please help!");
+            break;
+        case 9:
+            // Take Item From Outlaw    
+            message_Talk(" Some poor shmuck is sniffling about\nan item that they say was stolen in a dungeon.\n[K]It's really harshing the vibes in the cafe...");
+            break;
+        case 10:
+            message_Talk(" Some [CS:C]coppers[CR] want you to take a job\nfor 'em.[K] Reeeeeal hard to party with one of\nthem officers seeing everything we do, ya dig?");
+            // Arrest Outlaw, in all of its forms. Be vague, client could be either Magnemite or Magnezone! 
+            break;
+        case 11:
+            // Challenge Letter!
+            switch($REQUEST_THANKS_RESULT_VARIATION) {
+                case 0:
+                    // Not Legendary
+                    message_Talk(" Stop me if you've heard this one:\nThree knuckleheads walk into the bar, say they\nwant a clean fight with team [team].");
+                    message_Talk(" They corner one of my regulars, and\ntell them to pass their challenge letter along,\nor they'll break their equivalent of a kneecap.");
+                    jump @skip_legendary_letter;
+                    break;
+                case 1:
+                    message_Talk(" Stop me if you've heard this one:\n[CS:G]Mewtwo[CR] flies into a bar, locks eyes with one\nof my regulars, and lifts them into the air.");
+                    break;
+                case 2:
+                    message_Talk(" Stop me if you've heard this one:\n[CS:G]Entei[CR] charges into the bar, sets a table on fire,\njumps on top, and lets out a ferocious roar!");
+                    break;
+                case 3:
+                    message_Talk(" Stop me if you've heard this one:\n[CS:G]Raikou[CR] leaps into the bar, summons lightning\nthrough our ceiling, and lets out an angry roar!");
+                    break;
+                case 4:
+                    message_Talk(" Stop me if you've heard this one:\n[CS:G]Suicune[CR] strides into the bar, purifies all of our\ndrinks into bland water, and lets out a roar!");
+                    break;
+                case 5:
+                    message_Talk(" Stop me if you've heard this one:\n[CS:G]Jirachi[CR] floats into the bar, orders a [CS:I]Chesto\nCoffee[CR], and lets out a pathetic roar!");
+                    break;
+            }
+            message_Talk(' Next, they were all like \"On my honor\nas a legendary, team [team] is to face\nme in battle! Deliver this letter or else!\"');
+            §skip_legendary_letter;
+            message_Talk(" Mad scary, right?[K] Awful for business\ntoo, but what are we gonna do, right?[K] Teach\nthat party crasher a lesson for us, alright?");
+            break;
+        case 14:
+            message_Talk(" Some bigwig with an accent came in\nlike he owned the place, and told one of my\nregulars to pass some letter to you.[K] Weiiiiird.");
+            message_Talk(" It seemed important, or at least the\nhead honcho suit guy thought so.[K] [CS:C]You should\ndefinitely go check what's in that letter[CR]!");
+            break;
+    }
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+    hold;
+}

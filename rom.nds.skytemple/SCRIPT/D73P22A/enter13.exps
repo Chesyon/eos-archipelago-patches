@@ -1,0 +1,149 @@
+
+def 0 {
+    if ( $SCENARIO_TALK_BIT_FLAG[122]) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We\'re always here as support\nfor the explorers climbing to the top of\n[CS:P]Sky Peak[CR]! Yes, we are!",
+            french=" Nous sommes toujours là, oui\nnous le sommes, pour soutenir les explorateurs\nqui escaladent le [CS:P]Pic Céleste[CR] jusqu\'au sommet!",
+            german=" Ich bin allzeit bereit, die\nErkunder bei der Besteigung des [CS:P]Himmelsgipfels[CR]\nzu unterstützen! Ja, das bin ich!",
+            italian=" Siamo sempre qui per aiutare\ngli esploratori che vogliono raggiungere la cima\ndel [CS:P]Picco del Cielo[CR]! Oh sì che ci siamo!",
+            spanish=" Siempre estamos aquí para\nayudar a los exploradores que ascienden\na la cima de la [CS:P]Cumbre del Cielo[CR]. ¡Sí, sí!",
+        });
+        message_Close();
+        §label_130;
+        JumpCommon(CORO_END_TALK);
+    } elseif ($DUNGEON_CONQUEST_LIST[122]) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Congratulations on making it to\nthe summit safely!",
+            french=" Nous vous félicitons d\'avoir\natteint le sommet sans trop de dégâts!",
+            german=" Herzlichen Glückwunsch zur\nerfolgreichen Besteigung des Gipfels!",
+            italian=" Congratulazioni per aver\nraggiunto la vetta!",
+            spanish=" ¡Enhorabuena por llegar a salvo\na la cima!",
+        });
+        message_Talk({
+            english=" Your achievement made our\nsupport well worth it!",
+            french=" Votre réussite justifie\nnotre rôle d\'équipe de soutien!",
+            german=" Dein Erfolg adelt unsere\nBemühungen!",
+            italian=" La vostra impresa rende onore\nai nostri sforzi!",
+            spanish=" ¡Un logro así hace que haya\nvalido la pena ayudar!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[115]) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We\'ve set up a base at\nthe 6th Station Clearing.",
+            french=" Il y a un dernier campement\nà la trouée du 6[F:E] Relais.",
+            german=" Wir haben eine Basis auf der\n6. Zwischenlagerlichtung errichtet.",
+            italian=" Abbiamo creato un campo base\nal Bivacco 6.",
+            spanish=" Hemos levantado un campamento\nen la Base del Sexto Puerto.",
+        });
+        message_Talk({
+            english=" But above the 6th Station\nClearing, the road gets too steep for us to\nset up any bases.",
+            french=" Mais au-delà de la trouée\ndu 6[F:E] Relais, la route devient trop escarpée.",
+            german=" Aber der Weg wird zu steil\noberhalb der 6. Zwischenlagerlichtung, daher\nkönnen wir keine weiteren Basen errichten.",
+            italian=" Ma oltre quel punto il sentiero\nè troppo ripido e non ci permette di costruirne\naltri.",
+            spanish=" Pero por encima de la Base del\nSexto Puerto el sendero es demasiado\nimpracticable como para levantar una base.",
+        });
+        message_Talk({
+            english=" From there on, you have to rely\non yourself!",
+            french=" A partir de ce point,\nil vous faudra compter sur vous-mêmes!",
+            german=" Willst du weiter, musst du dich\nauf dich selbst verlassen!",
+            italian=" Da là in avanti, dovrete\ncavartela per conto vostro!",
+            spanish=" A partir de allí tendrás que\nconfiar en tu pericia.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[113]) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" They\'ve set up a base at\nthe 4th Station Clearing.",
+            french=" Un campement a été établi\nà la trouée du 4[F:E] Relais.",
+            german=" Auf der 4. Zwischenlagerlichtung\nwurde eine Basis errichtet.",
+            italian=" Hanno costruito un campo base al\nBivacco 4.",
+            spanish=" Han levantado un campamento en\nla Base del Cuarto Puerto.",
+        });
+        message_Talk({
+            english=" You can use the Gondola to climb\nquickly as well.",
+            french=" Vous pouvez aussi utiliser\nla Navette pour grimper là-haut plus vite.",
+            german=" Mit der Seilbahn kann man\nschnell hinaufkommen.",
+            italian=" Puoi anche usare l\'Agenzia Viaggi\nper salire velocemente.",
+            spanish=" También puedes usar la Góndola\npara ascender rápidamente.",
+        });
+        message_Talk({
+            english=" Feel free to use it if you\'re\ngetting tired.",
+            french=" N\'hésitez pas à l\'utiliser\nsi vous sentez la fatigue vous envahir.",
+            german=" Du kannst sie ohne schlechtes\nGewissen verwenden, solltest du dich müde\nfühlen!",
+            italian=" Usala pure se hai bisogno di\ntirare un po\' il fiato.",
+            spanish=" No dudes en usarla si te\nempiezas a cansar.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[111]) {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" [CS:N]Breloom[CR] has gone ahead to the\n4th Station Clearing to build a base.",
+            french=" [CS:N]Chapignon[CR] est parti devant\njusqu\'à la trouée du 4[F:E] Relais\npour établir un campement.",
+            german=" [CS:N]Kapilz[CR] ist schon zur\n4. Zwischenlagerlichtung vorausgegangen, um\neine Basis zu errichten.",
+            italian=" [CS:N]Breloom[CR] e la sua squadra ci\nhanno preceduti al Bivacco 4 per costruire\nun campo base.",
+            spanish=" [CS:N]Breloom[CR] se ha adelantado hasta\nla Base del Cuarto Puerto para levantar\nun campamento.",
+        });
+        message_Close();
+        jump @label_130;
+    } else {
+        with (actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        message_SetFace(ACTOR_NPC_TAMATAMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We\'re the backup team for\nProject P. Yes, we are!",
+            french=" Nous sommes l\'équipe de soutien\ndu Projet P. Oui, c\'est nous!",
+            german=" Wir sind das\nUnterstützungsteam von Projekt P.\nGenau das sind wir!",
+            italian=" Siamo la squadra che si occupa\ndel Progetto P. Eh sì, siamo noi!",
+            spanish=" Somos el equipo de reserva del\nProyecto P. ¡Eso es lo que somos!",
+        });
+        message_Talk({
+            english=" We\'re here as support for\neveryone\'s explorations!",
+            french=" Nous servons ici de soutien\naux explorations de tout un chacun!",
+            german=" Wir unterstützen bei Bedarf alle\nanderen Erkundungen!",
+            italian=" Siamo qui per offrire il nostro\naiuto a tutti gli esploratori!",
+            spanish=" Estamos aquí para ayudar a\nexplorar a quien nos necesite.",
+        });
+        message_Close();
+        jump @label_130;
+    }
+}

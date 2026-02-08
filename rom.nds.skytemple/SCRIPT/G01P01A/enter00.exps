@@ -1,0 +1,94 @@
+
+def 0 {
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                case 0:
+                    supervision_ExecuteStationSub(LEVEL_G01P01A, 'UN01', 0);
+                    §label_4;
+                    switch ( sector() ) {
+                        case 1:
+                            end;
+                        default:
+                            switch ( $GROUND_GETOUT ) {
+                                case 201:
+                                default:
+                                    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                        case 0:
+                                            supervision_StationCommon(21);
+                                            §label_27;
+                                            debug_Print('SET_BGM');
+                                            bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+                                            JumpCommon(CORO_COMMON_ENTER);
+                                        case 2:
+                                            supervision_StationCommon(41);
+                                            jump @label_27;
+                                        default:
+                                            supervision_StationCommon(1);
+                                            jump @label_27;
+                                    }
+                                    break;
+                                case 224:
+                                    switch ( $EXECUTE_SPECIAL_EPISODE_TYPE ) {
+                                        case 0:
+                                            supervision_StationCommon(22);
+                                            jump @label_27;
+                                        case 2:
+                                            supervision_StationCommon(42);
+                                            jump @label_27;
+                                        default:
+                                            supervision_StationCommon(2);
+                                            jump @label_27;
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case 2:
+                    supervision_ExecuteStationSub(LEVEL_G01P01A, 'UN04', 0);
+                    jump @label_4;
+                default:
+                    if ($DUNGEON_CONQUEST_LIST[19]) {
+                    } elseif ($DUNGEON_OPEN_LIST[17]) {
+                        supervision_ExecuteStationSub(LEVEL_G01P01A, 'um12', 0);
+                    }
+                    break;
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_G01P01A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 3 for_actor(ACTOR_PLAYER_BIPPA) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 4 for_actor(ACTOR_PLAYER_KIMAWARI) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

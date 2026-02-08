@@ -1,64 +1,31 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [29, 31] ) {
+    if ($DUNGEON_CONQUEST_LIST[122]) {
         §label_0;
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 30] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[120]) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 29] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[119]) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 28] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 27] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[118]) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 26] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 25] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[117]) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 24] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 23] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[116]) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 22] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 21] ) {
+    } elseif ($DUNGEON_ENTER_INDEX == 116) {
         supervision_Station(11);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 20] ) {
+    } else {
         supervision_Station(11);
         supervision_Station(12);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 19] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 18] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 17] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 16] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 15] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 14] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 13] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 12] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 11] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 10] ) {
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 8] ) {
-        §label_22;
-        end;
-    } else {
-        jump @label_22;
     }
 }

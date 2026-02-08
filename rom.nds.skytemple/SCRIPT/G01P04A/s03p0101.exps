@@ -120,7 +120,7 @@ def 0 {
     message_Close();
     screen_FadeOut(1, 30);
     worldmap_SetMode(4);
-    worldmap_SetLevel(8);
+    //worldmap_SetLevel(8);
     back2_SetMode(3);
     WaitSubScreen();
     worldmap_SetCamera(51);

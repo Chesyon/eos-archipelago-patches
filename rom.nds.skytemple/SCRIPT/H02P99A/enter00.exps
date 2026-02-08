@@ -8,122 +8,95 @@ def 0 {
             supervision_StationCommon(0);
             if ( scn($SCENARIO_MAIN) < [29, 5] ) {
                 §label_1;
-                switch ( scn($SCENARIO_MAIN)[0] ) {
-                    case == 23:
-                        supervision_ExecuteStationSub(LEVEL_H02P99A, 'UM22', 0);
-                        §label_4;
-                        if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
-                            debug_Print('SAMEHADA_RESUME');
-                            $SCENARIO_MAIN_BIT_FLAG[7] = 0;
-                            supervision_StationCommon(2);
-                            §label_16;
-                            debug_Print('SET_BGM');
-                            if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-                                bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
-                                $EVENT_LOCAL = 0;
-                                §label_20;
-                                JumpCommon(CORO_COMMON_ENTER);
-                            } else {
-                                bgm_PlayFadeIn(BGM_OCEAN1, 0, 256);
-                                jump @label_20;
-                            }
-                        } else {
-                            switch ( sector() ) {
-                                case 1:
-                                    end;
-                                default:
-                                    switch ( $GROUND_GETOUT ) {
-                                        case 999:
-                                            supervision_StationCommon(4);
-                                            Wait(60);
-                                            supervision_StationCommon(3);
-                                            se_Play(7183);
-                                            screen_FadeInAll(0, 30);
-                                            screen_FadeIn(1, 0);
-                                            ~FadeIn();
-                                            with (actor ACTOR_PLAYER) {
-                                                SetOutputAttribute(2);
-                                            }
-                                            with (actor ACTOR_ATTENDANT_PARTNER) {
-                                                SetOutputAttribute(2);
-                                            }
-                                            with (object OBJECT_D39P41A1_90) {
-                                                SetAnimation(18);
-                                            }
-                                            with (object OBJECT_D39P41A1_90) {
-                                                WaitAnimation();
-                                            }
-                                            WaitExecuteObject(OBJECT_D39P41A1_90);
-                                            with (object OBJECT_D39P41A1_90) {
-                                                Destroy();
-                                            }
-                                            Wait(60);
-                                            with (actor ACTOR_PLAYER) {
-                                                ResetOutputAttribute(2);
-                                            }
-                                            with (actor ACTOR_ATTENDANT_PARTNER) {
-                                                ResetOutputAttribute(2);
-                                            }
-                                            bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
-                                            JumpCommon(CORO_END_TALK);
-                                            end;
-                                        case 218:
-                                        default:
-                                            break;
+                if ($SCENARIO_SUB2 &<< 6) {
+                } elseif ($SCENARIO_SUB2 &<< 4) {
+                    supervision_ExecuteStationSub(LEVEL_H02P99A, 'us03', 0);
+                } elseif ($DUNGEON_CONQUEST_LIST[34]) {
+                    switch(scn($SCENARIO_SUB7)[1]) {
+                        case &<< 5:
+                            break;
+                        default:
+                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'um22', 0);
+                            break;
+                    }
+                }
+                §label_4;
+                if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                    debug_Print('SAMEHADA_RESUME');
+                    $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                    supervision_StationCommon(2);
+                    §label_16;
+                    debug_Print('SET_BGM');
+                    if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
+                        bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+                        $EVENT_LOCAL = 0;
+                        §label_20;
+                        JumpCommon(CORO_COMMON_ENTER);
+                    } else {
+                        bgm_PlayFadeIn(BGM_OCEAN1, 0, 256);
+                        jump @label_20;
+                    }
+                } else {
+                    switch ( sector() ) {
+                        case 1:
+                            end;
+                        default:
+                            switch ( $GROUND_GETOUT ) {
+                                case 999:
+                                    supervision_StationCommon(4);
+                                    Wait(60);
+                                    supervision_StationCommon(3);
+                                    se_Play(7183);
+                                    screen_FadeInAll(0, 30);
+                                    screen_FadeIn(1, 0);
+                                    ~FadeIn();
+                                    with (actor ACTOR_PLAYER) {
+                                        SetOutputAttribute(2);
                                     }
-                                    §label_18;
-                                    supervision_StationCommon(1);
-                                    jump @label_16;
+                                    with (actor ACTOR_ATTENDANT_PARTNER) {
+                                        SetOutputAttribute(2);
+                                    }
+                                    with (object OBJECT_D39P41A1_90) {
+                                        SetAnimation(18);
+                                    }
+                                    with (object OBJECT_D39P41A1_90) {
+                                        WaitAnimation();
+                                    }
+                                    WaitExecuteObject(OBJECT_D39P41A1_90);
+                                    with (object OBJECT_D39P41A1_90) {
+                                        Destroy();
+                                    }
+                                    Wait(60);
+                                    with (actor ACTOR_PLAYER) {
+                                        ResetOutputAttribute(2);
+                                    }
+                                    with (actor ACTOR_ATTENDANT_PARTNER) {
+                                        ResetOutputAttribute(2);
+                                    }
+                                    bgm_PlayFadeIn(BGM_DO_YOUR_BEST_AS_ALWAYS, 0, 256);
+                                    JumpCommon(CORO_END_TALK);
+                                    end;
+                                case 218:
+                                default:
+                                    break;
                             }
-                        }
-                        break;
-                    case == 29:
-                        if ($PERFORMANCE_PROGRESS_LIST[24]) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US23', 0);
-                            jump @label_4;
-                        } elseif ($SCENARIO_SUB2 &<< 4) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US03', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 93] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US23', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 86] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US22', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 77] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US21', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 68] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US20', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 54] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US04', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US03', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 32] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US02', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 7] ) {
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US31', 0);
-                            jump @label_4;
-                        } elseif ( scn($SCENARIO_MAIN) >= [29, 0] ) {
-                            §label_13;
-                            supervision_ExecuteStationSub(LEVEL_H02P99A, 'US01', 0);
-                            jump @label_4;
-                        } else {
-                            jump @label_13;
-                        }
-                        break;
-                    default:
-                        jump @label_4;
+                            §label_18;
+                            supervision_StationCommon(1);
+                            jump @label_16;
+                    }
                 }
             } else {
                 supervision_StationCommon(5);
                 jump @label_1;
             }
             break;
+        case 2:
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_H02P99A);
+            $GROUND_ENTER = LEVEL_H02P99A;
+            $SCENARIO_MAIN_BIT_FLAG[7] = 1;
+            supervision_StationCommon(6);
+            jump @label_0;
         default:
             screen_FadeOutAll(1, 0);
             back_SetGround(LEVEL_H02P99A);

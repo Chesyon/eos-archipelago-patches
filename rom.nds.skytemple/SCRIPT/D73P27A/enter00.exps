@@ -1,0 +1,95 @@
+
+def 0 {
+    debug_Print('START');
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            supervision_ExecuteStationSub(LEVEL_D73P27A, 'US31', 0);
+            supervision_StationCommon(7);
+            debug_Print('LABEL_TEAM_SET');
+            supervision_StationCommon(9);
+            switch ( sector() ) {
+                case 1:
+                    §label_3;
+                    debug_Print('LABEL_END');
+                    JumpCommon(CORO_COMMON_ENTER);
+                default:
+                    debug_Print('LABEL_PLAYER_SET');
+                    if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                        debug_Print('LABEL_REBIRTH');
+                        supervision_StationCommon(6);
+                        §label_6;
+                        debug_Print('SET_BGM');
+                        bgm_PlayFadeIn(BGM_SKY_PEAK_SNOWFIELD, 0, 256);
+                        debug_Print('LABEL_ENTER_END');
+                        if ( $SCENARIO_MAIN_BIT_FLAG[4] ) {
+                            $SCENARIO_MAIN_BIT_FLAG[4] = 0;
+                            jump @label_3;
+                        } else {
+                            JumpCommon(CORO_COMMON_ENTER);
+                        }
+                    } else {
+                        debug_Print('LABEL_PLAYER_SET_RESUME');
+                        if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                            debug_Print('LABEL_RESUME');
+                            $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                            supervision_StationCommon(4);
+                            jump @label_6;
+                        } else {
+                            debug_Print('LABEL_PLAYER_SET_NORMAL');
+                            supervision_StationCommon(1);
+                            jump @label_6;
+                        }
+                    }
+                    break;
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            debug_Print('LABEL_BACK_SET');
+            back_SetGround(LEVEL_D73P27A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER_APPOINT) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_NPC_PINPUKU) {
+    if ( scn($SCENARIO_MAIN) <= [29, 26] ) {
+        §label_10;
+        Destroy();
+    } elseif ( $SCENARIO_MAIN_BIT_FLAG[77] ) {
+        JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    } else {
+        jump @label_10;
+    }
+}
+
+def 3 for_actor(ACTOR_NPC_DONMERU) {
+    if ( scn($SCENARIO_MAIN) <= [29, 26] ) {
+        §label_12;
+        Destroy();
+    } elseif ( $SCENARIO_MAIN_BIT_FLAG[81] ) {
+        JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    } else {
+        jump @label_12;
+    }
+}
+
+def 4 for_actor(ACTOR_NPC_WATAKKO) {
+    if ( scn($SCENARIO_MAIN) <= [29, 26] ) {
+        §label_14;
+        Destroy();
+    } elseif ( $SCENARIO_MAIN_BIT_FLAG[86] ) {
+        SetMoveRange(Position<'m0', 33, 27>, 8, 6);
+        JumpCommon(CORO_MOVE_TYPE1);
+    } else {
+        jump @label_14;
+    }
+}

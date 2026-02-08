@@ -229,8 +229,17 @@ def 0 {
         case 10:
             if ($REQUEST_THANKS_RESULT_VARIATION == 4) {
                 call @do_outlaw_check;
-                message_SetFace(ACTOR_NPC_JIBAKOIRU, FACE_NORMAL, FACE_POS_STANDARD);
-                message_Talk(" ZZZT! Additionally, please have an\nextra check for permitting us to join you in\n[c_kind:ACTOR_RANDOM_REQUEST_NPC01]'s joint capture and arrest! ZZZT!");
+                switch(ProcessSpecial(102,1,0)) {
+                    case 81:
+                    case 681:
+                        message_SetFace(ACTOR_NPC_KOIRU, FACE_NORMAL, FACE_POS_STANDARD);
+                        break;
+                    case 504:
+                    default:            
+                        message_SetFace(ACTOR_NPC_JIBAKOIRU, FACE_NORMAL, FACE_POS_STANDARD);
+                        break;
+                }
+                message_Talk(" ZZZT! Additionally, please have an\nextra check for permitting me to join you in\n[c_kind:ACTOR_RANDOM_REQUEST_NPC01]'s joint capture and arrest! ZZZT!");
                 message_Close();
             }
         case 9:

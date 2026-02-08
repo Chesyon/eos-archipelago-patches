@@ -2,6 +2,21 @@ macro LaprasMain() {
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         if ( $SCENARIO_TALK_BIT_FLAG[46] ) {
+            // [29, 94], Chatot Says Manaphy Returned
+            if ( $SCENARIO_TALK_BIT_FLAG[47] ) {
+            } else {
+                $SCENARIO_TALK_BIT_FLAG[47] = 1;
+                message_SetFace(ACTOR_NPC_RAPURASU, FACE_NORMAL, FACE_POS_STANDARD);
+                message_Talk({
+                    english=" Oh?[K] Someone was nearly\novercome by the waves at this beach?",
+                    french=" Ah?[K] Quelqu\'un a failli se noyer\nsur cette plage?",
+                    german=" Oh?[K] Jemand wurde fast von den\nWellen an diesem Strand überwältigt?",
+                    italian=" Eh?[K] Qualcuno è stato quasi\nportato via dalle onde su questa spiaggia?",
+                    spanish=" ¿Eh?[K] ¿Alguien casi se ahoga\nentre las olas de la playa?",
+                });
+                message_Talk(" That\'s terrible! I\'m sorry...[K]\nBut that\'s just too funny!");
+                message_Close();
+            }
         } else {
             $SCENARIO_TALK_BIT_FLAG[46] = 1;
             message_SetFace(ACTOR_NPC_RAPURASU, FACE_NORMAL, FACE_POS_STANDARD);
@@ -142,7 +157,7 @@ macro LaprasMain() {
             });
             message_Close();
         }
-    } elseif ($DUNGEON_OPEN_LIST[44]) {
+    } elseif ($PERFORMANCE_PROGRESS_LIST[17]) {
         // [29, 1], Graduation first announcement
         if ( $SCENARIO_TALK_BIT_FLAG[43] || $GROUND_ENTER != LEVEL_D01P11A) {
         } else {
@@ -176,22 +191,6 @@ macro LaprasMain() {
                 italian=" Quando volete tornare alla\n[CS:P]Terra Nascosta[CR], ditelo a me.",
                 spanish=" Avisadme cuando queráis\nregresar a la [CS:P]Tierra Oculta[CR].",
             });
-            message_Close();
-        }
-    } else {
-        // [29, 94], Chatot Says Manaphy Returned
-        if ( $SCENARIO_TALK_BIT_FLAG[47] ) {
-        } else {
-            $SCENARIO_TALK_BIT_FLAG[47] = 1;
-            message_SetFace(ACTOR_NPC_RAPURASU, FACE_NORMAL, FACE_POS_STANDARD);
-            message_Talk({
-                english=" Oh?[K] Someone was nearly\novercome by the waves at this beach?",
-                french=" Ah?[K] Quelqu\'un a failli se noyer\nsur cette plage?",
-                german=" Oh?[K] Jemand wurde fast von den\nWellen an diesem Strand überwältigt?",
-                italian=" Eh?[K] Qualcuno è stato quasi\nportato via dalle onde su questa spiaggia?",
-                spanish=" ¿Eh?[K] ¿Alguien casi se ahoga\nentre las olas de la playa?",
-            });
-            message_Talk("That\'s terrible! I\'m sorry...[K]\nBut that\'s just too funny!");
             message_Close();
         }
     }
@@ -294,6 +293,7 @@ macro LaprasTransport() {
             }
         } else {
             §hidden_land_only;
+            message_SetFace(ACTOR_NPC_RAPURASU, FACE_NORMAL, FACE_POS_STANDARD);
             message_Talk({
                 english=" Would you like to go to the\n[CS:P]Hidden Land[CR]?",
                 french=" Voulez-vous aller dans les\n[CS:P]Terres Illusoires[CR]?",

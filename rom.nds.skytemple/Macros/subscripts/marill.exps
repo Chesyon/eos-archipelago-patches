@@ -1,7 +1,31 @@
 import "hints.exps";
 macro MarillMain() {
     ~CheckHints();
-    if ($DUNGEON_CONQUEST_LIST[69]) {
+    if ($GROUND_ENTER == LEVEL_G01P01A) {
+        // [13, 1], Amp Plains is open
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
+        }
+        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" We're sorry to bother you.[K]\nPlease get back our item!",
+            french=" Excusez-nous de vous\ndéranger.[K] Mais récupérez notre objet,\ns'il vous plaît!",
+            german=" Tut uns leid, euch zu stören.[K]\nBitte holt unser Item zurück!",
+            italian=" Ci dispiace disturbarvi.[K]\nMa per favore, riportateci il nostro strumento!",
+            spanish=" Sentimos causaros molestias.[K]\n¡Por favor, recuperad nuestro objeto!",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -309,30 +333,6 @@ macro MarillMain() {
             german=" Wir zählen auf euch![K]\nViel Glück!",
             italian=" Contiamo su di voi![K]\nBuona fortuna!",
             spanish=" ¡Gracias por vuestra ayuda![K]\n¡Buena suerte!",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[17]) {
-        // [13, 1], Amp Plains is open
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_MARIRU);
-        }
-        message_SetFace(ACTOR_NPC_MARIRU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We're sorry to bother you.[K]\nPlease get back our item!",
-            french=" Excusez-nous de vous\ndéranger.[K] Mais récupérez notre objet,\ns'il vous plaît!",
-            german=" Tut uns leid, euch zu stören.[K]\nBitte holt unser Item zurück!",
-            italian=" Ci dispiace disturbarvi.[K]\nMa per favore, riportateci il nostro strumento!",
-            spanish=" Sentimos causaros molestias.[K]\n¡Por favor, recuperad nuestro objeto!",
         });
         message_Close();
         jump @label_130;

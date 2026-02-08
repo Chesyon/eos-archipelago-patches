@@ -6,8 +6,8 @@ def 0 {
             supervision_StationCommon(0);
             switch ( scn($SCENARIO_MAIN)[0] ) {
                 case == 10:
-                    supervision_ExecuteStationSub(LEVEL_D08P11A, 'UM09', 0);
                     §label_2;
+                    supervision_ExecuteStationSub(LEVEL_D08P11A, 'UM09', 0);
                     if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
                         $SCENARIO_MAIN_BIT_FLAG[7] = 0;
                         supervision_StationCommon(2);

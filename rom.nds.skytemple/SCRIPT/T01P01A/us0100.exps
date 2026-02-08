@@ -1,20 +1,11 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [29, 6] ) {
-        §label_0;
+    if ($DUNGEON_CONQUEST_LIST[45]) {
         supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 5] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 2] ) {
-        supervision_Station(8);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 1] ) {
-        supervision_Station(8);
         end;
     } else {
+        supervision_Station(8);
         end;
     }
 }

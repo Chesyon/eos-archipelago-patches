@@ -1,5 +1,166 @@
 macro GrovyleMain() {
-    if ($DUNGEON_CONQUEST_LIST[39]) {
+    if ($GROUND_ENTER == LEVEL_D22P11A) {
+        // [20, 1], Dusk Forest Unlocked
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
+        }
+        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" If we don't hurry, the [CS:N]Sableye[CR]\nwill catch up to us.",
+            french=" Si on ne se dépêche pas, les\n[CS:N]Ténéfix[CR] vont nous rattraper.",
+            german=" Wenn wir uns nicht beeilen,\nwerden die [CS:N]Zobiris[CR] uns einholen.",
+            italian=" Se non ci affrettiamo, i [CS:N]Sableye[CR]\nci raggiungeranno.",
+            spanish=" Como no nos demos prisa, los\n[CS:N]Sableye[CR] nos alcanzarán.",
+        });
+        message_Talk({
+            english=" We're leaving as soon as\nyou're ready.",
+            french=" On part quand vous voulez.",
+            german=" Wir brechen auf, sobald ihr\nfertig seid.",
+            italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
+            spanish=" Nos iremos en cuanto esté\ntodo listo.",
+        });
+        message_Close();
+        jump @label_130;
+    } elseif ($GROUND_ENTER == LEVEL_D23P11A) {
+         if ($DUNGEON_ENTER_INDEX == 33) {
+            // [20, 4], Deep Dusk Forest Die
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
+            }
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We're nearly there.",
+                french=" On y est presque.",
+                german=" Wir sind fast da.",
+                italian=" Non manca molto.",
+                spanish=" Casi hemos llegado.",
+            });
+            message_Talk({
+                english=" We'll leave when you're ready.",
+                french=" On part quand tu voudras.",
+                german=" Wir brechen auf, wenn ihr\nfertig seid.",
+                italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
+                spanish=" Nos iremos en cuanto esté\ntodo listo.",
+            });
+            message_Close();
+            jump @label_130;
+        } elseif ($DUNGEON_OPEN_LIST[33]) {
+            // [20, 3], Deep Dusk Forest Unlocked
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
+            }
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" We can return to the past by\ngoing through the Passage of Time.",
+                french=" On peut retourner dans le passé\nen empruntant le Couloir du Temps.",
+                german=" Wir können in die Vergangenheit\nzurückkehren, indem wir durch den Zeittunnel\ngehen.",
+                italian=" Possiamo tornare nel passato\nattraverso il Portale del Tempo.",
+                spanish=" Podemos regresar al pasado\natravesando el Pasaje del Tiempo.",
+            });
+            message_Talk({
+                english=" We're almost there.[K] We're\nleaving as soon as you're ready.",
+                french=" On y est presque.[K] Allons-y\nquand vous voudrez.",
+                german=" Wir sind fast da.[K] Wir brechen\nauf, sobald ihr fertig seid.",
+                italian=" Ci siamo quasi.[K]\nPartiremo non appena avrete\nfatto tutti i preparativi necessari.",
+                spanish=" Casi hemos llegado.[K]\nContinuaremos en cuanto os hayáis preparado.",
+            });
+            message_Close();
+            jump @label_130;
+        }
+        jump @label_130;
+    
+    } elseif ($GROUND_ENTER == LEVEL_D24P11A) {
+        if ($DUNGEON_ENTER_INDEX == 34) {
+            // [21, 2], Lost to Treeshroud Forest
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
+            }
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" It feels different from before...\nSomething has changed here...",
+                french=" Cet endroit semble différent\ndepuis la dernière fois... Quelque chose\na changé ici...",
+                german=" Es fühlt sich anders an als\nvorher. Irgendetwas hat sich hier verändert.",
+                italian=" È diverso da prima... Qui\nqualcosa è cambiato...",
+                spanish=" Algo es distinto... Algo ha\ncambiado...",
+            });
+            message_Talk({
+                english=" Hurry. We have to go.",
+                french=" Vite. Il faut partir.",
+                german=" Beeilt euch. Wir müssen los.",
+                italian=" Presto. Dobbiamo andare.",
+                spanish=" Rápido. Tenemos que irnos.",
+            });
+            message_Close();
+            jump @label_130;
+        } else {
+            // [21, 1], Treeshroud Forest Unlocked
+            with(actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            with(actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
+            }
+            message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" There should be a Time Gear at\nthe deepest part of this forest.",
+                french=" On devrait trouver un Rouage du\nTemps au cœur de cette forêt.",
+                german=" Es sollte ein Zahnrad der Zeit\nim tiefsten Teil des Waldes geben.",
+                italian=" Ci dovrebbe essere un\nIngranaggio del Tempo nel cuore della\nforesta.",
+                spanish=" Debería haber un Engranaje del\nTiempo en la parte más profunda del bosque.",
+            });
+            message_Talk({
+                english=" We're leaving as soon as\nyou're ready.",
+                french=" On part quand vous voulez.",
+                german=" Wir brechen auf, sobald ihr\nfertig seid.",
+                italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
+                spanish=" Nos iremos en cuanto esté\ntodo listo.",
+            });
+            message_Close();
+            jump @label_130;
+        }
+    } elseif ($DUNGEON_CONQUEST_LIST[39]) {
         // [25, 4], Died to Dusknoir
         switch ( $GROUND_ENTER ) {
             case 59:
@@ -433,193 +594,6 @@ macro GrovyleMain() {
                 message_Close();
                 jump @label_130;
         }
-    } elseif ($DUNGEON_ENTER_INDEX == 34) {
-        // [21, 2], Lost to Treeshroud Forest
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" It feels different from before...\nSomething has changed here...",
-            french=" Cet endroit semble différent\ndepuis la dernière fois... Quelque chose\na changé ici...",
-            german=" Es fühlt sich anders an als\nvorher. Irgendetwas hat sich hier verändert.",
-            italian=" È diverso da prima... Qui\nqualcosa è cambiato...",
-            spanish=" Algo es distinto... Algo ha\ncambiado...",
-        });
-        message_Talk({
-            english=" Hurry. We have to go.",
-            french=" Vite. Il faut partir.",
-            german=" Beeilt euch. Wir müssen los.",
-            italian=" Presto. Dobbiamo andare.",
-            spanish=" Rápido. Tenemos que irnos.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[34]) {
-        // [21, 1], Treeshroud Forest Unlocked
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" There should be a Time Gear at\nthe deepest part of this forest.",
-            french=" On devrait trouver un Rouage du\nTemps au cœur de cette forêt.",
-            german=" Es sollte ein Zahnrad der Zeit\nim tiefsten Teil des Waldes geben.",
-            italian=" Ci dovrebbe essere un\nIngranaggio del Tempo nel cuore della\nforesta.",
-            spanish=" Debería haber un Engranaje del\nTiempo en la parte más profunda del bosque.",
-        });
-        message_Talk({
-            english=" We're leaving as soon as\nyou're ready.",
-            french=" On part quand vous voulez.",
-            german=" Wir brechen auf, sobald ihr\nfertig seid.",
-            italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
-            spanish=" Nos iremos en cuanto esté\ntodo listo.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 33) {
-        // [20, 4], Deep Dusk Forest Die
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We're nearly there.",
-            french=" On y est presque.",
-            german=" Wir sind fast da.",
-            italian=" Non manca molto.",
-            spanish=" Casi hemos llegado.",
-        });
-        message_Talk({
-            english=" We'll leave when you're ready.",
-            french=" On part quand tu voudras.",
-            german=" Wir brechen auf, wenn ihr\nfertig seid.",
-            italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
-            spanish=" Nos iremos en cuanto esté\ntodo listo.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[33]) {
-        // [20, 3], Deep Dusk Forest Unlocked
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" We can return to the past by\ngoing through the Passage of Time.",
-            french=" On peut retourner dans le passé\nen empruntant le Couloir du Temps.",
-            german=" Wir können in die Vergangenheit\nzurückkehren, indem wir durch den Zeittunnel\ngehen.",
-            italian=" Possiamo tornare nel passato\nattraverso il Portale del Tempo.",
-            spanish=" Podemos regresar al pasado\natravesando el Pasaje del Tiempo.",
-        });
-        message_Talk({
-            english=" We're almost there.[K] We're\nleaving as soon as you're ready.",
-            french=" On y est presque.[K] Allons-y\nquand vous voudrez.",
-            german=" Wir sind fast da.[K] Wir brechen\nauf, sobald ihr fertig seid.",
-            italian=" Ci siamo quasi.[K]\nPartiremo non appena avrete\nfatto tutti i preparativi necessari.",
-            spanish=" Casi hemos llegado.[K]\nContinuaremos en cuanto os hayáis preparado.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_ENTER_INDEX == 32) {
-        // [20, 2], Dusk Forest Die
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" If we don't hurry, the [CS:N]Sableye[CR]\nwill catch up to us.",
-            french=" Si on ne se dépêche pas, les\n[CS:N]Ténéfix[CR] vont nous rattraper.",
-            german=" Wenn wir uns nicht beeilen,\nwerden die [CS:N]Zobiris[CR] uns einholen.",
-            italian=" Se non ci affrettiamo, i [CS:N]Sableye[CR]\nci raggiungeranno.",
-            spanish=" Como no nos demos prisa, los\n[CS:N]Sableye[CR] nos alcanzarán.",
-        });
-        message_Talk({
-            english=" We're leaving as soon as\nyou're ready.",
-            french=" On part quand vous voulez.",
-            german=" Wir brechen auf, sobald ihr\nfertig seid.",
-            italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
-            spanish=" Nos iremos en cuanto esté\ntodo listo.",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($DUNGEON_OPEN_LIST[32]) {
-        // [20, 1], Dusk Forest Unlocked
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_JUPUTORU);
-        }
-        message_SetFace(ACTOR_NPC_JUPUTORU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" If we don't hurry, the [CS:N]Sableye[CR]\nwill catch up to us.",
-            french=" Si on ne se dépêche pas, les\n[CS:N]Ténéfix[CR] vont nous rattraper.",
-            german=" Wenn wir uns nicht beeilen,\nwerden die [CS:N]Zobiris[CR] uns einholen.",
-            italian=" Se non ci affrettiamo, i [CS:N]Sableye[CR]\nci raggiungeranno.",
-            spanish=" Como no nos demos prisa, los\n[CS:N]Sableye[CR] nos alcanzarán.",
-        });
-        message_Talk({
-            english=" We're leaving as soon as\nyou're ready.",
-            french=" On part quand vous voulez.",
-            german=" Wir brechen auf, sobald ihr\nfertig seid.",
-            italian=" Partiremo non appena avrete\nfatto tutti i preparativi necessari.",
-            spanish=" Nos iremos en cuanto esté\ntodo listo.",
-        });
-        message_Close();
-        jump @label_130;
-    } else {
-        jump @label_130;
     }
+    jump @label_130;
 }

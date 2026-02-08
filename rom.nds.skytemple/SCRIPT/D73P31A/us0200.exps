@@ -1,0 +1,11 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(1);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_PACHIRISU) {
+    SetMoveRange(Position<'m0', 36, 30>, 8, 6);
+    JumpCommon(CORO_MOVE_TYPE1);
+}

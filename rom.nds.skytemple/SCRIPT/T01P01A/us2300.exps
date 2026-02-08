@@ -1,15 +1,8 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [29, 94] ) {
-        §label_0;
-        supervision_Station(2);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 93] ) {
-        end;
-    } else {
-        end;
-    }
+    supervision_Station(2);
+    end;
 }
 
 def 1 for_actor(ACTOR_NPC_BANEBUU) {

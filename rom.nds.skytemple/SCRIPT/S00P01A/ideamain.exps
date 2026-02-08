@@ -1,3 +1,5 @@
+// TODO: Add Chimecho, Mr. Mime, and Sunflora checks to the logic. Pending Chesyon approval
+
 def 0 {
     if ($SCENARIO_SUB1 &<< 0) {
     } else {

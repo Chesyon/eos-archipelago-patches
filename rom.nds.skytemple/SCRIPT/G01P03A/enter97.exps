@@ -1,0 +1,24 @@
+def 0 {
+    message_SetFace(ACTOR_NPC_KURABU,FACE_NORMAL,FACE_POS_STANDARD);
+    message_Talk(" There was a bottle on the beach today.\n[K]I can't open it or carry it with my huge claws,\nor I might break it. Can you go throw it away?");
+    message_Close();
+    
+    switch ( ProcessSpecial(PROCESS_SPECIAL_INIT_RANDOM_NPC_JOBS, 1, 0) ) { }
+    switch ( ProcessSpecial(PROCESS_SPECIAL_GET_RANDOM_NPC_JOB_TYPE, 0, 0) ) { 
+        case 12:
+            message_Talk(" I think there was some kind of [CS:C]map[CR]\nstuffed in there, there might be treasure![K] I'm\nnot just saying that so you'll clean it up, okay?");
+            break;
+        case 0: // Rescue Client
+            message_Talk(" The handwriting was atrocious, almost\nlike they were in a hurry![K] Don't forget to take\ncare of the bottle when you check it out, okay?");
+            break;
+        case 7: // Deliver Item
+            message_Talk(" The handwriting was really flowery.\nI also saw a picture of an [CS:C]item[CR] in it, circled\nlike three times.[K] You'll take care of it, right?");
+            break;
+        case 1: // Rescue Target
+            message_Talk(" I think the paper inside had really\n[CS:I]colorful[CR] text.[K] Maybe it's important, or maybe\nit's just a flashy ad. Please get rid of it!");
+            break;
+    }
+    message_Close();
+    JumpCommon(CORO_END_TALK);
+    hold;
+}

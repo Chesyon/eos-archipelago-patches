@@ -1,0 +1,16 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(5);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_BANEBUU) {
+    switch ( sector() ) {
+        case 5:
+            SetMoveRange(Position<'m0', 41, 17>, 7, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

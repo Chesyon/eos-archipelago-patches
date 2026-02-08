@@ -1,0 +1,57 @@
+
+def 0 {
+    switch ( sector() ) {
+        case 1:
+            §label_0;
+            supervision_StationCommon(0);
+            if ($DUNGEON_CONQUEST_LIST[40]) {
+                supervision_ExecuteStationSub(LEVEL_D27P11A, 'UM25', 0);
+            } else {
+                supervision_ExecuteStationSub(LEVEL_D27P11A, 'UM24', 0);
+            }                    
+            §label_3;
+            if ( $SCENARIO_MAIN_BIT_FLAG[7] ) {
+                $SCENARIO_MAIN_BIT_FLAG[7] = 0;
+                supervision_StationCommon(3);
+                §label_6;
+                debug_Print('SET_BGM');
+                bgm_PlayFadeIn(BGM_HIDDEN_LAND, 0, 256);
+                back2_SetMode(-1);
+                JumpCommon(CORO_COMMON_ENTER);
+            } else {
+                switch ( sector() ) {
+                    case 1:
+                        end;
+                    default:
+                        switch ( $GROUND_GETOUT ) {
+                            case 11:
+                                supervision_StationCommon(1);
+                                jump @label_6;
+                            default:
+                                supervision_StationCommon(2);
+                                jump @label_6;
+                        }
+                        break;
+                }
+            }
+            break;
+        default:
+            screen_FadeOutAll(1, 0);
+            back_SetGround(LEVEL_D27P11A);
+            jump @label_0;
+    }
+}
+
+def 1 for_actor(ACTOR_PLAYER) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}
+
+def 2 for_actor(ACTOR_ATTENDANT1) {
+    SetAnimation(2);
+    WaitScreenFade();
+    WaitScreenFadeAll();
+    end;
+}

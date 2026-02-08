@@ -1,0 +1,12 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($SCENARIO_SUB7 &<< 6 || $SCENARIO_SUB2 &<< 5) {
+        supervision_Station(19);
+    } elseif ($SCENARIO_SUB2 &<< 4) {
+        supervision_Station(18);
+    } else {
+        supervision_Station(17);
+    }
+    end;
+}

@@ -1,0 +1,259 @@
+def 0 {
+    with (actor ACTOR_TALK_MAIN) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_TALK_SUB) {
+        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+    }
+    with (actor ACTOR_ATTENDANT1) {
+        SetAnimation(2);
+    }
+    screen2_FadeOut(1, 15);
+    back2_SetMode(0);
+    message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk("[STS] Hello, [hero] and [partner]!\nHow are you doing today?[STE]");
+    §anything_else;
+    switch(message_SwitchMenu(1,1)) {
+        case menu("Find Missions by dungeon..."):
+            if (debug) {
+                message_Mail(" This would crash if not on out.nds!");
+                jump @end_talk;
+            }
+            message_Close();
+            message_Talk("[STS] Oh, you want missions for a specific\ndungeon? Sure, which one?[STE]");
+            message_Close();
+            switch(message_Menu(80)) {
+                case 255: // 0 dungeons unlocked!
+                    message_CloseEnforce();
+                    message_Talk(" You uhh...[W:60] don\'t have\nany dungeons unlocked yet.[K] Come back when you do, okay?");
+                    message_Close();
+                    jump @end_talk;
+                case 254: // Cancelled
+                    message_CloseEnforce();
+                    message_Talk("[STS] Anything else I can help you with?[STE]");
+                    jump @anything_else;
+                case 0:
+                    message_CloseEnforce();
+                    message_Talk(" I heard that very rarely,\n[CS:G]Drowzee[CR] can send you there by accident.[K]\nCertainly beats hacking it in, right?");
+                    jump @dungeon_only;
+                case 27:
+                case 28:
+                case 29:   
+                case 32:
+                case 33:
+                    message_CloseEnforce();
+                    message_Talk("[STS] Since when could you two go to the\nfuture whenever you want? This is so unfair!\nWait... why do we even HAVE jobs out there?[STE]");
+                    jump @dungeon_only;
+                case 38:
+                    message_CloseEnforce();
+                    message_Talk("[STS] Is [CS:P]Hidden Land[CR] still off-limits? [CS:G]Lapras[CR]\nwas really adamant about nobody but you two\nbeing allowed to go there. I wonder though...[STE]");
+                    message_Talk("[STS] My dad is super jealous that you two\ngot to cross the sea, so maybe you could ask\n[CS:G]Lapras[CR] to take him for a ride somewhere?[STE]");
+                    message_Talk("[STS] Besides, why do we even have jobs in\na place that only the two of you are meant to\nbe able to access? Who needs rescuing?[STE]");
+                    jump @dungeon_only;
+                case 41:
+                    message_CloseEnforce();
+                    message_Talk("[STS] Wait a minute... Why can\'t [CS:G]Dialga[CR]\njust handle these jobs for us? Wouldn\'t that be\nway more efficient? Legendaries...[STE]");
+                    jump @dungeon_only;
+                case 63: 
+                    message_CloseEnforce();
+                    message_Talk("[STS] I still don\'t get it. Why and how are\nPokemon getting trapped inside the nightmares\nof others? Does this NOT bother anyone else?[STE]");
+                    jump @dungeon_only;
+                case 65:
+                    message_CloseEnforce();
+                    message_Talk(" You know there\'s no checks there...[W:30]\nRight?[K] You\'re literally just doing [CS:P]Dark Crater[CR]\nmissions for fun![K] You won already, go home!");
+                    jump @dungeon_only;
+                case 99:
+                case 100:
+                case 101:
+                case 102:
+                case 103:
+                    message_CloseEnforce();
+                    message_Talk(" What!?! Why would you want to set\nfoot in there, much less complete missions on\nthat godforsaken isle? Utter lunacy! Anyway...");
+                    jump @dungeon_only;
+                case 104:
+                    message_Talk(" Wait... [CS:P]Destiny Tower[CR] exists? And\nwe have jobs there? Huh... neat!");
+                    jump @dungeon_only;
+                case 175:
+                    message_Talk(" Huh? Did something happen in [CS:P]Shaymin Village[CR]?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 177: 
+                    message_Talk(" Huh? Has the grandmaster of all things bad resurfaced?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 16:
+                case 178:
+                    message_Talk(" Huh? Wait, did [CS:G]Torkoal[CR] finally croak?\n...or are you just pulling my leg here?[K]\nWe [CS:C]should never have jobs[CR] there, but here goes...");
+                    jump @dungeon_only;
+                case 71:
+                    message_Talk(" I\'ve heard nasty rumors about that place!\nThey say that all sorts of valuable items are\nstuck to the walls, fully out of reach.");
+                    message_Talk(" They say one whiff of that place will make\nyou [CS:C]never feel hungry again[CR], but\nit\'s also full of traps! I doubt we have jobs there...");
+                default: // Some other dungeon
+                    message_CloseEnforce();
+                    §dungeon_only;
+                    message_Talk("[STS] All set! When dad next\nresets the boards, you\'ll see just that dungeon!\nOh look, here he comes now![STE]");
+                    message_Close();
+                    Wait(30);
+                    break;
+            }
+            break;
+        case menu("Refresh boards"):
+            message_Close();
+            message_Talk("[STS] I can't exactly do that on my own, but\nmy dad should be refreshing them soon, if you\nwant to wait a minute or two...[STE]");
+            message_Close();
+            if (debug) {
+                switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
+            } else {
+                ProcessSpecial(104,0,0);
+            }
+            screen_FadeOut(1,30);
+            message_Mail("\n[CN]A few minutes later...");
+            message_Close();
+            screen_FadeIn(1,30);
+            break;
+        case menu("Toggle Reroll Cutscene"):
+            message_Close();
+            message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" Umm...[W:70] I don't know what you mean by tha-[W:30]");
+            message_CloseEnforce();
+            Wait(10);
+            if ($SCENARIO_TALK_BIT_FLAG[124]) {
+                message_ResetActor();
+                message_Talk(" Board reroll cutscene has been enabled!");
+                $SCENARIO_TALK_BIT_FLAG[124] = 0;
+            } else {
+                message_Talk(" Board reroll cutscene has been disabled!");
+                $SCENARIO_TALK_BIT_FLAG[124] = 1;
+            }
+            message_Close();
+            message_SetFace(ACTOR_NPC_DIGUDA, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk(" ...");
+            jump @anything_else;
+        case menu("Never mind"):
+        default:
+            message_Close();
+            message_Talk("[STS] Okay, best of luck on your\nmissions today, [hero] and [partner]![STE]");
+            message_Close();
+            jump @end_talk;
+    }
+    if ($SCENARIO_TALK_BIT_FLAG[124]) {
+        bgm_Stop();
+        screen_FadeOut(1,10);
+        bgm_PlayFadeIn(BGM_EARTHQUAKE1, 0, 256);
+        Wait(15);
+        se_Play(6416);
+        WaitSe(6416);
+        Wait(3);
+        se_Play(6416);
+        WaitSe(6416);
+        Wait(3);
+        se_Play(6416);
+        WaitSe(6416);
+        Wait(3);
+        se_Play(6416);
+        WaitSe(6416);
+        Wait(3);
+        message_Mail("[STS]Missions have been rerolled![STE]");
+        message_Close();
+        screen_FadeIn(1,10);
+        bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    } else {
+        Wait(15);
+        bgm_Stop();
+        se_Play(6415);
+        message_SetWaitMode(60,60);
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        message_ResetActor();
+        message_Talk({
+            english=" Stand clear! Updating listings![W:60]",
+            french=" Reculez! Mise à jour des tableaux![W:60]",
+            german=" Zurücktreten! Infobrett-Aktualisierung![W:60]",
+            italian=" Allontanatevi! Aggiornamento lista![W:60]",
+            spanish=" ¡A un lado! ¡Cambiando las listas![W:60]",
+        });
+        message_Talk({
+            english=" Stand clear! Updating listings![W:60]",
+            french=" Reculez! Mise à jour des tableaux![W:60]",
+            german=" Zurücktreten! Infobrett-Aktualisierung![W:60]",
+            italian=" Allontanatevi! Aggiornamento lista![W:60]",
+            spanish=" ¡A un lado! ¡Cambiando las listas![W:60]",
+        });
+        message_Close();
+        bgm_PlayFadeIn(BGM_EARTHQUAKE1, 0, 256);
+        camera_SetEffect(2, 1, 33024);
+        Wait(15);
+        se_Play(6416);
+        with (object OBJECT_G01P03A1_100) {
+            SetAnimation(18);
+        }
+        with (object OBJECT_G01P03A1_100) {
+            WaitAnimation();
+        }
+        WaitExecuteObject(OBJECT_G01P03A1_100);
+        with (object OBJECT_G01P03A1_100) {
+            SetAnimation(11);
+        }
+        Wait(60);
+        se_Play(6416);
+        with (object OBJECT_G01P03A1_103) {
+            SetAnimation(18);
+        }
+        with (object OBJECT_G01P03A1_103) {
+            WaitAnimation();
+        }
+        WaitExecuteObject(OBJECT_G01P03A1_103);
+        with (object OBJECT_G01P03A1_103) {
+            SetAnimation(11);
+        }
+        Wait(180);
+        se_Play(6415);
+        Wait(15);
+        message_SetActor(ACTOR_NPC_DAGUTORIO);
+        message_Talk({
+            english=" Update completed! Stand clear![W:60]",
+            french=" Mise à jour terminée! Reculez![W:60]",
+            german=" Aktualisierung fertig!\nZurücktreten![W:60]",
+            italian=" Aggiornamento completato! State\nlontani![W:60]",
+            spanish=" ¡Tablones listos! ¡A un lado![W:60]",
+        });
+        message_Talk({
+            english=" Update completed! Stand clear![W:60]",
+            french=" Mise à jour terminée! Reculez![W:60]",
+            german=" Aktualisierung fertig!\nZurücktreten![W:60]",
+            italian=" Aggiornamento completato! State\nlontani![W:60]",
+            spanish=" ¡Tablones listos! ¡A un lado![W:60]",
+        });
+        message_Close();
+        message_SetWaitMode(-1,-1);
+        camera_SetEffect(2, 1, 33024);
+        Wait(45);
+        se_Play(6416);
+        with (object OBJECT_G01P03A1_100) {
+            SetAnimation(20);
+        }
+        with (object OBJECT_G01P03A1_100) {
+            WaitAnimation();
+        }
+        WaitExecuteObject(OBJECT_G01P03A1_100);
+        with (object OBJECT_G01P03A1_100) {
+            SetAnimation(9);
+        }
+        Wait(60);
+        se_Play(6416);
+        with (object OBJECT_G01P03A1_103) {
+            SetAnimation(20);
+        }
+        with (object OBJECT_G01P03A1_103) {
+            WaitAnimation();
+        }
+        WaitExecuteObject(OBJECT_G01P03A1_103);
+        with (object OBJECT_G01P03A1_103) {
+            SetAnimation(9);
+        }
+        bgm2_Stop();
+        camera_SetEffect(0, 0, 0);
+        Wait(45);
+        bgm_PlayFadeIn(BGM_WIGGLYTUFFS_GUILD, 0, 256);
+    }
+    §end_talk;
+    JumpCommon(CORO_END_TALK);
+    hold;
+}
