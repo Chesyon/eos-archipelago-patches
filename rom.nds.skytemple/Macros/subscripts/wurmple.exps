@@ -1,12 +1,37 @@
 import "hints.exps";
 macro WurmpleMain() {
     ~CheckHints();
-    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
-        case 532:
-        case 1132:
-            $LOCAL0 = 1;
-        default:
-            break;
+    if ($ATTENDANT2_KIND == 10) {
+        // [29, 46], Manaphy is following?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_KEMUSSO);
+        }
+        message_SetFace(ACTOR_NPC_KEMUSSO, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" What...what a little cutie...",
+            french=" Oooh... comme il est mignon...",
+            german=" Was... Was für ein süßer\nKleiner...",
+            italian=" Che... Che bel marmocchio...",
+            spanish=" ¡Qué monada!",
+        });
+        message_Talk({
+            english=" [CS:N]Manaphy[CR] is his name? Such a\ncute little fellow.",
+            french=" Il s'appelle [CS:N]Manaphy[CR]? Il est\nmignon tout plein, ce petit gars.",
+            german=" [CS:N]Manaphy[CR] ist sein Name? So ein\nsüßes kleines Kerlchen.",
+            italian=" Si chiama [CS:N]Manaphy[CR]? È proprio\nun bel piccino.",
+            spanish=" ¿Se llama [CS:N]Manaphy[CR]? ¡Qué\nmonada!",
+        });
+        message_Close();
+        jump @label_130;
     }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
@@ -217,37 +242,6 @@ macro WurmpleMain() {
             german=" D-das ist besorgniserregend...",
             italian=" È-È inquietante...",
             spanish=" Pues es preocupante...",
-        });
-        message_Close();
-        jump @label_130;
-    } elseif ($LOCAL0 == 1) {
-        // [29, 46], Manaphy is following?
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_KEMUSSO);
-        }
-        message_SetFace(ACTOR_NPC_KEMUSSO, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" What...what a little cutie...",
-            french=" Oooh... comme il est mignon...",
-            german=" Was... Was für ein süßer\nKleiner...",
-            italian=" Che... Che bel marmocchio...",
-            spanish=" ¡Qué monada!",
-        });
-        message_Talk({
-            english=" [CS:N]Manaphy[CR] is his name? Such a\ncute little fellow.",
-            french=" Il s'appelle [CS:N]Manaphy[CR]? Il est\nmignon tout plein, ce petit gars.",
-            german=" [CS:N]Manaphy[CR] ist sein Name? So ein\nsüßes kleines Kerlchen.",
-            italian=" Si chiama [CS:N]Manaphy[CR]? È proprio\nun bel piccino.",
-            spanish=" ¿Se llama [CS:N]Manaphy[CR]? ¡Qué\nmonada!",
         });
         message_Close();
         jump @label_130;

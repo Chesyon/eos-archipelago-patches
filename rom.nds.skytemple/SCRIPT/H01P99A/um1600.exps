@@ -1,0 +1,9 @@
+
+def 0 {
+    supervision_Station(0);
+    if ( $SCENARIO_TALK_BIT_FLAG[24] ) {
+    } else {
+        supervision_Station(3);
+    }
+    end;
+}

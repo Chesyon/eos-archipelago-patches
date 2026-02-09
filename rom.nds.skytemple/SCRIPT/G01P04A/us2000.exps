@@ -1,0 +1,15 @@
+
+def 0 {
+    supervision_Station(0);
+    if ( $DUNGEON_OPEN_LIST[63] ) {
+        §label_0;
+        supervision_Station(12);
+        end;
+    } elseif ($DUNGEON_OPEN_LIST[62] ) {
+        supervision_Station(11);
+        end;
+    } else {
+        supervision_Station(10);
+        end;
+    }
+}

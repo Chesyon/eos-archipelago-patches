@@ -1,0 +1,7 @@
+
+def 0 {
+    supervision_Station(0);
+    end;
+    // Original Mr. Mime Subscript
+    supervision_Station(8);
+}

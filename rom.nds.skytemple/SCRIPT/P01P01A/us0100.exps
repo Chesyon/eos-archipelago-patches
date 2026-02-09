@@ -1,0 +1,7 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(10);
+    supervision_Station(2);
+    end;
+}

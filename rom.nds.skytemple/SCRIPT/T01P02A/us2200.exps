@@ -1,28 +1,12 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [29, 92] ) {
-        §label_0;
+    if ($DUNGEON_CONQUEST_LIST[68]) {
         supervision_Station(6);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 91] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 90] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 89] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 88] ) {
-        supervision_Station(10);
-        end;
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 87] ) {
-        supervision_Station(10);
-        end;
     } else {
-        end;
+        supervision_Station(10);
     }
+    end;
 }
 
 def 1 for_actor(ACTOR_NPC_YARUKIMONO) {

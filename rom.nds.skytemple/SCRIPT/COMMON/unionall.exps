@@ -5602,6 +5602,7 @@ coro EVENT_M26_01_08 {
     } else {
         adventure_log = 3;
         $PERFORMANCE_PROGRESS_LIST[17] = 1;
+        $SCENARIO_TALK_BIT_FLAG[41] = 0; // Reuse Cresselia Talk flag for post-dialga check!
         supervision_ExecuteActingSub(LEVEL_D30P41A, 'M26A0101', 0);
         supervision_ExecuteActingSub(LEVEL_D30P33A, 'M26A0102', 0);
         supervision_ExecuteActingSub(LEVEL_D30P34A, 'M26A0103', 0);

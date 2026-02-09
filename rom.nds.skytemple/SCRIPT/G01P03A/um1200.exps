@@ -1,0 +1,19 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(2);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 4:
+            SetMoveRange(Position<'m0', 39, 29>, 11, 11);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 2:
+            SetMoveRange(Position<'m1', 39, 29>, 11, 11);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

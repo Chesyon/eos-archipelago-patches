@@ -1,15 +1,27 @@
 
 def 0 {
+    sound_Stop();
+    back_SetGround(LEVEL_H01P99A);
+    supervision_StationCommon(0);
+    supervision_Acting(0);
     if ($PERFORMANCE_PROGRESS_LIST[17]) {
         if ($PERFORMANCE_PROGRESS_LIST[37]) {
             $EVENT_LOCAL = 22;
             $SCENARIO_TALK_BIT_FLAG[249] = 1;
         }
     }
-    sound_Stop();
-    back_SetGround(LEVEL_H01P99A);
-    supervision_StationCommon(0);
-    supervision_Acting(0);
+    if ($PERFORMANCE_PROGRESS_LIST[37]) {
+        with (actor ACTOR_NPC_KURESERIA) {
+            SetPositionMark(Position<'c0', 28, 19>);
+        }
+        with (actor ACTOR_NPC_KURESERIA) {
+            SetDirection(DIR_RIGHT);
+        }
+    } else {
+        with (actor ACTOR_NPC_KURESERIA) {
+            Destroy();
+        }
+    }
     with (performer 0) {
         camera_SetMyself();
     }
@@ -99,6 +111,9 @@ def 0 {
     }
     message_Close();
     bgm_FadeOut(120);
+    with (actor ACTOR_NPC_KURESERIA) {
+        MovePositionOffset(1,-1000,0);
+    }
     screen_FadeOut(1, 60);
     WaitBgm(BGM_OCEAN1);
     Wait(30);

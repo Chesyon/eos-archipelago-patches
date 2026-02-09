@@ -1,0 +1,42 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[4]) {
+        §label_0;
+        supervision_Station(8);
+        end;
+    } elseif ($DUNGEON_ENTER_INDEX == 4 || $DUNGEON_ENTER_INDEX == 5) {
+        supervision_Station(6);
+        end;
+    } else {
+        §label_2;
+        supervision_Station(4);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_KIMAWARI) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m0', 36, 31>, 7, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 6:
+            SetMoveRange(Position<'m1', 36, 31>, 7, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m2', 45, 32>, 7, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 6:
+            SetMoveRange(Position<'m3', 46, 31>, 7, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

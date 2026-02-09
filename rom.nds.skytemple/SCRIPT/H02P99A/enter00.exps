@@ -1,5 +1,5 @@
 import "fade_in.exps";
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('INSIDE');
     switch ( sector() ) {
@@ -100,6 +100,7 @@ def 0 {
         default:
             screen_FadeOutAll(1, 0);
             back_SetGround(LEVEL_H02P99A);
+            ~ManaphyFollow();
             jump @label_0;
     }
 }

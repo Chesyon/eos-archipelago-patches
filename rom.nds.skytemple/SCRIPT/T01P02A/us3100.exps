@@ -1,0 +1,26 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(1);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m0', 19, 27>, 9, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 1:
+            SetMoveRange(Position<'m1', 34, 28>, 8, 4);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

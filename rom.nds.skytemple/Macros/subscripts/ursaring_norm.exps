@@ -1,13 +1,31 @@
 import "hints.exps";
 macro Ursaring_NormMain() {
-    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
-        case 532:
-        case 1132:
-            $LOCAL0 = 1;
-        default:
-            break;
-    }
     ~CheckHints();
+    if ($ATTENDANT2_KIND == 10) {
+        // [29, 46], Manaphy is following?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RINGUMA);
+        }
+        message_SetFace(ACTOR_NPC_RINGUMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh, hey, now what's with your\ncute little buddy today?",
+            french=" Hé, comment va votre petit bout\nde chou aujourd'hui?",
+            german=" Oh, hey, was ist denn heute mit\neurem süßen kleinen Kumpel los?",
+            italian=" Ah, ehi, oggi come va con il\nvostro cucciolo?",
+            spanish=" Oh, ¿qué pasa con ese amiguito\ntuyo?",
+        });
+        message_Close();
+        JumpCommon(CORO_END_TALK);
+    }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
         with(actor ACTOR_TALK_MAIN) {
@@ -189,31 +207,6 @@ macro Ursaring_NormMain() {
             spanish=" No... La verdad es que no.",
         });
         message_Close();
-        
-    } elseif ($LOCAL0 == 1) {
-        // [29, 46], Manaphy is following?
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_RINGUMA);
-        }
-        message_SetFace(ACTOR_NPC_RINGUMA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oh, hey, now what's with your\ncute little buddy today?",
-            french=" Hé, comment va votre petit bout\nde chou aujourd'hui?",
-            german=" Oh, hey, was ist denn heute mit\neurem süßen kleinen Kumpel los?",
-            italian=" Ah, ehi, oggi come va con il\nvostro cucciolo?",
-            spanish=" Oh, ¿qué pasa con ese amiguito\ntuyo?",
-        });
-        message_Close();
-        
     } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
         // [29, 42], Manaphy hatched.
         with(actor ACTOR_TALK_MAIN) {

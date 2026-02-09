@@ -1,10 +1,35 @@
 macro Ursaring_EvoMain() {
-    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
-        case 532:
-        case 1132:
-            $LOCAL0 = 1;
-        default:
-            break;
+    if ($ATTENDANT2_KIND == 10) {
+        // [29, 46], Manaphy is following?
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_RINGUMA2);
+        }
+        message_SetFace(ACTOR_NPC_RINGUMA, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk({
+            english=" Oh! What a cutie!",
+            french=" Oh! Comme il est mignon!",
+            german=" Oh! Was für ein süßer kleiner\nSchatz!",
+            italian=" Oh! Che carino!",
+            spanish=" ¡Oh! ¡Qué monada!",
+        });
+        message_Talk({
+            english=" Why is that little cutie\nwith you?",
+            french=" Qu'est-ce que vous faites avec\nce petit bout de chou?",
+            german=" Warum habt ihr den kleinen\nSchatz denn dabei?",
+            italian=" Perché questo piccolino è con\nvoi?",
+            spanish=" ¿Por qué está contigo?",
+        });
+        message_Close();
+        JumpCommon(CORO_END_TALK);
     }
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
@@ -199,37 +224,6 @@ macro Ursaring_EvoMain() {
             german=" Das süße kleine Kerlchen ist\nverschwunden? Das, das wir gestern gesehen\nhaben?",
             italian=" Quel piccolino è scomparso?\nQuello che ho visto ieri?",
             spanish=" ¿Aquella monada desapareció?\n¿Aquella criaturita que vimos ayer?",
-        });
-        message_Close();
-        
-    } elseif ($LOCAL0 == 1) {
-        // [29, 46], Manaphy is following?
-        with(actor ACTOR_TALK_MAIN) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_TALK_SUB) {
-            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            SetAnimation(2);
-        }
-        with(actor ACTOR_ATTENDANT1) {
-            Turn2DirectionLives(4, 10, ACTOR_NPC_RINGUMA2);
-        }
-        message_SetFace(ACTOR_NPC_RINGUMA, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" Oh! What a cutie!",
-            french=" Oh! Comme il est mignon!",
-            german=" Oh! Was für ein süßer kleiner\nSchatz!",
-            italian=" Oh! Che carino!",
-            spanish=" ¡Oh! ¡Qué monada!",
-        });
-        message_Talk({
-            english=" Why is that little cutie\nwith you?",
-            french=" Qu'est-ce que vous faites avec\nce petit bout de chou?",
-            german=" Warum habt ihr den kleinen\nSchatz denn dabei?",
-            italian=" Perché questo piccolino è con\nvoi?",
-            spanish=" ¿Por qué está contigo?",
         });
         message_Close();
         

@@ -1121,15 +1121,13 @@ macro SunfloraMain() {
         jump @label_130;
     }
     §label_130;
-    if ($PERFORMANCE_PROGRESS_LIST[17]) {
-        if ($DUNGEON_CONQUEST_LIST[49]) {
-            switch(scn($SCENARIO_SUB7)[1]) {
-                case &<< 2:
-                    break;
-                default:
-                    ~SunfloraSurroundedSeaCheck();
-                    break;
-            }
+    if ($DUNGEON_CONQUEST_LIST[49]) {
+        switch(scn($SCENARIO_SUB7)[1]) {
+            case &<< 2:
+                break;
+            default:
+                ~SunfloraSurroundedSeaCheck();
+                break;
         }
     }
     JumpCommon(CORO_END_TALK);

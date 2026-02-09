@@ -1,0 +1,35 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[48]) {
+        §label_0;
+        supervision_Station(3);
+        end;
+    } else {
+        supervision_Station(8);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m0', 24, 27>, 12, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 3:
+            SetMoveRange(Position<'m1', 24, 27>, 12, 3);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 8:
+            SetMoveRange(Position<'m2', 41, 28>, 9, 6);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

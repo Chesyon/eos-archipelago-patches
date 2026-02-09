@@ -1,0 +1,17 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(4);
+    supervision_Station(8);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_KIMAWARI) {
+    switch ( sector() ) {
+        case 4:
+            SetMoveRange(Position<'m0', 35, 28>, 7, 8);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

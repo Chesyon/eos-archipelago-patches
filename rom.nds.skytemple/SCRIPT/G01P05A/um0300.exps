@@ -1,0 +1,15 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[5]) {
+        §label_0;
+        supervision_Station(8);
+        end;
+    } elseif ($DUNGEON_ENTER_INDEX == 4 || $DUNGEON_ENTER_INDEX == 5) {
+        supervision_Station(6);
+        end;
+    } else {
+        supervision_Station(4);
+        end;
+    }
+}

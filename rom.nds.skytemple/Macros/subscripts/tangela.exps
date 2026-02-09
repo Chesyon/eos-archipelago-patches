@@ -265,7 +265,7 @@ macro TangelaMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($DUNGEON_CONQUEST_LIST[3]) {
+    } else {
         // [4, 1], Drenched Bluff Cleared!
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
@@ -295,8 +295,6 @@ macro TangelaMain() {
             spanish=" ¡Nuestro [CS:X]Equipo Seedgey[CR] es uno\nde ellos!",
         });
         message_Close();
-        jump @label_130;
-    } else {
         jump @label_130;
     }
 }

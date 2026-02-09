@@ -1,5 +1,5 @@
 import "fade_in.exps";
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print("Hi");
     switch ( sector() ) {
@@ -247,110 +247,34 @@ def 0 {
                             §label_8;
                             if ( scn($SCENARIO_MAIN) < [6, 4] ) {
                                 §label_9;
-                                switch ( scn($SCENARIO_MAIN)[0] ) {
-                                    case == 4:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM03', 0);
-                                        jump @label_6;
-                                    case == 5:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM04', 0);
-                                        jump @label_6;
-                                    case == 6:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM05', 0);
-                                        jump @label_6;
-                                    case == 7:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM06', 0);
-                                        jump @label_6;
-                                    case == 8:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM07', 0);
-                                        jump @label_6;
-                                    case == 9:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM08', 0);
-                                        jump @label_6;
-                                    case == 12:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM11', 0);
-                                        jump @label_6;
-                                    case == 13:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM12', 0);
-                                        jump @label_6;
-                                    case == 14:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM13', 0);
-                                        jump @label_6;
-                                    case == 15:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM14', 0);
-                                        jump @label_6;
-                                    case == 16:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM15', 0);
-                                        jump @label_6;
-                                    case == 17:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM16', 0);
-                                        jump @label_6;
-                                    case == 18:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM17', 0);
-                                        jump @label_6;
-                                    case == 19:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM18', 0);
-                                        jump @label_6;
-                                    case == 20:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM19', 0);
-                                        jump @label_6;
-                                    case == 21:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM20', 0);
-                                        jump @label_6;
-                                    case == 22:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM21', 0);
-                                        jump @label_6;
-                                    case == 23:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM22', 0);
-                                        jump @label_6;
-                                    case == 24:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM23', 0);
-                                        jump @label_6;
-                                    case == 25:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM24', 0);
-                                        jump @label_6;
-                                    case == 26:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM25', 0);
-                                        jump @label_6;
-                                    case == 27:
-                                        supervision_ExecuteStationSub(LEVEL_P01P01A, 'UM26', 0);
-                                        jump @label_6;
-                                    case == 29:
-                                        if ( scn($SCENARIO_MAIN) >= [29, 93] ) {
-                                            debug_Print("Hi");
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US23', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 86] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US22', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 77] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US21', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 68] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US20', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 54] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US04', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 40] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US03', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 32] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US02', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 7] ) {
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US31', 0);
-                                            jump @label_6;
-                                        } elseif ( scn($SCENARIO_MAIN) >= [29, 0] ) {
-                                            §label_41;
-                                            supervision_ExecuteStationSub(LEVEL_P01P01A, 'US01', 0);
-                                            jump @label_6;
-                                        } else {
-                                            jump @label_41;
+                                if ($PERFORMANCE_PROGRESS_LIST[17]) {
+                                    if ($DUNGEON_CONQUEST_LIST[122]) {
+                                        switch(scn($SCENARIO_SUB7)[1]) {
+                                            case &<< 3:
+                                                break;
+                                            default:
+                                                supervision_StationCommon(30);
+                                                break;
                                         }
-                                        break;
-                                    default:
-                                        jump @label_6;
+                                    }
                                 }
+                                ~ManaphyFollow();
+                                if ($DUNGEON_CONQUEST_LIST[49]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'us03', 0);
+                                } elseif ($DUNGEON_CONQUEST_LIST[45]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'us31', 0);
+                                } elseif ($PERFORMANCE_PROGRESS_LIST[17]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'us01', 0);
+                                } elseif ($DUNGEON_OPEN_LIST[20]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'um13', 0);
+                                } elseif ($DUNGEON_OPEN_LIST[8] || $DUNGEON_OPEN_LIST[9]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'um08', 0);
+                                } elseif ($DUNGEON_CONQUEST_LIST[5]) {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'um04', 0);
+                                } else {
+                                    supervision_ExecuteStationSub(LEVEL_P01P01A, 'um03', 0);
+                                }
+                                jump @label_6;
                             } else {
                                 supervision_StationCommon(10);
                                 jump @label_9;

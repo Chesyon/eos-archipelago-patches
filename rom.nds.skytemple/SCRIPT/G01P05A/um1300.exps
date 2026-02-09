@@ -1,0 +1,14 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[20]) {
+        §label_0;
+        supervision_Station(6);
+        end;
+    } elseif ($DUNGEON_ENTER_INDEX == 20) {
+        supervision_Station(4);
+        end;
+    } else {
+        end;
+    }
+}

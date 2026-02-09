@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('MAPIN D22P11A');
     switch ( sector() ) {
@@ -54,6 +54,7 @@ def 0 {
             debug_Print('BACK_SET');
             screen_FadeOutAll(1, 0);
             back_SetGround(LEVEL_D22P11A);
+            ~ManaphyForceUnfollow();
             jump @label_0;
     }
 }

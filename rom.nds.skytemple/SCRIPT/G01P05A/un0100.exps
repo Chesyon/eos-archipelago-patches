@@ -1,0 +1,19 @@
+
+def 0 {
+    if ( scn($SCENARIO_SIDE) >= [40, 7] ) {
+        §label_0;
+        supervision_Station(5);
+        end;
+    } elseif ( scn($SCENARIO_SIDE) >= [40, 6] ) {
+        end;
+    } elseif ( scn($SCENARIO_SIDE) >= [40, 3] ) {
+        supervision_Station(5);
+        end;
+    } elseif ( scn($SCENARIO_SIDE) >= [40, 2] ) {
+        supervision_Station(5);
+        end;
+    } else {
+        supervision_Station(5);
+        end;
+    }
+}

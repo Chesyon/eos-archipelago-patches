@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('START');
     switch ( sector() ) {
@@ -22,6 +22,7 @@ def 0 {
                     jump @label_9;
             }
             */
+            ~ManaphyFollow();
             if ($DUNGEON_CONQUEST_LIST[69]) {
                 supervision_ExecuteStationSub(LEVEL_D73P11A, 'us23', 0);
             } elseif ($DUNGEON_CONQUEST_LIST[66]) {

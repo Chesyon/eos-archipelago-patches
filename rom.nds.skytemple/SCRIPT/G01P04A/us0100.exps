@@ -1,0 +1,12 @@
+
+def 0 {
+    debug_Print('S01_B2');
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[45]) {
+        supervision_Station(10);
+        end;
+    } else {
+        supervision_Station(8);
+        end;
+    }
+}

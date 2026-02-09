@@ -1,10 +1,20 @@
 
 def 0 {
     supervision_Station(0);
+    supervision_Station(19);
+    switch(scn($SCENARIO_SUB7)[1]) {
+        case &<< 2:
+            break;
+        default:
+            supervision_Station(16);
+            break;
+    }
     if ($SCENARIO_SUB2 &<< 4) {
-        Wait(0);
+        supervision_Station(20);
     } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
         supervision_Station(17);
+    } else {
+        supervision_Station(20);
     }
     end;
 }

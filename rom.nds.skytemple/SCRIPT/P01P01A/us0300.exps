@@ -1,0 +1,16 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(17);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_HEIGANI) {
+    switch ( sector() ) {
+        case 17:
+            SetMoveRange(Position<'m0', 10, 19>, 12, 5);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

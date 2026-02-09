@@ -160,12 +160,15 @@ def 0 {
                 italian="\"Insieme, possiamo fermare la paralisi del\npianeta.\"\n                             - Il vostro [CS:N]Grovyle[CR] -",
                 spanish="\"Juntos, detendremos la parálisis del planeta.\"\n                          Firmado: [CS:N]Grovyle[CR]",
             });
-            message_Mail("\"P.S. I found this since we last met.[K]\nMay it serve you well in the trials to come...\"");
+            message_Mail("\"P.S. In the future, this might be a hint!\"");
             if ($SCENARIO_SUB2 &<< 6) {
             } elseif ($SCENARIO_SUB2 &<< 4) {
                 message_Mail("\"P.P.S What's the deal with the baby?[K] Are you\ntwo really chosing NOW of all times to adopt?\n[K]The very fate of the world is at stake here!\"");
             }
             message_Close();
+            /*            
+            message_Close();
+            message_Mail("\"P.S. I found this since we last met.[K]\nMay it serve you well in the trials to come...\"");
             switch(scn($SCENARIO_SUB7)[1]) {
                 case &<< 5:
                     break;
@@ -177,6 +180,8 @@ def 0 {
                     message_Close();
                     break;
             }
+            */
+
             end;
         case menu({
             english="No",

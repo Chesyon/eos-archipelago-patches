@@ -1,6 +1,36 @@
 import "hints.exps";
 macro TeddiursaMain() {
     ~CheckHints();
+    if ($ATTENDANT2_KIND == 10) {
+        with(actor ACTOR_TALK_MAIN) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_TALK_SUB) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with(actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_NPC_HIMEGUMA);
+        }
+        message_Talk({
+            english=" Oh! What a cutie!",
+            french=" Oh! Comme il est mignon!",
+            german=" Oh! Was für ein süßer kleiner\nSchatz!",
+            italian=" Oh! Che carino!",
+            spanish=" ¡Oh! ¡Qué monada!",
+        });
+        message_Talk({
+            english=" Why is that little cutie\nwith you?",
+            french=" Qu'est-ce que vous faites avec\nce petit bout de chou?",
+            german=" Warum habt ihr den kleinen\nSchatz denn dabei?",
+            italian=" Perché questo piccolino è con\nvoi?",
+            spanish=" ¿Por qué está contigo?",
+        });
+        message_Close();
+        jump @label_130;
+    }
     if ($DUNGEON_OPEN_LIST[38]) {
         // [25, 1], Hidden \"Land Ho!\"
         with(actor ACTOR_TALK_MAIN) {

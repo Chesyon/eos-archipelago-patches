@@ -1,12 +1,5 @@
 import "hints.exps";
 macro VigorothMain() {
-    switch(SwitchLives(ACTOR_ATTENDANT_MANAFI)) {
-        case 532:
-        case 1132:
-            $LOCAL0 = 1;
-        default:
-            break;
-    }
     ~CheckHints();
     if ($DUNGEON_CONQUEST_LIST[69]) {
         // [29, 92], Darkrai Defeated
@@ -364,7 +357,7 @@ macro VigorothMain() {
         });
         message_Close();
         jump @label_130;
-    } elseif ($LOCAL0 == 1) {
+    } elseif ($ATTENDANT2_KIND == 10) {
         // [29, 46], Manaphy is following?
         with(actor ACTOR_TALK_MAIN) {
             ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);

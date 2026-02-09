@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     switch ( sector() ) {
         case 1:
@@ -39,6 +39,7 @@ def 0 {
                     supervision_ExecuteStationSub(LEVEL_G01P07A, 'UN04', 0);
                     jump @label_4;
                 default:
+                    ~ManaphyFollow();
                     if ( scn($SCENARIO_MAIN) >= [29, 5] ) {
                         §label_5;
                         if ($DUNGEON_CONQUEST_LIST[63]) {
@@ -46,6 +47,7 @@ def 0 {
                         } elseif ($DUNGEON_OPEN_LIST[62]) {
                             supervision_ExecuteStationSub(LEVEL_G01P07A, 'us20', 0);
                         }
+                        jump @label_4;
                     } else {
                         supervision_StationCommon(5);
                         jump @label_5;

@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('START');
     switch ( sector() ) {
@@ -76,6 +76,7 @@ def 0 {
             debug_Print('LABEL_BACK_SET');
             back_SetGround(LEVEL_D73P24A);
             supervision_StationCommon(10);
+            ~ManaphyForceUnfollow();
             jump @label_0;
     }
 }

@@ -279,6 +279,26 @@ def 0 {
                     break;
             }
         }
+        if ($SCENARIO_SUB2 &<< 7) {
+            switch(random(100)) {
+                case < 5:
+                    screen_FadeInAll(1,0);
+                    if ($ATTENDANT1_KIND == 10) {
+                        $ATTENDANT2_KIND = 0;
+                        message_Explanation("[CN][CS:G]Manaphy[CR] wandered off somewhere...");
+                        message_Close();
+                        Wait(10);                                        
+                    } else {
+                        $ATTENDANT2_KIND = 10;
+                        message_Explanation("[CN][CS:G]Manaphy[CR] decided to follow\n[CN]you around for a little while!");
+                        message_Close();
+                        Wait(10);
+                    }
+                    screen_FadeOutAll(1,0);
+                default:
+                    break;
+            }
+        }
         if ($DUNGEON_OPEN_LIST[38]) {
             if ($DUNGEON_CONQUEST_LIST[69]) {
                 supervision_ExecuteStationSub(LEVEL_D01P11A, 'us23', 0);

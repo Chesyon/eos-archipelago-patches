@@ -124,7 +124,7 @@ macro CresseliaMain() {
                 supervision_ExecuteCommon(CORO_EVENT_S22_05);
                 jump @label_130;
         }
-    } elseif ( scn($SCENARIO_MAIN) >= [29, 90] ) {
+    } elseif ($DUNGEON_CONQUEST_LIST[67] ) {
         switch ( $GROUND_ENTER ) {
             case 102:
                 §label_5;
@@ -169,21 +169,52 @@ macro CresseliaMain() {
     } elseif ($DUNGEON_OPEN_LIST[67]) {
         jump @label_7;
     } else {
+
         message_SetFace(ACTOR_NPC_KURESERIA, FACE_NORMAL, FACE_POS_STANDARD);
         if ($PERFORMANCE_PROGRESS_LIST[17]) {
+            with (actor ACTOR_TALK_MAIN) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_TALK_SUB) {
+                ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                SetAnimation(2);
+            }
+            WaitExecuteLives(ACTOR_ATTENDANT1);
+            with (actor ACTOR_PLAYER) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_KURESERIA);
+            }
+            with (actor ACTOR_ATTENDANT1) {
+                Turn2DirectionLives(4, 10, ACTOR_NPC_KURESERIA);
+            }
             message_Talk(" Your courage atop [CS:P]Temporal Tower[CR]\ndid not go unnoticed, heroes![K] I predict [CS:C]many\nlegendaries will join you[CR] from here on out...");
         } else {
-            message_Talk(" Who might you be?[K] Never mind, I\ndon't much care unless you've done [CS:C]something\nheroic[CR], like save the world from certain doom.");
+            if ($SCENARIO_TALK_BIT_FLAG[41]) {
+                message_SetFace(ACTOR_NPC_KURESERIA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEOUTW);
+                message_Talk(" ...");
+            } else {
+                message_SetFace(ACTOR_NPC_KURESERIA, FACE_NORMAL, FACE_POS_BOTTOM_L_FACEOUTW);
+                message_Talk(" Who might you be?[K] Never mind, I\ndon't much care unless you've done [CS:C]something\nheroic[CR], like save the world from certain doom.");
+                $SCENARIO_TALK_BIT_FLAG[41] = 1;
+            }
         }
     }
     §label_130;
+    message_Close();
     ~CresseliaCheck();
+    screen2_FadeIn(1, 30);
+    JumpCommon(CORO_END_TALK);
 }
 
 
 
 
 macro CresseliaCheck() {
+    if ($PERFORMANCE_PROGRESS_LIST[17]) {
+    } else {
+        JumpCommon(CORO_END_TALK);
+    }
     switch(scn($SCENARIO_SUB1)[1]) {
         case &<< 5:
             return;

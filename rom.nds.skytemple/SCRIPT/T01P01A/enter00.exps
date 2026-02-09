@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('TOWN_RIGHT');
     switch ( sector() ) {
@@ -20,6 +20,7 @@ def 0 {
                             debug_Print('CHARA_SET');
                             supervision_StationCommon(0);
                             supervision_StationCommon(99);
+                            ~ManaphyFollow();
                             if ($DUNGEON_CONQUEST_LIST[69]) {
                                 supervision_ExecuteStationSub(LEVEL_T01P01A, 'us23', 0);
                             } elseif ($DUNGEON_CONQUEST_LIST[66]) {

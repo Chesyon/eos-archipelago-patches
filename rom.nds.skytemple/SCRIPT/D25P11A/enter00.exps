@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     switch ( sector() ) {
         case 1:
@@ -33,6 +33,7 @@ def 0 {
         default:
             screen_FadeOutAll(1, 0);
             back_SetGround(LEVEL_D25P11A);
+            ~ManaphyForceUnfollow();
             jump @label_0;
     }
 }

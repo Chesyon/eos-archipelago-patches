@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     debug_Print('CROSSROAD');
     switch ( sector() ) {
@@ -24,6 +24,7 @@ def 0 {
                                     jump @label_6;
                                 default:
                                     supervision_StationCommon(1);
+                                    ~ManaphyFollow();
                                     jump @label_6;
                             }
                             break;
@@ -37,6 +38,7 @@ def 0 {
                                     jump @label_6;
                                 default:
                                     supervision_StationCommon(2);
+                                    ~ManaphyFollow();
                                     jump @label_6;
                             }
                             break;

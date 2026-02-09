@@ -1,0 +1,14 @@
+import "hints.exps";
+def 0 {
+    ~CheckHints();
+    supervision_Station(0);
+    if ($DUNGEON_ARRIVE_LIST[0]) {
+        §label_0;
+        supervision_Station(5);
+        end;
+    } else {
+        supervision_Station(3);
+        end;
+    }
+    end;
+}

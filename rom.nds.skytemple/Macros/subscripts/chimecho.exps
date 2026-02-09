@@ -1025,6 +1025,10 @@ macro ChimechoMain() {
     }
     if ($PERFORMANCE_PROGRESS_LIST[5]) {
         switch ( message_Menu(MENU_TEAM_ASSEMBLY) ) { }
+    } else {
+        message_SetFace(ACTOR_NPC_CHIRIIN, FACE_NORMAL, FACE_POS_STANDARD);
+        message_Talk(" I'm stuck preparing ingredients for\ndinner until you actually find the item for\nrecruitment, sorry team [team]...");
+        message_Close();
     }
     JumpCommon(CORO_END_TALK);
 }

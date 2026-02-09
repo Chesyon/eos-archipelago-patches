@@ -1,0 +1,12 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($SCENARIO_SUB2 &<< 0 || $SCENARIO_SUB2 &<< 1 || $SCENARIO_SUB2 &<< 2 || $SCENARIO_SUB2 &<< 3) {
+        §label_0;
+        supervision_Station(5);
+        end;
+    } else {
+        supervision_Station(2);
+        end;
+    }
+}

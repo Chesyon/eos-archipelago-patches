@@ -1,0 +1,16 @@
+
+def 0 {
+    supervision_Station(0);
+    supervision_Station(2);
+    end;
+}
+
+def 1 for_actor(ACTOR_NPC_DIGUDA) {
+    switch ( sector() ) {
+        case 2:
+            SetMoveRange(Position<'m0', 30, 22>, 8, 5);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            end;
+    }
+}

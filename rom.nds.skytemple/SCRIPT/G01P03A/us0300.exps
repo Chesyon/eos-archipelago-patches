@@ -1,0 +1,38 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($PERFORMANCE_PROGRESS_LIST[23]) {
+        §label_0;
+        supervision_Station(18);
+        end;
+    } else {
+        supervision_Station(17);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_HEIGANI) {
+    switch ( sector() ) {
+        case 17:
+            SetMoveRange(Position<'m0', 46, 29>, 12, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 18:
+            SetMoveRange(Position<'m1', 46, 29>, 12, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}
+
+def 2 for_actor(ACTOR_NPC_BIPPA) {
+    switch ( sector() ) {
+        case 17:
+            SetMoveRange(Position<'m2', 36, 28>, 10, 10);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 18:
+            SetMoveRange(Position<'m3', 36, 28>, 10, 10);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

@@ -1,0 +1,12 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($DUNGEON_CONQUEST_LIST[24]) {
+        §label_0;
+        supervision_Station(2);
+        end;
+    } else {
+        supervision_Station(1);
+        end;
+    }
+}

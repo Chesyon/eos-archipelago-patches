@@ -1,14 +1,12 @@
 
 def 0 {
     supervision_Station(0);
-    if ( scn($SCENARIO_MAIN) >= [7, 6] ) {
+    if ($DUNGEON_CONQUEST_LIST[6]) {
         §label_0;
         supervision_Station(5);
         end;
-    } elseif ( scn($SCENARIO_MAIN) >= [7, 2] ) {
-        supervision_Station(3);
-        end;
     } else {
+        supervision_Station(3);
         end;
     }
 }

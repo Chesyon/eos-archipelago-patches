@@ -1,0 +1,30 @@
+
+def 0 {
+    supervision_Station(0);
+    if ($SCENARIO_SUB2 &<< 6) {
+        supervision_Station(13);
+        end;
+    } elseif ($PERFORMANCE_PROGRESS_LIST[23]) {
+        supervision_Station(18);
+        end;
+    } else {
+        supervision_Station(17);
+        end;
+    }
+}
+
+def 1 for_actor(ACTOR_NPC_YARUKIMONO) {
+    switch ( sector() ) {
+        case 13:
+            SetMoveRange(Position<'m0', 32, 27>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 17:
+            SetMoveRange(Position<'m1', 32, 27>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        case 18:
+            SetMoveRange(Position<'m2', 32, 27>, 10, 7);
+            JumpCommon(CORO_MOVE_TYPE1);
+        default:
+            JumpCommon(CORO_LIVES_MOVE_NORMAL);
+    }
+}

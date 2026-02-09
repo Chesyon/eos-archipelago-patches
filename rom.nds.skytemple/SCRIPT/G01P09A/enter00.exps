@@ -1,4 +1,4 @@
-
+import "manaphyfollow.exps";
 def 0 {
     switch ( sector() ) {
         case 1:
@@ -41,6 +41,7 @@ def 0 {
                     jump @label_3;
                 default:
                     supervision_StationCommon(5);
+                    ~ManaphyFollow();
                     jump @label_3;
             }
             break;
