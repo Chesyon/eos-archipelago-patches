@@ -2,7 +2,7 @@ def 0 {
     $LOCAL0 = 0;
     $SIDE02_TALK[0] = 0;
     debug_Print("Testing in progress -Lappy");
-    ProcessSpecial(PROCESS_SPECIAL_ADD_RECRUITABLE_TO_TEAM,0,0);
+    ProcessSpecial(PROCESS_SPECIAL_ADD_ITEM_TO_BAG,70,0);
     debug_Print("item_Set(14,X,X) is really cool, seems to be DSE Field 0x28, causes BGM corrupts.");
     switch($FRIEND_SUM) {
         case 0:

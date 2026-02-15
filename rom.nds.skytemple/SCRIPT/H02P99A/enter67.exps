@@ -1,26 +1,26 @@
 def 0 {
-    with (actor ACTOR_ATTENDANT1) {
-        SetAnimation(2);
-    }
-    with (actor ACTOR_PLAYER) {
-        SetAnimation(2);
-    }
-    with (actor ACTOR_ATTENDANT1) {
-        Turn2DirectionLives(4, 10, ACTOR_PLAYER);
-    }
-    with (actor ACTOR_PLAYER) {
-        Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
-    }
-    WaitExecuteLives(ACTOR_ATTENDANT1);
-    WaitExecuteLives(ACTOR_PLAYER);
-    with (actor ACTOR_PLAYER) {
-        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-    }
-    with (actor ACTOR_ATTENDANT1) {
-        ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
-    }
     if (debug) {
     } else {
+        with (actor ACTOR_ATTENDANT1) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_PLAYER) {
+            SetAnimation(2);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            Turn2DirectionLives(4, 10, ACTOR_PLAYER);
+        }
+        with (actor ACTOR_PLAYER) {
+            Turn2DirectionLives(4, 10, ACTOR_ATTENDANT1);
+        }
+        WaitExecuteLives(ACTOR_ATTENDANT1);
+        WaitExecuteLives(ACTOR_PLAYER);
+        with (actor ACTOR_PLAYER) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
+        with (actor ACTOR_ATTENDANT1) {
+            ExecuteCommon(CORO_LIVES_REPLY_NORMAL, 0);
+        }
         message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_STANDARD);
         message_Talk(" Hiya, [hero]![K] Sorry to be\na bother, but have you played this [M:T5][CS:I]APWorld[CR]\nbefore?[K] Or even the vanilla [CS:K]Explorers of Sky[CR]?");
         switch(message_SwitchMenu(0, 0)) {

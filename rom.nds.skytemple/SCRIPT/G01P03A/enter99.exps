@@ -104,10 +104,13 @@ def 0 {
             } else {
                 ProcessSpecial(104,0,0);
             }
-            screen_FadeOut(1,30);
-            message_Mail("\n[CN]A few minutes later...");
-            message_Close();
-            screen_FadeIn(1,30);
+            if ($SCENARIO_TALK_BIT_FLAG[124]) {
+            } else {
+                screen_FadeOut(1,30);
+                message_Mail("\n[CN]A few minutes later...");
+                message_Close();
+                screen_FadeIn(1,30);
+            }
             break;
         case menu("Toggle Reroll Cutscene"):
             message_Close();
@@ -117,10 +120,10 @@ def 0 {
             Wait(10);
             if ($SCENARIO_TALK_BIT_FLAG[124]) {
                 message_ResetActor();
-                message_Talk(" Board reroll cutscene has been enabled!");
+                message_Mail(" Board reroll cutscene has been enabled!");
                 $SCENARIO_TALK_BIT_FLAG[124] = 0;
             } else {
-                message_Talk(" Board reroll cutscene has been disabled!");
+                message_Mail(" Board reroll cutscene has been disabled!");
                 $SCENARIO_TALK_BIT_FLAG[124] = 1;
             }
             message_Close();

@@ -66,7 +66,7 @@ RELEASE_CONFIG := -DDEBUG
 
 PYTHON := python3
 XDELTA := xdelta3
-BSDIFF := bsdiff4
+BSDIFF := bsdiff4f
 
 #---------------------------------------------------------------------------------
 # options for code generation

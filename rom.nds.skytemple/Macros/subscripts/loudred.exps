@@ -1018,17 +1018,19 @@ macro LoudredMain() {
         });
         message_Close();   
     }
-    if ($LOCAL0 == 0) {
-        message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
-        message_Talk({
-            english=" WHAT?[K] You want to pull sentry\nduty and earn some money?",
-            french=" QUOI?[K] Vous voulez gagner\nde l'argent en montant la garde?",
-            german=" WAS?[K] Ihr wollt Wache schieben\nund ein wenig Geld verdienen?",
-            italian=" COSA?[K] Volete fare il turno di\nguardia per guadagnare un po' di soldi?",
-            spanish=" ¿Qué?[K] ¿Que queréis hacer de\nvigías y ganaros un dinerillo?",
-        });
+    if ($GROUND_ENTER == LEVEL_G01P04A) {
+        if ($LOCAL0 == 0) {
+            message_SetFace(ACTOR_NPC_DOGOOMU, FACE_NORMAL, FACE_POS_STANDARD);
+            message_Talk({
+                english=" WHAT?[K] You want to pull sentry\nduty and earn some money?",
+                french=" QUOI?[K] Vous voulez gagner\nde l'argent en montant la garde?",
+                german=" WAS?[K] Ihr wollt Wache schieben\nund ein wenig Geld verdienen?",
+                italian=" COSA?[K] Volete fare il turno di\nguardia per guadagnare un po' di soldi?",
+                spanish=" ¿Qué?[K] ¿Que queréis hacer de\nvigías y ganaros un dinerillo?",
+            });
+        }
+        ~AskSentryDuty();
     }
-    ~AskSentryDuty();
     JumpCommon(CORO_END_TALK);
 }
 

@@ -283,7 +283,6 @@ def 0 {
     message_Close();
     bgm_FadeOut(120);
     screen_FadeOut(1, 90);
-    end;
     Wait(120);
     with (actor ACTOR_NPC_BIPPA) {
         SetEffect(EFFECT_NONE, 3);

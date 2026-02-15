@@ -2109,6 +2109,10 @@ macro ChatotAskCheck() {
 }
 
 macro ChatotDeferAWD() {
+    message_SetFace(ACTOR_NPC_PERAPPU, FACE_NORMAL, FACE_POS_STANDARD);
+    message_Talk(" Are you two looking for extra work?\n[K]Maybe you expect me to assign you something...");
+    message_Close();
+    Wait(10);
     message_SetFace(ACTOR_NPC_PERAPPU, FACE_WORRIED, FACE_POS_STANDARD);
     message_Talk(" That awful Team [CS:X]AWD[CR] have been seen\nin [CS:P]Spinda's Cafe[CR].[K] I'm [CS:C]terribly busy right now[CR],\nbut maybe you could keep a close eye on them?");
     message_Close();

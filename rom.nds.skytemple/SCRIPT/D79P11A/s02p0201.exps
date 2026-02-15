@@ -115,7 +115,7 @@ def 0 {
     message_Close();
     screen2_FadeOut(1, 15);
     back2_SetMode(0);
-    // screen_FadeIn(1, 30);
-    // bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
+    screen_FadeIn(1, 30);
+    bgm_PlayFadeIn(BGM_IN_THE_DEPTHS_OF_THE_PIT, 0, 256);
     end;
 }

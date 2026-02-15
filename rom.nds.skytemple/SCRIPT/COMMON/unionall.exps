@@ -4076,7 +4076,7 @@ coro EVENT_M08_04 {
 coro EVENT_M08_05_06 {
     CallCommon(CORO_SUBSCREEN_INIT);
     if ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
-        §label_606;
+        §craggy_coast_enter;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
         supervision_ExecuteActingSub(LEVEL_D06P11A, 'M08A0601', 0);
         supervision_ExecuteActingSub(LEVEL_S01P01A, 'M08A0602', 0);
@@ -4086,7 +4086,7 @@ coro EVENT_M08_05_06 {
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M08A0501', 0);
         supervision_ExecuteActingSub(LEVEL_S01P01A, 'M08A0502', 0);
         supervision_ExecuteActingSub(LEVEL_G01P04A, 'M08A0503', 0);
-        jump @label_606;
+        jump @craggy_coast_enter;
     }
 }
 
@@ -4117,13 +4117,16 @@ coro EVENT_M08_09 {
 
 coro EVENT_M08_10 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_D07P11A, 'M08A1001', 0);
-    supervision_ExecuteActingSub(LEVEL_S01P01A, 'M08A1002', 0);
-    supervision_ExecuteActingSub(LEVEL_D07P11A, 'M08A1003', 0);
-    CallCommon(CORO_EVENT_HA_SAME);
-    CallCommon(CORO_EVENT_END_MAPIN);
-    main_SetGround(LEVEL_D07P11A);
-    supervision_ExecuteStationCommon(LEVEL_D07P11A, 1);
+    if ($DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11]) {
+        supervision_ExecuteActingSub(LEVEL_D07P11A, 'M08A1001', 0);
+        supervision_ExecuteActingSub(LEVEL_S01P01A, 'M08A1002', 0);
+        supervision_ExecuteActingSub(LEVEL_D07P11A, 'M08A1003', 0);
+        CallCommon(CORO_EVENT_END_MAPIN);
+        main_SetGround(LEVEL_D07P11A);
+        supervision_ExecuteStationCommon(LEVEL_D07P11A, 0);
+    } else {
+        CallCommon(CORO_EVENT_HA_SAME);
+    }
     end;
 }
 
@@ -4965,8 +4968,9 @@ coro EVENT_M18_13_14 {
     if ( $SCENARIO_MAIN_BIT_FLAG[8] ) {
         §label_614;
         $SCENARIO_MAIN_BIT_FLAG[8] = 0;
-        JumpCommon(CORO_EVENT_HA_SAME);
+        // JumpCommon(CORO_EVENT_HA_SAME);
         supervision_ExecuteActingSub(LEVEL_P07P01A, 'M18B1401', 0);
+        JumpCommon(CORO_EVENT_M19_01_02);
         JumpCommon(CORO_EVENT_DIVIDE);
     } else {
         supervision_ExecuteActingSub(LEVEL_D21P41A, 'M18B1301', 0);
@@ -4978,6 +4982,7 @@ coro EVENT_M19_01_02 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_V17P03A, 'M19A0101', 0);
     supervision_ExecuteActingSub(LEVEL_P05P01A, 'M19A0102', 0);
+    §dusk_forest_enter;
     supervision_ExecuteActingSub(LEVEL_D22P11A, 'M19A0201', 0);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_D22P11A);
@@ -5010,13 +5015,17 @@ coro EVENT_M19_05 {
 }
 
 coro EVENT_M19_06_07 {
-    CallCommon(CORO_SUBSCREEN_INIT);
-    supervision_ExecuteActingSub(LEVEL_P08P01A, 'M19A0601', 0);
-    CallCommon(CORO_EVENT_HA_SAME);
-    supervision_ExecuteActingSub(LEVEL_D23P11A, 'M19B0701', 0);
-    CallCommon(CORO_EVENT_END_MAPIN);
-    main_SetGround(LEVEL_D23P11A);
-    supervision_ExecuteStationCommon(LEVEL_D23P11A, 1);
+    if ($DUNGEON_OPEN_LIST[33]) {
+        CallCommon(CORO_SUBSCREEN_INIT);
+        supervision_ExecuteActingSub(LEVEL_P08P01A, 'M19A0601', 0);
+        supervision_ExecuteActingSub(LEVEL_D23P11A, 'M19B0701', 0);
+        CallCommon(CORO_EVENT_END_MAPIN);
+        main_SetGround(LEVEL_D23P11A);
+        supervision_ExecuteStationCommon(LEVEL_D23P11A, 1);
+        end;
+    } else {
+        CallCommon(CORO_EVENT_HA_SAME);
+    }
     end;
 }
 
@@ -5054,7 +5063,11 @@ coro EVENT_M19_10 {
     $PERFORMANCE_PROGRESS_LIST[15] = 1;
     // supervision_ExecuteActingSub(LEVEL_V16P02A, 'M19B1014', 0);
     ~crass(LEVEL_V16P02A, 'M19B1014', 0,LEVEL_V16P02A, 'M19B1014:2', 0);
-    JumpCommon(CORO_EVENT_HA_SAME);
+    if ($DUNGEON_OPEN_LIST[34]) {
+        JumpCommon(CORO_EVENT_M20_01_04);
+    } else {
+        JumpCommon(CORO_EVENT_HA_SAME);
+    }
     hold;
 }
 
@@ -5083,6 +5096,7 @@ coro EVENT_M20_01_04 {
                 supervision_ExecuteActingSub(LEVEL_H02P99A, 'M20A0310', 0);
                 supervision_ExecuteActingSub(LEVEL_S01P01A, 'M20A0311', 0);
                 supervision_ExecuteActingSub(LEVEL_H02P99A, 'M20A0312', 0);
+                §treeshroud_forest_enter;
                 supervision_ExecuteActingSub(LEVEL_D24P11A, 'M20A0401', 0);
                 CallCommon(CORO_EVENT_END_MAPIN);
                 main_SetGround(LEVEL_D24P11A);
@@ -5268,7 +5282,7 @@ coro EVENT_M23_01_02 {
 
 coro EVENT_M23_03 {
     CallCommon(CORO_SUBSCREEN_INIT);
-    if ( scn($SCENARIO_MAIN) >= [24, 2] ) {
+    if ( $PERFORMANCE_PROGRESS_LIST[25] ) {
         supervision_ExecuteActingSub(LEVEL_D25P11A, 'M23A0302', 0);
         §label_621;
         CallCommon(CORO_EVENT_END_MAPIN);
@@ -5744,10 +5758,13 @@ coro EVENT_S02_01 {
 coro EVENT_S02_02 {
     CallCommon(CORO_SUBSCREEN_INIT);
     supervision_ExecuteActingSub(LEVEL_D79P11A, 'S02P0201', 0);
-    JumpCommon(CORO_EVENT_HA_SAME);
+    // JumpCommon(CORO_EVENT_HA_SAME);
     CallCommon(CORO_EVENT_END_MAPIN);
     main_SetGround(LEVEL_D79P11A);
     supervision_ExecuteStationCommon(LEVEL_D79P11A, 1);
+    end;
+    §crevice_cave_enter;
+    supervision_ExecuteStationCommon(LEVEL_D79P11A, 0);
     end;
 }
 
@@ -9269,6 +9286,7 @@ coro ENTER_SCENARIO_DUNGEON {
                     $DUNGEON_REQUEST_LIST[54] = 1;
                     main_EnterGround(LEVEL_D32P11A, 30);
                     hold;
+                    /*
                 case 44:
                     main_EnterDungeon(44, 30);
                     switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
@@ -9277,6 +9295,7 @@ coro ENTER_SCENARIO_DUNGEON {
                     main_EnterDungeon(-1, 30);
                     hold;
                     end;
+                    */
                 case 62:
                     main_EnterDungeon(62, 30);
                     switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
@@ -9305,7 +9324,57 @@ coro ENTER_SCENARIO_DUNGEON {
                         jump @label_708;
                     }
                     break;
+                    
+                case 8:
+                case 9:
+                    if ($DUNGEON_REQUEST_LIST[8] || $DUNGEON_REQUEST_LIST[9]) {
+                        jump @unit_init;
+                    } else {
+                        jump @craggy_coast_enter;
+                    }
+                case 10:
+                case 11:
+                    if ($DUNGEON_REQUEST_LIST[10] || $DUNGEON_REQUEST_LIST[11]) {
+                        jump @unit_init;
+                    } else {
+                        JumpCommon(CORO_EVENT_M08_10);
+                    }
+                case 12:
+                case 13:
+                    if ($DUNGEON_REQUEST_LIST[12] || $DUNGEON_REQUEST_LIST[13]) {
+                        jump @unit_init;
+                    } else {
+                        JumpCommon(CORO_EVENT_M09_01);
+                    }
+                case 27:
+                    JumpCommon(CORO_EVENT_M17_03_05); 
+                case 28:
+                    JumpCommon(CORO_EVENT_M18_01);
+                case 29:
+                    JumpCommon(CORO_EVENT_M18_04_05);
+                case 32:
+                    jump @dusk_forest_enter;
+                    // JumpCommon(CORO_EVENT_M19_01_02);
+                case 33:
+                    JumpCommon(CORO_EVENT_M19_06_07);
+                case 34:
+                    jump @treeshroud_forest_enter;
+
+                case 35:
+                    if ($PERFORMANCE_PROGRESS_LIST[25]) {
+                        main_EnterGround(LEVEL_D25P11A,0);
+                        hold;
+                    } else {
+                        supervision_ExecuteActingSub(LEVEL_D25P11A, 'M23A0201', 0);
+                        end;
+                    }
+                case 44:
+                    JumpCommon(CORO_EVENT_S01_03);
+                case 47:
+                    jump @crevice_cave_enter;
+                    JumpCommon(CORO_EVENT_S02_02);
                 default:
+                    §unit_init;
                     debug_Print('UNIT_INIT');
                     switch ( message_Menu(MENU_DUNGEON_INITIALIZE_TEAM) ) { }
                     debug_Print('BGM_FADEOUT');
@@ -9470,6 +9539,8 @@ coro ENTER_SCENARIO_DUNGEON {
                 default:
                     break;
             }
+            jump @label_710;
+            // redundant code below
             if ( scn($SCENARIO_MAIN) == [6, 4] ) {
                 screen_FadeOut(1, 30);
                 supervision_ExecuteCommon(CORO_EVENT_M05_03);
@@ -9878,14 +9949,31 @@ coro GETOUT_SCENARIO_DUNGEON {
                         dungeon_mode(8) = DMODE_OPEN_AND_REQUEST; 
                         debug_Print('LABEL_D008_CLEAR');
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_M08_10);
+                        if ($DUNGEON_OPEN_LIST[10] || $DUNGEON_OPEN_LIST[11]) {                    
+                            message_Mail("Continue to [CS:P]Mt. Horn[CR]/[CS:P]Rock Path[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M08_10);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 9:
                         §side_path;
                         debug_Print("Break Glass if Softlock!");
                         message_Mail("[CS:P]Side Path[CR] returned\nyou to where you\ncame from!");
                         dungeon_mode(9) = DMODE_OPEN_AND_REQUEST; 
-                        message_Close();
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
+                        message_Close();
+                        if ($DUNGEON_OPEN_LIST[8]) {
+                            if ($DUNGEON_CONQUEST_LIST[8]) {
+                            } else {
+                                JumpCommon(CORO_EVENT_M08_07);
+                            }
+                        }
                         JumpCommon(CORO_EVENT_DIVIDE);
                         break;
                     case 10:
@@ -9894,6 +9982,17 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print('LABEL_D010_CLEAR');
                         screen_WhiteIn(10, 0);
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
+                        if ($DUNGEON_OPEN_LIST[12] || $DUNGEON_OPEN_LIST[13]) {                    
+                            message_Mail("Continue to [CS:P]Foggy Forest[CR]/[CS:P]Forest Path[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M09_01);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 11:
                         §rock_path;
@@ -9902,13 +10001,30 @@ coro GETOUT_SCENARIO_DUNGEON {
                         dungeon_mode(11) = DMODE_OPEN_AND_REQUEST; 
                         message_Close();
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
+                        if ($DUNGEON_OPEN_LIST[10]) {
+                            if ($DUNGEON_CONQUEST_LIST[10]) {
+                            } else {
+                                JumpCommon(CORO_EVENT_M08_11);
+                            }
+                        }
                         JumpCommon(CORO_EVENT_DIVIDE);
                         break;
                     case 12:
                         debug_Print("Missions Foggy Forest");
                         dungeon_mode(12) = DMODE_OPEN_AND_REQUEST; 
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
-                        JumpCommon(CORO_EVENT_M09_06_07);
+                        if ($DUNGEON_OPEN_LIST[14]) {                    
+                            message_Mail("Continue to [CS:P]Steam Cave[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M09_06_07);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 13:
                         debug_Print("Break Glass if Softlock!");
                         §forest_path;
@@ -9916,19 +10032,14 @@ coro GETOUT_SCENARIO_DUNGEON {
                         message_Close();
                         dungeon_mode(13) = DMODE_OPEN_AND_REQUEST;
                         message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP);
+                        if ($DUNGEON_OPEN_LIST[12]) {
+                            if ($DUNGEON_CONQUEST_LIST[12]) {
+                            } else {
+                                JumpCommon(CORO_EVENT_M09_03);
+                            }
+                        }
                         JumpCommon(CORO_EVENT_DIVIDE);
                         hold;
-                        debug_Print("Forest Patch: No changes needed (?), see above!");
-                        if ( scn($SCENARIO_MAIN) >= [10, 3] ) {
-                            switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
-                            switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                            main_EnterGround(LEVEL_D08P11A, 30);
-                            hold;
-                        } else {
-                            switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                            JumpCommon(CORO_EVENT_M09_03);
-                        }
-                        break;
                     case 14:
                         debug_Print("Cleared Steam Cave Flag 202");
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -9981,7 +10092,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Northen Desert is a dead-end in base-game!");
                         dungeon_mode(20) = DMODE_OPEN_AND_REQUEST; 
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_M13_07);
+                        if ($DUNGEON_OPEN_LIST[21]) {                    
+                            message_Mail("Continue to [CS:P]Quicksand Cave[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M14_01);
+                                case menu("No"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M13_07);
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 21:
                         main_EnterGround(LEVEL_D15P21A, 30);
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
@@ -10023,12 +10145,33 @@ coro GETOUT_SCENARIO_DUNGEON {
                         screen_WhiteIn(19, 0);
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         dungeon_mode(27) = DMODE_OPEN_AND_REQUEST;
+                        if ($DUNGEON_OPEN_LIST[28]) {                    
+                            message_Mail("Continue to [CS:P]Dark Hill[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M18_01);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
                         JumpCommon(CORO_EVENT_HA_SAME);
                     case 28:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                         dungeon_mode(28) = DMODE_OPEN_AND_REQUEST;
+                        if ($DUNGEON_OPEN_LIST[29]) {                    
+                            message_Mail("Continue to [CS:P]Sealed Ruins[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M18_04_05);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
                         JumpCommon(CORO_EVENT_HA_SAME);
-                        JumpCommon(CORO_EVENT_M18_04_05);
                     case 29:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D21P21A, 30);
@@ -10047,16 +10190,49 @@ coro GETOUT_SCENARIO_DUNGEON {
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         dungeon_mode(29) = DMODE_OPEN_AND_REQUEST;
                         $DUNGEON_REQUEST_LIST[30] = 1;
-                        JumpCommon(CORO_EVENT_M18_13_14);
+                        if ($DUNGEON_OPEN_LIST[32]) {                    
+                            message_Mail("Continue to [CS:P]Dusk Forest[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M18_13_14);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 32:
                         dungeon_mode(32) = DMODE_OPEN_AND_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_M19_06_07);
+                        if ($DUNGEON_OPEN_LIST[33]) {                    
+                            message_Mail("Continue to [CS:P]Deep Dusk Forest[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M19_06_07);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 33:
                         $PERFORMANCE_PROGRESS_LIST[54] = 1; // Celebi Clear Mark
                         dungeon_mode(33) = DMODE_OPEN_AND_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_M19_10);
+                        if ($DUNGEON_OPEN_LIST[34]) {                    
+                            message_Mail("Continue to [CS:P]Treeshroud Forest[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_M19_10);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 34:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         debug_Print("Missions Treeshroud Forest");
@@ -10165,7 +10341,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                         debug_Print("Missons Blizzard Island");
                         dungeon_mode(46) = DMODE_OPEN_AND_REQUEST;
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                        JumpCommon(CORO_EVENT_S02_02);
+                        if ($DUNGEON_OPEN_LIST[47]) {                    
+                            message_Mail("Continue to [CS:P]Crevice Cave[CR]?");
+                            switch(message_SwitchMenu(0,1)) {
+                                case menu("Yes"):
+                                    message_Close();
+                                    JumpCommon(CORO_EVENT_S02_02);
+                                case menu("No"):
+                                    message_Close();
+                                    break;
+                            }
+                        }
+                        JumpCommon(CORO_EVENT_HA_SAME);
                     case 47:
                         switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) {} 
                         main_EnterGround(LEVEL_D79P21A, 30);
@@ -10884,6 +11071,24 @@ coro GETOUT_SCENARIO_DUNGEON {
                         break;
                     case 164:
                         JumpCommon(CORO_EVENT_N04_26);
+                    case 165:
+                        dungeon_mode(165) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 166:
+                        dungeon_mode(166) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 167:
+                        dungeon_mode(167) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 168:
+                        dungeon_mode(168) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 169:
+                        dungeon_mode(169) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
+                    case 170:
+                        dungeon_mode(170) = DMODE_OPEN_AND_REQUEST;
+                        JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                     case 174:
                         dungeon_mode(174) = DMODE_OPEN_AND_REQUEST;
                         JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
@@ -10925,6 +11130,18 @@ coro GETOUT_SCENARIO_DUNGEON {
                 JumpCommon(CORO_EVENT_DIVIDE);
             } else {
                 switch ( $DUNGEON_ENTER ) {
+                    case 8:
+                    case 9:
+                        JumpCommon(CORO_EVENT_M08_08);
+                        
+                    case 10:
+                    case 11:
+                        JumpCommon(CORO_EVENT_M08_12);
+                    
+                    case 12:
+                    case 13:
+                        JumpCommon(CORO_EVENT_M09_04);
+                        
                     case 15:
                     case 16:
                         JumpCommon(CORO_EVENT_M10_08);    
@@ -10942,6 +11159,13 @@ coro GETOUT_SCENARIO_DUNGEON {
                         message_Mail(" Wow...[W:60] Let me guess,\nyou just gave up, right?");
                         $DUNGEON_CONQUEST_LIST[26] = 1;
                         JumpCommon(CORO_EVENT_M15_10_12);
+                        
+                    case 27:
+                        JumpCommon(CORO_EVENT_M17_07);
+                        
+                    case 28:
+                        JumpCommon(CORO_EVENT_M18_03);
+                        
                     case 29:
                         message_Mail("Would you like to return home for the day?");
                         switch(message_SwitchMenu(1,1)) {
@@ -10960,6 +11184,19 @@ coro GETOUT_SCENARIO_DUNGEON {
                     case 31:
                         debug_Print("May need fixing later!");
                         JumpCommon(CORO_EVENT_M18_10);
+                    
+                    case 32:
+                        JumpCommon(CORO_EVENT_M19_05);
+                    
+                    case 33:
+                        JumpCommon(CORO_EVENT_M19_09);
+                    
+                    case 34:
+                        JumpCommon(CORO_EVENT_M20_06);
+                    
+                    case 35:
+                        JumpCommon(CORO_EVENT_M23_03);  
+                    
                     case 36:
                     case 37:
                         JumpCommon(CORO_EVENT_M23_06);
@@ -10977,6 +11214,8 @@ coro GETOUT_SCENARIO_DUNGEON {
                         JumpCommon(CORO_EVENT_M25_10);
                         §switch2_223;
                         jump @label_880;
+                    case 44:
+                        JumpCommon(CORO_EVENT_S01_04);
                     case 48:
                     case 49:
                         main_EnterGround(LEVEL_D79P21A, 30);
@@ -11105,6 +11344,352 @@ coro GETOUT_SCENARIO_DUNGEON {
 
 coro GETOUT_REQUEST_DUNGEON {
     debug_Print('GETOUT_REQUEST_DUNGEON');
+    if ($DUNGEON_RESULT == 8) {
+        switch($DUNGEON_ENTER_INDEX) {
+            case 14:
+                // Steam Cave
+                message_Mail("[STS]Continue to [CS:P]Upper Steam Cave[CR]?\nMission completion will be kept if you prevail.[STE]");
+                §ask_mission_skip;
+                switch(message_SwitchMenu(0,0)) {
+                    case menu("Yes"):
+                        message_Close();
+                        jump @skip_mission_completion;
+                    case menu("No"):
+                    default:
+                        message_Close();
+                        break;
+                }
+            case 15:
+                // Upper Steam Cave
+	        if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead 
+	            switch ( scn($SCENARIO_SUB2)[1] ) { // Uxie Check claimed?
+	                case &<< 1:
+		            break;
+	                default:	
+		            jump @skip_mission_completion;
+	            }
+	        }
+            case 16:
+                // Steam Cave Peak
+                if ($DUNGEON_ENTER_INDEX == 16) {
+                    supervision_ExecuteActingSub(LEVEL_D10P41A, 'M99A0105', 0);
+                }
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 14;
+                break;
+            case 17:
+                // Amp Plains
+                message_Mail("[STS]Continue to [CS:P]Far Amp Plains[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 18:
+                // Far Amp Plains
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 17;
+                break;
+            case 21:
+                // Quicksand Cave
+                message_Mail("[STS]Continue to [CS:P]Quicksand Pit[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 22:
+                // Quicksand Pit
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead 
+                    switch ( scn($SCENARIO_SUB2)[1] ) { // Mesprit Check Claimed?
+                        case &<< 2:
+			    break;
+                        default:
+			    jump @skip_mission_completion;
+                    }
+	        }
+            case 23:
+                if ($DUNGEON_ENTER_INDEX == 23) {
+                    supervision_ExecuteActingSub(LEVEL_D15P41A, 'M99A0109', 0);
+                }
+                // Underground Lake
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 21;
+                break;
+            case 25:
+                // Crystal Crossing
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    switch ( scn($SCENARIO_SUB2)[1] ) { // Azelf Check Claimed?
+                        case &<< 3:
+			    break;
+                        default:
+                            message_Mail("[STS]Continue to [CS:P]Shining Lake[CR]?\nMission completion will be kept if you prevail.[STE]");
+                            jump @ask_mission_skip;
+                    }
+	         }
+	         break;
+            case 26:
+                // Shining Lake
+                supervision_ExecuteActingSub(LEVEL_D17P45A, 'M99A0112', 0);
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 25;
+                break;
+            case 29:
+                // Sealed Ruin
+                message_Mail("[STS]Continue to [CS:P]Deep Sealed Ruin[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 30:
+                // Deep Sealed Ruin
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 29;
+                break;
+            case 35:
+                // Brine Cave
+                message_Mail("[STS]Continue to [CS:P]Lower Brine Cave[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 36:
+                // Lower Brine Cave
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 35;
+                break;
+            case 38:
+                // Hidden Land
+                message_Mail("[STS]Continue to [CS:P]Hidden Highland[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+                
+            case 39:
+                // Hidden Highland
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 38;
+                break;
+            case 41:
+                // Temporal Tower
+                message_Mail("[STS]Continue to [CS:P]Temporal Spire[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 42:
+                // Temporal Spire
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    switch ( scn($SCENARIO_SUB2)[1] ) { // Dialga Check Claimed?
+                        case &<< 4:
+			    break;
+                        default:
+			    jump @skip_mission_completion;
+                    }
+                }
+            case 43:
+                // Temporal Pinnacle
+                supervision_ExecuteActingSub(LEVEL_D30P41A, 'M99A0117', 0);
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 41;
+                break;
+            case 47:
+                // Crevice Cave
+                message_Mail("[STS]Continue to [CS:P]Lower Crevice Cave[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 48:
+                // Lower Crevice Cave
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 47;
+                break;
+            case 51:
+                // Miracle Sea
+                message_Mail("[STS]Continue to [CS:P]Deep Miracle Sea[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 52:
+                // Deep Miracle Sea
+                if ($SCENARIO_SUB2 &<< 6) {
+                    // Gyarados Defeated
+                    if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                        switch ( scn($SCENARIO_SUB2)[1] ) { // Phione Check Claimed?
+                            case &<< 5:
+                                break;
+                            default:
+                                supervision_ExecuteActingSub(LEVEL_D35P41A, 'S03P1801', 0);
+                                break;
+                        }
+                    }
+                } else {
+                    // Gyarados Not Defeated
+                    if ($SCENARIO_SUB2 &<< 5) {
+                        jump @skip_mission_completion;
+                    }
+                }
+            case 53:
+                // Miracle Seabed
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 51;
+                break;
+            case 64:
+                // Spacial Rift
+                message_Mail("[STS]Continue to [CS:P]Deep Spacial Rift[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 65:
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    switch ( scn($SCENARIO_SUB2)[1] ) { // Palkia Check Claimed?
+                        case &<< 6:
+                            break;
+                        default:
+                            jump @skip_mission_completion;
+                    }
+                }
+            case 66:
+                // Spacial Rift Bottom
+                supervision_ExecuteActingSub(LEVEL_D39P41A, 'M99A0122', 0);
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 64;
+                break;
+            case 67:
+                // Dark Crater
+                message_Mail("[STS]Continue to [CS:P]Deep Dark Crater[CR]?\nMission completion will be kept if you prevail.[STE]");
+                jump @ask_mission_skip;
+            case 68:
+                // Deep Dark Crater
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 67;
+                break;
+            case 73:
+                // Bottomless Sea
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB2)[1] ) { // Kyogre Checks Claimed?
+                            case &<< 7:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]Bottomless Sea Depths[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 74:
+                // Bottomless Sea Depths
+                supervision_ExecuteActingSub(LEVEL_D68P41A, 'S12A1101', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 73;
+                break;
+            case 75:
+                // Shimmer Desert
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[0] ) { // Groudon Checks Claimed?
+                            case &<< 1:
+                                break;
+                            default:        
+                                message_Mail("[STS]Continue to [CS:P]Shimmer Desert Pit[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 76:
+                // Shimmer Desert Pit
+                supervision_ExecuteActingSub(LEVEL_D66P41A, 'S12A0801', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 75;
+                break;
+            case 77:
+                // Mt. Avalanche
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[0] ) { // Articuno Checks Claimed?
+                            case &<< 3:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]Mt. Avalanche Peak[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 78:
+                // Mt. Avalanche Peak
+                supervision_ExecuteActingSub(LEVEL_D67P41A, 'S12A0201', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 77;
+                break;
+            case 79:
+                // Giant Volcano
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[0] ) { // Heatran Checks Claimed?
+                            case &<< 5:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]Giant Volcano Peak[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 80:
+                // Giant Volcano Peak
+                supervision_ExecuteActingSub(LEVEL_D65P41A, 'S12A0501', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 79;
+                break;
+            case 81:
+                // World Abyss
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[0] ) { // Giratina Checks Claimed?
+                            case &<< 7:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]World Abyss Pit[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 82: 
+                // World Abyss Pit
+                supervision_ExecuteActingSub(LEVEL_D69P41A, 'S12A1401', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 81;
+                break;
+            case 83:
+                // Sky Stairway
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[1] ) { // Rayquaza Checks Claimed?
+                            case &<< 1:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]Sky Stairway Apex[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 84:
+                // Sky Stairway Apex
+                supervision_ExecuteActingSub(LEVEL_D71P41A, 'S12A2001', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 83;
+                break;
+            case 85:
+                // Mystery Jungle
+                if ($PERFORMANCE_PROGRESS_LIST[17]) { // Dialga Dead  
+                    if ($PERFORMANCE_PROGRESS_LIST[22]) { // Secret Rank
+                        switch ( scn($SCENARIO_SUB3)[1] ) { // Mew Checks Claimed?
+                            case &<< 3:
+                                break;
+                            default:
+                                message_Mail("[STS]Continue to [CS:P]Deep Mystery Jungle[CR]?\nMission completion will be kept if you prevail.[STE]");
+                                jump @ask_mission_skip;
+                        }
+                    }
+                }
+                break;
+            case 86:
+                // Deep Mystery Jungle
+                supervision_ExecuteActingSub(LEVEL_D70P41A, 'S12A1701', 0);
+                call @check_all_treasures;
+                $DUNGEON_ENTER = 0xD7;
+                $DUNGEON_ENTER_INDEX = 85;
+                break;
+            default:
+                break;
+        }
+    }
     CallCommon(CORO_RESCUE_SET);
     switch ( ProcessSpecial(PROCESS_SPECIAL_DUNGEON_HAD_REQUEST_DONE, 0, 0) ) {
         case 0:
@@ -11112,6 +11697,7 @@ coro GETOUT_REQUEST_DUNGEON {
             switch ( $GROUND_START_MODE ) {
                 case 8:
                 default:
+                    §skip_mission_completion;
                     JumpCommon(CORO_GETOUT_REQUEST_CONQUEST);
                 case 9:
                     §label_954;
@@ -11134,7 +11720,10 @@ coro GETOUT_REQUEST_DUNGEON {
                             supervision_ExecuteActingSub(LEVEL_D01P41A, 'M01A0601', 0);
                         default:
                             §label_957;
-                            switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
+                            if ($DUNGEON_ENTER_INDEX == 2 || $DUNGEON_ENTER_INDEX == 5 || $DUNGEON_ENTER_INDEX == 15 || $DUNGEON_ENTER_INDEX == 16 || $DUNGEON_ENTER_INDEX == 18 || $DUNGEON_ENTER_INDEX == 65 || $DUNGEON_ENTER_INDEX == 71 || $DUNGEON_ENTER_INDEX == 86) {
+                            } else {
+                                switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
+                            }
                             switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
                             $SCENARIO_SELECT = scn[49, 0];
                             clear $EVENT_LOCAL;
@@ -11234,6 +11823,9 @@ coro GETOUT_REQUEST_DUNGEON {
                                     case 118:
                                     case 119:
                                     case 120:
+                                    case 165:
+                                    case 169:
+                                    case 170:
                                         message_SetFace(ACTOR_ATTENDANT1,FACE_NORMAL,FACE_POS_BOTTOM_L_FACEINW);
                                         message_Talk(" It's not even noon yet, [hero]![K]\nWould you like to do another round of missions\nbefore we call it a day?");
                                         switch(message_SwitchMenu(0,1)) {
@@ -11888,13 +12480,7 @@ coro GETOUT_REQUEST_CONQUEST {
                 case DMODE_OPEN_AND_REQUEST:
                     switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                     switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                    message_Mail({
-                        english="[CN]Would you like to go to [CS:P]Dark Hill[CR]?",
-                        french="[CN]Aller au [CS:P]Croisement Cristal[CR]?",
-                        german="[CN]Möchtest du zur [CS:P]Kristallstraße[CR] reisen?",
-                        italian="[CN]Vuoi andare al [CS:P]Bivio di Cristallo[CR]?",
-                        spanish="[CN]¿Quieres ir a la [CS:P]Vía Cristalina[CR]?",
-                    });
+                    message_Mail("[CN]Would you like to go to [CS:P]Dark Hill[CR]?");
                     switch ( message_SwitchMenu(0, 1) ) {
                         case menu({
                             english="Yes", french="Oui", german="Ja", italian="Sì", spanish="Sí",
@@ -11919,13 +12505,7 @@ coro GETOUT_REQUEST_CONQUEST {
                 case DMODE_OPEN_AND_REQUEST:
                     switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                     switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                    message_Mail({
-                        english="[CN]Would you like to go to [CS:P]Sealed Ruin[CR]?",
-                        french="[CN]Aller au [CS:P]Croisement Cristal[CR]?",
-                        german="[CN]Möchtest du zur [CS:P]Kristallstraße[CR] reisen?",
-                        italian="[CN]Vuoi andare al [CS:P]Bivio di Cristallo[CR]?",
-                        spanish="[CN]¿Quieres ir a la [CS:P]Vía Cristalina[CR]?",
-                    });
+                    message_Mail("[CN]Would you like to go to [CS:P]Sealed Ruin[CR]?");
                     switch ( message_SwitchMenu(0, 1) ) {
                         case menu({
                             english="Yes", french="Oui", german="Ja", italian="Sì", spanish="Sí",
@@ -11955,13 +12535,7 @@ coro GETOUT_REQUEST_CONQUEST {
                 case DMODE_OPEN_AND_REQUEST:
                     switch ( message_Menu(MENU_DUNGEON_EXPLORATION_RESULTS) ) { }
                     switch ( message_Menu(MENU_DUNGEON_TEAM_RETURNS_FROM_MAP) ) { }
-                    message_Mail({
-                        english="[CN]Would you like to go to [CS:P]Deep Dusk Forest[CR]?",
-                        french="[CN]Aller au [CS:P]Croisement Cristal[CR]?",
-                        german="[CN]Möchtest du zur [CS:P]Kristallstraße[CR] reisen?",
-                        italian="[CN]Vuoi andare al [CS:P]Bivio di Cristallo[CR]?",
-                        spanish="[CN]¿Quieres ir a la [CS:P]Vía Cristalina[CR]?",
-                    });
+                    message_Mail("[CN]Would you like to go to [CS:P]Deep Dusk Forest[CR]?");
                     switch ( message_SwitchMenu(0, 1) ) {
                         case menu({
                             english="Yes", french="Oui", german="Ja", italian="Sì", spanish="Sí",
@@ -12137,7 +12711,8 @@ coro GETOUT_REQUEST_CONQUEST {
             hold;
         case 52:
             debug_Print('LABEL_D052_CLEAR');
-            if not ($SCENARIO_SUB2 &<< 6) {
+            if ($SCENARIO_SUB2 &<< 6) {
+            } else {
                 if ($SCENARIO_SUB2 &<< 5) {                    
                     if ($SCENARIO_TALK_BIT_FLAG[214]) {
                         JumpCommon(CORO_EVENT_S03_16);
