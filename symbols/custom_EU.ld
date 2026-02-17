@@ -143,6 +143,12 @@ SetTopScreenTypeDungeonUnhook = 0x22E9110;
 GenerateFloorHook1 = 0x233B62C;
 GenerateFloorUnhook1 = 0x233B75C;
 GenerateFloorHook2 = 0x233B61C;
+IsTypeIneffectiveAgainstGhostFlip = 0x230B66C;
+GhostImmunityIsActiveHook = 0x230B67C;
+GetTypeMatchupHook1 = 0x230B710;
+GetTypeMatchupHook2 = 0x230B73C;
+GetTypeMatchupHook3 = 0x230B750;
+GetTypeMatchupHook4 = 0x230B770;
 
 /* ! For Overlay 31 */
 DungeonXMenuNameAddr = 0x23836D8;

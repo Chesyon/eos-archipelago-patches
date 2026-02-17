@@ -48,7 +48,8 @@ typedef struct CustomSaveArea {
     uint8_t trackerPage;                 // 0x2BD: Tracks which tab was last open in the tracker.
     uint8_t openSkyPeakPasses;           // 0x2BE: Tracks how many Sky Peak passes are open. I don't know what this is for but Cryptic wanted it.
     uint8_t legendaryListProgress;       // 0x2BF: Tracks how far we are along the legendary list. Requested by Cryptic in her endeavors to stop duplicate legendaries.
-    undefined fields[0xE40];             // 0x2C0: Unused.
+    bool inverseTypeMatchups;            // 0x2C0: If true, type matchups will be reversed, like in Gen VI's Inverse Battles.
+    undefined fields[0xE3F];             // 0x2C1: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
