@@ -1,6 +1,10 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+bool debug_mode = false;
+
+
+
 enum dungeon_check_type {
     DCT_OTHER = 0,
     DCT_EARLY = 1,
