@@ -859,55 +859,6 @@ void DrawEscortInfoInWindow(int idx, int y, char* buffer, enum monster_id escort
     DrawTextInWindow(idx, 15, y, buffer);
 }
 
-// Utility function to help us debug.
-void DrawDebugInfoInWindow(int idx, int x, int y, int maxWidth, char* buffer, enum script_var_id var) {
-    struct script_var *variableInfo = &(SCRIPT_VARS.vars[var]);
-    int width = GetStringWidth(variableInfo->name);
-    DrawTextInWindow(idx, x, y, variableInfo->name);
-    DrawTextInWindow(idx, x + width + 2, y, ":");
-    width+=8;
-    if (width >= maxWidth) {
-        width = 0;
-        y += 13;
-    }
-    for(int i = 0; i < variableInfo->n_values; i++) {
-        switch(variableInfo->type.val) {
-            case VARTYPE_NONE:;
-                return;
-            case VARTYPE_BIT:;
-                if(LoadScriptVariableValueAtIndex(NULL, var, i)){
-                    DrawTextInWindow(idx, x + width, y, "[M:S2]");
-                    width += 8;
-                } else {
-                    DrawTextInWindow(idx, x + width, y, "[M:S4]");
-                    width += 8;
-                }
-                break;
-            case VARTYPE_STRING:;
-                buffer[0] = LoadScriptVariableValueAtIndex(NULL, var, i);
-                buffer[1] = '\0';
-                width += GetStringWidth(buffer);
-                DrawTextInWindow(idx, x + width, y, buffer);
-                break;
-            case VARTYPE_UINT8:;
-            case VARTYPE_INT8:;
-            case VARTYPE_UINT16:;
-            case VARTYPE_INT16:;
-            case VARTYPE_UINT32:;
-            case VARTYPE_INT32:;
-            case VARTYPE_SPECIAL:;
-                preArgs.number_vals[0] = LoadScriptVariableValueAtIndex(NULL, var, i);
-                PreprocessString(buffer, TR_BUFF_LEN, (i > 0) ? ",[value:0]" : "[value:0]", preFlagTracker, &preArgs);
-                DrawTextInWindow(idx, x + width, y, buffer);
-                width += GetStringWidth(buffer);
-                break;
-        }
-        if(width >= maxWidth) {
-            width = 0;
-            y += 13;
-        }
-    }
-}
 
 void ApTrackerTopScreenWindowUpdate(int idx, uint32_t location) {
     ClearWindow(idx);

@@ -1,5 +1,11 @@
-/* 
-*/
+// ap_tracker.h
+// This header manages all the information for the tracker window
+// in game. If you are adding a check, that information should be
+// put into the tracker_book array in the corresponding location
+// that it can be obtainted. New pages should be added as an enum
+// in enum tracker_page and then a new entry should be added to
+// the tracker_book array defining any checks associated with the
+// location.
 
 #include <pmdsky.h>
 #include <cot.h>
@@ -40,12 +46,21 @@
 #define BAG_UPGRADE_CHECK_STR_ID 0
 #define BOSS_GIFT_CHECK_STR_ID 0
 
+// Info
+#define GRANDMASTER_OF_ALL_THINGS_BAD_BOSS_INFO_STR_ID 0
 #define START_ITEM_INFO_STR_ID 0
 #define BOSS_INFO_STR_ID 0
 #define BOSS_DUO_INFO_STR_ID 0
 #define ESCORT_INFO_STR_ID 0
 
-enum tracker_page {
+/* tracker_page
+    This lists all the pages in the tracker. If a page is added to
+    this list please also add an entry into the tracker_book array
+    below. Additionally, the order of the pages can be modified by
+    changing their order in this enum without modifying the order
+    in tracker_book. */
+enum __attribute__((__packed__)) tracker_page {
+    TRACKER_PAGE_NONE = 0,
     TRACKER_PAGE_SHOP,
     TRACKER_PAGE_BANK,
     TRACKER_PAGE_RANK,
@@ -53,6 +68,11 @@ enum tracker_page {
     TRACKER_PAGE_DOJO,
     TRACKER_PAGE_CAFE,
     TRACKER_PAGE_HABITAT, // Aka Sharpedo Bluff
+    TRACKER_PAGE_SE_BIDOOFS_WISH,
+    TRACKER_PAGE_SE_IGGLYBUFF_THE_PRODIGY,
+    TRACKER_PAGE_SE_TODAYS_OH_MY_GOSH,
+    TRACKER_PAGE_SE_HERE_COMES_TEAM_CHARM,
+    TRACKER_PAGE_SE_INTO_THE_FUTURE_OF_DARKNESS,
     TRACKER_PAGE_BEACH_CAVE,
     TRACKER_PAGE_DRENCHED_BLUFF,
     TRACKER_PAGE_MT_BRISTLE,
@@ -91,7 +111,8 @@ enum tracker_page {
     TRACKER_PAGE_CREVICE_CAVE,
     TRACKER_PAGE_SURROUNDED_SEA,
     TRACKER_PAGE_MIRACLE_SEA,
-    TRACKER_PAGE_AEGIS_CAVE, // DUNGEON_ICE_AEGIS_CAVE is first in this dungeon group.
+    // DUNGEON_ICE_AEGIS_CAVE is first in this dungeon group.
+    TRACKER_PAGE_AEGIS_CAVE,
     TRACKER_PAGE_MT_TRAVAIL,
     TRACKER_PAGE_THE_NIGHTMARE,
     TRACKER_PAGE_SPACIAL_RIFT,
@@ -121,62 +142,111 @@ enum tracker_page {
     TRACKER_PAGE_9TH_STATION_PASS,
     TRACKER_PAGE_SKY_PEAK_SUMMIT_PASS,
     TRACKER_PAGE_SKY_PEAK_SUMMIT,
-    TRACKER_PAGE_ZERO_ISLE_NORTH,
-    TRACKER_PAGE_ZERO_ISLE_EAST,
-    TRACKER_PAGE_ZERO_ISLE_WEST,
-    TRACKER_PAGE_ZERO_ISLE_SOUTH,
-    TRACKER_PAGE_ZERO_ISLE_CENTER,
-    TRACKER_PAGE_DESTINY_TOWER,
-    TRACKER_PAGE_OBLIVION_FOREST,
-    TRACKER_PAGE_TREACHEROUS_WATERS,
-    TRACKER_PAGE_SOUTHEASTERN_ISLANDS,
-    TRACKER_PAGE_INFERNO_CAVE,
-    TRACKER_PAGE_SE_BIDOOFS_WISH,
-    TRACKER_PAGE_SE_IGGLYBUFF_THE_PRODIGY,
-    TRACKER_PAGE_SE_TODAYS_OH_MY_GOSH,
-    TRACKER_PAGE_SE_HERE_COMES_TEAM_CHARM,
-    TRACKER_PAGE_SE_INTO_THE_FUTURE_OF_DARKNESS,
     TRACKER_PAGE_DARK_CRATER,
+    TRACKER_PAGE_ZERO_ISLE_NORTH,      // Rule
+    TRACKER_PAGE_ZERO_ISLE_EAST,       // Rule
+    TRACKER_PAGE_ZERO_ISLE_WEST,       // Rule
+    TRACKER_PAGE_ZERO_ISLE_SOUTH,      // Rule
+    TRACKER_PAGE_ZERO_ISLE_CENTER,     // Rule
+    TRACKER_PAGE_DESTINY_TOWER,        // Rule
+    TRACKER_PAGE_OBLIVION_FOREST,      // Rule
+    TRACKER_PAGE_TREACHEROUS_WATERS,   // Rule
+    TRACKER_PAGE_SOUTHEASTERN_ISLANDS, // Rule
+    TRACKER_PAGE_INFERNO_CAVE,         // Rule
 };
 
-// Force the enum to be as small as possible for better struct
-// memory usage.
+/* tracker_check_type
+    A comprehensive enum of all kinds of checks (and useful
+    information related to checks.) 
+    If a check has a unique named and is not part of a set
+    ie: (Shop Item #1, Shop Item #2, etc) it should use
+    TRACKER_CHECK_NAMED (enum) and named_check (type).
+    Otherwise, use one of the corresponding enums and the
+    matching type. ie: (TRACKER_CHECK_BANK & bank_check).
+    If the checks are part of a set that doesn't currently
+    exist, feel free to add a new kind of tracker_check_type
+    corresponding check_data for it into the union. */
 enum __attribute__((__packed__)) tracker_check_type {
     TRACKER_CHECK_TERMINATOR = 0,
-    // Check(s) that have a unique drawing/completion check. ie: 'Recycle Shop Dungeons:\n X X X X X'
-    TRACKER_CHECK_CUSTOM,
-    // Info that may be useful for a check. ie: 'This dungeon is unlocked from the start.'
+    // Info that may be useful for a check.
+    // ie: 'This dungeon is unlocked from the start.'
     TRACKER_CHECK_INFO,
-    // Info that shows the boss. ie: 'Boss: Groudon'
+    // Info that shows the boss.
+    // ie: 'Boss: Groudon'
     TRACKER_CHECK_BOSS_INFO,
-    // Info that shows the bosses. ie: 'Boss: Zubat & Koffing'
+    // Info that shows the bosses.
+    // ie: 'Boss: Zubat & Koffing'
     TRACKER_CHECK_BOSS_DUO_INFO,
-    // Info that shows an escort that joins the team. ie: 'Escort: Bidoof'
+    // Info that shows an escort that joins the team.
+    // ie: 'Escort: Bidoof'
     TRACKER_CHECK_ESCORT_INFO,
-    // Check with a unique name: 'Grandpa's Treasure: X'
+    // Info that shows the escorts that join the team.
+    // ie: 'Escort Grovyle & Celebi'
+    TRACKER_CHECK_ESCORT_DUO_INFO,
+    // Check(s)/info that have a unique completion/drawing check.
+    // ie: 'Recycle Shop Dungeons:\n X X X X X'
+    TRACKER_CHECK_CUSTOM,
+    // Check with a unique name that can't be grouped.
+    // ie: 'Grandpa's Treasure: X'
     TRACKER_CHECK_NAMED,
-    // Check for amount of money in bank. ie: '100 G: X'
+    // Check for amount of money in bank.
+    // ie: '100 G: X'
     TRACKER_CHECK_BANK,
-    // Check for item buyable in a shop. ie: 'Shop Item #3: X'
+    // Check for item buyable in a shop.
+    // ie: 'Shop Item #3: X'
     TRACKER_CHECK_SHOP,
-    // Check for swappable item in a shop. ie: 'Swap Shop Item #2: X'
+    // Check for swappable item in a shop.
+    // ie: 'Swap Shop Item #2: X'
     TRACKER_CHECK_SWAP_SHOP,
-    // Check for a bag upgrade. ie: 'Bag Upgrade #4: X'
+    // Check for a bag upgrade.
+    // ie: 'Bag Upgrade #4: X'
     TRACKER_CHECK_BAG_UPGRADE,
-    // Check for a rank. ie: 'Bronze Rank: X'
+    // Check for a rank.
+    // ie: 'Bronze Rank: X'
     TRACKER_CHECK_RANK,
-    // Check for a gift. ie: 'Palkia's Gift: X'
+    // Check for a gift.
+    // ie: 'Palkia's Gift: X'
     TRACKER_CHECK_GIFT,
-    // Check for a 7 Treasure Mission. ie: 'Aqua-Monica Mission: X'
+    // Check for a 7 Treasure Mission.
+    // ie: 'Aqua-Monica Mission: X'
     TRACKER_CHECK_SEVEN_TREASURE_MISSION,
-    // Check for a dungeon being completed: ie: 'Beach Cave: X'
+    // Check for a dungeon being completed.
+    // ie: 'Beach Cave: X'
     TRACKER_CHECK_DUNGEON_CONQUEST,
-    // Check for a dojo being completed: ie: 'Dragon Maze: X'
+    // Check for a special episode dungeon being completed.
+    // ie: 'SE Deep Star Cave: X'
+    TRACKER_CHECK_SPECIAL_EPISODE_DUNGEON_CONQUEST,
+    // Check for a dojo being completed.
+    // ie: 'Dragon Maze: X'
     TRACKER_CHECK_DOJO_CONQUEST,
 };
 
+/* tracker_check_built_layout
+    This struct is used to draw and layout pages. It is
+    not important for actually adding checks and pages.
+    Used by the tracker to manage where to place checks
+    in the window when it's time to actually draw them.
+    Currently, the system goes top to bottom then left
+    to right. (With a few exceptions for appearence).
+    Exceptions include: TRACKER_CHECK_BOSS_INFO and
+    TRACKER_CHECK_ESCORT_INFO which try to draw to the
+    write side of the previous check if possible. */
+struct tracker_check_built_layout {
+    uint16_t x;
+    uint16_t y;
+    uint32_t spot_usage[11][2];
+};
+
+/* custom_tracker_element
+    element_drawing_func: Used to draw the custom element
+        into the tracker window. If there is NOT enough
+        space in the layout struct, the element should
+        return without drawing anything.
+    element_checks_complete_func: Used to check if all
+        the checks associated with the custom tracker are
+        completed. */
 struct custom_tracker_element {
-    void (*element_drawing_func)();
+    void (*element_drawing_func)(int, struct tracker_check_built_layout*);
     bool (*element_checks_complete_func)();
 };
 
@@ -190,6 +260,7 @@ typedef helpful_information general_info;
 typedef helpful_information boss_info;
 typedef helpful_information boss_duo_info;
 typedef helpful_information escort_info;
+typedef helpful_information escort_duo_info;
 
 struct subx_check {
     uint16_t str_id;
@@ -197,10 +268,11 @@ struct subx_check {
 };
 typedef subx_check named_check;
 
-// number can be used to represent
+// number can be used to replace...
 // [value:0]
+// in the string preprocessing process
 struct numbered_subx_check {
-    uint32_t number;
+    uint32_t number; // Used for string preprocessing if need be.
     uint8_t subx_bit;
 };
 typedef numbered_subx_check bank_check;
@@ -208,63 +280,111 @@ typedef numbered_subx_check shop_check;
 typedef numbered_subx_check swap_shop_check;
 typedef numbered_subx_check bag_upgrade_check;
 
-// id_val can be used to represent
+// id can be used to replace...
 // [kind:0], [dungeon:0], [item:0], [rank:0]
+// in the string preprocessing process
 struct id_subx_check {
-    uint32_t id;
+    uint32_t id; // Used for string preprocessing if need be.
     uint8_t subx_bit;
 };
 typedef id_subx_check rank_check;
 typedef id_subx_check gift_check;
+typedef id_subx_check item_check;
 typedef id_subx_check seven_treasure_mission_check;
 
+// Note: In game, there is no difference between a
+// dungeon_conquest_check, dojo_conquest_check, and
+// special_episode_dungeon_conquest_check. They are
+// only made different in the tracker_book so it is
+// readily apparent which its meant to be.
 struct dungeon_conquest_check {
     struct dungeon_id_8 dungeon;
 };
 typedef dungeon_conquest_check dungeon_conquest_check;
+typedef special_episode_dungeon_conquest_check special_episode_dungeon_conquest_check;
 typedef dungeon_conquest_check dojo_conquest_check;
 
 union check_data {
     // Note: custom_tracker_elements should be used WISELY.
-    // However, they generally should serve aesthetic or practical purpose.
     struct custom_tracker_element custom_tracker_element;
     general_info general_info;
     boss_info boss_info;
     boss_duo_info boss_duo_info;
     escort_info escort_info;
+    escort_duo_info escort_duo_info;
     named_check named_check;
     bank_check bank_check;
     shop_check shop_check;
     bag_upgrade_check bag_upgrade_check;
     rank_check rank_check;
     gift_check gift_check;
+    item_check item_check;
     seven_treasure_mission_check seven_treasure_mission_check;
     dungeon_conquest_check dungeon_conquest_check;
     dojo_conquest_check dojo_conquest_check;
 };
 
-
+/* tracker_page_entry
+    type: The type of the check.
+    data: A union with the corresponding data for the type
+        listed above.
+    is_check_active_func: When not NULL, a function that
+        returns whether or not this check should be shown.*/
 struct tracker_check {
     enum tracker_check_type type;
     union check_data data;
-    bool (*is_check_active_func)();
+    bool (*is_check_active_func)(); // NULL means check is always obtainable.
 };
 
+/* tracker_page_entry
+    name_str_id: The string id to use from the text file
+        as the name. If 0/blank, use the dungeon name below.
+    dungeon: The dungeon associated with this page. This is
+        used to draw the mission checks and if name_str_id
+        is blank, the corresponding dungeon is used as the
+        name.
+    is_page_active_func: When not NULL, a function that returns
+        whether or not this page should be shown. For example,
+        DUNGEON_DARK_CRATER uses IsDarkraiGoal for this value
+        since it's only active if Darkrai is the goal.
+    checks: A list of tracker_checks terminated by one with
+        TRACKER_CHECK_TERMINATOR for the type. The macro
+        TRACKER_CHECK_BUNDLE can be used to automatically
+        append this terminator to the end. Additionally, if
+        there are no checks besides the missions for the
+        corresponding dungeon, you can use the 
+        TRACKER_EMPTY_CHECK_BUNDLE macro. */
 struct tracker_page_entry {
     uint16_t name_str_id;
     struct dungeon_id_16 dungeon;
-    bool (*is_page_active_func)(); // NULL means page is always active.
+    bool (*is_page_active_func)(); // NULL means page is always shown.
     struct tracker_check checks[];
 };
 
 // Handle recycle shop dungeon checks.
-void RecycleShopDungeonCheckDrawer();
+void RecycleShopDungeonCheckDrawer(int idx, struct tracker_check_built_layout *layout);
 bool IsAllRecycleShopDungeonChecksCompleted();
 
 // Handle drink/drink events.
-void DrinkAndDrinkEventCheckDrawer();
+void DrinkAndDrinkEventCheckDrawer(int idx, struct tracker_check_built_layout *layout);
 bool IsAllDrinkAndDrinkEventChecksCompleted();
 
+// TODO: Display current shop listings.
+
+// TODO: Display current bank info.
+
+// TODO: Display swap-shop info.
+
+// TODO: Display mission board info.
+
+/* tracker_book
+    A list of tracker_page_entries. Every value for the
+    tracker_page enum should have an entry in the
+    tracker_book. Because of the way the tracker_book
+    is defined, the ordering of the pages can be shuffled
+    around without modifying the decleration of
+    tracker_book.
+*/
 struct tracker_page_entry tracker_book[] = {
     [TRACKER_PAGE_SHOP] = {
         .name_str_id = SHOP_STR_ID,
@@ -836,17 +956,17 @@ struct tracker_page_entry tracker_book[] = {
                 }}
             },
             {
-                .type = TRACKER_CHECK_BOSS_INFO,
-                .data = {.boss_info = {
-                    .id_0 = MONSTER_UXIE,
-                }},
-                .is_check_active_func = IsDarkraiGoal,
-            },
-            {
                 .type = TRACKER_CHECK_GIFT,
                 .data = {.gift_check = {
                     .id = MONSTER_UXIE,
                     .subx_bit = 25
+                }},
+                .is_check_active_func = IsDarkraiGoal,
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_UXIE,
                 }},
                 .is_check_active_func = IsDarkraiGoal,
             }
@@ -869,18 +989,18 @@ struct tracker_page_entry tracker_book[] = {
         .dungeon = DUNGEON_QUICKSAND_CAVE,
         .checks = TRACKER_CHECK_BUNDLE(
             {
-                .type = TRACKER_CHECK_BOSS_INFO,
-                .data = {.boss_info = {
-                    .id_0 = MONSTER_MESPRIT,
-                }},
-            },
-            {
                 .type = TRACKER_CHECK_GIFT,
                 .data = {.gift_check = {
                     .id = MONSTER_MESPRIT,
                     .subx_bit = 26
                 }},
                 .is_check_active_func = IsDarkraiGoal,
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_MESPRIT,
+                }},
             }
         )
     },
@@ -896,17 +1016,17 @@ struct tracker_page_entry tracker_book[] = {
             },
             // TODO: Add scripted loss info here?
             {
-                .type = TRACKER_CHECK_BOSS_INFO,
-                .data = {.boss_info = {
-                    .id_0 = MONSTER_AZELF,
-                }},
-                .is_check_active_func = IsDarkraiGoal,
-            },
-            {
                 .type = TRACKER_CHECK_GIFT,
                 .data = {.gift_check = {
                     .id = MONSTER_AZELF,
                     .subx_bit = 26
+                }},
+                .is_check_active_func = IsDarkraiGoal,
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_AZELF,
                 }},
                 .is_check_active_func = IsDarkraiGoal,
             }
@@ -936,6 +1056,18 @@ struct tracker_page_entry tracker_book[] = {
             }
         )
     },
+    [TRACKER_PAGE_DEEP_DUSK_FOREST] = {
+        .dungeon = DUNGEON_DUSK_FOREST,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_DUO_INFO,
+                .data = {.escort_duo_info = {
+                    .id_0 = MONSTER_GROVYLE,
+                    .id_1 = MONSTER_CELEBI
+                }}
+            }
+        )
+    },
     [TRACKER_PAGE_TREESHROUD_FOREST] = {
         .dungeon = DUNGEON_TREESHROUD_FOREST,
         .checks = TRACKER_CHECK_BUNDLE(
@@ -947,53 +1079,566 @@ struct tracker_page_entry tracker_book[] = {
             }
         )
     },
-    [TRACKER_PAGE_BRINE_CAVE] = {},
+    [TRACKER_PAGE_BRINE_CAVE] = {
+        .dungeon = DUNGEON_BRINE_CAVE,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_BOSS_DUO_INFO,
+                .data = {.boss_duo_info = {
+                    .id_0 = MONSTER_KABUTOPS,
+                    .id_1 = MONSTER_OMASTAR,
+                }}
+            }
+        )
+        // TODO: Add conditional Chatot escort.
+    },
     [TRACKER_PAGE_SERENITY_RIVER] = {},
     [TRACKER_PAGE_LANDSLIDE_CAVE] = {},
     [TRACKER_PAGE_LUSH_PRAIRIE] = {},
     [TRACKER_PAGE_TINY_MEADOW] = {},
-    [TRACKER_PAGE_LABYRINTH_CAVE] = {},
+    [TRACKER_PAGE_LABYRINTH_CAVE] = {
+        .dungeon = DUNGEON_LABYRINTH_CAVE,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_GABITE,
+                }}
+            }
+        )
+    },
     [TRACKER_PAGE_ORAN_FOREST] = {},
     [TRACKER_PAGE_STAR_CAVE] = {},
     [TRACKER_PAGE_HIDDEN_LAND] = {},
     [TRACKER_PAGE_TEMPORAL_TOWER] = {},
-    [TRACKER_PAGE_MYSTIFYING_FOREST] = {},
+    [TRACKER_PAGE_MYSTIFYING_FOREST] = {
+        .dungeon = DUNGEON_MYSTIFYING_FOREST,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_INFO,
+                .data = {.general_info = {
+                    .str_id = GRANDMASTER_OF_ALL_THINGS_BAD_BOSS_INFO_STR_ID,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BAG_UPGRADE,
+                .data = {.bag_upgrade_check = {
+                    .number = 5,
+                    .subx_bit = 4,
+                }}
+            }
+        )
+    },
     [TRACKER_PAGE_BLIZZARD_ISLAND] = {},
-    [TRACKER_PAGE_CREVICE_CAVE] = {},
+    [TRACKER_PAGE_CREVICE_CAVE] = {
+        .dungeon = DUNGEON_CREVICE_CAVE,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_FROSLASS,
+                    .subx_bit = 47
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_FROSLASS,
+                }}
+            }
+        )
+    },
     [TRACKER_PAGE_SURROUNDED_SEA] = {},
-    [TRACKER_PAGE_MIRACLE_SEA] = {},
+    [TRACKER_PAGE_MIRACLE_SEA] = {
+        .dungeon = DUNGEON_MIRACLE_SEA,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_PHIONE,
+                    .subx_bit = 29
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_GYARADOS,
+                }}
+            }
+        ),
+    },
     [TRACKER_PAGE_AEGIS_CAVE] = {
         .name_str_id = AEGIS_CAVE_STR_ID,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_REGICE,
+                    .subx_bit = 69
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_REGICE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_REGIROCK,
+                    .subx_bit = 70
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_REGIROCK,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_REGISTEEL,
+                    .subx_bit = 71
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_REGISTEEL,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_REGIGIGAS,
+                    .subx_bit = 72
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_REGIGIGAS,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_ICE_AEGIS_CAVE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_REGICE_CHAMBER,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_ROCK_AEGIS_CAVE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_REGIROCK_CHAMBER,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_STEEL_AEGIS_CAVE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_REGISTEEL_CHAMBER,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_AEGIS_CAVE_PIT,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_DUNGEON_CONQUEST,
+                .data = {.dungeon_conquest_check = {
+                    .dungeon = DUNGEON_REGIGIGAS_CHAMBER,
+                }}
+            }
+        ),
     },
     [TRACKER_PAGE_MT_TRAVAIL] = {},
     [TRACKER_PAGE_THE_NIGHTMARE] = {},
-    [TRACKER_PAGE_SPACIAL_RIFT] = {},
+    [TRACKER_PAGE_SPACIAL_RIFT] = {
+        .dungeon = DUNGEON_SPACIAL_RIFT,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_PALKIA,
+                    .subx_bit = 30
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_PALKIA,
+                }}
+            }
+        ),
+    },
     [TRACKER_PAGE_CONCEALED_RUINS] = {},
     [TRACKER_PAGE_MARINE_RESORT] = {},
-    [TRACKER_PAGE_BOTTOMLESS_SEA] = {},
-    [TRACKER_PAGE_SHIMMER_DESERT] = {},
-    [TRACKER_PAGE_MT_AVALANCHE] = {},
-    [TRACKER_PAGE_GIANT_VOLCANO] = {},
-    [TRACKER_PAGE_WORLD_ABYSS] = {},
-    [TRACKER_PAGE_SKY_STAIRWAY] = {},
-    [TRACKER_PAGE_MYSTERY_JUNGLE] = {},
+    [TRACKER_PAGE_BOTTOMLESS_SEA] = {
+        .dungeon = DUNGEON_BOTTOMLESS_SEA,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_KYOGRE,
+                    .subx_bit = 32
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_KYOGRE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_AQUA_MONICA,
+                    .subx_bit = 31
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_SHIMMER_DESERT] = {
+        .dungeon = DUNGEON_SHIMMER_DESERT,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_GROUDON,
+                    .subx_bit = 34
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_GROUDON,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_TERRA_CYMBAL,
+                    .subx_bit = 33
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_MT_AVALANCHE] = {
+        .dungeon = DUNGEON_MT_AVALANCHE,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_ARTICUNO,
+                    .subx_bit = 36
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_ARTICUNO,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_ICY_FLUTE,
+                    .subx_bit = 35
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_GIANT_VOLCANO] = {
+        .dungeon = DUNGEON_GIANT_VOLCANO,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_HEATRAN,
+                    .subx_bit = 38
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_HEATRAN,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_FIERY_DRUM,
+                    .subx_bit = 37
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_WORLD_ABYSS] = {
+        .dungeon = DUNGEON_WORLD_ABYSS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_GIRATINA_ALTERED,
+                    .subx_bit = 40
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_GIRATINA_ALTERED,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_FIERY_DRUM,
+                    .subx_bit = 39
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_SKY_STAIRWAY] = {
+        .dungeon = DUNGEON_SKY_STAIRWAY,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_RAYQUAZA,
+                    .subx_bit = 42
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_RAYQUAZA,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_SKY_MELODICA,
+                    .subx_bit = 41
+                }}
+            }
+        ),
+    },
+    [TRACKER_PAGE_MYSTERY_JUNGLE] = {
+        .dungeon = DUNGEON_MYSTERY_JUNGLE,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_MEW,
+                    .subx_bit = 42
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_MEW,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.item_check = {
+                    .id = ITEM_GRASS_CORNET,
+                    .subx_bit = 41
+                }}
+            }
+        ),
+    },
     [TRACKER_PAGE_LAKE_AFAR] = {},
     [TRACKER_PAGE_HAPPY_OUTLOOK] = {},
     [TRACKER_PAGE_MY_MISTRAL] = {},
     [TRACKER_PAGE_SHIMMER_HILL] = {},
     [TRACKER_PAGE_LOST_WILDERNESS] = {},
     [TRACKER_PAGE_MIDNIGHT_FOREST] = {},
-    [TRACKER_PAGE_1ST_STATION_PASS] = {},
-    [TRACKER_PAGE_2ND_STATION_PASS] = {},
-    [TRACKER_PAGE_3RD_STATION_PASS] = {},
-    [TRACKER_PAGE_4TH_STATION_PASS] = {},
-    [TRACKER_PAGE_5TH_STATION_PASS] = {},
-    [TRACKER_PAGE_6TH_STATION_PASS] = {},
-    [TRACKER_PAGE_7TH_STATION_PASS] = {},
-    [TRACKER_PAGE_8TH_STATION_PASS] = {},
-    [TRACKER_PAGE_9TH_STATION_PASS] = {},
-    [TRACKER_PAGE_SKY_PEAK_SUMMIT_PASS] = {},
-    [TRACKER_PAGE_SKY_PEAK_SUMMIT] = {},
+    [TRACKER_PAGE_1ST_STATION_PASS] = {
+        .dungeon = DUNGEON_1ST_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }}
+            }
+        )
+    },
+    [TRACKER_PAGE_2ND_STATION_PASS] = {
+        .dungeon = DUNGEON_2ND_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_3RD_STATION_PASS] = {
+        .dungeon = DUNGEON_3RD_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_4TH_STATION_PASS] = {
+        .dungeon = DUNGEON_4TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_5TH_STATION_PASS] = {
+        .dungeon = DUNGEON_5TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_BOSS_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_CARNIVINE,
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_6TH_STATION_PASS] = {
+        .dungeon = DUNGEON_6TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_7TH_STATION_PASS] = {
+        .dungeon = DUNGEON_7TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_8TH_STATION_PASS] = {
+        .dungeon = DUNGEON_8TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+        // TODO: Add sneasel's gratitude.
+    },
+    [TRACKER_PAGE_9TH_STATION_PASS] = {
+        .dungeon = DUNGEON_9TH_STATION_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_SKY_PEAK_SUMMIT_PASS] = {
+        .dungeon = DUNGEON_SKY_PEAK_SUMMIT_PASS,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
+    [TRACKER_PAGE_SKY_PEAK_SUMMIT] = {
+        .dungeon = DUNGEON_SKY_PEAK_SUMMIT,
+        .is_page_active_func = IsDarkraiGoal,
+        .checks = TRACKER_CHECK_BUNDLE(
+            {
+                .type = TRACKER_CHECK_BOSS_DUO_INFO,
+                .data = {.boss_info = {
+                    .id_0 = MONSTER_MUK,
+                    .id_1 = MONSTER_GRIMER
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_GIFT,
+                .data = {.gift_check = {
+                    .id = MONSTER_SHAYMIN_LAND,
+                    .subx_bit = 46
+                }}
+            },
+            {
+                .type = TRACKER_CHECK_ESCORT_INFO,
+                .data = {.escort_info = {
+                    .id_0 = MONSTER_SHAYMIN_LAND,
+                }},
+            }
+        )
+    },
     [TRACKER_PAGE_ZERO_ISLE_NORTH] = {},
     [TRACKER_PAGE_ZERO_ISLE_EAST] = {},
     [TRACKER_PAGE_ZERO_ISLE_WEST] = {},
@@ -1004,10 +1649,10 @@ struct tracker_page_entry tracker_book[] = {
     [TRACKER_PAGE_TREACHEROUS_WATERS] = {},
     [TRACKER_PAGE_SOUTHEASTERN_ISLANDS] = {},
     [TRACKER_PAGE_INFERNO_CAVE] = {},
+    [TRACKER_PAGE_DARK_CRATER] = {},
     [TRACKER_PAGE_SE_BIDOOFS_WISH] = {},
     [TRACKER_PAGE_SE_IGGLYBUFF_THE_PRODIGY] = {},
     [TRACKER_PAGE_SE_TODAYS_OH_MY_GOSH] = {},
     [TRACKER_PAGE_SE_HERE_COMES_TEAM_CHARM] = {},
     [TRACKER_PAGE_SE_INTO_THE_FUTURE_OF_DARKNESS] = {},
-    [TRACKER_PAGE_DARK_CRATER] = {},
 };
