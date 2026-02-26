@@ -16,9 +16,12 @@
 #define DUNGEON_NONE DUNGEON_TEST_DUNGEON
 #define TRACKER_BOOK_PAGE_COUNT sizeof(tracker_book)/sizeof(tracker_book[0])
 
+// Error, IDEALLY will not end up used.
 #define FALLBACK_ERROR_STR_ID 15438
 
-// TODO: Adapt these strings for NA using ifdefs.
+// Selector
+#define TRACKER_SELECTOR_TITLE_STRING 527
+
 // Locations
 #define TOWN_STR_ID 16814
 #define SHOP_STR_ID 16304

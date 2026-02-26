@@ -3,18 +3,18 @@
 #include <pmdsky.h>
 #include <cot.h>
 
-// Some times the functions have returns. Sometimes they don't make them all
-// void* because they have differing signatures.
+// Some times the functions have returns. Sometimes they don't...
+// so make them all void* because they have differing signatures.
 typedef struct TopScreenMode {
     uint32_t thing;
-    void* createFunction;
-    void* closeFunction;
-    void* function3;
-    void* function4;
-    void* function5;
-    void* function6;
-    void* function7;
-    void* function8;
+    void* create_func;
+    void* close_func;
+    void* unk_3_func;
+    void* unk_4_func;
+    void* unk_5_func;
+    void* unk_6_func;
+    void* unk_7_func;
+    void* unk_8_func;
 } TopScreenMode;
 
 extern bool fadeOutAllActive;
@@ -44,7 +44,7 @@ void UnkTopScreenFun5(uint32_t num);
 void UnkTopScreenFun6(uint32_t num);
 void UnkTopScreenFun7(uint32_t num);
 void UnkTopScreenFun8(void* num);
-void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a pointer, but lazy
+void LoadTopScreenBGPart1(void* thing, uint32_t other); // other is actually a pointer
 void LoadTopScreenBGPart2(void* thing, char* bg_string, uint32_t num);
 void FreeTopScreenBG(void* thing);
 void SomethingTopScreenBG(void* thing);
