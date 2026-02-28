@@ -1,8 +1,10 @@
+#pragma once
+
 #include <pmdsky.h>
 #include <cot.h>
 
-bool debug_mode = false;
-
+#define DUNGEON_STR_ID_OFFSETS 16826
+#define DUNGEON_ID_TO_STR_ID(id) id + DUNGEON_STR_ID_OFFSETS
 
 
 enum dungeon_check_type {

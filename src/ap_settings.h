@@ -80,7 +80,8 @@ typedef struct ArchipelagoFlags {
     bool moveShortcuts : 1;      // bit 1 : 0b10
     bool typesanity : 1;         // bit 2 : 0b100
     bool longLocationsOn : 1;    // bit 3 : 0b1000
-    bool levelScaleGuests : 1;   // bit 4
+    bool levelScaleGuests : 1;   // bit 4 : 0b10000
+    bool specialEpisodesOn : 1;  // but 5 : 0b100000 TODO client side
 } ArchipelagoFlags;
 ASSERT_SIZE(struct ArchipelagoFlags, 0x1);
 

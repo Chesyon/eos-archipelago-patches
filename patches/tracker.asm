@@ -6,14 +6,14 @@
     .org OptionsMenuItemListPtr
     .area 0x4
         .pool
-            .word newTopScreenOptionsList
+            .word new_top_screen_mode_option_str_ids
     .endarea
 .close
 
 .open "overlay11.bin", overlay11_start
     .org ApTrackerSetupMenuHook
     .area 0x4
-        b ApTrackerSetupMenuCheck
+        b ApTrackerSelectorMenuCheck
     .endarea
 
     .org ApTrackerTopScreenHook
@@ -29,7 +29,7 @@
     .org GroundMenuItemListPtr
     .area 0x4
         .pool
-            .word newTopGroundMenuList
+            .word new_main_game_top_ground_menu_list
     .endarea
 .close
 
