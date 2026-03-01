@@ -13,10 +13,11 @@ typedef struct TopScreenApTrackerWindow {
     uint8_t padding_1;
     uint8_t padding_2;
     uint8_t padding_3;
-    uint32_t state; // 0x4: Controls top screen has an extra state? Seems redundant.
-    // 0x8: varies among top screens? We will use it to store the window id.
+    // 0x4: Controls top screen has an extra state? Seems redundant.
+    uint32_t state;
+    // 0x8: Varies among top screens? We will use it to store the window id.
     // Some other top screens may use it as a boolean instead for if the top
-    // screen is like ready.
+    // screen is ready to be displayed?
     signed char window_id;
     uint8_t faded;       // 0x9: Guess
     uint8_t displayable; // 0xA: Guess.
@@ -28,7 +29,7 @@ typedef struct TopScreenApTrackerWindow {
 typedef struct SomeMenuStruct {
     // For submenus this is 0xD?
     uint32_t something;
-    // Is null for some menus and actual init is handled in update.
+    // Is NULL for some menus and actual init is handled in update.
     void (*create_menu_func)(void);
     void (*close_menu_func)(void);
     uint32_t (*update_menu_func)(void);
@@ -43,6 +44,7 @@ struct preprocessor_flags preprocessor_flags_none = {};
     has a specific name_str_id, use that. Otherwise, check the
     dungeon_id and use the dungeon's str_id from the text file.
     If that fails, panic and use the fallback error str id.
+
     page: page to get the str id for
     return: str id for page title */
 uint16_t GetPageStrId(enum tracker_page page) {
@@ -60,8 +62,8 @@ uint16_t GetPageStrId(enum tracker_page page) {
 }
 
 /* IsPageActive
-    check: The check to evaluate the status of.
-    return: Is this check active for this game? */
+    page: The page to check if its active..
+    return: Is this page active for this game? */
 bool IsPageActive(enum tracker_page page) {
     bool (*is_page_active_func)() = tracker_book[page].is_page_active_func;
     if(NULL == is_page_active_func) {
@@ -71,92 +73,89 @@ bool IsPageActive(enum tracker_page page) {
     return is_page_active_func();
 }
 
-/* IsCheckActive
-    check: The check to evaluate the status of.
-    return: Is this check active for this game? */
-bool IsCheckActive(struct tracker_check *check) {
-    bool (*is_check_active_func)() = check->is_check_active_func;
-    if(NULL == is_check_active_func) {
+/* IsLocationActive
+    location: The location to evaluate the status of.
+    return: Is this location active for this game? */
+bool IsLocationActive(struct tracker_location *location) {
+    bool (*is_location_active_func)() = location->is_location_active_func;
+    if(NULL == is_location_active_func) {
         return true;
     }
 
-    return is_check_active_func();
+    return is_location_active_func();
 }
 
-/* IsCheckComplete
-    First, check if a check is zactually active (in this Archipelago).
+/* IsLocationComplete
+    First, check if a location is actually active (in this Archipelago).
     If it is not in this Archipelago, return the check as completed.
     If it is in this Archipelago, actually check if it has been
     completed.
-    check: The check to evaluate the completion of.
-    return: Is the check complete? */
-bool IsCheckComplete(struct tracker_check *check) {
-    if(false == IsCheckActive(check)) {
+
+    location: The location to check completion of.
+    return: Is the location complete? */
+bool IsLocationComplete(struct tracker_location *location) {
+    if(false == IsLocationActive(location)) {
         return true;
     }
 
-    enum tracker_check_type check_type = check->type;
-    union check_data *check_data = &(check->data);
-    switch (check_type)
+    enum tracker_location_type location_type = location->type;
+    union location_data *location_data = &(location->data);
+    switch (location_type)
     {
         default:
-        case TRACKER_CHECK_TERMINATOR:
+        case TRACKER_LOCATION_TERMINATOR:
             return false;
-        case TRACKER_CHECK_INFO:
-        case TRACKER_CHECK_BOSS_INFO:
-        case TRACKER_CHECK_BOSS_DUO_INFO:
-        case TRACKER_CHECK_ESCORT_INFO:
-        case TRACKER_CHECK_ESCORT_DUO_INFO:
+        case TRACKER_LOCATION_INFO:
+        case TRACKER_LOCATION_BOSS_INFO:
+        case TRACKER_LOCATION_BOSS_DUO_INFO:
+        case TRACKER_LOCATION_ESCORT_INFO:
+        case TRACKER_LOCATION_ESCORT_DUO_INFO:
             return true;
-        case TRACKER_CHECK_CUSTOM:
-        {
-            struct custom_tracker_element *cte = (struct custom_tracker_element*)check_data;
-            bool (*element_checks_complete_func)() = cte->element_checks_complete_func;
+        case TRACKER_LOCATION_CUSTOM: {
+            struct custom_tracker_element *cte = (struct custom_tracker_element*)location_data;
+            bool (*element_checks_complete_func)() = cte->element_locations_complete_func;
             return element_checks_complete_func();
         }
-        case TRACKER_CHECK_NAMED:
-        {
-            struct subx_check *subx_check = (struct subx_check*)check_data;
+        case TRACKER_LOCATION_NAMED: {
+            struct subx_check *subx_check = (struct subx_check*)location_data;
             uint8_t subx_bit = subx_check->subx_bit;
             return GetSubXBit(subx_bit);
         }
-        case TRACKER_CHECK_BANK:
-        case TRACKER_CHECK_SHOP:
-        case TRACKER_CHECK_SWAP_SHOP:
-        case TRACKER_CHECK_BAG_UPGRADE:
-        {
-            struct numbered_subx_check *nsc = (struct numbered_subx_check*)check_data;
+        case TRACKER_LOCATION_BANK:
+        case TRACKER_LOCATION_SHOP:
+        case TRACKER_LOCATION_SWAP_SHOP:
+        case TRACKER_LOCATION_BAG_UPGRADE: {
+            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             return GetSubXBit(subx_bit);
         }
-        case TRACKER_CHECK_RANK:
-        case TRACKER_CHECK_GIFT:
-        case TRACKER_CHECK_ITEM:
-        case TRACKER_CHECK_SEVEN_TREASURE_MISSION:
-        {
-            struct id_subx_check *isc = (struct id_subx_check*)check_data;
+        case TRACKER_LOCATION_RANK:
+        case TRACKER_LOCATION_GIFT:
+        case TRACKER_LOCATION_ITEM:
+        case TRACKER_LOCATION_SEVEN_TREASURE_MISSION: {
+            struct id_subx_check *isc = (struct id_subx_check*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             return GetSubXBit(subx_bit);
         }
-        case TRACKER_CHECK_DUNGEON_CONQUEST:
-        case TRACKER_CHECK_SPECIAL_EPISODE_DUNGEON_CONQUEST:
-        case TRACKER_CHECK_DOJO_CONQUEST:
-        {
-            struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)check_data;
+        case TRACKER_LOCATION_DUNGEON_CONQUEST:
+        case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
+        case TRACKER_LOCATION_DOJO_CONQUEST: {
+            struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)location_data;
             enum dungeon_id dungeon_id = dqc->dungeon;
             return LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
         }
     }
 }
 
-/* IsCheckComplete
+/* IsPageLocationsComplete
     First, check if a check is zactually active (in this Archipelago).
     If it is not in this Archipelago, return the check as completed.
     If it is in this Archipelago, actually check if it has been
     completed.
-    check: The check to evaluate the completion of.
-    return: Is the check complete? */
-bool IsPageChecksComplete(enum tracker_page page) {
+
+    page: page to check all the locations for
+    return: Is the page complete */
+bool IsPageLocationsComplete(enum tracker_page page) {
     // Sanity check our number of pages since crashing the game is
     // bad (obviously).
     if(TRACKER_BOOK_PAGE_COUNT <= page) {
@@ -165,25 +164,27 @@ bool IsPageChecksComplete(enum tracker_page page) {
 
     // Check if this page is a dungeon with missions.
     enum dungeon_id dungeon_id = tracker_book[page].dungeon.val;
-    if(0 <= GetRemainingDungeonMissionChecks(dungeon_id, false)) {
-        return false;
-    }
-    if(0 <= GetRemainingDungeonMissionChecks(dungeon_id, true)) {
-        return false;
-    }
-
-    struct tracker_check *check = tracker_book[page].checks;
-    while(TRACKER_CHECK_TERMINATOR != check->type) {
-        if(false == IsCheckComplete(check)) {
+    if(DUNGEON_NONE != dungeon_id) {
+        if(0 <= GetRemainingDungeonMissionChecks(dungeon_id, false)) {
             return false;
         }
-        check++;
+        if(0 <= GetRemainingDungeonMissionChecks(dungeon_id, true)) {
+            return false;
+        }
+    }
+
+    struct tracker_location *location = tracker_book[page].locations;
+    while(TRACKER_LOCATION_TERMINATOR != location->type) {
+        if(false == IsLocationComplete(location)) {
+            return false;
+        }
+        location++;
     }
     
     return true;
 }
 
-void RecycleShopDungeonCheckDrawer(int idx, struct tracker_check_built_layout *layout) {
+void RecycleShopDungeonCheckDrawer(int idx, struct tracker_location_built_layout *layout) {
     return;
 }
 bool IsAllRecycleShopDungeonChecksCompleted() {
@@ -191,7 +192,7 @@ bool IsAllRecycleShopDungeonChecksCompleted() {
 }
 
 // Handle drink/drink events.
-void DrinkAndDrinkEventCheckDrawer(int idx, struct tracker_check_built_layout *layout) {
+void DrinkAndDrinkEventCheckDrawer(int idx, struct tracker_location_built_layout *layout) {
     return;
 }
 bool IsAllDrinkAndDrinkEventChecksCompleted() {
@@ -199,13 +200,13 @@ bool IsAllDrinkAndDrinkEventChecksCompleted() {
 }
 
 // Various strings for subbing in symbols in the ap tracker.
-char locked_symbol_str[] = "[M:S4][S:8]";
-char complete_symbol_str[] = "[M:S3][S:8]";
-char unlocked_symbol_str[] = "[M:R7][S:8]";
-char incomplete_symbol_str[] = "[M:R4][S:8]";
-char check_symbol_str[] = "[M:S2][S:8]";
-char instrument_symbol_str[] = "[M:R9][S:8]";
-char relic_symbol_str[] = "[M:T4][S:8]";
+char locked_symbol_str[] = "[M:S4]";
+char complete_symbol_str[] = "[M:S3]";
+char unlocked_symbol_str[] = "[M:R7]";
+char mail_symbol_str[] = "[M:R4]";
+char check_symbol_str[] = "[M:S2]";
+char instrument_symbol_str[] = "[M:R9]";
+char relic_symbol_str[] = "[M:T4]";
 char bag_symbol_str[] = "[M:S6]";
 char money_symbol_str[] = "[M:S0]";
 char debug_symbol_str[] = "[M:B32]";
@@ -239,127 +240,261 @@ struct window_params tracker_top_screen_window_params = {
 };
 
 /* DrawStringInNextSlotInWindow
-    Finds the next available spot in layout to place the string in
-    the window. This function is probably extremely overengineered
-    since it's designed to work with as many columns as desired;
-    however, the tracker only uses two columns because of the
-    screen and font size. It probably doesn't cover every corner
-    case if you have more than 3 columns. So, if this function is
-    going to be reused for something else (why?), keep that in mind.
+    Finds the next available spot in layout to place the string in the window.
+    This functions is probably a little overengineered to work with many
+    columns despite the current layout only having two because of the screen
+    and font size.
+
     idx: window idx
     layout: current layout data
     width_max: window max width
     str: the string to draw */
-void DrawStringInNextSlotInWindow(int idx, struct tracker_check_built_layout *layout, int width_max, char* str) {
-    // TODO: This function can probably be cleaned up in some way.
+void DrawStringInNextSlotInWindow(int idx, struct tracker_location_built_layout *layout, int width_max, char* str) {
     int width_str = GetStringWidth(str);
     int row = layout->row;
     int col = layout->col;
-    for(int x_layout = col; x_layout < LAYOUT_COLS; x_layout++) {
-        for(int y_layout = row; y_layout < LAYOUT_ROWS; y_layout++) {
-            if(layout->spot_usage[x_layout][y_layout] != 0) {
-                continue;
-            }
-
-            // Gather width of all previous cells in this row.
-            int width_sum_before = 0;
-            for(int i = 0; i < x_layout; i++) {
-                int cell_usage = layout->spot_usage[i][y_layout];
-                if(cell_usage != 0) {
+    int x_layout = col;
+    int y_layout = row;
+    // This loop breaks if LAYOUT_ROWS or LAYOUT_COLS is 0. So don't do that.
+    // Additionally, it may? be possible to alter the loops to avoid nesting
+    // the if statements.
+    do {
+        do {
+            // If this spot is not blank.
+            if(layout->spot_usage[x_layout][y_layout] == 0) {
+                int i = 0;
+                // Gather width of all cells before this cell.
+                int width_sum_before = 0;
+                while(i < x_layout) {
+                    int cell_usage = layout->spot_usage[i][y_layout];
                     width_sum_before += cell_usage;
-                    width_sum_before += PADDING_X;
+                    i++;
                 }
-            }
 
-            // Gather width of all cells in this row after.
-            int width_sum_after = 0;
-            for(int i = x_layout + 1; i < LAYOUT_COLS; i++) {
-                int cell_usage = layout->spot_usage[i][y_layout];
-                if(cell_usage != 0) {
+                i = x_layout + 1; // i = x_layout + 1
+                // Gather width of all cells after this cell.
+                int width_sum_after = 0;
+                while(i < LAYOUT_COLS) {
+                    int cell_usage = layout->spot_usage[i][y_layout];
                     width_sum_after += cell_usage;
-                    width_sum_after += PADDING_X;
+                    i++;
+                }
+
+                // If the string fits here (sum of widths is under the max).
+                int total_width = width_sum_before + width_sum_after + width_str;
+                if(total_width <= width_max - PADDING_X * (LAYOUT_COLS + 1)) {
+                    layout->spot_usage[x_layout][y_layout] = width_str;
+                    int x_draw;
+                    if(x_layout == 0) {
+                        x_draw = PADDING_X;
+                    } else if (x_layout == LAYOUT_COLS - 1){
+                        x_draw = width_max - width_str - PADDING_X;
+                    } else {
+                        x_draw = width_sum_before + PADDING_X;
+                    }
+                    int y_draw = TRACKER_ROW_TO_Y(y_layout);
+                    if(x_layout > col || (x_layout == col && y_layout > row)) {
+                        layout->col = x_layout;
+                        layout->row = y_layout;
+                    }
+                    DrawTextInWindow(idx, x_draw, y_draw, str);
+                    return;
                 }
             }
-            
-            // If this string doesn't fix next to the others... frown.
-            if(width_sum_before + width_sum_after+ width_str > width_max - PADDING_X * 2) {
-                continue;
+
+            y_layout++;
+            if(y_layout >= LAYOUT_ROWS) {
+                y_layout = 0;
             }
-            layout->spot_usage[x_layout][y_layout] = width_str;
-            int x_draw;
-            if(x_layout == 0) {
-                x_draw = PADDING_X;
-            } else if (x_layout == LAYOUT_COLS - 1){
-                x_draw = width_max - width_str - PADDING_X;
-            } else {
-                x_draw = width_sum_before + PADDING_X;
-            }
-            int y_draw = TRACKER_ROW_TO_Y(y_layout);
-            layout->col = x_layout;
-            layout->row = y_layout;
-            DrawTextInWindow(idx, x_draw, y_draw, str);
-            return;
+        } while (y_layout != row);
+        x_layout++;
+        if(x_layout >= LAYOUT_COLS) {
+            x_layout = 0;
         }
-    }
-
-    // If we can't find a location in the forward direction...
-    // look for the first spot we can squish this into.
-    for(int x_layout = 0; x_layout < col; x_layout++) {
-        for(int y_layout = 0; y_layout < row; y_layout++) {
-            if(layout->spot_usage[x_layout][y_layout] != 0) {
-                continue;
-            }
-
-            // Gather width of all previous cells in this row.
-            int width_sum_before = 0;
-            for(int i = 0; i < x_layout; i++) {
-                int cell_usage = layout->spot_usage[i][y_layout];
-                if(cell_usage != 0) {
-                    width_sum_before += cell_usage;
-                    width_sum_before += PADDING_X;
-                }
-            }
-
-            // Gather width of all cells in this row after.
-            int width_sum_after = 0;
-            for(int i = x_layout + 1; i < LAYOUT_COLS; i++) {
-                int cell_usage = layout->spot_usage[i][y_layout];
-                if(cell_usage != 0) {
-                    width_sum_after += cell_usage;
-                    width_sum_after += PADDING_X;
-                }
-            }
-            
-            // If this string doesn't fix next to the others... find another spot.
-            if(width_sum_before + width_sum_after+ width_str > width_max - PADDING_X * 2) {
-                continue;
-            }
-            layout->spot_usage[x_layout][y_layout] = width_str;
-            int x_draw;
-            if(x_layout == 0) {
-                x_draw = PADDING_X;
-            } else if (x_layout == LAYOUT_COLS - 1){
-                x_draw = width_max - width_str - PADDING_X;
-            } else {
-                x_draw = width_sum_before + PADDING_X;
-            }
-            int y_draw = TRACKER_ROW_TO_Y(y_layout);
-            DrawTextInWindow(idx, x_draw, y_draw, str);
-            return;
-        }
-    }
+    } while (x_layout != col);
 }
 
-void DrawMissionChecksInWindow(int idx, char* buffer, struct tracker_check_built_layout *layout, enum dungeon_id dungeon_id) {
+/* DrawMissionLocationsInWindow
+    Places the completion, jobs, and outlaw location checks into the window
+    if applicable and if there is space in the tracker. Otherwise, 
+
+    idx: window idx
+    buffer: temp buffer to use
+    layout: current layout data
+    dungeon_id: the dungeon to draw the checks for */
+void DrawMissionLocationsInWindow(int idx, char* buffer, struct tracker_location_built_layout *layout, enum dungeon_id dungeon_id) {
     enum dungeon_check_type dct = GetDungeonCheckType(dungeon_id);
     if(DCT_OTHER == dct) {
         return; // Do nothing.
     }
 
+    // Draw the dungeon completion check. If it's a rule dungeon only draw
+    // completion and return.
     struct preprocessor_args preprocessor_args = {};
     bool conquest = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
     preprocessor_args.strings[0] = conquest ? check_symbol_str : locked_symbol_str;
-    PreprocessStringFromId(buffer, TR_BUFF_LEN, DUNGEON_COMPLETED_CHECK_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, DUNGEON_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+    if(DCT_RULE == dct) {
+        return;
+    }
+
+    // Grab the job/outlaw amounts for this dungeon check type.
+    int job_max;
+    int outlaw_max;
+    if(DCT_EARLY == dct) {
+        job_max = newApSettings.nums.totalJobsEarly;
+        outlaw_max = newApSettings.nums.totalOutlawsEarly;
+    } else {
+        job_max = newApSettings.nums.totalJobsLate;
+        outlaw_max = newApSettings.nums.totalOutlawsLate;
+    }
+    // Draw Regular Job Fraction
+    preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[dungeon_id].completedJobs;
+    preprocessor_args.number_vals[1] = job_max;
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, JOBS_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+    // Draw Outlaw Job Fraction
+    preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[dungeon_id].completedOutlaws;
+    preprocessor_args.number_vals[1] = outlaw_max;
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, OUTLAWS_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+}
+
+void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_layout *layout, struct tracker_location* location) {
+    enum tracker_location_type type = location->type;
+    union location_data *location_data = &(location->data);
+    // Fill in string preprocessing data.
+    struct preprocessor_args preprocessor_args = {};
+    int str_to_use = -1;
+    switch(type) {
+        default:
+        case TRACKER_LOCATION_TERMINATOR:
+            return;
+        case TRACKER_LOCATION_CUSTOM: {
+            struct custom_tracker_element *cte = (struct custom_tracker_element*)location_data;
+            void (*element_drawing_func)(int, struct tracker_location_built_layout*) = cte->element_drawing_func;
+            element_drawing_func(idx, layout);
+            return;
+        }
+        case TRACKER_LOCATION_INFO:
+        case TRACKER_LOCATION_BOSS_INFO:
+        case TRACKER_LOCATION_BOSS_DUO_INFO:
+        case TRACKER_LOCATION_ESCORT_INFO:
+        case TRACKER_LOCATION_ESCORT_DUO_INFO: {
+            struct helpful_information *helpful_information = (struct helpful_information*)location_data;
+            preprocessor_args.id_vals[0] = helpful_information->id_0;
+            preprocessor_args.id_vals[1] = helpful_information->id_1;
+            preprocessor_args.number_vals[0] = helpful_information->number;
+            str_to_use = helpful_information->str_id;
+            break;
+        }
+        case TRACKER_LOCATION_NAMED: {
+            struct subx_check *subx_check = (struct subx_check*)location_data;
+            uint8_t subx_bit = subx_check->subx_bit;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            str_to_use = subx_check->str_id;
+            break;
+        }
+        case TRACKER_LOCATION_BANK: {
+            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            uint8_t subx_bit = nsc->subx_bit;
+            preprocessor_args.number_vals[0] = nsc->number;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? money_symbol_str : locked_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_SHOP:
+        case TRACKER_LOCATION_SWAP_SHOP: {
+            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            uint8_t subx_bit = nsc->subx_bit;
+            preprocessor_args.number_vals[0] = nsc->number;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_BAG_UPGRADE: {
+            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            uint8_t subx_bit = nsc->subx_bit;
+            preprocessor_args.number_vals[0] = nsc->number;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? bag_symbol_str : locked_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_RANK:
+        case TRACKER_LOCATION_GIFT:
+        case TRACKER_LOCATION_ITEM: {
+            struct id_subx_check *isc = (struct id_subx_check*)location_data;
+            uint8_t subx_bit = isc->subx_bit;
+            preprocessor_args.id_vals[0] = isc->id;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_SEVEN_TREASURE_MISSION: {
+            struct id_subx_check *isc = (struct id_subx_check*)location_data;
+            uint8_t subx_bit = isc->subx_bit;
+            preprocessor_args.id_vals[0] = isc->id;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? mail_symbol_str : locked_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_DUNGEON_CONQUEST:
+        case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
+        case TRACKER_LOCATION_DOJO_CONQUEST:
+        {
+            struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)location_data;
+            enum dungeon_id dungeon_id = dqc->dungeon;
+            bool completed = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
+            preprocessor_args.id_vals[0] = dungeon_id;
+            preprocessor_args.strings[0] = completed ? complete_symbol_str : locked_symbol_str;
+            break;
+        }
+    }
+
+    switch(type) {
+        default:
+        case TRACKER_LOCATION_TERMINATOR:
+        case TRACKER_LOCATION_CUSTOM:
+            return;
+        case TRACKER_LOCATION_INFO:
+        case TRACKER_LOCATION_BOSS_INFO:
+        case TRACKER_LOCATION_BOSS_DUO_INFO:
+        case TRACKER_LOCATION_ESCORT_INFO:
+        case TRACKER_LOCATION_ESCORT_DUO_INFO:
+        case TRACKER_LOCATION_NAMED:
+            break;
+        case TRACKER_LOCATION_BANK: {
+            str_to_use = BANK_LOCATION_STR_ID;
+            break;
+        }
+        case TRACKER_LOCATION_SHOP:
+            str_to_use = SHOP_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_SWAP_SHOP:
+            str_to_use = TRACKER_FALLBACK_ERROR_STR_ID;
+            break;
+        case TRACKER_LOCATION_BAG_UPGRADE:
+            str_to_use = BAG_UPGRADE_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_RANK:
+            str_to_use = BANK_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_GIFT:
+            str_to_use = GIFT_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_ITEM:
+            str_to_use = ITEM_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_SEVEN_TREASURE_MISSION:
+            str_to_use = SEVEN_TREASURE_MISSION_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_DUNGEON_CONQUEST:
+        case TRACKER_LOCATION_DOJO_CONQUEST:
+            str_to_use = DUNGEON_CONQUEST_LOCATION_STR_ID;
+            break;
+        case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
+            // TODO: Change to use differnt string.
+            str_to_use = DUNGEON_CONQUEST_LOCATION_STR_ID;
+            break;
+    }
+
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, str_to_use, preprocessor_flags_none, &preprocessor_args);
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
 }
 
@@ -390,12 +525,20 @@ void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
     DrawTextInWindow(idx, title_x_start, 2, tracker_prefix_str);
     DrawTextInWindow(idx, title_x_start + width_title_prefix, 2, buffer);
 
-    struct tracker_check_built_layout layout = {.row = 0, .col = 0, .spot_usage = {{0}, {0}}};
+    struct tracker_location_built_layout layout = {.row = 0, .col = 0, .spot_usage = {{0}, {0}}};
     enum dungeon_id dungeon_id = tracker_book[page].dungeon.val;
     if(DUNGEON_NONE != dungeon_id) {
-        DrawMissionChecksInWindow(idx, buffer, &layout, dungeon_id);
+        DrawMissionLocationsInWindow(idx, buffer, &layout, dungeon_id);
     }
 
+    struct tracker_location *locations = tracker_book[page].locations;
+    if(locations == NULL) {
+        return; // This shouldn't be null! Crashing is bad so... just in case.
+    }
+    while(TRACKER_LOCATION_TERMINATOR != locations->type) {
+        DrawLocationInWindow(idx, buffer, &layout, locations);
+        locations++;
+    }
 
     UpdateWindow(idx);
 }
@@ -456,8 +599,8 @@ uint32_t IsReadyTrackerTopScreen() {
     return 1;
 }
 
-// Leftover debug function for top screen stuff maybe? All variants are just abort
-// "bx lr" if not NULL.
+// Leftover debug function for top screen stuff maybe? All variants are just
+// abort "bx lr" if not NULL.
 void DebugTrackerTopScreen() {
     return;
 }
@@ -612,7 +755,7 @@ char *ApTrackerSelectorEntryFn(char *buffer, int option_id) {
     enum tracker_page page = active_page_list[option_id];
     enum dungeon_id dungeon_id = tracker_book[page].dungeon.val;
     char* symbol_prefix_str;
-    if(true == IsPageChecksComplete(page)) {
+    if(true == IsPageLocationsComplete(page)) {
         symbol_prefix_str = complete_symbol_str;
     } else if (DUNGEON_NONE == dungeon_id) {
         symbol_prefix_str = unlocked_symbol_str;
@@ -631,7 +774,7 @@ char *ApTrackerSelectorEntryFn(char *buffer, int option_id) {
                 symbol_prefix_str = unlocked_symbol_str;
                 break;
             case DMODE_OPEN_AND_REQUEST:
-                symbol_prefix_str = incomplete_symbol_str;
+                symbol_prefix_str = mail_symbol_str;
                 break;
         }
     }
