@@ -20,7 +20,7 @@
 #define LAYOUT_ROWS 11
 #define LAYOUT_COLS 2
 #define TRACKER_ROW_TO_Y(row) (row * 13) + 15
-#define PADDING_X 15
+#define PADDING_X 10
 
 // Error Str Ids
 #define TRACKER_FALLBACK_ERROR_STR_ID 15438
@@ -65,8 +65,9 @@
 #define RANK_LOCATION_STR_ID 15479
 #define BAG_UPGRADE_LOCATION_STR_ID 15481
 #define GIFT_LOCATION_STR_ID 15482
-#define ITEM_LOCATION_STR_ID TRACKER_FALLBACK_ERROR_STR_ID
-#define SEVEN_TREASURE_MISSION_LOCATION_STR_ID TRACKER_FALLBACK_ERROR_STR_ID
+#define ITEM_LOCATION_STR_ID 15494
+#define SEVEN_TREASURE_MISSION_LOCATION_STR_ID 15495
+#define SWAP_SHOP_LOCATION_STR_ID TRACKER_FALLBACK_ERROR_STR_ID
 #define DUNGEON_CONQUEST_LOCATION_STR_ID 15483
 
 // Mission/Dungeon Location Str Ids
@@ -292,9 +293,9 @@ struct custom_tracker_element {
 
 struct helpful_information {
     uint16_t str_id;
-    uint16_t id_0;   // Used for string preprocessing if need be.
-    uint16_t id_1;   // Used for string preprocessing if need be.
-    uint16_t number; // Used for string preprocessing if need be.
+    uint16_t flag_0; // Used for string preprocessing if need be.
+    uint16_t flag_1; // Used for string preprocessing if need be.
+    uint16_t id;     // Used for string preprocessing if need be.
 };
 typedef struct helpful_information general_info;
 typedef struct helpful_information boss_info;
@@ -320,15 +321,23 @@ typedef struct numbered_subx_check shop_check;
 typedef struct numbered_subx_check swap_shop_check;
 typedef struct numbered_subx_check bag_upgrade_check;
 
+// flag can be used to replace...
+// [kind:0]
+// in the string preprocessing process
+struct flag_subx_check {
+    uint32_t flag;
+    uint8_t subx_bit;
+};
+typedef struct flag_subx_check gift_check;
+
 // id can be used to replace...
-// [kind:0], [dungeon:0], [item:0], [rank:0]
+// [dungeon:0], [item:0], [rank:0]
 // in the string preprocessing process
 struct id_subx_check {
     uint32_t id; // Used for string preprocessing.
     uint8_t subx_bit;
 };
 typedef struct id_subx_check rank_check;
-typedef struct id_subx_check gift_check;
 typedef struct id_subx_check item_check;
 typedef struct id_subx_check seven_treasure_mission_check;
 
@@ -849,7 +858,7 @@ struct tracker_location habitat_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_MANAPHY,
+            .flag = MONSTER_MANAPHY,
             .subx_bit = 23
         }},
         .is_location_active_func = IsDarkraiGoal
@@ -857,7 +866,7 @@ struct tracker_location habitat_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_CRESSELIA,
+            .flag = MONSTER_CRESSELIA,
             .subx_bit = 45
         }},
         .is_location_active_func = IsDarkraiGoal
@@ -891,7 +900,7 @@ struct tracker_location mt_bristle_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_DROWZEE,
+            .flag_0 = MONSTER_DROWZEE,
         }}
     }
 );
@@ -909,7 +918,7 @@ struct tracker_location bidoof_escort_info[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_BIDOOF,
+            .flag_0 = MONSTER_BIDOOF,
         }}
     }
 );
@@ -925,13 +934,13 @@ struct tracker_location steam_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GROUDON,
+            .flag_0 = MONSTER_GROUDON,
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_UXIE,
+            .flag = MONSTER_UXIE,
             .subx_bit = 25
         }},
         .is_location_active_func = IsDarkraiGoal,
@@ -939,7 +948,7 @@ struct tracker_location steam_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_UXIE,
+            .flag_0 = MONSTER_UXIE,
         }},
         .is_location_active_func = IsDarkraiGoal,
     }
@@ -949,8 +958,8 @@ struct tracker_location amp_plains_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_DUO_INFO,
         .data = {.boss_duo_info = {
-            .id_0 = MONSTER_MANECTRIC,
-            .id_1 = MONSTER_ELECTRIKE,
+            .flag_0 = MONSTER_MANECTRIC,
+            .flag_1 = MONSTER_ELECTRIKE,
         }}
     }
 );
@@ -959,7 +968,7 @@ struct tracker_location quicksand_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_MESPRIT,
+            .flag = MONSTER_MESPRIT,
             .subx_bit = 26
         }},
         .is_location_active_func = IsDarkraiGoal,
@@ -967,7 +976,7 @@ struct tracker_location quicksand_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_MESPRIT,
+            .flag_0 = MONSTER_MESPRIT,
         }},
     }
 );
@@ -976,14 +985,14 @@ struct tracker_location crystal_crossing_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GROVYLE,
+            .flag_0 = MONSTER_GROVYLE,
         }},
     },
     // TODO: Add scripted loss info here?
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_AZELF,
+            .flag = MONSTER_AZELF,
             .subx_bit = 26
         }},
         .is_location_active_func = IsDarkraiGoal,
@@ -991,7 +1000,7 @@ struct tracker_location crystal_crossing_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_AZELF,
+            .flag_0 = MONSTER_AZELF,
         }},
         .is_location_active_func = IsDarkraiGoal,
     }
@@ -1001,7 +1010,7 @@ struct tracker_location sealed_ruin_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_SPIRITOMB,
+            .flag_0 = MONSTER_SPIRITOMB,
         }}
     }
 );
@@ -1010,7 +1019,7 @@ struct tracker_location grovyle_escort_info[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_GROVYLE,
+            .flag_0 = MONSTER_GROVYLE,
         }}
     }
 );
@@ -1019,8 +1028,8 @@ struct tracker_location dusk_forest_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_ESCORT_DUO_INFO,
         .data = {.escort_duo_info = {
-            .id_0 = MONSTER_GROVYLE,
-            .id_1 = MONSTER_CELEBI
+            .flag_0 = MONSTER_GROVYLE,
+            .flag_1 = MONSTER_CELEBI
         }}
     }
 );
@@ -1029,8 +1038,8 @@ struct tracker_location brine_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_DUO_INFO,
         .data = {.boss_duo_info = {
-            .id_0 = MONSTER_KABUTOPS,
-            .id_1 = MONSTER_OMASTAR,
+            .flag_0 = MONSTER_KABUTOPS,
+            .flag_1 = MONSTER_OMASTAR,
         }}
     }
 );
@@ -1040,7 +1049,7 @@ struct tracker_location labyrinth_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GABITE,
+            .flag_0 = MONSTER_GABITE,
         }}
     }
 );
@@ -1065,14 +1074,14 @@ struct tracker_location crevice_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_FROSLASS,
+            .flag = MONSTER_SCIZOR,
             .subx_bit = 47
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_FROSLASS,
+            .flag_0 = MONSTER_FROSLASS,
         }}
     }
 );
@@ -1081,14 +1090,14 @@ struct tracker_location surrounded_sea_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_PHIONE,
+            .flag = MONSTER_PHIONE,
             .subx_bit = 29
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GYARADOS,
+            .flag_0 = MONSTER_GYARADOS,
         }}
     }
 );
@@ -1097,53 +1106,53 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_REGICE,
+            .flag = MONSTER_REGICE,
             .subx_bit = 69
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_REGICE,
+            .flag_0 = MONSTER_REGICE,
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_REGIROCK,
+            .flag = MONSTER_REGIROCK,
             .subx_bit = 70
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_REGIROCK,
+            .flag_0 = MONSTER_REGIROCK,
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_REGISTEEL,
+            .flag = MONSTER_REGISTEEL,
             .subx_bit = 71
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_REGISTEEL,
+            .flag_0 = MONSTER_REGISTEEL,
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_REGIGIGAS,
+            .flag = MONSTER_REGIGIGAS,
             .subx_bit = 72
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_REGIGIGAS,
+            .flag_0 = MONSTER_REGIGIGAS,
         }}
     },
     {
@@ -1200,14 +1209,14 @@ struct tracker_location spacial_rift_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_PALKIA,
+            .flag = MONSTER_PALKIA,
             .subx_bit = 30
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_PALKIA,
+            .flag_0 = MONSTER_PALKIA,
         }}
     }
 );
@@ -1216,14 +1225,14 @@ struct tracker_location bottomless_sea_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_KYOGRE,
+            .flag = MONSTER_KYOGRE,
             .subx_bit = 32
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_KYOGRE,
+            .flag_0 = MONSTER_KYOGRE,
         }}
     },
     {
@@ -1239,14 +1248,14 @@ struct tracker_location shimmer_desert_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_GROUDON,
+            .flag = MONSTER_GROUDON,
             .subx_bit = 34
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GROUDON,
+            .flag_0 = MONSTER_GROUDON,
         }}
     },
     {
@@ -1262,14 +1271,14 @@ struct tracker_location mt_avalanche_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_ARTICUNO,
+            .flag = MONSTER_ARTICUNO,
             .subx_bit = 36
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_ARTICUNO,
+            .flag_0 = MONSTER_ARTICUNO,
         }}
     },
     {
@@ -1285,14 +1294,14 @@ struct tracker_location giant_volcano_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_HEATRAN,
+            .flag = MONSTER_HEATRAN,
             .subx_bit = 38
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_HEATRAN,
+            .flag_0 = MONSTER_HEATRAN,
         }}
     },
     {
@@ -1308,14 +1317,14 @@ struct tracker_location world_abyss_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_GIRATINA_ALTERED,
+            .flag = MONSTER_GIRATINA_ALTERED,
             .subx_bit = 40
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_GIRATINA_ALTERED,
+            .flag_0 = MONSTER_GIRATINA_ALTERED,
         }}
     },
     {
@@ -1331,14 +1340,14 @@ struct tracker_location sky_stairway_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_RAYQUAZA,
+            .flag = MONSTER_RAYQUAZA,
             .subx_bit = 42
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_RAYQUAZA,
+            .flag_0 = MONSTER_RAYQUAZA,
         }}
     },
     {
@@ -1354,14 +1363,14 @@ struct tracker_location mystery_jungle_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_MEW,
+            .flag = MONSTER_MEW,
             .subx_bit = 42
         }}
     },
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_MEW,
+            .flag_0 = MONSTER_MEW,
         }}
     },
     {
@@ -1377,7 +1386,7 @@ struct tracker_location first_station_pass_locations[] = TRACKER_LOCATION_BUNDLE
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }}
     }
 );
@@ -1386,7 +1395,7 @@ struct tracker_location third_station_pass_locations[] = TRACKER_LOCATION_BUNDLE
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }}
     }
 );
@@ -1395,13 +1404,13 @@ struct tracker_location fifth_station_pass_locations[] = TRACKER_LOCATION_BUNDLE
     {
         .type = TRACKER_LOCATION_BOSS_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_CARNIVINE,
+            .flag_0 = MONSTER_CARNIVINE,
         }}
     },
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }},
     }
 );
@@ -1410,7 +1419,7 @@ struct tracker_location seventh_station_pass_locations[] = TRACKER_LOCATION_BUND
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }}
     }
 );
@@ -1426,7 +1435,7 @@ struct tracker_location eighth_station_pass_locations[] = TRACKER_LOCATION_BUNDL
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }},
     }
 );
@@ -1435,7 +1444,7 @@ struct tracker_location ninth_station_pass_locations[] = TRACKER_LOCATION_BUNDLE
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }}
     }
 );
@@ -1444,7 +1453,7 @@ struct tracker_location shaymin_escort_info[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }}
     }
 );
@@ -1453,21 +1462,21 @@ struct tracker_location sky_peak_summit_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BOSS_DUO_INFO,
         .data = {.boss_info = {
-            .id_0 = MONSTER_MUK,
-            .id_1 = MONSTER_GRIMER
+            .flag_0 = MONSTER_MUK,
+            .flag_1 = MONSTER_GRIMER
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
         .data = {.gift_check = {
-            .id = MONSTER_SHAYMIN_LAND,
+            .flag = MONSTER_SHAYMIN_LAND,
             .subx_bit = 46
         }}
     },
     {
         .type = TRACKER_LOCATION_ESCORT_INFO,
         .data = {.escort_info = {
-            .id_0 = MONSTER_SHAYMIN_LAND,
+            .flag_0 = MONSTER_SHAYMIN_LAND,
         }},
     }
 );
@@ -1743,7 +1752,7 @@ struct tracker_page_entry tracker_book[] = {
         .locations = grovyle_escort_info,
     },
     [TRACKER_PAGE_DEEP_DUSK_FOREST] = {
-        .dungeon = {.val = DUNGEON_DUSK_FOREST},
+        .dungeon = {.val = DUNGEON_DEEP_DUSK_FOREST},
         .locations = dusk_forest_locations,
     },
     [TRACKER_PAGE_TREESHROUD_FOREST] = {

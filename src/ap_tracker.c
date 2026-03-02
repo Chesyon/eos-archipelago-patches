@@ -200,9 +200,13 @@ bool IsAllDrinkAndDrinkEventChecksCompleted() {
 }
 
 // Various strings for subbing in symbols in the ap tracker.
-char locked_symbol_str[] = "[M:S4]";
-char complete_symbol_str[] = "[M:S3]";
-char unlocked_symbol_str[] = "[M:R7]";
+char locked_symbol_str[] = "[M:S4][S:8]";
+char complete_symbol_str[] = "[M:S3][S:8]";
+char unlocked_symbol_str[] = "[M:R7][S:8]";
+
+char x_symbol_str[] = "[M:S4]";
+char star_symbol_str[] = "[M:S3]";
+char exclamation_symbol_str[] = "[M:R7]";
 char mail_symbol_str[] = "[M:R4]";
 char check_symbol_str[] = "[M:S2]";
 char instrument_symbol_str[] = "[M:R9]";
@@ -212,7 +216,17 @@ char money_symbol_str[] = "[M:S0]";
 char debug_symbol_str[] = "[M:B32]";
 
 // Utility function to handle drawing circular progression bars in the tracker box.
-void DrawCircleBarInTextBox(signed char idx, int radius, int center_x, int center_y, uint32_t to_get, uint32_t gotten, char* locked_str, char* unlocked_str, int rotation) {
+void DrawCircleBarInTextBox(
+    signed char idx,
+    int radius,
+    int center_x,
+    int center_y,
+    uint32_t to_get,
+    uint32_t gotten,
+    char* locked_str,
+    char* unlocked_str,
+    int rotation
+) {
     if (to_get == 0) {
         return;
     }
@@ -249,7 +263,12 @@ struct window_params tracker_top_screen_window_params = {
     layout: current layout data
     width_max: window max width
     str: the string to draw */
-void DrawStringInNextSlotInWindow(int idx, struct tracker_location_built_layout *layout, int width_max, char* str) {
+void DrawStringInNextSlotInWindow(
+    int idx,
+    struct tracker_location_built_layout *layout,
+    int width_max,
+    char* str
+) {
     int width_str = GetStringWidth(str);
     int row = layout->row;
     int col = layout->col;
@@ -282,7 +301,7 @@ void DrawStringInNextSlotInWindow(int idx, struct tracker_location_built_layout 
 
                 // If the string fits here (sum of widths is under the max).
                 int total_width = width_sum_before + width_sum_after + width_str;
-                if(total_width <= width_max - PADDING_X * (LAYOUT_COLS + 1)) {
+                if(total_width <= width_max - (PADDING_X * 5)/2) { // 2.5x padding
                     layout->spot_usage[x_layout][y_layout] = width_str;
                     int x_draw;
                     if(x_layout == 0) {
@@ -322,7 +341,12 @@ void DrawStringInNextSlotInWindow(int idx, struct tracker_location_built_layout 
     buffer: temp buffer to use
     layout: current layout data
     dungeon_id: the dungeon to draw the checks for */
-void DrawMissionLocationsInWindow(int idx, char* buffer, struct tracker_location_built_layout *layout, enum dungeon_id dungeon_id) {
+void DrawMissionLocationsInWindow(
+    int idx,
+    char* buffer,
+    struct tracker_location_built_layout *layout,
+    enum dungeon_id dungeon_id
+) {
     enum dungeon_check_type dct = GetDungeonCheckType(dungeon_id);
     if(DCT_OTHER == dct) {
         return; // Do nothing.
@@ -332,10 +356,17 @@ void DrawMissionLocationsInWindow(int idx, char* buffer, struct tracker_location
     // completion and return.
     struct preprocessor_args preprocessor_args = {};
     bool conquest = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
-    preprocessor_args.strings[0] = conquest ? check_symbol_str : locked_symbol_str;
-    PreprocessStringFromId(buffer, TR_BUFF_LEN, DUNGEON_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    preprocessor_args.strings[0] = conquest ? check_symbol_str : x_symbol_str;
+    PreprocessStringFromId(
+        buffer,
+        TR_BUFF_LEN,
+        DUNGEON_COMPLETED_LOCATION_STR_ID,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
     if(DCT_RULE == dct) {
+        layout->row++;
         return;
     }
 
@@ -352,28 +383,69 @@ void DrawMissionLocationsInWindow(int idx, char* buffer, struct tracker_location
     // Draw Regular Job Fraction
     preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[dungeon_id].completedJobs;
     preprocessor_args.number_vals[1] = job_max;
-    PreprocessStringFromId(buffer, TR_BUFF_LEN, JOBS_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    PreprocessStringFromId(
+        buffer,
+        TR_BUFF_LEN,
+        JOBS_COMPLETED_LOCATION_STR_ID,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
     // Draw Outlaw Job Fraction
     preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.missionStats[dungeon_id].completedOutlaws;
     preprocessor_args.number_vals[1] = outlaw_max;
-    PreprocessStringFromId(buffer, TR_BUFF_LEN, OUTLAWS_COMPLETED_LOCATION_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    PreprocessStringFromId(
+        buffer,
+        TR_BUFF_LEN,
+        OUTLAWS_COMPLETED_LOCATION_STR_ID,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+    layout->row++;
 }
 
-void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_layout *layout, struct tracker_location* location) {
+uint16_t location_str_id_table[] = {
+    [TRACKER_LOCATION_TERMINATOR] = TRACKER_FALLBACK_ERROR_STR_ID,
+    [TRACKER_LOCATION_INFO] = TRACKER_FALLBACK_ERROR_STR_ID,
+    [TRACKER_LOCATION_BOSS_INFO] = BOSS_INFO_STR_ID,
+    [TRACKER_LOCATION_BOSS_DUO_INFO] = BOSS_DUO_INFO_STR_ID,
+    [TRACKER_LOCATION_ESCORT_INFO] = ESCORT_INFO_STR_ID,
+    [TRACKER_LOCATION_ESCORT_DUO_INFO] = ESCORT_DUO_INFO_STR_ID,
+    [TRACKER_LOCATION_CUSTOM] = TRACKER_FALLBACK_ERROR_STR_ID,
+    [TRACKER_LOCATION_NAMED] = TRACKER_FALLBACK_ERROR_STR_ID,
+    [TRACKER_LOCATION_BANK] = BANK_LOCATION_STR_ID,
+    [TRACKER_LOCATION_SHOP] = SHOP_LOCATION_STR_ID,
+    [TRACKER_LOCATION_SWAP_SHOP] = SWAP_SHOP_LOCATION_STR_ID,
+    [TRACKER_LOCATION_BAG_UPGRADE] = BAG_UPGRADE_LOCATION_STR_ID,
+    [TRACKER_LOCATION_RANK] = RANK_LOCATION_STR_ID,
+    [TRACKER_LOCATION_GIFT] = GIFT_LOCATION_STR_ID,
+    [TRACKER_LOCATION_ITEM] = ITEM_LOCATION_STR_ID,
+    [TRACKER_LOCATION_SEVEN_TREASURE_MISSION] = SEVEN_TREASURE_MISSION_LOCATION_STR_ID,
+    [TRACKER_LOCATION_DUNGEON_CONQUEST] = DUNGEON_CONQUEST_LOCATION_STR_ID,
+    [TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST] = DUNGEON_CONQUEST_LOCATION_STR_ID,
+    [TRACKER_LOCATION_DOJO_CONQUEST] = DUNGEON_CONQUEST_LOCATION_STR_ID,
+};
+
+void DrawLocationInWindow(
+    int idx,
+    char* buffer,
+    struct tracker_location_built_layout *layout,
+    struct tracker_location* location
+) {
     enum tracker_location_type type = location->type;
     union location_data *location_data = &(location->data);
     // Fill in string preprocessing data.
     struct preprocessor_args preprocessor_args = {};
-    int str_to_use = -1;
-    switch(type) {
+    int str_to_use = location_str_id_table[type];
+    switch (type) {
         default:
         case TRACKER_LOCATION_TERMINATOR:
             return;
         case TRACKER_LOCATION_CUSTOM: {
             struct custom_tracker_element *cte = (struct custom_tracker_element*)location_data;
-            void (*element_drawing_func)(int, struct tracker_location_built_layout*) = cte->element_drawing_func;
+            void (*element_drawing_func)(int, struct tracker_location_built_layout*);
+            element_drawing_func = cte->element_drawing_func;
             element_drawing_func(idx, layout);
             return;
         }
@@ -382,17 +454,20 @@ void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_l
         case TRACKER_LOCATION_BOSS_DUO_INFO:
         case TRACKER_LOCATION_ESCORT_INFO:
         case TRACKER_LOCATION_ESCORT_DUO_INFO: {
-            struct helpful_information *helpful_information = (struct helpful_information*)location_data;
-            preprocessor_args.id_vals[0] = helpful_information->id_0;
-            preprocessor_args.id_vals[1] = helpful_information->id_1;
-            preprocessor_args.number_vals[0] = helpful_information->number;
-            str_to_use = helpful_information->str_id;
+            struct helpful_information *helpful_information;
+            helpful_information = (struct helpful_information*)location_data;
+            preprocessor_args.flag_vals[0] = helpful_information->flag_0;
+            preprocessor_args.flag_vals[1] = helpful_information->flag_1;
+            preprocessor_args.id_vals[0] = helpful_information->id;
+            if(0 < helpful_information->str_id) {
+                str_to_use = helpful_information->str_id;
+            }
             break;
         }
         case TRACKER_LOCATION_NAMED: {
             struct subx_check *subx_check = (struct subx_check*)location_data;
             uint8_t subx_bit = subx_check->subx_bit;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             str_to_use = subx_check->str_id;
             break;
         }
@@ -400,7 +475,7 @@ void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_l
             struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? money_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? money_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_SHOP:
@@ -408,30 +483,36 @@ void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_l
             struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_BAG_UPGRADE: {
             struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? bag_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? bag_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_RANK:
-        case TRACKER_LOCATION_GIFT:
         case TRACKER_LOCATION_ITEM: {
             struct id_subx_check *isc = (struct id_subx_check*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             preprocessor_args.id_vals[0] = isc->id;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
+            break;
+        }
+        case TRACKER_LOCATION_GIFT: {
+            struct flag_subx_check *fsc = (struct flag_subx_check*)location_data;
+            uint8_t subx_bit = fsc->subx_bit;
+            preprocessor_args.flag_vals[0] = fsc->flag;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_SEVEN_TREASURE_MISSION: {
             struct id_subx_check *isc = (struct id_subx_check*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             preprocessor_args.id_vals[0] = isc->id;
-            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? mail_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? mail_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_DUNGEON_CONQUEST:
@@ -440,62 +521,47 @@ void DrawLocationInWindow(int idx, char* buffer, struct tracker_location_built_l
         {
             struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)location_data;
             enum dungeon_id dungeon_id = dqc->dungeon;
-            bool completed = LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
+            bool completed = LoadScriptVariableValueAtIndex(
+                NULL,
+                VAR_DUNGEON_CONQUEST_LIST,
+                dungeon_id
+            );
             preprocessor_args.id_vals[0] = dungeon_id;
-            preprocessor_args.strings[0] = completed ? complete_symbol_str : locked_symbol_str;
+            preprocessor_args.strings[0] = completed ? complete_symbol_str : x_symbol_str;
             break;
         }
     }
 
-    switch(type) {
-        default:
-        case TRACKER_LOCATION_TERMINATOR:
-        case TRACKER_LOCATION_CUSTOM:
-            return;
-        case TRACKER_LOCATION_INFO:
-        case TRACKER_LOCATION_BOSS_INFO:
-        case TRACKER_LOCATION_BOSS_DUO_INFO:
-        case TRACKER_LOCATION_ESCORT_INFO:
-        case TRACKER_LOCATION_ESCORT_DUO_INFO:
-        case TRACKER_LOCATION_NAMED:
-            break;
-        case TRACKER_LOCATION_BANK: {
-            str_to_use = BANK_LOCATION_STR_ID;
-            break;
-        }
-        case TRACKER_LOCATION_SHOP:
-            str_to_use = SHOP_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_SWAP_SHOP:
-            str_to_use = TRACKER_FALLBACK_ERROR_STR_ID;
-            break;
-        case TRACKER_LOCATION_BAG_UPGRADE:
-            str_to_use = BAG_UPGRADE_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_RANK:
-            str_to_use = BANK_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_GIFT:
-            str_to_use = GIFT_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_ITEM:
-            str_to_use = ITEM_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_SEVEN_TREASURE_MISSION:
-            str_to_use = SEVEN_TREASURE_MISSION_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_DUNGEON_CONQUEST:
-        case TRACKER_LOCATION_DOJO_CONQUEST:
-            str_to_use = DUNGEON_CONQUEST_LOCATION_STR_ID;
-            break;
-        case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
-            // TODO: Change to use differnt string.
-            str_to_use = DUNGEON_CONQUEST_LOCATION_STR_ID;
-            break;
+    // Special exception to always (attempt) to place boss/escort info
+    // to the rightmost row.
+    int x_layout_current = layout->col;
+    if (
+        type == TRACKER_LOCATION_BOSS_INFO
+        || type == TRACKER_LOCATION_BOSS_DUO_INFO
+        || type == TRACKER_LOCATION_ESCORT_INFO
+        || type == TRACKER_LOCATION_ESCORT_DUO_INFO
+    ) {
+        layout->col = LAYOUT_COLS - 1;
     }
 
-    PreprocessStringFromId(buffer, TR_BUFF_LEN, str_to_use, preprocessor_flags_none, &preprocessor_args);
+    PreprocessStringFromId(
+        buffer,
+        TR_BUFF_LEN,
+        str_to_use,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+
+    // If it was a boss/escort exception, return the 'cursor' to where we are now.
+    if (
+        type == TRACKER_LOCATION_BOSS_INFO
+        || type == TRACKER_LOCATION_BOSS_DUO_INFO
+        || type == TRACKER_LOCATION_ESCORT_INFO
+        || type == TRACKER_LOCATION_ESCORT_DUO_INFO
+    ) {
+        layout->col = x_layout_current;
+    }
 }
 
 char *tracker_prefix_str = "Tracker: ";
@@ -509,7 +575,13 @@ void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
     struct preprocessor_args preprocessor_args = {};
     strncat(buffer, title_color_prefix_str, TR_BUFF_LEN);
     size_t color_prefix_str_len = strlen(buffer);
-    PreprocessStringFromId(buffer + color_prefix_str_len, TR_BUFF_LEN, page_name_str_id, preprocessor_flags_none, &preprocessor_args);
+    PreprocessStringFromId(
+        buffer + color_prefix_str_len,
+        TR_BUFF_LEN,
+        page_name_str_id,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
 
     // Do math to center the title and then draw it.
     // Q: Why do we seperate the prefix 'Tracker: ' and the location name?
@@ -533,6 +605,7 @@ void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
 
     struct tracker_location *locations = tracker_book[page].locations;
     if(locations == NULL) {
+        UpdateWindow(idx);
         return; // This shouldn't be null! Crashing is bad so... just in case.
     }
     while(TRACKER_LOCATION_TERMINATOR != locations->type) {
@@ -823,7 +896,7 @@ void CreateTrackerSelectorMenu() {
         &selector_window_extra_info,
         ApTrackerSelectorEntryFn, 
         active_page_count,
-        8
+        9
     );
 
     if(GetTopScreenOptionType() != 5) {
@@ -910,7 +983,6 @@ void CreateTrackerTopScreenDungeon() {
 }
 
 uint32_t UpdateTrackerTopScreenDungeon() {
-    
     return 1;
 }
 
