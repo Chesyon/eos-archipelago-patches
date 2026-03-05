@@ -35,6 +35,25 @@ typedef struct SomeMenuStruct {
     uint32_t (*update_menu_func)(void);
 } SomeMenuStruct;
 
+// Various strings for subbing in symbols in the ap tracker.
+char locked_symbol_str[] = "[M:S4][S:8]";
+char complete_symbol_str[] = "[M:S3][S:8]";
+char unlocked_symbol_str[] = "[M:R7][S:8]";
+
+char x_symbol_str[] = "[M:S4]";
+char star_symbol_str[] = "[M:S3]";
+char exclamation_symbol_str[] = "[M:R7]";
+char mail_symbol_str[] = "[M:R4]";
+char check_symbol_str[] = "[M:S2]";
+char instrument_symbol_str[] = "[M:R9]";
+char relic_symbol_str[] = "[M:T4]";
+char bag_symbol_str[] = "[M:S6]";
+char money_symbol_str[] = "[M:S0]";
+char debug_symbol_str[] = "[M:B32]";
+
+char fraction_string[] = "[value:0:1]/[value:1:1]";
+
+// Ground Mode Tracker Variables
 TopScreenApTrackerWindow *tracker_window_ptr = NULL;
 void* tracker_ground_mode_bg = NULL;
 struct preprocessor_flags preprocessor_flags_none = {};
@@ -113,19 +132,22 @@ bool IsLocationComplete(struct tracker_location *location) {
             return true;
         case TRACKER_LOCATION_CUSTOM: {
             struct custom_tracker_element *cte = (struct custom_tracker_element*)location_data;
-            bool (*element_checks_complete_func)() = cte->element_locations_complete_func;
-            return element_checks_complete_func();
+            bool (*element_locations_complete_func)() = cte->element_locations_complete_func;
+            if (NULL == element_locations_complete_func) {
+                return true;
+            }
+            return element_locations_complete_func();
         }
         case TRACKER_LOCATION_NAMED: {
-            struct subx_check *subx_check = (struct subx_check*)location_data;
-            uint8_t subx_bit = subx_check->subx_bit;
+            struct subx_location *subx_location = (struct subx_location*)location_data;
+            uint8_t subx_bit = subx_location->subx_bit;
             return GetSubXBit(subx_bit);
         }
         case TRACKER_LOCATION_BANK:
         case TRACKER_LOCATION_SHOP:
         case TRACKER_LOCATION_SWAP_SHOP:
         case TRACKER_LOCATION_BAG_UPGRADE: {
-            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            struct numbered_subx_location *nsc = (struct numbered_subx_location*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             return GetSubXBit(subx_bit);
         }
@@ -133,14 +155,14 @@ bool IsLocationComplete(struct tracker_location *location) {
         case TRACKER_LOCATION_GIFT:
         case TRACKER_LOCATION_ITEM:
         case TRACKER_LOCATION_SEVEN_TREASURE_MISSION: {
-            struct id_subx_check *isc = (struct id_subx_check*)location_data;
+            struct id_subx_location *isc = (struct id_subx_location*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             return GetSubXBit(subx_bit);
         }
         case TRACKER_LOCATION_DUNGEON_CONQUEST:
         case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
         case TRACKER_LOCATION_DOJO_CONQUEST: {
-            struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)location_data;
+            struct dungeon_conquest_location *dqc = (struct dungeon_conquest_location*)location_data;
             enum dungeon_id dungeon_id = dqc->dungeon;
             return LoadScriptVariableValueAtIndex(NULL, VAR_DUNGEON_CONQUEST_LIST, dungeon_id);
         }
@@ -184,38 +206,20 @@ bool IsPageLocationsComplete(enum tracker_page page) {
     return true;
 }
 
-void RecycleShopDungeonCheckDrawer(int idx, struct tracker_location_built_layout *layout) {
-    return;
-}
-bool IsAllRecycleShopDungeonChecksCompleted() {
-    return false;
-}
+/* DrawCircleBarInTextBox
+    Utility function to conveniently handle make a pretty circle progression
+    bar. 
 
-// Handle drink/drink events.
-void DrinkAndDrinkEventCheckDrawer(int idx, struct tracker_location_built_layout *layout) {
-    return;
-}
-bool IsAllDrinkAndDrinkEventChecksCompleted() {
-    return false;
-}
-
-// Various strings for subbing in symbols in the ap tracker.
-char locked_symbol_str[] = "[M:S4][S:8]";
-char complete_symbol_str[] = "[M:S3][S:8]";
-char unlocked_symbol_str[] = "[M:R7][S:8]";
-
-char x_symbol_str[] = "[M:S4]";
-char star_symbol_str[] = "[M:S3]";
-char exclamation_symbol_str[] = "[M:R7]";
-char mail_symbol_str[] = "[M:R4]";
-char check_symbol_str[] = "[M:S2]";
-char instrument_symbol_str[] = "[M:R9]";
-char relic_symbol_str[] = "[M:T4]";
-char bag_symbol_str[] = "[M:S6]";
-char money_symbol_str[] = "[M:S0]";
-char debug_symbol_str[] = "[M:B32]";
-
-// Utility function to handle drawing circular progression bars in the tracker box.
+    idx: Window id
+    radius: Radius of circle
+    center_x: X position of center
+    center_y: Y position of center
+    to_get: Denominator (max of the bar)
+    gotten: Numerator (current fill of bar)
+    locked_str: String to use when not portion is filled
+    unlocked_str: Strong to use when portion is filled
+    rotation: Rotation of circle in box. Can be changed overtime to make the
+              circle appear to spin. */
 void DrawCircleBarInTextBox(
     signed char idx,
     int radius,
@@ -240,6 +244,117 @@ void DrawCircleBarInTextBox(
             DrawTextInWindow(idx, center_x + x, center_y + y, unlocked_str);
         } else {
             DrawTextInWindow(idx, center_x + x, center_y + y, locked_str);
+        }
+    }
+    char buffer[30];
+    struct preprocessor_flags preprocessor_flags = {};
+    struct preprocessor_args preprocessor_args = {};
+    preprocessor_args.number_vals[0] = gotten;
+    preprocessor_args.number_vals[1] = to_get;
+    PreprocessString(buffer, 30, fraction_string, preprocessor_flags, &preprocessor_args);
+    int width = GetStringWidth(buffer);
+    DrawTextInWindow(idx, center_x - width/2, center_y, buffer);
+}
+
+void RecycleShopDungeonLocationDrawer(int idx, struct tracker_location_built_layout *layout) {
+    return;
+}
+bool IsAllRecycleShopDungeonLocationsCompleted() {
+    return false;
+}
+
+// Handle drink/drink events.
+void DrinkAndDrinkEventLocationDrawer(int idx, struct tracker_location_built_layout *layout) {
+    return;
+}
+bool IsAllDrinkAndDrinkEventLocationsCompleted() {
+    return false;
+}
+
+bool ShouldDisplayRelicFragmentShardsForHiddenLand() {
+    if(false == IsDarkraiGoal()) {
+        return true;
+    }
+
+    int current_fragments = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+    int needed_fragments = newApSettings.nums.requiredRelicFragmentShards;
+    if (current_fragments < needed_fragments) {
+        return true;
+    }
+    bool conquested = LoadScriptVariableValueAtIndex(
+        NULL,
+        VAR_DUNGEON_CONQUEST_LIST,
+        DUNGEON_HIDDEN_LAND
+    );
+
+    return conquested == false;
+}
+
+bool ShouldDisplayRelicFragmentShardsForTemporalTower() {
+    if(false == IsDarkraiGoal()) {
+        return true;
+    }
+
+    int current_fragments = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+    int needed_fragments = newApSettings.nums.requiredRelicFragmentShards;
+    if (current_fragments < needed_fragments) {
+        return true;
+    }
+    bool conquested = LoadScriptVariableValueAtIndex(
+        NULL,
+        VAR_DUNGEON_CONQUEST_LIST,
+        DUNGEON_TEMPORAL_TOWER
+    );
+
+    return conquested == false;
+}
+
+void RelicFragmentShardReceivedDrawer(int idx, struct tracker_location_built_layout *layout) {
+    int radius = 60;
+    int x_center = 108;
+    int y_center = 80;
+    int received = CUSTOM_SAVE_AREA.acquiredRelicFragmentShards;
+    int required = newApSettings.nums.requiredRelicFragmentShards;
+    int rotation = slotData.apTrimmedSeed[0] & 0xFFF;
+    DrawCircleBarInTextBox(
+        idx,
+        radius,
+        x_center,
+        y_center,
+        required,
+        received,
+        x_symbol_str,
+        relic_symbol_str,
+        rotation
+    );
+    for(int x = 0; x < LAYOUT_COLS; x++) {
+        for(int y = 0; y < LAYOUT_ROWS; y++) {
+            layout->spot_usage[x][y] = 9999;
+        }
+    }
+}
+
+void InstrumentRecievedDrawer(int idx, struct tracker_location_built_layout *layout) {
+    int radius = 60;
+    int x_center = 108;
+    int y_center = 80;
+    uint32_t received = CUSTOM_SAVE_AREA.acquiredInstruments;
+    uint32_t required = newApSettings.nums.requiredInstruments;
+    int rotation = slotData.apTrimmedSeed[1] & 0xFFF;
+    DrawCircleBarInTextBox(
+        idx,
+        radius,
+        x_center,
+        y_center,
+        required,
+        received,
+        x_symbol_str,
+        instrument_symbol_str,
+        rotation
+    );
+    for(int x = 0; x < LAYOUT_COLS; x++) {
+        for(int y = 0; y < LAYOUT_ROWS; y++) {
+            layout->spot_usage[x][y] = 9999;
         }
     }
 }
@@ -347,8 +462,8 @@ void DrawMissionLocationsInWindow(
     struct tracker_location_built_layout *layout,
     enum dungeon_id dungeon_id
 ) {
-    enum dungeon_check_type dct = GetDungeonCheckType(dungeon_id);
-    if(DCT_OTHER == dct) {
+    enum dungeon_location_type dlt = GetDungeonLocationType(dungeon_id);
+    if(DCT_OTHER == dlt) {
         return; // Do nothing.
     }
 
@@ -365,7 +480,7 @@ void DrawMissionLocationsInWindow(
         &preprocessor_args
     );
     DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
-    if(DCT_RULE == dct) {
+    if(DCT_RULE == dlt) {
         layout->row++;
         return;
     }
@@ -373,7 +488,7 @@ void DrawMissionLocationsInWindow(
     // Grab the job/outlaw amounts for this dungeon check type.
     int job_max;
     int outlaw_max;
-    if(DCT_EARLY == dct) {
+    if(DCT_EARLY == dlt) {
         job_max = newApSettings.nums.totalJobsEarly;
         outlaw_max = newApSettings.nums.totalOutlawsEarly;
     } else {
@@ -446,6 +561,9 @@ void DrawLocationInWindow(
             struct custom_tracker_element *cte = (struct custom_tracker_element*)location_data;
             void (*element_drawing_func)(int, struct tracker_location_built_layout*);
             element_drawing_func = cte->element_drawing_func;
+            if(NULL == element_drawing_func) {
+                return;
+            }
             element_drawing_func(idx, layout);
             return;
         }
@@ -465,14 +583,14 @@ void DrawLocationInWindow(
             break;
         }
         case TRACKER_LOCATION_NAMED: {
-            struct subx_check *subx_check = (struct subx_check*)location_data;
-            uint8_t subx_bit = subx_check->subx_bit;
+            struct subx_location *subx_location = (struct subx_location*)location_data;
+            uint8_t subx_bit = subx_location->subx_bit;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
-            str_to_use = subx_check->str_id;
+            str_to_use = subx_location->str_id;
             break;
         }
         case TRACKER_LOCATION_BANK: {
-            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            struct numbered_subx_location *nsc = (struct numbered_subx_location*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? money_symbol_str : x_symbol_str;
@@ -480,14 +598,14 @@ void DrawLocationInWindow(
         }
         case TRACKER_LOCATION_SHOP:
         case TRACKER_LOCATION_SWAP_SHOP: {
-            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            struct numbered_subx_location *nsc = (struct numbered_subx_location*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_BAG_UPGRADE: {
-            struct numbered_subx_check *nsc = (struct numbered_subx_check*)location_data;
+            struct numbered_subx_location *nsc = (struct numbered_subx_location*)location_data;
             uint8_t subx_bit = nsc->subx_bit;
             preprocessor_args.number_vals[0] = nsc->number;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? bag_symbol_str : x_symbol_str;
@@ -495,21 +613,21 @@ void DrawLocationInWindow(
         }
         case TRACKER_LOCATION_RANK:
         case TRACKER_LOCATION_ITEM: {
-            struct id_subx_check *isc = (struct id_subx_check*)location_data;
+            struct id_subx_location *isc = (struct id_subx_location*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             preprocessor_args.id_vals[0] = isc->id;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_GIFT: {
-            struct flag_subx_check *fsc = (struct flag_subx_check*)location_data;
+            struct flag_subx_location *fsc = (struct flag_subx_location*)location_data;
             uint8_t subx_bit = fsc->subx_bit;
             preprocessor_args.flag_vals[0] = fsc->flag;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? check_symbol_str : x_symbol_str;
             break;
         }
         case TRACKER_LOCATION_SEVEN_TREASURE_MISSION: {
-            struct id_subx_check *isc = (struct id_subx_check*)location_data;
+            struct id_subx_location *isc = (struct id_subx_location*)location_data;
             uint8_t subx_bit = isc->subx_bit;
             preprocessor_args.id_vals[0] = isc->id;
             preprocessor_args.strings[0] = GetSubXBit(subx_bit) ? mail_symbol_str : x_symbol_str;
@@ -519,7 +637,7 @@ void DrawLocationInWindow(
         case TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST:
         case TRACKER_LOCATION_DOJO_CONQUEST:
         {
-            struct dungeon_conquest_check *dqc = (struct dungeon_conquest_check*)location_data;
+            struct dungeon_conquest_location *dqc = (struct dungeon_conquest_location*)location_data;
             enum dungeon_id dungeon_id = dqc->dungeon;
             bool completed = LoadScriptVariableValueAtIndex(
                 NULL,
@@ -569,6 +687,9 @@ char *title_color_prefix_str = "[CS:P]";
 char *title_color_suffix_str = "[CR]";
 void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
     ClearWindow(idx);
+    if(TRACKER_BOOK_PAGE_COUNT <= page) {
+        return; // Don't draw error pages.
+    }
     char buffer[TR_BUFF_LEN];
     buffer[0] = '\0';
     uint16_t page_name_str_id = GetPageStrId(page);
@@ -599,7 +720,10 @@ void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
 
     struct tracker_location_built_layout layout = {.row = 0, .col = 0, .spot_usage = {{0}, {0}}};
     enum dungeon_id dungeon_id = tracker_book[page].dungeon.val;
-    if(DUNGEON_NONE != dungeon_id) {
+    bool delay_mission_draw = (DUNGEON_TEMPORAL_TOWER == dungeon_id);
+    delay_mission_draw = delay_mission_draw || (DUNGEON_HIDDEN_LAND == dungeon_id);
+    delay_mission_draw = delay_mission_draw || (DUNGEON_DARK_CRATER == dungeon_id);
+    if(DUNGEON_NONE != dungeon_id && false == delay_mission_draw) {
         DrawMissionLocationsInWindow(idx, buffer, &layout, dungeon_id);
     }
 
@@ -611,6 +735,10 @@ void DrawTrackerPageInWindow(int idx, enum tracker_page page) {
     while(TRACKER_LOCATION_TERMINATOR != locations->type) {
         DrawLocationInWindow(idx, buffer, &layout, locations);
         locations++;
+    }
+
+    if(delay_mission_draw) {
+        DrawMissionLocationsInWindow(idx, buffer, &layout, dungeon_id);
     }
 
     UpdateWindow(idx);
@@ -965,6 +1093,7 @@ void CreateTrackerTopScreenDungeon() {
     SetupBackgroundDungeon(&(TOP_SCREEN_STATUS_PTR->field107_0x80));
     enum dungeon_group_id dun_group = GetDungeonGroup(DUNGEON_PTR->id.val);
     enum dungeon_id base_dungeon_id = DUNGEON_PTR->id.val;
+    dungeon_mode_page = TRACKER_PAGE_ERROR;
     for(int i = 0; i < 255; i++) {
         if(GetDungeonGroup(i) == dun_group) {
             base_dungeon_id = i;
@@ -974,7 +1103,7 @@ void CreateTrackerTopScreenDungeon() {
 
     for(enum tracker_page p = 0; p < TRACKER_BOOK_PAGE_COUNT; p++) {
         if(tracker_book[p].dungeon.val == base_dungeon_id) {
-            dungeon_mode_page = TRACKER_PAGE_ERROR;
+            dungeon_mode_page = p;
         }
     }
 

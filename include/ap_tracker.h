@@ -49,6 +49,7 @@
 #define IGGLYBUFF_SE_LOC_LOCATION_STR_ID 15465
 #define SUNFLORA_SE_LOC_LOCATION_STR_ID 15466
 #define TEAM_CHARM_SE_LOC_LOCATION_STR_ID 15467
+#define INTO_THE_FUTURE_OF_DARKNESS_SE_LOCATION_STR_ID 15508
 #define CONQUEST_ALL_DOJO_LOCATION_STR_ID 15469
 #define GRANDPAS_TREASURE_LOCATION_STR_ID 15470
 #define RECYCLE_SHOP_TREASURE_LOCATION_STR_ID 15471
@@ -202,9 +203,9 @@ enum tracker_page ground_mode_opened_page = TRACKER_PAGE_ERROR;
     information related to checks.) 
     If a check has a unique named and is not part of a set
     ie: (Shop Item #1, Shop Item #2, etc) it should use
-    TRACKER_LOCATION_NAMED (enum) and named_check (type).
+    TRACKER_LOCATION_NAMED (enum) and named_location (type).
     Otherwise, use one of the corresponding enums and the
-    matching type. ie: (TRACKER_LOCATION_BANK & bank_check).
+    matching type. ie: (TRACKER_LOCATION_BANK & bank_location).
     If the checks are part of a set that doesn't currently
     exist, feel free to add a new kind of tracker_location_type
     corresponding location_data for it into the union. */
@@ -303,55 +304,55 @@ typedef struct helpful_information boss_duo_info;
 typedef struct helpful_information escort_info;
 typedef struct helpful_information escort_duo_info;
 
-struct subx_check {
+struct subx_location {
     uint16_t str_id;
     uint8_t subx_bit;
 };
-typedef struct subx_check named_check;
+typedef struct subx_location named_location;
 
 // number can be used to replace...
 // [value:0]
 // in the string preprocessing process
-struct numbered_subx_check {
+struct numbered_subx_location {
     uint32_t number; // Used for string preprocessing.
     uint8_t subx_bit;
 };
-typedef struct numbered_subx_check bank_check;
-typedef struct numbered_subx_check shop_check;
-typedef struct numbered_subx_check swap_shop_check;
-typedef struct numbered_subx_check bag_upgrade_check;
+typedef struct numbered_subx_location bank_location;
+typedef struct numbered_subx_location shop_location;
+typedef struct numbered_subx_location swap_shop_location;
+typedef struct numbered_subx_location bag_upgrade_location;
 
 // flag can be used to replace...
 // [kind:0]
 // in the string preprocessing process
-struct flag_subx_check {
+struct flag_subx_location {
     uint32_t flag;
     uint8_t subx_bit;
 };
-typedef struct flag_subx_check gift_check;
+typedef struct flag_subx_location gift_location;
 
 // id can be used to replace...
 // [dungeon:0], [item:0], [rank:0]
 // in the string preprocessing process
-struct id_subx_check {
+struct id_subx_location {
     uint32_t id; // Used for string preprocessing.
     uint8_t subx_bit;
 };
-typedef struct id_subx_check rank_check;
-typedef struct id_subx_check item_check;
-typedef struct id_subx_check seven_treasure_mission_check;
+typedef struct id_subx_location rank_location;
+typedef struct id_subx_location item_location;
+typedef struct id_subx_location seven_treasure_mission_location;
 
 // Note: In game, there is no difference between a
-// dungeon_conquest_check, dojo_conquest_check, and
-// special_episode_dungeon_conquest_check. They are
+// dungeon_conquest_location, dojo_conquest_location, and
+// special_episode_dungeon_conquest_location. They are
 // only made different in the tracker_book so it is
 // readily apparent which its meant to be.
-struct dungeon_conquest_check {
+struct dungeon_conquest_location {
     enum dungeon_id dungeon;
 };
-typedef struct dungeon_conquest_check dungeon_conquest_check;
-typedef struct dungeon_conquest_check special_episode_dungeon_conquest_check;
-typedef struct dungeon_conquest_check dojo_conquest_check;
+typedef struct dungeon_conquest_location dungeon_conquest_location;
+typedef struct dungeon_conquest_location special_episode_dungeon_conquest_location;
+typedef struct dungeon_conquest_location dojo_conquest_location;
 
 union location_data {
     // Note: custom_tracker_elements should be used WISELY.
@@ -361,17 +362,17 @@ union location_data {
     boss_duo_info boss_duo_info;
     escort_info escort_info;
     escort_duo_info escort_duo_info;
-    named_check named_check;
-    bank_check bank_check;
-    shop_check shop_check;
-    bag_upgrade_check bag_upgrade_check;
-    rank_check rank_check;
-    gift_check gift_check;
-    item_check item_check;
-    seven_treasure_mission_check seven_treasure_mission_check;
-    dungeon_conquest_check dungeon_conquest_check;
-    dojo_conquest_check dojo_conquest_check;
-    special_episode_dungeon_conquest_check special_episode_dungeon_conquest_check;
+    named_location named_location;
+    bank_location bank_location;
+    shop_location shop_location;
+    bag_upgrade_location bag_upgrade_location;
+    rank_location rank_location;
+    gift_location gift_location;
+    item_location item_location;
+    seven_treasure_mission_location seven_treasure_mission_location;
+    dungeon_conquest_location dungeon_conquest_location;
+    dojo_conquest_location dojo_conquest_location;
+    special_episode_dungeon_conquest_location special_episode_dungeon_conquest_location;
 };
 
 /* tracker_page_entry
@@ -410,12 +411,20 @@ struct tracker_page_entry {
 };
 
 // Handle recycle shop dungeon checks.
-void RecycleShopDungeonCheckDrawer(int idx, struct tracker_location_built_layout *layout);
-bool IsAllRecycleShopDungeonChecksCompleted();
+void RecycleShopDungeonLocationDrawer(int idx, struct tracker_location_built_layout *layout);
+bool IsAllRecycleShopDungeonLocationsCompleted();
 
 // Handle drink/drink events.
-void DrinkAndDrinkEventCheckDrawer(int idx, struct tracker_location_built_layout *layout);
-bool IsAllDrinkAndDrinkEventChecksCompleted();
+void DrinkAndDrinkEventLocationDrawer(int idx, struct tracker_location_built_layout *layout);
+bool IsAllDrinkAndDrinkEventLocationsCompleted();
+
+// Handle the circle for Temporal Tower / Hidden Land.
+void RelicFragmentShardReceivedDrawer(int idx, struct tracker_location_built_layout *layout);
+bool ShouldDisplayRelicFragmentShardsForHiddenLand();
+bool ShouldDisplayRelicFragmentShardsForTemporalTower();
+
+// Handle the circle for Dark Crater.
+void InstrumentRecievedDrawer(int idx, struct tracker_location_built_layout *layout);
 
 // TODO: Display current shop listings.
 
@@ -427,73 +436,112 @@ bool IsAllDrinkAndDrinkEventChecksCompleted();
 
 struct tracker_location empty_location = {.type = TRACKER_LOCATION_TERMINATOR};
 
+struct tracker_location hidden_land_locations[] = TRACKER_LOCATION_BUNDLE(
+    {
+        .type = TRACKER_LOCATION_CUSTOM,
+        .data = {.custom_tracker_element = {
+            .element_drawing_func = RelicFragmentShardReceivedDrawer,
+            .element_locations_complete_func = NULL,
+        }},
+        .is_location_active_func = ShouldDisplayRelicFragmentShardsForHiddenLand
+    },
+    {
+        .type = TRACKER_LOCATION_NAMED,
+        .data = {.named_location = {
+            .str_id = INTO_THE_FUTURE_OF_DARKNESS_SE_LOCATION_STR_ID,
+            .subx_bit = 9
+        }}
+    }
+);
+
+struct tracker_location temporal_tower_locations[] = TRACKER_LOCATION_BUNDLE(
+    {
+        .type = TRACKER_LOCATION_CUSTOM,
+        .data = {.custom_tracker_element = {
+            .element_drawing_func = RelicFragmentShardReceivedDrawer,
+            .element_locations_complete_func = NULL,
+        }},
+        .is_location_active_func = ShouldDisplayRelicFragmentShardsForTemporalTower
+    }
+);
+
+struct tracker_location dark_crater_locations[] = TRACKER_LOCATION_BUNDLE(
+    {
+        .type = TRACKER_LOCATION_CUSTOM,
+        .data = {.custom_tracker_element = {
+            .element_drawing_func = InstrumentRecievedDrawer,
+            .element_locations_complete_func = NULL,
+        }}
+    }
+);
+
 struct tracker_location shop_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 1,
              .subx_bit = 10
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 2,
              .subx_bit = 11
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 3,
              .subx_bit = 12
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 4,
              .subx_bit = 13
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 5,
              .subx_bit = 14
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 6,
              .subx_bit = 15
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 7,
              .subx_bit = 16
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 8,
              .subx_bit = 17
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 9,
              .subx_bit = 18
         }}
     },
     {
         .type = TRACKER_LOCATION_SHOP,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 10,
              .subx_bit = 19
         }}
@@ -503,49 +551,49 @@ struct tracker_location shop_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location bank_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 100,
              .subx_bit = 81
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 5000,
              .subx_bit = 82
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 10000,
              .subx_bit = 83
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 20000,
              .subx_bit = 84
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 50000,
              .subx_bit = 85
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 100000,
              .subx_bit = 86
         }}
     },
     {
         .type = TRACKER_LOCATION_BANK,
-        .data = {.shop_check = {
+        .data = {.shop_location = {
              .number = 9999999,
              .subx_bit = 87
         }}
@@ -556,63 +604,63 @@ struct tracker_location bank_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location rank_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_BRONZE,
             .subx_bit = 73
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_SILVER,
             .subx_bit = 74
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_GOLD,
             .subx_bit = 75
         }}  
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_DIAMOND,
             .subx_bit = 76
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_SUPER,
             .subx_bit = 77
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_ULTRA,
             .subx_bit = 78
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_HYPER,
             .subx_bit = 79
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_MASTER,
             .subx_bit = 80
         }}
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_MASTER_1_STAR,
             .subx_bit = 55
         }},
@@ -620,7 +668,7 @@ struct tracker_location rank_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_MASTER_2_STARS,
             .subx_bit = 56
         }},
@@ -628,7 +676,7 @@ struct tracker_location rank_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_MASTER_3_STARS,
             .subx_bit = 57
         }},
@@ -636,7 +684,7 @@ struct tracker_location rank_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_RANK,
-        .data = {.rank_check = {
+        .data = {.rank_location = {
             .id = RANK_GUILDMASTER,
             .subx_bit = 58
         }},
@@ -648,35 +696,35 @@ struct tracker_location rank_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location guild_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = BIDOOF_SE_LOC_LOCATION_STR_ID,
             .subx_bit = 5
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = IGGLYBUFF_SE_LOC_LOCATION_STR_ID,
             .subx_bit = 6
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = SUNFLORA_SE_LOC_LOCATION_STR_ID,
             .subx_bit = 7
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = TEAM_CHARM_SE_LOC_LOCATION_STR_ID,
             .subx_bit = 8
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = BLUE_GOOMI_1_LOCATION_STR_ID,
             .subx_bit = 20
         }},
@@ -687,80 +735,80 @@ struct tracker_location guild_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location dojo_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_NORMAL_FLY_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_DARK_FIRE_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_ROCK_WATER_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_GRASS_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_ELEC_STEEL_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_ICE_GROUND_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_FIGHT_PSYCH_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_POISON_BUG_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_DRAGON_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_GHOST_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_DOJO_CONQUEST,
-        .data = {.dojo_conquest_check = {
+        .data = {.dojo_conquest_location = {
             .dungeon = DUNGEON_FINAL_MAZE
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = CONQUEST_ALL_DOJO_LOCATION_STR_ID, 
             .subx_bit = 67
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = GRANDPAS_TREASURE_LOCATION_STR_ID,
             .subx_bit = 68
         }}
@@ -770,63 +818,63 @@ struct tracker_location dojo_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location cafe_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_AQUA_MONICA,
             .subx_bit = 48
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_TERRA_CYMBAL,
             .subx_bit = 49
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_ICY_FLUTE,
             .subx_bit = 50
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_FIERY_DRUM,
             .subx_bit = 51
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_ROCK_HORN,
             .subx_bit = 52
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_SKY_MELODICA,
             .subx_bit = 53
         }}
     },
     {
         .type = TRACKER_LOCATION_SEVEN_TREASURE_MISSION,
-        .data = {.seven_treasure_mission_check = {
+        .data = {.seven_treasure_mission_location = {
             .id = ITEM_GRASS_CORNET,
             .subx_bit = 54
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = RECYCLE_SHOP_TREASURE_LOCATION_STR_ID,
             .subx_bit = 59
         }}
     },
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = LUDICOLO_DANCE_LOCATION_STR_ID,
             .subx_bit = 88
         }}
@@ -834,15 +882,15 @@ struct tracker_location cafe_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_CUSTOM,
         .data = {.custom_tracker_element = {
-            .element_drawing_func = DrinkAndDrinkEventCheckDrawer,
-            .element_locations_complete_func = IsAllDrinkAndDrinkEventChecksCompleted
+            .element_drawing_func = DrinkAndDrinkEventLocationDrawer,
+            .element_locations_complete_func = IsAllDrinkAndDrinkEventLocationsCompleted
         }}
     },
     {
         .type = TRACKER_LOCATION_CUSTOM,
         .data = {.custom_tracker_element = {
-            .element_drawing_func = RecycleShopDungeonCheckDrawer,
-            .element_locations_complete_func = IsAllRecycleShopDungeonChecksCompleted
+            .element_drawing_func = RecycleShopDungeonLocationDrawer,
+            .element_locations_complete_func = IsAllRecycleShopDungeonLocationsCompleted
         }}
     }
 );
@@ -850,14 +898,14 @@ struct tracker_location cafe_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location habitat_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = BLUE_GOOMI_2_LOCATION_STR_ID,
             .subx_bit = 21
         }}
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_MANAPHY,
             .subx_bit = 23
         }},
@@ -865,7 +913,7 @@ struct tracker_location habitat_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_CRESSELIA,
             .subx_bit = 45
         }},
@@ -876,24 +924,30 @@ struct tracker_location habitat_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location beach_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = TEAM_NAME_LOCATION_STR_ID,
             .subx_bit = 127
         }}
     },
     {
+        .type = TRACKER_LOCATION_BOSS_DUO_INFO,
+        .data = {.boss_duo_info = {
+            .flag_0 = MONSTER_ZUBAT,
+            .flag_1 = MONSTER_KOFFING,
+        }}
+    },
+    {
         .type = TRACKER_LOCATION_BAG_UPGRADE,
-        .data = {.bag_upgrade_check = {
+        .data = {.bag_upgrade_location = {
              .number = 1, .subx_bit = 0,
         }}
     }
 );
-// TODO: Add starting information.
 
 struct tracker_location mt_bristle_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BAG_UPGRADE,
-        .data = {.bag_upgrade_check = {
+        .data = {.bag_upgrade_location = {
             .number = 2, .subx_bit = 1,
         }}
     },
@@ -908,7 +962,7 @@ struct tracker_location mt_bristle_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location apple_woods_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BAG_UPGRADE,
-        .data = {.bag_upgrade_check = {
+        .data = {.bag_upgrade_location = {
             .number = 3, .subx_bit = 2
         }}
     }
@@ -926,7 +980,7 @@ struct tracker_location bidoof_escort_info[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location steam_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_BAG_UPGRADE,
-        .data = {.bag_upgrade_check = {
+        .data = {.bag_upgrade_location = {
             .number = 4,
             .subx_bit = 3
         }}
@@ -939,7 +993,7 @@ struct tracker_location steam_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_UXIE,
             .subx_bit = 25
         }},
@@ -967,7 +1021,7 @@ struct tracker_location amp_plains_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location quicksand_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_MESPRIT,
             .subx_bit = 26
         }},
@@ -991,7 +1045,7 @@ struct tracker_location crystal_crossing_locations[] = TRACKER_LOCATION_BUNDLE(
     // TODO: Add scripted loss info here?
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_AZELF,
             .subx_bit = 26
         }},
@@ -1063,7 +1117,7 @@ struct tracker_location mystifying_forest_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_BAG_UPGRADE,
-        .data = {.bag_upgrade_check = {
+        .data = {.bag_upgrade_location = {
             .number = 5,
             .subx_bit = 4,
         }}
@@ -1073,7 +1127,7 @@ struct tracker_location mystifying_forest_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location crevice_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_SCIZOR,
             .subx_bit = 47
         }}
@@ -1089,7 +1143,7 @@ struct tracker_location crevice_cave_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location surrounded_sea_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_PHIONE,
             .subx_bit = 29
         }}
@@ -1105,7 +1159,7 @@ struct tracker_location surrounded_sea_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_REGICE,
             .subx_bit = 69
         }}
@@ -1118,7 +1172,7 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_REGIROCK,
             .subx_bit = 70
         }}
@@ -1131,7 +1185,7 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_REGISTEEL,
             .subx_bit = 71
         }}
@@ -1144,7 +1198,7 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_REGIGIGAS,
             .subx_bit = 72
         }}
@@ -1157,49 +1211,49 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_ICE_AEGIS_CAVE,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_REGICE_CHAMBER,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_ROCK_AEGIS_CAVE,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_REGIROCK_CHAMBER,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_STEEL_AEGIS_CAVE,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_REGISTEEL_CHAMBER,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_AEGIS_CAVE_PIT,
         }}
     },
     {
         .type = TRACKER_LOCATION_DUNGEON_CONQUEST,
-        .data = {.dungeon_conquest_check = {
+        .data = {.dungeon_conquest_location = {
             .dungeon = DUNGEON_REGIGIGAS_CHAMBER,
         }}
     }
@@ -1208,7 +1262,7 @@ struct tracker_location aegis_cave_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location spacial_rift_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_PALKIA,
             .subx_bit = 30
         }}
@@ -1224,7 +1278,7 @@ struct tracker_location spacial_rift_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location bottomless_sea_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_KYOGRE,
             .subx_bit = 32
         }}
@@ -1237,7 +1291,7 @@ struct tracker_location bottomless_sea_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_AQUA_MONICA,
             .subx_bit = 31
         }}
@@ -1247,7 +1301,7 @@ struct tracker_location bottomless_sea_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location shimmer_desert_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_GROUDON,
             .subx_bit = 34
         }}
@@ -1260,7 +1314,7 @@ struct tracker_location shimmer_desert_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_TERRA_CYMBAL,
             .subx_bit = 33
         }}
@@ -1270,7 +1324,7 @@ struct tracker_location shimmer_desert_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location mt_avalanche_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_ARTICUNO,
             .subx_bit = 36
         }}
@@ -1283,7 +1337,7 @@ struct tracker_location mt_avalanche_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_ICY_FLUTE,
             .subx_bit = 35
         }}
@@ -1293,7 +1347,7 @@ struct tracker_location mt_avalanche_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location giant_volcano_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_HEATRAN,
             .subx_bit = 38
         }}
@@ -1306,7 +1360,7 @@ struct tracker_location giant_volcano_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_FIERY_DRUM,
             .subx_bit = 37
         }}
@@ -1316,7 +1370,7 @@ struct tracker_location giant_volcano_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location world_abyss_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_GIRATINA_ALTERED,
             .subx_bit = 40
         }}
@@ -1329,7 +1383,7 @@ struct tracker_location world_abyss_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_FIERY_DRUM,
             .subx_bit = 39
         }}
@@ -1339,7 +1393,7 @@ struct tracker_location world_abyss_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location sky_stairway_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_RAYQUAZA,
             .subx_bit = 42
         }}
@@ -1352,7 +1406,7 @@ struct tracker_location sky_stairway_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_SKY_MELODICA,
             .subx_bit = 41
         }}
@@ -1362,7 +1416,7 @@ struct tracker_location sky_stairway_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location mystery_jungle_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_MEW,
             .subx_bit = 42
         }}
@@ -1375,7 +1429,7 @@ struct tracker_location mystery_jungle_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_ITEM,
-        .data = {.item_check = {
+        .data = {.item_location = {
             .id = ITEM_GRASS_CORNET,
             .subx_bit = 41
         }}
@@ -1427,7 +1481,7 @@ struct tracker_location seventh_station_pass_locations[] = TRACKER_LOCATION_BUND
 struct tracker_location eighth_station_pass_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = SNEASELS_GRATITUDE_LOCATION_STR_ID,
             .subx_bit = 65
         }}
@@ -1468,7 +1522,7 @@ struct tracker_location sky_peak_summit_locations[] = TRACKER_LOCATION_BUNDLE(
     },
     {
         .type = TRACKER_LOCATION_GIFT,
-        .data = {.gift_check = {
+        .data = {.gift_location = {
             .flag = MONSTER_SHAYMIN_LAND,
             .subx_bit = 46
         }}
@@ -1484,20 +1538,20 @@ struct tracker_location sky_peak_summit_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location se_bidoofs_wish_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_NAMED,
-        .data = {.named_check = {
+        .data = {.named_location = {
             .str_id = SE_MAROWAK_DOJO_REVIVAL_LOCATION_STR_ID,
             .subx_bit = 66,
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_DEEP_STAR_CAVE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_STAR_CAVE_PIT
         }}
     }
@@ -1506,19 +1560,19 @@ struct tracker_location se_bidoofs_wish_locations[] = TRACKER_LOCATION_BUNDLE(
 struct tracker_location se_igglybuff_the_prodigy_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_MURKY_FOREST
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_EASTERN_CAVE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_FORTUNE_RAVINE_PIT
         }}
     }
@@ -1527,19 +1581,19 @@ struct tracker_location se_igglybuff_the_prodigy_locations[] = TRACKER_LOCATION_
 struct tracker_location se_todays_oh_my_gosh_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_UPPER_SPRING_CAVE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_MIDDLE_SPRING_CAVE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_SPRING_CAVE_PIT
         }}
     }
@@ -1548,31 +1602,31 @@ struct tracker_location se_todays_oh_my_gosh_locations[] = TRACKER_LOCATION_BUND
 struct tracker_location se_here_comes_team_charm_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_SOUTHERN_JUNGLE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_BOULDER_QUARRY_CLEARING
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_RIGHT_CAVE_PATH
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_LEFT_CAVE_PATH
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_LIMESTONE_CAVERN_DEPTHS
         }}
     }
@@ -1581,49 +1635,49 @@ struct tracker_location se_here_comes_team_charm_locations[] = TRACKER_LOCATION_
 struct tracker_location se_into_the_future_of_darkness_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_BARREN_VALLEY_CLEARING
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_DARK_WASTELAND
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_TEMPORAL_SPIRE_SE5
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_BLACK_SWAMP
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_SPACIAL_CLIFFS
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_DARK_ICE_MOUNTAIN_PINNACLE
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_ICICLE_FOREST
         }}
     },
     {
         .type = TRACKER_LOCATION_SPECIAL_EPISODE_DUNGEON_CONQUEST,
-        .data = {.special_episode_dungeon_conquest_check = {
+        .data = {.special_episode_dungeon_conquest_location = {
             .dungeon = DUNGEON_VAST_ICE_MOUNTAIN_PINNACLE
         }}
     }
@@ -1791,13 +1845,13 @@ struct tracker_page_entry tracker_book[] = {
         .dungeon = {.val = DUNGEON_STAR_CAVE},
         .locations = &empty_location,
     },
-    [TRACKER_PAGE_HIDDEN_LAND] = { // TODO
+    [TRACKER_PAGE_HIDDEN_LAND] = {
         .dungeon = {.val = DUNGEON_HIDDEN_LAND},
-        .locations = &empty_location,
+        .locations = hidden_land_locations,
     },
-    [TRACKER_PAGE_TEMPORAL_TOWER] = { // TODO
+    [TRACKER_PAGE_TEMPORAL_TOWER] = {
         .dungeon = {.val = DUNGEON_TEMPORAL_TOWER},
-        .locations = &empty_location,
+        .locations = temporal_tower_locations,
     },
     [TRACKER_PAGE_MYSTIFYING_FOREST] = {
         .dungeon = {.val = DUNGEON_MYSTIFYING_FOREST},
@@ -2025,9 +2079,10 @@ struct tracker_page_entry tracker_book[] = {
         .is_page_active_func = AreLongLocationsOn,
         .locations = &empty_location,
     },
-    [TRACKER_PAGE_DARK_CRATER] = { // TODO
+    [TRACKER_PAGE_DARK_CRATER] = {
         .dungeon = {.val = DUNGEON_DARK_CRATER},
         .is_page_active_func = IsDarkraiGoal,
+        .locations = dark_crater_locations
     },
     [TRACKER_PAGE_SE_BIDOOFS_WISH] = {
         .name_str_id = BIDOOF_SE_STR_ID,

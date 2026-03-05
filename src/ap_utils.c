@@ -8,7 +8,7 @@
 #define GOAL_DIALGA 1
 #define GOAL_DARKRAI 0
 
-enum dungeon_check_type GetDungeonCheckType(short dungeon_id) {
+enum dungeon_location_type GetDungeonLocationType(short dungeon_id) {
     if (newApSettings.nums.goal == GOAL_DIALGA) {
         if(dungeon_id == DUNGEON_TEMPORAL_TOWER || dungeon_id == DUNGEON_HIDDEN_LAND) {
             return DCT_OTHER;
@@ -61,7 +61,7 @@ int GetRemainingDungeonMissionChecks(enum dungeon_id dungeon, bool outlaw) {
         return 404;
     }
     
-    enum dungeon_check_type dungeonCt = GetDungeonCheckType(dungeon);
+    enum dungeon_location_type dungeonCt = GetDungeonLocationType(dungeon);
     if(dungeonCt != DCT_LATE && dungeonCt != DCT_EARLY) {
         return 0;
     }

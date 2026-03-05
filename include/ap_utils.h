@@ -7,19 +7,19 @@
 #define DUNGEON_ID_TO_STR_ID(id) id + DUNGEON_STR_ID_OFFSETS
 
 
-enum dungeon_check_type {
+enum dungeon_location_type {
     DCT_OTHER = 0,
     DCT_EARLY = 1,
     DCT_LATE = 2,
     DCT_RULE = 3
 };
 
-/* GetDungeonCheckType
+/* GetDungeonLocationType
     Returns the type of missions checks that this dungeon has.
 
-    dungeon_id: dungeon to get the type of mission checks
+    dungeon_id: dungeon to get the type of mission locations
     return: dungeon_check_type */
-enum dungeon_check_type GetDungeonCheckType(short dungeon_id);
+enum dungeon_location_type GetDungeonLocationType(short dungeon_id);
 
 /* GetSubXBit
     Returns the status of the xth bit in the corresponding

@@ -15,7 +15,7 @@ static int SpGetLevelScalingStatus() {
 // Special process 101: Read/write mission status struct. First parameter: Read/Write. Second parameter: Jobs/outlaws
 static int SpAccessMissionStatuses(short mode, short missionType) {
     int dungeonId = LoadScriptVariableValue(0, 41);
-    enum dungeon_check_type dungeonCt = GetDungeonCheckType(dungeonId);
+    enum dungeon_location_type dungeonCt = GetDungeonLocationType(dungeonId);
     if(dungeonCt == DCT_OTHER || dungeonCt == DCT_RULE) {
         return 255; // This should be larger than any mission 
     }

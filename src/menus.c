@@ -23,7 +23,7 @@ char* TailoredDungeonMissionMenuEntryFn(char* buffer, int option_id) {
     char* dungeonSymbol = noMissionChecksString;
     uint32_t regularJobMax;
     uint32_t outlawJobMax;
-    enum dungeon_check_type dungeonCt = GetDungeonCheckType(dungeonId);
+    enum dungeon_location_type dungeonCt = GetDungeonLocationType(dungeonId);
     switch(dungeonCt) {
         case DCT_EARLY:;
             regularJobMax = newApSettings.nums.totalJobsEarly;
