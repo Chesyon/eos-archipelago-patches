@@ -88,7 +88,7 @@ ScriptingDebugInstructionAddr = 0x22DFC70;
 /* Overlay 11: Ap Tracker */
 ApTrackerSetupMenuHook = 0x2301A7C;
 ApTrackerTopScreenHook = 0x230DA34;
-ApTrackerTopScreenUnhook = 0x230DA94;
+ApTrackerTopScreenUnhook = 0x230DA90;
 ApTrackerTopScreenHook2 = 0x230D9BC;
 ApTrackerTopScreenUnhook2 = 0x230DA18;
 GroundMenuItemListPtr = 0x2301878;
