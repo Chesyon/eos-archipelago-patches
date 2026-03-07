@@ -60,6 +60,12 @@
 #define BLUE_GOOMI_2_LOCATION_STR_ID 15476
 #define TEAM_NAME_LOCATION_STR_ID 15480
 
+// Special Location Str Ids
+#define CAFE_DRINK_LOCATIONS_STR_ID 15510
+#define CAFE_EVENT_LOCATIONS_STR_ID 15509
+#define RECYCLE_SHOP_DUNGEON_EARLY_STR_ID 15511
+#define RECYCLE_SHOP_DUNGEON_LATE_STR_ID 15512
+
 // Generic Location Str Ids
 #define SHOP_LOCATION_STR_ID 15477
 #define BANK_LOCATION_STR_ID 15478
@@ -89,6 +95,10 @@
 #define SCRIPTING_DEBUG_1_STR_ID 15711
 #define SCRIPTING_DEBUG_2_STR_ID 15712
 #define SCRIPTING_DEBUG_3_STR_ID 15713
+
+// Flip this boolean to tell it to redraw. This is needed when a check is
+// obtainted in ground mode, but the tracker page is left open.
+bool redraw_tracker = false;
 
 /* tracker_page
     This lists all the pages in the tracker. If a page is added to
@@ -882,15 +892,15 @@ struct tracker_location cafe_locations[] = TRACKER_LOCATION_BUNDLE(
     {
         .type = TRACKER_LOCATION_CUSTOM,
         .data = {.custom_tracker_element = {
-            .element_drawing_func = DrinkAndDrinkEventLocationDrawer,
-            .element_locations_complete_func = IsAllDrinkAndDrinkEventLocationsCompleted
+            .element_drawing_func = RecycleShopDungeonLocationDrawer,
+            .element_locations_complete_func = IsAllRecycleShopDungeonLocationsCompleted
         }}
     },
     {
         .type = TRACKER_LOCATION_CUSTOM,
         .data = {.custom_tracker_element = {
-            .element_drawing_func = RecycleShopDungeonLocationDrawer,
-            .element_locations_complete_func = IsAllRecycleShopDungeonLocationsCompleted
+            .element_drawing_func = DrinkAndDrinkEventLocationDrawer,
+            .element_locations_complete_func = IsAllDrinkAndDrinkEventLocationsCompleted
         }}
     }
 );

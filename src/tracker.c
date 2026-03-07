@@ -4,7 +4,7 @@
 #include "extern.h"
 #include "custom_save_area.h"
 #include "ap_settings.h"
-#include "ap_tracker.h"
+#include "tracker.h"
 
 #define TR_BUFF_LEN 100
 
@@ -52,6 +52,15 @@ char money_symbol_str[] = "[M:S0]";
 char debug_symbol_str[] = "[M:B32]";
 
 char fraction_string[] = "[value:0:1]/[value:1:1]";
+
+struct window_params tracker_top_screen_window_params = {
+    .x_offset = 2,
+    .y_offset = 2,
+    .width = 0x1C,
+    .height = 0x14,
+    .screen = {.val = SCREEN_SUB},
+    .box_type = {.val = 0xFF}
+};
 
 // Ground Mode Tracker Variables
 TopScreenApTrackerWindow *tracker_window_ptr = NULL;
@@ -256,19 +265,152 @@ void DrawCircleBarInTextBox(
     DrawTextInWindow(idx, center_x - width/2, center_y, buffer);
 }
 
-void RecycleShopDungeonLocationDrawer(int idx, struct tracker_location_built_layout *layout) {
-    return;
-}
-bool IsAllRecycleShopDungeonLocationsCompleted() {
-    return false;
+/* DrawStringInNextSlotInWindow
+    Finds the next available spot in layout to place the string in the window.
+    This functions is probably a little overengineered to work with many
+    columns despite the current layout only having two because of the screen
+    and font size.
+
+    idx: window idx
+    layout: current layout data
+    width_max: window max width
+    str: the string to draw */
+void DrawStringInNextSlotInWindow(
+    int idx,
+    struct tracker_location_built_layout *layout,
+    int width_max,
+    char* str
+) {
+    int width_str = GetStringWidth(str);
+    int row = layout->row;
+    int col = layout->col;
+    int x_layout = col;
+    int y_layout = row;
+    // This loop breaks if LAYOUT_ROWS or LAYOUT_COLS is 0. So don't do that.
+    // Additionally, it may? be possible to alter the loops to avoid nesting
+    // the if statements.
+    do {
+        do {
+            // If this spot is not blank.
+            if(layout->spot_usage[x_layout][y_layout] == 0) {
+                int i = 0;
+                // Gather width of all cells before this cell.
+                int width_sum_before = 0;
+                while(i < x_layout) {
+                    int cell_usage = layout->spot_usage[i][y_layout];
+                    width_sum_before += cell_usage;
+                    i++;
+                }
+
+                i = x_layout + 1; // i = x_layout + 1
+                // Gather width of all cells after this cell.
+                int width_sum_after = 0;
+                while(i < LAYOUT_COLS) {
+                    int cell_usage = layout->spot_usage[i][y_layout];
+                    width_sum_after += cell_usage;
+                    i++;
+                }
+
+                // If the string fits here (sum of widths is under the max).
+                int total_width = width_sum_before + width_sum_after + width_str;
+                if(total_width <= width_max - (PADDING_X * 5)/2) { // 2.5x padding
+                    layout->spot_usage[x_layout][y_layout] = width_str;
+                    int x_draw;
+                    if(x_layout == 0) {
+                        x_draw = PADDING_X;
+                    } else if (x_layout == LAYOUT_COLS - 1){
+                        x_draw = width_max - width_str - PADDING_X;
+                    } else {
+                        x_draw = width_sum_before + PADDING_X;
+                    }
+                    int y_draw = TRACKER_ROW_TO_Y(y_layout);
+                    if(x_layout > col || (x_layout == col && y_layout > row)) {
+                        layout->col = x_layout;
+                        layout->row = y_layout;
+                    }
+                    DrawTextInWindow(idx, x_draw, y_draw, str);
+                    return;
+                }
+            }
+
+            y_layout++;
+            if(y_layout >= LAYOUT_ROWS) {
+                y_layout = 0;
+            }
+        } while (y_layout != row);
+        x_layout++;
+        if(x_layout >= LAYOUT_COLS) {
+            x_layout = 0;
+        }
+    } while (x_layout != col);
 }
 
-// Handle drink/drink events.
+void RecycleShopDungeonLocationDrawer(int idx, struct tracker_location_built_layout *layout) {
+    char buffer[TR_BUFF_LEN];
+    int str_to_use = RECYCLE_SHOP_DUNGEON_EARLY_STR_ID;
+    struct preprocessor_args preprocessor_args = {};
+    preprocessor_args.strings[0] = GetSubXBit(60) ? mail_symbol_str : x_symbol_str;
+    preprocessor_args.strings[1] = GetSubXBit(61) ? mail_symbol_str : x_symbol_str;
+    preprocessor_args.strings[2] = GetSubXBit(62) ? mail_symbol_str : x_symbol_str;
+    if(IsDarkraiGoal()) {
+        str_to_use = RECYCLE_SHOP_DUNGEON_LATE_STR_ID;
+        preprocessor_args.strings[3] = GetSubXBit(63) ? mail_symbol_str : x_symbol_str;
+        preprocessor_args.strings[4] = GetSubXBit(64) ? mail_symbol_str : x_symbol_str;
+    }
+    PreprocessStringFromId(
+        buffer,
+        TR_BUFF_LEN,
+        str_to_use,
+        preprocessor_flags_none,
+        &preprocessor_args
+    );
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+
+    // Note: This is a layout related thing. Since the drink checks go below.
+    // Currently, one drink check goes on the right side by itself and one on
+    // the left. To avoid this claim the space below.
+    int y_cursor = layout->row + 1;
+    int x_cursor = layout->col;
+    if(LAYOUT_ROWS <= y_cursor) {
+        return;
+    }
+    if(0 < layout->spot_usage[x_cursor][y_cursor]) {
+        return;
+    }
+
+    layout->spot_usage[x_cursor][y_cursor] = 9999;
+}
+bool IsAllRecycleShopDungeonLocationsCompleted() {
+    if(IsDarkraiGoal()) {
+        // Recycle Shop Dungeon Cheks 4 & 5 are post-game.
+        if(false == (GetSubXBit(63) & GetSubXBit(64))) {
+            return false;
+        }
+    }
+
+    return GetSubXBit(60) & GetSubXBit(61) & GetSubXBit(62);
+}
+
 void DrinkAndDrinkEventLocationDrawer(int idx, struct tracker_location_built_layout *layout) {
-    return;
+    char buffer[TR_BUFF_LEN];
+    struct preprocessor_args preprocessor_args = {};
+    preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
+    preprocessor_args.number_vals[1] = newApSettings.nums.cafeDrinkMax;
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, CAFE_DRINK_LOCATIONS_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
+    preprocessor_args.number_vals[0] = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
+    preprocessor_args.number_vals[1] = newApSettings.nums.cafeEventMax;
+    PreprocessStringFromId(buffer, TR_BUFF_LEN, CAFE_EVENT_LOCATIONS_STR_ID, preprocessor_flags_none, &preprocessor_args);
+    DrawStringInNextSlotInWindow(idx, layout, tracker_top_screen_window_params.width * 8, buffer);
 }
 bool IsAllDrinkAndDrinkEventLocationsCompleted() {
-    return false;
+    int max_drink_locations = newApSettings.nums.cafeDrinkMax;
+    int acquired_cafe_drinks = CUSTOM_SAVE_AREA.acquiredCafeDrinkChecks;
+    bool drinks_completed = acquired_cafe_drinks >= max_drink_locations;
+    int max_drink_event_locations = newApSettings.nums.cafeEventMax;
+    int acquired_cafe_events = CUSTOM_SAVE_AREA.acquiredCafeEventChecks;
+    bool drink_events_completed = acquired_cafe_events >= max_drink_event_locations;
+    return drinks_completed & drink_events_completed;
 }
 
 bool ShouldDisplayRelicFragmentShardsForHiddenLand() {
@@ -357,95 +499,6 @@ void InstrumentRecievedDrawer(int idx, struct tracker_location_built_layout *lay
             layout->spot_usage[x][y] = 9999;
         }
     }
-}
-
-struct window_params tracker_top_screen_window_params = {
-    .x_offset = 2,
-    .y_offset = 2,
-    .width = 0x1C,
-    .height = 0x14,
-    .screen = {.val = SCREEN_SUB},
-    .box_type = {.val = 0xFF}
-};
-
-/* DrawStringInNextSlotInWindow
-    Finds the next available spot in layout to place the string in the window.
-    This functions is probably a little overengineered to work with many
-    columns despite the current layout only having two because of the screen
-    and font size.
-
-    idx: window idx
-    layout: current layout data
-    width_max: window max width
-    str: the string to draw */
-void DrawStringInNextSlotInWindow(
-    int idx,
-    struct tracker_location_built_layout *layout,
-    int width_max,
-    char* str
-) {
-    int width_str = GetStringWidth(str);
-    int row = layout->row;
-    int col = layout->col;
-    int x_layout = col;
-    int y_layout = row;
-    // This loop breaks if LAYOUT_ROWS or LAYOUT_COLS is 0. So don't do that.
-    // Additionally, it may? be possible to alter the loops to avoid nesting
-    // the if statements.
-    do {
-        do {
-            // If this spot is not blank.
-            if(layout->spot_usage[x_layout][y_layout] == 0) {
-                int i = 0;
-                // Gather width of all cells before this cell.
-                int width_sum_before = 0;
-                while(i < x_layout) {
-                    int cell_usage = layout->spot_usage[i][y_layout];
-                    width_sum_before += cell_usage;
-                    i++;
-                }
-
-                i = x_layout + 1; // i = x_layout + 1
-                // Gather width of all cells after this cell.
-                int width_sum_after = 0;
-                while(i < LAYOUT_COLS) {
-                    int cell_usage = layout->spot_usage[i][y_layout];
-                    width_sum_after += cell_usage;
-                    i++;
-                }
-
-                // If the string fits here (sum of widths is under the max).
-                int total_width = width_sum_before + width_sum_after + width_str;
-                if(total_width <= width_max - (PADDING_X * 5)/2) { // 2.5x padding
-                    layout->spot_usage[x_layout][y_layout] = width_str;
-                    int x_draw;
-                    if(x_layout == 0) {
-                        x_draw = PADDING_X;
-                    } else if (x_layout == LAYOUT_COLS - 1){
-                        x_draw = width_max - width_str - PADDING_X;
-                    } else {
-                        x_draw = width_sum_before + PADDING_X;
-                    }
-                    int y_draw = TRACKER_ROW_TO_Y(y_layout);
-                    if(x_layout > col || (x_layout == col && y_layout > row)) {
-                        layout->col = x_layout;
-                        layout->row = y_layout;
-                    }
-                    DrawTextInWindow(idx, x_draw, y_draw, str);
-                    return;
-                }
-            }
-
-            y_layout++;
-            if(y_layout >= LAYOUT_ROWS) {
-                y_layout = 0;
-            }
-        } while (y_layout != row);
-        x_layout++;
-        if(x_layout >= LAYOUT_COLS) {
-            x_layout = 0;
-        }
-    } while (x_layout != col);
 }
 
 /* DrawMissionLocationsInWindow
@@ -850,8 +903,8 @@ uint32_t StateManagerTrackerTopScreen() {
         case 5:;
             enum tracker_page current_page = CUSTOM_SAVE_AREA.trackerPage;
             if(tracker_window_ptr->closing == 0 && tracker_window_ptr->displayable == 0) {
-                if(ground_mode_opened_page != CUSTOM_SAVE_AREA.trackerPage) {
-                    ground_mode_opened_page = CUSTOM_SAVE_AREA.trackerPage;
+                if((ground_mode_opened_page != current_page) || redraw_tracker) {
+                    ground_mode_opened_page = current_page;
                     DrawTrackerPageInWindow(tracker_window_ptr->window_id, current_page);
                 }
                 tracker_window_ptr->faded = 0;
