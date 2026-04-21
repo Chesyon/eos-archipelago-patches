@@ -2,16 +2,16 @@
 This repository contains all ROMside custom code used in the Pokémon Mystery Dungeon: Explorers of Sky [Archipelago APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky).
 
 ## Just testing?
-Most of the below info doesn't apply to you. Just go check out the installation guide for your OS ([Linux](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_linux.md)) ([Windows](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_windows.md)) ([MacOS](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_macos.md)). Once the repository is set up, run `make rom out bsdiff offsets` to get a `archipelago-base.bsdiff` that you can drop into the [APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/tree/main/worlds/pmd_eos/data). Change the values of `ov36_mem_loc` and `hintable_items_offset` in [Rom.py](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/Rom.py) to the values you get at the end of the `make` command.
+Most of the below info doesn't apply to you. Just go check out the installation guide for your OS ([Linux](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_linux.md)) ([Windows](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_windows.md)) ([MacOS](https://github.com/Chesyon/eos-archipelago-patches/blob/main/install_macos.md)). Once the repository is set up, run `make rom out bsdiff offsets` to get a `archipelago-base.bsdiff` that you can drop into the [APWorld](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/tree/main/worlds/pmd_eos/data). Change the values of `ov36_mem_loc` and `hintable_items_offset` in [rom.py](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/rom.py) to the values you get at the end of the `make` command.
 
 ## Makefile and the ROMs:
-We use Makefile to make compiling way easier. There are three NDS files in this repo, each with different purposes:
+We use Makefile to compile our code. There are three NDS files in this repo, each with different purposes:
 * vanilla.nds: This needs to be provided by you. This should be an unmodified EU ROM for Pokémon Mystery Dungeon: Explorers of Sky. You will not modify this file.
 * rom.nds: The input file for c-of-time. Any changes that need to be made in SkyTemple or with external programs that aren't c-of-time should be done on this ROM.
-* out.nds: The output file from c-of-time. This is the final-ish ROM (minus the [world-specific data that gets written while patching](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/Rom.py#L111)), that Archipelago players will be using. This has all the C/ASM code from the repository applied. **Avoid making changes here, since they will be overwritten when re-applying c-of-time code!**
+* out.nds: The output file from c-of-time. This is the final-ish ROM (minus the [world-specific data that gets written while patching](https://github.com/CrypticMonkey33/ArchipelagoExplorersOfSky/blob/main/worlds/pmd_eos/rom.py#L111)), that Archipelago players will be using. This has all the C/ASM code from the repository applied. **Avoid making changes here, since they will be overwritten when re-applying c-of-time code!**
 
-Now, we have a bunch of Makefile commands for the sake of applying code and patches. There are ten commands that you can mix and match as needed.
-### Base commands
+### Makefile commands
+We have a bunch of Makefile commands for the sake of applying code and patches. There are ten commands that you can mix and match as needed.
 * `make out`: Applies code from the CoT repo to rom.nds to generate out.nds.
 * `make clean`: Removes unwanted files. Run this if something breaks when running `make out`.
 * `make rom`: Get the latest rom.nds by applying unpatched-base.xdelta to vanilla.nds. Calls `make backup` first.
