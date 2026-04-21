@@ -333,12 +333,13 @@ static int SpGetSkyPeaksOpen() {
 // Input: Number to increase adventure log recycle count by.
 // Output: New adventure log recycle count.
 // NOTE: Couldn't we just... read from VAR_RECYCLE_COUNT...? Eh, lappy asked for it to be implemented this way. Come back to this.
-static void SpUpdateAdventureLogRecycles(){
+static int SpUpdateAdventureLogRecycles(){
     uint32_t num_to_add = LoadScriptVariableValue(NULL, VAR_EVENT_LOCAL);
     uint32_t recycle_count = GetNbRecycled() + num_to_add;
     if(recycle_count > 999999) recycle_count = 999999; // for consistency with what'll be shown in adventure log
     SetNbRecycled(recycle_count);
     SaveScriptVariableValue(NULL, VAR_EVENT_LOCAL, recycle_count);
+	return recycle_count;
 }
 
 // Special process Read/write DeathLink
@@ -421,7 +422,7 @@ bool CustomScriptSpecialProcessCall(undefined4* unknown, uint32_t special_proces
         *return_val = SpGetSkyPeaksOpen();
         return true;
     case 116:
-        SpUpdateAdventureLogRecycles();
+        *return_val = SpUpdateAdventureLogRecycles();
         return true;
     case 117:
         *return_val = fadeOutAllActive;
