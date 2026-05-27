@@ -13752,7 +13752,7 @@ coro RESCUE_DEBUG {
                     case 6:
                         se_Play(8968);
                         Wait(60);
-                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Tailsdx[CR]?");
+                        message_Talk("...wait a minute.[K] You\'re THE [CS:G]Tailsdk[CR]?");
                         message_Talk("Alright, so on this run I need you to confirm if\n[CS:P]Zero Isle South[CR] missions function as normal\nokay?[K] Just clear it a few times, piece of cake!");
                         message_Talk("But seriously, thanks a lot for\nhelping to make this APWorld what it is now!");
                         message_Talk("Without you, there\'s so many things that we\nwould have never found before release: the\n\"quirks\" of [CS:P]Special Rift[CR] come to mind... "); 
