@@ -277,6 +277,15 @@ void QuizCustomStateHandler(QuizData* quizData, int state) {
                     selectable += 1;
                 }
             }
+            // Small Little Easter Egg
+            if (selectable <= 30 && newApSettings.nums.starterOptions != STARTER_OPTION_RANDOM) {
+                if (0 == strncmp(slotData.apSlotName, "Debug", sizeof("Debug"))) {
+                    quizData->partners[selectable].val = (genderPicked == 0 ? MONSTER_LAPRAS : MONSTER_LAPRAS_SECONDARY);
+                    selectable++;
+                    quizData->partners[selectable].val = (genderPicked == 0 ? MONSTER_DUSKULL : MONSTER_DUSKULL_SECONDARY);
+                    selectable++;
+                }
+            }
             quizData->numSelectablePartners = selectable;
             // Reuse currentQuestion to store species.
             if (newApSettings.nums.starterOptions == STARTER_OPTION_OVERRIDE) {
