@@ -36,14 +36,8 @@ void __attribute__((naked)) ApMazeTrapCheck() {
 }
 
 void DungeonModeInitApTrap() {
-    CUSTOM_SAVE_AREA.dungeonTraps.yawn = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.whiffer = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.dropItems = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.weather = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.warp = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.pitfall = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.embargo = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.maze = false;
+    // when initializing a dungeon, the delay is set, so traps recieved while outside the dungeon won't immediately trigger;
+    CUSTOM_SAVE_AREA.dungeonTrapDelay = DungeonRandInt(100) + 10; 
 }
 
 void DungeonModeTrapCheck() {
@@ -59,7 +53,19 @@ void DungeonModeTrapCheck() {
         SetMainTeamName(buffer1);
         SaveScriptVariableValueAtIndex(NULL, VAR_PERFORMANCE_PROGRESS_LIST, 1, 1);
     }
-    
+    if (CUSTOM_SAVE_AREA.dungeonTrapDelay > 0) {
+        CUSTOM_SAVE_AREA.dungeonTrapDelay = CUSTOM_SAVE_AREA.dungeonTrapDelay - 1;
+        return;
+    }
+    if (CUSTOM_SAVE_AREA.dungeonTraps.pitfall == true) {
+        CUSTOM_SAVE_AREA.dungeonTraps.pitfall = false;
+        //roll the the trap delay again since the player is being forced to the next floor.
+        CUSTOM_SAVE_AREA.dungeonTrapDelay = DungeonRandInt(10) + 10;
+        DUNGEON_PTR->end_floor_flag = 2;
+        // return before clearing the flags for the other traps so they can still be triggered after falling.
+        return;
+    }
+
     if (CUSTOM_SAVE_AREA.dungeonTraps.yawn == true) {
         for (int i = 0; i < 4; i++) {
             struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
@@ -106,11 +112,7 @@ void DungeonModeTrapCheck() {
         }
         TryActivateWeather(true, false);
     }
-    
-    if (CUSTOM_SAVE_AREA.dungeonTraps.pitfall == true) {
-        DUNGEON_PTR->end_floor_flag = 2;
-    }
-    
+        
     if (CUSTOM_SAVE_AREA.dungeonTraps.embargo == true) {
         for (int i = 0; i < 4; i++) {
             struct entity *monsterEntity = DUNGEON_PTR->entity_table.header.monster_slot_ptrs[i];
@@ -123,6 +125,5 @@ void DungeonModeTrapCheck() {
     CUSTOM_SAVE_AREA.dungeonTraps.dropItems = false;
     CUSTOM_SAVE_AREA.dungeonTraps.weather = false;
     CUSTOM_SAVE_AREA.dungeonTraps.warp = false;
-    CUSTOM_SAVE_AREA.dungeonTraps.pitfall = false;
     CUSTOM_SAVE_AREA.dungeonTraps.embargo = false;
 }
