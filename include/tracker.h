@@ -1720,6 +1720,7 @@ struct tracker_page_entry tracker_book[] = {
     },
     [TRACKER_PAGE_DOJO] = {
         .name_str_id = DOJO_STR_ID,
+        .dungeon = {.val = DUNGEON_NORMAL_FLY_MAZE},
         .locations = dojo_locations,
     },
     [TRACKER_PAGE_CAFE] = {

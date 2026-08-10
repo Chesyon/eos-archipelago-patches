@@ -1147,17 +1147,20 @@ void CreateTrackerTopScreenDungeon() {
     enum dungeon_group_id dun_group = GetDungeonGroup(DUNGEON_PTR->id.val);
     enum dungeon_id base_dungeon_id = DUNGEON_PTR->id.val;
     dungeon_mode_page = TRACKER_PAGE_ERROR;
-    for(int i = 0; i < 255; i++) {
-        if(GetDungeonGroup(i) == dun_group) {
-            base_dungeon_id = i;
-            break;
+    enum tracker_page dungeon_mode_page_fallback = TRACKER_PAGE_ERROR;
+    for (enum tracker_page p = 0; p < TRACKER_BOOK_PAGE_COUNT; p++) {
+        if (tracker_book[p].dungeon.val == base_dungeon_id) {
+            dungeon_mode_page = p;
+        }
+        if (TRACKER_PAGE_ERROR == dungeon_mode_page_fallback) {
+            if (GetDungeonGroup(tracker_book[p].dungeon.val) == dun_group) {
+                dungeon_mode_page_fallback = p;
+            }
         }
     }
 
-    for(enum tracker_page p = 0; p < TRACKER_BOOK_PAGE_COUNT; p++) {
-        if(tracker_book[p].dungeon.val == base_dungeon_id) {
-            dungeon_mode_page = p;
-        }
+    if (TRACKER_PAGE_ERROR == dungeon_mode_page) {
+        dungeon_mode_page = dungeon_mode_page_fallback;
     }
 
     tracker_dungeon_window_id = CreateTextBox(&tracker_top_screen_window_params, NULL);
