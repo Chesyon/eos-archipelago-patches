@@ -49,7 +49,8 @@ typedef struct CustomSaveArea {
     uint8_t openSkyPeakPasses;           // 0x2BE: Tracks how many Sky Peak passes are open. I don't know what this is for but Cryptic wanted it.
     uint8_t legendaryListProgress;       // 0x2BF: Tracks how far we are along the legendary list. Requested by Cryptic in her endeavors to stop duplicate legendaries.
     bool inverseTypeMatchups;            // 0x2C0: If true, type matchups will be reversed, like in Gen VI's Inverse Battles.
-    undefined fields[0xE3F];             // 0x2C1: Unused.
+    uint8_t dungeonTrapDelay;            // 0x2C1: When dungeon traps are recieved while outside a dungeon this counter is used to determine how many turns until they trigger.
+    undefined fields[0xE3E];             // 0x2C2: Unused.
 } CustomSaveArea;
 ASSERT_SIZE(CustomSaveArea, 0x1100);
 
