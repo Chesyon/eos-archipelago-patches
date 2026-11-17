@@ -1,7 +1,9 @@
 /backups
 /build
 /venv
+/.venv
 /rom.nds.skytemple/debugger
+/NDS_UNPACK
 tmp
 
 /.ccls-cache
