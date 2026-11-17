@@ -5,8 +5,8 @@
 #include "ap_settings.h"
 #include "ap_utils.h"
 
-#define GOAL_DIALGA 1
-#define GOAL_DARKRAI 0
+#define GOAL_DIALGA 0
+#define GOAL_DARKRAI 1
 
 enum dungeon_check_type GetDungeonCheckType(short dunId) {
     if (newApSettings.nums.goal == GOAL_DIALGA) {

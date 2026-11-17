@@ -60,7 +60,7 @@ typedef struct ArchipelagoNums {
     uint8_t expMultiplier;               // 0x0
     uint8_t iqMultiplier;                // 0x1
     uint8_t levelScalingMode;            // 0x2
-    uint8_t goal;                        // 0x3: For the time being, 0x0=Darkrai, 0x1=Dialga. I know, it should be the other way around, but this used to be a bool called dialgaIsGoal. I'll fix it when we get to recruitemall.
+    uint8_t goal;                        // 0x3: 0x0=Dialga, 0x1=Darkrai
     uint8_t startingEpisode;             // 0x4
     uint8_t deathLinkType;               // 0x5
     uint8_t totalJobsEarly;              // 0x6
