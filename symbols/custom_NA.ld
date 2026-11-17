@@ -1,3 +1,18 @@
+/* ! For Overlay29 */
+/* Move Shortcut Hooks */
+MoveShortcutsMainCheckHook = 0x22F11DC;         /* In SetLeaderAction */
+MoveShortcutsMainCheckLoopUnhook = 0x22F1024;   /* In SetLeaderAction */
+MoveShortcutsMainCheckNormalUnhook = 0x22F11E4; /* In SetLeaderAction */
+MessageLogShortcutButtonOneCheck = 0x22F1E44;   /* In SetLeaderAction */
+MessageLogShortcutButtonTwoCheck = 0x22F1E54;   /* In SetLeaderAction */
+
+/* Undocumented Functions/Symbols
+   Note: You may to remove some of these definitions if they become defined
+   in pmdsky-debug.*/
+GetStringWidth = 0x20265A8;
+SetDisplayMode = 0x22EA428; /* Used to hide the textbox and map. */
+DUNGEON_CONTROLLER_STATUS = 0x237C694;
+
 /* ! Base CoT file overlay11 */
 OpcodeCheck = 0x022DDDD4;
 GetParameterCount = 0x022DDD8C;

@@ -149,6 +149,12 @@ GetTypeMatchupHook1 = 0x230B710;
 GetTypeMatchupHook2 = 0x230B73C;
 GetTypeMatchupHook3 = 0x230B750;
 GetTypeMatchupHook4 = 0x230B770;
+/* Move Shortcut Hooks */
+MoveShortcutsMainCheckHook = 0x22F1B90;         /* In SetLeaderAction */
+MoveShortcutsMainCheckLoopUnhook = 0x22F19D8;   /* In SetLeaderAction */
+MoveShortcutsMainCheckNormalUnhook = 0x22F1B98; /* In SetLeaderAction */
+MessageLogShortcutButtonOneCheck = 0x22F27F8;   /* In SetLeaderAction */
+MessageLogShortcutButtonTwoCheck = 0x22F2808;   /* In SetLeaderAction */
 
 /* ! For Overlay 31 */
 DungeonXMenuNameAddr = 0x23836D8;
@@ -163,7 +169,7 @@ fadeOutAllActive = 0x23DE031;
 deathLinkTracker = 0x23B0186; /* See CustomSaveArea in extern.h */
 CUSTOM_SAVE_AREA = 0x23B0000;
 
-/* Undocumented Functions 
+/* Undocumented Functions/Symbols
    Note: You may to remove some of these definitions if they become defined
    in pmdsky-debug.*/
 AddItemToKecleon1 = 0x2010B70;
@@ -187,6 +193,8 @@ TopScreenModeSetDungeonMode = 0x22E9658;
 FreeTopScreenBGDungeon = 0x22C2BD0;
 RemoveEmptyItemsInStorage = 0x2010124;
 AnalyzeTextPreamble = 0x20264F8;
+SetDisplayMode = 0x22EADD8; /* Used to hide the textbox and map. */
+DUNGEON_CONTROLLER_STATUS = 0x237D294;
 
 /* Ap Tracker Top Screen Stuff */
 UnkTopScreenFun1 = 0x22EC7EC;
