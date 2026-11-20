@@ -170,7 +170,7 @@ then clean the build with `make clean`.
 ## Adding custom symbols
 If you've found symbols that are currently missing, consider contributing them to [pmdsky-debug](https://github.com/UsernameFodder/pmdsky-debug). You can find instructions in the repository's [contribution docs](https://github.com/UsernameFodder/pmdsky-debug/blob/master/docs/contributing.md).
 
-For quick testing, you can also add symbols to `symbols/custom_[region].ld` (`symbols/generated_[region].ld` is auto-generated and should not be modified). You need to specify the file each symbol belongs to in comments:
+For quick testing, you can also add symbols to `symbols/custom_[region].ld` (`symbols/generated_[region].ld` is auto-generated and should not be modified). You can also add additional linker scripts that match `symbols/custom_[region]_*.ld`. You need to specify the file each symbol belongs to in comments:
 
 ```
 /* !file arm9 */
@@ -203,7 +203,17 @@ Subtract the amount of additional bytes you want to allocate from `ORIGIN` and a
 ### Optimizing for size
 You can also change the compiler flags to optimize for size instead of speed. To do so, set `OPT_LEVEL := Os` in `Makefile`. Effectiveness varies per project.
 
+## Submodules
+
+You can add external c-of-time compatible libraries as Git submodules:
+
+```bash
+git submodule add https://github.com/user/module-name modules/module-name
+```
+
+**Caveat:** File names currently must be unique across all modules and code in the main repository.
+
 ## Licensing
-- Build scripts (everything under the `scripts`), and any files in `tools` that use skytemple-files and/or ndspy are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
+- Build scripts (everything under the `scripts` directory), and any files in `tools` that use skytemple-files and/or ndspy are licensed under GPLv3. Review the file `LICENSE_GPLv3` for more information.
 - All other code is licensed under MIT. Review the file `LICENSE_MIT` for more information.
 
